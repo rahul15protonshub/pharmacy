@@ -1,0 +1,42 @@
+.animate-carousel {
+    overflow: hidden;
+    position: relative;
+}
+
+.animate-carousel .slider-container,
+.animate-carousel .rec-slider-container {
+    margin: 0;
+}
+
+.animate-carousel button.carousel__back-button,
+.animate-carousel button.carousel__next-button {
+    background-color: var(--color-cyan) !important;
+    height: 56px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.animate-carousel button:disabled.carousel__back-button,
+.animate-carousel button:disabled.carousel__next-button {
+    display: none;
+}
+
+.animate-carousel button.carousel__back-button {
+    left: -32px;
+}
+
+.animate-carousel:hover button.carousel__back-button {
+    left: 0;
+}
+
+.animate-carousel button.carousel__next-button {
+    right: -32px;
+}
+
+.animate-carousel:hover button.carousel__next-button {
+    right: 0;
+}

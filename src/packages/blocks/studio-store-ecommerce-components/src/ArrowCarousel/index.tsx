@@ -1,0 +1,1 @@
+export { ArrowCarousel as default } from "./ArrowCarousel";

@@ -1,0 +1,65 @@
+{
+    "attributes": {
+        "heading": "YOUR STORE",
+        "sub_heading": "Your Online Supporting Partner",
+        "phone_number": "7415267209",
+        "fb_link": "https://www.facebook.com/",
+        "instagram_link": "https://www.instagram.com/",
+        "twitter_link": "https://twitter.com/",
+        "youtube_link": "https://www.youtube.com/",
+        "primary_color": "#3e0486",
+        "background_color": "#ffffff",
+        "background_grey": "#3e454f",
+        "border_color": "#a9a9a9",
+        "common_button_color": "#450693",
+        "secondary_color": "#e65e52",
+        "secondary_button_color": "#e65e52",
+        "extra_button_color": "#080808",
+        "header_color": "#ffffff",
+        "header_text_color": "#ffffff",
+        "header_subtext_color": "#ffffff",
+        "white": "#fff",
+        "black": "#000",
+        "grey": "#f2f2f2",
+        "transparent": "rgba(34,34,34, 0.8)",
+        "country": "india",
+        "country_code": 91,
+        "currency_type": "Rs",
+        "isFacebookLogin": false,
+        "isGoogleLogin": false,
+        "isAppleLogin": false,
+        "razorpay": {
+            "api_key": "rzp_test_bcTUPBfgspyEkV",
+            "secret_key": "cTcQ5qsr4GpdgpDIl95oyJ8V"
+        },
+        "stripe": {
+            "stripe_pub_key": null,
+            "stripe_secret_key": null
+        },
+        "logo": "https://automationssteststore58-225345-ruby.b225345.dev.eastus.az.svc.builder.cafe/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBWDA9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4034389377cd819567e0f1cc22819302135754a2/cropped_image.png",
+        "firebase": {
+            "apiKey": "",
+            "authDomain": "",
+            "databaseURL": "",
+            "projectId": "",
+            "storageBucket": "",
+            "messagingSenderId": "",
+            "appId": "",
+            "measurementId": ""
+        },
+        "ShippingKeys": {
+            "logistics": {
+                "oauth_site_url": null,
+                "base_url": null,
+                "client_id": null,
+                "client_secret": null,
+                "logistic_api_key": null
+            },
+            "shiprocket": {
+                "ship_rocket_base_url": null,
+                "ship_rocket_user_email": null,
+                "ship_rocket_user_password": null
+            }
+        }
+    }
+}

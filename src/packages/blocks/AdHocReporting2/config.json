@@ -1,0 +1,65 @@
+{
+  "id": "AdHocReporting2",
+  "version": "0.0.2",
+  "status": "preAlpha",
+  "path": "./packages/blocks/AdHocReporting2",
+  "assembler-adapters": [],
+  "mobile": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "AdHocReporting2"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "AdHocReporting2": {
+        "file": "AdHocReporting2.tsx",
+        "extends": "AdHocReporting2Controller",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "AdHocReporting2Controller",
+            "path": "./AdHocReporting2Controller"
+          },
+          {
+            "value": "{Props}",
+            "path": "./AdHocReporting2Controller"
+          }
+        ]
+      }
+    }
+  },
+  "web": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "AdHocReporting2"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "AdHocReporting2": {
+        "file": "AdHocReporting2.web.tsx",
+        "extends": "AdHocReporting2Controller",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "AdHocReporting2Controller",
+            "path": "./AdHocReporting2Controller"
+          },
+          {
+            "value": "{Props}",
+            "path": "./AdHocReporting2Controller"
+          }
+        ]
+      }
+    }
+  }
+}

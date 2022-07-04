@@ -1,0 +1,109 @@
+/* template three start */
+.templatethree-product {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+.templatethree-product-container.slider-container {
+  width: 100%;
+  margin: 0px;
+  padding-top: 0.5rem;
+}
+.templatethree-product-container.slider-container {
+  padding: 0px 0 0 1px;
+  border-radius: 4px;
+  background-color: transparent;
+  height: auto;
+  width: 100%;
+  border: none;
+}
+.templatethree-product > * {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+.templatethree-product img.prodimage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border: 2px solid transparent;
+  border-bottom: 0;
+  cursor: pointer;
+}
+.templatethree-product img:hover {
+  border-color: #000;
+  transition: all 0.2s ease-in;
+}
+.templatethree-product p {
+  margin: 0;
+}
+
+.templatethree-product p.productName {
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.templatethree-product p.productPrice {
+  font-weight: 400;
+}
+.templatethree-product .addtowishlistt3 {
+  position: absolute;
+  top: 4%;
+  left: 4%;
+  stroke: var(--color-cyan);
+  cursor: pointer;
+}
+.templatethree-product .addtowishlistt3.active {
+  fill: var(--color-cyan) !important;
+  fill-opacity: 0.4 !important;
+}
+
+.templatethree-product .addtowishlistt3:hover {
+  fill: var(--color-cyan) !important;
+  fill-opacity: 0.4 !important;
+}
+
+@media only screen and (min-width: 0px) {
+  .templatethree-product img.prodimage {
+    height: 190px !important;
+  }
+  .templatethree-product p.productName {
+    font-size: 14px;
+  }
+  .templatethree-product p.productPrice {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .templatethree-product img.prodimage {
+    height: 302px !important;
+  }
+  .templatethree-product p.productName {
+    font-size: 18px;
+  }
+  .templatethree-product p.productPrice {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .templatethree-product img.prodimage {
+    flex-grow: 1.567;
+  }
+}
+/* template three end */
+
+@media (min-width: 992px) {
+  .templatethree-carousel-responsive-container .rec-carousel-wrapper {
+    margin-left: -12px;
+    width: calc(100% + 12px);
+  }
+}
+
+@media (min-width: 0px) and (max-width: 992px) {
+  .templatethree-carousel-responsive-container {
+    max-width: 100% !important;
+    padding: 0px;
+  }
+}

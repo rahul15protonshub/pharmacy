@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "340410458447",
+    "project_id": "ecommapp-82317",
+    "storage_bucket": "ecommapp-82317.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:340410458447:android:8960e298387f1a1fb5253a",
+        "android_client_info": {
+          "package_name": "ai.engineer.ecommerce.InternalSSPharmacyDemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "340410458447-6jo10pjagquv78po07jtts470fj39rql.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ai.engineer.ecommerce.InternalSSPharmacyDemo",
+            "certificate_hash": "d6a1ff6e95ca93d7a118e5cb07bd8d78d56cf97d"
+          }
+        },
+        {
+          "client_id": "340410458447-otgrf7md4phaic9lircllf1ru0pq7vl4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ai.engineer.ecommerce.InternalSSPharmacyDemo",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "340410458447-fd7qt6r2iq7r5f4nsjn3oa5vv8t9rout.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuj8GJ5DIBTqxbnpezE90SYnNPc6UxQ8g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "340410458447-fd7qt6r2iq7r5f4nsjn3oa5vv8t9rout.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "340410458447-acsdu3vt2g33hpij8j6m6tvdip62400c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ai.engineer.ecommerce.InternalSSPharmacyDemo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

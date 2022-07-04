@@ -1,0 +1,114 @@
+/* template four start  */
+.slider-container {
+  width: 100%;
+  margin: 0;
+  padding-top: 4rem;
+}
+.templatefour-product-container .templatefour-product-image-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.templatefour-product img {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+  height: 100%;
+}
+.templatefour-product-container .templatefour-product-image-container:hover .templatefour-overlay {
+  opacity: 1 !important;
+  transition: all 500ms ease-in-out;
+  z-index: 10;
+}
+
+.templatefour-product .templatefour-overlay {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100% !important;
+  opacity: 0;
+  color: var(--color-cyan);
+}
+.templatefour-product .templatefour-overlay .arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  cursor: pointer;
+  color: var(--color-cyan);
+}
+.templatefour-product p {
+  margin: 0;
+}
+.templatefour-product p.productName {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.templatefour-product p.productPrice {
+  font-size: 14px;
+  font-weight: 400;
+}
+.templatefour-product .wishlist {
+  stroke: var(--color-cyan);
+}
+.templatefour-product .wishlist:hover {
+  fill: var(--color-cyan) !important;
+  fill-opacity: 0.4 !important;
+}
+.templatefour-product-slider {
+  background: linear-gradient(180deg, var(--color-secondary-hover-4) 50%, var(--bs-body-bg) 50%);
+  border-radius: 0;
+}
+
+@media (min-width: 0px) {
+  .templatefour-product p.productName {
+    font-size: 14px;
+  }
+  .templatefour-product p.productPrice {
+    font-size: 12px;
+  }
+  .templatefour-product .templatefour-product-image-container {
+    height: 187px;
+  }
+  .templatefour-product-detail {
+    margin-top: 16px;
+    margin-bottom: 4px !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .templatefour-product p.productName {
+    font-size: 18px;
+  }
+  .templatefour-product p.productPrice {
+    font-size: 14px;
+  }
+  .templatefour-product .templatefour-product-image-container {
+    height: 330px;
+  }
+  .templatefour-product-detail {
+    margin-top: 14px;
+    margin-bottom: 4px !important;
+  }
+}
+@media (min-width: 992px) {
+  .templatefour-product .templatefour-product-image-container {
+    height: 374px;
+  }
+  .templatefour-product-detail {
+    margin-top: 16px;
+    margin-bottom: 8px !important;
+  }
+}
+
+/* template four end */

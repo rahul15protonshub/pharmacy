@@ -1,0 +1,30 @@
+.product-quantity-container {
+    width: 110px;
+}
+.product-quantity-container .btn {
+    padding: 0.15rem 0.5rem;
+    display: flex;
+    align-items: center;
+    box-shadow: none !important;
+    z-index: 0 !important;
+}
+
+.product-quantity-container .btn.minus {
+    color: var(--color-dark-grey);
+    background-color: var(--color-light-grey-3) !important;
+    border-color: var(--color-light-grey-3) !important;
+}
+
+.product-quantity-container input {
+    pointer-events: none;
+    border-color: var(--color-light-grey-3);
+    -moz-appearance: textfield;
+    text-align: center;
+    padding: 4px 0 !important;
+}
+
+.product-quantity-container .btn.plus {
+    color: white;
+    background-color: var(--color-cyan);
+    border-color: var(--color-cyan) !important;
+}

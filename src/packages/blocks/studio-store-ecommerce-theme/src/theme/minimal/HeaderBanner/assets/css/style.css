@@ -1,0 +1,36 @@
+.minimal-header-banner__carousel .rec-pagination {
+    display: none;
+}
+
+@media screen and (min-width: 0px) {
+    .minimal-header-banner__carousel .rec-slider-container {
+        height: 93px;
+    }
+    .minimal-header-banner__carousel .rec-pagination {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 0) and (max-width: 545px) {
+    .minimal-header-banner {
+        margin-bottom: 1.875rem !important;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .minimal-header-banner__carousel .rec-pagination {
+        display: block;
+    }
+    .minimal-header-banner__carousel .rec-slider-container {
+        height: 197px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .minimal-header-banner__carousel .rec-pagination {
+        display: block;
+    }
+    .minimal-header-banner__carousel .rec-slider-container {
+        height: 337px;
+    }
+}

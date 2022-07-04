@@ -1,0 +1,29 @@
+.notify-modal-container .modal-content {
+    border-radius: 0;
+    box-shadow: 0px 4px 40px var(--color-light-grey-2);
+    border: 0;
+}
+.notify-modal-container .modal-body {
+    text-align: left;
+    padding: 2.5rem;
+    position: relative;
+}
+.notify-modal-container .modal-body .close-icon {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+
+.notify-modal-container .modal-body .heading,
+.notify-modal-container .modal-body .desc {
+    color: var(--color-black);
+}
+.notify-modal-container .modal-body .desc {
+    line-height: 24px;
+}
+
+.notify-modal-container .modal-footer {
+    padding: 0 2.5rem 2.5rem 2.5rem;
+    border-top: 0;
+}

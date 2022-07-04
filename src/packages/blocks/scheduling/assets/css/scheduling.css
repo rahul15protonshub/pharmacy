@@ -1,0 +1,160 @@
+/*
+* Add Address Modal CSs
+*/
+.price {
+  /* width: 53px; */
+  height: 28px;
+  margin: 5px 23px 22px 18px;
+  font-size: 24px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.17;
+  letter-spacing: 0.92px;
+  text-align: left;
+  color: var(--color-primary);
+}
+.Pcakages-subscription {
+  font-size: 17px;
+  line-height: 1.24;
+  text-align: left;
+  color: var(--color-black) !important;
+}
+.subscription-qty,
+.subscribePackageText,
+.subscriptionPeriod,
+.subscription-timeslot {
+  font-size: 16px;
+  text-align: left;
+  color: var(--color-dark-grey);
+}
+.subscribePackageText {
+  text-align: left !important;
+}
+.sp-quantity-tag-name {
+  color: #a3a3a3;
+  font-size: 16px;
+}
+.select-input {
+  width: 90%;
+  margin: 5px 20px 1px 23px;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.19;
+  letter-spacing: normal;
+  text-align: left;
+  color: #a3a3a3;
+}
+.edit-add-addr-title-bar {
+  border-color: #dbdbdb;
+  border-width: 2px;
+}
+.edit-add-addr-title-bar span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: 0 !important;
+  top: 27px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.11;
+  color: var(--color-black);
+}
+.edit-add-addr-close-btn {
+  position: relative;
+  z-index: 1;
+}
+.edit-add-addr-close-btn img {
+  width: 14px;
+  height: 14px;
+}
+.radio-btn {
+  width: 21px;
+  height: 21px;
+  margin: 0 10px 0 0;
+  padding: 6px;
+}
+
+.radio-btn-text {
+  color: var(--color-black);
+  margin-left: 6%;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.quantity {
+  margin-top: 2% !important;
+}
+
+.content {
+  margin-top: -7% !important;
+}
+
+.sp-price-right-content {
+  height: auto;
+}
+/* .body-container {
+      max-height: auto;
+      overflow-y: auto;
+    } */
+
+.modal-footer {
+  justify-content: center !important;
+}
+
+.add-to-cart {
+  width: 45%;
+  height: 50px;
+  margin: 12px ​1.2px 10px 21px;
+  padding: 15px 45px;
+  opacity: 0.99;
+  background-color: var(--color-primary);
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.11;
+}
+.buy-now {
+  width: 45%;
+  height: 50px;
+  margin: 12px ​1.2px 10px 21px;
+  padding: 15px 32px;
+  opacity: 0.99;
+  background-color: var(--color-ButtonBackRegular);
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.11;
+}
+
+@media (min-width: 1366px) and (max-width: 1900px) {
+}
+/*
+    * Screen for under 1280 Resolution 
+    */
+@media (max-width: 1279.92px) {
+  .edit-add-addr-title-bar span {
+    font-size: 18px;
+    line-height: 1.11;
+  }
+  .yt-add-modal-body {
+    padding: 30px 40px 20px !important;
+  }
+}
+
+/*
+    * Screen for under 768 Resolution 
+    */
+@media (max-width: 767.92px) {
+  .edit-add-addr-title-bar span {
+    font-size: 18px;
+    line-height: 1.11;
+  }
+
+  .yt-add-modal-body {
+    padding: 20px 15px !important;
+  }
+}

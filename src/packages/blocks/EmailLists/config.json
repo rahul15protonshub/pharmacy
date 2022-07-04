@@ -1,0 +1,65 @@
+{
+  "id": "EmailLists",
+  "version": "0.0.2",
+  "status": "preAlpha",
+  "path": "./packages/blocks/EmailLists",
+  "assembler-adapters": [],
+  "mobile": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "EmailLists"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "EmailLists": {
+        "file": "EmailLists.tsx",
+        "extends": "EmailListsController",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "EmailListsController",
+            "path": "./EmailListsController"
+          },
+          {
+            "value": "{Props}",
+            "path": "./EmailListsController"
+          }
+        ]
+      }
+    }
+  },
+  "web": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "EmailLists"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "EmailLists": {
+        "file": "EmailLists.web.tsx",
+        "extends": "EmailListsController",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "EmailListsController",
+            "path": "./EmailListsController"
+          },
+          {
+            "value": "{Props}",
+            "path": "./EmailListsController"
+          }
+        ]
+      }
+    }
+  }
+}

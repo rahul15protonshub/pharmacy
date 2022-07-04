@@ -1,0 +1,65 @@
+{
+  "id": "Sms2",
+  "version": "0.0.2",
+  "status": "preAlpha",
+  "path": "./packages/blocks/Sms2",
+  "assembler-adapters": [],
+  "mobile": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "Sms2"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "Sms2": {
+        "file": "Sms2.tsx",
+        "extends": "Sms2Controller",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "Sms2Controller",
+            "path": "./Sms2Controller"
+          },
+          {
+            "value": "{Props}",
+            "path": "./Sms2Controller"
+          }
+        ]
+      }
+    }
+  },
+  "web": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "Sms2"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "Sms2": {
+        "file": "Sms2.web.tsx",
+        "extends": "Sms2Controller",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "Sms2Controller",
+            "path": "./Sms2Controller"
+          },
+          {
+            "value": "{Props}",
+            "path": "./Sms2Controller"
+          }
+        ]
+      }
+    }
+  }
+}

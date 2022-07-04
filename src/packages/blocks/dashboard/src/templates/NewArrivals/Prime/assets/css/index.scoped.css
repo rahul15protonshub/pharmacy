@@ -1,0 +1,22 @@
+.product-gallery-layout__container {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+
+@media screen and (min-width: 0px) {
+    .product-gallery__grid {
+        height: 176px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .product-gallery__grid {
+        height: 360px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .product-gallery__grid {
+        height: 628px;
+    }
+}

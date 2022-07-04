@@ -1,0 +1,65 @@
+{
+  "id": "ApiIntegration19",
+  "version": "0.0.2",
+  "status": "preAlpha",
+  "path": "./packages/blocks/ApiIntegration19",
+  "assembler-adapters": [],
+  "mobile": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "ApiIntegration19"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "ApiIntegration19": {
+        "file": "ApiIntegration19.tsx",
+        "extends": "ApiIntegration19Controller",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "ApiIntegration19Controller",
+            "path": "./ApiIntegration19Controller"
+          },
+          {
+            "value": "{Props}",
+            "path": "./ApiIntegration19Controller"
+          }
+        ]
+      }
+    }
+  },
+  "web": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "ApiIntegration19"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "ApiIntegration19": {
+        "file": "ApiIntegration19.web.tsx",
+        "extends": "ApiIntegration19Controller",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "ApiIntegration19Controller",
+            "path": "./ApiIntegration19Controller"
+          },
+          {
+            "value": "{Props}",
+            "path": "./ApiIntegration19Controller"
+          }
+        ]
+      }
+    }
+  }
+}

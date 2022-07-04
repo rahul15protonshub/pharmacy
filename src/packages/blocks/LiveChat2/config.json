@@ -1,0 +1,65 @@
+{
+  "id": "LiveChat2",
+  "version": "0.0.2",
+  "status": "preAlpha",
+  "path": "./packages/blocks/LiveChat2",
+  "assembler-adapters": [],
+  "mobile": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "LiveChat2"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "LiveChat2": {
+        "file": "LiveChat2.tsx",
+        "extends": "LiveChat2Controller",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "LiveChat2Controller",
+            "path": "./LiveChat2Controller"
+          },
+          {
+            "value": "{Props}",
+            "path": "./LiveChat2Controller"
+          }
+        ]
+      }
+    }
+  },
+  "web": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "LiveChat2"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "LiveChat2": {
+        "file": "LiveChat2.web.tsx",
+        "extends": "LiveChat2Controller",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "LiveChat2Controller",
+            "path": "./LiveChat2Controller"
+          },
+          {
+            "value": "{Props}",
+            "path": "./LiveChat2Controller"
+          }
+        ]
+      }
+    }
+  }
+}

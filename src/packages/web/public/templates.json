@@ -1,0 +1,42 @@
+{
+    "templates" : {
+        "templates1" :{
+            "primaryColor" : "#3fc1cb",
+            "secondaryColor" : "red",
+            "banner1" : {
+                "type" : "fullWidth",
+                "CarouselIconPosition" : "center",
+                "bannerTemplateclass" : "bannertemplatewithmargin"
+            },
+            "categorySection" : {
+                "title" : "Product Categories",
+                "isViewAllButton": true,
+                "categoryTitleClass" : "category_title-template-1",
+                "cardTemplateType" : "template1"
+            },
+            "Collection":{
+                "title" : "New Arrivals",
+                "maxCard" : 4
+            }
+        },
+        "templates2" :{
+            "primaryColor" : "green",
+            "secondaryColor" : "orange",
+            "banner1" : {
+                "type" : "fullWidth",
+                "CarouselIconPosition" : "center",
+                "bannerTemplateclass" : "bannertemplatewithfullwidth"
+            },
+            "categorySection" : {
+                "title" : "Category",
+                "isViewAllButton": false,
+                "categoryTitleClass" : "category_title-template-2",
+                "cardTemplateType" : "template2"
+            },
+            "Collection":{
+                "title" : "NEW ARRIVALS",
+                "maxCard" : 3
+            }
+        }
+    }
+}

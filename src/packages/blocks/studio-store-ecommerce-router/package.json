@@ -1,0 +1,11 @@
+{
+  "name": "studio-store-ecommerce-router",
+  "version": "1.3.3",
+  "repository": "https://gitlab.builder.ai/builder/builder-bx/Bx/blocks/react-native/development/builder-studio-store/e-commerce/blocks/studio-store-ecommerce-router.git",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo Router Block no code",
+    "testBackend": "echo Router Block no code",
+    "lint": "echo Router Block no code"
+  }
+}

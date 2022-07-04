@@ -1,0 +1,28 @@
+.common-header-banner__container {
+    max-width: 1440px;
+    margin: auto;
+}
+
+@media screen and (min-width: 0px) {
+    .common-header-banner__carousel .rec-slider-container {
+        height: 125px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .common-header-banner__carousel .rec-pagination {
+        display: block;
+    }
+    .common-header-banner__carousel .rec-slider-container {
+        height: 256px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .common-header-banner__carousel .rec-pagination {
+        display: block;
+    }
+    .common-header-banner__carousel .rec-slider-container {
+        height: 480px;
+    }
+}

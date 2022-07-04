@@ -1,0 +1,11 @@
+{
+  "name": "studio-store-ecommerce-components",
+  "version": "1.3.3",
+  "repository": "https://gitlab.builder.ai/builder/builder-bx/Bx/blocks/react-native/development/builder-studio-store/e-commerce/blocks/studio-store-ecommerce-components.git",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo Components Block no code",
+    "testBackend": "echo Components Block no code",
+    "lint": "echo Components Block no code"
+  }
+}

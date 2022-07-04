@@ -1,0 +1,92 @@
+{
+  "minimal": [
+    {
+      "sectionName": "headerBanner",
+      "componentName": "Minimal"
+    },
+    {
+      "sectionName": "categories",
+      "componentName": "Minimal"
+    },
+    {
+      "sectionName": "newArriwal",
+      "componentName": "Minimal"
+    },
+    {
+      "sectionName": "TrendingProduct",
+      "componentName": "Minimal"
+    }
+  ],
+  "prime": [
+    {
+      "sectionName": "headerBanner",
+      "componentName": "CommonBanner"
+    },
+    {
+      "sectionName": "TrendingProduct",
+      "componentName": "Prime"
+    },
+    {
+      "sectionName": "newArriwal",
+      "componentName": "Prime"
+    },
+    {
+      "sectionName": "categories",
+      "componentName": "Prime"
+    }
+  ],
+  "bold": [
+    {
+      "sectionName": "headerBanner",
+      "componentName": "CommonBanner"
+    },
+    {
+      "sectionName": "TrendingProduct",
+      "componentName": "Bold"
+    },
+    {
+      "sectionName": "newArriwal",
+      "componentName": "Bold"
+    },
+    {
+      "sectionName": "categories",
+      "componentName": "Bold"
+    }
+  ],
+  "ultra": [
+    {
+      "sectionName": "headerBanner",
+      "componentName": "CommonBanner"
+    },
+    {
+      "sectionName": "TrendingProduct",
+      "componentName": "Ultra"
+    },
+    {
+      "sectionName": "newArriwal",
+      "componentName": "Ultra"
+    },
+    {
+      "sectionName": "categories",
+      "componentName": "Ultra"
+    }
+  ],
+  "essence": [
+    {
+      "sectionName": "headerBanner",
+      "componentName": "CommonBanner"
+    },
+    {
+      "sectionName": "TrendingProduct",
+      "componentName": "Essence"
+    },
+    {
+      "sectionName": "newArriwal",
+      "componentName": "Essence"
+    },
+    {
+      "sectionName": "categories",
+      "componentName": "Essence"
+    }
+  ]
+}

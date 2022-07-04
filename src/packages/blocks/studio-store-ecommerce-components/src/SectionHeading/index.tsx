@@ -1,0 +1,1 @@
+export { SectionHeading as default, MinimalHeading } from './SectionHeading';

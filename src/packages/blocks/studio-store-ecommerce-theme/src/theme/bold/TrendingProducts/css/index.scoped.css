@@ -1,0 +1,117 @@
+/* template 2 start */
+.templatetwo-product-container.slider-container .item-slider {
+  border: none;
+  /* margin-right: 30px; */
+  /* max-width: 284px; */
+}
+.templatetwo-product-slider.product-slider .rec-slider-container {
+  margin: 0 !important;
+}
+.templatetwo-product-container.slider-container {
+  width: 100%;
+  padding-top: 0.5rem;
+}
+.templatetwo-product {
+  position: relative;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 100%;
+  transition: all 0.3s ease-in;
+}
+.templatetwo-product .hoveroverlay {
+  position: absolute;
+  bottom: 0 !important;
+  left: 0 !important;
+  height: 0 !important;
+  width: 100% !important;
+  opacity: 1;
+  background-color: rgb(0, 0, 0, 0.6);
+  transition: all 0.5s ease-in-out;
+}
+.templatetwo-product:hover {
+  box-shadow: 0 0px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+.templatetwo-product:hover .hoveroverlay {
+  height: 100% !important;
+}
+.templatetwo-product .templatetwo-overlay {
+  background-color: rgb(0, 0, 0, 0.6);
+  color: #f1f1f1;
+  width: 100%;
+  opacity: 1;
+  color: white;
+  text-align: left;
+}
+
+.templatetwo-product .templatetwo-overlay p {
+  margin: 0;
+}
+.templatetwo-product .templatetwo-overlay p.productName {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.templatetwo-product .templatetwo-overlay p.productPrice {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.templatetwo-product-wishlist.addtowishlistt2 {
+  position: absolute;
+  top: 5%;
+  z-index: 100;
+  right: 5%;
+  stroke: var(--color-cyan);
+}
+.templatetwo-product-wishlist.addtowishlistt2.active {
+  fill: var(--color-cyan) !important;
+  fill-opacity: 0.4 !important;
+}
+.templatetwo-product-wishlist.addtowishlistt2:hover {
+  fill: var(--color-cyan) !important;
+  fill-opacity: 0.4 !important;
+}
+
+@media (min-width: 0px) {
+  .templatetwo-product {
+    height: 187px;
+  }
+  .templatetwo-product .templatetwo-overlay {
+    padding: 0.5rem 1rem;
+  }
+  .templatetwo-product .templatetwo-overlay p.productName {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .templatetwo-product .templatetwo-overlay p.productPrice {
+    font-size: 12px;
+    font-weight: 400;
+  }
+}
+@media (min-width: 768px) {
+  .templatetwo-product {
+    height: 330px;
+  }
+  .templatetwo-product .templatetwo-overlay p.productName {
+    font-size: 18px;
+  }
+  .templatetwo-product .templatetwo-overlay p.productPrice {
+    font-size: 14px;
+  }
+  .templatetwo-product .templatetwo-overlay {
+    padding: 0.875rem 1.25rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .templatetwo-product {
+    height: 374px;
+  }
+  .templatetwo-product .templatetwo-overlay {
+    padding: 1rem 1.5rem;
+  }
+}
+
+/* template two end */

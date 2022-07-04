@@ -1,0 +1,65 @@
+{
+  "id": "Reviews2",
+  "version": "0.0.2",
+  "status": "preAlpha",
+  "path": "./packages/blocks/Reviews2",
+  "assembler-adapters": [],
+  "mobile": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "Reviews2"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "Reviews2": {
+        "file": "Reviews2.tsx",
+        "extends": "Reviews2Controller",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "Reviews2Controller",
+            "path": "./Reviews2Controller"
+          },
+          {
+            "value": "{Props}",
+            "path": "./Reviews2Controller"
+          }
+        ]
+      }
+    }
+  },
+  "web": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "Reviews2"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "Reviews2": {
+        "file": "Reviews2.web.tsx",
+        "extends": "Reviews2Controller",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "Reviews2Controller",
+            "path": "./Reviews2Controller"
+          },
+          {
+            "value": "{Props}",
+            "path": "./Reviews2Controller"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "email-account-login",
+  "version": "1.3.0",
+  "status": "StudioStoreEcommerce",
+  "path": "./packages/blocks/email-account-login",
+  "assembler-adapters": [],
+  "mobile": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [],
+    "assembler-messages": {},
+    "assembler-dependencies": [],
+    "catalog-dependencies": [],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {}
+  },
+  "web": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [],
+    "assembler-messages": {},
+    "assembler-dependencies": [],
+    "catalog-dependencies": [],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {}
+  }
+}

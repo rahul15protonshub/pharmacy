@@ -1,0 +1,83 @@
+.section-heading {
+    justify-content: space-between;
+}
+
+.section-heading__text {
+    color: var(--color-ButtonBackRegular) !important;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 2rem;
+    margin-bottom: 0px !important;
+}
+
+.section-heading__minimal-text {
+    font-size: 24px;
+    letter-spacing: -2%;
+}
+
+.section-heading__link,
+.section-heading__link:hover,
+.section-heading__link:focus {
+    color: var(--color-cyan) !important;
+}
+
+/* underline  */
+
+.section-heading__text--underline-enabled {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 16px;
+}
+
+.section-heading__text--underline-enabled + .section-heading__link {
+    margin-bottom: 16px;
+}
+
+.section-heading__text--underline-enabled::after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    width: 160px;
+    z-index: 1;
+    background-color: var(--color-cyan);
+}
+
+/* separator  */
+
+.section-heading__text--separator-enabled hr {
+    background-color: var(--color-light-grey-3);
+    height: 2px;
+}
+
+.section-heading__text--separator-enabled .section-heading__link {
+    margin-left: 1rem;
+}
+
+.section-heading__text--separator-enabled .section-heading__text {
+    margin-right: 1rem;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 545px) {
+    .section-heading {
+        margin-bottom: 1rem !important;
+    }
+    .section-heading__text {
+        font-size: 1.25rem !important;
+        letter-spacing: normal;
+    }
+    .section-heading__text--underline-enabled {
+        padding-bottom: 10px;
+    }
+    .section-heading__text--underline-enabled + .section-heading__link {
+        margin-bottom: 10px;
+    }
+    .section-heading__minimal-text {
+        font-size: 18px;
+        letter-spacing: -2%;
+    }
+    .section-heading__text--underline-enabled::after {
+        width: 72px;
+    }
+}

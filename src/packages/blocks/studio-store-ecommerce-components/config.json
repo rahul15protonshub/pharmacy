@@ -1,0 +1,27 @@
+{
+  "id": "studio-store-ecommerce-components",
+  "version": "1.3.3",
+  "status": "StudioStoreEcommerce",
+  "path": "./packages/blocks/theme",
+  "assembler-adapters": [],
+  "mobile": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {}
+  },
+  "web": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [],
+    "assembler-dependencies": [
+      "\"react-image-magnify\": \"^2.7.4\""
+    ],
+    "catalog-dependencies": [],
+    "assembler-devDependencies": [
+      "\"@types/react-image-magnify\": \"^2.7.1\""
+    ],
+    "merge-engine-screens": {}
+  }
+}

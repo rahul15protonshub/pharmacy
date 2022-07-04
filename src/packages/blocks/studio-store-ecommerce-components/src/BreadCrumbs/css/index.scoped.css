@@ -1,0 +1,23 @@
+.custom-breadcrumbs {
+    padding: 1.5rem 0 !important;
+}
+.custom-breadcrumbs .breadcrumb {
+    margin-bottom: 0px;
+}
+.custom-breadcrumbs .breadcrumb .breadcrumb-item,
+.custom-breadcrumbs .breadcrumb .breadcrumb-item a {
+    font-size: 14px;
+    font-weight: 300;
+    transition: all 0.3s;
+}
+.custom-breadcrumbs .breadcrumb .breadcrumb-item a {
+    color: var(--color-cyan) !important;
+    text-decoration: none;
+}
+.custom-breadcrumbs .breadcrumb .breadcrumb-item a:hover {
+    font-weight: 500;
+}
+
+.custom-breadcrumbs .breadcrumb .breadcrumb-item.active {
+    color: #000;
+}

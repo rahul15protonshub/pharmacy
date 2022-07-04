@@ -1,0 +1,25 @@
+{
+  "id": "email-account-registration",
+  "version": "1.3.0",
+  "status": "StudioStoreEcommerce",
+  "assembler-adapters": [],
+  "mobile": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [],
+    "assembler-messages": {},
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {}
+  },
+  "web": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [],
+    "assembler-messages": {},
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+    }
+  }
+}
