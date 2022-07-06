@@ -108,9 +108,14 @@ export default class Shoppingcart extends ShoppingcartController {
     let itemQuantity = item.attributes.quantity
       ? item.attributes.quantity
       : item.attributes.subscription_quantity;
+<<<<<<< HEAD
     // let prescription=  item.attributes.catalogue.attributes.prescription 
 
   let prescription=true
+=======
+    let prescription=  item.attributes.catalogue.attributes.prescription 
+  
+>>>>>>> d76db2f (code merge)
     return (
       <View style={{}} key={item.id}>
         <TouchableOpacity

@@ -49,6 +49,9 @@ interface S {
   selectedVariantId: any;
   selectedItem: any;
   selectedQuantity: any;
+  prescriptionModal:boolean;
+  prescriptionNeed:boolean;
+  productDataArr:any;
   // Customizable Area Start
   prescriptionModal:boolean;
   prescriptionNeed:boolean;
@@ -76,6 +79,7 @@ export default class ShoppingcartController extends BlockComponent<
   getCartProductId: any;
   addToWishlistApiCallId: any;
   _unsubscribe: any;
+  addPrescriptionApiCallId:any;
   // Customizable Area Start
   addPrescriptionApiCallId:any;
   // Customizable Area End
@@ -114,6 +118,9 @@ export default class ShoppingcartController extends BlockComponent<
       selectedVariantId: "",
       selectedItem: null,
       selectedQuantity: null,
+      prescriptionModal:false,
+      prescriptionNeed:true,
+      productDataArr:[]
       // Customizable Area Start
       prescriptionModal:false,
       prescriptionNeed:true,
@@ -172,7 +179,14 @@ export default class ShoppingcartController extends BlockComponent<
   };
 
   uploadproduct=async(productdata:any)=>{
+<<<<<<< HEAD
     var finalData=[]
+=======
+    
+
+    var finalData=[]
+
+>>>>>>> d76db2f (code merge)
     if (productdata.length > 0) {
     for(let i=0;i<productdata.length;i++){
       let getselectedData={
@@ -181,6 +195,10 @@ export default class ShoppingcartController extends BlockComponent<
       }
       finalData.push(getselectedData);
     }
+<<<<<<< HEAD
+=======
+   
+>>>>>>> d76db2f (code merge)
       const httpBody = {
         order_items: finalData,
       };
@@ -192,7 +210,13 @@ export default class ShoppingcartController extends BlockComponent<
           configJSON.getAddprescriptionAPIEndPoint ,
         body: httpBody,
       });
+<<<<<<< HEAD
     }
+=======
+
+    }
+    
+>>>>>>> d76db2f (code merge)
   }
 
   async receive(from: string, message: Message) {
@@ -334,6 +358,10 @@ export default class ShoppingcartController extends BlockComponent<
       }
 
       if (apiRequestCallId === this.addPrescriptionApiCallId) {
+<<<<<<< HEAD
+=======
+        
+>>>>>>> d76db2f (code merge)
         if (responseJson && responseJson.errors) {
           let errorMessage = this.parseApiCatchErrorResponse(
             responseJson.errors[0].message
@@ -346,15 +374,24 @@ export default class ShoppingcartController extends BlockComponent<
           });
           return;
         } else if (responseJson && responseJson.message) {
+<<<<<<< HEAD
+=======
+         
+>>>>>>> d76db2f (code merge)
           this.setState({
             prescriptionModal:false,
              isFetching: false,
           });
+<<<<<<< HEAD
+=======
+
+>>>>>>> d76db2f (code merge)
           this.props.navigation.push("Checkout", {
             isFromCheckout: true,
             isFromBuyNow: false,
             buyNowCartID: null,
           })
+<<<<<<< HEAD
           return;
         } else {
           this.setState({
@@ -362,6 +399,14 @@ export default class ShoppingcartController extends BlockComponent<
          });
         }
       }
+=======
+
+          return;
+        }
+      }
+
+
+>>>>>>> d76db2f (code merge)
       if (responseJson?.data) {
         if (apiRequestCallId === this.getCartListApiCallId) {
           let dataPrescription=[]

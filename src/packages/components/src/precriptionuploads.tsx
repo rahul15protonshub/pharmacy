@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  // Customizable Area Start
   View,
   Text,
   Platform,
@@ -8,9 +7,8 @@ import {
   SafeAreaView,
   ScrollView,
   Image,FlatList,
-  TouchableOpacity,
-  Modal,
-  Dimensions
+  TouchableOpacity,Modal,Dimensions
+  // Customizable Area Start
   // Customizable Area End
 } from "react-native";
 import { BlockComponent } from "../../framework/src/BlockComponent";
@@ -30,13 +28,15 @@ import RNFetchBlob from "rn-fetch-blob";
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const fs = RNFetchBlob.fs;
+let imagePath:any = null;
+
 interface Props {
-  // Customizable Area Start
   navigation: any;
   showmodal:boolean;
   hideErrorModal:any;
   productData:any;
   uploadprescription:any;
+  // Customizable Area Start
   // Customizable Area End
 }
 
@@ -110,16 +110,20 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
     if(this.state.showanother==false){
       return false
     }
+   
     var empIds = this.state.selectedItems
+    // const searchData = this.props.productData.filter( (task:any) => !task.id.includes(this.state.selectedItems))
     var searchData = this.props.productData.filter(function(itm:any){
       return empIds.indexOf(itm.id) == -1;
     });
+    // return false
      let createdata={selectedItems: [],forselect:searchData,browsefile:[],is_selecatable:false}
      let olddata=this.state.dataArr
      let lastiindex=olddata.length-1
      olddata[lastiindex].is_selecatable=true
      let newdata=olddata.concat(createdata);
      this.setState({dataArr:newdata})
+    // dataArr.push(add)
     this.setState({showanother:false})
   }
 
@@ -162,8 +166,12 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
     this.setState({dataArr:tempbrowsefile,showanother:false,allfileupload:false})
   }
     
+  
   render() {
+    
     const { selectedItems ,dataArr} = this.state;
+    const { navigation } = this.props;
+    const _this = this;
     return (
      <Modal  animationType="slide"
      transparent={true}
@@ -245,23 +253,25 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
                           searchIcon={false}
                           hideDropdown
                           submitButtonColor="blue"
-                          submitButtonText="Submit" 
+                          submitButtonText="Submit"
+                          
+                          
+                          
                         />
                         </View>
                </View>
             </View>}
             </View>
             )
+          
           }}
-            />
-            }
+            />}
             <View style={styles.adduploadbutton}>
               <Text onPress={()=>{this.addanotherview()}} style={styles.labelTextAddanother}>{this.state.showanother? '+ Add another prescription':'' }</Text>
               <TouchableOpacity onPress={()=>{
                 this.props.uploadprescription(this.state.dataArr)
               }} 
-              disabled={(this.state.selectedItems?.length==this.props.productData?.length && this.state.allfileupload) ? false:true}
-               style={{opacity:(this.state.selectedItems?.length==this.props.productData?.length && this.state.allfileupload) ? 1:0.4, backgroundColor:COLOR_CONST.btncolor,padding:scale(3),borderRadius:4}}> 
+              disabled={(this.state.selectedItems?.length==this.props.productData?.length && this.state.allfileupload) ? false:true} style={{opacity:(this.state.selectedItems?.length==this.props.productData?.length && this.state.allfileupload) ? 1:0.4, backgroundColor:COLOR_CONST.primaryThemeGradient,padding:scale(3),borderRadius:4}}> 
                  <Text style={styles.labelTextupload}>Upload</Text>
               </TouchableOpacity>
 
@@ -389,13 +399,7 @@ labelText: {
     width: scale(14),
     height: scale(8),
   },
-  adduploadbutton:{
-    width:windowWidth*85/100,
-    paddingHorizontal:'2%', 
-    marginVertical:windowHeight*2/100,
-     flexDirection:'row',
-     justifyContent:'space-between'
-    },
+  adduploadbutton:{width:windowWidth*85/100,paddingHorizontal:'2%', marginVertical:windowHeight*2/100, flexDirection:'row',justifyContent:'space-between'},
 });
-
+// Customizable Area End
 export default Prescriptionuploads;
