@@ -173,6 +173,9 @@ export default class ProductDescriptionController extends BlockComponent<
       subscriptionCartHasProduct: false,
       isFromSubscription: false,
       showProductDescriptionModal: false,
+      prescriptionModal:false,
+      buyNowDoneCartID:'',
+      productDataArr:[],
       // Customizable Area Start
       prescriptionModal:false,
       buyNowDoneCartID:'',
@@ -268,9 +271,8 @@ export default class ProductDescriptionController extends BlockComponent<
         body: httpBody,
       });
 
-    }
+    } 
   }
-
   async receive(from: string, message: Message) {
     if (getName(MessageEnum.RestAPIResponceMessage) === message.id) {
       const apiRequestCallId = message.getData(
@@ -310,6 +312,8 @@ export default class ProductDescriptionController extends BlockComponent<
             },
             () =>
               setTimeout(() => {
+                this.setState({ prescriptionModal: true, buyNowDoneCartID:responseJson.data.id });
+               return false
                 if (this.state.productData?.attributes?.prescription){
                   this.setState({ prescriptionModal: true, buyNowDoneCartID:responseJson.data.id });
                 }else{
@@ -479,7 +483,18 @@ export default class ProductDescriptionController extends BlockComponent<
             isFetching: false,
             message: this.parseApiErrorResponse(responseJson),
           });
-        }
+        }else if (apiRequestCallId === this.addPrescriptionApiCallId) {
+          let errorMessage = this.parseApiErrorResponse(
+             responseJson.errors[0].message
+           );
+           this.setState({
+             isFetching: false,
+             isShowError: true,
+             showAlertModal: true,
+             message: errorMessage,
+           });
+           return;
+         }
         // Customizable Area Start
         else if (apiRequestCallId === this.addPrescriptionApiCallId) {
           let errorMessage = this.parseApiErrorResponse(
@@ -541,6 +556,16 @@ export default class ProductDescriptionController extends BlockComponent<
             showAlertModal: true,
             isFetching: false,
             message: responseJson?.message,
+          });
+        }
+        else if (apiRequestCallId === this.addPrescriptionApiCallId) {
+          this.setState({
+            prescriptionModal:false,
+             isFetching: false,
+          });
+          this.props.navigation.push("Checkout", {
+            isFromBuyNow: true,
+            buyNowCartID: this.state.buyNowDoneCartID,
           });
         }
         // Customizable Area Start
@@ -666,6 +691,7 @@ export default class ProductDescriptionController extends BlockComponent<
    
     this.setState(
       {
+        // productDataArr:dataPrescription,
         isFetching: false,
         productData: responseJson?.data,
         selectedProduct: selectedProduct || null,

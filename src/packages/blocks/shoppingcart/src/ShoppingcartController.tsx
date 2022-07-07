@@ -402,6 +402,10 @@ export default class ShoppingcartController extends BlockComponent<
 =======
 
           return;
+        } else {
+          this.setState({
+            isFetching: false,
+         });
         }
       }
 
@@ -413,10 +417,10 @@ export default class ShoppingcartController extends BlockComponent<
           if(responseJson?.data[0]?.attributes?.order_items && responseJson?.data[0]?.attributes?.order_items?.length>0){
             for (let i=0; i<responseJson?.data[0]?.attributes?.order_items?.length;i++){
               let tempdata=responseJson?.data[0]?.attributes?.order_items[i]?.attributes
-                if(tempdata?.catalogue?.attributes?.prescription){
+                // if(tempdata?.catalogue?.attributes?.prescription){
                 let tempPrescription={'id':tempdata?.id,'name':tempdata.product_name}
                 dataPrescription.push(tempPrescription)
-                }
+                // }
             }
           }
           if(dataPrescription.length>0){

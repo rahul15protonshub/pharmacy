@@ -271,7 +271,8 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
               <TouchableOpacity onPress={()=>{
                 this.props.uploadprescription(this.state.dataArr)
               }} 
-              disabled={(this.state.selectedItems?.length==this.props.productData?.length && this.state.allfileupload) ? false:true} style={{opacity:(this.state.selectedItems?.length==this.props.productData?.length && this.state.allfileupload) ? 1:0.4, backgroundColor:COLOR_CONST.primaryThemeGradient,padding:scale(3),borderRadius:4}}> 
+              disabled={(this.state.selectedItems?.length==this.props.productData?.length && this.state.allfileupload) ? false:true}
+               style={{opacity:(this.state.selectedItems?.length==this.props.productData?.length && this.state.allfileupload) ? 1:0.4, backgroundColor:COLOR_CONST.btncolor,padding:scale(3),borderRadius:4}}> 
                  <Text style={styles.labelTextupload}>Upload</Text>
               </TouchableOpacity>
 

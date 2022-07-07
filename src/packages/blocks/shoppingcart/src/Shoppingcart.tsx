@@ -109,6 +109,7 @@ export default class Shoppingcart extends ShoppingcartController {
       ? item.attributes.quantity
       : item.attributes.subscription_quantity;
 <<<<<<< HEAD
+<<<<<<< HEAD
     // let prescription=  item.attributes.catalogue.attributes.prescription 
 
   let prescription=true
@@ -116,6 +117,11 @@ export default class Shoppingcart extends ShoppingcartController {
     let prescription=  item.attributes.catalogue.attributes.prescription 
   
 >>>>>>> d76db2f (code merge)
+=======
+    // let prescription=  item.attributes.catalogue.attributes.prescription 
+
+  let prescription=true
+>>>>>>> 2a8b82c (buynow and hardcode)
     return (
       <View style={{}} key={item.id}>
         <TouchableOpacity
