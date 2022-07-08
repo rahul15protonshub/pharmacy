@@ -58,6 +58,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
   postApplyCouponApiCallId: string = "";
   delCouponApiCallId: string = "";
   postBuyNowApiCallId: string = "";
+  postPrescrion:string="";
   // Customizable Area Start
   postPrescription:string="";
   // Customizable Area End
@@ -579,6 +580,11 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
   };
  //upload prescripton file start//
  postPrescriptionFile = (order_items: any): boolean => {
+<<<<<<< HEAD
+=======
+  // Customizable Area End
+  // console.log('order_items', order_items)
+>>>>>>> c77ba52 (new setup)
   const header = {
     "Content-Type": configJSON.validationApiContentType,
     token: localStorage.getItem("token"),
@@ -587,7 +593,11 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     getName(MessageEnum.RestAPIRequestMessage)
   );
 
+<<<<<<< HEAD
   this.postPrescription = requestMessage.messageId;
+=======
+  this.postPrescrion = requestMessage.messageId;
+>>>>>>> c77ba52 (new setup)
 
   requestMessage.addData(
     getName(MessageEnum.RestAPIResponceEndPointMessage),

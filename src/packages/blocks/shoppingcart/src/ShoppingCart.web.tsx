@@ -31,6 +31,7 @@ import "../assets/css/modalAddressField.css";
 import "../assets/css/index.css";
 import { toast } from "react-toastify";
 import Loader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader.web";
+import { prescription } from "./assets";
 // Customizable Area Start
 import { prescription } from "./assets";
 // Customizable Area End
@@ -591,7 +592,10 @@ const CartAmount: any = withRouter((props: any) => {
   const [prescriptionFile, setPrescriptionFile] = useState<any>([]);
   const [isPrescModal, setIsPrescModal] = useState<any>(false);
   const [presProduct, setpresProduct] = useState<any>([]);
+  const [uploadFileContaner, setUploadFileContaner] = useState<any>([1]);
   const [progress, setProgress] = useState<any>(0);
+  const [unselectItem, setUnselectItem] = useState<any>([]);
+  const [selecteditem, setSelecteditem] = useState<any>([]);
   const [uploading, setUploading] = useState<any>([]);
   const [selectedProduct, setSelectedProduct] = useState<any>([]);
   const [isPrescriptionFieldExist, setIsPrescriptionFieldExist] =
@@ -609,6 +613,7 @@ const CartAmount: any = withRouter((props: any) => {
     let preProduct = wholeCart.order_items.filter((item: any) => {
       return item.attributes.catalogue.attributes.prescription == true;
     });
+    console.log("preProduct********************", preProduct.length);
     if (preProduct.length != 0) {
       setIsPrescriptionFieldExist(true);
     }
@@ -781,6 +786,7 @@ const CartAmount: any = withRouter((props: any) => {
       };
     }
   }
+  const [selected, setSelected] = useState<any>([]);
 
   const handleDeleteUploadFile = (id: any) => {
     setPrescriptionFile(
@@ -1221,7 +1227,6 @@ const CartAmount: any = withRouter((props: any) => {
                             labelledBy="Select"
                             disableSearch={true}
                             className="multiselect"
-                            // disabled={dropDown.length!=index?false:true}
                           />
                         </div>
                       </>
@@ -1233,13 +1238,12 @@ const CartAmount: any = withRouter((props: any) => {
               className="justify-content-between"
               style={{ border: "none" }}
             >
-             {dropDown[dropDown.length - 1].options.length !=
-              selectedProduct.length ? (
+             {presProduct.length != 0 ? (
                 <Button
                   className="textDecorationNone px-0"
                   color="link"
                   onClick={handleUploadAnotherPre}
-                  disabled={selectedProduct.length==0&&progress!=100?true:false}
+                  disabled={selectedProduct.length==0?true:false}
                 >
                   + Add another prescription
                 </Button>
@@ -1255,14 +1259,7 @@ const CartAmount: any = withRouter((props: any) => {
                   cancel
                 </Button>{" "}
                 <Button
-                 disabled={
-                  dropDown[dropDown.length - 1].options.length !=
-                  selectedProduct.length
-                    ? true
-                    : false || progress != 100
-                    ? true
-                    : false
-                }
+                  // disabled={progress != 100 && true}
                   onClick={handleUpload}
                   className=" btn-btn btn-secondary yt-login-btn btn-block px-4 py-1"
                 >
