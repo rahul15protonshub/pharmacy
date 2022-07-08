@@ -97,7 +97,10 @@
     "yup": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/yup",
     "react-image-magnify": "^2.7.4",
     "react-custom-scrollbars": "^4.2.1",
-    "invert-color": "2.0.0"
+    "invert-color": "2.0.0",
+    "material-ui-dropzone": "^3.5.0",
+    "react-multi-select-component": "^4.2.9",
+    "react-dropzone": "^14.2.1"
   },
   "devDependencies": {
     "@types/node": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/@types/node",

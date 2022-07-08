@@ -103,7 +103,7 @@ export default class EmailAccountLoginController extends BlockComponent<
       //@ts-ignore
       if (
         window.localStorage.getItem("guestUUID") &&
-        this.verifyGuestToken() &&
+        await this.verifyGuestToken() &&
         this.props.location?.state?.calledFrom !== "guest-login"
       ) {
         this.props?.history?.push("/home-page");
@@ -557,10 +557,7 @@ export default class EmailAccountLoginController extends BlockComponent<
   });
   SigninSchema2 = Yup.object().shape({
     userEmail: Yup.string()
-      .matches(
-        /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
-        "Invalid Email / Phone Number"
-      )
+    .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, "Invalid Email / Phone Number")
       .required("Email / Phone Number is required."),
     password: Yup.string()
       .min(8, "Minimum Password length is 8.")

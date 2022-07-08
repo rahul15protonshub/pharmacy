@@ -160,6 +160,24 @@ export default class OrderSummaryController extends BlockComponent<
             //window.notify([{ type: 'error', message: responseJson.errors[0].message }])
           }
         }
+        if (apiRequestCallId === this.putUpdateCartQuantityApiCallId) {
+          console.log('responseJson.data.id',responseJson);
+          
+          if (responseJson.data.id) {
+            {
+              Object.keys(
+                JSON.parse(localStorage.getItem("buyNow") || "{}")
+              ).length == 0 && this.getCart();
+            }
+            // @ts-ignore
+            window.notify([
+              { message: "Cart updated successfully ", type: "success" },
+            ]);
+          } else {
+            this.parseApiErrorResponse(responseJson);
+          }
+          //console.log(responseJson, "UpdateCartQuantity");
+        }
         if (apiRequestCallId === this.postApplyCouponApiCallId) {
           if (responseJson && responseJson.data) {
             //console.log(responseJson, "apply coupon");
@@ -503,6 +521,17 @@ export default class OrderSummaryController extends BlockComponent<
       this.releaseBlockQuantity();
     }
   };
+  
+// =============sahib============//
+  onSelectCod=(event)=>{
+    if(this.state.paymentType=="cod"){
+      this.setState({ paymentType: "razorpay" })
+    }else{
+      this.setState({ paymentType: event.target.name })
+    }
+  }
+// =============sahib============//
+
 
   placeOrder = async () => {
     if (this.state.paymentType === "cod") {
@@ -736,6 +765,67 @@ export default class OrderSummaryController extends BlockComponent<
 
     return true;
   };
+
+    // update cart quantity
+    putUpdateCartQuantity = (
+      product_id: any,
+      product_variant: any,
+      quantity: any,
+      type: any
+    ): boolean => {
+      // Customizable Area End
+      const header = {
+        "Content-Type": configJSON.validationApiContentType,
+        token: localStorage.getItem("token"),
+      };
+      setTimeout(() => {
+        let httpBody: any;
+        if (type == "subscription") {
+          httpBody = {
+            subscription_quantity: quantity,
+            catalogue_id: product_id,
+            // catalogue_variant_id: product_variant,
+          };
+        } else {
+          httpBody = {
+            quantity: quantity,
+            catalogue_id: product_id,
+            catalogue_variant_id: product_variant,
+          };
+        }
+        const requestMessage = new Message(
+          getName(MessageEnum.RestAPIRequestMessage)
+        );
+  
+        this.putUpdateCartQuantityApiCallId = requestMessage.messageId;
+  
+        requestMessage.addData(
+          getName(MessageEnum.RestAPIResponceEndPointMessage),
+          configJSON.endPointApiPutUpdateCartQuantity +
+            `${this.state.cartId}/update_item_quantity`
+        );
+  
+        requestMessage.addData(
+          getName(MessageEnum.RestAPIRequestHeaderMessage),
+          JSON.stringify(header)
+        );
+  
+        requestMessage.addData(
+          getName(MessageEnum.RestAPIRequestBodyMessage),
+          JSON.stringify(httpBody)
+        );
+  
+        requestMessage.addData(
+          getName(MessageEnum.RestAPIRequestMethodMessage),
+          configJSON.putAPiMethod
+        );
+  
+        runEngine.sendMessage(requestMessage.id, requestMessage);
+      }, 500);
+  
+      return true;
+      // Customizable Area End
+    };
   releaseShippingCharge = () => {
     // Customizable Area Start
     const { isRealeasedShippingCharge } = this.state;

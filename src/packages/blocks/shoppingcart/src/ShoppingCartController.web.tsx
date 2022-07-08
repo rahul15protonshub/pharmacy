@@ -58,6 +58,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
   postApplyCouponApiCallId: string = "";
   delCouponApiCallId: string = "";
   postBuyNowApiCallId: string = "";
+  postPrescrion:string="";
   // Customizable Area Start
   // Customizable Area End
   constructor(props: Props) {
@@ -578,6 +579,44 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     return true;
     // Customizable Area End
   };
+ //upload prescripton file start//
+ postPrescriptionFile = (order_items: any): boolean => {
+  // Customizable Area End
+  // console.log('order_items', order_items)
+  const header = {
+    "Content-Type": configJSON.validationApiContentType,
+    token: localStorage.getItem("token"),
+  };
+  const requestMessage = new Message(
+    getName(MessageEnum.RestAPIRequestMessage)
+  );
+
+  this.postPrescrion = requestMessage.messageId;
+
+  requestMessage.addData(
+    getName(MessageEnum.RestAPIResponceEndPointMessage),
+    configJSON.endPointApiUploadPrescription
+  );
+  requestMessage.addData(
+    getName(MessageEnum.RestAPIRequestHeaderMessage),
+    JSON.stringify(header)
+  );
+
+  requestMessage.addData(
+    getName(MessageEnum.RestAPIRequestBodyMessage),
+    JSON.stringify(order_items)
+  );
+
+  requestMessage.addData(
+    getName(MessageEnum.RestAPIRequestMethodMessage),
+    configJSON.putAPiMethod
+  );
+  runEngine.sendMessage(requestMessage.id, requestMessage);
+  return true;
+  // Customizable Area End
+};
+
+//upload prescripton file end//
 
   // apply coupon
   postApplyCoupon = (code: any, amount: any): boolean => {

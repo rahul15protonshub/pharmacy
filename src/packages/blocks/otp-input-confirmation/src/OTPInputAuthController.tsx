@@ -454,6 +454,7 @@ export default class OTPInputAuthController extends BlockComponent<
             full_name: this.state.fullName,
             full_phone_number: this.state.emailInput,
             password: this.state.passwordInput,
+            activated:true
           },
         },
       };
@@ -466,6 +467,7 @@ export default class OTPInputAuthController extends BlockComponent<
             full_name: this.state.fullName,
             email: this.state.emailInput,
             password: this.state.passwordInput,
+            activated:true
           },
         },
       };

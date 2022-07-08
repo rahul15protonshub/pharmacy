@@ -10,6 +10,7 @@ exports.PutMethodType = "PUT";
 exports.DeleteMethodType = "DELETE";
 exports.apiMethodTypePut = "PUT"
 exports.getWishlistApiEndPoint = "wishlist/wishlists";
+exports.postPrescriptionFile = "/bx_block_order_management/order_transactions/add_presc_files";
 
 exports.getCartApiEndPoint= "cart/carts"
 exports.addToCartApiEndPoint = "cart/carts/"
