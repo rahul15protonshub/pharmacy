@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  // Customizable Area Start
   View,
   Text,
   Platform,
@@ -9,7 +8,6 @@ import {
   ScrollView,
   Image,FlatList,
   TouchableOpacity,Modal,Dimensions
-  // Customizable Area End
 } from "react-native";
 import { BlockComponent } from "../../framework/src/BlockComponent";
 import scale, { verticalScale } from "../../framework/src/utils/Scale";
@@ -31,13 +29,11 @@ const fs = RNFetchBlob.fs;
 let imagePath:any = null;
 
 interface Props {
-  // Customizable Area Start
   navigation: any;
   showmodal:boolean;
   hideErrorModal:any;
   productData:any;
   uploadprescription:any;
-  // Customizable Area End
 }
 
 interface S {
@@ -402,5 +398,5 @@ labelText: {
   },
   adduploadbutton:{width:windowWidth*85/100,paddingHorizontal:'2%', marginVertical:windowHeight*2/100, flexDirection:'row',justifyContent:'space-between'},
 });
-// Customizable Area End
+
 export default Prescriptionuploads;
