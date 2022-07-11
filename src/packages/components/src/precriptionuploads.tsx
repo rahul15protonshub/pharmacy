@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  // Customizable Area Start
   View,
   Text,
   Platform,
@@ -8,7 +9,6 @@ import {
   ScrollView,
   Image,FlatList,
   TouchableOpacity,Modal,Dimensions
-  // Customizable Area Start
   // Customizable Area End
 } from "react-native";
 import { BlockComponent } from "../../framework/src/BlockComponent";
@@ -31,12 +31,12 @@ const fs = RNFetchBlob.fs;
 let imagePath:any = null;
 
 interface Props {
+  // Customizable Area Start
   navigation: any;
   showmodal:boolean;
   hideErrorModal:any;
   productData:any;
   uploadprescription:any;
-  // Customizable Area Start
   // Customizable Area End
 }
 

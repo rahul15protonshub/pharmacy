@@ -1,6 +1,7 @@
 import React from "react";
 
 import {
+   // Customizable Area Start
   FlatList,
   Image,
   Modal,
@@ -9,7 +10,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-  // Customizable Area Start
+ 
   // Customizable Area End
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
@@ -55,7 +56,7 @@ export default class ProductDescription extends ProductDescriptionController {
     // Customizable Area Start
     // Customizable Area End
   }
-
+  
   renderToolItem = (item: any, attribute: any, isFromColor: boolean) => {
     // Customizable Area Start
     const { selectedAttributes } = this.state;

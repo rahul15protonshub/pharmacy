@@ -17,13 +17,14 @@ import {
 export const configJSON = require("./config");
 
 export interface Props {
+    // Customizable Area Start
   navigation: any;
   id: string;
-  // Customizable Area Start
   // Customizable Area End
 }
 
 interface S {
+  // Customizable Area Start
   arrayHolder: any;
   token: string;
   productData: any;
@@ -84,8 +85,9 @@ interface S {
 }
 
 interface SS {
-  id: any;
+ 
   // Customizable Area Start
+  id: any;
   // Customizable Area End
 }
 export default class ProductDescriptionController extends BlockComponent<
@@ -93,6 +95,7 @@ export default class ProductDescriptionController extends BlockComponent<
   S,
   SS
 > {
+   // Customizable Area Start
   getProductDescriptionApiCallId: any;
   getBuyProductApiCallId: any;
   getNotifyProductApiCallId: any;
@@ -103,7 +106,7 @@ export default class ProductDescriptionController extends BlockComponent<
   getCartProductId: any;
   getCartProductDescriptionId: any;
   _unsubscribe: any;
-  // Customizable Area Start
+ 
   LikeFlag: any;
   LikeFlagId: any;
   addPrescriptionApiCallId:any
@@ -113,11 +116,13 @@ export default class ProductDescriptionController extends BlockComponent<
     this.receive = this.receive.bind(this);
 
     this.subScribedMessages = [
+         // Customizable Area Start
       getName(MessageEnum.RestAPIResponceMessage),
-      // Customizable Area Start
+   
       // Customizable Area End
     ];
     this.state = {
+        // Customizable Area Start
       arrayHolder: [],
       token: "",
       productData: null,
@@ -190,6 +195,7 @@ export default class ProductDescriptionController extends BlockComponent<
   }
 
   async componentDidMount() {
+       // Customizable Area Start
     super.componentDidMount();
     this._unsubscribe = this.props.navigation.addListener("willFocus", () => {
       this.setState({ isFetching: true, selectedAttributes: {} }, () => {
@@ -203,7 +209,7 @@ export default class ProductDescriptionController extends BlockComponent<
       "hardwareBackPress",
       this.handleBackButtonClick
     );
-    // Customizable Area Start
+ 
     // Customizable Area End
   }
 
@@ -231,6 +237,7 @@ export default class ProductDescriptionController extends BlockComponent<
   };
 
   async componentWillUnmount() {
+    // Customizable Area Start
     super.componentWillUnmount();
     this._unsubscribe.remove();
     runEngine.unSubscribeFromMessages(this, this.subScribedMessages);
@@ -238,7 +245,7 @@ export default class ProductDescriptionController extends BlockComponent<
       "hardwareBackPress",
       this.handleBackButtonClick
     );
-    // Customizable Area Start
+    
     // Customizable Area End
   }
 
@@ -274,6 +281,7 @@ export default class ProductDescriptionController extends BlockComponent<
     } 
   }
   async receive(from: string, message: Message) {
+    // Customizable Area Start
     if (getName(MessageEnum.RestAPIResponceMessage) === message.id) {
       const apiRequestCallId = message.getData(
         getName(MessageEnum.RestAPIResponceDataMessage)
@@ -298,6 +306,7 @@ export default class ProductDescriptionController extends BlockComponent<
       }
 
       if (responseJson && responseJson?.data) {
+           // Customizable Area Start
         if (apiRequestCallId === this.getProductDescriptionApiCallId) {
           this.getProductDescriptionSuccessCallBack(responseJson);
           this.setState({ isFetching: false });
@@ -400,7 +409,7 @@ export default class ProductDescriptionController extends BlockComponent<
             }
           );
         }
-        // Customizable Area Start
+     
         // Customizable Area End
       } else {
         if (
@@ -431,6 +440,7 @@ export default class ProductDescriptionController extends BlockComponent<
       }
 
       if (responseJson && responseJson.errors) {
+           // Customizable Area Start
         if (apiRequestCallId === this.addToCartApiCallId) {
           this.setState({
             isFetching: false,
@@ -495,22 +505,10 @@ export default class ProductDescriptionController extends BlockComponent<
            });
            return;
          }
-        // Customizable Area Start
-        else if (apiRequestCallId === this.addPrescriptionApiCallId) {
-          let errorMessage = this.parseApiErrorResponse(
-             responseJson.errors[0].message
-           );
-           this.setState({
-             isFetching: false,
-             isShowError: true,
-             showAlertModal: true,
-             message: errorMessage,
-           });
-           return;
-         }
         // Customizable Area End
       }
       if (responseJson?.message) {
+         // Customizable Area Start
         if (apiRequestCallId === this.addToCartApiCallId) {
           this.setState({
             isFetching: false,
@@ -568,20 +566,10 @@ export default class ProductDescriptionController extends BlockComponent<
             buyNowCartID: this.state.buyNowDoneCartID,
           });
         }
-        // Customizable Area Start
-        else if (apiRequestCallId === this.addPrescriptionApiCallId) {
-          this.setState({
-            prescriptionModal:false,
-             isFetching: false,
-          });
-          this.props.navigation.push("Checkout", {
-            isFromBuyNow: true,
-            buyNowCartID: this.state.buyNowDoneCartID,
-          });
-        }
         // Customizable Area End
       }
       if (errorReponse) {
+           // Customizable Area Start
         this.setState({
            isFetching: false,
         });
@@ -636,11 +624,11 @@ export default class ProductDescriptionController extends BlockComponent<
             message: errorReponse,
           });
         }
-        // Customizable Area Start
+     
         // Customizable Area End
       }
     }
-    // Customizable Area Start
+    
     // Customizable Area End
   }
 
