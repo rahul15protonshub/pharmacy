@@ -116,9 +116,9 @@ export default class ProductDescriptionController extends BlockComponent<
     this.receive = this.receive.bind(this);
 
     this.subScribedMessages = [
-         // Customizable Area Start
+        
       getName(MessageEnum.RestAPIResponceMessage),
-   
+      // Customizable Area Start
       // Customizable Area End
     ];
     this.state = {
