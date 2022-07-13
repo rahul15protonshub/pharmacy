@@ -49,9 +49,11 @@ interface S {
   selectedVariantId: any;
   selectedItem: any;
   selectedQuantity: any;
+  // Customizable Area Start
   prescriptionModal:boolean;
   prescriptionNeed:boolean;
   productDataArr:any;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
   // Customizable Area Start
@@ -64,6 +66,8 @@ interface S {
 =======
   // Customizable Area Start
 >>>>>>> a604c54 (Revert "mergecode")
+=======
+>>>>>>> dddf799 (newchanges)
   // Customizable Area End
 }
 
@@ -87,6 +91,7 @@ export default class ShoppingcartController extends BlockComponent<
   getCartProductId: any;
   addToWishlistApiCallId: any;
   _unsubscribe: any;
+<<<<<<< HEAD
   addPrescriptionApiCallId:any;
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -97,6 +102,10 @@ export default class ShoppingcartController extends BlockComponent<
 =======
   // Customizable Area Start
 >>>>>>> a604c54 (Revert "mergecode")
+=======
+  // Customizable Area Start
+  addPrescriptionApiCallId:any;
+>>>>>>> dddf799 (newchanges)
   // Customizable Area End
   constructor(props: Props) {
     super(props);
@@ -133,9 +142,11 @@ export default class ShoppingcartController extends BlockComponent<
       selectedVariantId: "",
       selectedItem: null,
       selectedQuantity: null,
+      // Customizable Area Start
       prescriptionModal:false,
       prescriptionNeed:true,
       productDataArr:[]
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       // Customizable Area Start
@@ -148,6 +159,8 @@ export default class ShoppingcartController extends BlockComponent<
 =======
       // Customizable Area Start
 >>>>>>> a604c54 (Revert "mergecode")
+=======
+>>>>>>> dddf799 (newchanges)
       // Customizable Area End
     };
 
@@ -203,6 +216,7 @@ export default class ShoppingcartController extends BlockComponent<
 
   uploadproduct=async(productdata:any)=>{
 <<<<<<< HEAD
+<<<<<<< HEAD
     var finalData=[]
 =======
     
@@ -210,6 +224,9 @@ export default class ShoppingcartController extends BlockComponent<
     var finalData=[]
 
 >>>>>>> d76db2f (code merge)
+=======
+    var finalData=[]
+>>>>>>> dddf799 (newchanges)
     if (productdata.length > 0) {
     for(let i=0;i<productdata.length;i++){
       let getselectedData={
@@ -219,9 +236,12 @@ export default class ShoppingcartController extends BlockComponent<
       finalData.push(getselectedData);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
    
 >>>>>>> d76db2f (code merge)
+=======
+>>>>>>> dddf799 (newchanges)
       const httpBody = {
         order_items: finalData,
       };
@@ -234,12 +254,16 @@ export default class ShoppingcartController extends BlockComponent<
         body: httpBody,
       });
 <<<<<<< HEAD
+<<<<<<< HEAD
     }
 =======
 
     }
     
 >>>>>>> d76db2f (code merge)
+=======
+    }
+>>>>>>> dddf799 (newchanges)
   }
 
   async receive(from: string, message: Message) {
@@ -382,9 +406,12 @@ export default class ShoppingcartController extends BlockComponent<
 
       if (apiRequestCallId === this.addPrescriptionApiCallId) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> d76db2f (code merge)
+=======
+>>>>>>> dddf799 (newchanges)
         if (responseJson && responseJson.errors) {
           let errorMessage = this.parseApiCatchErrorResponse(
             responseJson.errors[0].message
@@ -398,23 +425,30 @@ export default class ShoppingcartController extends BlockComponent<
           return;
         } else if (responseJson && responseJson.message) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
          
 >>>>>>> d76db2f (code merge)
+=======
+>>>>>>> dddf799 (newchanges)
           this.setState({
             prescriptionModal:false,
              isFetching: false,
           });
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> d76db2f (code merge)
+=======
+>>>>>>> dddf799 (newchanges)
           this.props.navigation.push("Checkout", {
             isFromCheckout: true,
             isFromBuyNow: false,
             buyNowCartID: null,
           })
 <<<<<<< HEAD
+<<<<<<< HEAD
           return;
         } else {
           this.setState({
@@ -424,6 +458,8 @@ export default class ShoppingcartController extends BlockComponent<
       }
 =======
 
+=======
+>>>>>>> dddf799 (newchanges)
           return;
         } else {
           this.setState({
@@ -431,19 +467,22 @@ export default class ShoppingcartController extends BlockComponent<
          });
         }
       }
+<<<<<<< HEAD
 
 
 >>>>>>> d76db2f (code merge)
+=======
+>>>>>>> dddf799 (newchanges)
       if (responseJson?.data) {
         if (apiRequestCallId === this.getCartListApiCallId) {
           let dataPrescription=[]
           if(responseJson?.data[0]?.attributes?.order_items && responseJson?.data[0]?.attributes?.order_items?.length>0){
             for (let i=0; i<responseJson?.data[0]?.attributes?.order_items?.length;i++){
               let tempdata=responseJson?.data[0]?.attributes?.order_items[i]?.attributes
-                // if(tempdata?.catalogue?.attributes?.prescription){
+                if(tempdata?.catalogue?.attributes?.prescription){
                 let tempPrescription={'id':tempdata?.id,'name':tempdata.product_name}
                 dataPrescription.push(tempPrescription)
-                // }
+                }
             }
           }
           if(dataPrescription.length>0){

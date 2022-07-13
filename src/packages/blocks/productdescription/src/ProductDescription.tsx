@@ -43,7 +43,6 @@ import ApplicationLoader from "../../studio-store-ecommerce-components/src/AppLo
 import CustomErrorModal from "../../studio-store-ecommerce-components/src/CustomErrorModal/CustomErrorModal";
 import Scheduling from "../../../blocks/scheduling/src/Scheduling";
 const themeJson = require("../../studio-store-ecommerce-theme/src/theme.json");
-import Prescriptionuploads from '../../../components/src/precriptionuploads'
 export const configJSON = require("./config");
 // Customizable Area Start
 import Prescriptionuploads from '../../../components/src/precriptionuploads'

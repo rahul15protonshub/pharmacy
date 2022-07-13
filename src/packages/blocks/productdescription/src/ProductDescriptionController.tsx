@@ -80,7 +80,6 @@ interface S {
   prescriptionModal:boolean;
   buyNowDoneCartID:any
   productDataArr:any;
-  // Customizable Area Start
   // Customizable Area End
 }
 
@@ -174,10 +173,10 @@ export default class ProductDescriptionController extends BlockComponent<
       subscriptionCartHasProduct: false,
       isFromSubscription: false,
       showProductDescriptionModal: false,
+      // Customizable Area Start
       prescriptionModal:false,
       buyNowDoneCartID:'',
       productDataArr:[],
-      // Customizable Area Start
       // Customizable Area End
     };
 
@@ -268,8 +267,7 @@ export default class ProductDescriptionController extends BlockComponent<
           configJSON.getAddprescriptionAPIEndPoint ,
         body: httpBody,
       });
-
-    } 
+    }
   }
   async receive(from: string, message: Message) {
     if (getName(MessageEnum.RestAPIResponceMessage) === message.id) {
@@ -310,8 +308,6 @@ export default class ProductDescriptionController extends BlockComponent<
             },
             () =>
               setTimeout(() => {
-                this.setState({ prescriptionModal: true, buyNowDoneCartID:responseJson.data.id });
-               return false
                 if (this.state.productData?.attributes?.prescription){
                   this.setState({ prescriptionModal: true, buyNowDoneCartID:responseJson.data.id });
                 }else{
@@ -481,7 +477,9 @@ export default class ProductDescriptionController extends BlockComponent<
             isFetching: false,
             message: this.parseApiErrorResponse(responseJson),
           });
-        }else if (apiRequestCallId === this.addPrescriptionApiCallId) {
+        }
+        // Customizable Area Start
+        else if (apiRequestCallId === this.addPrescriptionApiCallId) {
           let errorMessage = this.parseApiErrorResponse(
              responseJson.errors[0].message
            );
@@ -543,6 +541,7 @@ export default class ProductDescriptionController extends BlockComponent<
             message: responseJson?.message,
           });
         }
+        // Customizable Area Start
         else if (apiRequestCallId === this.addPrescriptionApiCallId) {
           this.setState({
             prescriptionModal:false,
@@ -665,7 +664,6 @@ export default class ProductDescriptionController extends BlockComponent<
    
     this.setState(
       {
-        // productDataArr:dataPrescription,
         isFetching: false,
         productData: responseJson?.data,
         selectedProduct: selectedProduct || null,
