@@ -8,6 +8,8 @@ import {
   ScrollView,
   Image,FlatList,
   TouchableOpacity,Modal,Dimensions
+  // Customizable Area Start
+  // Customizable Area End
 } from "react-native";
 import { BlockComponent } from "../../framework/src/BlockComponent";
 import scale, { verticalScale } from "../../framework/src/utils/Scale";
@@ -34,6 +36,9 @@ interface Props {
   hideErrorModal:any;
   productData:any;
   uploadprescription:any;
+ 
+  // Customizable Area Start
+  // Customizable Area End
 }
 
 interface S {

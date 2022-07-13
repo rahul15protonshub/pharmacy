@@ -24,15 +24,13 @@ const themeJson = require("../../studio-store-ecommerce-theme/src/theme.json");
 // Customizable Area End
 
 export interface Props {
-  // Customizable Area Start
   navigation: any;
   fromCart: boolean;
-  
+  // Customizable Area Start
   // Customizable Area End
 }
 
 interface S {
-   // Customizable Area Start
   emailInput: string;
   passwordInput: string;
   fullNameInput: string;
@@ -54,6 +52,7 @@ interface S {
   isFetching: boolean;
   privacyPolicy: any;
   termsPolicy: any;
+  // Customizable Area Start
   // Customizable Area End
 }
 
@@ -68,19 +67,16 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
   secondTextInput: any;
   thirdTextInput: any;
   constructor(props: Props) {
-
-    // Customizable Area Start
     super(props);
 
     this.subScribedMessages = [
-      // Customizable Area Start
       getName(MessageEnum.RestAPIResponceMessage),
       getName(MessageEnum.ReciveUserCredentials),
+      // Customizable Area Start
       // Customizable Area Start
     ];
 
     this.state = {
-      // Customizable Area Start
       emailInput: "",
       passwordInput: "",
       fullNameInput: "",
@@ -102,7 +98,7 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
       isFetching: false,
       privacyPolicy: null,
       termsPolicy: null,
-    
+      // Customizable Area Start
       // Customizable Area Start
     };
 
@@ -111,20 +107,20 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
     runEngine.attachBuildingBlock(this as IBlock, this.subScribedMessages);
 
     // Customizable Area Start
+    // Customizable Area Start
   }
 
   async componentDidMount() {
-      // Customizable Area Start
     super.componentDidMount();
     this.setupGoogleConfiguration();
     this.getHelpCenterData();
     // Customizable Area Start
+    // Customizable Area Start
   }
 
   async componentWillUnmount() {
-     // Customizable Area Start
     super.componentWillUnmount();
-   
+    // Customizable Area Start
     // Customizable Area Start
   }
 
@@ -139,7 +135,6 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
   };
 
   async receive(from: string, message: Message) {
-     // Customizable Area Start
     if (getName(MessageEnum.RestAPIResponceMessage) === message.id) {
       const apiRequestCallId = message.getData(
         getName(MessageEnum.RestAPIResponceDataMessage)
@@ -155,7 +150,6 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
         getName(MessageEnum.RestAPIResponceErrorMessage)
       );
       if (responseJson && responseJson.data) {
-            // Customizable Area Start
         if (apiRequestCallId === this.sendOtpApiCallId) {
           this.onSignUpUserSuccessCallBack(responseJson);
         }
@@ -169,10 +163,9 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
           this.getHelpCenterDataSuccessCallBack(responseJson);
         }
 
-    
+        // Customizable Area Start
         // Customizable Area End
       } else if (responseJson && responseJson.errors) {
-          // Customizable Area Start
         if (apiRequestCallId === this.sendOtpApiCallId) {
           this.onSignUpUserFailureCallBack(responseJson);
         }
@@ -186,22 +179,23 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
           this.getHelpCenterDataFailureCallBack(responseJson);
         }
 
+        // Customizable Area Start
         // Customizable Area End
       } else if (errorReponse) {
-            // Customizable Area Start
         this.setState({
-            // Customizable Area Start
           isShowError: true,
           message: errorReponse,
           showAlertModal: true,
           isFetching: false,
-        
+          // Customizable Area Start
           // Customizable Area End
         });
-    
+        // Customizable Area Start
         // Customizable Area End
       }
     }
+
+    // Customizable Area Start
     // Customizable Area End
   }
 

@@ -18,15 +18,13 @@ import {
 export const configJSON = require("./config");
 
 export interface Props {
-  
-  // Customizable Area Start
   navigation: any;
   id: string;
+  // Customizable Area Start
   // Customizable Area End
 }
 
 interface S {
-  // Customizable Area Start
   showCouponCodeModal: boolean;
   showGuestModal: boolean;
   token: string;
@@ -55,6 +53,7 @@ interface S {
   prescriptionNeed:boolean;
   productDataArr:any;
 <<<<<<< HEAD
+<<<<<<< HEAD
   // Customizable Area Start
   prescriptionModal:boolean;
   prescriptionNeed:boolean;
@@ -62,13 +61,15 @@ interface S {
 =======
   
 >>>>>>> 4037f48 (mergecode)
+=======
+  // Customizable Area Start
+>>>>>>> a604c54 (Revert "mergecode")
   // Customizable Area End
 }
 
 interface SS {
-  
-  // Customizable Area Start
   id: any;
+  // Customizable Area Start
   // Customizable Area End
 }
 
@@ -77,8 +78,6 @@ export default class ShoppingcartController extends BlockComponent<
   S,
   SS
 > {
- 
-  // Customizable Area Start
   apiApplyCouponCallId: any;
   getCartListApiCallId: any;
   updateQtyApiCallId: any;
@@ -90,23 +89,26 @@ export default class ShoppingcartController extends BlockComponent<
   _unsubscribe: any;
   addPrescriptionApiCallId:any;
 <<<<<<< HEAD
+<<<<<<< HEAD
   // Customizable Area Start
   addPrescriptionApiCallId:any;
 =======
 >>>>>>> 4037f48 (mergecode)
+=======
+  // Customizable Area Start
+>>>>>>> a604c54 (Revert "mergecode")
   // Customizable Area End
   constructor(props: Props) {
     super(props);
     this.receive = this.receive.bind(this);
 
     this.subScribedMessages = [
-      // Customizable Area Start
       getName(MessageEnum.RestAPIResponceMessage),
+      // Customizable Area Start
       // Customizable Area End
     ];
 
     this.state = {
-          // Customizable Area Start
       showCouponCodeModal: false,
       showGuestModal: false,
       token: "",
@@ -135,6 +137,7 @@ export default class ShoppingcartController extends BlockComponent<
       prescriptionNeed:true,
       productDataArr:[]
 <<<<<<< HEAD
+<<<<<<< HEAD
       // Customizable Area Start
       prescriptionModal:false,
       prescriptionNeed:true,
@@ -142,6 +145,9 @@ export default class ShoppingcartController extends BlockComponent<
 =======
   
 >>>>>>> 4037f48 (mergecode)
+=======
+      // Customizable Area Start
+>>>>>>> a604c54 (Revert "mergecode")
       // Customizable Area End
     };
 
@@ -152,7 +158,6 @@ export default class ShoppingcartController extends BlockComponent<
   }
 
   async componentDidMount() {
-     // Customizable Area Start
     super.componentDidMount();
     this._unsubscribe = this.props.navigation.addListener("willFocus", () => {
       this.getProfileData();
@@ -161,7 +166,7 @@ export default class ShoppingcartController extends BlockComponent<
         this.handleBackButtonClick
       );
     });
-   
+    // Customizable Area Start
     // Customizable Area End
   }
 
@@ -171,13 +176,13 @@ export default class ShoppingcartController extends BlockComponent<
   };
 
   async componentWillUnmount() {
-     // Customizable Area Start
     super.componentWillUnmount();
     runEngine.unSubscribeFromMessages(this, this.subScribedMessages);
     BackHandler.removeEventListener(
       "hardwareBackPress",
       this.handleBackButtonClick
     );
+    // Customizable Area Start
     // Customizable Area End
   }
 
@@ -529,14 +534,14 @@ export default class ShoppingcartController extends BlockComponent<
   };
 
   applyCoupon = async () => {
-      // Customizable Area Start
     if (this.state.codeValue.trim() === "") {
+      // Customizable Area Start
       this.setState({
         isShowError: true,
         message: "Field can not be empty",
         showAlertModal: true,
       });
-     
+      // Customizable Area End
     } else {
       this.setState({
         isFetching: true,
@@ -556,7 +561,6 @@ export default class ShoppingcartController extends BlockComponent<
         body: httpBody,
       });
     }
-     // Customizable Area End
   };
 
   removeCoupon = async () => {
