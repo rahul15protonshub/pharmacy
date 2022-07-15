@@ -771,7 +771,6 @@ export default class OrderSummaryController extends BlockComponent<
       quantity: any,
       type: any
     ): boolean => {
-      // Customizable Area End
       const header = {
         "Content-Type": configJSON.validationApiContentType,
         token: localStorage.getItem("token"),
@@ -822,8 +821,8 @@ export default class OrderSummaryController extends BlockComponent<
       }, 500);
   
       return true;
-      // Customizable Area End
     };
+
   releaseShippingCharge = () => {
     // Customizable Area Start
     const { isRealeasedShippingCharge } = this.state;

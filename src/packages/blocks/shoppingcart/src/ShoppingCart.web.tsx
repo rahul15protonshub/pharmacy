@@ -31,7 +31,6 @@ import "../assets/css/modalAddressField.css";
 import "../assets/css/index.css";
 import { toast } from "react-toastify";
 import Loader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader.web";
-import { prescription } from "./assets";
 // Customizable Area Start
 import { prescription } from "./assets";
 // Customizable Area End
