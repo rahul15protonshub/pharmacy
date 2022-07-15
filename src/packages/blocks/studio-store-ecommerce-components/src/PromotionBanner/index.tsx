@@ -1,0 +1,1 @@
+export { PromotionBanner as default } from './PromotionBanner';

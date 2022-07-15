@@ -23,6 +23,8 @@ exports.labelTitleText = "dashboard";
 exports.labelBodyText = "dashboard Body";
 
 exports.btnExampleTitle = "CLICK ME";
+exports.endPointApiGetFilteredProducts = "filter_items/filtering";
+
 // Customizable Area End
 
 exports.endPointApiGetNewCollection = "catalogue/catalogues";
@@ -48,3 +50,5 @@ exports.endPointApiPostNotifyMe = "catalogue/catalogues_variants/";
 //WEB API's
 exports.buyNowAPiEndPoint = "cart/carts/buy_now";
 exports.cartHasProductAPIEndPoint = "cart/user/carts/has_product";
+exports.endPointApiUploadPrescription="bx_block_order_management/order_transactions/add_presc_files"
+

@@ -3,7 +3,7 @@ import React from "react";
 
 import DashboardController, { Props } from "./DashboardController.web";
 import { withRouter } from "react-router-dom";
-
+import { Container, Row, Col } from "reactstrap";
 import Loader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader.web";
 // Customizable Area Start
 import { setTimeout } from "timers";
@@ -40,6 +40,9 @@ const dynamicComponentLoad = (
   }
 };
 import "../assets/css/index.css";
+import { IoMdClose } from "react-icons/io";
+import LeftContent from "./components/LeftContent";
+import RightContent from "./components/RightContent";
 // Customizable Area End
 class HomeDashboard extends DashboardController {
   constructor(props: Props) {
@@ -73,23 +76,69 @@ class HomeDashboard extends DashboardController {
       templates[this.state.selectedTemplate].find(
         (temp) => temp.sectionName === "headerBanner"
       );
-    const selectedCategory =
-      this.state.selectedTemplate &&
-      templates[this.state.selectedTemplate].find(
-        (temp) => temp.sectionName === "categories"
-      );
-    const selectedTrendingProducts =
-      this.state.selectedTemplate &&
-      templates[this.state.selectedTemplate].find(
-        (temp) => temp.sectionName === "TrendingProduct"
-      );
+    // const selectedCategory =
+    //   this.state.selectedTemplate &&
+    //   templates[this.state.selectedTemplate].find(
+    //     (temp) => temp.sectionName === "categories"
+    //   );
+    // const selectedTrendingProducts =
+    //   this.state.selectedTemplate &&
+    //   templates[this.state.selectedTemplate].find(
+    //     (temp) => temp.sectionName === "TrendingProduct"
+    //   );
 
     return (
       <>
         {this.state.dashboardLoader && (
           <Loader loading={this.state.dashboardLoader} />
         )}
-        {this.state.selectedTemplate && templates[this.state.selectedTemplate] && (
+
+        {/* Shib start */}
+        <Container className={`home-layout ${this.state.showProducts ? 'home-layout--show' : ''} h-100 mb-40`}>
+          <Row className="home-layout__row gx-40 h-100">
+            <Col
+              xs="auto"
+              className="home-layout__col home-layout__left"
+            >
+              <div className="home-layout__toggle-icon" onClick={this.toggeProduct}>
+                <IoMdClose/>
+              </div>
+              <LeftContent data={this.state.collectionCategory} banners={this.state.bannerPosition2?.attributes?.images?.data || []}
+              onSelectSubCategory={category => {
+                this.setSelectedCategory(category)
+              }} />
+            </Col>
+            <Col
+              xs="12"
+              lg=""
+              className="home-layout__col home-layout__right"
+            >
+              <RightContent
+                toggeProduct={this.toggeProduct}
+                banners={this.state.banners || []}
+                products={this.state.dashboardFilteredProducts}
+                onScrollEnd={() => {
+                  if (this.state.dashboardFilteredProductsTotalPages > this.state.dashboardFilteredProductsActivePage) {
+                    this.setDashboardFilters(this.state.dashboardFilteredProductsActivePage + 1)
+                  }
+                }}
+                loading={this.state.dashboardFilterLoading}
+                onProductAddToWishlist={id => this.postWishlist(id)}
+                onProductDeleteFromWishlist={id => this.delWishlist(id)}
+                onSortingChange={(sortBy, sortOrder) => this.setDashboardFilters(1, undefined, undefined, sortBy, sortOrder)}
+                productListTitle={this.state.selectedCategory.name || 'All Products'}
+                onProductAddToCart={product => this.addToCart(product)}
+                productsAddingToCart={this.state.productsAddingToCart}
+                onProductDecreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, -1)}
+                onProductIncreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, 1)}
+              />
+            </Col>
+          </Row>
+          <div className="home-layout__backdrop" onClick={this.toggeProduct}></div>
+        </Container>
+        {/* Shib end */}
+
+        {/* {this.state.selectedTemplate && templates[this.state.selectedTemplate] && (
           <>
             {dynamicComponentLoad(
               {
@@ -102,8 +151,8 @@ class HomeDashboard extends DashboardController {
               selectedBanner,
               this.state.selectedTemplate,
               "HeaderBanner"
-            )}
-
+            )} */}
+{/* 
             {dynamicComponentLoad(
               {
                 collection: this.state.collectionCategory,
@@ -134,8 +183,8 @@ class HomeDashboard extends DashboardController {
               selectedCategory,
               this.state.selectedTemplate,
               "Categories"
-            )}
-
+            )} */}
+{/* 
             {dynamicComponentLoad(
               {
                 collection: this.state.newCollection,
@@ -166,9 +215,9 @@ class HomeDashboard extends DashboardController {
               selectedCategory,
               this.state.selectedTemplate,
               "NewArrivals"
-            )}
+            )} */}
 
-            <section className="container ds-mb-40 ds-mb-md-80 ds-mb-lg-104">
+            {/* <section className="container ds-mb-40 ds-mb-md-80 ds-mb-lg-104">
               {this.state.banners.length > 0 &&
                 this.state.bannerPosition2 &&
                 this.state.bannerPosition2.attributes.images != null && (
@@ -197,8 +246,8 @@ class HomeDashboard extends DashboardController {
                     />
                   </div>
                 )}
-            </section>
-            {this.state.selectedTemplate &&
+            </section> */}
+            {/* {this.state.selectedTemplate &&
               templates[this.state.selectedTemplate] &&
               selectedTrendingProducts &&
               dynamicComponentLoad(
@@ -232,8 +281,8 @@ class HomeDashboard extends DashboardController {
                 selectedTrendingProducts,
                 this.state.selectedTemplate,
                 "TrendingProducts"
-              )}
-            <section className="container ds-mb-40 ds-mb-md-80 ds-mb-lg-104">
+              )} */}
+            {/* <section className="container ds-mb-40 ds-mb-md-80 ds-mb-lg-104">
               {this.state.banners.length > 0 &&
                 this.state.bannerPosition4 &&
                 this.state.bannerPosition4.attributes.images != null && (
@@ -262,10 +311,10 @@ class HomeDashboard extends DashboardController {
                     />
                   </div>
                 )}
-            </section>
+            </section> */}
           </>
-        )}
-      </>
+        // )}
+      // </>
     );
     // Customizable Area End
   }

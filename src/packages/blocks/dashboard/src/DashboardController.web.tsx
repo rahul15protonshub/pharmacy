@@ -61,11 +61,31 @@ interface S {
   productDescriptionLoader: boolean;
   dashboardLoader: boolean;
   invalidTokenMessageRecieved: boolean;
+  selectedCategory: any;
+  productsAddingToCart: number[];
+
+   // dashboard products filtering
+   dashboardFilteredProducts?: any[];
+   dashboardFilteredProductsTotalPages: number;
+   dashboardFilteredProductsActivePage: number;
+   dashboardFilterCategoryIds?: number[],
+   dashboardFilterSubCategoryIds?: number[],
+   dashboardFilterSortBy?: string,
+   dashboardFilterSortOrder?: string
+   dashboardFilterLoading: boolean;
 
   //subscribe
   isSubscribeClicked?: boolean;
-  subscriptionRequestBody?: any;
+  suscribeProductData?: any;
+  selectedPackagePeriod?: any;
+  selectedPackageName?: any;
+  selectedSubscribePackage?: Array<any>;
+  selectedTimeSlotType?: any;
+  avaiableTimeSlotName?: Array<any>;
+  TimeslotList?: Array<any>;
+  SubscriptionRequestBody?: any;
   isSubscriptionUpdate?: any;
+  subscriptionqty?: any;
   // Customizable Area Start
 
   //Dynamic Varaint's states
@@ -93,6 +113,8 @@ interface S {
   isrcmdCollectionPrevButtonActive: boolean;
   templateLoading: boolean;
   selectedTemplate: any;
+  showProducts: boolean;
+
   // Customizable Area End
 }
 interface SS {
@@ -109,10 +131,13 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
   GetAllNewCollectionApiCallId: string = "";
   GetCategoryListApiCallId: string = "";
   GetFeaturedProductApiCallId: string = "";
+  GetFilteredProductsApiCallId: string = "";
+  postPrescrion:string="";
   GetIsCartCreatedApiCallId: string = "";
   getProductDetailsApiCallId: string = "";
   postCreateCartApiCallId: string = "";
   putItemToCartApiCallId: string = "";
+  increaseOrDecreaseCartQuantityApiCallId: string = "";
   getAllWishlistApiCallId: string = "";
   postWishlistApiCallId: string = "";
   delWishlistApiCallId: string = "";
@@ -133,7 +158,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
       getName(MessageEnum.CountryCodeMessage),
       getName(MessageEnum.RestAPIResponceMessage),
       getName(MessageEnum.ReciveUserCredentials),
-      "updateTemplate",
+      // "updateTemplate",
       // Customizable Area Start
       // Customizable Area End
     ];
@@ -151,8 +176,18 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
         show: false,
       },
 
+      selectedCategory: {},
+      dashboardFilteredProducts: undefined,
+      dashboardFilteredProductsActivePage: 1,
+      dashboardFilteredProductsTotalPages: 1,
+      dashboardFilterCategoryIds: [],
+      dashboardFilterSubCategoryIds: [],
+      dashboardFilterSortBy: "created_at",
+      dashboardFilterSortOrder: "desc",
+      dashboardFilterLoading: false,
       showAlert: false,
-
+      productsAddingToCart: [],
+      
       collectionCategory: [],
       newCollection: [],
       featuredProduct: [],
@@ -186,6 +221,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
       invalidTokenMessageRecieved: false,
 
       isSubscribeClicked: false,
+      selectedSubscribePackage: [],
 
       selectedAttributes: {},
       currentSelection: null,
@@ -199,6 +235,10 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
       bannerPosition3: "",
       bannerPosition4: "",
       bannerPosition5: "",
+
+      subscriptionqty: 1,
+      showProducts: true,
+
       templateLoading: true,
       selectedTemplate: localStorage.getItem("selectedTemplateName") || null,
 
@@ -219,6 +259,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     this.getFeaturedProduct();
     this.getIsCartCreated();
     this.getAllWishlist();
+    this.getFilteredProducts();
     this.send(new Message(getName(MessageEnum.RequestUserCredentials)));
     const Apptemplate = JSON.parse(
       localStorage.getItem("appTemplateData") ?? "{}"
@@ -294,12 +335,12 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
             if (apiRequestCallId === this.postCreateCartApiCallId) {
               if (responseJson?.data) {
                 //@ts-ignore
-                // window.notify([
-                //   {
-                //     message: "Item added in cart successfully",
-                //     type: "success",
-                //   },
-                // ]);
+                window.notify([
+                  {
+                    message: "Item added in cart successfully",
+                    type: "success",
+                  },
+                ]);
                 this.getIsCartCreated();
                 this.getProductDetails();
                 this.getNewCollection();
@@ -312,19 +353,26 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
                 this.setState({
                   isSubscribeClicked: false,
                   productDescriptionLoader: false,
+                  productsAddingToCart: [],
                 });
               }
             }
 
             // add items to the cart
             if (apiRequestCallId === this.putItemToCartApiCallId) {
+              this.state.dashboardFilteredProducts?.forEach((product: any) => {
+                const orderItem = responseJson.data.attributes.order_items.find((item: any) => parseInt(product.id) === item.attributes.catalogue_id);
+                product.attributes.cart_quantity = orderItem ? orderItem.attributes.quantity ?? 1 : null;
+              })
               this.setState({
                 isSubscribeClicked: false,
                 cartDetails: [responseJson.data],
                 cartId: responseJson.data.id,
+                productsAddingToCart: [],
+                dashboardFilteredProducts: this.state.dashboardFilteredProducts ? [...this.state.dashboardFilteredProducts] : [],
               });
               // @ts-ignore
-              // window.notify([{ message: "Item quantity updated in cart successfully", type: "success" }]);
+              window.notify([{ message: "Item quantity updated in cart successfully", type: "success" }]);
               // @ts-ignore
               const cart_length = parseInt(
                 localStorage.getItem("cart_length") || ""
@@ -350,9 +398,29 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
               });
               this.getProductDetails();
               //@ts-ignore
-              // window.notify([
-              //   { message: "Cart updated successfully ", type: "success" },
-              // ]);
+              window.notify([
+                { message: "Cart updated successfully ", type: "success" },
+              ]);
+            }
+
+            
+            //increase or decrease cart quantity
+            
+            if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
+              this.state.dashboardFilteredProducts?.forEach((product: any) => {
+                const orderItem = responseJson.data.attributes.order_items.find((item: any) => parseInt(product.id) === item.attributes.catalogue_id);
+                product.attributes.cart_quantity = orderItem ? orderItem.attributes.quantity : null;
+              })
+              this.setState({
+                productDescriptionLoader: false,
+                productsAddingToCart: [],
+                dashboardFilteredProducts: this.state.dashboardFilteredProducts ? [...this.state.dashboardFilteredProducts] : [],
+              });
+              //this.getFilteredProducts();
+              //@ts-ignore
+              window.notify([
+                { message: "Quantity changed successfully", type: "success" },
+              ]);
             }
 
             //product details
@@ -396,6 +464,15 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
                   responseJson?.data.attributes?.images?.data
                 ),
               });
+              if (
+                responseJson?.data.attributes?.is_subscription_available &&
+                responseJson?.data.attributes?.subscription_quantity
+              ) {
+                this.setState({
+                  subscriptionqty:
+                    responseJson?.data.attributes?.subscription_quantity,
+                });
+              }
               if (localStorage.getItem("catalogue_variant_id")) {
                 this.setState({
                   catalogue_variant_id: localStorage.getItem(
@@ -440,9 +517,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
             //create wishlist
             if (apiRequestCallId === this.postWishlistApiCallId) {
               // @ts-ignore
-              // window.notify([
-              //   { message: responseJson?.message, type: "success" },
-              // ]);
+              window.notify([
+                { message: responseJson?.message, type: "success" },
+              ]);
               const wishlist_length = parseInt(
                 localStorage.getItem("wishlist_len") ?? "0"
               );
@@ -505,12 +582,12 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
               this.getAllProductReview();
               this.getProductDetails();
               // @ts-ignore
-              // window.notify([
-              //   {
-              //     message: "you've successfully reviewed the product",
-              //     type: "success",
-              //   },
-              // ]);
+              window.notify([
+                {
+                  message: "you've successfully reviewed the product",
+                  type: "success",
+                },
+              ]);
             }
 
             // get all reviews that user
@@ -526,6 +603,28 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
             }
           }
           // Customizable Area Start
+          if(apiRequestCallId === this.GetFilteredProductsApiCallId){
+            if (this.state.dashboardFilteredProductsActivePage === 1) {
+              this.setState(responseJson?.data ? {
+                dashboardFilteredProducts: responseJson?.data,
+                dashboardFilteredProductsTotalPages: responseJson?.meta?.pagination?.total_pages
+              } : {
+                dashboardFilteredProducts: [],
+                dashboardFilteredProductsTotalPages: 1
+              })
+            }
+            else {
+              this.setState({
+                dashboardFilteredProducts: [...this.state.dashboardFilteredProducts ?? [], ...responseJson?.data],
+                dashboardFilteredProductsTotalPages: responseJson?.meta?.pagination?.total_pages,
+              });
+            }
+
+            this.setState({
+              dashboardFilterLoading: false,
+            })
+
+          }
           // Customizable Area End
         }
         if (responseJson?.errors) {
@@ -558,6 +657,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
       }
 
       // Customizable Area End
+
     } else if ("updateTemplate" === message.id) {
       var templateName = message.getData(
         "updateTemplateData"
@@ -748,7 +848,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     };
     let httpBody: any;
     if (product == "subscription") {
-      httpBody = this.state.subscriptionRequestBody;
+      httpBody = this.state.SubscriptionRequestBody;
     } else {
       if (product?.catalogue_id) {
         httpBody = {
@@ -803,7 +903,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     };
     let httpBody: any;
     if (type == "subscription") {
-      httpBody = this.state.subscriptionRequestBody;
+      httpBody = this.state.SubscriptionRequestBody;
     } else {
       if (product.catalogue_id && this.state.catalogue_variant_id) {
         httpBody = {
@@ -984,6 +1084,105 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     return true;
   };
 
+  postPrescriptionFile = (order_items: any): boolean => {
+    // Customizable Area End
+    // console.log('order_items', order_items)
+    const header = {
+      "Content-Type": configJSON.validationApiContentType,
+      token: localStorage.getItem("token"),
+    };
+    const requestMessage = new Message(
+      getName(MessageEnum.RestAPIRequestMessage)
+    );
+
+    this.postPrescrion = requestMessage.messageId;
+
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIResponceEndPointMessage),
+      configJSON.endPointApiUploadPrescription
+    );
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIRequestHeaderMessage),
+      JSON.stringify(header)
+    );
+
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIRequestBodyMessage),
+      JSON.stringify(order_items)
+    );
+
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIRequestMethodMessage),
+      configJSON.putAPiMethod
+    );
+    runEngine.sendMessage(requestMessage.id, requestMessage);
+    return true;
+  };
+
+  increaseOrDecreaseCartQuantity(product: any, increment: number) {
+    this.setState({
+      productsAddingToCart: [...this.state.productsAddingToCart, product.id]
+    });
+    const header = {
+      "Content-Type": configJSON.dashboarContentType,
+      token: localStorage.getItem("token"),
+    };
+    setTimeout(() => {
+      let httpBody: any;
+      let endPointFullPath: string;
+      let method: string;
+
+      if (product.attributes.cart_quantity + increment > 0) {
+        httpBody = {
+          quantity: product.attributes.cart_quantity + increment,
+          catalogue_id: product.id,
+        };
+        endPointFullPath = configJSON.endPointApiPutUpdateCartQuantity +
+        `${this.state.cartId}/update_item_quantity`
+        method = configJSON.putAPiMethod;
+      }
+      else {
+        httpBody = {
+          catalogue_id: product.id,
+          catalogue_variant_id: ""
+        }
+        endPointFullPath = configJSON.endPointApiPutUpdateCartQuantity +
+        `${this.state.cartId}/delete_item`
+        method = configJSON.delAPiMethod;
+      }
+
+      const requestMessage = new Message(
+        getName(MessageEnum.RestAPIRequestMessage)
+      );
+
+      this.increaseOrDecreaseCartQuantityApiCallId = requestMessage.messageId;
+
+      requestMessage.addData(
+        getName(MessageEnum.RestAPIResponceEndPointMessage),
+        endPointFullPath
+      );
+
+      requestMessage.addData(
+        getName(MessageEnum.RestAPIRequestHeaderMessage),
+        JSON.stringify(header)
+      );
+
+      requestMessage.addData(
+        getName(MessageEnum.RestAPIRequestBodyMessage),
+        JSON.stringify(httpBody)
+      );
+
+      requestMessage.addData(
+        getName(MessageEnum.RestAPIRequestMethodMessage),
+        method
+      );
+
+      runEngine.sendMessage(requestMessage.id, requestMessage);
+      
+    }, 500);
+
+    return true;
+  }
   // update cart quantity
   putUpdateCartQuantity = (product_id: any, product_variant: any): boolean => {
     this.setState({
@@ -1485,19 +1684,73 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
   };
   addToCartWithSubscription = (data: any) => {
     this.setState(
-      {
+      ({ SubscriptionRequestBody }) => ({
         isSubscriptionUpdate: this.state.productDetails.attributes
           ?.subscription_package
           ? true
           : false,
-        subscriptionRequestBody: data,
-      },
+        SubscriptionRequestBody: {
+          ...SubscriptionRequestBody,
+          subscription_quantity: this.state.subscriptionqty,
+          subscription_package: this.state.selectedPackageName,
+          subscription_period: this.state.selectedPackagePeriod,
+        },
+      }),
       () => {
         this.state.cartId != ""
           ? this.putItemToCart(this.state.cartId, "subscription")
           : this.postCreateCart("subscription");
       }
     );
+  };
+  subscriptionPackages = (subscriptioninfo: any, subscriptionType: any) => {
+    let data: any = [];
+    if (subscriptioninfo.length > 0) {
+      subscriptioninfo.map((ele: any, index: number) => {
+        data.push({
+          type: subscriptionType,
+          value: ele,
+        });
+      });
+    } else {
+      data.push({
+        type: subscriptionType,
+        value: subscriptioninfo,
+      });
+    }
+    this.setState({
+      selectedSubscribePackage: data,
+      selectedPackageName: subscriptionType,
+    });
+  };
+
+  updateSubscriptionQty = (data: any, type: any) => {
+    if (type == "Add") {
+      if (this.state.subscriptionqty + 1 > data) {
+        //@ts-ignore
+        window.notify([
+          {
+            message: `You can not add more than ${data} quantity of this product`,
+            type: "warning",
+          },
+        ]);
+      } else {
+        this.setState({
+          subscriptionqty: this.state.subscriptionqty + 1,
+        });
+      }
+    } else {
+      if (this.state.subscriptionqty - 1 < 1) {
+        //@ts-ignore
+        window.notify([
+          { message: `You can not set less than 1 quantity`, type: "warning" },
+        ]);
+      } else {
+        this.setState({
+          subscriptionqty: this.state.subscriptionqty - 1,
+        });
+      }
+    }
   };
 
   //Handle Varaints functions
@@ -2030,5 +2283,186 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     );
   };
 
+  initializeSubscribeFormState = () => {
+    const { productDetails } = this.state;
+    this?.setState(
+      {
+        isSubscribeClicked: true,
+        suscribeProductData: productDetails,
+        selectedPackageName: productDetails?.attributes?.subscription_package,
+        selectedPackagePeriod: productDetails?.attributes?.subscription_period,
+        selectedTimeSlotType:
+          typeof productDetails?.attributes?.preferred_delivery_slot ===
+            "string"
+            ? productDetails?.attributes?.preferred_delivery_slot?.includes(
+              "pm"
+            )
+              ? "evening_slot"
+              : "morning_slot"
+            : "",
+        subscriptionqty: productDetails?.attributes?.subscription_quantity || 1,
+      },
+      () => {
+        const {
+          selectedPackageName,
+          suscribeProductData,
+          selectedPackagePeriod,
+          selectedTimeSlotType,
+        } = this.state;
+        if (selectedPackageName) {
+          this?.subscriptionPackages(
+            suscribeProductData.attributes.available_subscription[
+            selectedPackageName
+            ],
+            selectedPackageName
+          );
+        }
+        if (selectedPackagePeriod) {
+          this.state.suscribeProductData.attributes.catalogue_subscriptions &&
+            this.state.suscribeProductData.attributes.catalogue_subscriptions
+              .length > 0 &&
+            this.state.suscribeProductData.attributes.catalogue_subscriptions.map(
+              (ele: any, index: number) => {
+                if (
+                  ele.attributes.subscription_package ==
+                  this.state.selectedPackageName &&
+                  ele.attributes.subscription_period.split(" ")[0] ==
+                  selectedPackagePeriod
+                ) {
+                  let mr = JSON.parse(ele.attributes.morning_slot).filter(
+                    (item: any) => item
+                  ),
+                    en = JSON.parse(ele.attributes.evening_slot).filter(
+                      (item2: any) => item2
+                    );
+                  let isMrng =
+                    ele.attributes.morning_slot && mr.length > 0 && "Morning",
+                    isEven =
+                      ele.attributes.evening_slot && en.length > 0 && "Evening";
+                  const valueList = [];
+                  if (isMrng) {
+                    valueList.push({
+                      value: isMrng,
+                      type: "morning_slot",
+                      timeSlot: mr,
+                      discount: ele.attributes.discount,
+                    });
+                  }
+                  if (isEven) {
+                    valueList.push({
+                      value: isEven,
+                      type: "evening_slot",
+                      timeSlot: en,
+                      discount: ele.attributes.discount,
+                    });
+                  }
+                  let slotData: any = valueList.find(
+                    (ele: any, index: number) => {
+                      return ele.type == selectedTimeSlotType;
+                    }
+                  );
+                  let data = {
+                    catalogue_id: Number(this.state.suscribeProductData.id),
+                    subscription_quantity: this.state.subscriptionqty,
+                    subscription_package: this.state.selectedPackageName,
+                    subscription_period: this.state.selectedPackagePeriod,
+                    preferred_delivery_slot:
+                      productDetails?.attributes?.preferred_delivery_slot,
+                    subscription_discount: slotData.discount,
+                  };
+                  let TimeslotList: any = {
+                    slotName: slotData.timeSlot,
+                    discount: slotData.discount,
+                  };
+                  this.setState({
+                    avaiableTimeSlotName: valueList,
+                    TimeslotList: TimeslotList,
+                    SubscriptionRequestBody: data,
+                  });
+                }
+              }
+            );
+        }
+      }
+    );
+  };
+  toggeProduct = () => {
+    this.setState(
+      ({ showProducts }) => ({
+        showProducts: !showProducts
+      })
+    )
+  }
+
+  getFilteredProducts = (): boolean => {
+    const headers = {
+      "Content-Type": configJSON.dashboarContentType,
+      token: localStorage.getItem("token"),
+    };
+
+    this.setState({
+      dashboardFilterLoading: true
+    })
+
+    const requestMessage = new Message(
+      getName(MessageEnum.RestAPIRequestMessage)
+    );
+
+    this.GetFilteredProductsApiCallId = requestMessage.messageId;
+
+    let filteredUrl = `${configJSON.endPointApiGetFilteredProducts}?page=${this.state.dashboardFilteredProductsActivePage}&per_page=16`;
+
+    if (this.state.dashboardFilterCategoryIds && this.state.dashboardFilterCategoryIds.length > 0) {
+      filteredUrl += `&q[category_id][]=${this.state.dashboardFilterCategoryIds.join(',')}`
+    }
+
+    if (this.state.dashboardFilterSubCategoryIds && this.state.dashboardFilterSubCategoryIds.length > 0) {
+      filteredUrl += `&q[sub_category_id][]=${this.state.dashboardFilterSubCategoryIds.join(',')}`
+    }
+
+    if (this.state.dashboardFilterSortBy) {
+      filteredUrl += `&sort[order_by]=${this.state.dashboardFilterSortBy}`
+    }
+
+    if (this.state.dashboardFilterSortOrder) {
+      filteredUrl += `&sort[direction]=${this.state.dashboardFilterSortOrder}`
+    }
+
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIResponceEndPointMessage),
+      filteredUrl
+    );
+
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIRequestHeaderMessage),
+      JSON.stringify(headers)
+    );
+
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIRequestMethodMessage),
+      configJSON.dashboarApiMethodType
+    );
+
+    runEngine.sendMessage(requestMessage.id, requestMessage);
+
+    return true;
+  };
+
+  setDashboardFilters(pageNumber?: number, categoryIds?: number[], subCategoryIds?: number[], sortBy?: string, sortOrder?: string) {
+    this.setState({
+      dashboardFilteredProductsActivePage: pageNumber ? pageNumber : this.state.dashboardFilteredProductsActivePage,
+      dashboardFilterCategoryIds: categoryIds ? categoryIds : this.state.dashboardFilterCategoryIds,
+      dashboardFilterSubCategoryIds: subCategoryIds ? subCategoryIds : this.state.dashboardFilterSubCategoryIds,
+      dashboardFilterSortBy: sortBy ? sortBy : this.state.dashboardFilterSortBy,
+      dashboardFilterSortOrder: sortOrder ? sortOrder : this.state.dashboardFilterSortOrder,
+    }, () => {
+      this.getFilteredProducts();
+    })
+  }
+  setSelectedCategory(category: any) {
+    this.setState({ selectedCategory: category }, () => {
+      this.setDashboardFilters(1, [category.category_id], [category.id]);
+    })
+  }
   // Customizable Area End
 }
