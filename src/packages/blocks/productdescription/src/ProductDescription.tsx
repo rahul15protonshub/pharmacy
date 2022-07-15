@@ -31,6 +31,7 @@ import {
   SOLD_OUT_ICON,
   RADIO_SELECTED,
   RADIO_UNSELECTED,
+  RX,
 } from "../../studio-store-ecommerce-theme/src/AppAssets/appassets";
 import scale, { verticalScale } from "../../../framework/src/utils/Scale";
 import { WebView } from "react-native-webview";
@@ -42,10 +43,9 @@ import ApplicationLoader from "../../studio-store-ecommerce-components/src/AppLo
 import CustomErrorModal from "../../studio-store-ecommerce-components/src/CustomErrorModal/CustomErrorModal";
 import Scheduling from "../../../blocks/scheduling/src/Scheduling";
 const themeJson = require("../../studio-store-ecommerce-theme/src/theme.json");
-
 export const configJSON = require("./config");
-
 // Customizable Area Start
+import Prescriptionuploads from '../../../components/src/precriptionuploads'
 // Customizable Area End
 
 export default class ProductDescription extends ProductDescriptionController {
@@ -408,6 +408,7 @@ export default class ProductDescription extends ProductDescriptionController {
     const on_sale = selectedProduct
       ? selectedProduct.attributes.on_sale
       : attributes.on_sale;
+    const prescription = attributes.prescription ;
     const price = selectedProduct
       ? on_sale
         ? selectedProduct.attributes?.actual_price_including_tax
@@ -538,6 +539,13 @@ export default class ProductDescription extends ProductDescriptionController {
                   {themeJson.attributes.currency_type} {price}
                 </Text>
               ) : null}
+               {prescription ? ( <View style={[styles.outDesctription]}>
+             <Image
+             source={RX}
+             style={styles.descrioptionTick}
+           />
+            <Text style={styles.prescription}>Prescription Required</Text>
+          </View>) : null}
             </View>
           )}
 
@@ -902,6 +910,19 @@ export default class ProductDescription extends ProductDescriptionController {
           headerTitleStyle={{}}
           headerStyle={{ elevation: 2 }}
         />
+
+        {this.state.prescriptionModal &&
+         <Prescriptionuploads  
+        navigation={this.props.navigation} 
+        showmodal={this.state.prescriptionModal}
+        hideErrorModal ={() =>
+          this.setState({ prescriptionModal: false })
+        }
+        uploadprescription ={(productdata:any) =>
+         this.uploadproduct(productdata)
+        }
+        productData={this.state.productDataArr}
+        />}
         {this.state.productData && this.renderViewAll()}
         {this.state.showNotifiyModal && this.renderNotifiyModal()}
         {this.renderGuestModal()}

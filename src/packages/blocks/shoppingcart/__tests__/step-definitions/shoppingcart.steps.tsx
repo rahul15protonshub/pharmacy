@@ -107,6 +107,48 @@ defineFeature(feature, (test) => {
 
         });
 
+
+        then("I can upload shoping prescription without errors", () => {
+          const msgLoadDataAPI = new Message(
+            getName(MessageEnum.RestAPIResponceMessage)
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceDataMessage),
+            msgLoadDataAPI.messageId
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceSuccessMessage),
+            {
+              message: [{}],
+            }
+          );
+          instance.addPrescriptionApiCallId = msgLoadDataAPI.messageId;
+          runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+        });
+    
+        then("Failed to upload  shoping prescription", () => {
+          const msgLoadPrivacyErrorRestAPI = new Message(
+            getName(MessageEnum.RestAPIResponceMessage)
+          );
+          msgLoadPrivacyErrorRestAPI.addData(
+            getName(MessageEnum.RestAPIResponceDataMessage),
+            msgLoadPrivacyErrorRestAPI
+          );
+          msgLoadPrivacyErrorRestAPI.addData(
+            getName(MessageEnum.RestAPIResponceSuccessMessage),
+            {
+              errors: [{}],
+            }
+          );
+    
+          msgLoadPrivacyErrorRestAPI.addData(
+            getName(MessageEnum.RestAPIResponceDataMessage),
+            msgLoadPrivacyErrorRestAPI.messageId
+          );
+          instance.addPrescriptionApiCallId = msgLoadPrivacyErrorRestAPI.messageId;
+          runEngine.sendMessage("Unit Test", msgLoadPrivacyErrorRestAPI);
+        });
+
         then('I can leave the screen with out errors', () => {
             instance.componentWillUnmount()
             expect(shoppingcartWrapper).toBeTruthy()

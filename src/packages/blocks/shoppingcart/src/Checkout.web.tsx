@@ -1,5 +1,5 @@
 //@ts-nocheck;
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState,useEffect } from "react";
 import { emptyCheck, checkCheck, closeImg, addressImage } from "./assetsWeb";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -45,6 +45,12 @@ function CartAmount(props: any) {
   const isCheckedShippingCharge = props.isCheckedShippingCharge;
   const [couponCode, setCouponCode] = useState("");
   const [accordianOpen, setAccordianOpen] = useState("");
+
+  useEffect(()=>{
+    if(props.wholeCart?.coupon?.attributes?.code!=undefined){
+      setCouponCode(props.wholeCart?.coupon?.attributes?.code)
+    }
+  },[props.wholeCart?.coupon?.attributes?.code])
   function getProducts() {
     var items: any = [];
     wholeCart &&
@@ -207,8 +213,8 @@ function CartAmount(props: any) {
               </tbody>
             </Table>
             <span className="cart-divider" />
-            {Object.keys(JSON.parse(localStorage.getItem("buyNow") || "{}"))
-              .length == 0 && (
+            {/* {Object.keys(JSON.parse(localStorage.getItem("buyNow") || "{}"))
+              .length == 0 && ( */}
               <div style={{ marginBottom: 0 }} className="cart-coupon mt-3">
                 <Form className="yt-cart-disct-wrap">
                   <FormGroup
@@ -314,7 +320,7 @@ function CartAmount(props: any) {
                   </div>
                 )}
               </div>
-            )}
+            {/* )} */}
             <Table className="mb-0 cart-prodict-sub-total-amount " borderless>
               <tbody>
                 <tr>
@@ -834,7 +840,7 @@ export class Checkout extends CheckoutController {
                                 </FormGroup>
                               </Col>
 
-                              <Col lg={6}>
+                              {/* <Col lg={6}>
                                 <FormGroup>
                                   <span className="checkout-form-label">
                                     City
@@ -852,6 +858,67 @@ export class Checkout extends CheckoutController {
                                   touched?.billing_address?.city ? (
                                     <FormText color="danger" className="mt-1">
                                       {errors?.billing_address?.city}
+                                    </FormText>
+                                  ) : (
+                                    ""
+                                  )}
+                                </FormGroup>
+                              </Col> */}
+                               <Col lg={6}>
+                                <FormGroup>
+                                  <span className="checkout-form-label">
+                                    Pin Code{" "}
+                                  </span>
+                                  <Input
+                                    // @ts-ignore
+                                    type={
+                                      this.state?.countryName?.toLowerCase() ==
+                                      "india"
+                                        ? "number"
+                                        : "text"
+                                    }
+                                    data-testid={"text-input-zip-code"}
+                                    className="py-2 border-0 ps-0"
+                                    name="billing_address.zip_code"
+                                    id="zip_code"
+                                    onChange={(event) => {
+                                      this.setZipCode(event.target.value);
+                                      handleChange(event);
+                                    }}
+                                    onBlur={(event) => {
+                                      this.checkShippingAggressCharge();
+                                      handleBlur(event);
+                                    }}
+                                    value={values?.billing_address?.zip_code}
+                                  />
+                                  {errors?.billing_address?.zip_code &&
+                                  touched?.billing_address?.zip_code ? (
+                                    <FormText color="danger" className="mt-1">
+                                      {errors?.billing_address?.zip_code}
+                                    </FormText>
+                                  ) : (
+                                    ""
+                                  )}
+                                </FormGroup>
+                              </Col>
+                              <Col lg={6}>
+                                <FormGroup>
+                                  <span className="checkout-form-label">
+                                    Country
+                                  </span>
+                                  <Input
+                                    type="text"
+                                    className="py-2 border-0 ps-0"
+                                    name="billing_address.country"
+                                    id="country"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values?.billing_address?.country}
+                                  />
+                                  {errors?.billing_address?.country &&
+                                  touched?.billing_address?.country ? (
+                                    <FormText color="danger" className="mt-1">
+                                      {errors?.billing_address?.country}
                                     </FormText>
                                   ) : (
                                     ""
@@ -893,7 +960,7 @@ export class Checkout extends CheckoutController {
                                 </FormGroup>
                               </Col>
 
-                              <Col lg={6}>
+                              {/* <Col lg={6}>
                                 <FormGroup>
                                   <span className="checkout-form-label">
                                     Country
@@ -916,9 +983,9 @@ export class Checkout extends CheckoutController {
                                     ""
                                   )}
                                 </FormGroup>
-                              </Col>
+                              </Col> */}
 
-                              <Col lg={6}>
+                              {/* <Col lg={6}>
                                 <FormGroup>
                                   <span className="checkout-form-label">
                                     Pin Code{" "}
@@ -949,6 +1016,30 @@ export class Checkout extends CheckoutController {
                                   touched?.billing_address?.zip_code ? (
                                     <FormText color="danger" className="mt-1">
                                       {errors?.billing_address?.zip_code}
+                                    </FormText>
+                                  ) : (
+                                    ""
+                                  )}
+                                </FormGroup>
+                              </Col> */}
+                                   <Col lg={6}>
+                                <FormGroup>
+                                  <span className="checkout-form-label">
+                                    City
+                                  </span>
+                                  <Input
+                                    type="text"
+                                    className="py-2 border-0 ps-0"
+                                    name="billing_address.city"
+                                    id="city"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values?.billing_address?.city}
+                                  />
+                                  {errors?.billing_address?.city &&
+                                  touched?.billing_address?.city ? (
+                                    <FormText color="danger" className="mt-1">
+                                      {errors?.billing_address?.city}
                                     </FormText>
                                   ) : (
                                     ""

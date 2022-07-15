@@ -59,6 +59,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
   delCouponApiCallId: string = "";
   postBuyNowApiCallId: string = "";
   // Customizable Area Start
+  postPrescription:string="";
   // Customizable Area End
   constructor(props: Props) {
     super(props);
@@ -533,7 +534,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
   /// add to wishlist
   postWishlist = (catalogue_id: any): boolean => {
-    // Customizable Area End
     const header = {
       "Content-Type": configJSON.validationApiContentType,
       token: localStorage.getItem("token"),
@@ -576,8 +576,43 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     );
     runEngine.sendMessage(requestMessage.id, requestMessage);
     return true;
-    // Customizable Area End
   };
+ //upload prescripton file start//
+ postPrescriptionFile = (order_items: any): boolean => {
+  const header = {
+    "Content-Type": configJSON.validationApiContentType,
+    token: localStorage.getItem("token"),
+  };
+  const requestMessage = new Message(
+    getName(MessageEnum.RestAPIRequestMessage)
+  );
+
+  this.postPrescription = requestMessage.messageId;
+
+  requestMessage.addData(
+    getName(MessageEnum.RestAPIResponceEndPointMessage),
+    configJSON.endPointApiUploadPrescription
+  );
+  requestMessage.addData(
+    getName(MessageEnum.RestAPIRequestHeaderMessage),
+    JSON.stringify(header)
+  );
+
+  requestMessage.addData(
+    getName(MessageEnum.RestAPIRequestBodyMessage),
+    JSON.stringify(order_items)
+  );
+
+  requestMessage.addData(
+    getName(MessageEnum.RestAPIRequestMethodMessage),
+    configJSON.putAPiMethod
+  );
+  runEngine.sendMessage(requestMessage.id, requestMessage);
+  return true;
+  // Customizable Area End
+};
+
+//upload prescripton file end//
 
   // apply coupon
   postApplyCoupon = (code: any, amount: any): boolean => {

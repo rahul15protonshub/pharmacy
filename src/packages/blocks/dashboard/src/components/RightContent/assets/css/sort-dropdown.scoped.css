@@ -1,0 +1,62 @@
+.yt-product-page-recommend-btn {
+    /* border-radius: 10px !important; */
+    border: none;
+    background-color: transparent !important;
+    min-width: max-content;
+    text-align: left;
+    box-shadow: none !important;
+    color: var(--color-cyan) !important;
+    align-items: center;
+  }
+  .yt-recommend-wrapper {
+    /* width: 100%; */
+    box-shadow: none;
+    border: none;
+    margin: 0;
+    border-radius: 0;
+    border: solid 1px #cae2fe;
+    border-top: none !important;
+  }
+  
+  .yt-recommend-inner .show .yt-product-page-recommend-btn {
+    box-shadow: 0px -20px 20px 0 rgba(0, 0, 0, 0.05);
+  }
+  
+  .yt-recommend-inner .show .yt-recommend-wrapper {
+    box-shadow: 0px 20px 20px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 20px 20px 0 rgba(0, 0, 0, 0.05);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    right: 0 !important;
+    min-width: 12rem !important;
+  }
+
+  .yt-recommend-wrapper .dropdown-item {
+    padding: 10px 14px;
+    line-height: 1.11;
+    text-align: left;
+    font-weight: 300;
+    font-size: 14px;
+  }
+  
+  .yt-recommend-wrapper .dropdown-item.active,
+  .yt-recommend-wrapper .dropdown-item:active {
+    background-color: white;
+    color: var(--color-cyan);
+    font-weight: 500;
+  }
+
+  .current-active-filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+  .current-active-filter::after {
+    content: "";
+    width: 15px;
+    height: 15px;
+    display: block;
+    background-size: cover;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAMAAABFjsb+AAAAP1BMVEVHcEw/v69AtqVCtqZAt6dBtaVDt6dBtqY/uaRCtqZCtqZCtqZBtqZCt6dBt6c/t6dCtaVCt6dCtqZCtqZCtaajP99jAAAAFXRSTlMAED9/T4//nzDf78+QoIAgUGBw8MAfmX3GAAAAcUlEQVR4AWLADQCNz8UBwzAQBVHjmMX9txr82ig3z/EJtx/Gcer/ZObT8tN1Q+1r3XWAoXaeNF3fbdTcBfi3BVT8XJLe5iA7I5zs6KNIFnijF5HsjcOL8N27i6aiP2es7Ots2Wjtav7SQe2SJueS5HZPj28GSlotjwMAAAAASUVORK5CYII=);
+}

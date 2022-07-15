@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import EmptyCartContent from "./EmptyCartContent.web";
 import Ripple from "react-ripples";
 import {
@@ -9,9 +9,17 @@ import {
   Table,
   Form,
   FormGroup,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Progress,
 } from "reactstrap";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { Link, withRouter } from "react-router-dom";
+import Dropzone from "react-dropzone";
+import { MultiSelect } from "react-multi-select-component";
+import { BsFileEarmarkText } from "react-icons/bs";
 //@ts-ignore
 import content from "../../studio-store-ecommerce-components/src/content.js";
 import ShoppingCartController, {
@@ -21,10 +29,10 @@ import ShoppingCartController, {
 import "../assets/css/index.scoped.css";
 import "../assets/css/modalAddressField.css";
 import "../assets/css/index.css";
-
+import { toast } from "react-toastify";
 import Loader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader.web";
-
 // Customizable Area Start
+import { prescription } from "./assets";
 // Customizable Area End
 
 //// links to navigate hompage/////
@@ -103,13 +111,13 @@ function CartProduct(props: any) {
                       //@ts-ignore
                       localStorage.setItem("catalogue_variant_id", variant?.id);
                     }
-                    if (
-                      Object.keys(
-                        JSON.parse(localStorage.getItem("buyNow") || "{}")
-                      ).length == 0
-                    ) {
+                    // if (
+                    //   Object.keys(
+                    //     JSON.parse(localStorage.getItem("buyNow") || "{}")
+                    //   ).length == 0
+                    // ) {
                       props.toSetdefaultVariant(index, variant.catalogue_id);
-                    }
+                    // }
                   }}
                 >
                   <img
@@ -410,6 +418,27 @@ function CartProduct(props: any) {
                     </div>
                   </div>
                 </div>
+                {props.product?.attributes?.catalogue.attributes
+                  .prescription ? (
+                  <Fragment>
+                    <div className="d-flex align-items-center">
+                      <div className="sp-verify-icn-wrap">
+                        <img
+                          src={prescription}
+                          alt="verify"
+                          className="img-fluid"
+                          width="25"
+                          height="25"
+                        />
+                      </div>
+                      <p className="m-0 sp-prescription-tag-name">
+                        Prescription Required
+                      </p>
+                    </div>
+                  </Fragment>
+                ) : (
+                  <></>
+                )}
                 <div className="cart-action-wrap text-right">
                   <div className="cart-quantity-box">
                     <div className="cart-quantity-field">
@@ -558,6 +587,48 @@ const CartAmount: any = withRouter((props: any) => {
   const [couponCode, setCouponCode] = useState(
     wholeCart?.coupon?.attributes?.code
   );
+
+  const [prescriptionFile, setPrescriptionFile] = useState<any>([]);
+  const [isPrescModal, setIsPrescModal] = useState<any>(false);
+  const [presProduct, setpresProduct] = useState<any>([]);
+  const [progress, setProgress] = useState<any>(0);
+  const [uploading, setUploading] = useState<any>([]);
+  const [selectedProduct, setSelectedProduct] = useState<any>([]);
+  const [isPrescriptionFieldExist, setIsPrescriptionFieldExist] =
+    useState<boolean>(false);
+  const [preFiles, setPreFiles] = useState<any>([]);
+  const [dropDown, setDropdown] = useState([
+    {
+      id: 0,
+      options: presProduct,
+      selected: [],
+    },
+  ]);
+
+  useEffect(() => {
+    let preProduct = wholeCart.order_items.filter((item: any) => {
+      return item.attributes.catalogue.attributes.prescription == true;
+    });
+    if (preProduct.length != 0) {
+      setIsPrescriptionFieldExist(true);
+    }
+    preProduct.filter((elm: any) => {
+      setpresProduct((presProduct: any) => [
+        ...presProduct,
+        { label: elm.attributes.catalogue.attributes.name, value: elm.id },
+      ]);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (presProduct.length > 0) {
+      let newArr = dropDown.map((item, i) => {
+        return { ...item, options: presProduct };
+      });
+      setDropdown(newArr);
+    }
+  }, [presProduct]);
+
   function getProducts() {
     var items: any = [];
     wholeCart &&
@@ -614,6 +685,139 @@ const CartAmount: any = withRouter((props: any) => {
       props?.history?.push("./checkout");
     }
   };
+
+  const getBase64 = (file: any) => {
+    return new Promise((resolve) => {
+      let fileInfo;
+      let baseURL: any = "";
+      // Make new FileReader
+      let reader = new FileReader();
+
+      // Convert the file to base64 text
+      reader.readAsDataURL(file);
+
+      // on reader load somthing...
+      reader.onload = () => {
+        baseURL = reader.result;
+        resolve(baseURL);
+      };
+    });
+  };
+
+  const proceedToCheckFileIsUploade = () => {
+    if (isPrescriptionFieldExist) {
+      setIsPrescModal(true);
+    } else {
+      proceedToCheckoutForm();
+    }
+  };
+  const handleUpload = () => {
+    let itemIds: any = [];
+    dropDown.map((elm: any) => {
+      elm.options.map((item: any) => {
+        itemIds.push(parseInt(item.value));
+      });
+    });
+ 
+    let data: any = {
+      order_items: [
+        {
+          order_item_ids: itemIds,
+          prescription_files: preFiles,
+        },
+      ],
+    };
+
+   
+    let res=props.uploadPrescription(data);
+    if (res) {
+       proceedToCheckoutForm();
+    }
+  };
+  // cheek input value is valid or not {rf}
+  // const checkValidFile = (file: { target: { value: any } }) => {
+  const checkValidFile = (file: any) => {
+    const filePath = file[0].path;
+    var allowedExtensions = /(.jpg|.jpeg|.png|.gif|.pdf|.docx)$/i;
+
+    if (!allowedExtensions.exec(filePath)) {
+      toast.warning("Please Upload PDF or Image.");
+      return false;
+    }
+    return true;
+  };
+  // function for handle Prescription Upload {rf}
+  function handlePrescriptionUpload(event: any, index: any) {
+    if (checkValidFile(event)) {
+      var file = event[0];
+      event.map((elm: any) => {
+        getBase64(file)
+          .then((result) => {
+            file["base64"] = result;
+            setPreFiles((preFiles: any) => [...preFiles, result]);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function (event: any) {
+        file.url = reader.result;
+        setProgress(Math.round((100 * event.loaded) / event.total));
+        setPrescriptionFile((prescriptionFile: any) => [
+          ...prescriptionFile,
+          file,
+        ]);
+        let obj = {
+          id: index,
+          file: file.path,
+        };
+        setUploading((uploading: any) => [...uploading, obj]);
+        toast.success("File upload Successfully");
+      };
+      reader.onerror = function (error) {
+        console.log("Error: ", error);
+      };
+    }
+  }
+
+  const handleDeleteUploadFile = (id: any) => {
+    setPrescriptionFile(
+      prescriptionFile.filter((elm: any, index: any) => index !== id)
+    );
+    setUploading(uploading.filter((el: any) => el.id !== id));
+    setProgress(0);
+  };
+
+  const handleUploadAnotherPre = () => {
+    let remainProduct = presProduct.filter((o1: { value: any; }) => !selectedProduct.some((o2: { value: any; }) => o1.value === o2.value));
+    let obj = {
+      id: dropDown.length + 1,
+      options: remainProduct,
+      selected: [],
+    };
+    setDropdown((dropDown) => [...dropDown, obj]);
+  };
+  const handleOnSelect = (e: any, index: number) => {
+    let proArr:any=[]
+    e.map((elm:any)=>{
+      proArr.push(elm)
+    })
+      setSelectedProduct(proArr)
+    let newArr = dropDown.map((item, i) => {
+      if (index == i) {
+        return { ...item, selected: e };
+      } else {
+        return item;
+      }
+    });
+    setDropdown(newArr);
+  };
+  const removeUploadFile=(id:any)=>{
+    let updateArray=dropDown.filter((elm:any,index:any)=>index!=id)
+    setDropdown(updateArray);
+  }
 
   return (
     wholeCart && (
@@ -904,12 +1108,169 @@ const CartAmount: any = withRouter((props: any) => {
             color="btn btn-secondary yt-login-btn btn-block"
             //  onClick={()=> props.history.push("./checkout")}
             onClick={() => {
-              proceedToCheckoutForm();
+              proceedToCheckFileIsUploade();
             }}
           >
             {content.proceed}
           </Button>
           {/* </Ripple> */}
+        </div>
+        <div className={` modal-wrap`}>
+          <Modal
+            isOpen={isPrescModal}
+            toggle={() => setIsPrescModal(false)}
+            centered
+          >
+            <ModalHeader
+              toggle={() => setIsPrescModal(false)}
+              style={{ border: "none" }}
+              closed
+            >
+              <h5 className="modalTitle"> Prescription</h5>
+            </ModalHeader>
+            <ModalBody>
+              <div>
+                <h6 className="sub-heading">Please upload the prescription </h6>
+                {dropDown &&
+                  dropDown.map((elm: any, index: any) => {
+                    return (
+                      <>
+                        {index != 0 && (
+                          <div
+                            style={{
+                              color: "#3FC1CB",
+                              cursor: "pointer",
+                              display: "flex",
+                              justifyContent: "flex-end",
+                            }}
+                            onClick={() => removeUploadFile(index)}
+                          >
+                            x
+                          </div>
+                        )}
+                        <div className="dropzone">
+                          {uploading.length > 0 &&
+                          uploading[index] &&
+                          uploading[index].id == index ? (
+                            <div className="d-flex justify-content-betweeen align-items-center w-100">
+                              <div className="file-icon">
+                                <BsFileEarmarkText size={"2rem"} />
+                              </div>
+                              <div style={{ width: "80%" }}>
+                                <div className="d-flex justify-content-between align-items-center w-100">
+                                  <h6 style={{ color: "#000" }}>
+                                    {prescriptionFile &&
+                                      prescriptionFile.length > 0 &&
+                                      prescriptionFile[index] &&
+                                      prescriptionFile[index].path}{" "}
+                                    {(
+                                      prescriptionFile &&
+                                      prescriptionFile.length > 0 &&
+                                      prescriptionFile[index] &&
+                                      prescriptionFile[index].size / 1024 / 1024
+                                    ).toFixed(2)}{" "}
+                                    mb
+                                  </h6>
+                                  <div
+                                    style={{
+                                      color: "#3FC1CB",
+                                      cursor: "pointer",
+                                    }}
+                                    onClick={() =>
+                                      handleDeleteUploadFile(index)
+                                    }
+                                  >
+                                    x
+                                  </div>
+                                </div>
+                                <Progress value={progress} />
+                                <div className="d-flex justify-content-start mt-1">
+                                  <span
+                                    style={{ color: "#000" }}
+                                  >{`${progress}% done`}</span>
+                                </div>
+                              </div>
+                            </div>
+                          ) : (
+                            <Dropzone
+                              multiple={true}
+                              onDrop={(e: any) =>
+                                handlePrescriptionUpload(e, index)
+                              }
+                            >
+                              {({ getRootProps, getInputProps }) => (
+                                <div {...getRootProps()}>
+                                  <input {...getInputProps()} />
+                                  <p>Drag & Drop the document here</p>
+                                  <p>OR</p>
+                                  <Button color="secondary" className="browse-btn">
+                                    Browse File
+                                  </Button>
+                                </div>
+                              )}
+                            </Dropzone>
+                          )}
+                        </div>
+
+                        <div className="d-flex justify-content-between align-items-center mb-2">
+                          <span>Prescription For</span>
+                          <MultiSelect
+                            options={elm.options}
+                            value={elm.selected}
+                            onChange={(e: any) => handleOnSelect(e, index)}
+                            labelledBy="Select"
+                            disableSearch={true}
+                            className="multiselect"
+                            // disabled={dropDown.length!=index?false:true}
+                          />
+                        </div>
+                      </>
+                    );
+                  })}
+              </div>
+            </ModalBody>
+            <ModalFooter
+              className="justify-content-between"
+              style={{ border: "none" }}
+            >
+             {dropDown[dropDown.length - 1].options.length !=
+              selectedProduct.length ? (
+                <Button
+                  className="textDecorationNone px-0"
+                  color="link"
+                  onClick={handleUploadAnotherPre}
+                  disabled={selectedProduct.length==0&&progress!=100?true:false}
+                >
+                  + Add another prescription
+                </Button>
+              ) : (
+                <div></div>
+              )}
+              <span className="d-flex">
+                <Button
+                  className="textDecorationNone px-1 mx-3 "
+                  color="link"
+                  onClick={() => setIsPrescModal(false)}
+                >
+                  cancel
+                </Button>{" "}
+                <Button
+                 disabled={
+                  dropDown[dropDown.length - 1].options.length !=
+                  selectedProduct.length
+                    ? true
+                    : false || progress != 100
+                    ? true
+                    : false
+                }
+                  onClick={handleUpload}
+                  className=" btn-btn btn-secondary yt-login-btn btn-block px-4 py-1"
+                >
+                  Upload
+                </Button>
+              </span>
+            </ModalFooter>
+          </Modal>
         </div>
       </div>
     )
@@ -957,6 +1318,7 @@ const CartProductListData: any = withRouter((props: any) => {
                 deleteCoupon={props.deleteCoupon}
                 couponCodeError={props.couponCodeError}
                 changeCouponCode={props.changeCouponCode}
+                uploadPrescription={props.uploadPrescription}
               />
             </Col>
           </Row>
@@ -1003,6 +1365,7 @@ export class Cart extends ShoppingCartController {
                 setDefaultImage={this.setDefaultImage}
                 couponCodeError={this.state.couponCodeError}
                 changeCouponCode={this.changeCouponCode}
+                uploadPrescription={this.postPrescriptionFile}
               />
             ) : (
               <EmptyCartContent />

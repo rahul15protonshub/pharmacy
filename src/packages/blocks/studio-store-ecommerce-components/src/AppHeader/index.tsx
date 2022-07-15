@@ -33,6 +33,7 @@ import content from "../content.js";
 
 //@ts-ignore
 import isEmpty from 'lodash/isEmpty';
+const img=require('./images/user.png')
 
 
 const MobileSideNav: any = withRouter((props: any) => {
@@ -773,7 +774,8 @@ class AppHeaderScreen extends HeaderController {
       >
         <span>
           <img
-            src={this.state.userProfileImg && this.state.userProfileImg && this.state.userProfileImg !== 'null' ? this.state.userProfileImg : require('./images/user.png')}
+            // src={this.state.userProfileImg && this.state.userProfileImg && this.state.userProfileImg !== 'null' ? this.state.userProfileImg : require('./images/user.png')}
+            src={this.state.userProfileImg != null ? img:this.state.userProfileImg}
             alt="user"
             className="usericon"
           />

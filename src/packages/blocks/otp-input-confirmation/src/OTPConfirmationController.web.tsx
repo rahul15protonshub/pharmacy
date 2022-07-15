@@ -350,6 +350,7 @@ export default class OTPConfirmationController extends BlockComponent<
               JSON.parse(localStorage.getItem("countryCode") ?? "{}")
                 ?.countryPinCode + user.Email,
             password: user.password,
+            activated:true
           },
         },
       };
@@ -362,6 +363,7 @@ export default class OTPConfirmationController extends BlockComponent<
             full_name: userName,
             email: user.Email,
             password: user.password,
+            activated:true
           },
           type: "email_account",
           // process: "register",

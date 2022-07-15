@@ -26,6 +26,8 @@ Feature: ProductDescription
         And Render view all components
         And I can enter text with out errors
         And I can select the button with with out errors
+        And I can upload prescription without errors
+        And Failed to upload prescription
         And I can leave the screen with out errors
 
     Scenario: User navigates to ReviewList

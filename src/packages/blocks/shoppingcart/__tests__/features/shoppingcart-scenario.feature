@@ -4,6 +4,8 @@ Feature: shoppingcart
         Given I am a User loading shoppingcart
         When I navigate to the shoppingcart
         Then shoppingcart will load with out errors
+        Then I can upload shoping prescription without errors
+        Then Failed to upload shoping prescription
         And I can leave the screen with out errors
 
     Scenario: User navigates to checkout

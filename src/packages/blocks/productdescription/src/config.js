@@ -31,4 +31,5 @@ exports.Recommended = "Recommended"
 exports.SearchPlaceholder = "Search Branded Clothes"
 exports.descriptionConst = "Search Branded Clothes and get prizes and other stuff free you will enjoy. Search Branded Clothes and get prizes and other stuff free you will enjoy. Search Branded Clothes and get prizes and other stuff free you will enjoy."
 exports.notifyMsg = "You will get notified once the product is back in stock."
+exports.getAddprescriptionAPIEndPoint = "bx_block_order_management/order_transactions/add_presc_files"
 // Customizable Area End

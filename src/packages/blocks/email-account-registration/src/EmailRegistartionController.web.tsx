@@ -167,6 +167,7 @@ export default class EmailAccountRegistrationController extends BlockComponent<
           attributes: {
             email: values?.Email,
             full_name: values?.FullName,
+            activated:true,
           },
           process: "register",
         },
@@ -181,6 +182,7 @@ export default class EmailAccountRegistrationController extends BlockComponent<
             // full_phone_number: countryInfo?.countryPinCode + values?.Email,
             full_phone_number: this.state.countryCode + values?.Email,
             full_name: values?.FullName,
+            activated:true,
           },
         },
       };
@@ -607,10 +609,7 @@ export default class EmailAccountRegistrationController extends BlockComponent<
       )
       .required("Password is Required"),
     Email: Yup.string()
-      .matches(
-        /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
-        "Invalid Email / Phone Number"
-      )
+    .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, "Invalid Email / Phone Number")
       .required("Email / Phone Number is Required"),
     // Yup.string().matches(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).required('Email / Phone Number is Required')
     // || Yup.string().matches(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,'Phone Number InValid'),
