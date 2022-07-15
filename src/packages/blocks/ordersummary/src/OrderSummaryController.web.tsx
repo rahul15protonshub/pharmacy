@@ -522,7 +522,6 @@ export default class OrderSummaryController extends BlockComponent<
     }
   };
   
-// =============sahib============//
   onSelectCod=(event)=>{
     if(this.state.paymentType=="cod"){
       this.setState({ paymentType: "razorpay" })
@@ -530,7 +529,6 @@ export default class OrderSummaryController extends BlockComponent<
       this.setState({ paymentType: event.target.name })
     }
   }
-// =============sahib============//
 
 
   placeOrder = async () => {
