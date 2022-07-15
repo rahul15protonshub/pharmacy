@@ -10,4 +10,5 @@ export const blankAddress = require("../assets/images/blankAddress.png");
 export const tickAddress = require("../assets/images/tickAddress.png");
 export const cartEmpty = require("../assets/images/cartEmpty.png");
 export const couponTick = require("../assets/images/couponTick.png");
+export const prescription = require("../assets/images/prescription.png");
 // Customizable Area End

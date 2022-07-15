@@ -12,6 +12,8 @@
     "production": "react-native run-android --variant=release"
   },
   "dependencies": {
+    "rn-fetch-blob": "^0.12.0",
+    "react-native-document-picker": "8.1.1",
     "@invertase/react-native-apple-authentication": "file:../blocks/studio-store-ecommerce-core/node_modules/@invertase/react-native-apple-authentication",
     "@react-native-community/async-storage-backend-legacy": "file:../blocks/studio-store-ecommerce-core/node_modules/@react-native-community/async-storage-backend-legacy",
     "@react-native-community/datetimepicker": "file:../blocks/studio-store-ecommerce-core/node_modules/@react-native-community/datetimepicker",

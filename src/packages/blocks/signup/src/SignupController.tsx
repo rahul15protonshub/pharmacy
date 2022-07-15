@@ -144,6 +144,8 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
         getName(MessageEnum.RestAPIResponceSuccessMessage)
       );
 
+      console.log('responseJson===',responseJson)
+
       var errorReponse = message.getData(
         getName(MessageEnum.RestAPIResponceErrorMessage)
       );
@@ -661,16 +663,16 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
       this.onSocialLogin(data);
       console.log("@@@ Google SignIn Response =========== ", userInfo);
     } catch (error) {
-      console.log("@@@ Message ==============================", error);
-      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        console.log("User Cancelled the Login Flow");
-      } else if (error.code === statusCodes.IN_PROGRESS) {
-        console.log("Signing In");
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        console.log("Play Services Not Available or Outdated");
-      } else {
-        console.log("Some Other Error Happened");
-      }
+      // console.log("@@@ Message ==============================", error);
+      // if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+      //   console.log("User Cancelled the Login Flow");
+      // } else if (error.code === statusCodes.IN_PROGRESS) {
+      //   console.log("Signing In");
+      // } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+      //   console.log("Play Services Not Available or Outdated");
+      // } else {
+      //   console.log("Some Other Error Happened");
+      // }
     }
   };
 

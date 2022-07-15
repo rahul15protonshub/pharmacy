@@ -1129,7 +1129,7 @@ export default StyleSheet.create({
   },
 
   descriptionContainer: {
-    height: scale(50),
+    height: scale(60),
     marginRight: scale(20),
   },
 
@@ -1156,6 +1156,25 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
     marginTop: verticalScale(10),
+  },
+  outDesctription: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom:2
+  },
+  prescription: {
+    fontSize: scale(14),
+    lineHeight: scale(23),
+    marginLeft: scale(8),
+    textAlign: "left",
+    color: themeJson.attributes.black,
+    fontFamily: FONTS.GTWalsheimProMedium,
+  },
+  descrioptionTick: {
+    width: scale(15),
+    height: scale(15),
+    marginLeft: scale(17),
+    marginRight: scale(6),
   },
   // Customizable Area End
 });

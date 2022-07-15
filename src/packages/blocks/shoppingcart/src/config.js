@@ -21,6 +21,7 @@ exports.textInputPlaceHolder = "Enter Text";
 exports.labelTitleText = "shoppingcart";
 exports.labelBodyText = "shoppingcart Body";
 exports.btnExampleTitle = "CLICK ME";
+exports.getAddprescriptionAPIEndPoint = "bx_block_order_management/order_transactions/add_presc_files"
 // Customizable Area End
 
 exports.getStateListAPIEndpoint = "order_management/addresses/get_address_states";
@@ -54,3 +55,4 @@ exports.calculateShippingAddressChargeAPIEndPoint =
 exports.releaseShippingAddressChargeAPIEndPoint =
   "shipping_charge/shipping_charge/release_shipping_charge";
 exports.endPointApipostBuyNow = "cart/carts/buy_now";
+exports.endPointApiUploadPrescription="bx_block_order_management/order_transactions/add_presc_files"

@@ -50,6 +50,9 @@ interface S {
   selectedItem: any;
   selectedQuantity: any;
   // Customizable Area Start
+  prescriptionModal:boolean;
+  prescriptionNeed:boolean;
+  productDataArr:any;
   // Customizable Area End
 }
 
@@ -74,6 +77,7 @@ export default class ShoppingcartController extends BlockComponent<
   addToWishlistApiCallId: any;
   _unsubscribe: any;
   // Customizable Area Start
+  addPrescriptionApiCallId:any;
   // Customizable Area End
   constructor(props: Props) {
     super(props);
@@ -111,6 +115,9 @@ export default class ShoppingcartController extends BlockComponent<
       selectedItem: null,
       selectedQuantity: null,
       // Customizable Area Start
+      prescriptionModal:false,
+      prescriptionNeed:true,
+      productDataArr:[]
       // Customizable Area End
     };
 
@@ -163,6 +170,30 @@ export default class ShoppingcartController extends BlockComponent<
     this.setState({ token: token }, () => this.getCartList(token));
     this.getCartHasProduct();
   };
+
+  uploadproduct=async(productdata:any)=>{
+    var finalData=[]
+    if (productdata.length > 0) {
+    for(let i=0;i<productdata.length;i++){
+      let getselectedData={
+        "order_item_ids":productdata[i].selectedItems,
+        "prescription_files":productdata[i].browsefile
+      }
+      finalData.push(getselectedData);
+    }
+      const httpBody = {
+        order_items: finalData,
+      };
+      this.setState({ isFetching: true})
+      this.addPrescriptionApiCallId = await this.apiCall({
+        contentType: configJSON.ApiContentType,
+        method: configJSON.apiMethodTypePut,
+        endPoint:
+          configJSON.getAddprescriptionAPIEndPoint ,
+        body: httpBody,
+      });
+    }
+  }
 
   async receive(from: string, message: Message) {
     if (getName(MessageEnum.RestAPIResponceMessage) === message.id) {
@@ -301,9 +332,57 @@ export default class ShoppingcartController extends BlockComponent<
           return;
         }
       }
+
+      if (apiRequestCallId === this.addPrescriptionApiCallId) {
+        if (responseJson && responseJson.errors) {
+          let errorMessage = this.parseApiCatchErrorResponse(
+            responseJson.errors[0].message
+          );
+          this.setState({
+            isFetching: false,
+            isShowError: true,
+            showAlertModal: true,
+            message: errorMessage,
+          });
+          return;
+        } else if (responseJson && responseJson.message) {
+          this.setState({
+            prescriptionModal:false,
+             isFetching: false,
+          });
+          this.props.navigation.push("Checkout", {
+            isFromCheckout: true,
+            isFromBuyNow: false,
+            buyNowCartID: null,
+          })
+          return;
+        } else {
+          this.setState({
+            isFetching: false,
+         });
+        }
+      }
       if (responseJson?.data) {
         if (apiRequestCallId === this.getCartListApiCallId) {
+          let dataPrescription=[]
+          if(responseJson?.data[0]?.attributes?.order_items && responseJson?.data[0]?.attributes?.order_items?.length>0){
+            for (let i=0; i<responseJson?.data[0]?.attributes?.order_items?.length;i++){
+              let tempdata=responseJson?.data[0]?.attributes?.order_items[i]?.attributes
+                if(tempdata?.catalogue?.attributes?.prescription){
+                let tempPrescription={'id':tempdata?.id,'name':tempdata.product_name}
+                dataPrescription.push(tempPrescription)
+                }
+            }
+          }
+          if(dataPrescription.length>0){
+            this.setState({
+              prescriptionNeed:true})
+          }else{
+            this.setState({
+              prescriptionNeed:false})
+          }
           this.setState({
+            productDataArr:dataPrescription,
             cartList: responseJson.data[0].attributes.order_items,
             cartData: responseJson.data[0],
             isFetching: false,
