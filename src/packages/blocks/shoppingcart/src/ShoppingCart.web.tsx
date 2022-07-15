@@ -592,10 +592,7 @@ const CartAmount: any = withRouter((props: any) => {
   const [prescriptionFile, setPrescriptionFile] = useState<any>([]);
   const [isPrescModal, setIsPrescModal] = useState<any>(false);
   const [presProduct, setpresProduct] = useState<any>([]);
-  const [uploadFileContaner, setUploadFileContaner] = useState<any>([1]);
   const [progress, setProgress] = useState<any>(0);
-  const [unselectItem, setUnselectItem] = useState<any>([]);
-  const [selecteditem, setSelecteditem] = useState<any>([]);
   const [uploading, setUploading] = useState<any>([]);
   const [selectedProduct, setSelectedProduct] = useState<any>([]);
   const [isPrescriptionFieldExist, setIsPrescriptionFieldExist] =
@@ -613,7 +610,6 @@ const CartAmount: any = withRouter((props: any) => {
     let preProduct = wholeCart.order_items.filter((item: any) => {
       return item.attributes.catalogue.attributes.prescription == true;
     });
-    console.log("preProduct********************", preProduct.length);
     if (preProduct.length != 0) {
       setIsPrescriptionFieldExist(true);
     }
@@ -786,7 +782,6 @@ const CartAmount: any = withRouter((props: any) => {
       };
     }
   }
-  const [selected, setSelected] = useState<any>([]);
 
   const handleDeleteUploadFile = (id: any) => {
     setPrescriptionFile(
@@ -1227,6 +1222,7 @@ const CartAmount: any = withRouter((props: any) => {
                             labelledBy="Select"
                             disableSearch={true}
                             className="multiselect"
+                            // disabled={dropDown.length!=index?false:true}
                           />
                         </div>
                       </>
@@ -1238,12 +1234,13 @@ const CartAmount: any = withRouter((props: any) => {
               className="justify-content-between"
               style={{ border: "none" }}
             >
-             {presProduct.length != 0 ? (
+             {dropDown[dropDown.length - 1].options.length !=
+              selectedProduct.length ? (
                 <Button
                   className="textDecorationNone px-0"
                   color="link"
                   onClick={handleUploadAnotherPre}
-                  disabled={selectedProduct.length==0?true:false}
+                  disabled={selectedProduct.length==0&&progress!=100?true:false}
                 >
                   + Add another prescription
                 </Button>
@@ -1259,7 +1256,14 @@ const CartAmount: any = withRouter((props: any) => {
                   cancel
                 </Button>{" "}
                 <Button
-                  // disabled={progress != 100 && true}
+                 disabled={
+                  dropDown[dropDown.length - 1].options.length !=
+                  selectedProduct.length
+                    ? true
+                    : false || progress != 100
+                    ? true
+                    : false
+                }
                   onClick={handleUpload}
                   className=" btn-btn btn-secondary yt-login-btn btn-block px-4 py-1"
                 >
