@@ -227,7 +227,7 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
                    
                         <View style={styles.multiselectview}>
                         <MultiSelect
-                          is_selecatable={item.is_selecatable}
+                          // is_selecatable={item.is_selecatable}
                           hideTags
                           items={item.forselect}
                           uniqueKey="id"
