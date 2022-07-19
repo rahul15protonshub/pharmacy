@@ -58,7 +58,7 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
   constructor(props: Props) {
     super(props);
     Prescriptionuploads.instance = this;
-    let createdata=[{ selectedItems: [],forselect:this.props.productData,browsefile:[],is_selecatable:false}]
+    let createdata=[{ selectedItems: [],forselect:this.props.productData,browsefile:[],is_selecatable:false,selected_values:''}]
     this.state = {
       mainarrLength:this.props.productData.length,
       showbrowsecount:1,
@@ -76,6 +76,16 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
     let editdata= this.state.dataArr
     let getallselected=this.state.dataArr
     editdata[index].selectedItems=selectedItems
+    var selected_values = '';
+    let final_data = [];
+    for (let i = 0; i < selectedItems.length; i++) {
+      var indexget =  getallselected[index].forselect.findIndex((x: any) => x.id == selectedItems[i]);
+      if (indexget >= 0){
+        final_data.push(getallselected[index].forselect[indexget].name)
+      }
+    }
+    selected_values = final_data.join(', ')
+    editdata[index].selected_values=selected_values
     this.setState({ dataArr:editdata });
     var blankarr:any = []
     if(getallselected.length>0){
@@ -114,7 +124,7 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
     var searchData = this.props.productData.filter(function(itm:any){
       return empIds.indexOf(itm.id) == -1;
     });
-     let createdata={selectedItems: [],forselect:searchData,browsefile:[],is_selecatable:false}
+     let createdata={selectedItems: [],forselect:searchData,browsefile:[],is_selecatable:false,selected_values:''}
      let olddata=this.state.dataArr
      let lastiindex=olddata.length-1
      olddata[lastiindex].is_selecatable=true
@@ -125,7 +135,17 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
 
   browsefile=async(index:any)=>{
     const response = await DocumentPicker.pick({
-      type: [DocumentPicker.types.pdf,DocumentPicker.types.images],
+      type: [
+        DocumentPicker.types.pdf,
+        DocumentPicker.types.images,
+        DocumentPicker.types.plainText,
+        DocumentPicker.types.doc,
+        DocumentPicker.types.docx,
+        DocumentPicker.types.ppt,
+        DocumentPicker.types.xls,
+        DocumentPicker.types.xlsx,
+        DocumentPicker.types.pptx,
+      ],
     }).then((response)=>{
       
       RNFetchBlob.fs
@@ -190,7 +210,6 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
              data={dataArr}
              keyExtractor={(index: any, item: any) => index.toString()}
              renderItem={({ item, index }) => {
-              
               return(
                 <View>
 
@@ -224,10 +243,9 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
                 </View>
                 <View style={styles.maindropdwnview}>
                     <Text style={styles.labelText2}>Prescription for</Text>
-                   
-                        <View style={styles.multiselectview}>
-                        <MultiSelect
-                          // is_selecatable={item.is_selecatable}
+                       <View style={styles.multiselectview}>
+                      {!item.is_selecatable? 
+                       <MultiSelect
                           hideTags
                           items={item.forselect}
                           uniqueKey="id"
@@ -246,7 +264,9 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
                           hideDropdown
                           submitButtonColor="blue"
                           submitButtonText="Submit" 
-                        />
+                        />:
+                        <Text  numberOfLines={1} style={styles.labelTextselectedvalues}>{item.selected_values}</Text>
+                        }
                         </View>
                </View>
             </View>}
@@ -350,6 +370,15 @@ labelText: {
     color: COLOR_CONST.white,
     fontSize: scale(14),
     lineHeight: scale(21),
+  },
+  labelTextselectedvalues: {
+    fontFamily: FONTS.GTWalsheimProRegular,
+    color: '#525966',
+    fontSize: scale(14),
+    lineHeight: scale(21),
+    paddingVertical:verticalScale(14),
+    marginTop:-scale(5)
+    
   },
   labelText2: {
     fontFamily: FONTS.GTWalsheimProRegular,
