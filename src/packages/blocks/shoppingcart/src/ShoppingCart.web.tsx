@@ -1201,8 +1201,8 @@ const CartAmount: any = withRouter((props: any) => {
                               {({ getRootProps, getInputProps }) => (
                                 <div {...getRootProps()}>
                                   <input {...getInputProps()} />
-                                  <p>Drag & Drop the document here</p>
-                                  <p>OR</p>
+                                  <p style={{color:"#000000"}}>Drag & Drop the document here</p>
+                                  <p style={{color:"#000000"}}>OR</p>
                                   <Button color="secondary" className="browse-btn">
                                     Browse File
                                   </Button>
@@ -1218,7 +1218,7 @@ const CartAmount: any = withRouter((props: any) => {
                             options={elm.options}
                             value={elm.selected}
                             onChange={(e: any) => handleOnSelect(e, index)}
-                            labelledBy="Select"
+                            labelledBy="Select Product"
                             disableSearch={true}
                             className="multiselect"
                             // disabled={dropDown.length!=index?false:true}
@@ -1248,7 +1248,7 @@ const CartAmount: any = withRouter((props: any) => {
               )}
               <span className="d-flex">
                 <Button
-                  className="textDecorationNone px-1 mx-3 "
+                  className="cancel px-1 mx-3 "
                   color="link"
                   onClick={() => setIsPrescModal(false)}
                 >

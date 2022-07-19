@@ -284,7 +284,7 @@ class SingleOrders extends SingleOrdersController {
                       >
                         &#8226;
                       </span>{" "}
-                      {capitalize(item?.attributes?.status)}
+                      {capitalize(item?.attributes?.overall_order_status)}
                     </div>
                     {item?.attributes?.subscription_package != null && (
                       <div className="sub-items mt-2 mb-2 text-end">

@@ -47,7 +47,6 @@ const RightContent: React.FunctionComponent<RightContentProps> = (props: RightCo
             onScrollEnd()
         }
     }
-    console.log('banners', banners)
 
     return (
         <div className='right-content'>
