@@ -1132,9 +1132,12 @@ form.yt-cart-disct-wrap .success.form-group {
 }
 .textDecorationNone{
   
-  color: var(--color-black) !important;
+  color: var(--color-blue) !important;
 }
 .textDecorationNone:hover{
+  color: var(--color-blue) !important;
+}
+.cancel{
   color: var(--color-black) !important;
 }
 .progress{
