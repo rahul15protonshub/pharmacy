@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React from "react";
+import React, {Fragment} from "react";
 import DashboardController, { Props } from "./DashboardController.web";
 import SimilarProductListCard from "../../studio-store-ecommerce-components/src/ProductCard/SimilarProductListCard";
 import ProductImageWithSlider from "../../studio-store-ecommerce-components/src/ProductImageWithSlider";
@@ -19,6 +19,8 @@ import { debounce } from "../../studio-store-ecommerce-components/src/Utils";
 import "../assets/css/productDetail.css";
 import "../assets/css/index.css";
 import "../assets/css/subscribeModal.css";
+import { prescription } from "./assets";
+
 
 class ProductDetails extends DashboardController {
   constructor(props: Props) {
@@ -320,11 +322,11 @@ class ProductDetails extends DashboardController {
                                 <FaStar />
                               </div>
                               <div class="vr mx-2" />
-                              <div className="f-14 d-flex align-items-center font-weight-light">
+                              {/* <div className="f-14 d-flex align-items-center font-weight-light">
                                 <span className="f-sm fw-light">
                                   {productDetails?.attributes?.reviews?.length}
                                 </span>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                           <div className="product-detail-price">
@@ -373,6 +375,30 @@ class ProductDetails extends DashboardController {
                             disabled={!isProductAvailable}
                           />
                         </div>
+                        {console.log('this.state.productDetails', productDetails.attributes)}
+                        {productDetails?.attributes?.prescription ? (
+                          <Fragment>
+                            <div
+                              className="d-flex align-items-center"
+                              style={{ marginBottom: "1.3rem" }}
+                            >
+                              <div className="sp-verify-icn-wrap">
+                                <img
+                                  src={prescription}
+                                  alt="verify"
+                                  className="img-fluid"
+                                  width="25"
+                                  height="25"
+                                />
+                              </div>
+                              <p className="m-0 sp-prescription-tag-name">
+                                Prescription Required
+                              </p>
+                            </div>
+                          </Fragment>
+                        ) : (
+                          ""
+                        )}
                         <>
                           {!stock_qty ? (
                             isNotifyProduct ? (

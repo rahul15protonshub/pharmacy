@@ -116,7 +116,7 @@ function CartProduct(props: any) {
                     //     JSON.parse(localStorage.getItem("buyNow") || "{}")
                     //   ).length == 0
                     // ) {
-                      props.toSetdefaultVariant(index, variant.catalogue_id);
+                    props.toSetdefaultVariant(index, variant.catalogue_id);
                     // }
                   }}
                 >
@@ -417,28 +417,29 @@ function CartProduct(props: any) {
                       </div>
                     </div>
                   </div>
-                </div>
-                {props.product?.attributes?.catalogue.attributes
-                  .prescription ? (
-                  <Fragment>
-                    <div className="d-flex align-items-center">
-                      <div className="sp-verify-icn-wrap">
-                        <img
-                          src={prescription}
-                          alt="verify"
-                          className="img-fluid"
-                          width="25"
-                          height="25"
-                        />
+                  {props.product?.attributes?.catalogue.attributes
+                    .prescription ? (
+                    <Fragment>
+                      <div className="d-flex align-items-center mt-5">
+                        <div className="sp-verify-icn-wrap">
+                          <img
+                            src={prescription}
+                            alt="verify"
+                            className="img-fluid"
+                            width="25"
+                            height="25"
+                          />
+                        </div>
+                        <p className="m-0 sp-prescription-tag-name">
+                          Prescription Required
+                        </p>
                       </div>
-                      <p className="m-0 sp-prescription-tag-name">
-                        Prescription Required
-                      </p>
-                    </div>
-                  </Fragment>
-                ) : (
-                  <></>
-                )}
+                    </Fragment>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+
                 <div className="cart-action-wrap text-right">
                   <div className="cart-quantity-box">
                     <div className="cart-quantity-field">
@@ -591,7 +592,7 @@ const CartAmount: any = withRouter((props: any) => {
   const [prescriptionFile, setPrescriptionFile] = useState<any>([]);
   const [isPrescModal, setIsPrescModal] = useState<any>(false);
   const [presProduct, setpresProduct] = useState<any>([]);
-  const [progress, setProgress] = useState<any>(0);
+  const [progress, setProgress] = useState<any>([]);
   const [uploading, setUploading] = useState<any>([]);
   const [selectedProduct, setSelectedProduct] = useState<any>([]);
   const [isPrescriptionFieldExist, setIsPrescriptionFieldExist] =
@@ -718,7 +719,7 @@ const CartAmount: any = withRouter((props: any) => {
         itemIds.push(parseInt(item.value));
       });
     });
- 
+
     let data: any = {
       order_items: [
         {
@@ -728,10 +729,9 @@ const CartAmount: any = withRouter((props: any) => {
       ],
     };
 
-   
-    let res=props.uploadPrescription(data);
+    let res = props.uploadPrescription(data);
     if (res) {
-       proceedToCheckoutForm();
+      proceedToCheckoutForm();
     }
   };
   // cheek input value is valid or not {rf}
@@ -759,12 +759,15 @@ const CartAmount: any = withRouter((props: any) => {
           .catch((err) => {
             console.log(err);
           });
-      })
+      });
       var reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = function (event: any) {
         file.url = reader.result;
-        setProgress(Math.round((100 * event.loaded) / event.total));
+        setProgress([
+          ...progress,
+          Math.round((100 * event.loaded) / event.total),
+        ]);
         setPrescriptionFile((prescriptionFile: any) => [
           ...prescriptionFile,
           file,
@@ -787,11 +790,14 @@ const CartAmount: any = withRouter((props: any) => {
       prescriptionFile.filter((elm: any, index: any) => index !== id)
     );
     setUploading(uploading.filter((el: any) => el.id !== id));
-    setProgress(0);
+    setProgress(progress.filter((item: any, index: any) => index != id));
   };
 
   const handleUploadAnotherPre = () => {
-    let remainProduct = presProduct.filter((o1: { value: any; }) => !selectedProduct.some((o2: { value: any; }) => o1.value === o2.value));
+    let remainProduct = presProduct.filter(
+      (o1: { value: any }) =>
+        !selectedProduct.some((o2: { value: any }) => o1.value === o2.value)
+    );
     let obj = {
       id: dropDown.length + 1,
       options: remainProduct,
@@ -800,11 +806,11 @@ const CartAmount: any = withRouter((props: any) => {
     setDropdown((dropDown) => [...dropDown, obj]);
   };
   const handleOnSelect = (e: any, index: number) => {
-    let proArr:any=[]
-    e.map((elm:any)=>{
-      proArr.push(elm)
-    })
-      setSelectedProduct(proArr)
+    let proArr: any = [];
+    e.map((elm: any) => {
+      proArr.push(elm);
+    });
+    setSelectedProduct(proArr);
     let newArr = dropDown.map((item, i) => {
       if (index == i) {
         return { ...item, selected: e };
@@ -814,10 +820,10 @@ const CartAmount: any = withRouter((props: any) => {
     });
     setDropdown(newArr);
   };
-  const removeUploadFile=(id:any)=>{
-    let updateArray=dropDown.filter((elm:any,index:any)=>index!=id)
+  const removeUploadFile = (id: any) => {
+    let updateArray = dropDown.filter((elm: any, index: any) => index != id);
     setDropdown(updateArray);
-  }
+  };
 
   return (
     wholeCart && (
@@ -1138,14 +1144,18 @@ const CartAmount: any = withRouter((props: any) => {
                         {index != 0 && (
                           <div
                             style={{
-                              color: "#3FC1CB",
-                              cursor: "pointer",
                               display: "flex",
                               justifyContent: "flex-end",
                             }}
-                            onClick={() => removeUploadFile(index)}
                           >
-                            x
+                            <span
+                              style={{
+                                cursor: "pointer",
+                              }}
+                              onClick={() => removeUploadFile(index)}
+                            >
+                              x
+                            </span>
                           </div>
                         )}
                         <div className="dropzone">
@@ -1183,11 +1193,11 @@ const CartAmount: any = withRouter((props: any) => {
                                     x
                                   </div>
                                 </div>
-                                <Progress value={progress} />
+                                <Progress value={progress[index]} />
                                 <div className="d-flex justify-content-start mt-1">
                                   <span
                                     style={{ color: "#000" }}
-                                  >{`${progress}% done`}</span>
+                                  >{`${progress[index]}% done`}</span>
                                 </div>
                               </div>
                             </div>
@@ -1201,9 +1211,14 @@ const CartAmount: any = withRouter((props: any) => {
                               {({ getRootProps, getInputProps }) => (
                                 <div {...getRootProps()}>
                                   <input {...getInputProps()} />
-                                  <p style={{color:"#000000"}}>Drag & Drop the document here</p>
-                                  <p style={{color:"#000000"}}>OR</p>
-                                  <Button color="secondary" className="browse-btn">
+                                  <p style={{ color: "#000000" }}>
+                                    Drag & Drop the document here
+                                  </p>
+                                  <p style={{ color: "#000000" }}>OR</p>
+                                  <Button
+                                    color="secondary"
+                                    className="browse-btn"
+                                  >
                                     Browse File
                                   </Button>
                                 </div>
@@ -1213,14 +1228,16 @@ const CartAmount: any = withRouter((props: any) => {
                         </div>
 
                         <div className="d-flex justify-content-between align-items-center mb-2">
-                          <span>Prescription For</span>
+                          <span style={{ color: "#000000" }}>
+                            Prescription For
+                          </span>
                           <MultiSelect
                             options={elm.options}
                             value={elm.selected}
                             onChange={(e: any) => handleOnSelect(e, index)}
                             labelledBy="Select Product"
                             disableSearch={true}
-                            className="multiselect"
+                            className="multiselect dropDownItem"
                             // disabled={dropDown.length!=index?false:true}
                           />
                         </div>
@@ -1233,13 +1250,18 @@ const CartAmount: any = withRouter((props: any) => {
               className="justify-content-between"
               style={{ border: "none" }}
             >
-             {dropDown[dropDown.length - 1].options.length !=
+              {console.log("progress", progress.length)}
+              {dropDown[dropDown.length - 1].options.length !=
               selectedProduct.length ? (
                 <Button
                   className="textDecorationNone px-0"
                   color="link"
                   onClick={handleUploadAnotherPre}
-                  disabled={selectedProduct.length==0&&progress!=100?true:false}
+                  disabled={
+                    selectedProduct.length != 0 && progress.length != 0
+                      ? false
+                      : true
+                  }
                 >
                   + Add another prescription
                 </Button>
@@ -1255,14 +1277,14 @@ const CartAmount: any = withRouter((props: any) => {
                   cancel
                 </Button>{" "}
                 <Button
-                 disabled={
-                  dropDown[dropDown.length - 1].options.length !=
-                  selectedProduct.length
-                    ? true
-                    : false || progress != 100
-                    ? true
-                    : false
-                }
+                  disabled={
+                    dropDown[dropDown.length - 1].options.length !=
+                    selectedProduct.length
+                      ? true
+                      : false || progress != 100
+                      ? true
+                      : false
+                  }
                   onClick={handleUpload}
                   className=" btn-btn btn-secondary yt-login-btn btn-block px-4 py-1"
                 >

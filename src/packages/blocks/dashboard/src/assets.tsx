@@ -18,3 +18,4 @@ export const OfferCardImage2 = require("../assets/images/offer-card2.jpg");
 export const OfferCardImage3 = require("../assets/images/offer-card3.jpg");
 export const heartFav = require("../assets/images/heart-fav.png");
 export const closebutton = require("../assets/images/closebutton.png");
+export const prescription = require("../assets/images/prescription.png");
