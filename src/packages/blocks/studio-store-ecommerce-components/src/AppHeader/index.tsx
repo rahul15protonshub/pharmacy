@@ -732,6 +732,7 @@ class AppHeaderScreen extends HeaderController {
         <path d="M15.375 21.375C15.5821 21.375 15.75 21.5429 15.75 21.75C15.75 21.9571 15.5821 22.125 15.375 22.125C15.1679 22.125 15 21.9571 15 21.75C15 21.5429 15.1679 21.375 15.375 21.375" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M17.9531 14.625H5.88206C4.50573 14.6248 3.30605 13.6882 2.97206 12.353L1.52206 6.55297C1.46599 6.32884 1.51636 6.09137 1.65858 5.90929C1.80081 5.72721 2.01902 5.62084 2.25006 5.62097H19.4841" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
+      {console.log('this.state.cartLength', this.state.cartLength)}
       {parseInt(this.state.cartLength) > 0 && <span className={"w3-green cart-notify"}>
         {/* @ts-ignore */}
         {parseInt(this.state.cartLength) > 9 ? "9+" : this.state.cartLength}
