@@ -108,24 +108,8 @@ export default class Shoppingcart extends ShoppingcartController {
     let itemQuantity = item.attributes.quantity
       ? item.attributes.quantity
       : item.attributes.subscription_quantity;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    // let prescription=  item.attributes.catalogue.attributes.prescription 
 
-  let prescription=true
-=======
-    let prescription=  item.attributes.catalogue.attributes.prescription 
-  
->>>>>>> d76db2f (code merge)
-=======
-    // let prescription=  item.attributes.catalogue.attributes.prescription 
-
-  let prescription=true
->>>>>>> 2a8b82c (buynow and hardcode)
-=======
-    let prescription=  item.attributes.catalogue.attributes.prescription 
->>>>>>> 6087267 (Multiselect issue resolved)
+    let prescription=  item.attributes.catalogue.attributes.prescription;
     return (
       <View style={{}} key={item.id}>
         <TouchableOpacity

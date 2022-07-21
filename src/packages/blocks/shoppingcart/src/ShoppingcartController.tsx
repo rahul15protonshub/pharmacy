@@ -49,25 +49,11 @@ interface S {
   selectedVariantId: any;
   selectedItem: any;
   selectedQuantity: any;
+
   // Customizable Area Start
   prescriptionModal:boolean;
   prescriptionNeed:boolean;
   productDataArr:any;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  // Customizable Area Start
-  prescriptionModal:boolean;
-  prescriptionNeed:boolean;
-  productDataArr:any;
-=======
-  
->>>>>>> 4037f48 (mergecode)
-=======
-  // Customizable Area Start
->>>>>>> a604c54 (Revert "mergecode")
-=======
->>>>>>> dddf799 (newchanges)
   // Customizable Area End
 }
 
@@ -91,21 +77,8 @@ export default class ShoppingcartController extends BlockComponent<
   getCartProductId: any;
   addToWishlistApiCallId: any;
   _unsubscribe: any;
-<<<<<<< HEAD
-  addPrescriptionApiCallId:any;
-<<<<<<< HEAD
-<<<<<<< HEAD
   // Customizable Area Start
   addPrescriptionApiCallId:any;
-=======
->>>>>>> 4037f48 (mergecode)
-=======
-  // Customizable Area Start
->>>>>>> a604c54 (Revert "mergecode")
-=======
-  // Customizable Area Start
-  addPrescriptionApiCallId:any;
->>>>>>> dddf799 (newchanges)
   // Customizable Area End
   constructor(props: Props) {
     super(props);
@@ -146,21 +119,6 @@ export default class ShoppingcartController extends BlockComponent<
       prescriptionModal:false,
       prescriptionNeed:true,
       productDataArr:[]
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-      // Customizable Area Start
-      prescriptionModal:false,
-      prescriptionNeed:true,
-      productDataArr:[]
-=======
-  
->>>>>>> 4037f48 (mergecode)
-=======
-      // Customizable Area Start
->>>>>>> a604c54 (Revert "mergecode")
-=======
->>>>>>> dddf799 (newchanges)
       // Customizable Area End
     };
 
@@ -215,18 +173,7 @@ export default class ShoppingcartController extends BlockComponent<
   };
 
   uploadproduct=async(productdata:any)=>{
-<<<<<<< HEAD
-<<<<<<< HEAD
     var finalData=[]
-=======
-    
-
-    var finalData=[]
-
->>>>>>> d76db2f (code merge)
-=======
-    var finalData=[]
->>>>>>> dddf799 (newchanges)
     if (productdata.length > 0) {
     for(let i=0;i<productdata.length;i++){
       let getselectedData={
@@ -235,13 +182,6 @@ export default class ShoppingcartController extends BlockComponent<
       }
       finalData.push(getselectedData);
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-   
->>>>>>> d76db2f (code merge)
-=======
->>>>>>> dddf799 (newchanges)
       const httpBody = {
         order_items: finalData,
       };
@@ -253,17 +193,7 @@ export default class ShoppingcartController extends BlockComponent<
           configJSON.getAddprescriptionAPIEndPoint ,
         body: httpBody,
       });
-<<<<<<< HEAD
-<<<<<<< HEAD
     }
-=======
-
-    }
-    
->>>>>>> d76db2f (code merge)
-=======
-    }
->>>>>>> dddf799 (newchanges)
   }
 
   async receive(from: string, message: Message) {
@@ -405,13 +335,6 @@ export default class ShoppingcartController extends BlockComponent<
       }
 
       if (apiRequestCallId === this.addPrescriptionApiCallId) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        
->>>>>>> d76db2f (code merge)
-=======
->>>>>>> dddf799 (newchanges)
         if (responseJson && responseJson.errors) {
           let errorMessage = this.parseApiCatchErrorResponse(
             responseJson.errors[0].message
@@ -424,31 +347,15 @@ export default class ShoppingcartController extends BlockComponent<
           });
           return;
         } else if (responseJson && responseJson.message) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-         
->>>>>>> d76db2f (code merge)
-=======
->>>>>>> dddf799 (newchanges)
           this.setState({
             prescriptionModal:false,
              isFetching: false,
           });
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> d76db2f (code merge)
-=======
->>>>>>> dddf799 (newchanges)
           this.props.navigation.push("Checkout", {
             isFromCheckout: true,
             isFromBuyNow: false,
             buyNowCartID: null,
           })
-<<<<<<< HEAD
-<<<<<<< HEAD
           return;
         } else {
           this.setState({
@@ -456,23 +363,6 @@ export default class ShoppingcartController extends BlockComponent<
          });
         }
       }
-=======
-
-=======
->>>>>>> dddf799 (newchanges)
-          return;
-        } else {
-          this.setState({
-            isFetching: false,
-         });
-        }
-      }
-<<<<<<< HEAD
-
-
->>>>>>> d76db2f (code merge)
-=======
->>>>>>> dddf799 (newchanges)
       if (responseJson?.data) {
         if (apiRequestCallId === this.getCartListApiCallId) {
           let dataPrescription=[]
