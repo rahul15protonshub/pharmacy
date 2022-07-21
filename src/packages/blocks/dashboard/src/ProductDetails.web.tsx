@@ -375,7 +375,6 @@ class ProductDetails extends DashboardController {
                             disabled={!isProductAvailable}
                           />
                         </div>
-                        {console.log('this.state.productDetails', productDetails.attributes)}
                         {productDetails?.attributes?.prescription ? (
                           <Fragment>
                             <div
@@ -392,7 +391,7 @@ class ProductDetails extends DashboardController {
                                 />
                               </div>
                               <p className="m-0 sp-prescription-tag-name">
-                                Prescription Required
+                                Prescription needed
                               </p>
                             </div>
                           </Fragment>

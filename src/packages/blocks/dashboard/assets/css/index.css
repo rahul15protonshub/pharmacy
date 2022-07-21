@@ -386,8 +386,8 @@ iframe {
 }
 
 .likebuttononimage.active {
-  fill: var(--color-light-cyan) !important;
-  fill-opacity: 0.3;
+  fill: var(--color-cyan) !important;
+  fill-opacity:1;
 }
 
 .likebuttononimage:hover {

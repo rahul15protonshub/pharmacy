@@ -431,7 +431,7 @@ function CartProduct(props: any) {
                           />
                         </div>
                         <p className="m-0 sp-prescription-tag-name">
-                          Prescription Required
+                          Prescription needed
                         </p>
                       </div>
                     </Fragment>
@@ -641,7 +641,7 @@ const CartAmount: any = withRouter((props: any) => {
                 {item.attributes.catalogue.attributes.name}
               </span>
             </td>
-            <td>
+            <td style={{textAlign:"center"}}>
               <span className="cart-product-amount">
                 x
                 {item.attributes.subscription_quantity
@@ -738,7 +738,7 @@ const CartAmount: any = withRouter((props: any) => {
   // const checkValidFile = (file: { target: { value: any } }) => {
   const checkValidFile = (file: any) => {
     const filePath = file[0].path;
-    var allowedExtensions = /(.jpg|.jpeg|.png|.gif|.pdf|.docx)$/i;
+    var allowedExtensions = /(.jpg|.jpeg|.png|.gif|.pdf|.docx)/;
 
     if (!allowedExtensions.exec(filePath)) {
       toast.warning("Please Upload PDF or Image.");
@@ -792,15 +792,13 @@ const CartAmount: any = withRouter((props: any) => {
     setUploading(uploading.filter((el: any) => el.id !== id));
     setProgress(progress.filter((item: any, index: any) => index != id));
   };
-
   const handleUploadAnotherPre = () => {
-    let remainProduct = presProduct.filter(
-      (o1: { value: any }) =>
-        !selectedProduct.some((o2: { value: any }) => o1.value === o2.value)
-    );
+    setSelectedProduct([])
+    let remainProduct=dropDown[dropDown.length-1].options.filter((o1: { value: any }) =>
+    !selectedProduct.some((o2: { value: any }) => o1.value === o2.value))
     let obj = {
-      id: dropDown.length + 1,
-      options: remainProduct,
+      id: dropDown.length,
+      options: remainProduct.reduce((a:any, b:any) => a.concat(b), []),
       selected: [],
     };
     setDropdown((dropDown) => [...dropDown, obj]);
@@ -836,7 +834,7 @@ const CartAmount: any = withRouter((props: any) => {
             <thead>
               <tr>
                 <th>Product</th>
-                <th className="qty-cls">{content.qty}</th>
+                <th className="qty-cls" style={{textAlign:"center"}}>{content.qty}</th>
                 <th>{content.amount}</th>
               </tr>
             </thead>
@@ -1135,7 +1133,7 @@ const CartAmount: any = withRouter((props: any) => {
               <h5 className="modalTitle"> Prescription</h5>
             </ModalHeader>
             <ModalBody>
-              <div>
+              <div className="modalContent">
                 <h6 className="sub-heading">Please upload the prescription </h6>
                 {dropDown &&
                   dropDown.map((elm: any, index: any) => {
@@ -1238,7 +1236,7 @@ const CartAmount: any = withRouter((props: any) => {
                             labelledBy="Select Product"
                             disableSearch={true}
                             className="multiselect dropDownItem"
-                            // disabled={dropDown.length!=index?false:true}
+                            disabled={dropDown.length>index+1?true:false}
                           />
                         </div>
                       </>
@@ -1250,7 +1248,6 @@ const CartAmount: any = withRouter((props: any) => {
               className="justify-content-between"
               style={{ border: "none" }}
             >
-              {console.log("progress", progress.length)}
               {dropDown[dropDown.length - 1].options.length !=
               selectedProduct.length ? (
                 <Button
