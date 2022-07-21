@@ -45,14 +45,20 @@
     "date-fns": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/date-fns",
     "formik": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/formik",
     "html-react-parser": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/html-react-parser",
+    "invert-color": "2.0.0",
     "jest": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/jest",
+    "material-ui-dropzone": "^3.5.0",
     "moment": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/moment",
     "pure-react-carousel": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/pure-react-carousel",
     "react-credit-cards": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-credit-cards",
+    "react-custom-scrollbars": "^4.2.1",
+    "react-dropzone": "^14.2.1",
     "react-elastic-carousel": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-elastic-carousel",
     "react-geocode": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-geocode",
     "react-icons": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-icons",
+    "react-image-magnify": "^2.7.4",
     "react-input-range": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-input-range",
+    "react-multi-select-component": "^4.3.0",
     "react-native": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-native",
     "react-native-check-box": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-native-check-box",
     "react-native-countdown-component": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-native-countdown-component",
@@ -94,16 +100,12 @@
     "styled-components": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/styled-components",
     "tipsi-stripe": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/tipsi-stripe",
     "uuidv4": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/uuidv4",
-    "yup": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/yup",
-    "react-image-magnify": "^2.7.4",
-    "react-custom-scrollbars": "^4.2.1",
-    "invert-color": "2.0.0",
-    "material-ui-dropzone": "^3.5.0",
-    "react-multi-select-component": "^4.2.9",
-    "react-dropzone": "^14.2.1"
+    "yup": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/yup"
   },
   "devDependencies": {
     "@types/node": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/@types/node",
+    "@types/react-custom-scrollbars": "^4.0.10",
+    "@types/react-image-magnify": "^2.7.1",
     "@types/react-native": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/@types/react-native",
     "@types/react-native-check-box": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/@types/react-native-check-box",
     "@types/react-native-datepicker": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/@types/react-native-datepicker",
@@ -119,8 +121,6 @@
     "jest-cucumber": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/jest-cucumber",
     "metro-react-native-babel-preset": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/metro-react-native-babel-preset",
     "react-native-save-view": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-native-save-view",
-    "typescript": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/typescript",
-    "@types/react-image-magnify": "^2.7.1",
-    "@types/react-custom-scrollbars": "^4.0.10"
+    "typescript": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/typescript"
   }
 }

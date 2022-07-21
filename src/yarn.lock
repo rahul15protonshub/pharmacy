@@ -12336,7 +12336,12 @@ mkdirp@0.x, mkdirp@^0.5.1, mkdirp@^0.5.4, mkdirp@^0.5.5, mkdirp@~0.5.1:
   dependencies:
     minimist "^1.2.6"
 
-moment@>=2.14.0, moment@^2.22.0, "moment@file:./packages/blocks/studio-store-ecommerce-core/node_modules/moment", "moment@file:packages/blocks/studio-store-ecommerce-core/node_modules/moment":
+moment@>=2.14.0, moment@^2.22.0:
+  version "2.29.4"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
+  integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
+
+"moment@file:./packages/blocks/studio-store-ecommerce-core/node_modules/moment", "moment@file:packages/blocks/studio-store-ecommerce-core/node_modules/moment":
   version "2.29.3"
 
 moo@^0.5.0:
@@ -14756,10 +14761,10 @@ react-lifecycles-compat@^3, react-lifecycles-compat@^3.0.2, react-lifecycles-com
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-multi-select-component@^4.2.9:
-  version "4.2.9"
-  resolved "https://registry.yarnpkg.com/react-multi-select-component/-/react-multi-select-component-4.2.9.tgz#e0e750bcd243f4e4d829a9b0d983bbc457fd90fe"
-  integrity sha512-ef++2OuhBhAQ6MMfwl5BvI9Jtq8wcnCTM3MHvcKKdv5OGoUtIZpj5PGqLmegwSi75ZhkJTp/AdE8MR0nv2zGxQ==
+react-multi-select-component@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/react-multi-select-component/-/react-multi-select-component-4.3.0.tgz#c971bd94b246c0d90bbc304151c5ffa00626d8c7"
+  integrity sha512-2SgFf+6kBYsPP/CFgYU8cNBt8sbQ2VjG0E4pTyvb2RkXc2KDvkfB79TQXWPiGw57cbdJRD9WBsQddbMdTrwH8g==
 
 react-native-animatable@1.3.3, react-native-animatable@^1.2.4:
   version "1.3.3"

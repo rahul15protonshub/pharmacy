@@ -113,6 +113,7 @@ class HomeDashboard extends DashboardController {
               lg=""
               className="home-layout__col home-layout__right"
             >
+              {console.log('this.state.selectedCategory', this.state.selectedCategory)}
               <RightContent
                 toggeProduct={this.toggeProduct}
                 banners={this.state.banners || []}
