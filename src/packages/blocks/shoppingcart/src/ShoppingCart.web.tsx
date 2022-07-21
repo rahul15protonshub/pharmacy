@@ -1124,7 +1124,6 @@ const CartAmount: any = withRouter((props: any) => {
             isOpen={isPrescModal}
             toggle={() => setIsPrescModal(false)}
             centered
-            
           >
             <ModalHeader
               toggle={() => setIsPrescModal(false)}

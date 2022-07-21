@@ -702,5 +702,26 @@ export default StyleSheet.create({
     fontFamily: FONTS.GTWalsheimProMedium,
     color: COLOR_CONST.boderdarkishBlueTwo,
   },
+  outDesctription: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom:scale(2),
+    marginTop:-scale(15),
+    marginLeft:scale(67)
+  },
+  prescription: {
+    fontSize: scale(12),
+    lineHeight: scale(23),
+    marginLeft: scale(6),
+    textAlign: "left",
+    color: themeJson.attributes.black,
+    fontFamily: FONTS.GTWalsheimProMedium,
+  },
+  descrioptionTick: {
+    width: scale(12),
+    height: scale(12),
+    marginLeft: scale(17),
+    marginRight: scale(6),
+  },
   // Customizable Area End
 });

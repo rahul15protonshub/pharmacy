@@ -30,8 +30,9 @@ import content from "../content.js";
 // import { _ } from '../../../framework/src/IBlock';
 
 //@ts-ignore
-import isEmpty from "lodash/isEmpty";
-const img = require("./images/user.png");
+import isEmpty from 'lodash/isEmpty';
+const img=require('./images/user.png')
+
 
 const MobileSideNav: any = withRouter((props: any) => {
   const isOpen = props.isOpen;

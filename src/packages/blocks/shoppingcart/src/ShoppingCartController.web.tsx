@@ -579,6 +579,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
   };
  //upload prescripton file start//
  postPrescriptionFile = (order_items: any): boolean => {
+  // Customizable Area End
   const header = {
     "Content-Type": configJSON.validationApiContentType,
     token: localStorage.getItem("token"),
@@ -586,7 +587,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
   const requestMessage = new Message(
     getName(MessageEnum.RestAPIRequestMessage)
   );
-
+  
   this.postPrescription = requestMessage.messageId;
 
   requestMessage.addData(

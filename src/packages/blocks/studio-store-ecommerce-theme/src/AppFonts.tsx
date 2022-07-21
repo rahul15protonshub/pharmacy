@@ -12,6 +12,7 @@ const COLOR_CONST = {
     primaryThemeColor: '',
     secondaryThemeColor: '#e65e52',//
     primaryThemeGradient: '#333D8F',//
+    btncolor: "#450693",
     secondaryThemeGradient: '#333D8F',//
     tertiaryThemeGradient: '#595a74',//
     greenThemeColor: '#3bc490',

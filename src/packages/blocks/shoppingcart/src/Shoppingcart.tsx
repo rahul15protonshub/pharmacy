@@ -24,6 +24,7 @@ import {
   NOTIFICATIONS_ICON,
   COUPON_TICK,
   BACK_ICON,
+  RX
 } from "../../studio-store-ecommerce-theme/src/AppAssets/appassets";
 import styles from "./ShopingCartStyle";
 import ShoppingcartController, { Props } from "./ShoppingcartController";
@@ -32,6 +33,7 @@ import CustomErrorModal from "../../studio-store-ecommerce-components/src/Custom
 const themeJson = require("../../studio-store-ecommerce-theme/src/theme.json");
 import FastImage from "react-native-fast-image";
 const staticString = require("./../../studio-store-ecommerce-translations/en.json");
+import Prescriptionuploads from '../../../components/src/precriptionuploads'
 
 export default class Shoppingcart extends ShoppingcartController {
   constructor(props: Props) {
@@ -106,6 +108,8 @@ export default class Shoppingcart extends ShoppingcartController {
     let itemQuantity = item.attributes.quantity
       ? item.attributes.quantity
       : item.attributes.subscription_quantity;
+
+    let prescription=  item.attributes.catalogue.attributes.prescription;
     return (
       <View style={{}} key={item.id}>
         <TouchableOpacity
@@ -205,6 +209,16 @@ export default class Shoppingcart extends ShoppingcartController {
               </View>
             </View>
           </View>
+
+          {prescription && <View style={[styles.outDesctription]}>
+             
+             <Image
+             source={RX}
+             style={styles.descrioptionTick}
+           />
+            <Text style={styles.prescription}>Prescription Required</Text>
+          
+          </View>}
           <View style={styles.bottomContainer}>
             <TouchableOpacity
               onPress={() =>
@@ -548,6 +562,9 @@ export default class Shoppingcart extends ShoppingcartController {
                 onPress={() =>
                   this.state.isGuestUser
                     ? this.setState({ showGuestModal: true })
+                    :
+                    this.state.prescriptionNeed 
+                    ?  this.setState({ prescriptionModal: true })
                     : this.props.navigation.push("Checkout", {
                         isFromCheckout: true,
                         isFromBuyNow: false,
@@ -578,6 +595,18 @@ export default class Shoppingcart extends ShoppingcartController {
           isShowError={this.state.isShowError}
           hideErrorModal={() => this.setState({ showAlertModal: false })}
         />
+         {this.state.prescriptionModal &&
+         <Prescriptionuploads  
+        navigation={this.props.navigation} 
+        showmodal={this.state.prescriptionModal}
+        hideErrorModal ={() =>
+          this.setState({ prescriptionModal: false })
+        }
+        uploadprescription ={(productdata:any) =>
+          this.uploadproduct(productdata)
+        }
+        productData={this.state.productDataArr}
+        />}
       </SafeAreaView>
       // Customizable Area End
     );

@@ -10,7 +10,7 @@ appExtConfig:
   PROJECT_TYPE: "studio_store" 
   extval1: "example1"
   EXTVAL2: "example2"
-  REACT_APP_API_PATH: "https://ecommerceappwebsite-216579-ruby.b216579.prod.eastus.az.svc.builder.ai"
+  REACT_APP_API_PATH: "https://internalsspharmacydemo-216579-ruby.b216579.dev.eastus.az.svc.builder.cafe"
 
 extraFiles:
   - fileName: env.js

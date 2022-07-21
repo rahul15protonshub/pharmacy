@@ -322,11 +322,11 @@ class ProductDetails extends DashboardController {
                                 <FaStar />
                               </div>
                               <div class="vr mx-2" />
-                              <div className="f-14 d-flex align-items-center font-weight-light">
+                              {/* <div className="f-14 d-flex align-items-center font-weight-light">
                                 <span className="f-sm fw-light">
                                   {productDetails?.attributes?.reviews?.length}
                                 </span>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                           <div className="product-detail-price">
