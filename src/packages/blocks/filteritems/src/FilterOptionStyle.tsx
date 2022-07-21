@@ -297,7 +297,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginLeft: scale(27.3),
-    marginTop: verticalScale(35),
+    marginTop: verticalScale(6),
   },
 
   sliderContainer: {

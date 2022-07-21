@@ -43,7 +43,7 @@ export default class OrderConfirm extends OrderConfirmController {
         : this.state.orderConfirmStatus;
     const total = this.props.navigation.state?.params?.orderData?.order?.total;
     let placed_at =
-      this.props.navigation.state?.params?.orderData?.order?.placed_at;
+      this.props.navigation.state?.params?.orderData?.order?.created_at;
     return (
       <SafeAreaView
         style={{

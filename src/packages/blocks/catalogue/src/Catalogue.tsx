@@ -172,7 +172,7 @@ export default class Catalogue extends CatalogueController {
         </View>
         <View style={commonStyles.reviewRow}>
           <Text style={commonStyles.avgReview}>
-            {item.attributes.average_rating}
+            {(item.attributes.average_rating).toFixed(1)}
           </Text>
           <Image source={reviewStar} style={commonStyles.reviewStar} />
           {item.attributes.reviews && (

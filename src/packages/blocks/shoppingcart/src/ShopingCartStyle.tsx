@@ -502,7 +502,7 @@ export default StyleSheet.create({
   applyCouponText: {
     fontSize: scale(15),
     lineHeight: scale(18),
-    marginTop: verticalScale(5),
+    marginTop: verticalScale(15),
     marginBottom: verticalScale(10),
     marginLeft: scale(18),
     fontFamily: FONTS.GTWalsheimProMedium,

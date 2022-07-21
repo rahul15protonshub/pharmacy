@@ -134,7 +134,7 @@ export default class Orderdetailview extends OrderdetailviewController {
                       ? trackingDetails[0].attributes.status === "new"
                         ? "confirmed"
                         : trackingDetails[0].attributes.status
-                      : ""}
+                      : orderDetails.overall_order_status}
                   </Text>
                 </View>
               )}

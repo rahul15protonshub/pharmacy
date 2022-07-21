@@ -22,7 +22,8 @@ import {
   CROSS_ICONS,
   CROSS_PRESC,
   DOWN_ARROW,
-  BROWSE_ICON
+  BROWSE_ICON,
+  crossIcon
   } from "../../blocks/studio-store-ecommerce-theme/src/AppAssets/appassets";
 import MultiSelect from 'react-native-multiple-select';
 import DocumentPicker from 'react-native-document-picker';
@@ -195,16 +196,15 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
         <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.incontainer}>
             <View style={styles.mainscrollview}>
-                <Text style={styles.labelText}>Prescription</Text>
-                <TouchableOpacity onPress={()=>{this.props.hideErrorModal();}}>
+            <TouchableOpacity style={{alignSelf:'flex-end',marginRight:scale(5)}} onPress={()=>{this.props.hideErrorModal();}}>
                 <Image
                   source={CROSS_PRESC}
                   style={styles.closeimg}
                 />
                 </TouchableOpacity>
-                
+                <Text style={styles.labelText}>Prescription</Text>
             </View>
-            <Text style={styles.labelText1}>Please upload the prescription</Text>
+            <Text style={[styles.labelText1,{marginHorizontal:windowWidth*2/100,}]}>Please upload the prescription</Text>
             {dataArr.length>0 &&
              <FlatList
              data={dataArr}
@@ -220,9 +220,9 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
                         this.browsefile(index)
                     }}
                      style={styles.browsetouch}>
-                       <Text style={styles.labelText1}>Browse file</Text>
+                       <Text style={styles.labelText11}>Browse files</Text>
                     </TouchableOpacity>:
-                    <View style={{flexDirection:'row',width:'80%',justifyContent:'space-between'}}>
+                    <View style={{alignItems:'center', flexDirection:'row',width:'80%',justifyContent:'space-between'}}>
                    
                    <View style={{flexDirection:'row'}}>
                      <Image
@@ -235,7 +235,7 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
                         this.deletebrowsefile(index)
                         }}>
                       <Image
-                        source={CROSS_ICONS}
+                        source={crossIcon}
                         style={styles.crossimg}
                       />
                       </TouchableOpacity>
@@ -262,7 +262,7 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
                           textInputProps={{ editable: false }}
                           searchIcon={false}
                           hideDropdown
-                          submitButtonColor="blue"
+                          submitButtonColor={COLOR_CONST.btncolor}
                           submitButtonText="Submit" 
                         />:
                         <Text  numberOfLines={1} style={styles.labelTextselectedvalues}>{item.selected_values}</Text>
@@ -276,14 +276,18 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
             />
             }
             <View style={styles.adduploadbutton}>
-              <Text onPress={()=>{this.addanotherview()}} style={styles.labelTextAddanother}>{this.state.showanother? '+ Add another prescription':'' }</Text>
+              <Text onPress={()=>{this.addanotherview()}} style={styles.labelTextAddanother}>{this.state.showanother? '+ Add prescription':'' }</Text>
+              <View style={{flexDirection:'row',alignItems:'center'}}>
+              <Text onPress={()=>{this.props.hideErrorModal()}} style={styles.labelTextcancel}>{'Cancel' }</Text>
               <TouchableOpacity onPress={()=>{
                 this.props.uploadprescription(this.state.dataArr)
               }} 
               disabled={(this.state.selectedItems?.length==this.props.productData?.length && this.state.allfileupload) ? false:true}
-               style={{opacity:(this.state.selectedItems?.length==this.props.productData?.length && this.state.allfileupload) ? 1:0.4, backgroundColor:COLOR_CONST.btncolor,padding:scale(3),borderRadius:4}}> 
+               style={(this.state.selectedItems?.length==this.props.productData?.length && this.state.allfileupload) ? styles.uploadactive:styles.uploadDeactive}> 
                  <Text style={styles.labelTextupload}>Upload</Text>
               </TouchableOpacity>
+              </View>
+       
 
             </View>
         </ScrollView>
@@ -299,13 +303,15 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
 
 const styles = StyleSheet.create({
   browsefilemain:  {
-    width:windowWidth*85/100,
+    width:windowWidth*81/100,
     height:windowHeight*15/100,
-    borderColor:COLOR_CONST.coolGrey,
+    borderColor:COLOR_CONST.lightgray,
     borderWidth:1,
     borderRadius:8,
+    borderStyle:'dashed',
     alignItems:'center',
-    justifyContent:'center'
+    justifyContent:'center',
+    alignSelf:'center'
   },
 container:{
   flex:1,
@@ -316,47 +322,50 @@ container:{
 },
 incontainer:{
   paddingHorizontal:windowWidth*2/100,
-  borderRadius:8,
+  borderRadius:0,
   width:windowWidth*90/100,
   backgroundColor:'#ffffff'
 },
 mainscrollview:{
+  marginHorizontal:windowWidth*2/100,
   alignItems:'center',
   marginBottom:10, 
-  flexDirection:'row',
-  justifyContent:'space-between',
   marginTop:15
 },
 browsetouch:{ 
   width:"30%",
   backgroundColor:'white',
-  elevation:2,
+  borderWidth:0.8,
+  borderColor:COLOR_CONST.lightgray,
   borderRadius:2,
   alignItems:'center',
+  paddingVertical:verticalScale(3),
   justifyContent:'center'
 },
 maindropdwnview:{
-  width:windowWidth*85/100,
+  width:windowWidth*81/100,
   alignItems:'center',
+  alignSelf:'center',
   marginBottom:10,
   flexDirection:'row',
   justifyContent:'space-between',
   marginTop:verticalScale(15)
 },
 multiselectview:{
-  width:'65%',
+  width:'58%',
   marginTop:4,
   borderRadius:2,
-  borderColor:COLOR_CONST.coolGrey,
+  borderColor:COLOR_CONST.lightgray,
   borderWidth:1,backgroundColor:'white',
   paddingTop:scale(6),
   paddingHorizontal:scale(5)
 },
 labelText: {
-    fontFamily: FONTS.GTWalsheimProMedium,
+    fontFamily: FONTS.GTWalsheimProBold,
     color: COLOR_CONST.black,
     fontSize: scale(17),
     lineHeight: scale(21),
+    alignSelf:'flex-start'
   
   },
   labelText1: {
@@ -365,10 +374,24 @@ labelText: {
     fontSize: scale(14),
     lineHeight: scale(21),
   },
+  labelText11: {
+    fontFamily: FONTS.GTWalsheimProRegular,
+    color: COLOR_CONST.black,
+    fontSize: scale(12),
+    lineHeight: scale(21),
+  },
   labelTextupload: {
     fontFamily: FONTS.GTWalsheimProRegular,
     color: COLOR_CONST.white,
-    fontSize: scale(14),
+    fontSize: scale(13),
+    lineHeight: scale(21),
+  },
+  labelTextcancel: {
+    fontFamily: FONTS.GTWalsheimProMedium,
+    color: COLOR_CONST.black,
+    fontSize: scale(13),
+    textDecorationLine:'underline',
+    marginRight:scale(8),
     lineHeight: scale(21),
   },
   labelTextselectedvalues: {
@@ -376,16 +399,16 @@ labelText: {
     color: '#525966',
     fontSize: scale(14),
     lineHeight: scale(21),
-    paddingVertical:verticalScale(14),
+    paddingVertical:verticalScale(11),
     marginTop:-scale(5)
     
   },
   labelText2: {
-    fontFamily: FONTS.GTWalsheimProRegular,
+    fontFamily: FONTS.GTWalsheimProMedium,
     color: COLOR_CONST.black,
     fontSize: scale(13),
     lineHeight: scale(21),
-    width:'30%',
+    width:'40%',
   },
   labelText3: {
     fontFamily: FONTS.GTWalsheimProRegular,
@@ -396,17 +419,17 @@ labelText: {
   },
   labelTextAddanother: {
     fontFamily: FONTS.GTWalsheimProRegular,
-    color: COLOR_CONST.primaryThemeGradient,
+    color: '#448AFF',
     fontSize: scale(14),
     lineHeight: scale(21),
   },
   closeimg: {
-    width: scale(14),
-    height: scale(14),
+    width: scale(27),
+    height: scale(27),
   },
   crossimg: {
-    width: scale(20),
-    height: scale(20),
+    width: scale(10),
+    height: scale(10),
   },
   browseimg: {
     width: scale(25),
@@ -419,12 +442,18 @@ labelText: {
     height: scale(8),
   },
   adduploadbutton:{
-    width:windowWidth*85/100,
-    paddingHorizontal:'2%', 
-    marginVertical:windowHeight*2/100,
+    alignSelf:'center',
+    width:windowWidth*81/100,
+    marginVertical:windowHeight*4/100,
      flexDirection:'row',
-     justifyContent:'space-between'
+     justifyContent:'space-between',
+     alignItems:'center'
     },
+
+    uploadactive:{
+    backgroundColor:COLOR_CONST.btncolor,paddingVertical:scale(7), paddingHorizontal:scale(22),borderRadius:4},
+    uploadDeactive:{
+      backgroundColor:'#D7DCE1',paddingVertical:scale(7),paddingHorizontal:scale(22),borderRadius:4},
 });
 
 export default Prescriptionuploads;

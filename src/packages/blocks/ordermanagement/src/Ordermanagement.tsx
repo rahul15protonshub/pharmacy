@@ -179,7 +179,7 @@ export default class Ordermanagement extends OrdermanagementController {
                         ? orderItem.ship_rocket_status === "new"
                           ? "confirmed"
                           : orderItem.ship_rocket_status
-                        : item.status}
+                        : item.overall_order_status}
                     </Text>
                   </View>
                 )}
