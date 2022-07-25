@@ -98,6 +98,7 @@
     "react-toast-notifications": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-toast-notifications",
     "react-toastify": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-toastify",
     "reactstrap": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/reactstrap",
+    "read-more-react": "^1.0.10",
     "recompose": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/recompose",
     "rn-fetch-blob": "^0.12.0",
     "rn-range-slider": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/rn-range-slider",

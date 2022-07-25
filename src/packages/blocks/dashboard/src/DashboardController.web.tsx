@@ -114,6 +114,8 @@ interface S {
   templateLoading: boolean;
   selectedTemplate: any;
   showProducts: boolean;
+  deleteProduct: boolean;
+  isReadMore:boolean
 
   // Customizable Area End
 }
@@ -243,6 +245,8 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
       selectedTemplate: localStorage.getItem("selectedTemplateName") || null,
 
       // Customizable Area Start
+      deleteProduct: false,
+      isReadMore:true
       // Customizable Area End
     };
     runEngine.attachBuildingBlock(this as IBlock, this.subScribedMessages);
@@ -436,6 +440,23 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
                   ? [...this.state.dashboardFilteredProducts]
                   : [],
               });
+              if (this.state.deleteProduct) {
+                const cart_length = parseInt(
+                  localStorage.getItem("cart_length") ?? "0"
+                );
+                localStorage.setItem(
+                  "cart_length",
+                  (cart_length - 1).toString()
+                );
+                this.getIsCartCreated();
+                this.getNewCollection();
+                this.getFeaturedProduct();
+                this.getProductDetails();
+                this.setState({
+                  deleteProduct: false,
+                });
+              }
+
               //this.getFilteredProducts();
               //@ts-ignore
               window.notify([
@@ -556,8 +577,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
                 wishlistupdateMessage.id,
                 wishlistupdateMessage
               );
-              this.getNewCollection();
-              this.getFeaturedProduct();
+                this.getNewCollection();
+                this.getFeaturedProduct();
+                this.getFilteredProducts();
               // console.log(window.location.pathname);
               if (window.location.pathname.startsWith("/shop/")) {
                 window.scrollTo(0, 0);
@@ -569,9 +591,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
             //delete wishlist
             if (apiRequestCallId === this.delWishlistApiCallId) {
               // @ts-ignore
-              // window.notify([
-              //   { message: responseJson?.message, type: "success" },
-              // ]);
+              window.notify([
+                { message: responseJson?.message, type: "success" },
+              ]);
               const wishlist_length = parseInt(
                 localStorage.getItem("wishlist_len") || "0"
               );
@@ -588,8 +610,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
                 wishlistupdateMessage.id,
                 wishlistupdateMessage
               );
-              this.getNewCollection();
-              this.getFeaturedProduct();
+                this.getNewCollection();
+                this.getFeaturedProduct();
+                this.getFilteredProducts();
               if (window.location.pathname.startsWith("/shop/")) {
                 window.scrollTo(0, 0);
                 this.getProductDetails();
@@ -794,6 +817,12 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
     return true;
   };
+
+  handleReadMore=()=>{
+    this.setState({
+      isReadMore:!this.state.isReadMore
+    })
+  }
 
   // get category list
   getFeaturedProduct = (): boolean => {
@@ -1166,6 +1195,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
           `${this.state.cartId}/update_item_quantity`;
         method = configJSON.putAPiMethod;
       } else {
+        this.setState({
+          deleteProduct: true,
+        });
         httpBody = {
           catalogue_id: product.id,
           catalogue_variant_id: "",
@@ -2517,7 +2549,10 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
   }
 
   fetchMoreData = () => {
-    if (this.state.dashboardFilteredProducts&&this.state.dashboardFilteredProducts?.length >= 16) {
+    if (
+      this.state.dashboardFilteredProducts &&
+      this.state.dashboardFilteredProducts?.length >= 16
+    ) {
       this.setState({
         dashboardFilteredProductsActivePage:
           this.state.dashboardFilteredProductsActivePage + 1,

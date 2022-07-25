@@ -94,7 +94,8 @@ function CartProduct(props: any) {
               </div>
             ))}
           <div className="d-flex flex-wrap cart-pg-product-list-row justify-content-between">
-            <div className="cart-pg-list-prdt-info d-flex justify-content-between ">
+            <div className={`cart-pg-list-prdt-info d-flex justify-content-between ${props.product?.attributes?.catalogue.attributes
+                    .prescription ?"cart-pg-list-prdt-res":""}`}>
               <div className="cart-pg-list-image">
                 <div
                   data-testid={"button-set-default-variant"}
@@ -295,6 +296,7 @@ function CartProduct(props: any) {
                         alignItems: "center",
                         cursor: "pointer",
                       }}
+                      className='wishlistBox'
                     >
                       <svg
                         width="17"
@@ -420,7 +422,7 @@ function CartProduct(props: any) {
                   {props.product?.attributes?.catalogue.attributes
                     .prescription ? (
                     <Fragment>
-                      <div className="d-flex align-items-center mt-5">
+                      <div className="d-flex align-items-center mt-5 presBox">
                         <div className="sp-verify-icn-wrap">
                           <img
                             src={prescription}

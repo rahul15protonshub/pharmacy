@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, {Fragment} from "react";
+import React, { Fragment } from "react";
 import DashboardController, { Props } from "./DashboardController.web";
 import SimilarProductListCard from "../../studio-store-ecommerce-components/src/ProductCard/SimilarProductListCard";
 import ProductImageWithSlider from "../../studio-store-ecommerce-components/src/ProductImageWithSlider";
@@ -20,7 +20,7 @@ import "../assets/css/productDetail.css";
 import "../assets/css/index.css";
 import "../assets/css/subscribeModal.css";
 import { prescription } from "./assets";
-
+import ReadMoreReact from "read-more-react";
 
 class ProductDetails extends DashboardController {
   constructor(props: Props) {
@@ -57,7 +57,7 @@ class ProductDetails extends DashboardController {
 
   renderToolSelector = () => {
     // Customizable Area Start
-    const { selectedAttributes } = this.state;
+    const { selectedAttributes, isReadMore } = this.state;
     const product_attributes = this.getProductAttributes();
     if (product_attributes) {
       const attributes = Object?.keys(product_attributes).sort();
@@ -174,6 +174,7 @@ class ProductDetails extends DashboardController {
       catalogue_id,
       isProductAvailable,
       notifyModelOpen,
+      isReadMore,
     } = this.state;
 
     const { history } = this.props;
@@ -249,7 +250,7 @@ class ProductDetails extends DashboardController {
               <Card className="border-0 shadow-sm">
                 <CardBody className="bg-white product-wrapper rounded">
                   <Container fluid>
-                    <Row className="gx-lg-109 gx-md-40">
+                    <Row className="gx-lg-109 gx-md-40 mb-2">
                       <Col sm="12" md="5" xl="auto">
                         <div className="product-left-content">
                           <div className="product-image mb-5 d-flex">
@@ -263,12 +264,31 @@ class ProductDetails extends DashboardController {
                               imageSlider={this?.imageSlider}
                             />
                           </div>
+                          <div className="res-description">
+                            {productDetails?.attributes?.description && (
+                              <>
+                                <h5 className="d-flex align-items-center text-dark-grey-2 f-md product-desc">
+                                  Description
+                                </h5>
+                                <ReadMoreReact
+                                  text={productDetails?.attributes?.description.replace(
+                                    /<(.|\n)*?>/g,
+                                    ""
+                                  )}
+                                  min={150}
+                                  ideal={150}
+                                  max={200}
+                                  readMoreText="...read more"
+                                />
+                              </>
+                            )}
+                          </div>
                         </div>
                       </Col>
                       <Col sm="12" md="" xl="" className="ms-md-4">
                         <div className="product-detail vstack gap-3 mb-4 product-right-content">
                           <div className="product-detail-heading">
-                            <h4 className="d-flex align-items-center">
+                            <h4 className="d-flex">
                               <span>{productDetails?.attributes?.name}</span>
                               &nbsp; &nbsp;
                               <a
@@ -476,19 +496,21 @@ class ProductDetails extends DashboardController {
                                   {content?.buyNow}
                                 </Button>
                               </div>
-                              <div>
+                              <div className="description h-description">
                                 {productDetails?.attributes?.description && (
                                   <>
                                     <h5 className="d-flex align-items-center text-dark-grey-2 f-md product-desc">
                                       Description
                                     </h5>
-                                    <p
-                                      className="f-md"
-                                      dangerouslySetInnerHTML={{
-                                        __html:
-                                          productDetails?.attributes
-                                            ?.description,
-                                      }}
+                                    <ReadMoreReact
+                                      text={productDetails?.attributes?.description.replace(
+                                        /<(.|\n)*?>/g,
+                                        ""
+                                      )}
+                                      min={150}
+                                      ideal={150}
+                                      max={200}
+                                      readMoreText="...read more"
                                     />
                                   </>
                                 )}

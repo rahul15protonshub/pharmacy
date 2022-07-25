@@ -215,6 +215,7 @@ table.cart-prodict-type tbody th {
   font-size: 18px;
   font-weight: 500;
 }
+
 @media (max-width: 768px) {
   .cart-prodict-type-container {
     max-width: 54vw;
@@ -1197,4 +1198,9 @@ form.yt-cart-disct-wrap .success.form-group {
   font-size: 14px !important;
   font-weight: 400 !important;
   line-height: 24px !important;
+}
+@media (max-width: 480px) {
+  .cart-pg-list-prdt-info{
+    margin-bottom: 60px;
+  }
 }
