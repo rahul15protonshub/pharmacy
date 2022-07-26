@@ -1254,6 +1254,11 @@ form.yt-cart-disct-wrap .success.form-group {
   margin: 0px 0px 10px 137px !important;
 }
 }
+@media (max-width:376px) {
+.presBox{
+  margin: 0px 0px 10px 110px !important
+}
+}
 @media (max-width:360px) {
   .cart-prodict-info {
     flex: 0 0 47%;
