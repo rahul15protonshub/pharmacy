@@ -1079,6 +1079,12 @@ form.yt-cart-disct-wrap .success.form-group {
   margin-bottom: 1rem;
 }
 @media (max-width: 575.98px) {
+  .cart-prodict-info {
+    flex: 0 0 64%;
+  }
+  .cart-quantity-box-noPres {
+    bottom: 46px !important;
+}
   .empty-cart-text {
     max-width: 233px;
     margin-left: auto;
