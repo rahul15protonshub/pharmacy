@@ -848,10 +848,6 @@ class AppHeaderScreen extends HeaderController {
                           stroke-linejoin="round"
                         />
                       </svg>
-                      {console.log(
-                        "this.state.cartLength",
-                        this.state.cartLength
-                      )}
                       {parseInt(this.state.cartLength) > 0 && (
                         <span className={"w3-green cart-notify"}>
                           {/* @ts-ignore */}

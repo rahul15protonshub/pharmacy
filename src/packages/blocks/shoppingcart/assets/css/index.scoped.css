@@ -81,7 +81,7 @@
   line-height: 1.17;
   color: var(--color-black);
   margin-bottom: 0px;
-  max-width: 310px;
+  max-width: 262px;
   display: inline-block;
 }
 
@@ -125,7 +125,13 @@
 .accordian-icon {
   display: none;
 }
+.presBox{
+  margin-top: 4rem !important;
+}
 @media (max-width: 768px) {
+  .cart-prodict-info {
+    flex: 0 0 52%;
+  }
   .cart-prodict-type-container {
     max-width: 54vw;
     margin-bottom: 20px;
@@ -136,6 +142,20 @@
 }
 
 @media (max-width: 992px) {
+  .priceBox{
+    margin-bottom: 15px;
+  }
+  .presBox{
+    position: absolute;
+    bottom: 56px;
+    margin: 0px 0px 10px 157px;
+  }
+  .wishlistBox{
+    min-width: 130px !important;
+  }
+  .cart-prodict-info {
+    flex: 0 0 52%;
+  }
   .cart-prodict-type-container {
     display: inline;
   }
@@ -540,7 +560,7 @@ form.yt-cart-disct-wrap .success.form-group {
 
 .cart-quantity-box {
   position: absolute;
-  bottom: 60px;
+  bottom: 50px;
   right: 30px;
   width: 115px;
 }
@@ -677,6 +697,9 @@ form.yt-cart-disct-wrap .success.form-group {
 }
 
 @media (max-width: 992px) {
+  .cart-pg-list-prdt-res{
+    margin-bottom: 60px;
+  }
   .cart-product-head-container {
     display: block;
   }
@@ -730,6 +753,11 @@ form.yt-cart-disct-wrap .success.form-group {
 */
 
 @media (max-width: 1279.92px) {
+  .presBox{
+    position: absolute;
+    bottom: 56px;
+    margin: 0px 0px 10px 157px;
+  }
   .yt-empty-cart-wrap {
     max-width: 92%;
     margin-left: auto;
@@ -844,6 +872,12 @@ form.yt-cart-disct-wrap .success.form-group {
 */
 
 @media (max-width: 767.92px) {
+  .cart-quantity-box-noPres{
+    bottom: 80px !important;
+  }
+  .presBox{
+    margin: 0px 0px 10px 140px !important;
+  }
   .cart-pg-inner-wrap
     .yt-chekout-radio
     .form-check-input:checked
@@ -1045,6 +1079,12 @@ form.yt-cart-disct-wrap .success.form-group {
   margin-bottom: 1rem;
 }
 @media (max-width: 575.98px) {
+  .cart-prodict-info {
+    flex: 0 0 64%;
+  }
+  .cart-quantity-box-noPres {
+    bottom: 46px !important;
+}
   .empty-cart-text {
     max-width: 233px;
     margin-left: auto;
@@ -1093,5 +1133,10 @@ form.yt-cart-disct-wrap .success.form-group {
   }
   table.yt-sub-ttl-tbl-wrap.table {
     margin: 0;
+  }
+}
+@media (max-width: 480px) {
+  .cart-pg-list-prdt-res{
+    margin-bottom: 30px;
   }
 }

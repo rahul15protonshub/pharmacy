@@ -43,7 +43,24 @@
   .pp-remove-wh-lst-btn-dark-grey {
     color: var(--color-black);
   }
+  .likebuttononimage {
+    position: absolute;
+    top: 24px;
+    right: 22px;
+    stroke: var(--color-cyan);
+    cursor: pointer;
+    color: #fff !important;
+  }
   
+  .likebuttononimage.active {
+    color: var(--color-cyan) !important;
+    fill-opacity:1;
+  }
+  
+  .likebuttononimage:hover {
+    color: var(--color-light-cyan) !important;
+    fill-opacity: 0.3;
+  }
   /*
   * Screen for under 768 Resolution 
   */

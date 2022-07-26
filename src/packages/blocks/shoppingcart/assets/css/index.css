@@ -192,7 +192,7 @@ table.cart-prodict-type tbody th {
   line-height: 24px ;
   color: var(--color-black);
   margin-bottom: 20px;
-  max-width: 310px;
+  max-width: 262px;
 }
 
 .cart-prodict-type-container {
@@ -215,6 +215,7 @@ table.cart-prodict-type tbody th {
   font-size: 18px;
   font-weight: 500;
 }
+
 @media (max-width: 768px) {
   .cart-prodict-type-container {
     max-width: 54vw;
@@ -656,7 +657,33 @@ form.yt-cart-disct-wrap .success.form-group {
     height: 133px;
   }
 }
-
+@media(min-width:768px)and (max-width: 819px){
+  .presBox{
+    margin: 0px 0px 10px 117px;
+  }
+}
+@media(min-width:820px)and (max-width: 912px){
+  .presBox{
+    margin: 0px 0px 10px 137px;
+  }
+}
+@media(min-width:912px)and (max-width: 991px){
+  .presBox{
+    margin: 0px 0px 10px 175px;
+  }
+}
+@media(min-width:993px)and (max-width: 1279px){
+  .cart-quantity-box {
+    position: absolute;
+    bottom: 50px !important;
+    right: 30px;
+    width: 115px;
+  }
+  .presBox{
+    bottom: 90px;
+    margin: 0px 0px 10px 415px;
+  }
+}
 @media (min-width: 1280px) {
   .empty-main-ttl {
     display: none;
@@ -840,6 +867,9 @@ form.yt-cart-disct-wrap .success.form-group {
 */
 
 @media (max-width: 767.92px) {
+  .presBox{
+    margin: 0px 0px 10px 117px !important
+  }
   .cart-pg-inner-wrap
     .yt-chekout-radio
     .form-check-input:checked
@@ -1037,7 +1067,7 @@ form.yt-cart-disct-wrap .success.form-group {
   }
   .cart-quantity-box {
     position: absolute;
-    bottom: 5px;
+    bottom: 15px;
     right: 30px;
     width: 115px;
   }
@@ -1073,8 +1103,23 @@ form.yt-cart-disct-wrap .success.form-group {
     margin: 0 0 0 10px;
   }
 }
-
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .cart-prodict-info {
+    flex: 0 0 66% !important;
+  }
+  .presBox{
+    margin: 0px 0px 10px 308px;
+  }
+}
+@media (min-width: 1280px) and (max-width: 1365px) {
+  .cart-prodict-info {
+    flex: 0 0 45% !important;
+  }
+}
 @media (min-width: 1366px) and (max-width: 1900px) {
+  .cart-action{
+    margin-top: 2px;
+  }
   .yt-chekout-radio .checkout-form-label {
     font-size: 16px;
     line-height: 1.13;
@@ -1198,3 +1243,36 @@ form.yt-cart-disct-wrap .success.form-group {
   font-weight: 400 !important;
   line-height: 24px !important;
 }
+@media (max-width: 480px) {
+  .cart-pg-list-prdt-info{
+    margin-bottom: 60px;
+  }
+  .cart-prodict-info {
+    flex: 0 0 52%;
+}
+.presBox {
+  margin: 0px 0px 10px 137px !important;
+}
+}
+@media (max-width:376px) {
+.presBox{
+  margin: 0px 0px 10px 110px !important
+}
+}
+@media (max-width:360px) {
+  .cart-prodict-info {
+    flex: 0 0 47%;
+}
+.presBox{
+  margin: 0px 0px 10px 95px !important
+}
+}
+@media (max-width:280px) {
+  .cart-prodict-info {
+    flex: 0 0 32%;
+}
+.presBox{
+  margin: 0px 0px 10px 30px !important
+}
+}
+

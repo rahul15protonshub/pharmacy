@@ -94,7 +94,8 @@ function CartProduct(props: any) {
               </div>
             ))}
           <div className="d-flex flex-wrap cart-pg-product-list-row justify-content-between">
-            <div className="cart-pg-list-prdt-info d-flex justify-content-between ">
+            <div className={`cart-pg-list-prdt-info d-flex justify-content-between ${props.product?.attributes?.catalogue.attributes
+                    .prescription ?"cart-pg-list-prdt-res":""}`}>
               <div className="cart-pg-list-image">
                 <div
                   data-testid={"button-set-default-variant"}
@@ -249,7 +250,8 @@ function CartProduct(props: any) {
                 )}
                 {variant?.catalogue_variant_properties &&
                 variant?.catalogue_variant_properties.length > 0 ? (
-                  <div style={{ marginTop: "auto" }}>
+                  <div className={!props.product?.attributes?.catalogue.attributes
+                    .prescription?"priceBox":""} style={{ marginTop: "auto" }} >
                     <div className="product-feature-heading">
                       {/* @ts-ignore  */}
                       Price
@@ -264,7 +266,8 @@ function CartProduct(props: any) {
                     </p>
                   </div>
                 ) : (
-                  <div style={{ marginTop: "auto" }}>
+                  <div className={!props.product?.attributes?.catalogue.attributes
+                    .prescription?"priceBox":""} style={{ marginTop: "auto" }}>
                     <div className="product-feature-heading">
                       {/* @ts-ignore  */}
                       Price
@@ -295,6 +298,7 @@ function CartProduct(props: any) {
                         alignItems: "center",
                         cursor: "pointer",
                       }}
+                      className='wishlistBox'
                     >
                       <svg
                         width="17"
@@ -418,10 +422,10 @@ function CartProduct(props: any) {
                     </div>
                   </div>
                   {props.product?.attributes?.catalogue.attributes
-                    .prescription ? (
+                    .prescription && (
                     <Fragment>
-                      <div className="d-flex align-items-center mt-5">
-                        <div className="sp-verify-icn-wrap">
+                      <div className="d-flex align-items-center presBox">
+                        <div className="sp-verify-icn-wrap mx-2">
                           <img
                             src={prescription}
                             alt="verify"
@@ -435,13 +439,11 @@ function CartProduct(props: any) {
                         </p>
                       </div>
                     </Fragment>
-                  ) : (
-                    <></>
                   )}
                 </div>
 
                 <div className="cart-action-wrap text-right">
-                  <div className="cart-quantity-box">
+                  <div className={`${!props.product?.attributes?.catalogue.attributes.prescription?"cart-quantity-box-noPres":""} cart-quantity-box`}>
                     <div className="cart-quantity-field">
                       <Form>
                         <FormGroup className="m-0">

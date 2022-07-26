@@ -99,6 +99,9 @@ iframe {
 }
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
+  .h-description{
+    display: none;
+  }
   .home-layout__col.home-layout__left {
     width: 288px;
   }
@@ -411,6 +414,9 @@ iframe {
 }
 
 @media screen and (min-width: 994px) {
+  .res-description{
+    display: none;
+  }
   .product_category_type {
     display: none;
   }
@@ -423,6 +429,14 @@ iframe {
   }
 }
 @media screen and (max-width: 992px) {
+  .res-class{
+    position: absolute;
+    bottom: 10px;
+    left: 40px;
+    max-width: 275px;
+  }
+  
+  
   .product_category_type_web{
     display: none !important;
   }
@@ -512,6 +526,11 @@ iframe {
     align-items: flex-start;
   }
 
+}
+@media screen and (max-width:550px) {
+  .res-description{
+    display: none;
+  }
 }
 
 @media screen and (max-width: 360px) {
