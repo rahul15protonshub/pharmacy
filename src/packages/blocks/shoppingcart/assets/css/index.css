@@ -192,7 +192,7 @@ table.cart-prodict-type tbody th {
   line-height: 24px ;
   color: var(--color-black);
   margin-bottom: 20px;
-  max-width: 310px;
+  max-width: 262px;
 }
 
 .cart-prodict-type-container {
@@ -657,7 +657,18 @@ form.yt-cart-disct-wrap .success.form-group {
     height: 133px;
   }
 }
-
+@media(min-width:993px)and (max-width: 1279px){
+  .cart-quantity-box {
+    position: absolute;
+    bottom: 50px !important;
+    right: 30px;
+    width: 115px;
+  }
+  .presBox{
+    bottom: 90px;
+    margin: 0px 0px 10px 415px;
+  }
+}
 @media (min-width: 1280px) {
   .empty-main-ttl {
     display: none;
@@ -1038,7 +1049,7 @@ form.yt-cart-disct-wrap .success.form-group {
   }
   .cart-quantity-box {
     position: absolute;
-    bottom: 5px;
+    bottom: 15px;
     right: 30px;
     width: 115px;
   }
@@ -1076,6 +1087,9 @@ form.yt-cart-disct-wrap .success.form-group {
 }
 
 @media (min-width: 1366px) and (max-width: 1900px) {
+  .cart-action{
+    margin-top: 2px;
+  }
   .yt-chekout-radio .checkout-form-label {
     font-size: 16px;
     line-height: 1.13;
@@ -1204,3 +1218,4 @@ form.yt-cart-disct-wrap .success.form-group {
     margin-bottom: 60px;
   }
 }
+

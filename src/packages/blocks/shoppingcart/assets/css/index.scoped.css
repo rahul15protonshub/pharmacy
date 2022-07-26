@@ -81,7 +81,7 @@
   line-height: 1.17;
   color: var(--color-black);
   margin-bottom: 0px;
-  max-width: 310px;
+  max-width: 262px;
   display: inline-block;
 }
 
@@ -125,6 +125,9 @@
 .accordian-icon {
   display: none;
 }
+.presBox{
+  margin-top: 4rem !important;
+}
 @media (max-width: 768px) {
   .cart-prodict-info {
     flex: 0 0 52%;
@@ -139,9 +142,12 @@
 }
 
 @media (max-width: 992px) {
+  .priceBox{
+    margin-bottom: 15px;
+  }
   .presBox{
     position: absolute;
-    bottom: 42px;
+    bottom: 56px;
     margin: 0px 0px 10px 157px;
   }
   .wishlistBox{
@@ -554,7 +560,7 @@ form.yt-cart-disct-wrap .success.form-group {
 
 .cart-quantity-box {
   position: absolute;
-  bottom: 60px;
+  bottom: 50px;
   right: 30px;
   width: 115px;
 }
@@ -747,6 +753,11 @@ form.yt-cart-disct-wrap .success.form-group {
 */
 
 @media (max-width: 1279.92px) {
+  .presBox{
+    position: absolute;
+    bottom: 56px;
+    margin: 0px 0px 10px 157px;
+  }
   .yt-empty-cart-wrap {
     max-width: 92%;
     margin-left: auto;
@@ -861,6 +872,12 @@ form.yt-cart-disct-wrap .success.form-group {
 */
 
 @media (max-width: 767.92px) {
+  .cart-quantity-box-noPres{
+    bottom: 80px !important;
+  }
+  .presBox{
+    margin: 0px 0px 10px 140px !important;
+  }
   .cart-pg-inner-wrap
     .yt-chekout-radio
     .form-check-input:checked
