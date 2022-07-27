@@ -818,12 +818,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     return true;
   };
 
-  handleReadMore=()=>{
-    this.setState({
-      isReadMore:!this.state.isReadMore
-    })
-  }
-
   // get category list
   getFeaturedProduct = (): boolean => {
     const headers = {
@@ -1139,7 +1133,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
   postPrescriptionFile = (order_items: any): boolean => {
     // Customizable Area End
-    // console.log('order_items', order_items)
     const header = {
       "Content-Type": configJSON.validationApiContentType,
       token: localStorage.getItem("token"),
@@ -1895,6 +1888,11 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     });
   };
   // Customizable Area Start
+  handleReadMore=()=>{
+    this.setState({
+      isReadMore:!this.state.isReadMore
+    })
+  }
   /** Handle Varaints functions Start */
   onPressTool = (item: any, attribute: any) => {
     if (this.state.selectedAttributes[attribute]) {

@@ -176,9 +176,7 @@ class ProductDetails extends DashboardController {
       notifyModelOpen,
       isReadMore,
     } = this.state;
-
     const { history } = this.props;
-
     const product = default_variant?.attributes;
 
     //Enable qty increase for Cart Products end
@@ -342,11 +340,11 @@ class ProductDetails extends DashboardController {
                                 <FaStar />
                               </div>
                               <div class="vr mx-2" />
-                              {/* <div className="f-14 d-flex align-items-center font-weight-light">
+                              <div className="f-14 d-flex align-items-center font-weight-light">
                                 <span className="f-sm fw-light">
                                   {productDetails?.attributes?.reviews?.length}
                                 </span>
-                              </div> */}
+                              </div>
                             </div>
                           </div>
                           <div className="product-detail-price">
