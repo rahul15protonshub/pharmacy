@@ -87,8 +87,8 @@ export default class Login extends LoginController {
                     borderColor: this.state.emailError
                       ? COLOR_CONST.pastelRed
                       : this.state.email
-                      ? COLOR_CONST.whiteThree
-                      : COLOR_CONST.focusDarkColor,
+                        ? COLOR_CONST.whiteThree
+                        : COLOR_CONST.focusDarkColor,
                   },
                 ]}
               >
@@ -110,8 +110,8 @@ export default class Login extends LoginController {
                       color: this.state.emailError
                         ? COLOR_CONST.pastelRed
                         : this.state.email
-                        ? COLOR_CONST.charcoalGrey
-                        : COLOR_CONST.focusDarkColor,
+                          ? COLOR_CONST.charcoalGrey
+                          : COLOR_CONST.focusDarkColor,
                     },
                   ]}
                   onFocus={() => this.onFocus("email")}
@@ -142,8 +142,8 @@ export default class Login extends LoginController {
                     borderColor: this.state.passwordError
                       ? COLOR_CONST.pastelRed
                       : this.state.password
-                      ? COLOR_CONST.whiteThree
-                      : COLOR_CONST.focusDarkColor,
+                        ? COLOR_CONST.whiteThree
+                        : COLOR_CONST.focusDarkColor,
                   },
                 ]}
               >
@@ -165,8 +165,8 @@ export default class Login extends LoginController {
                       color: this.state.passwordError
                         ? COLOR_CONST.pastelRed
                         : this.state.password
-                        ? COLOR_CONST.charcoalGrey
-                        : COLOR_CONST.focusDarkColor,
+                          ? COLOR_CONST.charcoalGrey
+                          : COLOR_CONST.focusDarkColor,
                     },
                   ]}
                   ref={(input) => {
@@ -211,7 +211,7 @@ export default class Login extends LoginController {
                       backgroundColor: themeJson.attributes.common_button_color,
                       opacity:
                         this.state.emailInput.trim() === "" ||
-                        this.state.passwordInput.trim() === ""
+                          this.state.passwordInput.trim() === ""
                           ? 0.5
                           : 1,
                     },
@@ -222,7 +222,7 @@ export default class Login extends LoginController {
                     this.state.passwordInput.trim() === ""
                   }
                 >
-                  <Text style={styles.loginText}>LOG IN</Text>
+                  <Text style={styles.loginText}>Log In</Text>
                 </TouchableOpacity>
               )}
             </View>

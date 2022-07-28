@@ -138,8 +138,8 @@ export default class ForgotPassword extends ForgotPasswordController {
                       borderColor: this.state.emailError
                         ? COLOR_CONST.pastelRed
                         : this.state.email
-                        ? COLOR_CONST.whiteThree
-                        : COLOR_CONST.focusDarkColor,
+                          ? COLOR_CONST.whiteThree
+                          : COLOR_CONST.focusDarkColor,
                     },
                   ]}
                 >
@@ -183,13 +183,13 @@ export default class ForgotPassword extends ForgotPasswordController {
                     style={
                       this.state.OTPError
                         ? [
-                            styles.SectionStyle,
-                            { marginTop: verticalScale(13) },
-                          ]
+                          styles.SectionStyle,
+                          { marginTop: verticalScale(13) },
+                        ]
                         : [
-                            styles.SectionStyle1,
-                            { marginTop: verticalScale(13) },
-                          ]
+                          styles.SectionStyle1,
+                          { marginTop: verticalScale(13) },
+                        ]
                     }
                   >
                     <Image
@@ -241,7 +241,7 @@ export default class ForgotPassword extends ForgotPasswordController {
                     onPress={() => this.onPressSubmitButton()}
                     disabled={this.state.emailInput.trim() === ""}
                   >
-                    <Text style={styles.submitText}>SUBMIT</Text>
+                    <Text style={styles.submitText}>Submit</Text>
                   </TouchableOpacity>
                 ) : (
                   <TouchableOpacity

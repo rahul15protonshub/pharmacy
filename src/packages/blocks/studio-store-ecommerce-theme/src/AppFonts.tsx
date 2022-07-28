@@ -78,7 +78,7 @@ const COLOR_CONST = {
     lightgraycolor: '#757575',
     newtheme: '#3FC1CB',
     newlightcolor: '#DFDFDF',
-    newbordercolor: '#364F6B',
+    newtheme_another: '#364F6B',
     removered: '#FC5185'
 };
 export default COLOR_CONST

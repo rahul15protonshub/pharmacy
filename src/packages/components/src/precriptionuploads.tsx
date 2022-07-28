@@ -263,7 +263,7 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
                                 textInputProps={{ editable: false }}
                                 searchIcon={false}
                                 hideDropdown
-                                submitButtonColor={COLOR_CONST.btncolor}
+                                submitButtonColor={COLOR_CONST.newtheme_another}
                                 submitButtonText="Submit"
                               /> :
                               <Text numberOfLines={1} style={styles.labelTextselectedvalues}>{item.selected_values}</Text>
@@ -450,7 +450,7 @@ const styles = StyleSheet.create({
   },
 
   uploadactive: {
-    backgroundColor: COLOR_CONST.btncolor, paddingVertical: scale(7), paddingHorizontal: scale(22), borderRadius: 4
+    backgroundColor: COLOR_CONST.newtheme_another, paddingVertical: scale(7), paddingHorizontal: scale(22), borderRadius: 4
   },
   uploadDeactive: {
     backgroundColor: '#D7DCE1', paddingVertical: scale(7), paddingHorizontal: scale(22), borderRadius: 4

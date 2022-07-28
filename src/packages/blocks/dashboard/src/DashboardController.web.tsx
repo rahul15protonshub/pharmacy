@@ -64,15 +64,15 @@ interface S {
   selectedCategory: any;
   productsAddingToCart: number[];
 
-   // dashboard products filtering
-   dashboardFilteredProducts?: any[];
-   dashboardFilteredProductsTotalPages: number;
-   dashboardFilteredProductsActivePage: number;
-   dashboardFilterCategoryIds?: number[],
-   dashboardFilterSubCategoryIds?: number[],
-   dashboardFilterSortBy?: string,
-   dashboardFilterSortOrder?: string
-   dashboardFilterLoading: boolean;
+  // dashboard products filtering
+  dashboardFilteredProducts?: any[];
+  dashboardFilteredProductsTotalPages: number;
+  dashboardFilteredProductsActivePage: number;
+  dashboardFilterCategoryIds?: number[];
+  dashboardFilterSubCategoryIds?: number[];
+  dashboardFilterSortBy?: string;
+  dashboardFilterSortOrder?: string;
+  dashboardFilterLoading: boolean;
 
   //subscribe
   isSubscribeClicked?: boolean;
@@ -114,6 +114,8 @@ interface S {
   templateLoading: boolean;
   selectedTemplate: any;
   showProducts: boolean;
+  deleteProduct: boolean;
+  isReadMore:boolean
 
   // Customizable Area End
 }
@@ -132,7 +134,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
   GetCategoryListApiCallId: string = "";
   GetFeaturedProductApiCallId: string = "";
   GetFilteredProductsApiCallId: string = "";
-  postPrescrion:string="";
+  postPrescrion: string = "";
   GetIsCartCreatedApiCallId: string = "";
   getProductDetailsApiCallId: string = "";
   postCreateCartApiCallId: string = "";
@@ -187,7 +189,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
       dashboardFilterLoading: false,
       showAlert: false,
       productsAddingToCart: [],
-      
+
       collectionCategory: [],
       newCollection: [],
       featuredProduct: [],
@@ -243,6 +245,8 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
       selectedTemplate: localStorage.getItem("selectedTemplateName") || null,
 
       // Customizable Area Start
+      deleteProduct: false,
+      isReadMore:true
       // Customizable Area End
     };
     runEngine.attachBuildingBlock(this as IBlock, this.subScribedMessages);
@@ -361,18 +365,30 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
             // add items to the cart
             if (apiRequestCallId === this.putItemToCartApiCallId) {
               this.state.dashboardFilteredProducts?.forEach((product: any) => {
-                const orderItem = responseJson.data.attributes.order_items.find((item: any) => parseInt(product.id) === item.attributes.catalogue_id);
-                product.attributes.cart_quantity = orderItem ? orderItem.attributes.quantity ?? 1 : null;
-              })
+                const orderItem = responseJson.data.attributes.order_items.find(
+                  (item: any) =>
+                    parseInt(product.id) === item.attributes.catalogue_id
+                );
+                product.attributes.cart_quantity = orderItem
+                  ? orderItem.attributes.quantity ?? 1
+                  : null;
+              });
               this.setState({
                 isSubscribeClicked: false,
                 cartDetails: [responseJson.data],
                 cartId: responseJson.data.id,
                 productsAddingToCart: [],
-                dashboardFilteredProducts: this.state.dashboardFilteredProducts ? [...this.state.dashboardFilteredProducts] : [],
+                dashboardFilteredProducts: this.state.dashboardFilteredProducts
+                  ? [...this.state.dashboardFilteredProducts]
+                  : [],
               });
               // @ts-ignore
-              window.notify([{ message: "Item quantity updated in cart successfully", type: "success" }]);
+              window.notify([
+                {
+                  message: "Item quantity updated in cart successfully",
+                  type: "success",
+                },
+              ]);
               // @ts-ignore
               const cart_length = parseInt(
                 localStorage.getItem("cart_length") || ""
@@ -403,19 +419,44 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
               ]);
             }
 
-            
             //increase or decrease cart quantity
-            
-            if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
+
+            if (
+              apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId
+            ) {
               this.state.dashboardFilteredProducts?.forEach((product: any) => {
-                const orderItem = responseJson.data.attributes.order_items.find((item: any) => parseInt(product.id) === item.attributes.catalogue_id);
-                product.attributes.cart_quantity = orderItem ? orderItem.attributes.quantity : null;
-              })
+                const orderItem = responseJson.data.attributes.order_items.find(
+                  (item: any) =>
+                    parseInt(product.id) === item.attributes.catalogue_id
+                );
+                product.attributes.cart_quantity = orderItem
+                  ? orderItem.attributes.quantity
+                  : null;
+              });
               this.setState({
                 productDescriptionLoader: false,
                 productsAddingToCart: [],
-                dashboardFilteredProducts: this.state.dashboardFilteredProducts ? [...this.state.dashboardFilteredProducts] : [],
+                dashboardFilteredProducts: this.state.dashboardFilteredProducts
+                  ? [...this.state.dashboardFilteredProducts]
+                  : [],
               });
+              if (this.state.deleteProduct) {
+                const cart_length = parseInt(
+                  localStorage.getItem("cart_length") ?? "0"
+                );
+                localStorage.setItem(
+                  "cart_length",
+                  (cart_length - 1).toString()
+                );
+                this.getIsCartCreated();
+                this.getNewCollection();
+                this.getFeaturedProduct();
+                this.getProductDetails();
+                this.setState({
+                  deleteProduct: false,
+                });
+              }
+
               //this.getFilteredProducts();
               //@ts-ignore
               window.notify([
@@ -536,8 +577,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
                 wishlistupdateMessage.id,
                 wishlistupdateMessage
               );
-              this.getNewCollection();
-              this.getFeaturedProduct();
+                this.getNewCollection();
+                this.getFeaturedProduct();
+                this.getFilteredProducts();
               // console.log(window.location.pathname);
               if (window.location.pathname.startsWith("/shop/")) {
                 window.scrollTo(0, 0);
@@ -549,9 +591,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
             //delete wishlist
             if (apiRequestCallId === this.delWishlistApiCallId) {
               // @ts-ignore
-              // window.notify([
-              //   { message: responseJson?.message, type: "success" },
-              // ]);
+              window.notify([
+                { message: responseJson?.message, type: "success" },
+              ]);
               const wishlist_length = parseInt(
                 localStorage.getItem("wishlist_len") || "0"
               );
@@ -568,8 +610,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
                 wishlistupdateMessage.id,
                 wishlistupdateMessage
               );
-              this.getNewCollection();
-              this.getFeaturedProduct();
+                this.getNewCollection();
+                this.getFeaturedProduct();
+                this.getFilteredProducts();
               if (window.location.pathname.startsWith("/shop/")) {
                 window.scrollTo(0, 0);
                 this.getProductDetails();
@@ -603,27 +646,34 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
             }
           }
           // Customizable Area Start
-          if(apiRequestCallId === this.GetFilteredProductsApiCallId){
+          if (apiRequestCallId === this.GetFilteredProductsApiCallId) {
             if (this.state.dashboardFilteredProductsActivePage === 1) {
-              this.setState(responseJson?.data ? {
-                dashboardFilteredProducts: responseJson?.data,
-                dashboardFilteredProductsTotalPages: responseJson?.meta?.pagination?.total_pages
-              } : {
-                dashboardFilteredProducts: [],
-                dashboardFilteredProductsTotalPages: 1
-              })
-            }
-            else {
+              this.setState(
+                responseJson?.data
+                  ? {
+                      dashboardFilteredProducts: responseJson?.data,
+                      dashboardFilteredProductsTotalPages:
+                        responseJson?.meta?.pagination?.total_pages,
+                    }
+                  : {
+                      dashboardFilteredProducts: [],
+                      dashboardFilteredProductsTotalPages: 1,
+                    }
+              );
+            } else {
               this.setState({
-                dashboardFilteredProducts: [...this.state.dashboardFilteredProducts ?? [], ...responseJson?.data],
-                dashboardFilteredProductsTotalPages: responseJson?.meta?.pagination?.total_pages,
+                dashboardFilteredProducts: [
+                  ...(this.state.dashboardFilteredProducts ?? []),
+                  ...responseJson?.data,
+                ],
+                dashboardFilteredProductsTotalPages:
+                  responseJson?.meta?.pagination?.total_pages,
               });
             }
 
             this.setState({
               dashboardFilterLoading: false,
-            })
-
+            });
           }
           // Customizable Area End
         }
@@ -657,11 +707,8 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
       }
 
       // Customizable Area End
-
     } else if ("updateTemplate" === message.id) {
-      var templateName = message.getData(
-        "updateTemplateData"
-      );
+      var templateName = message.getData("updateTemplateData");
       this.setState({
         selectedTemplate: templateName.templateName,
         templateLoading: false,
@@ -770,6 +817,12 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
     return true;
   };
+
+  handleReadMore=()=>{
+    this.setState({
+      isReadMore:!this.state.isReadMore
+    })
+  }
 
   // get category list
   getFeaturedProduct = (): boolean => {
@@ -1121,7 +1174,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
   increaseOrDecreaseCartQuantity(product: any, increment: number) {
     this.setState({
-      productsAddingToCart: [...this.state.productsAddingToCart, product.id]
+      productsAddingToCart: [...this.state.productsAddingToCart, product.id],
     });
     const header = {
       "Content-Type": configJSON.dashboarContentType,
@@ -1137,17 +1190,21 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
           quantity: product.attributes.cart_quantity + increment,
           catalogue_id: product.id,
         };
-        endPointFullPath = configJSON.endPointApiPutUpdateCartQuantity +
-        `${this.state.cartId}/update_item_quantity`
+        endPointFullPath =
+          configJSON.endPointApiPutUpdateCartQuantity +
+          `${this.state.cartId}/update_item_quantity`;
         method = configJSON.putAPiMethod;
-      }
-      else {
+      } else {
+        this.setState({
+          deleteProduct: true,
+        });
         httpBody = {
           catalogue_id: product.id,
-          catalogue_variant_id: ""
-        }
-        endPointFullPath = configJSON.endPointApiPutUpdateCartQuantity +
-        `${this.state.cartId}/delete_item`
+          catalogue_variant_id: "",
+        };
+        endPointFullPath =
+          configJSON.endPointApiPutUpdateCartQuantity +
+          `${this.state.cartId}/delete_item`;
         method = configJSON.delAPiMethod;
       }
 
@@ -1178,7 +1235,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
       );
 
       runEngine.sendMessage(requestMessage.id, requestMessage);
-      
     }, 500);
 
     return true;
@@ -2293,10 +2349,10 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
         selectedPackagePeriod: productDetails?.attributes?.subscription_period,
         selectedTimeSlotType:
           typeof productDetails?.attributes?.preferred_delivery_slot ===
-            "string"
+          "string"
             ? productDetails?.attributes?.preferred_delivery_slot?.includes(
-              "pm"
-            )
+                "pm"
+              )
               ? "evening_slot"
               : "morning_slot"
             : "",
@@ -2312,7 +2368,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
         if (selectedPackageName) {
           this?.subscriptionPackages(
             suscribeProductData.attributes.available_subscription[
-            selectedPackageName
+              selectedPackageName
             ],
             selectedPackageName
           );
@@ -2325,18 +2381,18 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
               (ele: any, index: number) => {
                 if (
                   ele.attributes.subscription_package ==
-                  this.state.selectedPackageName &&
+                    this.state.selectedPackageName &&
                   ele.attributes.subscription_period.split(" ")[0] ==
-                  selectedPackagePeriod
+                    selectedPackagePeriod
                 ) {
                   let mr = JSON.parse(ele.attributes.morning_slot).filter(
-                    (item: any) => item
-                  ),
+                      (item: any) => item
+                    ),
                     en = JSON.parse(ele.attributes.evening_slot).filter(
                       (item2: any) => item2
                     );
                   let isMrng =
-                    ele.attributes.morning_slot && mr.length > 0 && "Morning",
+                      ele.attributes.morning_slot && mr.length > 0 && "Morning",
                     isEven =
                       ele.attributes.evening_slot && en.length > 0 && "Evening";
                   const valueList = [];
@@ -2387,12 +2443,10 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     );
   };
   toggeProduct = () => {
-    this.setState(
-      ({ showProducts }) => ({
-        showProducts: !showProducts
-      })
-    )
-  }
+    this.setState(({ showProducts }) => ({
+      showProducts: !showProducts,
+    }));
+  };
 
   getFilteredProducts = (): boolean => {
     const headers = {
@@ -2401,8 +2455,8 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     };
 
     this.setState({
-      dashboardFilterLoading: true
-    })
+      dashboardFilterLoading: true,
+    });
 
     const requestMessage = new Message(
       getName(MessageEnum.RestAPIRequestMessage)
@@ -2412,20 +2466,30 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
     let filteredUrl = `${configJSON.endPointApiGetFilteredProducts}?page=${this.state.dashboardFilteredProductsActivePage}&per_page=16`;
 
-    if (this.state.dashboardFilterCategoryIds && this.state.dashboardFilterCategoryIds.length > 0) {
-      filteredUrl += `&q[category_id][]=${this.state.dashboardFilterCategoryIds.join(',')}`
+    if (
+      this.state.dashboardFilterCategoryIds &&
+      this.state.dashboardFilterCategoryIds.length > 0
+    ) {
+      filteredUrl += `&q[category_id][]=${this.state.dashboardFilterCategoryIds.join(
+        ","
+      )}`;
     }
 
-    if (this.state.dashboardFilterSubCategoryIds && this.state.dashboardFilterSubCategoryIds.length > 0) {
-      filteredUrl += `&q[sub_category_id][]=${this.state.dashboardFilterSubCategoryIds.join(',')}`
+    if (
+      this.state.dashboardFilterSubCategoryIds &&
+      this.state.dashboardFilterSubCategoryIds.length > 0
+    ) {
+      filteredUrl += `&q[sub_category_id][]=${this.state.dashboardFilterSubCategoryIds.join(
+        ","
+      )}`;
     }
 
     if (this.state.dashboardFilterSortBy) {
-      filteredUrl += `&sort[order_by]=${this.state.dashboardFilterSortBy}`
+      filteredUrl += `&sort[order_by]=${this.state.dashboardFilterSortBy}`;
     }
 
     if (this.state.dashboardFilterSortOrder) {
-      filteredUrl += `&sort[direction]=${this.state.dashboardFilterSortOrder}`
+      filteredUrl += `&sort[direction]=${this.state.dashboardFilterSortOrder}`;
     }
 
     requestMessage.addData(
@@ -2448,21 +2512,54 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     return true;
   };
 
-  setDashboardFilters(pageNumber?: number, categoryIds?: number[], subCategoryIds?: number[], sortBy?: string, sortOrder?: string) {
-    this.setState({
-      dashboardFilteredProductsActivePage: pageNumber ? pageNumber : this.state.dashboardFilteredProductsActivePage,
-      dashboardFilterCategoryIds: categoryIds ? categoryIds : this.state.dashboardFilterCategoryIds,
-      dashboardFilterSubCategoryIds: subCategoryIds ? subCategoryIds : this.state.dashboardFilterSubCategoryIds,
-      dashboardFilterSortBy: sortBy ? sortBy : this.state.dashboardFilterSortBy,
-      dashboardFilterSortOrder: sortOrder ? sortOrder : this.state.dashboardFilterSortOrder,
-    }, () => {
-      this.getFilteredProducts();
-    })
+  setDashboardFilters(
+    pageNumber?: number,
+    categoryIds?: number[],
+    subCategoryIds?: number[],
+    sortBy?: string,
+    sortOrder?: string
+  ) {
+    this.setState(
+      {
+        dashboardFilteredProductsActivePage: pageNumber
+          ? pageNumber
+          : this.state.dashboardFilteredProductsActivePage,
+        dashboardFilterCategoryIds: categoryIds
+          ? categoryIds
+          : this.state.dashboardFilterCategoryIds,
+        dashboardFilterSubCategoryIds: subCategoryIds
+          ? subCategoryIds
+          : this.state.dashboardFilterSubCategoryIds,
+        dashboardFilterSortBy: sortBy
+          ? sortBy
+          : this.state.dashboardFilterSortBy,
+        dashboardFilterSortOrder: sortOrder
+          ? sortOrder
+          : this.state.dashboardFilterSortOrder,
+      },
+      () => {
+        this.getFilteredProducts();
+      }
+    );
   }
   setSelectedCategory(category: any) {
     this.setState({ selectedCategory: category }, () => {
       this.setDashboardFilters(1, [category.category_id], [category.id]);
-    })
+    });
   }
+
+  fetchMoreData = () => {
+    if (
+      this.state.dashboardFilteredProducts &&
+      this.state.dashboardFilteredProducts?.length >= 16
+    ) {
+      this.setState({
+        dashboardFilteredProductsActivePage:
+          this.state.dashboardFilteredProductsActivePage + 1,
+      });
+      this.getFilteredProducts();
+    }
+  };
+
   // Customizable Area End
 }

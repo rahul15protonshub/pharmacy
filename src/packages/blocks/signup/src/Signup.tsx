@@ -74,8 +74,8 @@ export default class Signup extends SignupController {
                   borderColor: this.state.nameError
                     ? COLOR_CONST.pastelRed
                     : this.state.fullNameInput
-                    ? COLOR_CONST.whiteThree
-                    : COLOR_CONST.focusDarkColor,
+                      ? COLOR_CONST.whiteThree
+                      : COLOR_CONST.focusDarkColor,
                 },
               ]}
             >
@@ -104,8 +104,8 @@ export default class Signup extends SignupController {
                       color: this.state.nameError
                         ? COLOR_CONST.pastelRed
                         : this.state.fullName
-                        ? COLOR_CONST.charcoalGrey
-                        : COLOR_CONST.focusDarkColor,
+                          ? COLOR_CONST.charcoalGrey
+                          : COLOR_CONST.focusDarkColor,
                     },
                   ]}
                   onFocus={() => this.onFocus("fullName")}
@@ -132,8 +132,8 @@ export default class Signup extends SignupController {
                     borderColor: this.state.emailError
                       ? COLOR_CONST.pastelRed
                       : this.state.email
-                      ? COLOR_CONST.whiteThree
-                      : COLOR_CONST.focusDarkColor,
+                        ? COLOR_CONST.whiteThree
+                        : COLOR_CONST.focusDarkColor,
                   },
                 ]}
               >
@@ -155,8 +155,8 @@ export default class Signup extends SignupController {
                       color: this.state.emailError
                         ? COLOR_CONST.pastelRed
                         : this.state.email
-                        ? COLOR_CONST.charcoalGrey
-                        : COLOR_CONST.focusDarkColor,
+                          ? COLOR_CONST.charcoalGrey
+                          : COLOR_CONST.focusDarkColor,
                     },
                   ]}
                   ref={(input) => {
@@ -188,8 +188,8 @@ export default class Signup extends SignupController {
                     borderColor: this.state.passwordError
                       ? COLOR_CONST.pastelRed
                       : this.state.password
-                      ? COLOR_CONST.whiteThree
-                      : COLOR_CONST.focusDarkColor,
+                        ? COLOR_CONST.whiteThree
+                        : COLOR_CONST.focusDarkColor,
                   },
                 ]}
               >
@@ -211,8 +211,8 @@ export default class Signup extends SignupController {
                       color: this.state.passwordError
                         ? COLOR_CONST.pastelRed
                         : this.state.password
-                        ? COLOR_CONST.charcoalGrey
-                        : COLOR_CONST.focusDarkColor,
+                          ? COLOR_CONST.charcoalGrey
+                          : COLOR_CONST.focusDarkColor,
                     },
                   ]}
                   onFocus={() => this.onFocus("password")}
@@ -249,8 +249,8 @@ export default class Signup extends SignupController {
                     backgroundColor: themeJson.attributes.common_button_color,
                     opacity:
                       this.state.emailInput.trim().length === 0 ||
-                      this.state.passwordInput.trim().length === 0 ||
-                      this.state.fullNameInput.trim().length === 0
+                        this.state.passwordInput.trim().length === 0 ||
+                        this.state.fullNameInput.trim().length === 0
                         ? 0.5
                         : 1,
                   },
@@ -258,13 +258,13 @@ export default class Signup extends SignupController {
                 onPress={() => this.onPressSignUp()}
                 disabled={
                   this.state.emailInput.trim().length === 0 ||
-                  this.state.passwordInput.trim().length === 0 ||
-                  this.state.fullNameInput.trim().length === 0
+                    this.state.passwordInput.trim().length === 0 ||
+                    this.state.fullNameInput.trim().length === 0
                     ? true
                     : false
                 }
               >
-                <Text style={styles.signupText}>SIGN UP</Text>
+                <Text style={styles.signupText}>Sign Up</Text>
               </TouchableOpacity>
             </View>
           </View>

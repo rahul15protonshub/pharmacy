@@ -587,7 +587,7 @@ export default class Shoppingcart extends ShoppingcartController {
 
         {!this.state.emptyCart ? (
           <>
-            <View style={{ flex: 1, justifyContent: "space-between" }}>
+            <View style={{ marginTop: verticalScale(2), flex: 1, justifyContent: "space-between" }}>
               <ScrollView keyboardShouldPersistTaps={"always"}>
                 {this.renderMyOrderList()}
                 {this.renderBottomDetails()}

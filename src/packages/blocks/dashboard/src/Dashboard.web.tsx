@@ -131,6 +131,7 @@ class HomeDashboard extends DashboardController {
                 productsAddingToCart={this.state.productsAddingToCart}
                 onProductDecreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, -1)}
                 onProductIncreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, 1)}
+                fetchMoreData={this.fetchMoreData}
               />
             </Col>
           </Row>

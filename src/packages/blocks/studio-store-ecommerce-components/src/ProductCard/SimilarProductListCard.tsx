@@ -19,7 +19,6 @@ const SimilarProductListCard: any = withRouter((props: any) => {
 
     function getList() {
         let list: any = [];
-
         props.collection && props.collection.forEach((product: any, index: number) => {
             // console.log(props.collection, "props.collection", product)
             let catalogue_variant_in_stock: any, productOnSale: any, productSlaeprice: any, ProductPrice: any;
@@ -79,9 +78,9 @@ const SimilarProductListCard: any = withRouter((props: any) => {
                                 />
                                 {product.attributes.wishlisted ?
                                     (
-                                        <svg className="addedtowishlist" onClick={() => props.deleteWishlist(product.id)} width="21" height="21" viewBox="0 0 24 24" fill="#fff" stroke="#8899A4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                        <svg className="addedtowishlis likebuttononimaget" onClick={() => props.deleteWishlist(product.id)} width="21" height="21" viewBox="0 0 24 24" fill="#fff" stroke="#8899A4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                                     ) : (
-                                        <svg className=" addtowishlist" onClick={() => props.createWishlist(product.id)} width="21" height="21" viewBox="0 0 24 24" fill="#fff" stroke="#8899A4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                        <svg className=" addtowishlist likebuttononimage" onClick={() => props.createWishlist(product.id)} width="21" height="21" viewBox="0 0 24 24" fill="#fff" stroke="#8899A4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                                     )
                                     // ? (
                                     //   <img className="addtowishlist" src={require("./images/like.png")} alt="add to wishlist" onClick={() => props.deleteWishlist(product.id)}

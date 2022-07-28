@@ -158,7 +158,6 @@ export default class WishList extends WishListController {
     );
   };
   render() {
-    console.log('newwww', this.state.addedItem)
     return (
       // Customizable Area Start
       <SafeAreaView style={styles.mainContainer}>

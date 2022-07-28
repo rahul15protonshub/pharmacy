@@ -47,8 +47,8 @@ export default class ChangePassword extends ChangePasswordController {
               {
                 color:
                   this.state.textInputErrorData.currentPassError ||
-                  this.state.textInputErrorData.newPassError ||
-                  this.state.textInputErrorData.newPass1Error
+                    this.state.textInputErrorData.newPassError ||
+                    this.state.textInputErrorData.newPass1Error
                     ? COLOR_CONST.pastelRed
                     : COLOR_CONST.charcoalGrey,
               },
@@ -197,7 +197,7 @@ export default class ChangePassword extends ChangePasswordController {
         </KeyboardAwareScrollView>
         <GreenButton
           testID="btnChangePassword"
-          title="CHANGE PASSWORD"
+          title="Change Password"
           disabled={
             this.state.textInputData.currentPass.trim() === "" ||
             this.state.textInputData.newPass.trim() === "" ||
@@ -208,8 +208,8 @@ export default class ChangePassword extends ChangePasswordController {
             {
               opacity:
                 this.state.textInputData.currentPass.trim() === "" ||
-                this.state.textInputData.newPass.trim() === "" ||
-                this.state.textInputData.newPass1.trim() === ""
+                  this.state.textInputData.newPass.trim() === "" ||
+                  this.state.textInputData.newPass1.trim() === ""
                   ? 0.5
                   : 1,
             },

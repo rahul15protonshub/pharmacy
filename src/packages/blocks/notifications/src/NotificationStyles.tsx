@@ -90,7 +90,7 @@ export default StyleSheet.create({
     width: scale(335),
     height: scale(44),
     marginBottom: verticalScale(30),
-    borderRadius: scale(20),
+    borderRadius: scale(5),
     justifyContent: "center",
     alignItems: "center",
     opacity: 0.99,
@@ -128,7 +128,7 @@ export default StyleSheet.create({
   bellContainer: {
     width: scale(44),
     height: scale(44),
-    borderRadius: scale(22),
+    borderRadius: scale(5),
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: COLOR_CONST.bellLightGrey,

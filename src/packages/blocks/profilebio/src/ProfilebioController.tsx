@@ -46,6 +46,7 @@ interface S {
   showLogoutModal: boolean;
   isSocialLoginUser: boolean;
   // Customizable Area Start
+  cartcount: any
   // Customizable Area End
 }
 
@@ -93,6 +94,7 @@ export default class ProfilebioController extends BlockComponent<Props, S, SS> {
       showLogoutModal: false,
       isSocialLoginUser: false,
       // Customizable Area Start
+      cartcount: 0
       // Customizable Area End
     };
     runEngine.attachBuildingBlock(this as IBlock, this.subScribedMessages);
@@ -279,7 +281,7 @@ export default class ProfilebioController extends BlockComponent<Props, S, SS> {
           () => this.updateProfileData()
         );
       });
-    } catch (e) {}
+    } catch (e) { }
   };
 
   onPressPickImage = () => {
@@ -300,7 +302,7 @@ export default class ProfilebioController extends BlockComponent<Props, S, SS> {
           () => this.updateProfileData()
         );
       });
-    } catch (e) {}
+    } catch (e) { }
   };
 
   refreshCart = async () => {
@@ -353,10 +355,10 @@ export default class ProfilebioController extends BlockComponent<Props, S, SS> {
   };
 
   cartHasProductSuccessCallBack = (res: any) => {
-    this.setState({ cartHasProduct: res.has_cart_product });
+    this.setState({ cartHasProduct: res.has_cart_product, cartcount: res.total_cart_item });
   };
 
-  cartHasProductFailureCallBack = (error: any) => {};
+  cartHasProductFailureCallBack = (error: any) => { };
 
   updateProfileData = async () => {
     let formData: any = {};

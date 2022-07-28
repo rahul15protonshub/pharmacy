@@ -20,7 +20,7 @@ import "../assets/css/productDetail.css";
 import "../assets/css/index.css";
 import "../assets/css/subscribeModal.css";
 import { prescription } from "./assets";
-
+import ReadMoreReact from "read-more-react";
 
 class ProductDetails extends DashboardController {
   constructor(props: Props) {
@@ -57,7 +57,7 @@ class ProductDetails extends DashboardController {
 
   renderToolSelector = () => {
     // Customizable Area Start
-    const { selectedAttributes } = this.state;
+    const { selectedAttributes, isReadMore } = this.state;
     const product_attributes = this.getProductAttributes();
     if (product_attributes) {
       const attributes = Object?.keys(product_attributes).sort();
@@ -173,10 +173,9 @@ class ProductDetails extends DashboardController {
       catalogue_id,
       isProductAvailable,
       notifyModelOpen,
+      isReadMore,
     } = this.state;
-
     const { history } = this.props;
-
     const product = default_variant?.attributes;
 
     //Enable qty increase for Cart Products end
@@ -248,7 +247,7 @@ class ProductDetails extends DashboardController {
               <Card className="border-0 shadow-sm">
                 <CardBody className="bg-white product-wrapper rounded">
                   <Container fluid>
-                    <Row className="gx-lg-109 gx-md-40">
+                    <Row className="gx-lg-109 gx-md-40 mb-2">
                       <Col sm="12" md="5" xl="auto">
                         <div className="product-left-content">
                           <div className="product-image mb-5 d-flex">
@@ -262,12 +261,31 @@ class ProductDetails extends DashboardController {
                               imageSlider={this?.imageSlider}
                             />
                           </div>
+                          <div className="res-description">
+                            {productDetails?.attributes?.description && (
+                              <>
+                                <h5 className="d-flex align-items-center text-dark-grey-2 f-md product-desc">
+                                  Description
+                                </h5>
+                                <ReadMoreReact
+                                  text={productDetails?.attributes?.description.replace(
+                                    /<(.|\n)*?>/g,
+                                    ""
+                                  )}
+                                  min={150}
+                                  ideal={150}
+                                  max={200}
+                                  readMoreText="...read more"
+                                />
+                              </>
+                            )}
+                          </div>
                         </div>
                       </Col>
                       <Col sm="12" md="" xl="" className="ms-md-4">
                         <div className="product-detail vstack gap-3 mb-4 product-right-content">
                           <div className="product-detail-heading">
-                            <h4 className="d-flex align-items-center">
+                            <h4 className="d-flex">
                               <span>{productDetails?.attributes?.name}</span>
                               &nbsp; &nbsp;
                               <a
@@ -321,11 +339,11 @@ class ProductDetails extends DashboardController {
                                 <FaStar />
                               </div>
                               <div class="vr mx-2" />
-                              {/* <div className="f-14 d-flex align-items-center font-weight-light">
+                              <div className="f-14 d-flex align-items-center font-weight-light">
                                 <span className="f-sm fw-light">
                                   {productDetails?.attributes?.reviews?.length}
                                 </span>
-                              </div> */}
+                              </div>
                             </div>
                           </div>
                           <div className="product-detail-price">
@@ -374,7 +392,6 @@ class ProductDetails extends DashboardController {
                             disabled={!isProductAvailable}
                           />
                         </div>
-                        {console.log('this.state.productDetails', productDetails.attributes)}
                         {productDetails?.attributes?.prescription ? (
                           <Fragment>
                             <div
@@ -391,7 +408,7 @@ class ProductDetails extends DashboardController {
                                 />
                               </div>
                               <p className="m-0 sp-prescription-tag-name">
-                                Prescription Required
+                                Prescription needed
                               </p>
                             </div>
                           </Fragment>
@@ -476,19 +493,21 @@ class ProductDetails extends DashboardController {
                                   {content?.buyNow}
                                 </Button>
                               </div>
-                              <div>
+                              <div className="description h-description">
                                 {productDetails?.attributes?.description && (
                                   <>
                                     <h5 className="d-flex align-items-center text-dark-grey-2 f-md product-desc">
                                       Description
                                     </h5>
-                                    <p
-                                      className="f-md"
-                                      dangerouslySetInnerHTML={{
-                                        __html:
-                                          productDetails?.attributes
-                                            ?.description,
-                                      }}
+                                    <ReadMoreReact
+                                      text={productDetails?.attributes?.description.replace(
+                                        /<(.|\n)*?>/g,
+                                        ""
+                                      )}
+                                      min={150}
+                                      ideal={150}
+                                      max={200}
+                                      readMoreText="...read more"
                                     />
                                   </>
                                 )}

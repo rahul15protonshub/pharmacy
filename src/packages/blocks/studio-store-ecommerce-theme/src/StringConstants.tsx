@@ -13,7 +13,7 @@ export const View_All = 'View all';
 
 //*> Notifications Screen
 export const BROWSE_FOR_PRODUCTS = 'Browse for products or check out\nour latest additions.'
-export const CONTINUE_SHOPPING = 'CONTINUE SHOPPING'
+export const CONTINUE_SHOPPING = 'Continue Shopping'
 export const YOUR_ORDER_SHIPPED = `Your order has been placed. We’ll update you once it’s out for delivery`
 export const NO_NOTIFICATIONS_YET = `No notifications yet !`
 export const THATS_ALL = `That’s all`

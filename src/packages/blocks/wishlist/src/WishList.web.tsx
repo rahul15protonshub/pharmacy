@@ -28,14 +28,14 @@ function FavouriteProductSet(props: any) {
     <>
       {props.isFav ? (
         <FaHeart
-          className="yt-sglproduct-fav active"
-          color="red"
+          className="yt-sglproduct-fav likebuttononimage active"
+          // color="red"
           style={{ cursor: "pointer" }}
           onClick={() => props.onClick()}
         />
       ) : (
         <FaRegHeart
-          className="yt-sglproduct-fav"
+          className="yt-sglproduct-fav likebuttononimage"
           onClick={() => props.onClick()}
         />
       )}
@@ -241,7 +241,7 @@ export class WishList extends WishListController {
                                     }
                                   />
                                   <div className="mt-3 profile-pg-wl-sgl-product-title text-center">
-                                    {productData?.name}
+                                    {productData?.name.slice(0,30)}...
                                   </div>
 
                                   <div className="price profile-pg-wl-sgl-price-wrap text-center ">
@@ -472,7 +472,7 @@ export class WishList extends WishListController {
                                       alt="image"
                                     />
                                     <div className="mt-3 profile-pg-wl-sgl-product-title text-center">
-                                      {product.name}
+                                      {product.name.slice(0,20)}
                                     </div>
 
                                     <div className="price profile-pg-wl-sgl-price-wrap text-center ">

@@ -129,8 +129,8 @@ export default class Orderdetailview extends OrderdetailviewController {
                   <View style={styles.greenDot} />
                   <Text style={styles.placedText}>
                     {trackingDetails &&
-                    trackingDetails.length > 0 &&
-                    trackingDetails[0]
+                      trackingDetails.length > 0 &&
+                      trackingDetails[0]
                       ? trackingDetails[0].attributes.status === "new"
                         ? "confirmed"
                         : trackingDetails[0].attributes.status
@@ -144,8 +144,8 @@ export default class Orderdetailview extends OrderdetailviewController {
                 <Text style={styles.package1}>
                   {orderData.attributes.preferred_delivery_slot
                     ? this.getSlotString(
-                        orderData.attributes.preferred_delivery_slot
-                      ) + ` ${orderData.attributes.preferred_delivery_slot} | `
+                      orderData.attributes.preferred_delivery_slot
+                    ) + ` ${orderData.attributes.preferred_delivery_slot} | `
                     : ""}
                 </Text>
                 <Text style={styles.period}>
@@ -300,8 +300,8 @@ export default class Orderdetailview extends OrderdetailviewController {
               <Text style={styles.package}>
                 {orderData.attributes.preferred_delivery_slot
                   ? this.getSlotString(
-                      orderData.attributes.preferred_delivery_slot
-                    ) + ` ${orderData.attributes.preferred_delivery_slot} | `
+                    orderData.attributes.preferred_delivery_slot
+                  ) + ` ${orderData.attributes.preferred_delivery_slot} | `
                   : ""}
                 <Text style={styles.period}>
                   {orderData.attributes.subscription_package
@@ -444,7 +444,7 @@ export default class Orderdetailview extends OrderdetailviewController {
         <TouchableOpacity
           testID={"buttonCancelOrderModalContent"}
           activeOpacity={1}
-          onPress={() => {}}
+          onPress={() => { }}
           style={styles.modalContainer}
         >
           <View style={styles.popup}>
@@ -497,7 +497,7 @@ export default class Orderdetailview extends OrderdetailviewController {
           <TouchableOpacity
             testID={"buttonRatingContainer"}
             activeOpacity={1}
-            onPress={() => {}}
+            onPress={() => { }}
             style={styles.modalContainer}
           >
             <View style={styles.reviewPopup}>
@@ -586,6 +586,7 @@ export default class Orderdetailview extends OrderdetailviewController {
                 this.props.navigation.navigate("Shoppingcart");
               },
               cartHasProductFlag: this.state.cartHasProduct,
+              cartquantity: this.state.cartcount,
               style: { resizeMode: "contain", marginLeft: scale(35) },
             },
           ]}

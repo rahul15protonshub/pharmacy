@@ -500,7 +500,7 @@ export default StyleSheet.create({
     alignSelf: "center",
   },
   addtocartitem: {
-    backgroundColor: COLOR_CONST.newbordercolor,
+    backgroundColor: COLOR_CONST.newtheme_another,
     alignItems: 'center',
     paddingVertical: verticalScale(12),
     marginTop: verticalScale(14)

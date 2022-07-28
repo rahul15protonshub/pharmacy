@@ -94,7 +94,13 @@ function CartProduct(props: any) {
               </div>
             ))}
           <div className="d-flex flex-wrap cart-pg-product-list-row justify-content-between">
-            <div className="cart-pg-list-prdt-info d-flex justify-content-between ">
+            <div
+              className={`cart-pg-list-prdt-info d-flex justify-content-between ${
+                props.product?.attributes?.catalogue.attributes.prescription
+                  ? "cart-pg-list-prdt-res"
+                  : ""
+              }`}
+            >
               <div className="cart-pg-list-image">
                 <div
                   data-testid={"button-set-default-variant"}
@@ -249,7 +255,15 @@ function CartProduct(props: any) {
                 )}
                 {variant?.catalogue_variant_properties &&
                 variant?.catalogue_variant_properties.length > 0 ? (
-                  <div style={{ marginTop: "auto" }}>
+                  <div
+                    className={
+                      !props.product?.attributes?.catalogue.attributes
+                        .prescription
+                        ? "priceBox"
+                        : ""
+                    }
+                    style={{ marginTop: "auto" }}
+                  >
                     <div className="product-feature-heading">
                       {/* @ts-ignore  */}
                       Price
@@ -264,7 +278,15 @@ function CartProduct(props: any) {
                     </p>
                   </div>
                 ) : (
-                  <div style={{ marginTop: "auto" }}>
+                  <div
+                    className={
+                      !props.product?.attributes?.catalogue.attributes
+                        .prescription
+                        ? "priceBox"
+                        : ""
+                    }
+                    style={{ marginTop: "auto" }}
+                  >
                     <div className="product-feature-heading">
                       {/* @ts-ignore  */}
                       Price
@@ -295,6 +317,7 @@ function CartProduct(props: any) {
                         alignItems: "center",
                         cursor: "pointer",
                       }}
+                      className="wishlistBox"
                     >
                       <svg
                         width="17"
@@ -418,10 +441,18 @@ function CartProduct(props: any) {
                     </div>
                   </div>
                   {props.product?.attributes?.catalogue.attributes
-                    .prescription ? (
+                    .prescription && (
                     <Fragment>
-                      <div className="d-flex align-items-center mt-5">
-                        <div className="sp-verify-icn-wrap">
+                      <div
+                        className={`${
+                          variant?.catalogue_variant_properties &&
+                          variant?.catalogue_variant_properties.length ==1
+                            ? "varientAvl1"
+                            : ""
+                        } ${variant?.catalogue_variant_properties &&
+                          variant?.catalogue_variant_properties.length == 2&&"varientAvl2"} d-flex align-items-center presBox`}
+                      >
+                        <div className="sp-verify-icn-wrap mx-2">
                           <img
                             src={prescription}
                             alt="verify"
@@ -431,17 +462,22 @@ function CartProduct(props: any) {
                           />
                         </div>
                         <p className="m-0 sp-prescription-tag-name">
-                          Prescription Required
+                          Prescription needed
                         </p>
                       </div>
                     </Fragment>
-                  ) : (
-                    <></>
                   )}
                 </div>
 
                 <div className="cart-action-wrap text-right">
-                  <div className="cart-quantity-box">
+                  <div
+                    className={`${
+                      !props.product?.attributes?.catalogue.attributes
+                        .prescription
+                        ? "cart-quantity-box-noPres"
+                        : ""
+                    } cart-quantity-box`}
+                  >
                     <div className="cart-quantity-field">
                       <Form>
                         <FormGroup className="m-0">
@@ -595,8 +631,9 @@ const CartAmount: any = withRouter((props: any) => {
   const [progress, setProgress] = useState<any>([]);
   const [uploading, setUploading] = useState<any>([]);
   const [selectedProduct, setSelectedProduct] = useState<any>([]);
-  const [isPrescriptionFieldExist, setIsPrescriptionFieldExist] =
-    useState<boolean>(false);
+  const [isPrescriptionFieldExist, setIsPrescriptionFieldExist] = useState<
+    boolean
+  >(false);
   const [preFiles, setPreFiles] = useState<any>([]);
   const [dropDown, setDropdown] = useState([
     {
@@ -641,7 +678,7 @@ const CartAmount: any = withRouter((props: any) => {
                 {item.attributes.catalogue.attributes.name}
               </span>
             </td>
-            <td>
+            <td style={{ textAlign: "center" }}>
               <span className="cart-product-amount">
                 x
                 {item.attributes.subscription_quantity
@@ -738,7 +775,7 @@ const CartAmount: any = withRouter((props: any) => {
   // const checkValidFile = (file: { target: { value: any } }) => {
   const checkValidFile = (file: any) => {
     const filePath = file[0].path;
-    var allowedExtensions = /(.jpg|.jpeg|.png|.gif|.pdf|.docx)$/i;
+    var allowedExtensions = /(.jpg|.jpeg|.png|.gif|.pdf|.docx)/;
 
     if (!allowedExtensions.exec(filePath)) {
       toast.warning("Please Upload PDF or Image.");
@@ -762,7 +799,7 @@ const CartAmount: any = withRouter((props: any) => {
       });
       var reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = function (event: any) {
+      reader.onload = function(event: any) {
         file.url = reader.result;
         setProgress([
           ...progress,
@@ -779,7 +816,7 @@ const CartAmount: any = withRouter((props: any) => {
         setUploading((uploading: any) => [...uploading, obj]);
         toast.success("File upload Successfully");
       };
-      reader.onerror = function (error) {
+      reader.onerror = function(error) {
         console.log("Error: ", error);
       };
     }
@@ -792,15 +829,15 @@ const CartAmount: any = withRouter((props: any) => {
     setUploading(uploading.filter((el: any) => el.id !== id));
     setProgress(progress.filter((item: any, index: any) => index != id));
   };
-
   const handleUploadAnotherPre = () => {
-    let remainProduct = presProduct.filter(
+    setSelectedProduct([]);
+    let remainProduct = dropDown[dropDown.length - 1].options.filter(
       (o1: { value: any }) =>
         !selectedProduct.some((o2: { value: any }) => o1.value === o2.value)
     );
     let obj = {
-      id: dropDown.length + 1,
-      options: remainProduct,
+      id: dropDown.length,
+      options: remainProduct.reduce((a: any, b: any) => a.concat(b), []),
       selected: [],
     };
     setDropdown((dropDown) => [...dropDown, obj]);
@@ -836,7 +873,9 @@ const CartAmount: any = withRouter((props: any) => {
             <thead>
               <tr>
                 <th>Product</th>
-                <th className="qty-cls">{content.qty}</th>
+                <th className="qty-cls" style={{ textAlign: "center" }}>
+                  {content.qty}
+                </th>
                 <th>{content.amount}</th>
               </tr>
             </thead>
@@ -1135,7 +1174,7 @@ const CartAmount: any = withRouter((props: any) => {
               <h5 className="modalTitle"> Prescription</h5>
             </ModalHeader>
             <ModalBody>
-              <div>
+              <div className="modalContent">
                 <h6 className="sub-heading">Please upload the prescription </h6>
                 {dropDown &&
                   dropDown.map((elm: any, index: any) => {
@@ -1238,7 +1277,9 @@ const CartAmount: any = withRouter((props: any) => {
                             labelledBy="Select Product"
                             disableSearch={true}
                             className="multiselect dropDownItem"
-                            // disabled={dropDown.length!=index?false:true}
+                            disabled={
+                              dropDown.length > index + 1 ? true : false
+                            }
                           />
                         </div>
                       </>
@@ -1250,7 +1291,6 @@ const CartAmount: any = withRouter((props: any) => {
               className="justify-content-between"
               style={{ border: "none" }}
             >
-              {console.log("progress", progress.length)}
               {dropDown[dropDown.length - 1].options.length !=
               selectedProduct.length ? (
                 <Button

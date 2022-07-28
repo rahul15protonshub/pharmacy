@@ -118,6 +118,7 @@ export default StyleSheet.create({
 
   listContainerOne: {
     flex: 1,
+    marginLeft: scale(14),
     marginTop: verticalScale(10),
   },
 
@@ -490,7 +491,7 @@ export default StyleSheet.create({
     marginLeft: scale(4.5),
   },
   addtocartitem: {
-    backgroundColor: COLOR_CONST.newbordercolor,
+    backgroundColor: COLOR_CONST.newtheme_another,
     alignItems: 'center',
     paddingVertical: verticalScale(12),
     marginTop: verticalScale(14)

@@ -438,6 +438,7 @@ export default class ProductDescription extends ProductDescriptionController {
         <ScrollView
           style={{
             paddingBottom: verticalScale(5),
+            marginTop: verticalScale(2),
             backgroundColor: COLOR_CONST.white,
           }}
         >
@@ -848,7 +849,7 @@ export default class ProductDescription extends ProductDescriptionController {
           this.setState({ showProductDescriptionModal: false });
         }}
       >
-        <View style={styles.pdpModal}>
+        <SafeAreaView style={styles.pdpModal}>
           <Text style={styles.descriptionTitle}>DESCRIPTION</Text>
           <WebView
             originWhitelist={["*"]}
@@ -871,7 +872,7 @@ export default class ProductDescription extends ProductDescriptionController {
               <Text style={styles.BUYcustomTxtStyle}>Close</Text>
             </View>
           </TouchableOpacity>
-        </View>
+        </SafeAreaView>
       </Modal>
     );
   };
@@ -895,9 +896,9 @@ export default class ProductDescription extends ProductDescriptionController {
                 this.onShare();
               },
               style: {
-                resizeMode: "stretch",
+                resizeMode: "contain",
                 width: scale(16),
-                height: scale(21),
+                height: scale(16),
               },
             },
             {
@@ -913,7 +914,7 @@ export default class ProductDescription extends ProductDescriptionController {
           navigation={this.props.navigation}
           headerLeftIconStyle={{}}
           headerTitleStyle={{}}
-          headerStyle={{ elevation: 2 }}
+          headerStyle={{}}
         />
 
         {this.state.prescriptionModal &&

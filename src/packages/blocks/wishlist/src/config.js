@@ -11,13 +11,12 @@ exports.DeleteMethodType = "DELETE";
 exports.apiMethodTypePut = "PUT"
 exports.getWishlistApiEndPoint = "wishlist/wishlists";
 exports.postPrescriptionFile = "/bx_block_order_management/order_transactions/add_presc_files";
-
-exports.getCartApiEndPoint = "cart/carts"
 exports.addToCartApiEndPoint = "cart/carts/"
 exports.updateQtyEndPoint = "cart/carts/"
 exports.cartHasProductEndPoint = "cart/user/carts/has_product"
 
 // Customizable Area Start
+exports.getCartApiEndPoint = "cart/carts"
 exports.exampleApiContentType = "application/json";
 exports.textInputPlaceHolder = "Enter Text";
 exports.labelTitleText = "profilebio";

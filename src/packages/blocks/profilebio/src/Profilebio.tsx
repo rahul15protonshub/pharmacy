@@ -73,8 +73,8 @@ export default class Profilebio extends ProfilebioController {
                     ? { uri: userData.attributes.image_url }
                     : cameraIcon
                   : this.state.isFetching
-                  ? ""
-                  : cameraIcon
+                    ? ""
+                    : cameraIcon
               }
               style={
                 userData
@@ -90,8 +90,8 @@ export default class Profilebio extends ProfilebioController {
               {userData
                 ? userData.attributes.full_name
                 : this.state.isFetching
-                ? ""
-                : "Guest User"}
+                  ? ""
+                  : "Guest User"}
             </Text>
             <Text numberOfLines={1} style={styles.profileEmail}>
               {userData
@@ -99,8 +99,8 @@ export default class Profilebio extends ProfilebioController {
                   ? userData.attributes.email
                   : userData.attributes.phone_number
                 : this.state.isFetching
-                ? ""
-                : "example@gmail.com"}
+                  ? ""
+                  : "example@gmail.com"}
             </Text>
           </View>
         </View>
@@ -154,8 +154,8 @@ export default class Profilebio extends ProfilebioController {
           onPress={() =>
             this.state.userData
               ? this.props.navigation.navigate("Ordermanagement", {
-                  isFromPlaced: false,
-                })
+                isFromPlaced: false,
+              })
               : this.setState({ showGuestModal: true })
           }
           style={styles.rowItemContainer}
@@ -339,7 +339,7 @@ export default class Profilebio extends ProfilebioController {
       >
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => {}}
+          onPress={() => { }}
           style={styles.modalContainer}
         >
           <View style={styles.popup}>
@@ -388,7 +388,7 @@ export default class Profilebio extends ProfilebioController {
       >
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => {}}
+          onPress={() => { }}
           style={styles.modalContainer}
         >
           <View style={styles.popup}>
@@ -436,6 +436,7 @@ export default class Profilebio extends ProfilebioController {
                 this.props.navigation.navigate("Shoppingcart");
               },
               cartHasProductFlag: this.state.cartHasProduct,
+              cartquantity: this.state.cartcount,
               style: { resizeMode: "contain", marginLeft: Scale(30) },
             },
           ]}
