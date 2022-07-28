@@ -60,8 +60,9 @@ export default StyleSheet.create({
   },
 
   heartIcon: {
-    width: scale(50),
-    height: scale(50),
+    width: scale(23),
+    height: scale(23),
+    resizeMode: 'contain'
   },
 
   BottalImage: {

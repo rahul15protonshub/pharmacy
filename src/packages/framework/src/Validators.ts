@@ -2,6 +2,7 @@ const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d.*)(?=.*\W.*)[a-zA-Z0-9\S]{6,}$/;
 const phoneNoRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
 const nameRegex = /^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/;
+const nameRegexnew =/^[a-zA-Z ]+$/;
 
 export const isEmailValid = (email: any) =>{
     return regex.test(email)
@@ -9,6 +10,10 @@ export const isEmailValid = (email: any) =>{
 
 export const isNameValid = (name: any) =>{
     return nameRegex.test(name)
+}
+
+export const isNameValidNew = (name: any) =>{
+    return nameRegexnew.test(name)
 }
 
 export const isPasswordValid = (password: any) =>{

@@ -77,9 +77,9 @@ interface S {
   isFromSubscription: boolean;
   // Customizable Area Start
   showProductDescriptionModal: boolean;
-  prescriptionModal:boolean;
-  buyNowDoneCartID:any
-  productDataArr:any;
+  prescriptionModal: boolean;
+  buyNowDoneCartID: any
+  productDataArr: any;
   // Customizable Area End
 }
 
@@ -106,7 +106,7 @@ export default class ProductDescriptionController extends BlockComponent<
   // Customizable Area Start
   LikeFlag: any;
   LikeFlagId: any;
-  addPrescriptionApiCallId:any
+  addPrescriptionApiCallId: any
   // Customizable Area End
   constructor(props: Props) {
     super(props);
@@ -174,9 +174,9 @@ export default class ProductDescriptionController extends BlockComponent<
       isFromSubscription: false,
       showProductDescriptionModal: false,
       // Customizable Area Start
-      prescriptionModal:false,
-      buyNowDoneCartID:'',
-      productDataArr:[],
+      prescriptionModal: false,
+      buyNowDoneCartID: '',
+      productDataArr: [],
       // Customizable Area End
     };
 
@@ -246,25 +246,25 @@ export default class ProductDescriptionController extends BlockComponent<
     this.getCartHasProduct();
   };
 
-  uploadproduct=async(productdata:any)=>{
-    var finalData=[]
+  uploadproduct = async (productdata: any) => {
+    var finalData = []
     if (productdata.length > 0) {
-    for(let i=0;i<productdata.length;i++){
-      let getselectedData={
-        "order_item_ids":productdata[i].selectedItems,
-        "prescription_files":productdata[i].browsefile
+      for (let i = 0; i < productdata.length; i++) {
+        let getselectedData = {
+          "order_item_ids": productdata[i].selectedItems,
+          "prescription_files": productdata[i].browsefile
+        }
+        finalData.push(getselectedData);
       }
-      finalData.push(getselectedData);
-    }
       const httpBody = {
         order_items: finalData,
       };
-      this.setState({ isFetching: true})
+      this.setState({ isFetching: true })
       this.addPrescriptionApiCallId = await this.apiCall({
         contentType: configJSON.productApiContentType,
         method: configJSON.apiMethodTypePut,
         endPoint:
-          configJSON.getAddprescriptionAPIEndPoint ,
+          configJSON.getAddprescriptionAPIEndPoint,
         body: httpBody,
       });
     }
@@ -300,21 +300,22 @@ export default class ProductDescriptionController extends BlockComponent<
         } else if (apiRequestCallId === this.getCartProductDescriptionId) {
           this.getCartProductDescriptionSuccessCallBack(responseJson);
         } else if (apiRequestCallId === this.getBuyProductApiCallId) {
-        let dataPrescription=[{'id':responseJson?.data?.attributes?.order_items[0]?.id,'name':this.state.productData?.attributes?.name}]
+          let dataPrescription = [{ 'id': responseJson?.data?.attributes?.order_items[0]?.id, 'name': this.state.productData?.attributes?.name }]
           this.setState(
             {
-              productDataArr:dataPrescription,
+              productDataArr: dataPrescription,
               isFetching: false,
             },
             () =>
               setTimeout(() => {
-                if (this.state.productData?.attributes?.prescription){
-                  this.setState({ prescriptionModal: true, buyNowDoneCartID:responseJson.data.id });
-                }else{
-                this.props.navigation.push("Checkout", {
-                  isFromBuyNow: true,
-                  buyNowCartID: responseJson.data.id,
-                });}
+                if (this.state.productData?.attributes?.prescription) {
+                  this.setState({ prescriptionModal: true, buyNowDoneCartID: responseJson.data.id });
+                } else {
+                  this.props.navigation.push("Checkout", {
+                    isFromBuyNow: true,
+                    buyNowCartID: responseJson.data.id,
+                  });
+                }
               }, 0)
           );
         } else if (apiRequestCallId === this.getNotifyProductApiCallId) {
@@ -481,16 +482,16 @@ export default class ProductDescriptionController extends BlockComponent<
         // Customizable Area Start
         else if (apiRequestCallId === this.addPrescriptionApiCallId) {
           let errorMessage = this.parseApiErrorResponse(
-             responseJson.errors[0].message
-           );
-           this.setState({
-             isFetching: false,
-             isShowError: true,
-             showAlertModal: true,
-             message: errorMessage,
-           });
-           return;
-         }
+            responseJson.errors[0].message
+          );
+          this.setState({
+            isFetching: false,
+            isShowError: true,
+            showAlertModal: true,
+            message: errorMessage,
+          });
+          return;
+        }
         // Customizable Area End
       }
       if (responseJson?.message) {
@@ -544,8 +545,8 @@ export default class ProductDescriptionController extends BlockComponent<
         // Customizable Area Start
         else if (apiRequestCallId === this.addPrescriptionApiCallId) {
           this.setState({
-            prescriptionModal:false,
-             isFetching: false,
+            prescriptionModal: false,
+            isFetching: false,
           });
           this.props.navigation.push("Checkout", {
             isFromBuyNow: true,
@@ -556,7 +557,7 @@ export default class ProductDescriptionController extends BlockComponent<
       }
       if (errorReponse) {
         this.setState({
-           isFetching: false,
+          isFetching: false,
         });
         if (apiRequestCallId === this.addToCartApiCallId) {
           this.setState({
@@ -660,8 +661,8 @@ export default class ProductDescriptionController extends BlockComponent<
     let isVariantProduct =
       responseJson?.data?.attributes?.catalogue_variants.length > 0;
     // console.log('@@@ Product Description Success CallBack =============', responseJson?.data);
-   
-   
+
+
     this.setState(
       {
         isFetching: false,
@@ -674,19 +675,19 @@ export default class ProductDescriptionController extends BlockComponent<
           selectedProduct && selectedProduct.attributes.cart_quantity
             ? selectedProduct.attributes.cart_quantity
             : isVariantProduct
-            ? 1
-            : productData.cart_quantity
-            ? productData.cart_quantity
-            : 1,
+              ? 1
+              : productData.cart_quantity
+                ? productData.cart_quantity
+                : 1,
         updateCart: selectedProduct
           ? responseJson?.data.attributes.variants_in_cart.includes(
-              selectedProduct.attributes.id
-            )
+            selectedProduct.attributes.id
+          )
             ? true
             : false
           : productData.cart_quantity
-          ? true
-          : false,
+            ? true
+            : false,
         availableAttributes: responseJson?.data.attributes?.product_attributes,
         catalogue_variant_id:
           this.props.navigation.state.params?.catalogue_variant_id ||
@@ -778,19 +779,19 @@ export default class ProductDescriptionController extends BlockComponent<
           selectedProduct && selectedProduct.attributes.cart_quantity
             ? selectedProduct.attributes.cart_quantity
             : isVariantProduct
-            ? 1
-            : productData.cart_quantity
-            ? productData.cart_quantity
-            : 1,
+              ? 1
+              : productData.cart_quantity
+                ? productData.cart_quantity
+                : 1,
         updateCart: selectedProduct
           ? responseJson?.data.attributes.variants_in_cart.includes(
-              selectedProduct.attributes.id
-            )
+            selectedProduct.attributes.id
+          )
             ? true
             : false
           : productData.cart_quantity
-          ? true
-          : false,
+            ? true
+            : false,
         availableAttributes: responseJson?.data.attributes?.product_attributes,
         showNotifyButton: responseJson?.data.attributes.product_notified,
         catalogue_variant_id:
@@ -1021,7 +1022,7 @@ export default class ProductDescriptionController extends BlockComponent<
     const { cart_quantity } = productData.attributes;
     const isUpdate = selectedProduct
       ? selectedProduct?.attributes?.cart_quantity !== Number(quantity) &&
-        selectedProduct?.attributes?.cart_quantity > 0
+      selectedProduct?.attributes?.cart_quantity > 0
       : cart_quantity !== Number(quantity) && cart_quantity > 0;
     const isInCart = selectedProduct
       ? selectedProduct?.attributes?.cart_quantity > 0
@@ -1189,6 +1190,44 @@ export default class ProductDescriptionController extends BlockComponent<
     }
   };
 
+  addToCartPress = async (item: any) => {
+
+    const isInCart = item?.attributes?.cart_quantity > 0 ? true : false
+    if (isInCart) {
+      this.props.navigation.navigate("Shoppingcart");
+      return;
+    }
+    if (item?.attributes?.catalogue_variants?.length > 0) {
+
+      const httpBody = {
+        catalogue_id: item.id,
+        catalogue_variant_id: item.attributes.catalogue_variants[0].id,
+        quantity: 1,
+      };
+
+      this.setState({ isFetching: true });
+      this.addToCartApiCallId = await this.apiCall({
+        contentType: configJSON.productApiContentType,
+        method: configJSON.apiMethodTypePost,
+        endPoint: configJSON.addToCartApiEndPoint,
+        body: httpBody,
+      });
+    } else {
+      const httpBody = {
+        catalogue_id: item.id,
+        quantity: 1,
+      };
+
+      this.setState({ isFetching: true });
+      this.addToCartApiCallId = await this.apiCall({
+        contentType: configJSON.productApiContentType,
+        method: configJSON.apiMethodTypePost,
+        endPoint: configJSON.addToCartApiEndPoint,
+        body: httpBody,
+      });
+    }
+  };
+
   getCartHasProduct = async () => {
     this.setState({ isFetching: true });
     this.getCartProductId = await this.apiCall({
@@ -1315,13 +1354,13 @@ export default class ProductDescriptionController extends BlockComponent<
           availableAttributes: availableAttributes,
           updateCart: selectedProduct
             ? variants_in_cart.includes(
-                this.state.selectedProduct.attributes.id
-              )
+              this.state.selectedProduct.attributes.id
+            )
               ? true
               : false
             : cart_quantity
-            ? true
-            : false,
+              ? true
+              : false,
         },
         () => {
           // console.log('@@@ Available Attributes ===========', availableAttributes);
@@ -1377,7 +1416,7 @@ export default class ProductDescriptionController extends BlockComponent<
           selectedAttributes[variantProperty.attributes.variant_name] &&
           selectedAttributes[variantProperty.attributes.variant_name]
             .variant_property_id ===
-            variantProperty.attributes.variant_property_id
+          variantProperty.attributes.variant_property_id
         ) {
           varientPropertyIds.push(
             variantProperty.attributes.variant_property_id
@@ -1398,7 +1437,7 @@ export default class ProductDescriptionController extends BlockComponent<
       if (varientPropertyIds.length === selectedVarientPropertyIds.length) {
         if (
           JSON.stringify(selectedVarientPropertyIds.sort()) ===
-            JSON.stringify(varientPropertyIds.sort()) &&
+          JSON.stringify(varientPropertyIds.sort()) &&
           Object.keys(selectedAttributes).length === varientPropertyIds.length
         ) {
           isSelectedFound = true;
@@ -1739,7 +1778,7 @@ export default class ProductDescriptionController extends BlockComponent<
       catalogue_subscriptions?.map((sub: any) => {
         if (
           sub.attributes.subscription_package ===
-            subscriptionPackage.toLowerCase() &&
+          subscriptionPackage.toLowerCase() &&
           sub.attributes.subscription_period === period + " month"
         ) {
           const morningSlot = sub.attributes.morning_slot

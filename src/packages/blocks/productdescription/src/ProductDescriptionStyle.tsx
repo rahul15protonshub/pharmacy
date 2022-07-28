@@ -79,7 +79,7 @@ export default StyleSheet.create({
   productNameContainer: {
     // height: scale(120),
     width: scale(375),
-    marginTop: verticalScale(2),
+    marginTop: verticalScale(0),
     backgroundColor: COLOR_CONST.white,
     zIndex: 10,
   },
@@ -93,32 +93,28 @@ export default StyleSheet.create({
 
   heartConatiner: {
     position: "absolute",
-    right: scale(29),
-    top: scale(-25),
+    right: scale(18),
     zIndex: 1000,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: COLOR_CONST.white,
-    width: scale(50),
-    height: scale(50),
-    borderRadius: 40,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    elevation: 2,
+    width: scale(25),
+    height: scale(25),
   },
 
   heart: {
-    width: scale(19),
-    height: scale(18),
+    width: scale(23),
+    height: scale(23),
+    resizeMode: 'contain'
   },
 
   productName: {
-    fontFamily: FONTS.GTWalsheimProMedium,
-    color: COLOR_CONST.pastelRed,
+    fontFamily: FONTS.GTWalsheimProBold,
+    color: COLOR_CONST.black,
     fontSize: scale(18),
     lineHeight: scale(25),
     textAlign: "left",
-    marginTop: verticalScale(29),
+    marginTop: verticalScale(0),
+    width: '80%',
     marginLeft: scale(18),
   },
 
@@ -139,7 +135,11 @@ export default StyleSheet.create({
     marginLeft: scale(18),
     alignItems: "center",
   },
-  insidePriceBox2: {},
+  insidePriceBox2: {
+    paddingHorizontal: scale(18),
+    marginTop: verticalScale(10),
+    backgroundColor: COLOR_CONST.white
+  },
   outStock: {
     flexDirection: "row",
     alignItems: "center",
@@ -147,8 +147,8 @@ export default StyleSheet.create({
 
   price: {
     fontFamily: FONTS.GTWalsheimProMedium,
-    color: themeJson.attributes.primary_color,
-    fontSize: scale(18),
+    color: COLOR_CONST.black,
+    fontSize: scale(16),
     lineHeight: scale(32),
     letterSpacing: 1.08,
     textAlign: "left",
@@ -187,6 +187,7 @@ export default StyleSheet.create({
     height: scale(13),
     marginLeft: scale(13),
     marginRight: scale(6),
+    resizeMode: 'contain'
   },
 
   tick: {
@@ -202,9 +203,9 @@ export default StyleSheet.create({
   },
 
   inStockText: {
-    color: COLOR_CONST.charcoalGrey,
-    fontSize: scale(14),
-    letterSpacing: scale(0.54),
+    color: COLOR_CONST.black,
+    fontSize: scale(16),
+    lineHeight: scale(32),
     fontFamily: FONTS.GTWalsheimProMedium,
   },
 
@@ -216,10 +217,9 @@ export default StyleSheet.create({
   },
 
   tools: {
-    borderWidth: scale(1),
-    borderColor: COLOR_CONST.borderduckEggBlue,
-    backgroundColor: COLOR_CONST.white,
-    marginLeft: scale(5),
+    // borderWidth: scale(1),
+    // borderColor: COLOR_CONST.borderduckEggBlue,
+    marginLeft: scale(0),
     flexDirection: "row",
     alignItems: "center",
     height: scale(30),
@@ -236,36 +236,59 @@ export default StyleSheet.create({
   },
 
   minus: {
-    fontSize: scale(15),
-    marginLeft: scale(8),
-    marginRight: scale(15.4),
-    lineHeight: scale(18),
+    fontSize: scale(22),
+    lineHeight: scale(25),
     fontFamily: FONTS.GTWalsheimProMedium,
-    color: COLOR_CONST.charcoalGrey,
-    opacity: 0.5,
+    color: COLOR_CONST.lightgraycolor,
+    opacity: 1,
+  },
+  minusview: {
+    backgroundColor: COLOR_CONST.newlightcolor,
+    paddingVertical: scale(2),
+    paddingHorizontal: scale(12),
+    alignItems: 'center',
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
+    opacity: 1,
   },
 
   count: {
-    fontSize: scale(15),
+    fontSize: scale(16),
     lineHeight: scale(18),
     fontFamily: FONTS.GTWalsheimProMedium,
-    color: COLOR_CONST.charcoalGrey,
+    color: COLOR_CONST.black,
   },
-
-  plus: {
-    fontSize: scale(15),
-    lineHeight: scale(18),
-    marginLeft: scale(15.4),
-    marginRight: scale(8),
-    fontFamily: FONTS.GTWalsheimProMedium,
-    color: COLOR_CONST.charcoalGrey,
-    opacity: 0.5,
-  },
-
-  selectorToolContainer: {
-    marginTop: verticalScale(5),
+  countview: {
     backgroundColor: COLOR_CONST.white,
-    paddingBottom: verticalScale(22.2),
+    paddingVertical: scale(4.5),
+    width: scale(38),
+    alignItems: 'center',
+    borderTopColor: COLOR_CONST.newlightcolor,
+    borderBottomColor: COLOR_CONST.newlightcolor,
+    borderTopWidth: 1,
+    borderBottomWidth: 1
+  },
+  plus: {
+    fontSize: scale(22),
+    lineHeight: scale(25),
+    fontFamily: FONTS.GTWalsheimProMedium,
+    color: COLOR_CONST.white,
+    opacity: 1,
+
+  },
+  plusview: {
+    backgroundColor: COLOR_CONST.newtheme,
+    paddingVertical: scale(2),
+    paddingHorizontal: scale(12),
+    alignItems: 'center',
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5,
+    opacity: 1,
+  },
+  selectorToolContainer: {
+    marginTop: verticalScale(0),
+    backgroundColor: COLOR_CONST.white,
+    paddingBottom: verticalScale(18),
   },
 
   selectorToolMessageContainer: {
@@ -293,29 +316,30 @@ export default StyleSheet.create({
   toolItemSizeCell: {
     justifyContent: "center",
     alignItems: "center",
-    marginRight: scale(5),
+    marginRight: scale(8),
     height: scale(37),
     borderWidth: scale(1),
     borderRadius: scale(4),
-    paddingHorizontal: scale(5),
+    paddingHorizontal: scale(22),
+    paddingVertical: scale(5),
     borderColor: COLOR_CONST.white,
   },
 
   labelText: {
-    fontFamily: FONTS.GTWalsheimProRegular,
-    color: COLOR_CONST.charcoalGrey,
-    fontSize: scale(17),
+    fontFamily: FONTS.GTWalsheimProMedium,
+    color: COLOR_CONST.black,
+    fontSize: scale(14),
     lineHeight: scale(21),
   },
 
   colorText: {
-    fontFamily: FONTS.GTWalsheimProBold,
+    fontFamily: FONTS.GTWalsheimProMedium,
     marginLeft: scale(18),
-    marginTop: verticalScale(22),
+    marginTop: verticalScale(20),
     marginBottom: verticalScale(9.8),
-    color: COLOR_CONST.charcoalGrey,
-    fontSize: scale(13),
-    lineHeight: scale(15),
+    color: COLOR_CONST.lightgraycolor,
+    fontSize: scale(16),
+    lineHeight: scale(20),
     letterSpacing: scale(0.5),
   },
 
@@ -347,11 +371,12 @@ export default StyleSheet.create({
   },
 
   specifictaionTitle: {
-    color: COLOR_CONST.charcoalGrey,
+    color: COLOR_CONST.lightgraycolor,
     fontSize: scale(16),
     letterSpacing: 0.5,
-    fontFamily: FONTS.GTWalsheimProBold,
+    fontFamily: FONTS.GTWalsheimProMedium,
     textAlign: "left",
+    marginTop: verticalScale(12),
     marginBottom: 5,
   },
 
@@ -390,7 +415,7 @@ export default StyleSheet.create({
   },
 
   descrpitionStyle: {
-    marginTop: verticalScale(2),
+    marginTop: verticalScale(0),
     width: scale(375),
     backgroundColor: COLOR_CONST.white,
   },
@@ -398,7 +423,7 @@ export default StyleSheet.create({
   descrpitionReadStyle: {
     marginTop: verticalScale(19),
     marginLeft: scale(18),
-    marginBottom: verticalScale(10),
+    paddingBottom: verticalScale(10),
   },
 
   ShippingContainer: {
@@ -455,10 +480,10 @@ export default StyleSheet.create({
 
   readmore: {
     fontFamily: FONTS.GTWalsheimProMedium,
-    fontSize: scale(15),
+    fontSize: scale(16),
     lineHeight: scale(18),
     textAlign: "left",
-    color: themeJson.attributes.primary_color,
+    color: COLOR_CONST.newtheme,
     marginTop: scale(10),
   },
   buttonStyle: {
@@ -469,20 +494,24 @@ export default StyleSheet.create({
   },
 
   AddbuttonCustom1: {
-    width: scale(160),
+    width: scale(336),
     height: scale(44),
-    borderRadius: scale(22),
-    backgroundColor: themeJson.attributes.primary_color,
+    borderRadius: scale(5),
+    backgroundColor: COLOR_CONST.white,
+    borderColor: COLOR_CONST.newbordercolor,
+    borderWidth: 1,
     opacity: 0.99,
     alignItems: "center",
     justifyContent: "center",
   },
 
   AddbuttonCustom: {
-    width: scale(110),
+    width: scale(336),
     height: scale(44),
-    borderRadius: scale(22),
-    backgroundColor: COLOR_CONST.subscribeButtonColor,
+    borderRadius: scale(5),
+    backgroundColor: COLOR_CONST.white,
+    borderColor: COLOR_CONST.newbordercolor,
+    borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
     marginHorizontal: scale(3),
@@ -516,10 +545,11 @@ export default StyleSheet.create({
   },
 
   BUYbuttonCustom: {
-    width: scale(100),
+    marginTop: verticalScale(15),
+    width: scale(336),
     height: scale(44),
-    borderRadius: scale(21),
-    backgroundColor: themeJson.attributes.primary_color,
+    borderRadius: scale(5),
+    backgroundColor: COLOR_CONST.newbordercolor,
     opacity: 0.99,
     alignItems: "center",
     justifyContent: "center",
@@ -527,17 +557,18 @@ export default StyleSheet.create({
   },
 
   BUYbuttonCustom1: {
-    width: scale(160),
+    marginTop: verticalScale(15),
+    width: scale(336),
     height: scale(44),
-    borderRadius: scale(21),
-    backgroundColor: themeJson.attributes.primary_color,
+    borderRadius: scale(5),
+    backgroundColor: COLOR_CONST.newbordercolor,
     opacity: 0.99,
     alignItems: "center",
     justifyContent: "center",
   },
 
   AddcustomTxtStyle: {
-    color: COLOR_CONST.white,
+    color: COLOR_CONST.newbordercolor,
     alignSelf: "center",
     fontFamily: FONTS.GTWalsheimProBold,
     fontSize: scale(14),
@@ -567,25 +598,24 @@ export default StyleSheet.create({
   },
 
   productGrid: {
-    marginTop: verticalScale(5),
-    marginBottom: verticalScale(30),
+    paddingTop: verticalScale(2),
+    paddingBottom: verticalScale(25),
   },
 
   ButtonConatiner: {
-    position: "absolute",
-    bottom: 0,
-    height: scale(59),
-    width: scale(375),
+    // position: "absolute",
+    // bottom: 0,
+    // height: scale(59),
+    // width: scale(375),
+    paddingTop: verticalScale(10),
     backgroundColor: COLOR_CONST.white,
   },
 
   InnerConatiner: {
-    flex: 1,
-    justifyContent: "space-between",
-    flexDirection: "row",
-    marginTop: verticalScale(8),
+    marginTop: verticalScale(0),
     marginBottom: verticalScale(7),
     marginHorizontal: scale(20),
+    width: width * 90 / 100
   },
 
   InnerConatinerNOTIFICATION: {
@@ -804,7 +834,7 @@ export default StyleSheet.create({
   },
 
   reviewContainer: {
-    marginTop: verticalScale(5),
+    paddingTop: verticalScale(5),
     backgroundColor: COLOR_CONST.white,
   },
 
@@ -1129,7 +1159,7 @@ export default StyleSheet.create({
   },
 
   descriptionContainer: {
-    height: scale(60),
+    height: 80,
     marginRight: scale(20),
   },
 
@@ -1160,7 +1190,9 @@ export default StyleSheet.create({
   outDesctription: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom:2
+    paddingBottom: verticalScale(10),
+    backgroundColor: COLOR_CONST.white,
+    paddingTop: verticalScale(25),
   },
   prescription: {
     fontSize: scale(14),
@@ -1176,5 +1208,35 @@ export default StyleSheet.create({
     marginLeft: scale(17),
     marginRight: scale(6),
   },
+  reviewRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: scale(18),
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(12),
+  },
+  avgReview: {
+    fontFamily: FONTS.GTWalsheimProRegular,
+    color: COLOR_CONST.black,
+    fontSize: scale(14),
+    textAlign: "center",
+    lineHeight: scale(16),
+  },
+
+  reviewStar: {
+    marginLeft: scale(4),
+    width: scale(13),
+    height: scale(13),
+  },
+
+  reviewCount: {
+    fontFamily: FONTS.GTWalsheimProRegular,
+    color: COLOR_CONST.black,
+    fontSize: scale(14),
+    textAlign: "center",
+    lineHeight: scale(16),
+    marginLeft: scale(4.5),
+  },
+
   // Customizable Area End
 });

@@ -10,22 +10,29 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Dimensions
 } from "react-native";
+
 import * as Animatable from "react-native-animatable";
 // Customizable Area End
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import LinearGradient from "react-native-linear-gradient";
 import FocusAwareStatusBar from "../../studio-store-ecommerce-components/src/FocusAwareStatusBar/FocusAwareStatusBar";
 import TopHeader from "../../studio-store-ecommerce-components/src/TopHeader/TopHeader";
-import COLOR_CONST from "../../studio-store-ecommerce-theme/src/AppFonts";
+import COLOR_CONST, {
+  FONTS,
+} from "../../studio-store-ecommerce-theme/src/AppFonts";
 import Scale, { verticalScale } from "../../../framework/src/utils/Scale";
 import {
   CART_EMPTY_ICON,
   NOTIFICATIONS_ICON,
   COUPON_TICK,
   BACK_ICON,
-  RX
+  RX,
+  CART_HEART,
+  CART_BIN
 } from "../../studio-store-ecommerce-theme/src/AppAssets/appassets";
+
 import styles from "./ShopingCartStyle";
 import ShoppingcartController, { Props } from "./ShoppingcartController";
 import ApplicationLoader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader";
@@ -34,7 +41,9 @@ const themeJson = require("../../studio-store-ecommerce-theme/src/theme.json");
 import FastImage from "react-native-fast-image";
 const staticString = require("./../../studio-store-ecommerce-translations/en.json");
 import Prescriptionuploads from '../../../components/src/precriptionuploads'
-
+import { scaleRatio } from "../../../framework/src/Utilities";
+const mobH = Dimensions.get('window').height;
+const mobW = Dimensions.get('window').width;
 export default class Shoppingcart extends ShoppingcartController {
   constructor(props: Props) {
     super(props);
@@ -54,15 +63,11 @@ export default class Shoppingcart extends ShoppingcartController {
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate("Catalogue")}
         >
-          <LinearGradient
-            colors={[
-              themeJson.attributes.common_button_color,
-              themeJson.attributes.common_button_color,
-            ]}
+          <View
             style={styles.loginButton}
           >
-            <Text style={styles.loginText}>BROWSE PRODUCTS</Text>
-          </LinearGradient>
+            <Text style={styles.loginText}>Browse product</Text>
+          </View>
         </TouchableOpacity>
       </View>
       // Customizable Area End
@@ -75,7 +80,18 @@ export default class Shoppingcart extends ShoppingcartController {
     }
     return "Evening";
   };
-
+  renderVariaentRow = (item: any, index: number) => {
+    return (
+      <View style={{
+        width: '50%',
+        marginRight: 10,
+        marginTop: 18,
+      }}>
+        <Text style={styles.productleftLabel}>{item.attributes.variant_name}</Text>
+        <Text style={styles.productleftValue}>{item.attributes.property_name}</Text>
+      </View>
+    )
+  }
   renderMyOrderCell = (item: any, index: number) => {
     // Customizable Area Start
     let isProductVarient = item.attributes.catalogue_variant !== null;
@@ -109,117 +125,36 @@ export default class Shoppingcart extends ShoppingcartController {
       ? item.attributes.quantity
       : item.attributes.subscription_quantity;
 
-    let prescription=  item.attributes.catalogue.attributes.prescription;
+    let prescription = item.attributes.catalogue.attributes.prescription;
     return (
-      <View style={{}} key={item.id}>
+      <View style={styles.itemview
+      } key={item.id}>
         <TouchableOpacity
           onPress={() => this.onPressProduct(item)}
           style={styles.rowContainer}
         >
-          {item.attributes.subscription_package && (
-            <View style={styles.labelSticker}>
-              <Text style={styles.stickerText}>
-                SUBSCRIPTION
-                {Number(item.attributes.subscription_discount) > 0
-                  ? ` (${item.attributes.subscription_discount}%)`
-                  : ""}
-              </Text>
-            </View>
-          )}
-          <View style={styles.row}>
-            {/* <Image
-              source={{ uri: productImage ? productImage : '' }}
-              style={styles.productImage}
-            /> */}
-            <FastImage
-              style={styles.productImage}
-              source={{
-                uri: productImage,
-              }}
-              //resizeMode={'stretch'}
-            />
 
-            <View style={styles.middleInfo}>
-              <Text numberOfLines={1} style={styles.prodName}>
-                {item.attributes.catalogue.attributes.name}
-              </Text>
-              {isFromSubscription && (
-                <View style={styles.changeRow}>
-                  <Text style={styles.periodText}>
-                    {item.attributes.preferred_delivery_slot
-                      ? `${this.getSlotString(
-                          item.attributes.preferred_delivery_slot
-                        )} | `
-                      : ""}
-                    <Text style={styles.packageText}>
-                      {item.attributes.subscription_package
-                        .charAt(0)
-                        .toUpperCase() +
-                        item.attributes.subscription_package.slice(1)}{" "}
-                      for {item.attributes.subscription_period} Month
-                    </Text>
-                  </Text>
-                  <TouchableOpacity onPress={() => this.onPressProduct(item)}>
-                    <Text style={styles.changeText}>Change</Text>
-                  </TouchableOpacity>
-                </View>
-              )}
-              {isProductVarient && (
-                <View style={styles.changeRow}>
-                  <Text style={styles.periodText}>
-                    {this.getVarientString(
-                      item.attributes.catalogue_variant.attributes
-                        .catalogue_variant_properties
-                    )}
-                  </Text>
-                </View>
-              )}
-              <View style={styles.toolRow}>
-                <Text style={styles.priceValue}>
-                  {themeJson.attributes.currency_type}{" "}
-                  {item.attributes.unit_price}
-                </Text>
-                <View style={styles.tools}>
-                  <TouchableOpacity
-                    onPress={() =>
-                      this.onUpdateCartValue(
-                        item,
-                        Number(itemQuantity) - 1,
-                        item.attributes.catalogue_id,
-                        item.attributes.catalogue_variant_id
-                      )
-                    }
-                  >
-                    <Text style={styles.minus}>-</Text>
-                  </TouchableOpacity>
-                  <Text style={styles.count}>{itemQuantity}</Text>
-                  <TouchableOpacity
-                    onPress={() =>
-                      this.onUpdateCartValue(
-                        item,
-                        Number(itemQuantity) + 1,
-                        item.attributes.catalogue_id,
-                        item.attributes.catalogue_variant_id
-                      )
-                    }
-                  >
-                    <Text style={styles.plus}>+</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-          </View>
-
-          {prescription && <View style={[styles.outDesctription]}>
-             
-             <Image
-             source={RX}
-             style={styles.descrioptionTick}
-           />
-            <Text style={styles.prescription}>Prescription Required</Text>
-          
-          </View>}
           <View style={styles.bottomContainer}>
+            <TouchableOpacity
+              onPress={() =>
+                this.addToWishlist(
+                  item,
+                  item.attributes.catalogue_id,
+                  item.attributes.catalogue_variant_id
+                )
+              }
+              style={styles.removeButton}
+            >
+              <FastImage
+                style={styles.rmIconsHeart}
+                source={CART_HEART}
+              />
+              <Text style={styles.moveWishlistText}>Move to Wishlist</Text>
+            </TouchableOpacity>
+            <View style={{ width: 1, height: verticalScale(28), backgroundColor: COLOR_CONST.newlightcolor, marginHorizontal: Scale(16), }}>
+
+            </View>
+
             <TouchableOpacity
               onPress={() =>
                 this.removeCartItem(
@@ -231,22 +166,93 @@ export default class Shoppingcart extends ShoppingcartController {
               }
               style={styles.removeButton}
             >
+              <FastImage
+                style={styles.rmIcons}
+                source={CART_BIN}
+              />
               <Text style={styles.removeText}>Remove</Text>
             </TouchableOpacity>
-            <View style={styles.vertical} />
-            <TouchableOpacity
-              onPress={() =>
-                this.addToWishlist(
-                  item,
-                  item.attributes.catalogue_id,
-                  item.attributes.catalogue_variant_id
+
+          </View>
+          <View style={styles.row}>
+
+            <FastImage
+              style={styles.productImage}
+              source={{
+                uri: productImage,
+              }}
+            //resizeMode={'stretch'}
+            />
+
+            <View style={styles.productleftContainer}>
+              <Text style={styles.productleftText}>{item.attributes.catalogue.attributes.name}</Text>
+
+
+              {/* <View style={styles.productleftContainer1}> */}
+
+              {
+                isProductVarient && (
+                  <FlatList
+                    data={item.attributes.catalogue_variant.attributes
+                      .catalogue_variant_properties}
+                    numColumns={2}
+                    extraData={this.state}
+                    renderItem={({ item, index }) => this.renderVariaentRow(item, index)}
+                  />
                 )
               }
-              style={styles.removeButton}
-            >
-              <Text style={styles.moveWishlistText}>Move to Wishlist</Text>
-            </TouchableOpacity>
+
+
+              <Text style={[styles.productleftLabel, { marginTop: verticalScale(20) }]}>Price</Text>
+              <Text style={styles.productleftamount}>{themeJson.attributes.currency_type}{" "}
+                {item.attributes.unit_price}</Text>
+              {
+                prescription &&
+                <View style={[styles.outDesctription]}>
+                  <Image
+                    source={RX}
+                    style={styles.descrioptionTick}
+                  />
+                  <Text style={styles.prescription}>Prescription needed</Text>
+                </View>
+              }
+              <View style={styles.tools}>
+                <TouchableOpacity
+                  style={styles.minusContainer}
+                  onPress={() =>
+                    this.onUpdateCartValue(
+                      item,
+                      Number(itemQuantity) - 1,
+                      item.attributes.catalogue_id,
+                      item.attributes.catalogue_variant_id
+                    )
+                  }
+                >
+                  <Text style={styles.minus}>-</Text>
+                </TouchableOpacity>
+                <View
+                  style={styles.countContainer}
+                >
+                  <Text style={styles.count}>{itemQuantity}</Text>
+                </View>
+                <TouchableOpacity
+                  style={styles.plusContainer}
+                  onPress={() =>
+                    this.onUpdateCartValue(
+                      item,
+                      Number(itemQuantity) + 1,
+                      item.attributes.catalogue_id,
+                      item.attributes.catalogue_variant_id
+                    )
+                  }
+                >
+                  <Text style={styles.plus}>+</Text>
+                </TouchableOpacity>
+              </View>
+
+            </View>
           </View>
+
         </TouchableOpacity>
       </View>
     );
@@ -256,8 +262,13 @@ export default class Shoppingcart extends ShoppingcartController {
     return (
       // Customizable Area Start
       <View style={styles.listContainer}>
+        {
+          this.state.cartList != null
+          && <View style={styles.list_devider} />
+        }
         <FlatList
           data={this.state.cartList}
+          contentContainerStyle={{ paddingBottom: verticalScale(30) }}
           extraData={this.state}
           renderItem={({ item, index }) => this.renderMyOrderCell(item, index)}
         />
@@ -269,18 +280,21 @@ export default class Shoppingcart extends ShoppingcartController {
     if (this.state.cartList) {
       return (
         // Customizable Area Start
-        <View>
+        <View style={{ marginBottom: Scale(30) }}>
           <View style={styles.bottomDetails}>
+            <Text style={styles.OrderSummery}>Order summary</Text>
             <View style={styles.headerCart}>
-              <Text style={styles.yourCart}>Your Cart</Text>
+              <Text style={styles.yourCart}>Product</Text>
               <Text style={styles.amountText}>Amount</Text>
             </View>
+
+
+
             {this.state.cartList.map((item: any) => {
               return (
-                <View style={styles.list} key={item.id}>
-                  <Text numberOfLines={1} style={styles.productName}>
-                    {item.attributes.catalogue.attributes.name}
-                  </Text>
+                <View style={styles.tax}>
+                  <Text style={styles.product_name}>{item.attributes.catalogue.attributes.name}</Text>
+                  <Text style={[styles.product_middle_name]}>x{item.attributes.quantity}</Text>
                   <Text style={styles.price}>
                     {themeJson.attributes.currency_type}{" "}
                     {item.attributes.total_price}
@@ -288,71 +302,87 @@ export default class Shoppingcart extends ShoppingcartController {
                 </View>
               );
             })}
-          </View>
-          <View style={styles.bottomDetails}>
-            <View style={styles.tax}>
-              <Text style={styles.productName}>Taxes</Text>
+
+            <View style={styles.devider} />
+            <View style={[styles.tax, { marginTop: verticalScale(25) }]}>
+              <Text style={styles.product_name}>Subtotal</Text>
               <Text style={styles.price}>
                 {themeJson.attributes.currency_type}{" "}
-                {this.state.cartData.attributes.total_tax || 0.0}
+                {this.state.cartData.attributes.sub_total}
               </Text>
             </View>
-            <View style={styles.delivery}>
-              <Text style={styles.productName}>Delivery Charges</Text>
-              <Text style={styles.price}>
-                {themeJson.attributes.currency_type}{" "}
-                {this.state.cartData.attributes.shipping_total || 0.0}
-              </Text>
-            </View>
-          </View>
-          <View style={styles.bottomDetails}>
-            {this.state.isValidCoupon && (
-              <View style={styles.coupon}>
-                <Text style={styles.couponText}>Coupon Applied</Text>
-                <Text style={styles.couponPrice}>
-                  -{themeJson.attributes.currency_type}{" "}
-                  {this.state.cartData?.attributes?.applied_discount}
+            <View style={styles.devider} />
+
+            <View>
+              <View style={styles.tax}>
+                <Text style={styles.product_name}>Taxes</Text>
+                <Text style={styles.price}>{'+ '}
+                  {themeJson.attributes.currency_type}{" "}
+                  {this.state.cartData.attributes.total_tax || 0.0}
                 </Text>
               </View>
-            )}
-            {this.state.isValidCoupon && (
-              <Text style={styles.couponText}>
-                {this.state.cartData?.attributes?.coupon?.attributes?.code}
-              </Text>
-            )}
-            {!this.state.isCouponApplied && (
-              <TouchableOpacity
-                style={styles.applyCouponRow}
-                onPress={() => this.setState({ showCouponCodeModal: true })}
-              >
-                <Text style={styles.applyCouponText}>{"Apply Coupon"}</Text>
-                <Text style={styles.subText}>
-                  Sub Total {themeJson.attributes.currency_type}{" "}
-                  {this.state.cartData.attributes.sub_total}
+              <View style={styles.tax}>
+                <Text style={styles.product_name}>Delivery Charges</Text>
+                <Text style={styles.price}>{'+ '}
+                  {themeJson.attributes.currency_type}{" "}
+                  {this.state.cartData.attributes.shipping_total || 0.0}
+                </Text>
+              </View>
+            </View>
+            <View style={styles.devider} />
+            {/* ===========================input feilds============================== */}
+            <View style={styles.inputContainerCupan}>
+              <TextInput
+                style={styles.input_cupan}
+                placeholder="Enter your promotion code"
+                autoCapitalize="characters"
+                placeholderTextColor="#8b8f95"
+                value={this.state.codeValue}
+                {...this.codeTextInputProps}
+                editable={(!this.state.isValidCoupon) ? true : false}
+              />
+              <TouchableOpacity disabled={this.state.isValidCoupon} style={styles.input_cupan_btn} onPress={() => {
+                this.applyCoupon();
+              }}>
+                <Text style={styles.cupon_btn_txt}>
+                  Apply
                 </Text>
               </TouchableOpacity>
-            )}
-            {this.state.isValidCoupon && (
-              <TouchableOpacity
-                onPress={() => this.setState({ showCouponCodeModal: true })}
-              >
-                <Text style={styles.changeCouponText}>Change Coupon</Text>
-              </TouchableOpacity>
-            )}
-            {this.state.isValidCoupon && (
-              <TouchableOpacity onPress={() => this.removeCoupon()}>
-                <Text style={styles.changeCouponText}>Remove Coupon</Text>
-              </TouchableOpacity>
-            )}
-          </View>
-          <View style={styles.bottomDetails}>
-            <View style={styles.total}>
-              <Text style={styles.couponText}>Total Amount</Text>
-              <Text style={styles.couponPrice}>
-                {themeJson.attributes.currency_type}{" "}
-                {this.state.cartData.attributes.total}
-              </Text>
             </View>
+            {this.state.isValidCoupon &&
+              <View style={styles.removeCupanContainer}>
+                <Text style={styles.rmTxt}>Great ! Coupon Code Applied</Text>
+                <TouchableOpacity activeOpacity={0} onPress={() => this.removeCoupon()}>
+                  <Text style={styles.rmTxt}>Remove Coupon</Text>
+                </TouchableOpacity>
+              </View>
+            }
+            {this.state.isValidCoupon &&
+              <>
+                <View style={[styles.tax, { marginHorizontal: mobW * 0.05, marginTop: verticalScale(24) }]}>
+                  <Text style={styles.discountTxt}>Discount</Text>
+                  <View style={styles.discountRightTxt}>
+                    <TouchableOpacity onPress={() => this.removeCoupon()}>
+                      <FastImage
+                        style={[styles.rmIcons, { marginRight: Scale(10) }]}
+                        source={CART_BIN}
+                      />
+                    </TouchableOpacity>
+                    <Text style={[styles.totaltxt, { textAlign: 'right' }]}>- {themeJson.attributes.currency_type}{" "}
+                      {this.state.cartData?.attributes?.applied_discount}</Text>
+                  </View>
+                </View>
+                <View style={styles.devider} />
+              </>
+            }
+
+            {/*============ total amount============= */}
+            <View style={[styles.tax, { marginHorizontal: mobW * 0.05, marginTop: verticalScale(25) }]}>
+              <Text style={styles.totaltxt}>Total</Text>
+              <Text style={[styles.totaltxt, { textAlign: 'right' }]}>+ {themeJson.attributes.currency_type}{" "}
+                {this.state.cartData.attributes.total}</Text>
+            </View>
+
           </View>
         </View>
         // Customizable Area End
@@ -491,7 +521,7 @@ export default class Shoppingcart extends ShoppingcartController {
       >
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => {}}
+          onPress={() => { }}
           style={styles.modalContainer1}
         >
           <View style={styles.popup1}>
@@ -524,6 +554,7 @@ export default class Shoppingcart extends ShoppingcartController {
       // Customizable Area End
     );
   };
+
   render() {
     return (
       // Customizable Area Start
@@ -550,37 +581,36 @@ export default class Shoppingcart extends ShoppingcartController {
           headerTitleStyle={{}}
           headerStyle={{}}
         />
+        {/* \\\\\\\\\\\\\\\\\order summery\\\\\\\\\ */}
+
+
+
         {!this.state.emptyCart ? (
           <>
             <View style={{ flex: 1, justifyContent: "space-between" }}>
               <ScrollView keyboardShouldPersistTaps={"always"}>
                 {this.renderMyOrderList()}
                 {this.renderBottomDetails()}
+
                 {this.state.showCouponCodeModal && this.renderCouponCodeModal()}
               </ScrollView>
               <TouchableOpacity
+                style={styles.loginButton}
                 onPress={() =>
                   this.state.isGuestUser
                     ? this.setState({ showGuestModal: true })
                     :
-                    this.state.prescriptionNeed 
-                    ?  this.setState({ prescriptionModal: true })
-                    : this.props.navigation.push("Checkout", {
+                    this.state.prescriptionNeed
+                      ? this.setState({ prescriptionModal: true })
+                      : this.props.navigation.push("Checkout", {
                         isFromCheckout: true,
                         isFromBuyNow: false,
                         buyNowCartID: null,
                       })
                 }
               >
-                <LinearGradient
-                  colors={[
-                    themeJson.attributes.common_button_color,
-                    themeJson.attributes.common_button_color,
-                  ]}
-                  style={styles.loginButton}
-                >
-                  <Text style={styles.loginText}>PROCEED</Text>
-                </LinearGradient>
+
+                <Text style={styles.loginText}>Proceed</Text>
               </TouchableOpacity>
             </View>
           </>
@@ -595,18 +625,18 @@ export default class Shoppingcart extends ShoppingcartController {
           isShowError={this.state.isShowError}
           hideErrorModal={() => this.setState({ showAlertModal: false })}
         />
-         {this.state.prescriptionModal &&
-         <Prescriptionuploads  
-        navigation={this.props.navigation} 
-        showmodal={this.state.prescriptionModal}
-        hideErrorModal ={() =>
-          this.setState({ prescriptionModal: false })
-        }
-        uploadprescription ={(productdata:any) =>
-          this.uploadproduct(productdata)
-        }
-        productData={this.state.productDataArr}
-        />}
+        {this.state.prescriptionModal &&
+          <Prescriptionuploads
+            navigation={this.props.navigation}
+            showmodal={this.state.prescriptionModal}
+            hideErrorModal={() =>
+              this.setState({ prescriptionModal: false })
+            }
+            uploadprescription={(productdata: any) =>
+              this.uploadproduct(productdata)
+            }
+            productData={this.state.productDataArr}
+          />}
       </SafeAreaView>
       // Customizable Area End
     );

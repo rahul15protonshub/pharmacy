@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, {Fragment} from "react";
+import React, { Fragment } from "react";
 import DashboardController, { Props } from "./DashboardController.web";
 import SimilarProductListCard from "../../studio-store-ecommerce-components/src/ProductCard/SimilarProductListCard";
 import ProductImageWithSlider from "../../studio-store-ecommerce-components/src/ProductImageWithSlider";
@@ -114,7 +114,7 @@ class ProductDetails extends DashboardController {
     const { selectedAttributes } = this?.state;
     const isSelected =
       selectedAttributes[attribute] &&
-      selectedAttributes[attribute]?.variant_property_id ===
+        selectedAttributes[attribute]?.variant_property_id ===
         item?.variant_property_id
         ? true
         : false;
@@ -124,9 +124,8 @@ class ProductDetails extends DashboardController {
           <Button
             key={item?.id}
             onClick={() => this?.onPressTool(item, attribute)}
-            className={`${
-              isSelected ? "active" : ""
-            } sp-size-details p-2 text-center`}
+            className={`${isSelected ? "active" : ""
+              } sp-size-details p-2 text-center`}
           >
             {!isFromColor && <p>{item?.name}</p>}
           </Button>
@@ -205,8 +204,8 @@ class ProductDetails extends DashboardController {
         ? selectedProduct?.attributes?.actual_price_including_tax
         : selectedProduct?.attributes?.price_including_tax
       : productOnSale
-      ? product?.actual_price_including_tax
-      : product?.price_including_tax;
+        ? product?.actual_price_including_tax
+        : product?.price_including_tax;
     let productSlaeprice: any = selectedProduct
       ? selectedProduct?.attributes?.price_including_tax
       : product?.price_including_tax;
@@ -446,17 +445,17 @@ class ProductDetails extends DashboardController {
                                 </Button>
                                 {productDetails?.attributes
                                   ?.is_subscription_available && (
-                                  <Button
-                                    className="product-btns"
-                                    type="button"
-                                    color="primary-1"
-                                    onClick={this.toggleSubscribe}
-                                  >
-                                    {isSubscribed
-                                      ? content?.subscribed
-                                      : content?.subscribe}
-                                  </Button>
-                                )}
+                                    <Button
+                                      className="product-btns"
+                                      type="button"
+                                      color="primary-1"
+                                      onClick={this.toggleSubscribe}
+                                    >
+                                      {isSubscribed
+                                        ? content?.subscribed
+                                        : content?.subscribe}
+                                    </Button>
+                                  )}
                                 <Button
                                   className="product-btns"
                                   type="button"
@@ -528,27 +527,27 @@ class ProductDetails extends DashboardController {
                   <Card className="border-0 shadow-sm bg-white rounded py-5">
                     {this?.state?.productDetails?.attributes?.similar_products
                       ?.data && (
-                      <>
-                        <h4 className="similar-product-heading mb-4">
-                          Similar Products
-                        </h4>
-                        <SimilarProductListCard
-                          collection={
-                            this?.state?.productDetails?.attributes
-                              ?.similar_products?.data
-                          }
-                          onViewMore={() =>
-                            //@ts-ignore
-                            this?.props?.history?.push("/Filteroptions")
-                          }
-                          addToCart={this?.addToCart}
-                          createWishlist={this?.postWishlist}
-                          deleteWishlist={this?.delWishlist}
-                          toSetDefaultVariant={this?.toSetDefaultVariant}
-                          defaultCarousel={false}
-                        />
-                      </>
-                    )}
+                        <>
+                          <h4 className="similar-product-heading mb-4">
+                            Similar Products
+                          </h4>
+                          <SimilarProductListCard
+                            collection={
+                              this?.state?.productDetails?.attributes
+                                ?.similar_products?.data
+                            }
+                            onViewMore={() =>
+                              //@ts-ignore
+                              this?.props?.history?.push("/Filteroptions")
+                            }
+                            addToCart={this?.addToCart}
+                            createWishlist={this?.postWishlist}
+                            deleteWishlist={this?.delWishlist}
+                            toSetDefaultVariant={this?.toSetDefaultVariant}
+                            defaultCarousel={false}
+                          />
+                        </>
+                      )}
                   </Card>
                 </Col>
               )}

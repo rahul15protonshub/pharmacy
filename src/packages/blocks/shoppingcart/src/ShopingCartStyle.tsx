@@ -1,10 +1,12 @@
 import { StyleSheet, Dimensions } from "react-native";
+import Scale from "../../../framework/src/utils/Scale";
 import scale, { verticalScale } from "../../../framework/src/utils/Scale";
 import COLOR_CONST, {
   FONTS,
 } from "../../studio-store-ecommerce-theme/src/AppFonts";
 const themeJson = require("../../studio-store-ecommerce-theme/src/theme.json");
-
+const mobH = Dimensions.get('window').height;
+const mobW = Dimensions.get('window').width;
 // Customizable Area Start
 // Customizable Area End
 
@@ -31,7 +33,7 @@ export default StyleSheet.create({
   backIcon: {
     width: scale(11.9),
     height: scale(21.7),
-    marginLeft: scale(18),
+    marginLeft: mobW * 0.05,
   },
 
   notifIcon: {
@@ -85,7 +87,7 @@ export default StyleSheet.create({
   },
 
   listContainer: {
-    marginTop: verticalScale(9.8),
+    // marginTop: verticalScale(9.8),
   },
 
   orderNumber: {
@@ -100,23 +102,23 @@ export default StyleSheet.create({
   rowContainer: {
     backgroundColor: COLOR_CONST.white,
     borderRadius: scale(4),
-    width: scale(353),
+    width: mobW * 0.9,
     alignSelf: "center",
+    marginTop: verticalScale(20),
     marginBottom: verticalScale(11),
   },
 
   row: {
     flexDirection: "row",
-    alignItems: "center",
+    // alignItems: "center",
+    justifyContent: 'space-between',
     paddingBottom: verticalScale(18),
+    marginTop: verticalScale(22),
   },
 
   productImage: {
-    width: scale(65),
-    height: scale(65),
-    marginLeft: scale(9),
-    marginTop: verticalScale(16),
-    backgroundColor: "#ddd",
+    width: scale(158),
+    height: scale(155),
   },
 
   middleInfo: {
@@ -164,7 +166,39 @@ export default StyleSheet.create({
     color: themeJson.attributes.primary_color,
     opacity: 0.9,
   },
-
+  productleftContainer: {
+    width: Scale(177),
+    // height: 70,
+    paddingLeft: Scale(20),
+    marginTop: scale(4),
+  },
+  productleftContainer1: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: verticalScale(20)
+  },
+  productleftText: {
+    fontSize: scale(18),
+    color: COLOR_CONST.black,
+    fontFamily: FONTS.GTWalsheimProMedium,
+  },
+  productleftLabel: {
+    fontSize: Scale(14),
+    fontFamily: FONTS.GTWalsheimProRegular,
+    color: COLOR_CONST.lightgraycolor
+  },
+  productleftValue: {
+    fontSize: Scale(14),
+    fontFamily: FONTS.GTWalsheimProRegular,
+    color: COLOR_CONST.black,
+    marginTop: 5
+  },
+  productleftamount: {
+    fontSize: scale(18),
+    color: COLOR_CONST.black,
+    fontFamily: FONTS.GTWalsheimProMedium,
+    marginTop: 5
+  },
   rightInfo: {
     alignItems: "flex-end",
     marginTop: verticalScale(12),
@@ -228,40 +262,54 @@ export default StyleSheet.create({
   },
 
   tools: {
-    borderWidth: scale(1),
-    borderColor: COLOR_CONST.borderduckEggBlue,
-    backgroundColor: COLOR_CONST.white,
-    marginLeft: scale(77),
     flexDirection: "row",
     alignItems: "center",
-    height: scale(30),
+    justifyContent: 'flex-end',
+    height: scale(34),
+    width: scale(120),
+    borderRadius: 5,
+    marginTop: verticalScale(16),
+    alignSelf: 'flex-end',
   },
 
+  minusContainer: {
+    width: Scale(28),
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
+    backgroundColor: COLOR_CONST.newlightcolor,
+    height: Scale(28)
+  },
   minus: {
-    fontSize: scale(15),
-    marginLeft: scale(8),
-    marginRight: scale(15.4),
+    fontSize: scale(18),
     lineHeight: scale(18),
     fontFamily: FONTS.GTWalsheimProMedium,
     color: COLOR_CONST.charcoalGrey,
-    opacity: 0.5,
+    opacity: 1,
   },
 
   count: {
     fontSize: scale(15),
     lineHeight: scale(18),
+    width: scale(33),
     fontFamily: FONTS.GTWalsheimProMedium,
     color: COLOR_CONST.charcoalGrey,
+    textAlign: 'center'
+  },
+  countContainer: {
+    width: Scale(40), justifyContent: 'center', alignItems: 'center', backgroundColor: COLOR_CONST.white, height: Scale(28), borderTopWidth: 1, borderBottomWidth: 1, borderColor: COLOR_CONST.newlightcolor
   },
 
+  plusContainer: {
+    width: Scale(28), justifyContent: 'center', alignItems: 'center', borderTopRightRadius: 5, borderBottomRightRadius: 5, backgroundColor: COLOR_CONST.newtheme, height: Scale(28)
+  },
   plus: {
-    fontSize: scale(15),
+    fontSize: scale(18),
     lineHeight: scale(18),
-    marginLeft: scale(15.4),
-    marginRight: scale(8),
     fontFamily: FONTS.GTWalsheimProMedium,
-    color: COLOR_CONST.charcoalGrey,
-    opacity: 0.5,
+    color: COLOR_CONST.white,
+    opacity: 1,
   },
 
   bottomDetails: {
@@ -274,7 +322,7 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginTop: verticalScale(20),
-    marginBottom: verticalScale(18),
+    // marginBottom: verticalScale(18),
   },
 
   list: {
@@ -285,43 +333,66 @@ export default StyleSheet.create({
   },
 
   yourCart: {
-    fontSize: scale(15),
+    fontSize: scale(16),
     lineHeight: scale(19),
-    marginLeft: scale(18),
+    marginLeft: mobW * 0.05,
     fontFamily: FONTS.GTWalsheimProRegular,
-    color: COLOR_CONST.charcoalGrey,
+    color: COLOR_CONST.lightgraycolor,
+  },
+  OrderSummery: {
+    fontSize: scale(18),
+    color: COLOR_CONST.black,
+    fontFamily: FONTS.GTWalsheimProMedium,
+    marginTop: verticalScale(3),
+    marginLeft: mobW * 0.05,
   },
 
   amountText: {
-    fontSize: scale(15),
+    fontSize: scale(16),
     lineHeight: scale(19),
-    marginRight: scale(18),
+    marginRight: mobW * 0.05,
     fontFamily: FONTS.GTWalsheimProRegular,
-    color: COLOR_CONST.charcoalGrey,
+    color: COLOR_CONST.lightgraycolor,
   },
 
   productName: {
     fontSize: scale(15),
     lineHeight: scale(18),
-    marginLeft: scale(18),
+    marginLeft: mobW * 0.05,
     fontFamily: FONTS.GTWalsheimProRegular,
     color: COLOR_CONST.black,
     width: scale(250),
   },
+  product_name: {
+    fontSize: scale(14),
+    width: mobW * 0.50,
+    marginLeft: mobW * 0.05,
+    fontFamily: FONTS.GTWalsheimProRegular,
+    color: COLOR_CONST.black,
+  },
+  product_middle_name: {
+    fontSize: scale(14),
+    width: mobW * 0.18,
+    fontFamily: FONTS.GTWalsheimProRegular,
+    color: COLOR_CONST.black,
+    textAlign: 'center',
+    // marginLeft: scale(20),
+  },
 
   price: {
-    fontSize: scale(15),
-    lineHeight: scale(18),
-    marginRight: scale(18),
-    fontFamily: FONTS.GTWalsheimProMedium,
+    width: mobW * 0.22,
+    fontSize: scale(14),
+    fontFamily: FONTS.GTWalsheimProRegular,
     color: COLOR_CONST.black,
+    textAlign: 'right',
+    marginRight: mobW * 0.05,
   },
 
   tax: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "space-between",
-    marginTop: verticalScale(26),
+    marginTop: verticalScale(20),
   },
 
   delivery: {
@@ -331,7 +402,15 @@ export default StyleSheet.create({
     marginTop: verticalScale(8),
     marginBottom: verticalScale(8),
   },
-
+  devider: {
+    height: 0.6,
+    backgroundColor: COLOR_CONST.newlightcolor,
+    marginHorizontal: scale(18),
+    marginTop: verticalScale(24)
+  },
+  list_devider: {
+    marginBottom: verticalScale(1)
+  },
   coupon: {
     flexDirection: "row",
     alignItems: "center",
@@ -346,12 +425,18 @@ export default StyleSheet.create({
     marginTop: verticalScale(24),
     marginBottom: verticalScale(24),
   },
+  totaltxt: {
+    fontSize: scale(18),
+    color: COLOR_CONST.black,
+    fontFamily: FONTS.GTWalsheimProMedium,
+    // width: mobW * 0.45
+  },
 
   couponText: {
     fontSize: scale(15),
     lineHeight: scale(18),
-    marginLeft: scale(18),
-    fontFamily: FONTS.GTWalsheimProMedium,
+    marginLeft: mobW * 0.05,
+    fontFamily: FONTS.GTWalsheimProBold,
     color: COLOR_CONST.black,
   },
 
@@ -360,7 +445,7 @@ export default StyleSheet.create({
     lineHeight: scale(18),
     marginTop: verticalScale(5),
     marginBottom: verticalScale(5),
-    marginLeft: scale(18),
+    marginLeft: mobW * 0.05,
     fontFamily: FONTS.GTWalsheimProMedium,
     color: COLOR_CONST.pastelRed,
   },
@@ -368,7 +453,7 @@ export default StyleSheet.create({
   couponPrice: {
     fontSize: scale(15),
     lineHeight: scale(18),
-    marginRight: scale(18),
+    marginRight: mobW * 0.05,
     fontFamily: FONTS.GTWalsheimProMedium,
     color: COLOR_CONST.black,
   },
@@ -379,10 +464,12 @@ export default StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     width: scale(339),
+    backgroundColor: COLOR_CONST.dollarValue,
     height: scale(42),
-    borderRadius: scale(21),
+    borderRadius: scale(5),
     opacity: 0.99,
-    marginBottom: verticalScale(30),
+    marginBottom: verticalScale(18),
+    marginTop: verticalScale(8),
   },
 
   loginText: {
@@ -400,6 +487,19 @@ export default StyleSheet.create({
     fontFamily: FONTS.GTWalsheimProRegular,
     color: COLOR_CONST.charcoalGrey,
     marginVertical: verticalScale(20),
+  },
+  discountTxt: {
+    fontSize: Scale(18),
+    fontFamily: FONTS.GTWalsheimProMedium,
+    color: COLOR_CONST.black
+  },
+  rmTxt: {
+    fontSize: Scale(12),
+    fontFamily: FONTS.GTWalsheimProBold,
+    color: COLOR_CONST.newtheme
+  },
+  discountRightTxt: {
+    flexDirection: 'row', alignItems: 'center'
   },
 
   modalContainer: {
@@ -450,6 +550,46 @@ export default StyleSheet.create({
     fontFamily: FONTS.GTWalsheimProMedium,
   },
 
+  inputContainerCupan: {
+    width: mobW * 0.90,
+    height: verticalScale(48),
+    borderWidth: scale(1),
+    borderColor: "#DFE0E6",
+    borderRadius: scale(3),
+    alignSelf: 'center',
+    marginTop: verticalScale(24),
+    justifyContent: 'space-between',
+    paddingHorizontal: scale(5),
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  removeCupanContainer: {
+    width: mobW * 0.90,
+    height: verticalScale(48),
+    paddingHorizontal: scale(1),
+    alignSelf: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: -10
+  },
+  input_cupan: {
+    width: mobW * 0.64,
+  },
+  input_cupan_btn: {
+    width: mobW * 0.18,
+    backgroundColor: COLOR_CONST.newtheme,
+    height: verticalScale(38),
+    borderRadius: scale(3),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  cupon_btn_txt: {
+    fontSize: scale(14),
+    fontFamily: FONTS.GTWalsheimProMedium,
+    color: COLOR_CONST.black,
+    textAlign: 'right',
+  },
   couponInput: {
     width: scale(261),
     fontSize: scale(15),
@@ -504,7 +644,7 @@ export default StyleSheet.create({
     lineHeight: scale(18),
     marginTop: verticalScale(15),
     marginBottom: verticalScale(10),
-    marginLeft: scale(18),
+    marginLeft: mobW * 0.05,
     fontFamily: FONTS.GTWalsheimProMedium,
     color: COLOR_CONST.pastelRed,
   },
@@ -515,7 +655,7 @@ export default StyleSheet.create({
     marginTop: verticalScale(5),
     fontFamily: FONTS.GTWalsheimProMedium,
     color: COLOR_CONST.black,
-    marginRight: scale(18),
+    marginRight: mobW * 0.05,
   },
 
   continueShoppingButton: {
@@ -670,24 +810,34 @@ export default StyleSheet.create({
 
   bottomContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    borderTopWidth: scale(1),
-    borderTopColor: COLOR_CONST.coolGreyTwo,
+    // alignItems: "center",
   },
 
   removeButton: {
     justifyContent: "center",
     alignItems: "center",
-    flex: 1,
-    paddingVertical: verticalScale(8),
+    flexDirection: 'row',
+    // paddingVertical: verticalScale(8),
+  },
+  rmIcons: {
+    width: scale(14),
+    height: scale(14),
+    resizeMode: 'contain'
+    // backgroundColor: "#ddd",
+  },
+  rmIconsHeart: {
+    width: scale(16),
+    height: scale(16),
+    resizeMode: 'contain',
+    marginTop: scale(3)
+    // backgroundColor: "#ddd",
   },
 
   removeText: {
     fontSize: scale(14),
-    lineHeight: scale(16),
-    fontFamily: FONTS.GTWalsheimProMedium,
-    color: COLOR_CONST.pastelRed,
+    fontFamily: FONTS.GTWalsheimProRegular,
+    color: COLOR_CONST.removered,
+    marginLeft: scale(9)
   },
 
   vertical: {
@@ -698,30 +848,36 @@ export default StyleSheet.create({
 
   moveWishlistText: {
     fontSize: scale(14),
-    lineHeight: scale(16),
-    fontFamily: FONTS.GTWalsheimProMedium,
-    color: COLOR_CONST.boderdarkishBlueTwo,
+    fontFamily: FONTS.GTWalsheimProRegular,
+    color: COLOR_CONST.lightgraycolor,
+    marginLeft: scale(9),
   },
   outDesctription: {
+    alignSelf: 'flex-start',
     flexDirection: "row",
     alignItems: "center",
-    marginBottom:scale(2),
-    marginTop:-scale(15),
-    marginLeft:scale(67)
+    marginBottom: scale(2),
+    marginTop: verticalScale(18)
   },
   prescription: {
-    fontSize: scale(12),
+    fontSize: scale(14),
     lineHeight: scale(23),
     marginLeft: scale(6),
     textAlign: "left",
     color: themeJson.attributes.black,
-    fontFamily: FONTS.GTWalsheimProMedium,
+    fontFamily: FONTS.GTWalsheimProRegular,
   },
   descrioptionTick: {
-    width: scale(12),
-    height: scale(12),
-    marginLeft: scale(17),
+    width: scale(13),
+    height: scale(13),
     marginRight: scale(6),
   },
+  itemview: {
+    borderBottomColor: COLOR_CONST.newlightcolor,
+    borderBottomWidth: 1,
+    width: mobW * 0.9,
+    alignItems: 'center',
+    alignSelf: 'center'
+  }
   // Customizable Area End
 });

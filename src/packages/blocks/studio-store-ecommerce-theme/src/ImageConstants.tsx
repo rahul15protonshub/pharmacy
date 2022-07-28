@@ -170,8 +170,8 @@ export const IDLY_CAT = require('../assets/Home/idlyCategory.png')
 export const MILLETS_CAT = require('../assets/Home/milletsCategory.png')
 export const VEG_CAT = require('../assets/Home/vegCategory.png')
 export const ORGLIV_TEXT = require('../assets/Home/orglivText.png')
-export const SELECTED_HEART = require('../assets/Home/selectedHeart.png');
-export const UN_SELECTED_HEART = require('../assets/Home/unselectedHeart.png');
+export const SELECTED_HEART = require('../assets/Home/selectedHeartActive.png');
+export const UN_SELECTED_HEART = require('../assets/Home/selectedHeartNew.png');
 
 //*> SEARCH 
 export const SEARCH_NO_RESULTS = require('../assets/Search/searchNoResults.png')

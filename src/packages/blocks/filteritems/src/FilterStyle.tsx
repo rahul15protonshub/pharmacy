@@ -141,51 +141,57 @@ export default StyleSheet.create({
   },
 
   heartIcon: {
-    width: scale(50),
-    height: scale(50),
+    width: scale(23),
+    height: scale(23),
+    resizeMode: 'contain'
   },
 
   BottalImage: {
     width: scale(171),
-    height: scale(171),
+    height: scale(155),
   },
 
   titleContainer: {
-    width: scale(159),
+    width: scale(164),
+    marginTop: verticalScale(16)
   },
 
   titleNameStyle: {
+    textAlign: 'center',
     fontSize: scale(17),
     lineHeight: scale(19),
     height: scale(19),
-    color: COLOR_CONST.charcoalGrey,
-    marginTop: verticalScale(11),
+    color: COLOR_CONST.black,
+    marginTop: verticalScale(7),
     fontFamily: FONTS.GTWalsheimProRegular,
-    marginHorizontal: scale(12),
   },
 
   price: {
+    textAlign: 'center',
     fontSize: scale(15),
     lineHeight: scale(18),
-    color: themeJson.attributes.primary_color,
+    color: COLOR_CONST.newtheme,
     fontFamily: FONTS.GTWalsheimProMedium,
-    marginTop: verticalScale(10),
+    marginTop: verticalScale(8),
     marginBottom: verticalScale(9),
     height: scale(18),
   },
 
   discountRow: {
     flexDirection: "row",
-    marginHorizontal: scale(12),
+    marginHorizontal: scale(1),
+    alignSelf: 'center'
   },
 
   discountPrice: {
+    textAlign: 'center',
     fontSize: scale(15),
     lineHeight: scale(18),
-    color: COLOR_CONST.charcoalGrey,
+    color: COLOR_CONST.lightgraycolor,
     fontFamily: FONTS.GTWalsheimProMedium,
     textDecorationLine: "line-through",
-    marginTop: verticalScale(10),
+    marginTop: verticalScale(8),
+    marginLeft: scale(2),
     marginBottom: verticalScale(9),
     height: scale(18),
   },
@@ -492,6 +498,19 @@ export default StyleSheet.create({
     width: scale(15),
     resizeMode: "contain",
     alignSelf: "center",
+  },
+  addtocartitem: {
+    backgroundColor: COLOR_CONST.newbordercolor,
+    alignItems: 'center',
+    paddingVertical: verticalScale(12),
+    marginTop: verticalScale(14)
+  },
+  addtocarttext: {
+    fontFamily: FONTS.GTWalsheimProRegular,
+    color: COLOR_CONST.white,
+    fontSize: scale(14),
+    textAlign: "center",
+    lineHeight: scale(16),
   },
   // Customizable Area End
 });

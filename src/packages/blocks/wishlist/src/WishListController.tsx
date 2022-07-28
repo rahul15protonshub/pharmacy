@@ -35,6 +35,7 @@ interface S {
   cartLength: number;
   isShowError: boolean;
   // Customizable Area Start
+  addedItem: number;
   // Customizable Area End
 }
 
@@ -76,6 +77,7 @@ export default class WishListController extends BlockComponent<Props, S, SS> {
       cartLength: 0,
       isShowError: false,
       // Customizable Area Start
+      addedItem: 0
       // Customizable Area End
     };
     // Customizable Area End
@@ -200,13 +202,16 @@ export default class WishListController extends BlockComponent<Props, S, SS> {
         } else if (apiRequestCallId === this.getCartProductId) {
           this.setState({
             cartProduct: responseJson.data.has_cart_product,
+            addedItem: responseJson?.data?.total_cart_item,
             isFetching: false,
           });
         } else if (apiRequestCallId === this.getCartListId) {
           let array = responseJson.data;
           this.setState({ cartLength: array.length, isFetching: false });
         } else if (apiRequestCallId === this.addToCartApiCallId) {
+          this.getListRequest();
           this.getCartHasProduct();
+          this.getCartList();
           this.setState({ isFetching: false });
         }
         // Customizable Area Start
@@ -270,6 +275,66 @@ export default class WishListController extends BlockComponent<Props, S, SS> {
       configJSON.DeleteMethodType
     );
     runEngine.sendMessage(requestMessage.id, requestMessage);
+  };
+
+  onAddtocartPress = async (item: any) => {
+    const data = this.state.cartProduct;
+    const isInCart = item?.attributes?.id?.data?.attributes?.cart_quantity > 0 ? true : false
+    if (isInCart) {
+      this.props.navigation.navigate("Shoppingcart");
+      return;
+    }
+
+    if (item?.attributes?.id?.data?.attributes?.catalogue_variants?.length > 0) {
+      if (data?.has_cart_product) {
+
+        const httpBody = {
+          catalogue_id: item.attributes.id.data.id,
+          catalogue_variant_id: item.attributes.catalogue_variants[0].id,
+          quantity: 1,
+        };
+
+        this.setState({ isFetching: true });
+        this.addToCartApiCallId = await this.apiCall({
+          contentType: configJSON.ApiContentType,
+          method: configJSON.PutMethodType,
+          endPoint: configJSON.addToCartApiEndPoint +
+            data.order_id +
+            "/add_item",
+          body: httpBody,
+        });
+      } else {
+        const httpBody = {
+          catalogue_id: item.attributes.id.data.id,
+          quantity: 1,
+        };
+
+        this.setState({ isFetching: true });
+        this.addToCartApiCallId = await this.apiCall({
+          contentType: configJSON.ApiContentType,
+          method: configJSON.PostMethodType,
+          endPoint: configJSON.addToCartApiEndPoint,
+          body: httpBody,
+        });
+      }
+    } else {
+      const httpBody = {
+        catalogue_id: item.attributes.id.data.id,
+        quantity: 1,
+      };
+
+      this.setState({ isFetching: true });
+      this.addToCartApiCallId = await this.apiCall({
+        contentType: configJSON.ApiContentType,
+        method: configJSON.PostMethodType,
+        endPoint: configJSON.addToCartApiEndPoint,
+        body: httpBody,
+      });
+    }
+
+
+
+
   };
 
   getListRequest = async () => {
