@@ -83,8 +83,8 @@ const COLOR_CONST = {
 };
 export default COLOR_CONST
 export const FONTS = {
-    GTWalsheimProBold: 'GTWalsheimPro-Bold',
-    GTWalsheimProLight: 'GTWalsheimPro-Light',
-    GTWalsheimProMedium: 'GTWalsheimPro-Medium',
-    GTWalsheimProRegular: 'GTWalsheimPro-Regular',
+    GTWalsheimProBold: 'Rubik-Bold',
+    GTWalsheimProLight: 'Rubik-Light',
+    GTWalsheimProMedium: 'Rubik-Medium',
+    GTWalsheimProRegular: 'Rubik-Regular',
 }

@@ -104,7 +104,6 @@ export default StyleSheet.create({
     borderRadius: scale(4),
     width: mobW * 0.9,
     alignSelf: "center",
-    marginTop: verticalScale(20),
     marginBottom: verticalScale(11),
   },
 
@@ -810,6 +809,7 @@ export default StyleSheet.create({
 
   bottomContainer: {
     flexDirection: "row",
+    alignSelf: 'center'
     // alignItems: "center",
   },
 
@@ -877,7 +877,8 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
     width: mobW * 0.9,
     alignItems: 'center',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginBottom: verticalScale(10)
   }
   // Customizable Area End
 });

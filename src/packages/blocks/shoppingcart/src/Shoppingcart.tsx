@@ -127,53 +127,13 @@ export default class Shoppingcart extends ShoppingcartController {
 
     let prescription = item.attributes.catalogue.attributes.prescription;
     return (
-      <View style={styles.itemview
+      <View style={{}
       } key={item.id}>
         <TouchableOpacity
           onPress={() => this.onPressProduct(item)}
           style={styles.rowContainer}
         >
 
-          <View style={styles.bottomContainer}>
-            <TouchableOpacity
-              onPress={() =>
-                this.addToWishlist(
-                  item,
-                  item.attributes.catalogue_id,
-                  item.attributes.catalogue_variant_id
-                )
-              }
-              style={styles.removeButton}
-            >
-              <FastImage
-                style={styles.rmIconsHeart}
-                source={CART_HEART}
-              />
-              <Text style={styles.moveWishlistText}>Move to Wishlist</Text>
-            </TouchableOpacity>
-            <View style={{ width: 1, height: verticalScale(28), backgroundColor: COLOR_CONST.newlightcolor, marginHorizontal: Scale(16), }}>
-
-            </View>
-
-            <TouchableOpacity
-              onPress={() =>
-                this.removeCartItem(
-                  item,
-                  Number(itemQuantity),
-                  item.attributes.catalogue_id,
-                  item.attributes.catalogue_variant_id
-                )
-              }
-              style={styles.removeButton}
-            >
-              <FastImage
-                style={styles.rmIcons}
-                source={CART_BIN}
-              />
-              <Text style={styles.removeText}>Remove</Text>
-            </TouchableOpacity>
-
-          </View>
           <View style={styles.row}>
 
             <FastImage
@@ -251,6 +211,47 @@ export default class Shoppingcart extends ShoppingcartController {
               </View>
 
             </View>
+          </View>
+          <View style={styles.itemview} ></View>
+          <View style={styles.bottomContainer}>
+            <TouchableOpacity
+              onPress={() =>
+                this.addToWishlist(
+                  item,
+                  item.attributes.catalogue_id,
+                  item.attributes.catalogue_variant_id
+                )
+              }
+              style={styles.removeButton}
+            >
+              <FastImage
+                style={styles.rmIconsHeart}
+                source={CART_HEART}
+              />
+              <Text style={styles.moveWishlistText}>Move to Wishlist</Text>
+            </TouchableOpacity>
+            <View style={{ width: 1, height: verticalScale(28), backgroundColor: COLOR_CONST.newlightcolor, marginHorizontal: Scale(16), }}>
+
+            </View>
+
+            <TouchableOpacity
+              onPress={() =>
+                this.removeCartItem(
+                  item,
+                  Number(itemQuantity),
+                  item.attributes.catalogue_id,
+                  item.attributes.catalogue_variant_id
+                )
+              }
+              style={styles.removeButton}
+            >
+              <FastImage
+                style={styles.rmIcons}
+                source={CART_BIN}
+              />
+              <Text style={styles.removeText}>Remove</Text>
+            </TouchableOpacity>
+
           </View>
 
         </TouchableOpacity>

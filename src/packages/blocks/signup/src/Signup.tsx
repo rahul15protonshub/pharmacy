@@ -75,7 +75,7 @@ export default class Signup extends SignupController {
                     ? COLOR_CONST.pastelRed
                     : this.state.fullNameInput
                       ? COLOR_CONST.whiteThree
-                      : COLOR_CONST.focusDarkColor,
+                      : themeJson.attributes.primary_color,
                 },
               ]}
             >
@@ -93,7 +93,7 @@ export default class Signup extends SignupController {
                     {
                       tintColor: this.state.fullName
                         ? COLOR_CONST.charcoalGrey
-                        : COLOR_CONST.focusDarkColor,
+                        : themeJson.attributes.primary_color,
                     },
                   ]}
                 />
@@ -105,7 +105,7 @@ export default class Signup extends SignupController {
                         ? COLOR_CONST.pastelRed
                         : this.state.fullName
                           ? COLOR_CONST.charcoalGrey
-                          : COLOR_CONST.focusDarkColor,
+                          : themeJson.attributes.primary_color,
                     },
                   ]}
                   onFocus={() => this.onFocus("fullName")}
@@ -133,7 +133,7 @@ export default class Signup extends SignupController {
                       ? COLOR_CONST.pastelRed
                       : this.state.email
                         ? COLOR_CONST.whiteThree
-                        : COLOR_CONST.focusDarkColor,
+                        : themeJson.attributes.primary_color,
                   },
                 ]}
               >
@@ -144,7 +144,7 @@ export default class Signup extends SignupController {
                     {
                       tintColor: this.state.email
                         ? COLOR_CONST.charcoalGrey
-                        : COLOR_CONST.focusDarkColor,
+                        : themeJson.attributes.primary_color,
                     },
                   ]}
                 />
@@ -156,7 +156,7 @@ export default class Signup extends SignupController {
                         ? COLOR_CONST.pastelRed
                         : this.state.email
                           ? COLOR_CONST.charcoalGrey
-                          : COLOR_CONST.focusDarkColor,
+                          : themeJson.attributes.primary_color,
                     },
                   ]}
                   ref={(input) => {
@@ -189,7 +189,7 @@ export default class Signup extends SignupController {
                       ? COLOR_CONST.pastelRed
                       : this.state.password
                         ? COLOR_CONST.whiteThree
-                        : COLOR_CONST.focusDarkColor,
+                        : themeJson.attributes.primary_color,
                   },
                 ]}
               >
@@ -200,7 +200,7 @@ export default class Signup extends SignupController {
                     {
                       tintColor: this.state.password
                         ? COLOR_CONST.charcoalGrey
-                        : COLOR_CONST.focusDarkColor,
+                        : themeJson.attributes.primary_color,
                     },
                   ]}
                 />
@@ -212,7 +212,7 @@ export default class Signup extends SignupController {
                         ? COLOR_CONST.pastelRed
                         : this.state.password
                           ? COLOR_CONST.charcoalGrey
-                          : COLOR_CONST.focusDarkColor,
+                          : themeJson.attributes.primary_color,
                     },
                   ]}
                   onFocus={() => this.onFocus("password")}

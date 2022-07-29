@@ -139,7 +139,7 @@ export default class ForgotPassword extends ForgotPasswordController {
                         ? COLOR_CONST.pastelRed
                         : this.state.email
                           ? COLOR_CONST.whiteThree
-                          : COLOR_CONST.focusDarkColor,
+                          : themeJson.attributes.primary_color,
                     },
                   ]}
                 >
@@ -150,7 +150,7 @@ export default class ForgotPassword extends ForgotPasswordController {
                       {
                         tintColor: this.state.emailInput
                           ? COLOR_CONST.charcoalGrey
-                          : COLOR_CONST.focusDarkColor,
+                          : themeJson.attributes.primary_color,
                       },
                     ]}
                   />
@@ -160,7 +160,7 @@ export default class ForgotPassword extends ForgotPasswordController {
                       {
                         color: this.state.emailError
                           ? COLOR_CONST.pastelRed
-                          : COLOR_CONST.focusDarkColor,
+                          : themeJson.attributes.primary_color,
                       },
                     ]}
                     secureTextEntry={false}
@@ -199,7 +199,7 @@ export default class ForgotPassword extends ForgotPasswordController {
                         {
                           tintColor: this.state.otp
                             ? COLOR_CONST.charcoalGrey
-                            : COLOR_CONST.focusDarkColor,
+                            : themeJson.attributes.primary_color,
                         },
                       ]}
                     />
@@ -209,7 +209,7 @@ export default class ForgotPassword extends ForgotPasswordController {
                         {
                           color: this.state.OTPError
                             ? COLOR_CONST.pastelRed
-                            : COLOR_CONST.focusDarkColor,
+                            : themeJson.attributes.primary_color,
                         },
                       ]}
                       secureTextEntry={false}

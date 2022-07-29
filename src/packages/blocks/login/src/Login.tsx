@@ -88,7 +88,7 @@ export default class Login extends LoginController {
                       ? COLOR_CONST.pastelRed
                       : this.state.email
                         ? COLOR_CONST.whiteThree
-                        : COLOR_CONST.focusDarkColor,
+                        : themeJson.attributes.primary_color,
                   },
                 ]}
               >
@@ -99,7 +99,7 @@ export default class Login extends LoginController {
                     {
                       tintColor: this.state.email
                         ? COLOR_CONST.charcoalGrey
-                        : COLOR_CONST.focusDarkColor,
+                        : themeJson.attributes.primary_color,
                     },
                   ]}
                 />
@@ -111,7 +111,7 @@ export default class Login extends LoginController {
                         ? COLOR_CONST.pastelRed
                         : this.state.email
                           ? COLOR_CONST.charcoalGrey
-                          : COLOR_CONST.focusDarkColor,
+                          : themeJson.attributes.primary_color,
                     },
                   ]}
                   onFocus={() => this.onFocus("email")}
@@ -143,7 +143,7 @@ export default class Login extends LoginController {
                       ? COLOR_CONST.pastelRed
                       : this.state.password
                         ? COLOR_CONST.whiteThree
-                        : COLOR_CONST.focusDarkColor,
+                        : themeJson.attributes.primary_color,
                   },
                 ]}
               >
@@ -154,7 +154,7 @@ export default class Login extends LoginController {
                     {
                       tintColor: this.state.password
                         ? COLOR_CONST.charcoalGrey
-                        : COLOR_CONST.focusDarkColor,
+                        : themeJson.attributes.primary_color,
                     },
                   ]}
                 />
@@ -166,7 +166,7 @@ export default class Login extends LoginController {
                         ? COLOR_CONST.pastelRed
                         : this.state.password
                           ? COLOR_CONST.charcoalGrey
-                          : COLOR_CONST.focusDarkColor,
+                          : themeJson.attributes.primary_color,
                     },
                   ]}
                   ref={(input) => {
