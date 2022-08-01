@@ -50,7 +50,7 @@ interface S {
   addFromWishListId: any;
   selectedCatalogeId: any;
   updateQuantity: any;
-
+  addToCartId: any;
   // Customizable Area End
 }
 
@@ -125,6 +125,7 @@ export default class FilteritemsController extends BlockComponent<
       selectedCatalogeId: "",
       updateQuantity: "",
       isFilterApplied: false,
+      addToCartId: '',
     };
     // Customizable Area End
     runEngine.attachBuildingBlock(this as IBlock, this.subScribedMessages);
@@ -222,7 +223,6 @@ export default class FilteritemsController extends BlockComponent<
 
       if (responseJson && responseJson?.data) {
         if (apiRequestCallId === this.getProductApiCallId) {
-          console.log("@@@ Get All Products ===========", responseJson.data);
           if (responseJson?.meta?.pagination?.total_pages) {
             this.setState({
               totalPage: responseJson?.meta?.pagination?.total_pages,
@@ -290,6 +290,7 @@ export default class FilteritemsController extends BlockComponent<
           this.setState({ cartProduct: array, isFetching: false });
         } else if (apiRequestCallId === this.addToCartApiCallId) {
           this.getCartHasProduct();
+          this.updateAddToCart();
           this.setState({ isFetching: false });
         } else if (apiRequestCallId === this.getCartListId) {
           let array = responseJson?.data;
@@ -570,7 +571,7 @@ export default class FilteritemsController extends BlockComponent<
   navigateToFilter = () => {
     let filterData =
       this.props.navigation.state.params &&
-      this.props.navigation.state.params.filterData
+        this.props.navigation.state.params.filterData
         ? this.props.navigation.state.params.filterData
         : [];
     if (
@@ -854,22 +855,43 @@ export default class FilteritemsController extends BlockComponent<
   };
 
   addToCart = async (item: any) => {
-    const data = this.state.cartProduct;
-    const httpBody = {
-      catalogue_id: item.item.id,
-      catalogue_variant_id: item.item.attributes.catalogue_variants[0].id,
-      quantity: 1,
-    };
-
-    this.setState({ isFetching: true });
-    if (data.has_cart_product) {
-      this.addToCartApiCallId = await this.apiCall({
-        contentType: configJSON.productApiContentType,
-        method: configJSON.apiMethodTypePut,
-        endPoint: configJSON.addToCartApiEndPoint + data.order_id + "/add_item",
-        body: httpBody,
-      });
+    const isInCart = item?.item?.attributes?.cart_quantity > 0 ? true : false
+    if (isInCart) {
+      this.props.navigation.navigate("Shoppingcart");
+      return;
+    }
+    var data = this.state.cartProduct
+    this.setState({ isFetching: true, addToCartId: item?.item?.id });
+    if (item?.item?.attributes?.catalogue_variants?.length > 0) {
+      if (data?.has_cart_product) {
+        const httpBody = {
+          catalogue_id: item?.item?.id,
+          catalogue_variant_id: item?.item?.attributes.catalogue_variants[0].id,
+          quantity: 1,
+        };
+        this.addToCartApiCallId = await this.apiCall({
+          contentType: configJSON.productApiContentType,
+          method: configJSON.putAPiMethod,
+          endPoint: configJSON.addToCartApiEndPoint + data.order_id + "/add_item",
+          body: httpBody,
+        });
+      } else {
+        const httpBody = {
+          catalogue_id: item?.item?.id,
+          quantity: 1,
+        };
+        this.addToCartApiCallId = await this.apiCall({
+          contentType: configJSON.productApiContentType,
+          method: configJSON.apiMethodTypePost,
+          endPoint: configJSON.addToCartApiEndPoint,
+          body: httpBody,
+        });
+      }
     } else {
+      const httpBody = {
+        catalogue_id: item?.item?.id,
+        quantity: 1,
+      };
       this.addToCartApiCallId = await this.apiCall({
         contentType: configJSON.productApiContentType,
         method: configJSON.apiMethodTypePost,
@@ -937,6 +959,21 @@ export default class FilteritemsController extends BlockComponent<
       if (item.id == this.state.addFromWishListId) {
         let itemsUpdate = Object.assign({}, item.attributes, {
           wishlisted: true,
+        });
+
+        return Object.assign({}, item, {
+          attributes: itemsUpdate,
+        });
+      }
+      return item;
+    });
+    this.setState({ productList: UpdatedArray });
+  };
+  updateAddToCart = () => {
+    let UpdatedArray = this.state.productList.map((item: any) => {
+      if (item.id == this.state.addToCartId) {
+        let itemsUpdate = Object.assign({}, item.attributes, {
+          cart_quantity: 1,
         });
 
         return Object.assign({}, item, {

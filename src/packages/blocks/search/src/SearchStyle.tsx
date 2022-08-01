@@ -40,6 +40,10 @@ export default StyleSheet.create({
 
   SearchBarContainer: {
     backgroundColor: COLOR_CONST.white,
+    borderColor:COLOR_CONST.lightgray,
+    borderWidth:1,
+    marginHorizontal:scale(10),
+    borderRadius:3
   },
 
   recentText: {

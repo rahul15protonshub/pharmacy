@@ -32,6 +32,10 @@ import {
   RADIO_SELECTED,
   RADIO_UNSELECTED,
   RX,
+  shapeHeart,
+  shapestar,
+  shapestock,
+  shapeHeartActive
 } from "../../studio-store-ecommerce-theme/src/AppAssets/appassets";
 import scale, { verticalScale } from "../../../framework/src/utils/Scale";
 import { WebView } from "react-native-webview";
@@ -46,6 +50,7 @@ const themeJson = require("../../studio-store-ecommerce-theme/src/theme.json");
 export const configJSON = require("./config");
 // Customizable Area Start
 import Prescriptionuploads from '../../../components/src/precriptionuploads'
+import { Console } from "console";
 // Customizable Area End
 
 export default class ProductDescription extends ProductDescriptionController {
@@ -60,7 +65,7 @@ export default class ProductDescription extends ProductDescriptionController {
     const { selectedAttributes } = this.state;
     const isSelected =
       selectedAttributes[attribute] &&
-      selectedAttributes[attribute].variant_property_id ===
+        selectedAttributes[attribute].variant_property_id ===
         item.variant_property_id
         ? true
         : false;
@@ -75,12 +80,12 @@ export default class ProductDescription extends ProductDescriptionController {
             styles.toolItemSizeCell,
             {
               backgroundColor: isSelected
-                ? COLOR_CONST.charcoalGrey
+                ? COLOR_CONST.newtheme
                 : COLOR_CONST.white,
               borderWidth: scale(1),
               borderColor: isSelected
                 ? COLOR_CONST.white
-                : COLOR_CONST.charcoalGrey,
+                : COLOR_CONST.newtheme,
               opacity: 0.7,
             },
           ]}
@@ -90,8 +95,8 @@ export default class ProductDescription extends ProductDescriptionController {
               styles.labelText,
               {
                 color: isSelected
-                  ? COLOR_CONST.white
-                  : COLOR_CONST.charcoalGrey,
+                  ? COLOR_CONST.black
+                  : COLOR_CONST.black,
               },
             ]}
           >
@@ -112,12 +117,12 @@ export default class ProductDescription extends ProductDescriptionController {
               styles.toolItemSizeCell,
               {
                 backgroundColor: isSelected
-                  ? COLOR_CONST.charcoalGrey
+                  ? COLOR_CONST.newtheme
                   : COLOR_CONST.white,
                 borderWidth: scale(1),
                 borderColor: isSelected
-                  ? COLOR_CONST.white
-                  : COLOR_CONST.charcoalGrey,
+                  ? COLOR_CONST.newtheme
+                  : COLOR_CONST.newtheme,
                 opacity: 0.7,
               },
             ]}
@@ -128,8 +133,8 @@ export default class ProductDescription extends ProductDescriptionController {
                   styles.labelText,
                   {
                     color: !isSelected
-                      ? COLOR_CONST.charcoalGrey
-                      : COLOR_CONST.white,
+                      ? COLOR_CONST.black
+                      : COLOR_CONST.black,
                   },
                 ]}
               >
@@ -247,7 +252,7 @@ export default class ProductDescription extends ProductDescriptionController {
               <TouchableOpacity
                 key={`rating-item-${index}`}
                 testID={"buttonRatingItem"}
-                onPress={() => {}}
+                onPress={() => { }}
               >
                 <Image
                   source={index < item.rating ? SELECTED_STAR : UNSELECTED_STAR}
@@ -329,7 +334,7 @@ export default class ProductDescription extends ProductDescriptionController {
             <View style={styles.starContainer}>
               {this.state.ratingList?.map((item: any, index: number) => {
                 return (
-                  <TouchableOpacity onPress={() => {}}>
+                  <TouchableOpacity onPress={() => { }}>
                     <Image
                       source={this.getStarImage(
                         index,
@@ -408,14 +413,14 @@ export default class ProductDescription extends ProductDescriptionController {
     const on_sale = selectedProduct
       ? selectedProduct.attributes.on_sale
       : attributes.on_sale;
-    const prescription = attributes.prescription ;
+    const prescription = attributes.prescription;
     const price = selectedProduct
       ? on_sale
         ? selectedProduct.attributes?.actual_price_including_tax
         : selectedProduct.attributes?.price_including_tax
       : on_sale
-      ? attributes?.actual_price_including_tax
-      : attributes?.price_including_tax;
+        ? attributes?.actual_price_including_tax
+        : attributes?.price_including_tax;
     const sale_price = selectedProduct
       ? selectedProduct?.attributes?.price_including_tax
       : attributes.price_including_tax;
@@ -432,8 +437,9 @@ export default class ProductDescription extends ProductDescriptionController {
       <>
         <ScrollView
           style={{
-            marginBottom: verticalScale(50),
-            backgroundColor: COLOR_CONST.lightGreyText,
+            paddingBottom: verticalScale(5),
+            marginTop: verticalScale(2),
+            backgroundColor: COLOR_CONST.white,
           }}
         >
           {productData && (
@@ -445,44 +451,44 @@ export default class ProductDescription extends ProductDescriptionController {
                     ? { uri: selectedImage }
                     : productData?.attributes?.images.data[0].attributes &&
                       productData?.attributes?.images.data.length > 0
-                    ? { uri: productImage }
-                    : {}
+                      ? { uri: productImage }
+                      : {}
                 }
                 style={styles.imageStyle}
               />
             </View>
           )}
-          <View style={styles.variantList}>
-            <FlatList
-              showsHorizontalScrollIndicator={false}
-              horizontal
-              keyExtractor={(index: any, item: any) => index.toString()}
-              extraData={this.state}
-              data={
-                selectedProduct
-                  ? selectedProduct?.attributes?.images?.data
-                  : productData?.attributes?.images.data
-              }
-              renderItem={({ item, index }) =>
-                this.renderVarientImageItems(item, index)
-              }
-            />
-          </View>
+
           {productData && (
             <View style={styles.productNameContainer}>
-              <TouchableOpacity
-                style={styles.heartConatiner}
-                onPress={() => this.onHeartPress(productData, "description")}
-              >
-                {productData?.attributes?.wishlisted ? (
-                  <Image source={redHeart} style={styles.heart} />
-                ) : (
-                  <Image source={heartWishlist} style={styles.heart} />
+              {/*  */}
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={styles.productName}>
+                  {productData?.attributes?.name}
+                </Text>
+                <TouchableOpacity
+                  style={styles.heartConatiner}
+                  onPress={() => this.onHeartPress(productData, "description")}
+                >
+                  {productData?.attributes?.wishlisted ? (
+                    <Image source={shapeHeartActive} style={styles.heart} />
+                  ) : (
+                    <Image source={shapeHeart} style={styles.heart} />
+                  )}
+                </TouchableOpacity>
+              </View>
+              <View style={styles.reviewRow}>
+                <Text style={styles.avgReview}>
+                  {(productData?.attributes?.average_rating).toFixed(1)}
+                </Text>
+                <Image source={shapestar} style={styles.reviewStar} />
+                {productData?.attributes?.reviews && (
+                  <Text style={styles.reviewCount}>
+                    | {productData?.attributes?.reviews.length}
+                  </Text>
                 )}
-              </TouchableOpacity>
-              <Text style={styles.productName}>
-                {productData?.attributes?.name}
-              </Text>
+              </View>
+              <Text style={[styles.specifictaionTitle, { marginLeft: scale(18), }]}>Price</Text>
               <View style={styles.priceRow}>
                 <View style={styles.insidePriceBox1}>
                   {productData && on_sale ? (
@@ -498,8 +504,8 @@ export default class ProductDescription extends ProductDescriptionController {
                   )}
                   {stock_qty !== 0 ? (
                     <>
-                      <Image source={STOCK_TICK} style={styles.stockTick} />
-                      <Text style={styles.inStockText}>In stock </Text>
+                      <Image source={shapestock} style={styles.stockTick} />
+                      <Text style={styles.inStockText}>In stock online </Text>
                       {/* </View>                                 */}
                     </>
                   ) : (
@@ -514,47 +520,49 @@ export default class ProductDescription extends ProductDescriptionController {
                     </>
                   )}
                 </View>
-                <View style={[styles.insidePriceBox2]}>
-                  {stock_qty !== 0 ? (
-                    <View style={[styles.tools, {}]}>
-                      <TouchableOpacity
-                        onPress={() => this.onUpdateCartValue(false)}
-                      >
-                        <Text style={styles.minus}>-</Text>
-                      </TouchableOpacity>
-                      <Text style={styles.count}>{this.state.quantity}</Text>
-                      <TouchableOpacity
-                        onPress={() => this.onUpdateCartValue(true)}
-                      >
-                        <Text style={styles.plus}>+</Text>
-                      </TouchableOpacity>
-                    </View>
-                  ) : null}
-                </View>
-              </View>
 
-              {on_sale ? (
-                <Text style={styles.discountPrice}>
-                  {" "}
-                  {themeJson.attributes.currency_type} {price}
-                </Text>
-              ) : null}
-               {prescription ? ( <View style={[styles.outDesctription]}>
-             <Image
-             source={RX}
-             style={styles.descrioptionTick}
-           />
-            <Text style={styles.prescription}>Prescription Required</Text>
-          </View>) : null}
+              </View>
             </View>
           )}
 
           {productData && this.renderSelectorTools()}
+          <View style={{ backgroundColor: COLOR_CONST.white }}>
+            <Text style={[styles.specifictaionTitle, { marginLeft: scale(18), }]}>Quantity</Text>
+            <View style={[styles.insidePriceBox2]}>
+              {stock_qty !== 0 ? (
+                <View style={[styles.tools, {}]}>
+                  <TouchableOpacity activeOpacity={1} style={styles.minusview}
+                    onPress={() => this.onUpdateCartValue(false)}
+                  >
+                    <Text style={styles.minus}>-</Text>
+                  </TouchableOpacity>
+                  <View style={styles.countview}>
+                    <Text style={styles.count}>{this.state.quantity}</Text>
+                  </View>
+                  <TouchableOpacity activeOpacity={1} style={styles.plusview}
+                    onPress={() => this.onUpdateCartValue(true)}
+                  >
+                    <Text style={styles.plus}>+</Text>
+                  </TouchableOpacity>
+                </View>
+              ) : null}
+            </View>
+          </View>
+          {prescription ? (<View style={[styles.outDesctription]}>
+            <Image
+              source={RX}
+              style={styles.descrioptionTick}
+            />
+            <Text style={styles.prescription}>Prescription needed</Text>
+          </View>) : null}
+          <View style={styles.ButtonConatiner}>
+            {stock_qty !== 0 ? this.renderButton() : this.renderNotification()}
+          </View>
 
           {productData && productData.attributes?.description !== "" && (
             <View style={styles.descrpitionStyle}>
               <View style={styles.descrpitionReadStyle}>
-                <Text style={styles.specifictaionTitle}>DESCRIPTION</Text>
+                <Text style={styles.specifictaionTitle}>Description</Text>
                 <View style={styles.descriptionContainer}>
                   <WebView
                     originWhitelist={["*"]}
@@ -565,7 +573,9 @@ export default class ProductDescription extends ProductDescriptionController {
                         productData.attributes?.description +
                         "</body></html>",
                     }}
-                    style={{ flex: 1 }}
+                    style={{
+                      flex: 1
+                    }}
                   />
                 </View>
                 {productData.attributes?.description !== "" && (
@@ -575,18 +585,18 @@ export default class ProductDescription extends ProductDescriptionController {
                     }
                     style={styles.readMoreButton}
                   >
-                    <Text style={styles.readmore}>read more</Text>
+                    <Text style={styles.readmore}>Read more</Text>
                   </TouchableOpacity>
                 )}
                 {/* <ReadMore
-                                numberOfLines={2}
-                                renderTruncatedFooter={this.renderTruncatedFooter}
-                                renderRevealedFooter={this.renderRevealedFooter}
-                            >
-                                <Text style={styles.DiscantaintType}>
-                                    {productData.attributes?.description}
-                                </Text>
-                            </ReadMore> */}
+                  numberOfLines={2}
+                  renderTruncatedFooter={this.renderTruncatedFooter}
+                  renderRevealedFooter={this.renderRevealedFooter}
+                >
+                  <Text style={styles.DiscantaintType}>
+                    {productData.attributes?.description}
+                  </Text>
+                </ReadMore> */}
               </View>
             </View>
           )}
@@ -602,13 +612,14 @@ export default class ProductDescription extends ProductDescriptionController {
                 onHeartPress={(item: any) =>
                   this.onHeartPress(item, "similarProducts")
                 }
+                onAddtocartPress={((item: any) => this.addToCartPress(item))}
               />
             </View>
           )}
         </ScrollView>
-        <View style={styles.ButtonConatiner}>
+        {/* <View style={styles.ButtonConatiner}>
           {stock_qty !== 0 ? this.renderButton() : this.renderNotification()}
-        </View>
+        </View> */}
       </>
     );
     // Customizable Area End
@@ -627,7 +638,7 @@ export default class ProductDescription extends ProductDescriptionController {
       >
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => {}}
+          onPress={() => { }}
           style={styles.modalContainer1}
         >
           <View style={styles.popup1}>
@@ -716,7 +727,7 @@ export default class ProductDescription extends ProductDescriptionController {
     const { cart_quantity } = productData.attributes;
     const isUpdate = selectedProduct
       ? selectedProduct?.attributes?.cart_quantity !== Number(quantity) &&
-        selectedProduct?.attributes?.cart_quantity > 0
+      selectedProduct?.attributes?.cart_quantity > 0
       : cart_quantity !== Number(quantity) && cart_quantity > 0;
     const isInCart = selectedProduct
       ? selectedProduct?.attributes?.cart_quantity > 0
@@ -727,11 +738,7 @@ export default class ProductDescription extends ProductDescriptionController {
           disabled={!this.state.isProductAvailable}
           onPress={() => this.addToCart()}
         >
-          <LinearGradient
-            colors={[
-              themeJson.attributes.common_button_color,
-              themeJson.attributes.common_button_color,
-            ]}
+          <View
             style={[
               isSubscriptionAvailable
                 ? styles.AddbuttonCustom
@@ -741,29 +748,28 @@ export default class ProductDescription extends ProductDescriptionController {
           >
             <Text style={styles.AddcustomTxtStyle}>
               {!this.state.isProductAvailable
-                ? "ADD TO CART"
+                ? "Add to cart"
                 : !isInCart
-                ? "ADD TO CART"
-                : isUpdate
-                ? "UPDATE CART"
-                : "GO TO CART"}
+                  ? "Add to cart"
+                  : isUpdate
+                    ? "Update cart"
+                    : "Go to cart"}
             </Text>
-          </LinearGradient>
+          </View>
         </TouchableOpacity>
         {isSubscriptionAvailable && (
           <TouchableOpacity
-            style={styles.AddbuttonCustom}
+            style={[styles.AddbuttonCustom, { marginTop: verticalScale(15), }]}
             onPress={() => this.onPressSubscriptionButton()}
           >
-            <Text style={styles.AddcustomTxtStyle}>SUBSCRIBE</Text>
+            <Text style={styles.AddcustomTxtStyle}>Subscribe</Text>
           </TouchableOpacity>
         )}
         <TouchableOpacity
           disabled={!this.state.isProductAvailable}
           onPress={() => this.onPressBuyNow()}
         >
-          <LinearGradient
-            colors={[COLOR_CONST.buyNowButton, COLOR_CONST.buyNowButton]}
+          <View
             style={[
               isSubscriptionAvailable
                 ? styles.BUYbuttonCustom
@@ -771,8 +777,8 @@ export default class ProductDescription extends ProductDescriptionController {
               { opacity: this.state.isProductAvailable ? 1 : 0.5 },
             ]}
           >
-            <Text style={styles.BUYcustomTxtStyle}>BUY NOW</Text>
-          </LinearGradient>
+            <Text style={styles.BUYcustomTxtStyle}>Buy now</Text>
+          </View>
         </TouchableOpacity>
       </View>
     );
@@ -843,7 +849,7 @@ export default class ProductDescription extends ProductDescriptionController {
           this.setState({ showProductDescriptionModal: false });
         }}
       >
-        <View style={styles.pdpModal}>
+        <SafeAreaView style={styles.pdpModal}>
           <Text style={styles.descriptionTitle}>DESCRIPTION</Text>
           <WebView
             originWhitelist={["*"]}
@@ -860,14 +866,13 @@ export default class ProductDescription extends ProductDescriptionController {
               this.setState({ showProductDescriptionModal: false })
             }
           >
-            <LinearGradient
-              colors={[COLOR_CONST.buyNowButton, COLOR_CONST.buyNowButton]}
-              style={styles.closeButton}
+            <View
+              style={styles.BUYbuttonCustom}
             >
-              <Text style={styles.BUYcustomTxtStyle}>CLOSE</Text>
-            </LinearGradient>
+              <Text style={styles.BUYcustomTxtStyle}>Close</Text>
+            </View>
           </TouchableOpacity>
-        </View>
+        </SafeAreaView>
       </Modal>
     );
   };
@@ -891,9 +896,9 @@ export default class ProductDescription extends ProductDescriptionController {
                 this.onShare();
               },
               style: {
-                resizeMode: "stretch",
+                resizeMode: "contain",
                 width: scale(16),
-                height: scale(21),
+                height: scale(16),
               },
             },
             {
@@ -902,27 +907,28 @@ export default class ProductDescription extends ProductDescriptionController {
                 this.props.navigation.navigate("Shoppingcart");
               },
               cartHasProductFlag: this.state.cartProduct?.has_cart_product,
+              cartquantity: this.state.cartProduct?.total_cart_item,
               style: { resizeMode: "contain" },
             },
           ]}
           navigation={this.props.navigation}
           headerLeftIconStyle={{}}
           headerTitleStyle={{}}
-          headerStyle={{ elevation: 2 }}
+          headerStyle={{}}
         />
 
         {this.state.prescriptionModal &&
-         <Prescriptionuploads  
-        navigation={this.props.navigation} 
-        showmodal={this.state.prescriptionModal}
-        hideErrorModal ={() =>
-          this.setState({ prescriptionModal: false })
-        }
-        uploadprescription ={(productdata:any) =>
-         this.uploadproduct(productdata)
-        }
-        productData={this.state.productDataArr}
-        />}
+          <Prescriptionuploads
+            navigation={this.props.navigation}
+            showmodal={this.state.prescriptionModal}
+            hideErrorModal={() =>
+              this.setState({ prescriptionModal: false })
+            }
+            uploadprescription={(productdata: any) =>
+              this.uploadproduct(productdata)
+            }
+            productData={this.state.productDataArr}
+          />}
         {this.state.productData && this.renderViewAll()}
         {this.state.showNotifiyModal && this.renderNotifiyModal()}
         {this.renderGuestModal()}

@@ -272,6 +272,7 @@ export default StyleSheet.create({
   },
 
   greenDot: {
+    marginTop:scale(3.5),
     width: scale(7),
     height: scale(7),
     borderRadius: scale(3.5),

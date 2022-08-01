@@ -327,11 +327,11 @@ export default class Filteroptions extends FilteroptionsController {
               style={styles.buttonCustom}
               onPress={() => this.props.navigation.goBack()}
             >
-              <Text style={styles.customTxtStyle}>CANCEL</Text>
+              <Text style={styles.customTxtStyle}>Cancel</Text>
             </TouchableOpacity>
             <GreenButton
               testID={"buttonApplyFilter"}
-              title="APPLY FILTER"
+              title="Apply Filter"
               customStyle={styles.buttonCustom}
               customTxtStyle={styles.customTxtStyle}
               onPress={() => this.onPressApplyFilter()}

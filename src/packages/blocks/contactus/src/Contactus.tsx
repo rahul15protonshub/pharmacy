@@ -191,7 +191,7 @@ export default class Contactus extends ContactusController {
           </View>
         </KeyboardAwareScrollView>
         <GreenButton
-          title="SUBMIT"
+          title="Submit"
           disabled={
             this.state.textInputData.name.trim() === "" ||
             this.state.textInputData.email.trim() === "" ||
@@ -203,9 +203,9 @@ export default class Contactus extends ContactusController {
             {
               opacity:
                 this.state.textInputData.name.trim() === "" ||
-                this.state.textInputData.email.trim() === "" ||
-                this.state.textInputData.phoneNo.trim() === "" ||
-                this.state.descriptionText.trim() === ""
+                  this.state.textInputData.email.trim() === "" ||
+                  this.state.textInputData.phoneNo.trim() === "" ||
+                  this.state.descriptionText.trim() === ""
                   ? 0.5
                   : 1,
             },

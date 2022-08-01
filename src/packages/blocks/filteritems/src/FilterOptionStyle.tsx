@@ -110,7 +110,7 @@ export default StyleSheet.create({
   buttonCustom: {
     width: scale(173),
     height: scale(44),
-    borderRadius: 21,
+    borderRadius: scale(5),
     backgroundColor: COLOR_CONST.charcoalGrey,
     opacity: 0.99,
     alignItems: "center",
@@ -297,7 +297,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginLeft: scale(27.3),
-    marginTop: verticalScale(35),
+    marginTop: verticalScale(6),
   },
 
   sliderContainer: {

@@ -6,11 +6,11 @@ const themeJson = require('../../../studio-store-ecommerce-theme/src/theme.json'
 const GreenButton = (props: any) => {
   return (
     <TouchableOpacity onPress={props.onPress} {...props}>
-      <LinearGradient colors={[themeJson.attributes.common_button_color, themeJson.attributes.common_button_color]} style={[styles.buttonStyle, props.customStyle]}>
+      <View style={[styles.buttonStyle, props.customStyle, { backgroundColor: COLOR_CONST.newtheme_another }]}>
         <Text style={[{ color: COLOR_CONST.white }, props.customTxtStyle]}>
           {props.title}
         </Text>
-      </LinearGradient>
+      </View>
     </TouchableOpacity>
   );
 };

@@ -388,7 +388,7 @@ export default StyleSheet.create({
     alignItems: "center",
     width: scale(339),
     height: scale(42),
-    borderRadius: scale(21),
+    borderRadius: scale(5),
     opacity: 0.99,
     marginBottom: verticalScale(30),
   },

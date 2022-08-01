@@ -60,7 +60,7 @@ export default StyleSheet.create({
     backgroundColor: themeJson.attributes.primary_color,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 22,
+    borderRadius: scale(5),
   },
 
   loginText: {
@@ -172,7 +172,7 @@ export default StyleSheet.create({
     borderColor: COLOR_CONST.whiteThree,
     width: scale(312),
     height: scale(40),
-    borderRadius: scale(20),
+    borderRadius: scale(5),
   },
 
   SectionStyle1: {
@@ -184,7 +184,7 @@ export default StyleSheet.create({
     borderColor: COLOR_CONST.focusDarkColor,
     width: scale(312),
     height: scale(40),
-    borderRadius: scale(20),
+    borderRadius: scale(5),
   },
 
   ImageStyleEmail: {

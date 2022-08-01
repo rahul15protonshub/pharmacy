@@ -43,7 +43,7 @@ export default class OrderConfirm extends OrderConfirmController {
         : this.state.orderConfirmStatus;
     const total = this.props.navigation.state?.params?.orderData?.order?.total;
     let placed_at =
-      this.props.navigation.state?.params?.orderData?.order?.placed_at;
+      this.props.navigation.state?.params?.orderData?.order?.created_at;
     return (
       <SafeAreaView
         style={{
@@ -138,7 +138,7 @@ export default class OrderConfirm extends OrderConfirmController {
                   ]}
                   style={styles.loginButton}
                 >
-                  <Text style={styles.loginText}>GO TO MY ORDERS </Text>
+                  <Text style={styles.loginText}>Go To My Orders </Text>
                 </LinearGradient>
               </TouchableOpacity>
             </View>
@@ -290,7 +290,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: scale(339),
     height: scale(42),
-    borderRadius: scale(21),
+    borderRadius: scale(5),
     opacity: 0.99,
     marginBottom: verticalScale(100),
   },

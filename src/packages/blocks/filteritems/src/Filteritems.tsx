@@ -166,6 +166,7 @@ export default class Filteritems extends FilteritemsController {
         productImage = item?.item?.attributes?.images?.data[0].attributes.url;
       }
     }
+    const isInCart = item?.item?.attributes?.cart_quantity > 0 ? true : false;
     return (
       <TouchableOpacity
         onPress={() =>
@@ -206,13 +207,21 @@ export default class Filteritems extends FilteritemsController {
               </Text>
             </View>
           ) : (
-            <Text style={[styles.price, { marginLeft: scale(12) }]}>
+            <Text style={[styles.price, {}]}>
               {themeJson.attributes.currency_type}{" "}
               {item.item.attributes.price_including_tax}
             </Text>
           )}
         </View>
-        <View style={styles.reviewRow}>
+        <TouchableOpacity onPress={() => this.addToCart(item)} style={styles.addtocartitem}>
+          <View >
+            <Text style={styles.addtocarttext}> {!isInCart
+              ? "Add to cart"
+              : "Go to cart"}</Text>
+          </View>
+
+        </TouchableOpacity>
+        {/* <View style={styles.reviewRow}>
           <Text style={styles.avgReview}>
             {item.item.attributes.average_rating}
           </Text>
@@ -222,7 +231,7 @@ export default class Filteritems extends FilteritemsController {
               | {item.item.attributes.reviews.length}
             </Text>
           )}
-        </View>
+        </View> */}
         {item.item.attributes.on_sale && (
           <View style={styles.labelSticker}>
             <Text style={styles.stickerText}>
@@ -255,6 +264,7 @@ export default class Filteritems extends FilteritemsController {
                 this.props.navigation.navigate("Shoppingcart");
               },
               cartHasProductFlag: this.state.cartProduct?.has_cart_product,
+              cartquantity: this.state.cartProduct?.total_cart_item,
               style: { resizeMode: "contain" },
             },
           ]}

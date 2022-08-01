@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 'GTWalsheimPro';
-    src: url('GTWalsheimPro-Bold.ttf') format('truetype');
+    font-family: 'Rubik';
+    src: url('Rubik-Bold.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -8,8 +8,8 @@
 
 /* regular */
 @font-face {
-    font-family: 'GTWalsheimPro';
-    src: url('GTWalsheimPro-Regular.ttf') format('truetype');
+    font-family: 'Rubik';
+    src: url('Rubik-Regular.ttf') format('truetype');
     font-weight: 900;
     font-style: normal;
     font-display: swap;
@@ -17,8 +17,8 @@
 
 /* light */
 @font-face {
-    font-family: 'GTWalsheimPro';
-    src: url('GTWalsheimPro-Light.ttf') format('truetype');
+    font-family: 'Rubik';
+    src: url('Rubik-Light.ttf') format('truetype');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
@@ -26,8 +26,8 @@
 
 /* medium */
 @font-face {
-    font-family: 'GTWalsheimPro';
-    src: url('GTWalsheimPro-Medium.ttf') format('truetype');
+    font-family: 'Rubik';
+    src: url('Rubik-Medium.ttf') format('truetype');
     font-style: normal;
     font-display: swap;
 }
@@ -40,6 +40,3 @@
     font-style: normal;
     font-display: swap;
 }
-
-
-

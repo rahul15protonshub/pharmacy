@@ -131,8 +131,8 @@ export default class Ordersummary extends OrdersummaryController {
                   <Text style={styles.periodText}>
                     {item.attributes.preferred_delivery_slot
                       ? `${this.getSlotString(
-                          item.attributes.preferred_delivery_slot
-                        )} | `
+                        item.attributes.preferred_delivery_slot
+                      )} | `
                       : ""}
                     <Text style={styles.packageText}>
                       {item.attributes.subscription_package
@@ -235,8 +235,8 @@ export default class Ordersummary extends OrdersummaryController {
                 <Text style={styles.couponPrice}>
                   -{themeJson.attributes.currency_type}{" "}
                   {this.state.cartData &&
-                  this.state.cartData.attributes &&
-                  this.state.cartData.attributes.applied_discount
+                    this.state.cartData.attributes &&
+                    this.state.cartData.attributes.applied_discount
                     ? this.state.cartData.attributes.applied_discount
                     : ""}
                 </Text>
@@ -449,7 +449,7 @@ export default class Ordersummary extends OrdersummaryController {
       >
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => {}}
+          onPress={() => { }}
           style={styles.modalContainer1}
         >
           <View style={styles.popup1}>
@@ -477,7 +477,7 @@ export default class Ordersummary extends OrdersummaryController {
                   )
                 }
               >
-                <Text style={styles.yesDelete1}>SIGN UP/LOG IN</Text>
+                <Text style={styles.yesDelete1}>Sign Up/Log IN</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -531,8 +531,8 @@ export default class Ordersummary extends OrdersummaryController {
                 onPress={() =>
                   this.state.token === ""
                     ? this.setState({
-                        showGuestModal: true,
-                      })
+                      showGuestModal: true,
+                    })
                     : this.saveAddress()
                 }
               >
@@ -546,13 +546,13 @@ export default class Ordersummary extends OrdersummaryController {
                     {
                       opacity:
                         this.state.isPaymentOption1Selected ||
-                        this.state.isPaymentOption2Selected
+                          this.state.isPaymentOption2Selected
                           ? 1
                           : 0.5,
                     },
                   ]}
                 >
-                  <Text style={styles.loginText}>PROCEED</Text>
+                  <Text style={styles.loginText}>Proceed</Text>
                 </LinearGradient>
               </TouchableOpacity>
             </View>

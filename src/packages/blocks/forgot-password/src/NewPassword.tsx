@@ -83,8 +83,8 @@ export default class NewPassword extends NewPasswordController {
                     this.state.passwordError
                       ? styles.errorSectionStyle
                       : this.state.password
-                      ? styles.SectionStyle
-                      : styles.SectionStyle1,
+                        ? styles.SectionStyle
+                        : styles.SectionStyle1,
                     { marginTop: verticalScale(13) },
                   ]}
                 >
@@ -106,8 +106,8 @@ export default class NewPassword extends NewPasswordController {
                         color: this.state.passwordError
                           ? COLOR_CONST.pastelRed
                           : this.state.password
-                          ? COLOR_CONST.charcoalGrey
-                          : themeJson.attributes.primary_color,
+                            ? COLOR_CONST.charcoalGrey
+                            : themeJson.attributes.primary_color,
                       },
                     ]}
                     placeholder="Enter New Password"
@@ -138,8 +138,8 @@ export default class NewPassword extends NewPasswordController {
                     this.state.confirmPasswordError
                       ? styles.errorSectionStyle
                       : this.state.confirmPassword
-                      ? styles.SectionStyle
-                      : styles.SectionStyle1,
+                        ? styles.SectionStyle
+                        : styles.SectionStyle1,
                     { marginTop: verticalScale(13) },
                   ]}
                 >
@@ -164,8 +164,8 @@ export default class NewPassword extends NewPasswordController {
                         color: this.state.confirmPasswordError
                           ? COLOR_CONST.pastelRed
                           : this.state.confirmPassword
-                          ? COLOR_CONST.charcoalGrey
-                          : themeJson.attributes.primary_color,
+                            ? COLOR_CONST.charcoalGrey
+                            : themeJson.attributes.primary_color,
                       },
                     ]}
                     placeholder="Confirm New Password"
@@ -198,7 +198,7 @@ export default class NewPassword extends NewPasswordController {
                       backgroundColor: themeJson.attributes.common_button_color,
                       opacity:
                         this.state.confirmPasswordInput.trim() === "" ||
-                        this.state.newPasswordInput.trim() === ""
+                          this.state.newPasswordInput.trim() === ""
                           ? 0.5
                           : 1,
                     },
@@ -209,7 +209,7 @@ export default class NewPassword extends NewPasswordController {
                     this.state.newPasswordInput.trim() === ""
                   }
                 >
-                  <Text style={styles.submitText}>RESET PASSWORD</Text>
+                  <Text style={styles.submitText}>Reset Password</Text>
                 </TouchableOpacity>
               </View>
             </View>

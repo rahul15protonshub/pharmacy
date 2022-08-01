@@ -109,7 +109,7 @@ export default StyleSheet.create({
 
   productRow: {
     flexDirection: "row",
-    alignItems: "center",
+   
     marginLeft: scale(11),
   },
 
@@ -366,6 +366,7 @@ export default StyleSheet.create({
   },
 
   greenDot: {
+    marginTop:scale(2.5),
     width: scale(7),
     height: scale(7),
     borderRadius: scale(3.5),

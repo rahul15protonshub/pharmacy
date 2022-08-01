@@ -406,7 +406,7 @@ export default class Checkout extends CheckoutController {
           </View>
         </ScrollView>
         <GreenButton
-          title="CONTINUE"
+          title="Continue"
           customStyle={styles.loginButton}
           customTxtStyle={styles.loginText}
           onPress={() => this.validateInput()}
