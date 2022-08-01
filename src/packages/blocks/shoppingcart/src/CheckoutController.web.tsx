@@ -61,6 +61,7 @@ interface S {
   loading?: boolean;
   buyNowCartId?: any;
   // Customizable Area Start
+  address:any
   // Customizable Area End
 }
 
@@ -123,6 +124,7 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
       isCheckedShippingCharge: false,
       stateList: [],
       // Customizable Area Start
+      address:""
       // Customizable Area End
     };
     this.receive = this.receive.bind(this);
@@ -806,6 +808,7 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
 
   updateAddress = (selectedAddress: any) => {
     //@ts-nocheck;
+    console.log('this.state.deliveryAddressID', this.state.deliveryAddressID)
     this.setState({
       selectedAddress: this.state.deliveryAddressID,
       selectAddressCheck: false,

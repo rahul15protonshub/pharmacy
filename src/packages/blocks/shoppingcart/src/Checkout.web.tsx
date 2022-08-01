@@ -1400,9 +1400,10 @@ export class Checkout extends CheckoutController {
                       className="pp-sa-list-none p-0 m-0 pp-sa-all-addres-list"
                       style={{ listStyle: "none" }}
                     >
+                     
                       {this.state.userAddress &&
                       this.state.userAddress.length > 0 ? (
-                        this.state.userAddress.map((ele, index) => (
+                        [...new Map(this.state.userAddress?.map(item =>[item["address"],item])).values()].map((ele, index) => (
                           <li
                             key={index}
                             className={

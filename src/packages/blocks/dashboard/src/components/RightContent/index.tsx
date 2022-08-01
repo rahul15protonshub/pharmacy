@@ -142,18 +142,13 @@ const RightContent: React.FunctionComponent<RightContentProps> = (
       </div>
       <div className="product_category_type">{productListTitle}</div>
       <div className="home-main-product-list">
-        {/*loading && <div style={{
-                        position: 'absolute', zIndex: 999, width: '100%', height: '100%', display: "flex", alignItems: 'center', justifyContent: 'center'
-                        }}>
-                        <CircularProgress />
-                        </div>*/}
         <div className="card_group" onScroll={handleScroll}>
           <Row style={{ flex: 1 }}>
             <InfiniteScroll
               dataLength={products ? products.length : 0}
               next={props.fetchMoreData}
               hasMore={true}
-              loader={<h4>Loading...</h4>}
+              loader={<></>}
               className="row"
             >
               {products ? (
