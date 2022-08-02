@@ -116,8 +116,8 @@ export default class OTPInputAuth extends OTPInputAuthController {
                     this.state.emailError
                       ? styles.errorSectionStyle
                       : this.state.email
-                      ? styles.SectionStyle
-                      : styles.SectionStyle1
+                        ? styles.SectionStyle
+                        : styles.SectionStyle1
                   }
                 >
                   <Image
@@ -127,7 +127,7 @@ export default class OTPInputAuth extends OTPInputAuthController {
                       {
                         tintColor: this.state.emailInput
                           ? COLOR_CONST.charcoalGrey
-                          : COLOR_CONST.focusDarkColor,
+                          : themeJson.attributes.primary_color,
                       },
                     ]}
                   />
@@ -157,8 +157,8 @@ export default class OTPInputAuth extends OTPInputAuthController {
                       this.state.OTPError
                         ? styles.errorSectionStyle
                         : this.state.OTPfocus
-                        ? styles.SectionStyle
-                        : styles.SectionStyle1,
+                          ? styles.SectionStyle
+                          : styles.SectionStyle1,
                       { marginTop: verticalScale(13) },
                     ]}
                   >
@@ -169,7 +169,7 @@ export default class OTPInputAuth extends OTPInputAuthController {
                         {
                           tintColor: this.state.OTP
                             ? COLOR_CONST.charcoalGrey
-                            : COLOR_CONST.focusDarkColor,
+                            : themeJson.attributes.primary_color,
                         },
                       ]}
                     />
@@ -180,8 +180,8 @@ export default class OTPInputAuth extends OTPInputAuthController {
                           color: this.state.OTPError
                             ? COLOR_CONST.pastelRed
                             : this.state.fullName
-                            ? COLOR_CONST.charcoalGrey
-                            : COLOR_CONST.focusDarkColor,
+                              ? COLOR_CONST.charcoalGrey
+                              : COLOR_CONST.focusDarkColor,
                         },
                       ]}
                       onFocus={() => this.onFocus("OTP")}
@@ -204,7 +204,7 @@ export default class OTPInputAuth extends OTPInputAuthController {
                   </View>
                 )}
                 <GreenButton
-                  title={this.state.isOTPSent ? "OTP VERIFY" : "SUBMIT"}
+                  title={this.state.isOTPSent ? "OTP Verify" : "Submit"}
                   disabled={this.state.emailInput.trim() === ""}
                   customStyle={[
                     styles.loginButton,

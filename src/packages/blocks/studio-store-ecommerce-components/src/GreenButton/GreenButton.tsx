@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 22,
+    borderRadius: 5,
     backgroundColor: COLOR_CONST.greenButton,
   },
 });

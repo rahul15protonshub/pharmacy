@@ -182,6 +182,13 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
     tempbrowsefile[index].browsefile = []
     this.setState({ dataArr: tempbrowsefile, showanother: false, allfileupload: false })
   }
+  deleteview = async (index: any) => {
+    let tempbrowsefile = this.state.dataArr
+      tempbrowsefile.splice(index, 1);
+      let newindex=tempbrowsefile.length-1
+      tempbrowsefile[newindex].is_selecatable = false
+    this.setState({ dataArr: tempbrowsefile,  allfileupload: false })
+  }
 
   render() {
     const { selectedItems, dataArr } = this.state;
@@ -215,6 +222,15 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
                     <View>
 
                       {<View style={{ marginTop: verticalScale(15) }}>
+                       {index>0 && <TouchableOpacity style={{alignSelf:'flex-end',marginRight:scale(15),marginBottom:scale(8)}} onPress={() => {
+                                this.deleteview(index)
+                              }}>
+                                <Image
+                                  source={crossIcon}
+                                  style={[styles.crossimg_br,{}]}
+                                />
+                        </TouchableOpacity>
+                        }
                         <View style={styles.browsefilemain}>
                           {item.browsefile.length == 0 ? <TouchableOpacity
                             onPress={() => {
@@ -429,6 +445,11 @@ const styles = StyleSheet.create({
   crossimg: {
     width: scale(10),
     height: scale(10),
+    tintColor:"#448AFF"
+  },
+  crossimg_br : {
+    width: scale(8),
+    height: scale(8),
   },
   browseimg: {
     width: scale(25),

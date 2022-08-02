@@ -282,7 +282,7 @@ export default StyleSheet.create({
     borderColor: COLOR_CONST.whiteThree,
     width: scale(312),
     height: scale(40),
-    borderRadius: scale(20),
+    borderRadius: scale(5),
   },
 
   SectionStyle1: {
@@ -291,10 +291,10 @@ export default StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#fff",
     borderWidth: 0.8,
-    borderColor: COLOR_CONST.focusDarkColor,
+    borderColor: themeJson.attributes.primary_color,
     width: scale(312),
     height: scale(40),
-    borderRadius: scale(20),
+    borderRadius: scale(5),
   },
 
   ImageStyleEmail: {
