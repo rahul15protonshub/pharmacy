@@ -694,6 +694,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
   //buy now post
   postBuyNow = (catalogue_id: any, catalogue_variant_id: any): boolean => {
+    console.log('catalogue_id', catalogue_id,"catalogue_variant_id",catalogue_variant_id)
     // Customizable Area Start
     const header = {
       "Content-Type": configJSON.validationApiContentType,

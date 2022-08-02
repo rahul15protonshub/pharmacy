@@ -685,11 +685,17 @@ form.yt-cart-disct-wrap .success.form-group {
   }
 }
 @media (min-width: 1280px) {
+  .varientAvlClr{
+    margin-top: 4rem !important
+  }
   .varientAvl1{
     margin-top: 8rem !important;
   }
   .varientAvl2{
     margin-top: 5rem !important;
+  }
+  .varientAvl3{
+    margin-top: 12rem !important;
   }
   .empty-main-ttl {
     display: none;

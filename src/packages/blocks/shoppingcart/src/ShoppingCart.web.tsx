@@ -444,13 +444,11 @@ function CartProduct(props: any) {
                     .prescription && (
                     <Fragment>
                       <div
-                        className={`${
-                          variant?.catalogue_variant_properties &&
-                          variant?.catalogue_variant_properties.length ==1
-                            ? "varientAvl1"
-                            : ""
-                        } ${variant?.catalogue_variant_properties &&
-                          variant?.catalogue_variant_properties.length == 2&&"varientAvl2"} d-flex align-items-center presBox`}
+                        className={`${variant?.catalogue_variant_properties &&
+                          variant?.catalogue_variant_properties.length == 2 ?
+                          "varientAvl2":""} ${variant?.catalogue_variant_properties &&
+                          variant?.catalogue_variant_properties.length > 2 ?
+                          "varientAvl3":""} d-flex align-items-center presBox`}
                       >
                         <div className="sp-verify-icn-wrap mx-2">
                           <img
@@ -638,11 +636,10 @@ const CartAmount: any = withRouter((props: any) => {
   const [dropDown, setDropdown] = useState([
     {
       id: 0,
-      options: presProduct,
+      options: presProduct&&presProduct,
       selected: [],
     },
   ]);
-
   useEffect(() => {
     let preProduct = wholeCart.order_items.filter((item: any) => {
       return item.attributes.catalogue.attributes.prescription == true;
@@ -653,15 +650,16 @@ const CartAmount: any = withRouter((props: any) => {
     preProduct.filter((elm: any) => {
       setpresProduct((presProduct: any) => [
         ...presProduct,
-        { label: elm.attributes.catalogue.attributes.name, value: elm.id },
+        { label: elm.attributes.catalogue.attributes.name, value: elm.id},
       ]);
     });
-  }, []);
+  }, [props.wholeCart]);
 
   useEffect(() => {
     if (presProduct.length > 0) {
+      let arr1= [...new Map(presProduct?.map((item:any) =>[item["label"],item])).values()]
       let newArr = dropDown.map((item, i) => {
-        return { ...item, options: presProduct };
+        return { ...item, options:arr1 };
       });
       setDropdown(newArr);
     }
@@ -756,7 +754,13 @@ const CartAmount: any = withRouter((props: any) => {
         itemIds.push(parseInt(item.value));
       });
     });
-
+    let itemIds1: any = [];
+    dropDown.map((elm: any) => {
+      elm.options.map((item: any) => {
+        let id=parseInt(item.value)+1
+        itemIds1.push(id);
+      });
+    });
     let data: any = {
       order_items: [
         {
@@ -765,9 +769,18 @@ const CartAmount: any = withRouter((props: any) => {
         },
       ],
     };
+    let data1: any = {
+      order_items: [
+        {
+          order_item_ids: itemIds1,
+          prescription_files: preFiles,
+        },
+      ],
+    };
 
     let res = props.uploadPrescription(data);
-    if (res) {
+    let res1 = props.uploadPrescription(data1);
+    if (res||res1) {
       proceedToCheckoutForm();
     }
   };
@@ -1306,9 +1319,9 @@ const CartAmount: any = withRouter((props: any) => {
                   + Add another prescription
                 </Button>
               ) : (
-                <div></div>
+                <div className="w-50"></div>
               )}
-              <span className="d-flex">
+              <div className="d-flex W-50">
                 <Button
                   className="cancel px-1 mx-3 "
                   color="link"
@@ -1330,7 +1343,7 @@ const CartAmount: any = withRouter((props: any) => {
                 >
                   Upload
                 </Button>
-              </span>
+              </div>
             </ModalFooter>
           </Modal>
         </div>
