@@ -101,36 +101,36 @@ export default class Ordermanagement extends OrdermanagementController {
         <View style={styles.rowContainer}>
           {orderItem.logistics_ship_rocket_enabled
             ? (orderItem.ship_rocket_status === "delivered" ||
-                orderItem.ship_rocket_status === "returned") &&
-              !orderItem.is_review_present &&
-              !orderItem.order_cancelled && (
-                <TouchableOpacity
-                  onPress={() =>
-                    this.setState({
-                      isInvalidReview: false,
-                      selectedOrderData: orderItem,
-                      showSubmitReviewModal: true,
-                    })
-                  }
-                >
-                  <Text style={styles.writeReview}>Write a Review</Text>
-                </TouchableOpacity>
-              )
+              orderItem.ship_rocket_status === "returned") &&
+            !orderItem.is_review_present &&
+            !orderItem.order_cancelled && (
+              <TouchableOpacity
+                onPress={() =>
+                  this.setState({
+                    isInvalidReview: false,
+                    selectedOrderData: orderItem,
+                    showSubmitReviewModal: true,
+                  })
+                }
+              >
+                <Text style={styles.writeReview}>Write a Review</Text>
+              </TouchableOpacity>
+            )
             : (item.status === "delivered" || item.status === "returned") &&
-              !item.is_review_present &&
-              !item.order_cancelled && (
-                <TouchableOpacity
-                  onPress={() =>
-                    this.setState({
-                      isInvalidReview: false,
-                      selectedOrderData: item,
-                      showSubmitReviewModal: true,
-                    })
-                  }
-                >
-                  <Text style={styles.writeReview}>Write a Review</Text>
-                </TouchableOpacity>
-              )}
+            !item.is_review_present &&
+            !item.order_cancelled && (
+              <TouchableOpacity
+                onPress={() =>
+                  this.setState({
+                    isInvalidReview: false,
+                    selectedOrderData: item,
+                    showSubmitReviewModal: true,
+                  })
+                }
+              >
+                <Text style={styles.writeReview}>Write a Review</Text>
+              </TouchableOpacity>
+            )}
           {item.subscription_package && (
             <View style={styles.labelSticker}>
               <Text style={styles.stickerText}>
@@ -148,7 +148,7 @@ export default class Ordermanagement extends OrdermanagementController {
               source={{
                 uri: productImage,
               }}
-              //resizeMode={'stretch'}
+            //resizeMode={'stretch'}
             />
 
             <View style={styles.middleInfo}>
@@ -179,7 +179,7 @@ export default class Ordermanagement extends OrdermanagementController {
                         ? orderItem.ship_rocket_status === "new"
                           ? "confirmed"
                           : orderItem.ship_rocket_status
-                        : item.status}
+                        : item.overall_order_status}
                     </Text>
                   </View>
                 )}
@@ -189,7 +189,7 @@ export default class Ordermanagement extends OrdermanagementController {
                   <Text style={styles.package}>
                     {item.preferred_delivery_slot
                       ? this.getSlotString(item.preferred_delivery_slot) +
-                        ` ${item.preferred_delivery_slot} | `
+                      ` ${item.preferred_delivery_slot} | `
                       : ""}
                   </Text>
                   <Text style={styles.period}>
@@ -326,7 +326,7 @@ export default class Ordermanagement extends OrdermanagementController {
       >
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => {}}
+          onPress={() => { }}
           style={styles.modalContainer}
         >
           <View style={styles.popup}>
@@ -375,7 +375,7 @@ export default class Ordermanagement extends OrdermanagementController {
         >
           <TouchableOpacity
             activeOpacity={1}
-            onPress={() => {}}
+            onPress={() => { }}
             style={styles.modalContainer}
           >
             <View style={styles.reviewPopup}>
@@ -460,6 +460,7 @@ export default class Ordermanagement extends OrdermanagementController {
                 this.props.navigation.navigate("Shoppingcart");
               },
               cartHasProductFlag: this.state.cartHasProduct,
+              cartquantity: this.state.cartcount,
               style: { resizeMode: "contain", marginLeft: Scale(35) },
             },
           ]}

@@ -68,56 +68,56 @@ import Sms2 from "../blocks/Sms2/src/Sms2";
 
 
 const HomeStack = createStackNavigator({
-Home: { screen: Contactus, navigationOptions: { header: null, title: "Home" } },
-Ordermanagement:{ screen:Ordermanagement,navigationOptions:{ title:"Ordermanagement"}},
-Auth:{ screen:Auth,navigationOptions:{ title:"Auth"}},
-Profilebio:{ screen:Profilebio,navigationOptions:{ title:"Profilebio"}},
-EditProfile:{ screen:EditProfile,navigationOptions:{ title:"EditProfile"}},
-ChangePassword:{ screen:ChangePassword,navigationOptions:{ title:"ChangePassword"}},
-Shoppingcart:{ screen:Shoppingcart,navigationOptions:{ title:"Shoppingcart"}},
-EditAddress:{ screen:EditAddress,navigationOptions:{ title:"EditAddress"}},
-SavedAddress:{ screen:SavedAddress,navigationOptions:{ title:"SavedAddress"}},
-Checkout:{ screen:Checkout,navigationOptions:{ title:"Checkout"}},
-Orderdetailview:{ screen:Orderdetailview,navigationOptions:{ title:"Orderdetailview"}},
-SubscriptionOrderList:{ screen:SubscriptionOrderList,navigationOptions:{ title:"SubscriptionOrderList"}},
-OTPInputAuth:{ screen:OTPInputAuth,navigationOptions:{ title:"OTPInputAuth"}},
-Login:{ screen:Login,navigationOptions:{ title:"Login"}},
-AdHocReporting2:{ screen:AdHocReporting2,navigationOptions:{ title:"AdHocReporting2"}},
-Signup:{ screen:Signup,navigationOptions:{ title:"Signup"}},
-ForgotPassword:{ screen:ForgotPassword,navigationOptions:{ title:"ForgotPassword"}},
-NewPassword:{ screen:NewPassword,navigationOptions:{ title:"NewPassword"}},
-Notifications:{ screen:Notifications,navigationOptions:{ title:"Notifications"}},
-EmailLists:{ screen:EmailLists,navigationOptions:{ title:"EmailLists"}},
-Filteritems:{ screen:Filteritems,navigationOptions:{ title:"Filteritems"}},
-Filteroptions:{ screen:Filteroptions,navigationOptions:{ title:"Filteroptions"}},
-ApiIntegration19:{ screen:ApiIntegration19,navigationOptions:{ title:"ApiIntegration19"}},
-HelpCenter:{ screen:HelpCenter,navigationOptions:{ title:"HelpCenter"}},
-HelpCenterData:{ screen:HelpCenterData,navigationOptions:{ title:"HelpCenterData"}},
-Interactivefaqs:{ screen:Interactivefaqs,navigationOptions:{ title:"Interactivefaqs"}},
-AdminConsole3:{ screen:AdminConsole3,navigationOptions:{ title:"AdminConsole3"}},
-WishList:{ screen:WishList,navigationOptions:{ title:"WishList"}},
-Reviews2:{ screen:Reviews2,navigationOptions:{ title:"Reviews2"}},
-BulkUploading:{ screen:BulkUploading,navigationOptions:{ title:"BulkUploading"}},
-Categoriessubcategories:{ screen:Categoriessubcategories,navigationOptions:{ title:"Categoriessubcategories"}},
-Share2:{ screen:Share2,navigationOptions:{ title:"Share2"}},
-ConnectedAccounts:{ screen:ConnectedAccounts,navigationOptions:{ title:"ConnectedAccounts"}},
-UploadMedia2:{ screen:UploadMedia2,navigationOptions:{ title:"UploadMedia2"}},
-Sorting:{ screen:Sorting,navigationOptions:{ title:"Sorting"}},
-Contactus:{ screen:Contactus,navigationOptions:{ title:"Contactus"}},
-Catalogue:{ screen:Catalogue,navigationOptions:{ title:"Catalogue"}},
-Payments:{ screen:Payments,navigationOptions:{ title:"Payments"}},
-Hyperpay:{ screen:Hyperpay,navigationOptions:{ title:"Hyperpay"}},
-OrderConfirm:{ screen:OrderConfirm,navigationOptions:{ title:"OrderConfirm"}},
-Dashboard:{ screen:Dashboard,navigationOptions:{ title:"Dashboard"}},
-Ordersummary:{ screen:Ordersummary,navigationOptions:{ title:"Ordersummary"}},
-Splashscreen:{ screen:Splashscreen,navigationOptions:{ title:"Splashscreen"}},
-TargetedFeed:{ screen:TargetedFeed,navigationOptions:{ title:"TargetedFeed"}},
-LiveChat2:{ screen:LiveChat2,navigationOptions:{ title:"LiveChat2"}},
-ProductDescription:{ screen:ProductDescription,navigationOptions:{ title:"ProductDescription"}},
-ReviewList:{ screen:ReviewList,navigationOptions:{ title:"ReviewList"}},
-Search:{ screen:Search,navigationOptions:{ title:"Search"}},
-CustomisedOrderStatus:{ screen:CustomisedOrderStatus,navigationOptions:{ title:"CustomisedOrderStatus"}},
-Sms2:{ screen:Sms2,navigationOptions:{ title:"Sms2"}},
+  Home: { screen: Contactus, navigationOptions: { header: null, title: "Home" } },
+  Ordermanagement: { screen: Ordermanagement, navigationOptions: { title: "Ordermanagement" } },
+  Auth: { screen: Auth, navigationOptions: { title: "Auth" } },
+  Profilebio: { screen: Profilebio, navigationOptions: { title: "Profilebio" } },
+  EditProfile: { screen: EditProfile, navigationOptions: { title: "EditProfile" } },
+  ChangePassword: { screen: ChangePassword, navigationOptions: { title: "ChangePassword" } },
+  Shoppingcart: { screen: Shoppingcart, navigationOptions: { title: "Shoppingcart" } },
+  EditAddress: { screen: EditAddress, navigationOptions: { title: "EditAddress" } },
+  SavedAddress: { screen: SavedAddress, navigationOptions: { title: "SavedAddress" } },
+  Checkout: { screen: Checkout, navigationOptions: { title: "Checkout" } },
+  Orderdetailview: { screen: Orderdetailview, navigationOptions: { title: "Orderdetailview" } },
+  SubscriptionOrderList: { screen: SubscriptionOrderList, navigationOptions: { title: "SubscriptionOrderList" } },
+  OTPInputAuth: { screen: OTPInputAuth, navigationOptions: { title: "OTPInputAuth" } },
+  Login: { screen: Login, navigationOptions: { title: "Login" } },
+  AdHocReporting2: { screen: AdHocReporting2, navigationOptions: { title: "AdHocReporting2" } },
+  Signup: { screen: Signup, navigationOptions: { title: "Signup" } },
+  ForgotPassword: { screen: ForgotPassword, navigationOptions: { title: "ForgotPassword" } },
+  NewPassword: { screen: NewPassword, navigationOptions: { title: "NewPassword" } },
+  Notifications: { screen: Notifications, navigationOptions: { title: "Notifications" } },
+  EmailLists: { screen: EmailLists, navigationOptions: { title: "EmailLists" } },
+  Filteritems: { screen: Filteritems, navigationOptions: { title: "Filteritems" } },
+  Filteroptions: { screen: Filteroptions, navigationOptions: { title: "Filteroptions" } },
+  ApiIntegration19: { screen: ApiIntegration19, navigationOptions: { title: "ApiIntegration19" } },
+  HelpCenter: { screen: HelpCenter, navigationOptions: { title: "HelpCenter" } },
+  HelpCenterData: { screen: HelpCenterData, navigationOptions: { title: "HelpCenterData" } },
+  Interactivefaqs: { screen: Interactivefaqs, navigationOptions: { title: "Interactivefaqs" } },
+  AdminConsole3: { screen: AdminConsole3, navigationOptions: { title: "AdminConsole3" } },
+  WishList: { screen: WishList, navigationOptions: { title: "WishList" } },
+  Reviews2: { screen: Reviews2, navigationOptions: { title: "Reviews2" } },
+  BulkUploading: { screen: BulkUploading, navigationOptions: { title: "BulkUploading" } },
+  Categoriessubcategories: { screen: Categoriessubcategories, navigationOptions: { title: "Categoriessubcategories" } },
+  Share2: { screen: Share2, navigationOptions: { title: "Share2" } },
+  ConnectedAccounts: { screen: ConnectedAccounts, navigationOptions: { title: "ConnectedAccounts" } },
+  UploadMedia2: { screen: UploadMedia2, navigationOptions: { title: "UploadMedia2" } },
+  Sorting: { screen: Sorting, navigationOptions: { title: "Sorting" } },
+  Contactus: { screen: Contactus, navigationOptions: { title: "Contactus" } },
+  Catalogue: { screen: Catalogue, navigationOptions: { title: "Catalogue" } },
+  Payments: { screen: Payments, navigationOptions: { title: "Payments" } },
+  Hyperpay: { screen: Hyperpay, navigationOptions: { title: "Hyperpay" } },
+  OrderConfirm: { screen: OrderConfirm, navigationOptions: { title: "OrderConfirm" } },
+  Dashboard: { screen: Dashboard, navigationOptions: { title: "Dashboard" } },
+  Ordersummary: { screen: Ordersummary, navigationOptions: { title: "Ordersummary" } },
+  Splashscreen: { screen: Splashscreen, navigationOptions: { title: "Splashscreen" } },
+  TargetedFeed: { screen: TargetedFeed, navigationOptions: { title: "TargetedFeed" } },
+  LiveChat2: { screen: LiveChat2, navigationOptions: { title: "LiveChat2" } },
+  ProductDescription: { screen: ProductDescription, navigationOptions: { title: "ProductDescription" } },
+  ReviewList: { screen: ReviewList, navigationOptions: { title: "ReviewList" } },
+  Search: { screen: Search, navigationOptions: { title: "Search" } },
+  CustomisedOrderStatus: { screen: CustomisedOrderStatus, navigationOptions: { title: "CustomisedOrderStatus" } },
+  Sms2: { screen: Sms2, navigationOptions: { title: "Sms2" } },
 
 });
 
@@ -189,6 +189,7 @@ const Footer = createBottomTabNavigator(
     }),
     tabBarOptions: {
       style: {
+        display: "none",
         backgroundColor: "#ffffff",
         borderColor: '#ffffff',
         height: verticalScale(50),
@@ -219,7 +220,7 @@ const MainNavigator = createStackNavigator({
     screen: Notifications,
     navigationOptions: { header: null, },
   },
- 
+
   Orderdetailview: {
     screen: Orderdetailview,
     navigationOptions: { header: null }
@@ -229,7 +230,7 @@ const MainNavigator = createStackNavigator({
     navigationOptions: { header: null }
   },
 
- 
+
   Search: { screen: Search, navigationOptions: { header: null } },
   Sorting: { screen: Sorting, navigationOptions: { title: 'Sorting' } },
 
@@ -273,7 +274,7 @@ const MainNavigator = createStackNavigator({
     screen: Contactus,
     navigationOptions: { header: null },
   },
- 
+
   Splashscreen: {
     screen: Splashscreen,
     navigationOptions: { title: 'Splashscreen' },
@@ -376,7 +377,7 @@ export default class App extends Component {
     };
     console.disableYellowBox = true;
     if (!__DEV__) {
-      console.log = () => {};
+      console.log = () => { };
     }
   }
 
@@ -433,7 +434,7 @@ export default class App extends Component {
   render() {
     return (
       <NavigationContainer>
-        <MainStackNavigator/>
+        <MainStackNavigator />
       </NavigationContainer>
     )
   }

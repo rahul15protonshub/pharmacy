@@ -13,7 +13,8 @@
     "compile": "tsc -b --incremental",
     "ios": "yarn workspace mobile  ios",
     "studio": "yarn workspace mobile studio",
-    "xcode": "yarn workspace mobile xcode"
+    "xcode": "yarn workspace mobile xcode",
+    "test": "jest"
   },
   "resolutions": {
     "@types/react": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/@types/react"
@@ -74,6 +75,7 @@
     "react-native-linear-gradient": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-native-linear-gradient",
     "react-native-loading-spinner-overlay": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-native-loading-spinner-overlay",
     "react-native-material-dropdown": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-native-material-dropdown",
+    "react-native-media-query": "^1.0.12",
     "react-native-modal": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-native-modal",
     "react-native-multi-slider": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-native-multi-slider",
     "react-native-multiple-select": "^0.5.9",

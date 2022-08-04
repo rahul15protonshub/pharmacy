@@ -31,7 +31,7 @@ const TopHeader = (props: any) => {
     return (
         <View style={[{ height: verticalScale(60), flexDirection: "row", backgroundColor: themeJson.attributes.header_color, justifyContent: "center", alignItems: "center", shadowOffset: { height: 0, width: 0 }, shadowOpacity: 0.2, elevation: 2 },
             headerStyle]}>
-            {   
+            {
                 headerLeftIconName && headerLeftIconName != "" ?
                     <TouchableOpacity
                         onPress={onPressLeft}
@@ -87,17 +87,29 @@ const TopHeader = (props: any) => {
                                 {item?.cartHasProductFlag && (
                                     <View
                                         style={{
-                                            height: Scale(8),
-                                            width: Scale(8),
-                                            borderRadius: Scale(4),
+                                            height: Scale(12),
+                                            width: Scale(12),
+                                            borderRadius: Scale(6),
                                             backgroundColor: 'red',
                                             borderColor: 'white',
                                             borderWidth: 0.9,
                                             position: 'absolute',
-                                            top: Scale(0),
+                                            top: Scale(-5),
                                             end: Scale(5),
-                                        }}
-                                    />
+                                            alignItems: 'center'
+                                        }}>
+                                        <Text style={[{
+                                            marginTop: 1,
+                                            alignSelf: 'center',
+                                            color: COLOR_CONST.white,
+                                            fontSize: Scale(6),
+                                            fontFamily: FONTS.GTWalsheimProRegular,
+                                        },]}
+                                        >
+                                            {item.cartquantity}
+                                        </Text>
+
+                                    </View>
                                 )}
                             </TouchableOpacity>
                         )

@@ -22,6 +22,8 @@ exports.getMobileBannersAPIEndPoint = "banner/banners/mobile_banners_list";
 exports.categoryAPIEndPoint = "categories/categories";
 
 // Customizable Area Start
+exports.brandSettingsAPIEndPoint = "store_profile/brand_settings";
+exports.endPointApiGetFilteredProducts = "filter_items/filtering";
 exports.TopWear = "New products";
 exports.Recommended = "Recommended products";
 exports.SearchPlaceholder = "Search";

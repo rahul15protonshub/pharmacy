@@ -51,6 +51,7 @@ interface S {
   isCancleLoading: boolean;
   cartHasProduct: boolean;
   // Customizable Area Start
+  cartcount: any
   // Customizable Area End
 }
 
@@ -108,6 +109,7 @@ export default class OrdermanagementController extends BlockComponent<
       isCancleLoading: false,
       cartHasProduct: false,
       // Customizable Area Start
+      cartcount: 0
       // Customizable Area End
     };
     runEngine.attachBuildingBlock(this as IBlock, this.subScribedMessages);
@@ -300,12 +302,12 @@ export default class OrdermanagementController extends BlockComponent<
           lastLoadCount: this.state.myOrderList.concat(res.order.data).length,
           onEndReachedCalledDuringMomentum:
             this.state.myOrderList.concat(res.order.data).length >=
-            this.state.limit
+              this.state.limit
               ? true
               : false,
           notFinalLoad:
             this.state.myOrderList.concat(res.order.data).length >=
-            this.state.limit
+              this.state.limit
               ? true
               : false,
         },
@@ -379,6 +381,9 @@ export default class OrdermanagementController extends BlockComponent<
   cartHasProductSuccessCallBack = (res: any) => {
     this.setState({ cartHasProduct: res.has_cart_product });
     // Customizable Area Start
+    this.setState({
+      cartcount: res.total_cart_item,
+    });
     // Customizable Area End
   };
 
@@ -474,7 +479,7 @@ export default class OrdermanagementController extends BlockComponent<
         ratingItem.isSelected = false;
       }
     });
-    this.setState({ ratingList: localRating, reviewText: "" }, () => {});
+    this.setState({ ratingList: localRating, reviewText: "" }, () => { });
   };
 
   cancelOrder = async () => {

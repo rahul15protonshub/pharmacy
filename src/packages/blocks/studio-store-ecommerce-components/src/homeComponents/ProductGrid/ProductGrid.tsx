@@ -55,10 +55,12 @@ export const ProductGrid = (props: any) => {
                     productImage = variant.attributes.url;
                 }
             });
-            if(productImage === '') {
+            if (productImage === '') {
                 productImage = item?.attributes?.images?.data[0].attributes.url
             }
         }
+
+        const isInCart = item?.attributes?.cart_quantity > 0 ? true : false;
         return (
             <TouchableOpacity onPress={() => props.onPress(item)} style={styles.productGridStyle}>
                 <TouchableOpacity onPress={() => props.onHeartPress(item)} style={styles.TouchableOpacityStyle}>
@@ -74,13 +76,21 @@ export const ProductGrid = (props: any) => {
                     {item.attributes?.on_sale ? (<View style={styles.discountRow}>
                         <Text style={styles.price}>{themeJson.attributes.currency_type} {item?.attributes?.price_including_tax}</Text>
                         <Text style={styles.discountPrice}> {themeJson.attributes.currency_type} {item?.attributes?.actual_price_including_tax}</Text>
-                    </View>) : (<Text style={[styles.price, { marginLeft: Scale(12) }]}>{themeJson.attributes.currency_type} {item?.attributes?.price_including_tax}</Text>)}
+                    </View>) : (<Text style={[styles.price, {}]}>{themeJson.attributes.currency_type} {item?.attributes?.price_including_tax}</Text>)}
                 </View>
-                <View style={styles.reviewRow}>
+                <TouchableOpacity onPress={() => props.onAddtocartPress(item)} style={styles.addtocartitem}>
+                    <View >
+                        <Text style={styles.addtocarttext}> {!isInCart
+                            ? "Add to cart"
+                            : "Go to cart"}</Text>
+                    </View>
+
+                </TouchableOpacity>
+                {/* <View style={styles.reviewRow}>
                     <Text style={styles.avgReview}>{item.attributes.average_rating}</Text>
                     <Image source={reviewStar} style={styles.reviewStar} />
                     {item.attributes.reviews && <Text style={styles.reviewCount}>| {item.attributes.reviews.length}</Text>}
-                </View>
+                </View> */}
                 {item.attributes.on_sale && <View style={styles.labelSticker}>
                     <Text style={styles.stickerText}>Save {Number(item.attributes.discount).toFixed(1)}%</Text>
                 </View>}

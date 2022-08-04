@@ -31,7 +31,7 @@ export default StyleSheet.create({
     backgroundColor: themeJson.attributes.common_button_color,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 22,
+    borderRadius: scale(5),
   },
   submitText: {
     color: "#fff",
@@ -328,10 +328,10 @@ export default StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#fff",
     borderWidth: 0.8,
-    borderColor: COLOR_CONST.white,
+    borderColor: COLOR_CONST.whiteThree,
     width: scale(312),
     height: scale(40),
-    borderRadius: scale(20),
+    borderRadius: scale(5),
   },
 
   SectionStyle1: {
@@ -343,7 +343,7 @@ export default StyleSheet.create({
     borderColor: themeJson.attributes.primary_color,
     width: scale(312),
     height: scale(40),
-    borderRadius: scale(20),
+    borderRadius: scale(5),
   },
   newSectionStyle: {
     flexDirection: "row",

@@ -34,6 +34,7 @@ interface S {
   isFetching: boolean;
   cartHasProduct: boolean;
   // Customizable Area Start
+  cartcount: any
   // Customizable Area End
 }
 
@@ -83,6 +84,7 @@ export default class CategoriessubcategoriesController extends BlockComponent<
       isFetching: false,
       cartHasProduct: false,
       // Customizable Area Start
+      cartcount: 0
       // Customizable Area End
     };
     runEngine.attachBuildingBlock(this as IBlock, this.subScribedMessages);
@@ -173,10 +175,14 @@ export default class CategoriessubcategoriesController extends BlockComponent<
             cartHasProduct: responseJson.data.has_cart_product,
             isFetching: false,
           });
-        }
 
-        // Customizable Area Start
-        // Customizable Area End
+
+          // Customizable Area Start
+          this.setState({
+            cartcount: responseJson.data.total_cart_item,
+          });
+          // Customizable Area End
+        }
       } else if (responseJson.errors) {
         this.setState({ isFetching: false });
         this.parseApiErrorResponse(responseJson);

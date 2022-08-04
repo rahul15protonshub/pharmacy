@@ -20,9 +20,10 @@ import styles from "./WishListStyle";
 import {
   CART_BLACK_ICON,
   NOT_FOUND_ICON,
-  SELECTED_HEART,
+  shapeHeart,
   UN_SELECTED_HEART,
   reviewStar,
+  shapeHeartActive
 } from "../../studio-store-ecommerce-theme/src/AppAssets/appassets";
 import GreenButton from "../../studio-store-ecommerce-components/src/GreenButton/GreenButton";
 import TopHeader from "../../studio-store-ecommerce-components/src/TopHeader/TopHeader";
@@ -86,6 +87,7 @@ export default class WishList extends WishListController {
         productImage = data?.images?.data[0].attributes.url;
       }
     }
+    const isInCart = data?.cart_quantity > 0 ? true : false;
     return (
       // Customizable Area Start
       <TouchableOpacity
@@ -102,9 +104,9 @@ export default class WishList extends WishListController {
           style={styles.touchableOpacityStyle}
         >
           {true ? (
-            <Image source={SELECTED_HEART} style={styles.heartIcon} />
+            <Image source={shapeHeartActive} style={styles.heartIcon} />
           ) : (
-            <Image source={UN_SELECTED_HEART} style={styles.heartIcon} />
+            <Image source={shapeHeart} style={styles.heartIcon} />
           )}
         </TouchableOpacity>
         <View style={styles.titleContainer}>
@@ -124,18 +126,26 @@ export default class WishList extends WishListController {
               </Text>
             </View>
           ) : (
-            <Text style={[styles.price, { marginLeft: scale(12) }]}>
+            <Text style={[styles.price, {}]}>
               {themeJson.attributes.currency_type} {data.price_including_tax}
             </Text>
           )}
         </View>
-        <View style={styles.reviewRow}>
+        <TouchableOpacity onPress={() => this.onAddtocartPress(item.item.data)} style={styles.addtocartitem}>
+          <View >
+            <Text style={styles.addtocarttext}> {!isInCart
+              ? "Add to cart"
+              : "Go to cart"}</Text>
+          </View>
+
+        </TouchableOpacity>
+        {/* <View style={styles.reviewRow}>
           <Text style={styles.avgReview}>{data.average_rating}</Text>
           <Image source={reviewStar} style={styles.reviewStar} />
           {data.reviews && (
             <Text style={styles.reviewCount}>| {data.reviews.length}</Text>
           )}
-        </View>
+        </View> */}
         {data.on_sale && (
           <View style={styles.labelSticker}>
             <Text style={styles.stickerText}>
@@ -172,6 +182,7 @@ export default class WishList extends WishListController {
                 this.props.navigation.navigate("Shoppingcart");
               },
               cartHasProductFlag: this.state.cartProduct,
+              cartquantity: this.state.addedItem,
               style: { resizeMode: "contain", marginLeft: scale(30) },
             },
           ]}

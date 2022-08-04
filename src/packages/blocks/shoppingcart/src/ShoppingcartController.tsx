@@ -51,9 +51,9 @@ interface S {
   selectedQuantity: any;
 
   // Customizable Area Start
-  prescriptionModal:boolean;
-  prescriptionNeed:boolean;
-  productDataArr:any;
+  prescriptionModal: boolean;
+  prescriptionNeed: boolean;
+  productDataArr: any;
   // Customizable Area End
 }
 
@@ -78,7 +78,7 @@ export default class ShoppingcartController extends BlockComponent<
   addToWishlistApiCallId: any;
   _unsubscribe: any;
   // Customizable Area Start
-  addPrescriptionApiCallId:any;
+  addPrescriptionApiCallId: any;
   // Customizable Area End
   constructor(props: Props) {
     super(props);
@@ -116,9 +116,9 @@ export default class ShoppingcartController extends BlockComponent<
       selectedItem: null,
       selectedQuantity: null,
       // Customizable Area Start
-      prescriptionModal:false,
-      prescriptionNeed:true,
-      productDataArr:[]
+      prescriptionModal: false,
+      prescriptionNeed: true,
+      productDataArr: []
       // Customizable Area End
     };
 
@@ -130,8 +130,8 @@ export default class ShoppingcartController extends BlockComponent<
 
   async componentDidMount() {
     super.componentDidMount();
+    this.getProfileData();
     this._unsubscribe = this.props.navigation.addListener("willFocus", () => {
-      this.getProfileData();
       BackHandler.addEventListener(
         "hardwareBackPress",
         this.handleBackButtonClick
@@ -172,25 +172,25 @@ export default class ShoppingcartController extends BlockComponent<
     this.getCartHasProduct();
   };
 
-  uploadproduct=async(productdata:any)=>{
-    var finalData=[]
+  uploadproduct = async (productdata: any) => {
+    var finalData = []
     if (productdata.length > 0) {
-    for(let i=0;i<productdata.length;i++){
-      let getselectedData={
-        "order_item_ids":productdata[i].selectedItems,
-        "prescription_files":productdata[i].browsefile
+      for (let i = 0; i < productdata.length; i++) {
+        let getselectedData = {
+          "order_item_ids": productdata[i].selectedItems,
+          "prescription_files": productdata[i].browsefile
+        }
+        finalData.push(getselectedData);
       }
-      finalData.push(getselectedData);
-    }
       const httpBody = {
         order_items: finalData,
       };
-      this.setState({ isFetching: true})
+      this.setState({ isFetching: true })
       this.addPrescriptionApiCallId = await this.apiCall({
         contentType: configJSON.ApiContentType,
         method: configJSON.apiMethodTypePut,
         endPoint:
-          configJSON.getAddprescriptionAPIEndPoint ,
+          configJSON.getAddprescriptionAPIEndPoint,
         body: httpBody,
       });
     }
@@ -247,6 +247,7 @@ export default class ShoppingcartController extends BlockComponent<
             message: responseJson.message,
             isFetching: false,
             isValidCoupon: false,
+            showAlertModal: true,
           });
           this.parseApiErrorResponse(responseJson);
         }
@@ -257,6 +258,7 @@ export default class ShoppingcartController extends BlockComponent<
             isFetching: false,
             isValidCoupon: false,
             isCouponApplied: false,
+            codeValue: ''
           });
           this.parseApiErrorResponse(responseJson);
         } else {
@@ -266,6 +268,7 @@ export default class ShoppingcartController extends BlockComponent<
               isFetching: false,
               isCouponApplied: false,
               isValidCoupon: false,
+              codeValue: ''
             },
             () => {
               this.getCartList(this.state.token);
@@ -348,8 +351,8 @@ export default class ShoppingcartController extends BlockComponent<
           return;
         } else if (responseJson && responseJson.message) {
           this.setState({
-            prescriptionModal:false,
-             isFetching: false,
+            prescriptionModal: false,
+            isFetching: false,
           });
           this.props.navigation.push("Checkout", {
             isFromCheckout: true,
@@ -360,30 +363,32 @@ export default class ShoppingcartController extends BlockComponent<
         } else {
           this.setState({
             isFetching: false,
-         });
+          });
         }
       }
       if (responseJson?.data) {
         if (apiRequestCallId === this.getCartListApiCallId) {
-          let dataPrescription=[]
-          if(responseJson?.data[0]?.attributes?.order_items && responseJson?.data[0]?.attributes?.order_items?.length>0){
-            for (let i=0; i<responseJson?.data[0]?.attributes?.order_items?.length;i++){
-              let tempdata=responseJson?.data[0]?.attributes?.order_items[i]?.attributes
-                if(tempdata?.catalogue?.attributes?.prescription){
-                let tempPrescription={'id':tempdata?.id,'name':tempdata.product_name}
+          let dataPrescription = []
+          if (responseJson?.data[0]?.attributes?.order_items && responseJson?.data[0]?.attributes?.order_items?.length > 0) {
+            for (let i = 0; i < responseJson?.data[0]?.attributes?.order_items?.length; i++) {
+              let tempdata = responseJson?.data[0]?.attributes?.order_items[i]?.attributes
+              if (tempdata?.catalogue?.attributes?.prescription) {
+                let tempPrescription = { 'id': tempdata?.id, 'name': tempdata.product_name }
                 dataPrescription.push(tempPrescription)
-                }
+              }
             }
           }
-          if(dataPrescription.length>0){
+          if (dataPrescription.length > 0) {
             this.setState({
-              prescriptionNeed:true})
-          }else{
+              prescriptionNeed: true
+            })
+          } else {
             this.setState({
-              prescriptionNeed:false})
+              prescriptionNeed: false
+            })
           }
           this.setState({
-            productDataArr:dataPrescription,
+            productDataArr: dataPrescription,
             cartList: responseJson.data[0].attributes.order_items,
             cartData: responseJson.data[0],
             isFetching: false,
@@ -393,14 +398,18 @@ export default class ShoppingcartController extends BlockComponent<
                 : false,
             isCouponApplied:
               responseJson.data[0].attributes.coupon_code_id != null &&
-              responseJson.data[0].attributes.applied_discount
+                responseJson.data[0].attributes.applied_discount
                 ? true
                 : false,
             isValidCoupon:
               responseJson.data[0].attributes.coupon_code_id != null &&
-              responseJson.data[0].attributes.applied_discount
+                responseJson.data[0].attributes.applied_discount
                 ? true
                 : false,
+            codeValue: responseJson.data[0].attributes.coupon_code_id != null &&
+              responseJson.data[0].attributes.applied_discount
+              ? responseJson.data[0].attributes.coupon.attributes.code
+              : "",
           });
         } else if (apiRequestCallId === this.updateQtyApiCallId) {
           this.setState({
@@ -418,13 +427,16 @@ export default class ShoppingcartController extends BlockComponent<
         }
         if (apiRequestCallId === this.apiApplyCouponCallId) {
           let errorMessage = this.parseApiCatchErrorResponse(
-            responseJson.errors
+            responseJson.errors[0]
           );
           this.setState({
             isFetching: false,
             isValidCoupon: false,
             isCouponApplied: true,
             couponCodeErrorMsg: errorMessage,
+            isShowError: true,
+            showAlertModal: true,
+            message: errorMessage,
           });
           return;
         }

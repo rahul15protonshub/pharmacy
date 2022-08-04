@@ -61,7 +61,7 @@ export default class Categoriessubcategories extends CategoriessubcategoriesCont
                     ? mainItem.attributes.product_image.url
                     : "",
                 }}
-                //resizeMode={'stretch'}
+              //resizeMode={'stretch'}
               />
 
               <View style={styles.infoText}>
@@ -136,6 +136,7 @@ export default class Categoriessubcategories extends CategoriessubcategoriesCont
                 this.props.navigation.navigate("Shoppingcart");
               },
               cartHasProductFlag: this.state.cartHasProduct,
+              cartquantity: this.state.cartcount,
             },
           ]}
           navigation={this.props.navigation}

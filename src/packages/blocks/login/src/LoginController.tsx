@@ -144,7 +144,6 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
       var responseJson = message.getData(
         getName(MessageEnum.RestAPIResponceSuccessMessage)
       );
-
       var errorReponse = message.getData(
         getName(MessageEnum.RestAPIResponceErrorMessage)
       );

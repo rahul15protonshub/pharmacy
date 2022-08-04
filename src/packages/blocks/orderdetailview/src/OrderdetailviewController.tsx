@@ -46,6 +46,7 @@ interface S {
   message: any;
   cartData: any;
   // Customizable Area Start
+  cartcount: any
   // Customizable Area End
 }
 
@@ -104,6 +105,7 @@ export default class OrderdetailviewController extends BlockComponent<
       message: "",
       cartData: null,
       // Customizable Area Start
+      cartcount: 0
       // Customizable Area End
     };
     runEngine.attachBuildingBlock(this as IBlock, this.subScribedMessages);
@@ -319,6 +321,7 @@ export default class OrderdetailviewController extends BlockComponent<
     // console.log("@@@ Cart Has Product Success CallBack ===================");
     this.setState({ cartHasProduct: res.has_cart_product });
     // Customizable Area Start
+    this.setState({ cartcount: res.total_cart_item });
     // Customizable Area End
   };
 
@@ -648,7 +651,7 @@ export default class OrderdetailviewController extends BlockComponent<
         ratingItem.isSelected = false;
       }
     });
-    this.setState({ ratingList: localRating, reviewText: "" }, () => {});
+    this.setState({ ratingList: localRating, reviewText: "" }, () => { });
   };
 
   getVarientString = (properties: any) => {

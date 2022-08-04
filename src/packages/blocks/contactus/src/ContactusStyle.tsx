@@ -95,7 +95,7 @@ export default StyleSheet.create({
     alignSelf: "center",
     width: scale(335),
     height: scale(44),
-    borderRadius: scale(2210),
+    borderRadius: scale(5),
     opacity: 0.99,
     marginBottom: verticalScale(30.2),
   },

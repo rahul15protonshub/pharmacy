@@ -39,6 +39,7 @@ const COLOR_CONST = {
     lightBlueGrey: '#d8e2ea',
     uploadBG: '#f3f4f4',
     coolGrey: '#8c9096',
+    lightgray: '#C0C3CE',
     darkishBlueTwo: '#054995',
     coolGreyTwo: "#8b8f95",
     whiteTwo: "#f9f9f9",
@@ -72,12 +73,18 @@ const COLOR_CONST = {
     logoGradientFirst: '#d8e4f0',
     logoGradientSecond: '#becfe0',
     borderColor: "#767676",
-    buyNowButton: '#e88a0c'
+    grayDarkDevider: "#DFDFDF",
+    buyNowButton: '#e88a0c',
+    lightgraycolor: '#757575',
+    newtheme: '#3FC1CB',
+    newlightcolor: '#DFDFDF',
+    newtheme_another: '#364F6B',
+    removered: '#FC5185'
 };
 export default COLOR_CONST
 export const FONTS = {
-    GTWalsheimProBold: 'GTWalsheimPro-Bold',
-    GTWalsheimProLight: 'GTWalsheimPro-Light',
-    GTWalsheimProMedium: 'GTWalsheimPro-Medium',
-    GTWalsheimProRegular: 'GTWalsheimPro-Regular',
+    GTWalsheimProBold: 'Rubik-Bold',
+    GTWalsheimProLight: 'Rubik-Light',
+    GTWalsheimProMedium: 'Rubik-Medium',
+    GTWalsheimProRegular: 'Rubik-Regular',
 }

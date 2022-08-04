@@ -48,7 +48,7 @@ export default class SavedAddress extends SavedAddressController {
           </Text>
         </View>
         <GreenButton
-          title="ADD AN ADDRESS"
+          title="Add an Address"
           customStyle={styles.loginButton}
           customTxtStyle={styles.loginText}
           onPress={() =>

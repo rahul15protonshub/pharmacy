@@ -20,11 +20,11 @@ export default StyleSheet.create({
         justifyContent: 'space-between',
         flexDirection: 'row',
         marginHorizontal: scale(20),
-        marginTop: verticalScale(18)
+        paddingTop: verticalScale(18)
     },
 
     titleTextStyle: {
-        color: COLOR_CONST.charcoalGrey,
+        color: COLOR_CONST.lightgraycolor,
         fontSize: scale(17),
         lineHeight: scale(19),
         fontFamily: FONTS.GTWalsheimProRegular
@@ -53,6 +53,8 @@ export default StyleSheet.create({
     },
 
     imageMainContainer: {
+        alignItems: 'center',
+        marginTop: verticalScale(16)
     },
 
     imageContainer: {
@@ -60,13 +62,14 @@ export default StyleSheet.create({
     },
 
     heartIcon: {
-        width: scale(50),
-        height: scale(50),
+        width: scale(25),
+        height: scale(25),
+        resizeMode: 'contain'
     },
 
     BottalImage: {
         width: scale(166),
-        height: scale(166),
+        height: scale(150),
         // marginTop: scale(14),
     },
 
@@ -82,17 +85,17 @@ export default StyleSheet.create({
         height: scale(19),
         marginHorizontal: scale(12),
         lineHeight: scale(19),
-        marginTop: verticalScale(11),
-        color: COLOR_CONST.charcoalGrey,
+        marginTop: verticalScale(7),
+        color: COLOR_CONST.black,
         fontFamily: FONTS.GTWalsheimProRegular
     },
 
     price: {
         fontSize: scale(15),
         lineHeight: scale(18),
-        color: themeJson.attributes.primary_color,
+        color: COLOR_CONST.newtheme,
         fontFamily: FONTS.GTWalsheimProMedium,
-        marginTop: verticalScale(10),
+        marginTop: verticalScale(8),
         marginBottom: verticalScale(9),
         height: scale(18),
     },
@@ -105,10 +108,11 @@ export default StyleSheet.create({
     discountPrice: {
         fontSize: scale(15),
         lineHeight: scale(18),
-        color: COLOR_CONST.charcoalGrey,
+        color: COLOR_CONST.lightgraycolor,
         fontFamily: FONTS.GTWalsheimProMedium,
         textDecorationLine: 'line-through',
-        marginTop: verticalScale(10),
+        marginTop: verticalScale(8),
+        marginLeft: scale(2),
         marginBottom: verticalScale(9),
         height: scale(18),
     },
@@ -199,31 +203,44 @@ export default StyleSheet.create({
         alignItems: 'center',
         marginLeft: scale(12),
         marginBottom: verticalScale(10),
-      },
-    
-      avgReview: {
+    },
+    addtocartitem: {
+        backgroundColor: COLOR_CONST.newtheme_another,
+        alignItems: 'center',
+        paddingVertical: verticalScale(12),
+        marginTop: verticalScale(14)
+    },
+    addtocarttext: {
+        fontFamily: FONTS.GTWalsheimProRegular,
+        color: COLOR_CONST.white,
+        fontSize: scale(14),
+        textAlign: "center",
+        lineHeight: scale(16),
+    },
+
+    avgReview: {
         fontFamily: FONTS.GTWalsheimProMedium,
         color: COLOR_CONST.black,
         fontSize: scale(14),
         textAlign: "center",
         lineHeight: scale(16),
-      },
-    
-      reviewStar: {
+    },
+
+    reviewStar: {
         marginLeft: scale(4),
         width: scale(9),
         height: scale(9),
-      },
-    
-      reviewCount: {
+    },
+
+    reviewCount: {
         fontFamily: FONTS.GTWalsheimProMedium,
         color: COLOR_CONST.darkGreyText,
         fontSize: scale(14),
         textAlign: "center",
         lineHeight: scale(16),
         marginLeft: scale(4.5),
-      }
-    
+    }
+
 
 
 });
