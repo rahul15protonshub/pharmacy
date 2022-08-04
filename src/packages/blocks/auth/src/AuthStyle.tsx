@@ -43,7 +43,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     width: scale(274),
     height: verticalScale(38),
-    borderRadius: 38,
+    borderRadius: scale(5),
     shadowColor: "#000",
     shadowOffset: { width: 4, height: 3 },
     shadowOpacity: 0.2,
@@ -72,10 +72,11 @@ export default StyleSheet.create({
   loginView: {
     width: scale(274 / 2),
     height: verticalScale(38),
-    borderRadius: scale(38),
+    borderRadius: scale(5),
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
+    borderBottomWidth:1
   },
   loginText: {
     fontSize: scale(16),

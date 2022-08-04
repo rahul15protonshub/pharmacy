@@ -3,7 +3,7 @@ import { StyleSheet, View, TouchableOpacity, Text, Image, TouchableHighlight, Ac
 import scale from "../../../../framework/src/utils/Scale";
 import FastImage from 'react-native-fast-image';
 const themeJson = require("../../../studio-store-ecommerce-theme/src/theme.json");
-import { FONTS } from "../../../studio-store-ecommerce-theme/src/AppFonts";
+import COLOR_CONST, { FONTS } from "../../../studio-store-ecommerce-theme/src/AppFonts";
 import { GR_ALERT_CIRCLE, GR_HEART_BLUE, GR_HEART_WHITE } from "../../../studio-store-ecommerce-theme/src/AppAssets/appassets";
 
 interface ProductBoxProps {
@@ -92,7 +92,23 @@ const ProductBox: React.FC<ProductBoxProps> = ({
                     style={componentStyles.productImage}
                 />
                 <Text style={componentStyles.productTitleText} numberOfLines={1}>{product.attributes.name}</Text>
-                <Text style={componentStyles.price}>{currency} {Number(productDefaultPrice.toString()).toFixed(2)}</Text>
+                {product.attributes.on_sale ? (
+            <View style={componentStyles.discountRow}>
+              <Text style={componentStyles.price}>
+                {themeJson.attributes.currency_type} {Number(product.attributes.price_including_tax.toString()).toFixed(1)}
+              </Text>
+              <Text style={componentStyles.discountPrice}>
+                {" "}
+                {themeJson.attributes.currency_type}{" "}
+                {product.attributes.actual_price_including_tax}
+              </Text>
+            </View>
+          ) : (
+            <Text style={[componentStyles.price, {}]}>
+              {themeJson.attributes.currency_type} {Number(product.attributes.price_including_tax.toString()).toFixed(1)}
+            </Text>
+          )}
+                {/* <Text style={componentStyles.price}>{currency} {Number(productDefaultPrice.toString()).toFixed(2)}</Text> */}
                 <Text style={componentStyles.weight}>{productDefaultWeight}</Text>
             </TouchableOpacity>
             {
@@ -112,6 +128,13 @@ const ProductBox: React.FC<ProductBoxProps> = ({
                     </TouchableOpacity>
                 )
             }
+              {product.attributes.on_sale && (
+          <View style={componentStyles.labelSticker}>
+            <Text style={componentStyles.stickerText}>
+              Save {Number(product.attributes.discount).toFixed(1)}%
+            </Text>
+          </View>
+        )}
         </View>
     )
 }
@@ -143,32 +166,41 @@ const componentStyles = StyleSheet.create({
     },
     productTitleText: {
         fontFamily: FONTS.GTWalsheimProRegular,
-        fontSize: scale(12),
+        fontSize: scale(14),
         lineHeight: scale(20),
         marginBottom: scale(4),
     },
     price: {
         fontFamily: FONTS.GTWalsheimProRegular,
-        fontSize: scale(14),
+        fontSize: scale(13),
         lineHeight: scale(24),
         color: themeJson.attributes.secondary_color,
     },
+    discountPrice: {
+        fontSize: scale(13),
+        lineHeight: scale(24),
+        color: COLOR_CONST.lightgraycolor,
+        fontFamily: FONTS.GTWalsheimProRegular,
+        textDecorationLine: 'line-through',
+        marginLeft: scale(2),
+      },
     weight: {
         fontFamily: FONTS.GTWalsheimProRegular,
-        fontSize: scale(14),
+        fontSize: scale(13),
         lineHeight: scale(24),
         color: themeJson.attributes.dark_grey,
     },
     heartIconWrapper: {
         position: "absolute",
-        top: scale(15),
-        right: scale(15),
+        top: scale(14),
+        right: scale(10),
         zIndex: 10,
-        padding: scale(5),
+       
     },
     heartIcon: {
-        width: scale(20),
-        height: scale(18),
+        width: scale(22),
+        height: scale(22),
+        resizeMode:'contain'
     },
     addToCartButtonWrapper: {
         padding: scale(8),
@@ -207,6 +239,31 @@ const componentStyles = StyleSheet.create({
         fontSize: scale(14),
         lineHeight: scale(24)
     },
+    labelSticker: {
+        position: "absolute",
+        backgroundColor: COLOR_CONST.pastelRed,
+        paddingHorizontal: scale(10),
+        height: scale(17),
+        justifyContent: "center",
+        borderTopRightRadius: scale(5),
+        borderBottomRightRadius: scale(5),
+        left: 0,
+        top: scale(16),
+        alignItems: "center",
+      },
+      stickerText: {
+        fontFamily: FONTS.GTWalsheimProMedium,
+        color: COLOR_CONST.white,
+        fontSize: scale(10),
+        textAlign: "center",
+        lineHeight: scale(11),
+      },
+      discountRow: {
+        flexDirection: "row",
+        marginHorizontal: scale(12),
+        alignSelf: 'center',
+        alignItems:'center'
+      },
 });
 
 export default ProductBox

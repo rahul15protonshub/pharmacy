@@ -259,7 +259,6 @@ export default class ProductDescriptionController extends BlockComponent<
       const httpBody = {
         order_items: finalData,
       };
-      console.log('httpBody', httpBody)
       this.setState({ isFetching: true })
       this.addPrescriptionApiCallId = await this.apiCall({
         contentType: configJSON.productApiContentType,
@@ -301,7 +300,6 @@ export default class ProductDescriptionController extends BlockComponent<
         } else if (apiRequestCallId === this.getCartProductDescriptionId) {
           this.getCartProductDescriptionSuccessCallBack(responseJson);
         } else if (apiRequestCallId === this.getBuyProductApiCallId) {
-          console.log('testtt=', responseJson?.data?.attributes)
           let dataPrescription = [{ 'id': responseJson?.data?.attributes?.order_items[0]?.id, 'name': this.state.productData?.attributes?.name }]
           this.setState(
             {
@@ -708,9 +706,10 @@ export default class ProductDescriptionController extends BlockComponent<
           : false,
       },
       () => {
-        if (isFromCart) {
-          this.setDefaultVarient();
-        }
+        // if (isFromCart) {
+        //   this.setDefaultVarient();
+        // }
+        this.setDefaultVarient();
         this.setSubscriptionData();
         this.setSelectedProduct();
       }

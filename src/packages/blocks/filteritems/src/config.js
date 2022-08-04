@@ -38,7 +38,7 @@ exports.endPointApiGetIsCartCreated = "cart/carts";
 exports.NoProductFound = "No Products found";
 exports.NoProductFoundTitle =
   "Try searching with a different terms or browse other categories.";
-exports.buttonTitle = "BROWSE PRODUCTS";
+exports.buttonTitle = "Browse Products";
 exports.btnExampleTitle = "CLICK ME";
 exports.currency = "₹";
 // Customizable Area End

@@ -239,16 +239,21 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
                             style={styles.browsetouch}>
                             <Text style={styles.labelText11}>Browse files</Text>
                           </TouchableOpacity> :
-                            <View style={{ alignItems: 'center', flexDirection: 'row', width: '80%', justifyContent: 'space-between' }}>
+                            <View style={{  flexDirection: 'row', width: '85%', justifyContent: 'space-between' }}>
 
                               <View style={{ flexDirection: 'row' }}>
                                 <Image
                                   source={BROWSE_ICON}
                                   style={styles.browseimg}
                                 />
-                                <Text style={styles.labelText1}>{'Prescription' + (index + 1)}</Text>
+                                <View>
+                                <Text style={styles.labelText12}>{'Prescription' + (index + 1)}</Text>
+                                <View style={{marginTop:verticalScale(6), backgroundColor:COLOR_CONST.newtheme,borderRadius:scale(5),width:windowWidth*55/100,height:verticalScale(5)}}></View>
+                                <Text style={[styles.labelText22,{}]}>Completed</Text>
+                                </View>
+                               
                               </View>
-                              <TouchableOpacity onPress={() => {
+                              <TouchableOpacity style={{marginTop:verticalScale(9)}} onPress={() => {
                                 this.deletebrowsefile(index)
                               }}>
                                 <Image
@@ -389,6 +394,12 @@ const styles = StyleSheet.create({
     fontSize: scale(14),
     lineHeight: scale(21),
   },
+  labelText12: {
+    fontFamily: FONTS.GTWalsheimProMedium,
+    color: COLOR_CONST.black,
+    fontSize: scale(14),
+    lineHeight: scale(21),
+  },
   labelText11: {
     fontFamily: FONTS.GTWalsheimProRegular,
     color: COLOR_CONST.black,
@@ -425,6 +436,14 @@ const styles = StyleSheet.create({
     lineHeight: scale(21),
     width: '40%',
   },
+  labelText22: {
+    fontFamily: FONTS.GTWalsheimProRegular,
+    color: COLOR_CONST.newtheme,
+    fontSize: scale(11),
+    lineHeight: scale(21),
+    marginTop:verticalScale(4)
+   
+  },
   labelText3: {
     fontFamily: FONTS.GTWalsheimProRegular,
     color: COLOR_CONST.lightGreyText,
@@ -445,7 +464,7 @@ const styles = StyleSheet.create({
   crossimg: {
     width: scale(10),
     height: scale(10),
-    tintColor:"#448AFF"
+    tintColor:COLOR_CONST.newtheme
   },
   crossimg_br : {
     width: scale(8),
@@ -453,7 +472,7 @@ const styles = StyleSheet.create({
   },
   browseimg: {
     width: scale(25),
-    height: scale(25),
+    height: scale(35),
     marginRight: scale(10)
   },
 
