@@ -247,6 +247,7 @@ export default class ShoppingcartController extends BlockComponent<
             message: responseJson.message,
             isFetching: false,
             isValidCoupon: false,
+            showAlertModal: true,
           });
           this.parseApiErrorResponse(responseJson);
         }
@@ -426,13 +427,16 @@ export default class ShoppingcartController extends BlockComponent<
         }
         if (apiRequestCallId === this.apiApplyCouponCallId) {
           let errorMessage = this.parseApiCatchErrorResponse(
-            responseJson.errors
+            responseJson.errors[0]
           );
           this.setState({
             isFetching: false,
             isValidCoupon: false,
             isCouponApplied: true,
             couponCodeErrorMsg: errorMessage,
+            isShowError: true,
+            showAlertModal: true,
+            message: errorMessage,
           });
           return;
         }

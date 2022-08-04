@@ -104,10 +104,10 @@
 	<string>$(PRODUCT_NAME) would like access to your photo gallery</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>GTWalsheimPro-Light.ttf</string>
-		<string>GTWalsheimPro-Medium.ttf</string>
-		<string>GTWalsheimPro-Bold.ttf</string>
-		<string>GTWalsheimPro-Regular.ttf</string>
+		<string>Rubik-Light.ttf</string>
+		<string>Rubik-Medium.ttf</string>
+		<string>Rubik-Bold.ttf</string>
+		<string>Rubik-Regular.ttf</string>
 		<string>AntDesign.ttf</string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>
