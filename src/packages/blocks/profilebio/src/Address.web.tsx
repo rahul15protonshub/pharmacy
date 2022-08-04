@@ -39,6 +39,7 @@ import { _ } from "../../../framework/src/IBlock";
 /** Validations start */
 const addNewAddressSchema = Yup.object().shape({
   name: Yup.string()
+    .matches(/^[A-Za-z]+$/)
     .min(2, "Name is Too Short")
     .max(20, "Maximum 20 Characters are allowed")
     .required("Name is Required"),
@@ -95,7 +96,7 @@ export default class Address extends AddressController {
                   className="pp-sa-list-none p-0 m-0 pp-sa-all-addres-list"
                   style={{ listStyle: "none" }}
                 >
-                  {this.state.userAddress.map((ele, index) => (
+                  {[...new Map(this.state.userAddress?.map(item =>[item["address"],item])).values()].map((ele, index) => (
                     <Fragment key={index}>
                       <li key={index}>
                         <div className="profile-pg-address-list bg-white radius-10 profile-pg-mb-30">
@@ -282,6 +283,7 @@ export default class Address extends AddressController {
                   case "india":
                     return Yup.object().shape({
                       name: Yup.string()
+                        .matches(/^[A-Za-z]+$/,"Only letters are allowed.")
                         .min(2, "Name is Too Short")
                         .max(20, "Maximum 20 Characters are allowed")
                         .required("Name is Required"),
@@ -629,6 +631,7 @@ export default class Address extends AddressController {
                               case "india":
                                 return Yup.object().shape({
                                   name: Yup.string()
+                                    .matches(/^[A-Za-z]+$/,"Only letters are allowed.")
                                     .min(2, "Name is Too Short")
                                     .max(
                                       20,

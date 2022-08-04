@@ -2543,6 +2543,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     );
   }
   setSelectedCategory(category: any) {
+    this.setState(({ showProducts }) => ({
+      showProducts: !showProducts,
+    }));
     this.setState({ selectedCategory: category }, () => {
       this.setDashboardFilters(1, [category.category_id], [category.id]);
     });

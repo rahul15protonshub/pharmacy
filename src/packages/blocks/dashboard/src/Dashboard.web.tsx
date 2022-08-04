@@ -94,7 +94,7 @@ class HomeDashboard extends DashboardController {
         )}
 
         {/* Shib start */}
-        <Container className={`home-layout ${this.state.showProducts ? 'home-layout--show' : ''} h-100 mb-40`}>
+        <Container className={`home-layout ${!this.state.showProducts ? 'home-layout--show' : ''} h-100 mb-40`}>
           <Row className="home-layout__row gx-40 h-100">
             <Col
               xs="auto"

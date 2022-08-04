@@ -537,7 +537,7 @@ class AppHeaderScreen extends HeaderController {
         </div>
         <div className="logocontainer">
           <div style={{ width: "93%", margin: "0 auto" }}>
-            <Row className="align-items-center">
+            <Row className="align-items-center header_outr">
               <Col xs={1} className="yt-head-col">
                 <Link to={localStorage.getItem("token") ? "/home-page" : "/"}>
                   <div className="d-flex align-items-center" onClick={()=>this.props.history.pathname=='/home-page'?window.location.reload():""}>
@@ -697,10 +697,14 @@ class AppHeaderScreen extends HeaderController {
                     alt="search"
                     className="searchicon w3-ripple w3-hover-opacity"
                     onClick={() => {
-                      this.state.searchQuery != "" &&
-                        (this.search(), this.setSearchDropDown(false));
+                      this.setSearchDropDown(!this.state.SearchDropDown)
+                      this.search()
+                      console.log('Clicked')
+                      // this.state.searchQuery != "" &&
+                      //   (this.search(), this.setSearchDropDown(false));
                     }}
                   />
+                  {console.log('first', this.state.SearchDropDown,"jhdgfjh",this.state.searchQuery)}
                   {this.state.SearchDropDown && this.state.searchQuery != "" && (
                     <SearchData
                       hideSearch={() => {
@@ -711,6 +715,27 @@ class AppHeaderScreen extends HeaderController {
                       }}
                       results={this.state.quickResults}
                       isQuickResults={true}
+                       value={this.state.searchQuery}
+                    onChange={(e: { target: { value: any; }; }) => {
+                      this.setState({
+                        searchQuery: e.target.value,
+                      });
+                      setTimeout(() => {
+                        this.state.searchQuery != "" && this.getLiveSearch();
+                      }, 300);
+                    }}
+                    onKeyUp={(e: { key: string; }) => {
+                      if (e.key === "Enter" && this.state.searchQuery != "") {
+                        this.search();
+                        this.setSearchDropDown(false);
+                      } else {
+                        this.quickSearch();
+                      }
+                    }}
+                    onFocus={() => {
+                      this.setSearchDropDown(true);
+                      this.getRecentSearch();
+                    }}
                     />
                   )}
                   {this.state.SearchDropDown &&

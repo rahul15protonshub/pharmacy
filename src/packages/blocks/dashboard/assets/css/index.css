@@ -528,6 +528,15 @@ iframe {
 
 }
 @media screen and (max-width:550px) {
+  
+  .product_sort {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    color: #000000;
+    display: contents;
+  }
   .res-description{
     display: none;
   }

@@ -503,6 +503,7 @@ export class Checkout extends CheckoutController {
                     is: false,
                     then: Yup.object({
                       name: Yup.string()
+                        .matches(/^[A-Za-z]+$/,"Only letters are allowed.")
                         .min(2, "Name is Too Short")
                         .required("Name is Required"),
                       flat_no: Yup.string().required(
