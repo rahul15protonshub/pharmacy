@@ -90,18 +90,18 @@ export default class ProfilebioController extends BlockComponent<Props, S, SS> {
       case "india":
         return Yup.object().shape({
           name: Yup.string()
+            .matches(/^[a-zA-Z ]+$/, 'Only letters are allowed.')
             .min(2, "Name is Too Short")
             .required("Name is Required"),
-          // .matches(/^[a-zA-Z ]+$/, 'Only letters are allowed.')
           // email: Yup.string().email().required('Email is Required'),
           // phone: Yup.number().min(1000000000, 'Phone Number Minimum 10 digits').max(9999999999, 'Phone Number Maximum 10 digits').required('Phone Number is Required')
         });
       default:
         return Yup.object().shape({
           name: Yup.string()
+            .matches(/^[a-zA-Z ]+$/, 'Only letters are allowed.')
             .min(2, "Name is Too Short")
             .required("Name is Required"),
-          // .matches(/^[a-zA-Z ]+$/, 'Only letters are allowed.')
           // email: Yup.string().email().required('Email is Required'),
           // phone: Yup.string().matches(/^\d+$/, "Only Numbers allow").required('Phone Number is Required')
         });

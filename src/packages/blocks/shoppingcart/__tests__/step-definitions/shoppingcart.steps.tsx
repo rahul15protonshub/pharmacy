@@ -35,7 +35,7 @@ const screenProps = {
     navigation: navigation,
     id: "Shoppingcart"
   }
-
+  jest.useFakeTimers();
 const feature = loadFeature('./__tests__/features/shoppingcart-scenario.feature');
 
 defineFeature(feature, (test) => {

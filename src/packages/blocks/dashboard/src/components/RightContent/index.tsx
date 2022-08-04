@@ -143,7 +143,7 @@ const RightContent: React.FunctionComponent<RightContentProps> = (
       <div className="product_category_type">{productListTitle}</div>
       <div className="home-main-product-list">
         <div className="card_group" onScroll={handleScroll}>
-          <Row style={{ flex: 1 }}>
+          <Row style={{ flex: 1 }} className="w-100">
             <InfiniteScroll
               dataLength={products ? products.length : 0}
               next={props.fetchMoreData}
