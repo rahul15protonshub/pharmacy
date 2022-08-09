@@ -1405,7 +1405,8 @@ const CartProductListData: any = withRouter((props: any) => {
 });
 
 //// main class component
-export class Cart extends ShoppingCartController {
+export default class Cart extends ShoppingCartController {
+  addPrescriptionApiCallId: string;
   // Customizable Area Start
   // Customizable Area End
   constructor(props: Props) {
@@ -1455,6 +1456,6 @@ export class Cart extends ShoppingCartController {
 
 // Customizable Area End
 //@ts-ignore
-export default withRouter(Cart);
+// export default withRouter(Cart);
 // Customizable Area Start
 // Customizable Area End
