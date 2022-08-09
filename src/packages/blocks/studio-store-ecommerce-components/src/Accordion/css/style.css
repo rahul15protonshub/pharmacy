@@ -10,7 +10,7 @@
     border: 0;
     background-color: transparent !important;
     color: black !important;
-    font-size: 1.125rem;
+    font-size: 1.12rem;
     box-shadow: none !important;
 }
 .custom-accordion__header-btn:not(.collapsed)::after {

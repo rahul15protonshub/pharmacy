@@ -548,7 +548,27 @@ iframe {
     height: 280px;*/
     overflow: hidden;
   }
-
+  .filter_type {
+    margin-left: 8px;
+    font-weight: 400;
+    font-size: 9px;
+}
+.product_filter {
+  padding: 4px 3px !important;
+  width: 95px !important;
+}
+.sort_type {
+  font-weight: 500;
+  font-size: 8px;
+}
+.product_sort {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 11px;
+  color: #000000;
+  display: contents;
+}
   .card_img {
     height: 147px;
     width: 126px !important;
