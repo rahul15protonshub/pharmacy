@@ -3,7 +3,7 @@ import { Container, Row, Col, Button } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import { emptyCart } from "./assets";
 //@ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 // Customizable Area Start
 // Customizable Area End
 

@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 import { CgSpinner } from "react-icons/cg";
 import * as Yup from "yup";
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import "./css/index.css";
 import "./css/indexConfrimAccount.css";
 import OTPConfirmationController, {

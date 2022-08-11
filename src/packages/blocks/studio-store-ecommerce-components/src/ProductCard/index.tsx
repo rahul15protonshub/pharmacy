@@ -18,7 +18,7 @@ import "./css/index.scoped.css";
 import { chevronLeft, chevronRight } from './assets';
 
 //@ts-ignore
-import content from "../content.js"
+import content from "../content"
 let list: any = [];
 
 function TitleBar(props: any) {

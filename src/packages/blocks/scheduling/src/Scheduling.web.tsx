@@ -17,7 +17,7 @@ import AddOrRemoveQuantity from "../../studio-store-ecommerce-components/src/Add
 //subscribe css
 import "../assets/css/scheduling.css";
 //@ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import { closebutton } from "./assets";
 import SchedulingController, { Props } from "./SchedulingController.web";
 import { ErrorMessage, Formik } from "formik";

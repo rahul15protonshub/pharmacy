@@ -7,7 +7,7 @@ import {
   IoIosStar,
 } from "react-icons/io";
 //@ts-ignore
-import content from "../content.js"
+import content from "../content"
 import Loader from "../AppLoader/AppLoader.web";
 export const configJSON = require("./config.js");
 import "./css/index.scoped.css";

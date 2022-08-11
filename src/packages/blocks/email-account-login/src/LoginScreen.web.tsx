@@ -7,7 +7,7 @@ import EmailAccountLoginController, {
 import EmailAccountLoginBlock from "./EmailAccountLogin.web";
 import EmailAccountRegistrationController from "../../email-account-registration/src/EmailRegistartion.web";
 //@ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import "../assets/styles/emailLogin.css";
 // Customizable Area Start
 // Customizable Area End

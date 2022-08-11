@@ -3,31 +3,40 @@ import { Collapse } from 'reactstrap';
 import './css/style.css';
 
 interface AccordionProps {
-    isOpen: boolean,
+    isOpen?: boolean,
     label: string,
-    toggle: Function,
-    content: any,
-    className?: string
+    onHeaderClick?: () => void,
+    content?: any,
+    className?: string,
+    isActive?: boolean
 }
 
 export const Accordion: React.FunctionComponent<AccordionProps> = (props) => {
-    const { isOpen, label, toggle, content, className } = props
+    const { isOpen, label, onHeaderClick, isActive, content, className } = props
     return (
         <div className={`${className || ''} accordion custom-accordion`}>
-            <div className="accordion-item custom-accordion__item">
+            <div className="accordion-item custom-accordion__item" style={{
+                backgroundColor: isActive ? 'var(--color-secondary-hover-4)' : undefined
+            }}>
                 <h2
                     className="accordion-header custom-accordion__header"
-                    onClick={() => toggle()}
+                    onClick={() => onHeaderClick?.()}
                 >
-                    <button
-                        className={`accordion-button custom-accordion__header-btn ${isOpen ? 'collapsed' : ''}`}
-                    >
-                        {label}
-                    </button>
+                     {
+                        content ? (
+                            <button className={`accordion-button custom-accordion__header-btn ${isOpen ? 'collapsed' : ''}`}>
+                                {label}
+                            </button>
+                        ) : (
+                            <button className="custom-accordion__header-btn-no-collapse">
+                                {label}
+                            </button>
+                        )
+                    }
                 </h2>
-                <Collapse isOpen={isOpen}>
-                    {content}
-                </Collapse>
+                {
+                    content && <Collapse isOpen={isOpen}>{content}</Collapse>
+                }
             </div>
         </div>
     );

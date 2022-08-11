@@ -6,7 +6,7 @@ import { withRouter, Link } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaFacebookF, FaRegEnvelope } from "react-icons/fa";
 import { CgSpinner } from "react-icons/cg";
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import "../assets/styles/index.css";
 import { EmailIcon, pwdIcon } from "./assets";
 import EmailAccountLoginController, {

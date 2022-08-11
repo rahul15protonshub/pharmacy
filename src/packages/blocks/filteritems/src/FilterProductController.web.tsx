@@ -9,7 +9,7 @@ import isEmpty from "lodash/isEmpty";
 import { runEngine } from "../../../framework/src/RunEngine";
 export const configJSON = require("./config");
 //@ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 // Customizable Area End
 // Customizable Area Start
 export interface Props {

@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import FilteroptionsList from "../src/FilteroptionsList.web";
 import FilterProduct from "../src/FilterProduct.web";
 //@ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 
 import "../assets/css/index.scoped.css";
 import "../assets/css/pagination.css";

@@ -126,7 +126,8 @@
   display: none;
 }
 .presBox{
-  margin-top: 4rem !important;
+  position: absolute;
+    bottom: 100px;
 }
 @media (max-width: 768px) {
   .cart-prodict-info {
@@ -228,8 +229,9 @@
 } */
 
 .cart-product-amount-ttl {
-  font-size: 18px;
-  line-height: 1.11;
+  font-size: 14px;
+    line-height: 24px;
+    font-weight: 400;
   text-align: left;
   color: var(--color-black);
   font-weight: normal;
@@ -823,13 +825,15 @@ form.yt-cart-disct-wrap .success.form-group {
   }
   .cart-product-amount-ttl {
     font-size: 14px;
+    line-height: 24px;
+    font-weight: 400;
     font-weight: normal;
-    line-height: 1.14;
   }
   .cart-product-amount-price {
     font-size: 14px;
+    line-height: 24px;
+    font-weight: 400;
     font-weight: normal;
-    line-height: 1.14;
   }
   .cart-prodict-amount tbody td,
   .cart-prodict-total-amount tbody td,
@@ -968,9 +972,10 @@ form.yt-cart-disct-wrap .success.form-group {
     line-height: 1.27;
   }
   .cart-product-amount-ttl {
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 400;
     font-weight: normal;
-    line-height: 1.2;
   }
   .cart-product-amount-price {
     font-size: 15px;

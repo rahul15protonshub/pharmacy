@@ -4,7 +4,7 @@ import DashboardController, { Props } from "./DashboardController.web";
 import SimilarProductListCard from "../../studio-store-ecommerce-components/src/ProductCard/SimilarProductListCard";
 import ProductImageWithSlider from "../../studio-store-ecommerce-components/src/ProductImageWithSlider";
 import { withRouter } from "react-router-dom";
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import Loader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader.web";
 import ChoiceChips from "../../studio-store-ecommerce-components/src/ChoiceChips";
 import CartQuantity from "../../studio-store-ecommerce-components/src/AddOrRemoveQuantity";
@@ -114,7 +114,7 @@ class ProductDetails extends DashboardController {
     const { selectedAttributes } = this?.state;
     const isSelected =
       selectedAttributes[attribute] &&
-        selectedAttributes[attribute]?.variant_property_id ===
+      selectedAttributes[attribute]?.variant_property_id ===
         item?.variant_property_id
         ? true
         : false;
@@ -124,8 +124,9 @@ class ProductDetails extends DashboardController {
           <Button
             key={item?.id}
             onClick={() => this?.onPressTool(item, attribute)}
-            className={`${isSelected ? "active" : ""
-              } sp-size-details p-2 text-center`}
+            className={`${
+              isSelected ? "active" : ""
+            } sp-size-details p-2 text-center`}
           >
             {!isFromColor && <p>{item?.name}</p>}
           </Button>
@@ -200,11 +201,19 @@ class ProductDetails extends DashboardController {
       : product?.on_sale;
     let productPrice: any = selectedProduct
       ? productOnSale
-        ? selectedProduct?.attributes?.actual_price_including_tax
-        : selectedProduct?.attributes?.price_including_tax
+        ? selectedProduct?.attributes?.price_including_tax
+        : selectedProduct?.attributes?.actual_price_including_tax
       : productOnSale
-        ? product?.actual_price_including_tax
-        : product?.price_including_tax;
+      ? product?.price_including_tax
+      : product?.actual_price_including_tax;
+
+    let productActualPrice: any = selectedProduct
+      ? false
+        ? selectedProduct?.attributes?.price_including_tax
+        : selectedProduct?.attributes?.actual_price_including_tax
+      : false
+      ? product?.price_including_tax
+      : product?.actual_price_including_tax;
     let productSlaeprice: any = selectedProduct
       ? selectedProduct?.attributes?.price_including_tax
       : product?.price_including_tax;
@@ -275,7 +284,7 @@ class ProductDetails extends DashboardController {
                                   min={150}
                                   ideal={150}
                                   max={200}
-                                  readMoreText="...read more"
+                                  readMoreText="read more..."
                                 />
                               </>
                             )}
@@ -285,7 +294,7 @@ class ProductDetails extends DashboardController {
                       <Col sm="12" md="" xl="" className="ms-md-4">
                         <div className="product-detail vstack gap-3 mb-4 product-right-content">
                           <div className="product-detail-heading">
-                            <h4 className="d-flex">
+                            <h4 className="d-flex product-name">
                               <span>{productDetails?.attributes?.name}</span>
                               &nbsp; &nbsp;
                               <a
@@ -353,18 +362,58 @@ class ProductDetails extends DashboardController {
                             {stock_qty > 0 ? (
                               <div className="d-flex align-items-center">
                                 <h5 className="f-md d-flex align-items-center fw-light">
-                                  <span>
+                                  {/* <span>
                                     {countryCode?.countryCode}{" "}
                                     {parseFloat(productPrice)?.toFixed(2)}
                                   </span>
-                                  &nbsp; &nbsp;
+                                  &nbsp; &nbsp; */}
+                                  {productOnSale && (
+                                    <>
+                                      <span className="price1 product-sale-price">
+                                        {/* @ts-ignore  */}
+                                        {
+                                          JSON.parse(
+                                            localStorage.getItem(
+                                              "countryCode"
+                                            ) ?? "{}"
+                                          )?.countryCode
+                                        }{" "}
+                                        {parseFloat(productPrice).toFixed(2)}
+                                      </span>
+                                      <span className="price2 product-reg-price2">
+                                        {/* @ts-ignore  */}
+                                        {
+                                          JSON.parse(
+                                            localStorage.getItem(
+                                              "countryCode"
+                                            ) ?? "{}"
+                                          )?.countryCode
+                                        }{" "}
+                                        {parseFloat(productActualPrice).toFixed(
+                                          2
+                                        )}
+                                      </span>
+                                    </>
+                                  )}
+                                  {!productOnSale && (
+                                    <span className="price1 product-sale-price">
+                                      {/* @ts-ignore  */}
+                                      {
+                                        JSON.parse(
+                                          localStorage.getItem("countryCode") ??
+                                            "{}"
+                                        )?.countryCode
+                                      }{" "}
+                                      {parseFloat(productPrice).toFixed(2)}
+                                    </span>
+                                  )}
                                   <img
                                     src={available}
                                     alt="verify"
                                     className="img-fluid"
                                   />
                                   &nbsp;
-                                  <span className="m-0 text-capitalize">
+                                  <span className="m-0 text-capitalize in-stock">
                                     In stock online
                                   </span>
                                 </h5>
@@ -462,17 +511,17 @@ class ProductDetails extends DashboardController {
                                 </Button>
                                 {productDetails?.attributes
                                   ?.is_subscription_available && (
-                                    <Button
-                                      className="product-btns"
-                                      type="button"
-                                      color="primary-1"
-                                      onClick={this.toggleSubscribe}
-                                    >
-                                      {isSubscribed
-                                        ? content?.subscribed
-                                        : content?.subscribe}
-                                    </Button>
-                                  )}
+                                  <Button
+                                    className="product-btns"
+                                    type="button"
+                                    color="primary-1"
+                                    onClick={this.toggleSubscribe}
+                                  >
+                                    {isSubscribed
+                                      ? content?.subscribed
+                                      : content?.subscribe}
+                                  </Button>
+                                )}
                                 <Button
                                   className="product-btns"
                                   type="button"
@@ -487,7 +536,7 @@ class ProductDetails extends DashboardController {
                                     });
                                     this?.onPressBuyNow();
                                     // this?.addToCart(product);
-                                      history?.push("/cart");
+                                    history?.push("/cart");
                                     //@ts-ignore
                                     // setTimeout(() => {
                                     //   history?.push("/cart");
@@ -511,7 +560,7 @@ class ProductDetails extends DashboardController {
                                       min={150}
                                       ideal={150}
                                       max={200}
-                                      readMoreText="...read more"
+                                      readMoreText="read more..."
                                     />
                                   </>
                                 )}
@@ -550,27 +599,27 @@ class ProductDetails extends DashboardController {
                   <Card className="border-0 shadow-sm bg-white rounded py-5">
                     {this?.state?.productDetails?.attributes?.similar_products
                       ?.data && (
-                        <>
-                          <h4 className="similar-product-heading mb-4">
-                            Similar Products
-                          </h4>
-                          <SimilarProductListCard
-                            collection={
-                              this?.state?.productDetails?.attributes
-                                ?.similar_products?.data
-                            }
-                            onViewMore={() =>
-                              //@ts-ignore
-                              this?.props?.history?.push("/Filteroptions")
-                            }
-                            addToCart={this?.addToCart}
-                            createWishlist={this?.postWishlist}
-                            deleteWishlist={this?.delWishlist}
-                            toSetDefaultVariant={this?.toSetDefaultVariant}
-                            defaultCarousel={false}
-                          />
-                        </>
-                      )}
+                      <>
+                        <h4 className="similar-product-heading mb-4">
+                          Similar Products
+                        </h4>
+                        <SimilarProductListCard
+                          collection={
+                            this?.state?.productDetails?.attributes
+                              ?.similar_products?.data
+                          }
+                          onViewMore={() =>
+                            //@ts-ignore
+                            this?.props?.history?.push("/Filteroptions")
+                          }
+                          addToCart={this?.addToCart}
+                          createWishlist={this?.postWishlist}
+                          deleteWishlist={this?.delWishlist}
+                          toSetDefaultVariant={this?.toSetDefaultVariant}
+                          defaultCarousel={false}
+                        />
+                      </>
+                    )}
                   </Card>
                 </Col>
               )}

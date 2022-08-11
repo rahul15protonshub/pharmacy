@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { Container } from "reactstrap";
 import "../assets/styles/page-loader.scoped.css";
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 // Customizable Area Start
 // Customizable Area End
 

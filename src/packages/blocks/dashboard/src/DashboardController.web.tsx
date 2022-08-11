@@ -254,6 +254,16 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     // Customizable Area End
   }
 
+  handleScroll = () => {
+
+    const position = document.documentElement.scrollHeight - document.documentElement.scrollTop
+    const cHeight = document.documentElement.clientHeight
+    if (position <= cHeight) {
+      if (this.state.dashboardFilteredProductsTotalPages > this.state.dashboardFilteredProductsActivePage) {
+        this.setDashboardFilters(this.state.dashboardFilteredProductsActivePage + 1)
+      }
+    }
+  };
   async componentDidMount() {
     super.componentDidMount();
     // Customizable Area Start
@@ -268,7 +278,12 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     const Apptemplate = JSON.parse(
       localStorage.getItem("appTemplateData") ?? "{}"
     );
+    window.addEventListener('scroll', this.handleScroll, true);
     // Customizable Area End
+  }
+  async componentWillUnmount() {
+    super.componentWillUnmount();
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
   async receive(from: string, message: Message) {
@@ -2551,18 +2566,24 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     });
   }
 
-  fetchMoreData = () => {
-    if (
-      this.state.dashboardFilteredProducts &&
-      this.state.dashboardFilteredProducts?.length >= 16
-    ) {
-      this.setState({
-        dashboardFilteredProductsActivePage:
-          this.state.dashboardFilteredProductsActivePage + 1,
-      });
-      this.getFilteredProducts();
-    }
-  };
+  clearSelectedCategory() {
+    this.setState({ selectedCategory: null }, () => {
+      this.setDashboardFilters(1, [], []);
+    })
+  }
+
+  // fetchMoreData = () => {
+  //   if (
+  //     this.state.dashboardFilteredProducts &&
+  //     this.state.dashboardFilteredProducts?.length >= 16
+  //   ) {
+  //     this.setState({
+  //       dashboardFilteredProductsActivePage:
+  //         this.state.dashboardFilteredProductsActivePage + 1,
+  //     });
+  //     this.getFilteredProducts();
+  //   }
+  // };
 
   // Customizable Area End
 }

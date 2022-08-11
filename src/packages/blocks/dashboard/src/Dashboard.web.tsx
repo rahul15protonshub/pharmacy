@@ -89,9 +89,9 @@ class HomeDashboard extends DashboardController {
 
     return (
       <>
-        {this.state.dashboardLoader && (
+        {/* {this.state.dashboardLoader && (
           <Loader loading={this.state.dashboardLoader} />
-        )}
+        )} */}
 
         {/* Shib start */}
         <Container className={`home-layout ${!this.state.showProducts ? 'home-layout--show' : ''} h-100 mb-40`}>
@@ -104,9 +104,26 @@ class HomeDashboard extends DashboardController {
                 <IoMdClose/>
               </div>
               <LeftContent data={this.state.collectionCategory} banners={this.state.bannerPosition2?.attributes?.images?.data || []}
-              onSelectSubCategory={category => {
+               onSelectSubCategory={category => {
                 this.setSelectedCategory(category)
-              }} />
+                setTimeout(() => {
+                  if (this.state.showOurProducts) {
+                    this.closeOurProducts()
+                  }
+                }, 300) // dont close immediately
+              }}
+              onSelectCategory={id => {
+                if (id === 0) {
+                  this.clearSelectedCategory()
+                  setTimeout(() => {
+                    if (this.state.showOurProducts) {
+                      this.closeOurProducts()
+                    }
+                  }, 300) // dont close immediately
+                }
+              }} 
+              
+              />
             </Col>
             <Col
               xs="12"
@@ -114,24 +131,38 @@ class HomeDashboard extends DashboardController {
               className="home-layout__col home-layout__right"
             >
               <RightContent
-                toggeProduct={this.toggeProduct}
+                // toggeProduct={this.toggeProduct}
+                // banners={this.state.banners || []}
+                // products={this.state.dashboardFilteredProducts}
+                // onScrollEnd={() => {
+                //   if (this.state.dashboardFilteredProductsTotalPages > this.state.dashboardFilteredProductsActivePage) {
+                //     this.setDashboardFilters(this.state.dashboardFilteredProductsActivePage + 1)
+                //   }
+                // }}
+                // loading={this.state.dashboardFilterLoading}
+                // onProductAddToWishlist={id => this.postWishlist(id)}
+                // onProductDeleteFromWishlist={id => this.delWishlist(id)}
+                // onSortingChange={(sortBy, sortOrder) => this.setDashboardFilters(1, undefined, undefined, sortBy, sortOrder)}
+                // productListTitle={this.state.selectedCategory.name || 'All Products'}
+                // onProductAddToCart={product => this.addToCart(product)}
+                // productsAddingToCart={this.state.productsAddingToCart}
+                // onProductDecreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, -1)}
+                // onProductIncreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, 1)}
+                // fetchMoreData={this.fetchMoreData}
+                // productWishlisting={this.state.productWishlisting}
+                toggleOurProducts={this.toggleOurProducts}
                 banners={this.state.banners || []}
                 products={this.state.dashboardFilteredProducts}
-                onScrollEnd={() => {
-                  if (this.state.dashboardFilteredProductsTotalPages > this.state.dashboardFilteredProductsActivePage) {
-                    this.setDashboardFilters(this.state.dashboardFilteredProductsActivePage + 1)
-                  }
-                }}
                 loading={this.state.dashboardFilterLoading}
                 onProductAddToWishlist={id => this.postWishlist(id)}
                 onProductDeleteFromWishlist={id => this.delWishlist(id)}
                 onSortingChange={(sortBy, sortOrder) => this.setDashboardFilters(1, undefined, undefined, sortBy, sortOrder)}
-                productListTitle={this.state.selectedCategory.name || 'All Products'}
-                onProductAddToCart={product => this.addToCart(product)}
+                productListTitle={this.state.selectedCategory?.name || 'New Arrivals'}
+                onProductAddToCart={product => this.addToCart(product, product.attributes.default_variant?.id)}
+                productWishlisting={this.state.productWishlisting}
                 productsAddingToCart={this.state.productsAddingToCart}
-                onProductDecreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, -1)}
-                onProductIncreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, 1)}
-                fetchMoreData={this.fetchMoreData}
+                onProductDecreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, -1, product.attributes.default_variant?.id)}
+                onProductIncreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, 1, product.attributes.default_variant?.id)}
               />
             </Col>
           </Row>
