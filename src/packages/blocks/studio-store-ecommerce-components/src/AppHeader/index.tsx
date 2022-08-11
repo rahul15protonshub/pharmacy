@@ -28,7 +28,7 @@ import SearchData from "./SearchData";
 import HeaderController, { Props } from "./HeaderController.Web";
 import "./css/index.scoped.css";
 // @ts-ignore
-import content from "../content.js";
+import content from "../content";
 
 // import { _ } from '../../../framework/src/IBlock';
 
@@ -766,7 +766,7 @@ class AppHeaderScreen extends HeaderController {
                       this.getRecentSearch();
                     }}
                   />
-                  {this.state.windWidth <= 767 ? (
+                  {this.state.windWidth <= 768 ? (
                     <img
                       src={require("./images/magnifying-glass@3x.png")}
                       alt="search"

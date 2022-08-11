@@ -31,7 +31,7 @@ import { withRouter } from "react-router-dom";
 import BreadCrumbs from "../../studio-store-ecommerce-components/src/BreadCrumbs";
 import { Scrollbars } from "react-custom-scrollbars";
 //@ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import Checkbox from "../../studio-store-ecommerce-components/src/UI/Checkbox";
 import CustomCard from "../../studio-store-ecommerce-components/src/Card";
 import "../assets/css/index.scoped.css";

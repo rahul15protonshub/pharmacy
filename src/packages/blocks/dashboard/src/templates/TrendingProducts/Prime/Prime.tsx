@@ -17,7 +17,7 @@ import "../css/index.scoped.css";
 import { chevronLeft, chevronRight } from "../assets";
 import { SectionHeading } from "../../../../../studio-store-ecommerce-components/src/SectionHeading/SectionHeading";
 //@ts-ignore
-import content from "../../../../../studio-store-ecommerce-components/src/content.js";
+import content from "../../../../../studio-store-ecommerce-components/src/content";
 
 let list: any = [];
 

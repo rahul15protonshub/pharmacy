@@ -7,7 +7,7 @@ import capitalize from "lodash/capitalize";
 import classnames from "classnames";
 import Loader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader.web";
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import NotificationController, { Props } from "./NotificationsController.web";
 import "../assets/styles/deleteAddressModal.css";
 import "../assets/styles/notifiaction.css";

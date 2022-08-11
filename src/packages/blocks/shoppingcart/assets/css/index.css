@@ -281,16 +281,18 @@ table.cart-prodict-type tbody th {
 } */
 
 .cart-product-amount-ttl {
-  font-size: 18px;
-  line-height: 1.11;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 400;
   text-align: left;
   color: var(--color-dark-grey-2);
   font-weight: normal;
 }
 
 .cart-product-amount-price {
-  font-size: 18px;
-  line-height: 1.11;
+  font-size: 14px;
+    line-height: 24px;
+    font-weight: 400;
   text-align: right;
   color: var(--color-black);
   display: block;
@@ -685,6 +687,9 @@ form.yt-cart-disct-wrap .success.form-group {
   }
 }
 @media (min-width: 1280px) {
+  .preCription{
+    font-size: 14px;
+  }
   .varientAvlClr{
     margin-top: 4rem !important
   }
@@ -806,14 +811,16 @@ form.yt-cart-disct-wrap .success.form-group {
   }
   .cart-product-amount-ttl {
     font-size: 14px;
+    line-height: 24px;
+    font-weight: 400;
     font-weight: normal;
-    line-height: 1.14;
   }
   .cart-product-amount-price {
-    font-size: 14px;
     font-weight: normal;
-    line-height: 1.14;
-  }
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 400; 
+}
   .cart-prodict-amount tbody td,
   .cart-prodict-total-amount tbody td,
   .cart-prodict-sub-total-amount tbody td,
@@ -994,14 +1001,15 @@ form.yt-cart-disct-wrap .success.form-group {
     line-height: 1.27;
   }
   .cart-product-amount-ttl {
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 400;
     font-weight: normal;
-    line-height: 1.2;
   }
   .cart-product-amount-price {
-    font-size: 15px;
-    line-height: 1.2;
-    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 400;
   }
   .cart-prodict-amount tbody td,
   .cart-prodict-total-amount tbody td,

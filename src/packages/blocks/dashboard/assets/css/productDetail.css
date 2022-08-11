@@ -28,7 +28,16 @@
 .out-of-stock-desc {
     color: var(--color-pink);
 }
-
+.displayed-text{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+}
+.in-stock{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+}
 @media (min-width: 0px) {
     .product-container .product-left-content {
         width: 100%;

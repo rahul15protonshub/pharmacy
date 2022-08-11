@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import { Button } from 'reactstrap';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 // @ts-ignore
-import content from "../content.js"
+import content from "../content"
 import './css/index.scoped.css';
 
 interface ProductCardProps extends RouteComponentProps {

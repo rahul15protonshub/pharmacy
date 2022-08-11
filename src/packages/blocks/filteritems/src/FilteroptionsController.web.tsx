@@ -11,7 +11,7 @@ import StorageProvider from "../../../framework/src/StorageProvider";
 // Customizable Area End
 export const configJSON = require("./config");
 //@ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 
 export interface Props {
   navigation: any;

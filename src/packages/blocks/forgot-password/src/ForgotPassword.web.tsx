@@ -4,7 +4,7 @@ import { CgSpinner } from "react-icons/cg";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { Link, withRouter } from "react-router-dom";
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import ForgotPasswordController, {
   Props,
 } from "./ForgotPasswordController.web";

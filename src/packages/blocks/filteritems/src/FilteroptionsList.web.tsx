@@ -25,7 +25,7 @@ import FilteroptionsListController, {
 } from "./FilteroptionsListController.web";
 import classnames from "classnames";
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import classNames from "classnames";
 import { withRouter } from "react-router-dom";
 // Customizable Area Start

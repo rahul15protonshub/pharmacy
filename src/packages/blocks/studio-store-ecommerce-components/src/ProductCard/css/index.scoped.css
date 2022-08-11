@@ -21,12 +21,12 @@
   text-align: center;
 }
 .product-details .product-title {
-  font-size: 16px;
-  font-weight: 300;
+  font-size: 14px;
+  font-weight: 400;
   color: var(--color-black);
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.06;
+  line-height: 24px;
   letter-spacing: normal;
 }
 .product-details .ellises {
@@ -53,8 +53,9 @@
   margin-left: 10px;
 }
 .product-details .product-reg-price2 {
-  font-size: 16px;
-  line-height: 1.13;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 400;
   text-decoration: line-through;
   color: #8b8f95;
 }
@@ -339,8 +340,8 @@
   fill: #fff !important;
 }
 .likebuttononimage.active {
-  fill: var(--color-light-cyan) !important;
-  fill-opacity: 0.3;
+  fill: var(--color-cyan) !important;
+  fill-opacity: 1;
 }
 .likebuttononimage:hover {
   fill: var(--color-light-cyan) !important;

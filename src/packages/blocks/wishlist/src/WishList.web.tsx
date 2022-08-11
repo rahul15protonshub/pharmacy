@@ -14,7 +14,7 @@ import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { IoIosStar } from "react-icons/io";
 
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import "../assets/styles/wishlist.scoped.css";
 import "../assets/styles/wishlist-modal.css";
 import Loader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader.web";

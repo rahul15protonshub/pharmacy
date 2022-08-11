@@ -7,7 +7,7 @@ import OTPConfirmationController, {
 import OTPConfrimAccount from "./OTPConfirmAccount.web";
 import "./css/index.css";
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 // Customizable Area Start
 // Customizable Area End
 export default class OTPConfirm extends OTPConfirmationController {

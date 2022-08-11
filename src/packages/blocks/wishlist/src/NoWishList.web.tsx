@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { Button } from "reactstrap";
 import "../assets/styles/nowishlist.scoped.css";
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import Loader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader.web";
 import { emptyOrdersAndWishlistImg } from "./assets";
 // Customizable Area Start

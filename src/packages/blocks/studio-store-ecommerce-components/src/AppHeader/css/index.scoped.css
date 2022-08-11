@@ -11,6 +11,9 @@
   -webkit-box-shadow: 0px 6px 35px -12px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0px 6px 35px -12px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 6px 35px -12px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 .shop-list-of-info {
   height: 75vh;
@@ -117,10 +120,10 @@ button.loginbutton.header-log-btn.w3-ripple.ml-2.btn.btn-secondary:hover {
 .yt-cart-icn-mainwp {
   margin-right: 20px !important;
 }
-.yt-head-hide-srch-col {
+/* .yt-head-hide-srch-col {
   position: relative;
-  left: 12% !important;
-}
+  left: 20%;
+} */
 
 .yt-main-header .logocontainer {
   background-color: white;
@@ -470,6 +473,7 @@ button.loginbutton.header-log-btn.w3-ripple.ml-2.btn.btn-secondary:hover {
 .yt-main-header .yt-main-menu .nav-item {
   font-size: 14px;
   line-height: 24px;
+  font-weight: 400;
   cursor: pointer;
 }
 
@@ -646,6 +650,9 @@ button.loginbutton.header-log-btn.w3-ripple.ml-2.btn.btn-secondary:hover {
 }
 
 @media only screen and (min-width: 1280px) {
+  .yt-head-hide-srch-col{
+    left: 20% !important;
+  }
   .yt-only-mobile-vw {
     display: none;
   }
@@ -682,6 +689,12 @@ button.loginbutton.header-log-btn.w3-ripple.ml-2.btn.btn-secondary:hover {
 /*
 * Screen for under 1280 Resolution 
 */
+@media only screen and (max-width: 991px)  {
+  .userbox {
+    display: none !important;
+  }
+}
+
 @media only screen and (min-width: 770px) and (max-width: 1279.92px) {
   .searchModal{
     display: none;
@@ -697,14 +710,12 @@ button.loginbutton.header-log-btn.w3-ripple.ml-2.btn.btn-secondary:hover {
     margin-left: auto;
     margin-right: auto;
   }
-  .userbox {
-    display: none !important;
-  }
+  
   .yt-head-hide-srch-col {
     /* display: none; */
     width: 28% !important;
     position: relative;
-    left: 0% !important;
+    /* left: 13%; */
   }
   .logo-txt {
     margin-left: -15px !important;
@@ -917,6 +928,16 @@ button.loginbutton.header-log-btn.w3-ripple.ml-2.btn.btn-secondary:hover {
   }
   .cart-notify{
     display:none !important;
+  }
+}
+@media only screen and (min-width: 991.5px) and (max-width:1025 )  {
+  .yt-head-hide-srch-col{
+    left: 7%!important;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width:1279 )  {
+  .yt-head-hide-srch-col{
+    left: 13%!important;
   }
 }
 
@@ -1367,6 +1388,9 @@ button.loginbutton.header-log-btn.w3-ripple.ml-2.btn.btn-secondary:hover {
 .uname {
   margin-left: 10px;
   color: gray;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
 }
 
 .userbox {
@@ -1420,9 +1444,9 @@ button.loginbutton.header-log-btn.w3-ripple.ml-2.btn.btn-secondary:hover {
   .yt-main-header .loginbutton {
     font-size: 16px;
   }
-  .yt-main-header .yt-main-menu .nav-item {
+  /* .yt-main-header .yt-main-menu .nav-item {
     font-size: 20px;
-  }
+  } */
   .yt-main-header .cm-big-menu-inner .cm-big-menu-head button {
     font-size: 20px;
   }
@@ -1448,7 +1472,7 @@ button.loginbutton.header-log-btn.w3-ripple.ml-2.btn.btn-secondary:hover {
 }
 .searchModal{
   background: #fff;
-    height: 100%;
+    height: 100vh;
     position: absolute;
     width: 100%;
     z-index: 9;
@@ -1466,6 +1490,9 @@ button.loginbutton.header-log-btn.w3-ripple.ml-2.btn.btn-secondary:hover {
 
 @media (max-width: 550px) {
 
+  .yt-main-header .menucontainer{
+    margin-left: 35px;
+  }
 .yt-head-hide-srch-col {
   right: 21% !important;
   margin-left: auto;
