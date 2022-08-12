@@ -2,13 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 // @ts-ignore
-import BackgroundHead from "./images/playstorebg.png";
+import BackgroundHead from "./images/playstorebg.png";;
 //@ts-ignore
 import googleplay from "./images/googleplay.svg";
 //@ts-ignore
 import appstore from "./images/appstore.svg";
 //@ts-ignore
-import promotion from "./images/promotion.png";
+import promotion from "./images/promotion.png";;
 import { withRouter } from "react-router-dom";
 // @ts-ignore
 import isEmpty from "lodash/isEmpty";
@@ -214,3 +214,4 @@ class Footer extends FooterController {
 }
 // @ts-ignore
 export default withRouter(Footer);
+
