@@ -456,7 +456,7 @@ class ProductDetails extends DashboardController {
                                   height="25"
                                 />
                               </div>
-                              <p className="m-0 sp-prescription-tag-name">
+                              <p className="m-0 px-2 sp-prescription-tag-name">
                                 Prescription needed
                               </p>
                             </div>

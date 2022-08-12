@@ -2,13 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 // @ts-ignore
-import BackgroundHead from "./images/playstorebg.png";
+import BackgroundHead from "./images/playstorebg.png";;
 //@ts-ignore
 import googleplay from "./images/googleplay.svg";
 //@ts-ignore
 import appstore from "./images/appstore.svg";
 //@ts-ignore
-import promotion from "./images/promotion.png";
+import promotion from "./images/promotion.png";;
 import { withRouter } from "react-router-dom";
 // @ts-ignore
 import isEmpty from "lodash/isEmpty";
@@ -169,12 +169,12 @@ class Footer extends FooterController {
               <div className="footer-contact-details">
                 <h2>Download App</h2>
                 <div className="row footerdownload footer-tab-view mobileViewContainer">
-                  <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 mob mobicon mobileView text-end">
+                  <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 mob mobicon mobileViewAndroid">
                     <a href="https://play.google.com/store" target="_blank">
                       <img src={playStoreImage} alt="playstore" />
                     </a>
                   </div>
-                  <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 mob xs-mob mobileView text-start">
+                  <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 mob xs-mob mobileViewIos">
                     <a
                       href="https://www.apple.com/in/app-store/"
                       target="_blank"
@@ -214,3 +214,4 @@ class Footer extends FooterController {
 }
 // @ts-ignore
 export default withRouter(Footer);
+
