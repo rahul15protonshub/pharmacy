@@ -20,7 +20,7 @@ import "../assets/styles/connectedAccounts.css";
 import firebase from "firebase";
 import Loader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader.web";
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 // Customizable Area Start
 // Customizable Area End
 export default class ConnectedAccounts extends ConnnectedAccountsController {

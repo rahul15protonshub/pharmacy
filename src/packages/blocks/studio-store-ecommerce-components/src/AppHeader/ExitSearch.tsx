@@ -80,6 +80,7 @@ class ExitSearch extends Component<MyProps, MyState>{
           <img
             src={require('./images/close-icn.png')}
             onClick={() => this.props.hideSearch()}
+            style={{ cursor: 'pointer' }}
           />
         </div>
         <ListGroup className="recent-search-list-wrap" flush>
@@ -94,7 +95,7 @@ class ExitSearch extends Component<MyProps, MyState>{
                 isQuickResults={this.props.isQuickResults}
               >
 
-                <div onClick={() => this.props.hideSearch()} >
+                <div onClick={() => this.props.hideSearch()}  >
                   {this.props.isQuickResults ? item.attributes.name : item.name}
                 </div>
               </ItemWithRouter>

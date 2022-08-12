@@ -47,6 +47,9 @@ export interface S {
   collectionCategory: any;
 
   isConnectedAccountsShow?: boolean;
+  windWidth?:any;
+  searchModal?:boolean;
+  noData?:boolean;
   // Customizable Area End
 }
 
@@ -106,7 +109,10 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
       wishlistLength: "",
       collectionCategory: "",
       activeTab: '3',
-      isConnectedAccountsShow: false
+      isConnectedAccountsShow: false,
+      windWidth:"0",
+      searchModal:false,
+      noData:false
       // Customizable Area End
     };
     // Customizable Area Start
@@ -163,7 +169,16 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
 
             //search live
             if (apiRequestCallId === this.getLiveSearchApiCallId) {
-              // console.log(responseJson, "live search");
+              console.log(responseJson.products.data, "live search");
+              if(responseJson.products.data.length==0){
+                this.setState({
+                  noData:true
+                })
+              }else{
+                this.setState({
+                  noData:false
+                })
+              }
               this.setState({
                 quickResults: responseJson.products.data,
               });
@@ -298,6 +313,9 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
 
   setSearchDropDown(value: any) {
     this.setState({ SearchDropDown: value })
+  }
+  setSearchModal(value: any) {
+    this.setState({ searchModal: value })
   }
 
   setSearchQuery(value: string) {

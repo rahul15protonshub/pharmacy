@@ -28,7 +28,7 @@ import { FaLongArrowAltLeft } from "react-icons/fa";
 import OrderSummaryWebController, { Props } from "./OrderSummaryController.web";
 import StripePayments from "../../payments/src/Stripe.web";
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 //@ts-ignore
 import lowerCase from "lodash/lowerCase";
 import Card from "../../studio-store-ecommerce-components/src/Card";

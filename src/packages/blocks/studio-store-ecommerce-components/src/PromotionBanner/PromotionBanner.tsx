@@ -11,9 +11,9 @@ export const PromotionBanner: React.FunctionComponent<PromotionBannerProps> = (p
     const { className, src, label } = props
     return (
         <div className={`${className} promotion-banner`}>
-            <h4 className='mb-0 promotion-banner__text'>
+            {/* <h4 className='mb-0 promotion-banner__text'>
                 {label}
-            </h4>
+            </h4> */}
             <img
                 className='promotion-banner__image'
                 src={src}

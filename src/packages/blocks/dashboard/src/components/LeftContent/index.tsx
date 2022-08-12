@@ -1,10 +1,8 @@
-import * as React from 'react';
-import { useState } from 'react';
+import React, {useState, useEffect} from 'react';
 //@ts-ignore
 import { Card, CardBody } from 'reactstrap';
 import Accordion from '../../../../studio-store-ecommerce-components/src/Accordion';
 import PromotionBanner from '../../../../studio-store-ecommerce-components/src/PromotionBanner';
-import { potraitHand } from '../../assets';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 import SimpleVerticalNav from '../../../../studio-store-ecommerce-components/src/Navs/SimpleVerticalNav';
@@ -12,12 +10,15 @@ import SimpleVerticalNav from '../../../../studio-store-ecommerce-components/src
 interface LeftContentProps {
     data: any[]
     onSelectSubCategory?: (category: any, id: number) => void
+    onSelectCategory?: (id: number) => void
     banners: any[]
 }
 
-const LeftContent: React.FunctionComponent<LeftContentProps> = ({ data, onSelectSubCategory, banners }) => {
+const LeftContent: React.FunctionComponent<LeftContentProps> = ({ data, onSelectSubCategory, banners, onSelectCategory }) => {
     
+    const [activeSubCategory, setActiveSubCategory] = useState<number|null>(0)
     const [activeCategory, setActiveCategory] = useState<number|null>(0)
+
 
     return (
         <aside className='h-100 d-flex flex-column'>
@@ -30,16 +31,26 @@ const LeftContent: React.FunctionComponent<LeftContentProps> = ({ data, onSelect
                     <div className='flex-grow-1 overflow-hidden'>
                         <Scrollbars autoHide>
                             <div className='home-category__category_list pe-4'>
+                            <Accordion
+                                label="New Arrivals"
+                                onHeaderClick={() => {
+                                    setActiveCategory(0)
+                                    setActiveSubCategory(null)
+                                    onSelectCategory?.(0)
+                                }}
+                                className="mb-2"
+                                isActive={activeCategory === 0}
+                            />
                                 {
                                     data.map(category => (
                                         <Accordion
                                             key={category.attributes.id}
-                                            isOpen={activeCategory === category.attributes.id}
+                                            isOpen={activeSubCategory === category.attributes.id}
                                             label={category.attributes.name}
-                                            toggle={() => {
-                                                setActiveCategory(activeCategory === category.attributes.id ? null : category.attributes.id)
+                                            onHeaderClick={() => {
+                                                setActiveSubCategory(activeSubCategory === category.attributes.id ? null : category.attributes.id)
                                             }}
-                                            className="mb-4"
+                                            className="mb-2"
                                             content={
                                                 <SimpleVerticalNav
                                                     list={category.attributes.sub_categories.map((subcat: any) => ({
@@ -47,7 +58,10 @@ const LeftContent: React.FunctionComponent<LeftContentProps> = ({ data, onSelect
                                                         value: subcat.id,
                                                         navItem: subcat
                                                     }))}
-                                                    onClick={(item, id) => onSelectSubCategory?.(item, id)}
+                                                    onClick={(item, id) => {
+                                                        setActiveCategory(category.attributes.id)
+                                                        onSelectSubCategory?.(item, id)
+                                                    }}
                                                 />
                                             }
                                         />

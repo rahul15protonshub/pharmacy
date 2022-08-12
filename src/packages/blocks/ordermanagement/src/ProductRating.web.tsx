@@ -18,7 +18,7 @@ import { Formik } from "formik";
 import ProductRatingController, { Props } from "./ProductRatingController.web";
 
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 // Customizable Area Start
 // Customizable Area End
 

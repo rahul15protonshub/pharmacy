@@ -25,7 +25,7 @@ import "../assets/styles/index.scoped.css";
 import "../assets/styles/logoutModal.css";
 import "../assets/styles/addressStyles.css";
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import Loader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader.web";
 import SavedAddress from "./Address.web";
 import Profilebio from "./Profilebio.web";

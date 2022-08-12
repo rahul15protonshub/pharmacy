@@ -21,7 +21,7 @@ import Dropzone from "react-dropzone";
 import { MultiSelect } from "react-multi-select-component";
 import { BsFileEarmarkText } from "react-icons/bs";
 //@ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import ShoppingCartController, {
   Props,
   configJSON,
@@ -444,11 +444,15 @@ function CartProduct(props: any) {
                     .prescription && (
                     <Fragment>
                       <div
-                        className={`${variant?.catalogue_variant_properties &&
-                          variant?.catalogue_variant_properties.length == 2 ?
-                          "varientAvl2":""} ${variant?.catalogue_variant_properties &&
-                          variant?.catalogue_variant_properties.length > 2 ?
-                          "varientAvl3":""} d-flex align-items-center presBox`}
+                      className="d-flex align-items-center preCription presBox"
+                        // className={`${variant?.catalogue_variant_properties &&
+                        //   variant?.catalogue_variant_properties.length == 1 ?
+                        //   "varientAvl1":""}
+                        // ${variant?.catalogue_variant_properties &&
+                        //   variant?.catalogue_variant_properties.length == 2 ?
+                        //   "varientAvl2":""} ${variant?.catalogue_variant_properties &&
+                        //   variant?.catalogue_variant_properties.length > 2 ?
+                        //   "varientAvl3":""} d-flex align-items-center `}
                       >
                         <div className="sp-verify-icn-wrap mx-2">
                           <img
@@ -1067,8 +1071,8 @@ const CartAmount: any = withRouter((props: any) => {
                               }}
                             >
                               <svg
-                                width="15"
-                                height="15"
+                                width="11"
+                                height="12"
                                 viewBox="0 0 15 15"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -1405,7 +1409,8 @@ const CartProductListData: any = withRouter((props: any) => {
 });
 
 //// main class component
-export class Cart extends ShoppingCartController {
+export default class Cart extends ShoppingCartController {
+  addPrescriptionApiCallId: string;
   // Customizable Area Start
   // Customizable Area End
   constructor(props: Props) {
@@ -1455,6 +1460,6 @@ export class Cart extends ShoppingCartController {
 
 // Customizable Area End
 //@ts-ignore
-export default withRouter(Cart);
+// export default withRouter(Cart);
 // Customizable Area Start
 // Customizable Area End

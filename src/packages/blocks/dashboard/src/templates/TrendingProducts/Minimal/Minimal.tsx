@@ -20,7 +20,7 @@ import {
   MinimalHeading,
 } from "../../../../../studio-store-ecommerce-components/src/SectionHeading/SectionHeading";
 //@ts-ignore
-import content from "../../../../../studio-store-ecommerce-components/src/content.js";
+import content from "../../../../../studio-store-ecommerce-components/src/content";
 let list: any = [];
 
 function TitleBar(props: any) {

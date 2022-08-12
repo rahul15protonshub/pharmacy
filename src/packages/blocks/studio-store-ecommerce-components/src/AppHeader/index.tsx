@@ -14,6 +14,8 @@ import {
   DropdownItem,
   Dropdown,
   Button,
+  ListGroup,
+  ListGroupItem,
 } from "reactstrap";
 import { FaChevronRight, FaChevronDown, FaRegHeart } from "react-icons/fa";
 import { AiFillCaretRight } from "react-icons/ai";
@@ -26,13 +28,14 @@ import SearchData from "./SearchData";
 import HeaderController, { Props } from "./HeaderController.Web";
 import "./css/index.scoped.css";
 // @ts-ignore
-import content from "../content.js";
+import content from "../content";
+
 // import { _ } from '../../../framework/src/IBlock';
 
 //@ts-ignore
-import isEmpty from 'lodash/isEmpty';
-const img=require('./images/user.png')
-
+import isEmpty from "lodash/isEmpty";
+import NotsearchFound from "./NotsearchFound";
+const img = require("./images/user.png");
 
 const MobileSideNav: any = withRouter((props: any) => {
   const isOpen = props.isOpen;
@@ -467,6 +470,56 @@ const MobileSideNav: any = withRouter((props: any) => {
   );
 });
 
+const ItemWithRouter: any = withRouter((props: any) => {
+  const selectingId = () => {
+    if (props.query.attributes.type == "Catalogue") {
+      return "id";
+    }
+    if (props.query.attributes.type == "SubCategory") {
+      return "sub_category_id";
+    }
+    if (props.query.attributes.type == "Category") {
+      return "category_id";
+    }
+  };
+
+  return (
+    <ListGroupItem
+      {...props}
+      onClick={() => {
+        let query;
+        // props.hideSearch();
+        //q[name]=Product 8&q[id]=60
+        props.isQuickResults
+          ? (localStorage.setItem(
+              "searchQuery",
+              `&q[name]=${props.query.attributes.name}&q[${selectingId()}]=${
+                props.query.attributes.id
+              }`
+            ),
+            (query = props.query.attributes.name))
+          : (localStorage.setItem(
+              "searchQuery",
+              `&q[name]=${props.query.name}`
+            ),
+            (query = props.query.name));
+
+        const route = "../";
+        //@ts-ignore
+        props.history.location.pathname.split("/").join(",").length < 1
+          ? props.history.push(
+              `./Filteroptions?&page=${1}&per_page=${15}&sort[order_by]=&sort[direction]=&q[name]=${query}`
+            )
+          : props.history.push(
+              `./${route.repeat(
+                props.history.location.pathname.split("/").join(",").length - 1
+              )}Filteroptions?&page=${1}&per_page=${15}&sort[order_by]=&sort[direction]=&q[name]=${query}`
+            );
+      }}
+    />
+  );
+});
+
 /// screen
 class AppHeaderScreen extends HeaderController {
   myRef: React.RefObject<any>;
@@ -477,9 +530,12 @@ class AppHeaderScreen extends HeaderController {
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.setSearchDropDown = this.setSearchDropDown.bind(this);
     this.activeTabToggle = this.activeTabToggle.bind(this);
+    this.setSearchModal = this.setSearchModal.bind(this);
   }
 
   async componentDidMount() {
+    this.getDimensions();
+    window.addEventListener("resize", this.getDimensions);
     document.addEventListener("mousedown", this.handleClickOutside, false);
     this.getAllWishlist();
     const themData = JSON.parse(localStorage.getItem("appThemData") ?? "{}");
@@ -503,7 +559,12 @@ class AppHeaderScreen extends HeaderController {
 
   async componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside, false);
+    window.removeEventListener("resize", this.getDimensions);
   }
+
+  getDimensions = () => {
+    this.setState({ windWidth: window.innerWidth });
+  };
 
   handleClickOutside(event: any) {
     if (this.myRef && !this.myRef.current.contains(event.target)) {
@@ -540,7 +601,14 @@ class AppHeaderScreen extends HeaderController {
             <Row className="align-items-center header_outr">
               <Col xs={1} className="yt-head-col">
                 <Link to={localStorage.getItem("token") ? "/home-page" : "/"}>
-                  <div className="d-flex align-items-center" onClick={()=>this.props.history.pathname=='/home-page'?window.location.reload():""}>
+                  <div
+                    className="d-flex align-items-center"
+                    onClick={() =>
+                      this.props.history.pathname == "/home-page"
+                        ? window.location.reload()
+                        : ""
+                    }
+                  >
                     <div className="logobox">
                       <img
                         src={
@@ -562,7 +630,14 @@ class AppHeaderScreen extends HeaderController {
 
               <Col xs={1} md={3} lg={1} className="yt-head-col logo-txt">
                 <Link to={localStorage.getItem("token") ? "/home-page" : "/"}>
-                  <div onClick={()=>this.props.history.pathname=='/home-page'?window.location.reload():""}>
+                  <div
+                  className="w-100"
+                    onClick={() =>
+                      this.props.history.pathname == "/home-page"
+                        ? window.location.reload()
+                        : ""
+                    }
+                  >
                     <span>
                       {JSON.parse(localStorage.getItem("appThemData") ?? "{}")
                         ?.ExtraFields?.heading
@@ -691,20 +766,23 @@ class AppHeaderScreen extends HeaderController {
                       this.getRecentSearch();
                     }}
                   />
-
-                  <img
-                    src={require("./images/magnifying-glass@3x.png")}
-                    alt="search"
-                    className="searchicon w3-ripple w3-hover-opacity"
-                    onClick={() => {
-                      this.setSearchDropDown(!this.state.SearchDropDown)
-                      this.search()
-                      console.log('Clicked')
-                      // this.state.searchQuery != "" &&
-                      //   (this.search(), this.setSearchDropDown(false));
-                    }}
-                  />
-                  {console.log('first', this.state.SearchDropDown,"jhdgfjh",this.state.searchQuery)}
+                  {this.state.windWidth <= 768 ? (
+                    <img
+                      src={require("./images/magnifying-glass@3x.png")}
+                      alt="search"
+                      className="searchicon w3-ripple w3-hover-opacity"
+                      onClick={() => {
+                        this.setSearchModal(!this.state.searchModal);
+                      }}
+                    />
+                  ) : (
+                    <img
+                      src={require("./images/magnifying-glass@3x.png")}
+                      alt="search"
+                      className="searchicon w3-ripple w3-hover-opacity"
+                      onClick={() => this.setSearchDropDown(true)}
+                    />
+                  )}
                   {this.state.SearchDropDown && this.state.searchQuery != "" && (
                     <SearchData
                       hideSearch={() => {
@@ -715,27 +793,27 @@ class AppHeaderScreen extends HeaderController {
                       }}
                       results={this.state.quickResults}
                       isQuickResults={true}
-                       value={this.state.searchQuery}
-                    onChange={(e: { target: { value: any; }; }) => {
-                      this.setState({
-                        searchQuery: e.target.value,
-                      });
-                      setTimeout(() => {
-                        this.state.searchQuery != "" && this.getLiveSearch();
-                      }, 300);
-                    }}
-                    onKeyUp={(e: { key: string; }) => {
-                      if (e.key === "Enter" && this.state.searchQuery != "") {
-                        this.search();
-                        this.setSearchDropDown(false);
-                      } else {
-                        this.quickSearch();
-                      }
-                    }}
-                    onFocus={() => {
-                      this.setSearchDropDown(true);
-                      this.getRecentSearch();
-                    }}
+                      value={this.state.searchQuery}
+                      onChange={(e: { target: { value: any } }) => {
+                        this.setState({
+                          searchQuery: e.target.value,
+                        });
+                        setTimeout(() => {
+                          this.state.searchQuery != "" && this.getLiveSearch();
+                        }, 300);
+                      }}
+                      onKeyUp={(e: { key: string }) => {
+                        if (e.key === "Enter" && this.state.searchQuery != "") {
+                          this.search();
+                          this.setSearchDropDown(false);
+                        } else {
+                          this.quickSearch();
+                        }
+                      }}
+                      onFocus={() => {
+                        this.setSearchDropDown(true);
+                        this.getRecentSearch();
+                      }}
                     />
                   )}
                   {this.state.SearchDropDown &&
@@ -974,7 +1052,7 @@ class AppHeaderScreen extends HeaderController {
                 </div>
               </Col>
             </Row>
-            <div className=" yt-head-mb-search-panel">
+            {/* <div className=" yt-head-mb-search-panel">
               {this.state.SearchDropDown && this.state.searchQuery != "" && (
                 <SearchData
                   hideSearch={() => {
@@ -1000,7 +1078,7 @@ class AppHeaderScreen extends HeaderController {
                         });
                         setTimeout(() => {
                           this.state.searchQuery != "" && this.getLiveSearch();
-                        }, 300);
+                        }, 100);
                       }}
                       onKeyUp={(e) => {
                         if (e.key === "Enter") {
@@ -1019,16 +1097,7 @@ class AppHeaderScreen extends HeaderController {
                 </SearchData>
               )}
               {this.state.SearchDropDown && this.state.searchQuery == "" && (
-                <SearchData
-                  hideSearch={() => {
-                    this.setState({
-                      searchQuery: "",
-                    });
-                    this.setSearchDropDown(false);
-                  }}
-                  results={this.state.recentSearches}
-                  isMobile={true}
-                >
+                <>
                   <div className="yt-mb-header-search-bar-wrap">
                     <input
                       type="text"
@@ -1047,7 +1116,7 @@ class AppHeaderScreen extends HeaderController {
                       onKeyUp={(e) => {
                         if (e.key === "Enter") {
                           this.search();
-                          this.setSearchDropDown(false);
+                          // this.setSearchDropDown(false);
                         } else {
                           this.quickSearch();
                         }
@@ -1059,9 +1128,9 @@ class AppHeaderScreen extends HeaderController {
                       autoFocus={true}
                     />
                   </div>
-                </SearchData>
+                </>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -1087,6 +1156,115 @@ class AppHeaderScreen extends HeaderController {
             }
             showConnectedAccounts={this.state.isConnectedAccountsShow}
           />
+        )}
+        {this.state.searchModal && (
+          <div className="searchModal">
+            <div>
+              <input
+                type="text"
+                placeholder={"Search"}
+                className="srchinput px-3"
+                // onClick={() => this.setSearchDropDown(true)}
+                value={this.state.searchQuery}
+                onChange={(e) => {
+                  this.setState({
+                    searchQuery: e.target.value,
+                  });
+                  setTimeout(() => {
+                    this.state.searchQuery != "" && this.getLiveSearch();
+                  }, 300);
+                }}
+                onKeyUp={(e) => {
+                  if (e.key === "Enter" && this.state.searchQuery != "") {
+                    this.search();
+                    this.setSearchDropDown(false);
+                  } else {
+                    this.quickSearch();
+                  }
+                }}
+                onFocus={() => {
+                  // this.setSearchDropDown(true);
+                  this.getRecentSearch();
+                }}
+              />
+            </div>
+
+            {this.state.noData ? (
+              <NotsearchFound
+                isMobileView={true}
+                hideSearch={() => this.setSearchModal(!this.state.searchModal)}
+              />
+            ) : (
+              <>
+                <div className="px-3 d-flex align-items-center justify-content-between mb-4">
+                  <p className="recent-search-tag-name m-0">
+                    {this.state.quickResults
+                      ? "Quick Results"
+                      : "Recent Searches"}
+                  </p>
+                  <img
+                    src={require("./images/close-icn.png")}
+                    onClick={() => this.setSearchModal(!this.state.searchModal)}
+                  />
+                </div>
+                <div>
+                  {Array.isArray(this.state.recentSearches) &&
+                  this.state.recentSearches.length > 0 &&
+                  this.state.quickResults.length == 0 ? (
+                    <ListGroup className="recent-search-list-wrap" flush>
+                      {this.state.recentSearches.map(
+                        (item: any, index: number) => {
+                          return (
+                            <ItemWithRouter
+                              // hideSearch={this.props.hideSearch}
+                              className="px-0 w3-hover-opacity"
+                              style={{ cursor: "default" }}
+                              query={item}
+                              isQuickResults={true}
+                            >
+                              <div
+                                onClick={() => {
+                                  this.setState({ searchQuery: "" });
+                                  this.setSearchModal(!this.state.searchModal);
+                                }}
+                              >
+                                {item.name}
+                              </div>
+                            </ItemWithRouter>
+                          );
+                        }
+                      )}
+                    </ListGroup>
+                  ) : (
+                    <ListGroup className="recent-search-list-wrap" flush>
+                      {this.state.quickResults.map(
+                        (item: any, index: number) => {
+                          return (
+                            <ItemWithRouter
+                              // hideSearch={this.props.hideSearch}
+                              className="px-0 w3-hover-opacity"
+                              style={{ cursor: "default" }}
+                              query={item}
+                              isQuickResults={true}
+                            >
+                              <div
+                                onClick={() => {
+                                  this.setState({ searchQuery: "" });
+                                  this.setSearchModal(!this.state.searchModal);
+                                }}
+                              >
+                                {true ? item.attributes.name : item.name}
+                              </div>
+                            </ItemWithRouter>
+                          );
+                        }
+                      )}
+                    </ListGroup>
+                  )}
+                </div>
+              </>
+            )}
+          </div>
         )}
       </header>
     );

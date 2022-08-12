@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 
 import './css/index.scoped.css';
 type MyProps = {
-  isMobile: boolean,
+  isMobile?: boolean,
   hideSearch: () => void
+  isMobileView?:boolean
 }
 
 export class NotsearchFound extends Component<MyProps > {
   render() {
     return (
-      <div className="yt-recent-search-wrap my-2">
+      <div className={`${this.props.isMobileView?"me-4":"yt-recent-search-wrap my-2"}`}>
         {this.props.isMobile && this.props.children}
         <div
           className="d-flex align-items-center justify-content-end"

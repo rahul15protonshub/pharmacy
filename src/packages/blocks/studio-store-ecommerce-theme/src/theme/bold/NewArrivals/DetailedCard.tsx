@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Row, Col, Button } from 'reactstrap';
 import { HiArrowNarrowRight } from 'react-icons/hi'
 //@ts-ignore
-import content from "../../../../../studio-store-ecommerce-components/src/content.js"
+import content from "../../../../../studio-store-ecommerce-components/src/content"
 import { Scrollbars } from 'react-custom-scrollbars';
 import './assets/css/detailed-card.scoped.css';
 

@@ -7,7 +7,7 @@ import { FaFacebookF, FaRegEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
 import { CgSpinner } from "react-icons/cg";
 import firebase from "firebase";
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import "../assets/styles/index.css";
 import EmailAccountRegistrationController from "./EmailRegistartionController.web";
 import {
