@@ -35,7 +35,7 @@ import "../assets/styles/styles.css";
 import "../assets/styles/addressStyles.css";
 import "../assets/styles/profile.css";
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import Loader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader.web";
 import "../assets/styles/index.scoped.css";
 // Customizable Area Start

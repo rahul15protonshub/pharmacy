@@ -3,14 +3,12 @@ import ExistSearch from './ExitSearch';
 import NotsearchFound from './NotsearchFound';
 
 export default function SearchData(props) {
-  console.log('props', props)
   let filtered = [];
   if (Array.isArray(props.results)) {
     filtered = props.results; //props.results.filter((item)=>item.class_name==="Product");
   }
-  console.log('filtered', filtered)
   return (
-    <Fragment>
+    <Fragment className="mobView">
       <span>
         {filtered.length > 0 ? (
           <ExistSearch {...props} results={filtered} />

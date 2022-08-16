@@ -187,7 +187,7 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
       tempbrowsefile.splice(index, 1);
       let newindex=tempbrowsefile.length-1
       tempbrowsefile[newindex].is_selecatable = false
-    this.setState({ dataArr: tempbrowsefile,  allfileupload: false })
+    this.setState({ dataArr: tempbrowsefile,  allfileupload: false,showanother: true })
   }
 
   render() {

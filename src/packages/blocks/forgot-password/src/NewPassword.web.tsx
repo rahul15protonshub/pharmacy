@@ -11,7 +11,7 @@ import { withRouter } from "react-router-dom";
 
 import NewPasswordController, { Props } from "./NewPasswordController.web";
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 // import content from "../../theme/src/content";
 
 import "../assets/styles/index.scoped.css";

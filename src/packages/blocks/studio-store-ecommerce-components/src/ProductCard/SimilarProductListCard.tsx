@@ -10,7 +10,7 @@ import "./css/index.scoped.css";
 export const configJSON = require("./config.js");
 
 //@ts-ignore
-import content from "../content.js"
+import content from "../content"
 let list: any = [];
 
 const SimilarProductListCard: any = withRouter((props: any) => {

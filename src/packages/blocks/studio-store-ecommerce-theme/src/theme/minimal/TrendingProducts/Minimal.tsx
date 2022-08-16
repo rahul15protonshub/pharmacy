@@ -7,7 +7,7 @@ export const configJSON = require("./config.js");
 import "./css/index.scoped.css";
 import { MinimalHeading } from "../../../../../studio-store-ecommerce-components/src/SectionHeading/SectionHeading";
 //@ts-ignore
-import content from "../../../../../studio-store-ecommerce-components/src/content.js"
+import content from "../../../../../studio-store-ecommerce-components/src/content"
 
 export const Minimal: any = withRouter((props: any) => {
 

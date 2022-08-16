@@ -32,7 +32,7 @@ import "../assets/styles/defaultAddressModal.css";
 import Loader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader.web";
 import { CgSpinner } from "react-icons/cg";
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import { _ } from "../../../framework/src/IBlock";
 
 // Customizable Area Start

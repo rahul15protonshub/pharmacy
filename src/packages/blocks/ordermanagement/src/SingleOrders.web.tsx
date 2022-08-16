@@ -13,7 +13,7 @@ import capitalize from "lodash/capitalize";
 // @ts-ignore
 import isEmpty from "lodash/isEmpty";
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import "../assets/styles/single-order.scoped.css";
 import SingleOrdersController, { Props } from "./SingleOrdersController.web";
 import ProductReviewModal from "./ProductRating.web";

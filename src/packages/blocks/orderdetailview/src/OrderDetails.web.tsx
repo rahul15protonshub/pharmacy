@@ -21,7 +21,7 @@ import capitalize from "lodash/capitalize";
 import "../assets/styles/order-details.scoped.css";
 import "../assets/styles/cancelSubscriptionModal.css";
 // @ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import OrderDetailsController, { Props } from "./OrderDetailsController.web";
 import PageLoadingBlog from "../../profilebio/src/PageLoadingBlog.web";
 import {

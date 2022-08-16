@@ -29,7 +29,7 @@ export default function Loader(props: myProps) {
     return props.loading ? (
         <div className={classes.root}>
             <div className={classes.circularContainer}>
-                <CircularProgress />
+                {/* <CircularProgress /> */}
             </div>
         </div>
     ) : (

@@ -128,13 +128,13 @@ const ProductBox: React.FC<ProductBoxProps> = ({
                     </TouchableOpacity>
                 )
             }
-              {product.attributes.on_sale && (
+              {/* {product.attributes.on_sale && (
           <View style={componentStyles.labelSticker}>
             <Text style={componentStyles.stickerText}>
               Save {Number(product.attributes.discount).toFixed(1)}%
             </Text>
           </View>
-        )}
+        )} */}
         </View>
     )
 }

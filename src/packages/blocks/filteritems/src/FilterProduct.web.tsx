@@ -14,7 +14,7 @@ import { BsFilterLeft, BsFunnel } from "react-icons/bs";
 import { RiCloseLine } from "react-icons/ri";
 import { withRouter } from "react-router-dom";
 //@ts-ignore
-import content from "../../studio-store-ecommerce-components/src/content.js";
+import content from "../../studio-store-ecommerce-components/src/content";
 import Loader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader.web";
 import FilterProductController, { Props } from "./FilterProductController.web";
 export const configJSON = require("./config");

@@ -1,4 +1,4 @@
-const content = {
+export default {
   login: "Log In",
   signup: "Sign Up",
   getStarted: "Get started and discover the best offers around you",
@@ -106,7 +106,6 @@ const content = {
   goBackNBrowse:
     "You can now go back and continue browsing products Enjoy Shopping !",
   goToProfile: "Go to Profile",
-  cancelOrder: "Cancel Order",
   sale: "Sale",
   currency: "INR",
   goToCart: "Go To Cart",
@@ -169,8 +168,6 @@ const content = {
   rupeeSymbol: "₹ ",
   inStock: "In stock online",
   soldOut: "Currently out of stock",
-  size: "SIZE",
-  color: "COLOR",
   itemOutOfStock: "The Item is currently out of stock",
   notifyMe: "Notify me - when available",
   NoProductFound: "No Product Found",
@@ -209,7 +206,6 @@ const content = {
   ByPopularity: "By Popularity",
   ByNewest: "By Newest",
   Recommended: "Recommended",
-  okay: "Okay",
   requestProcessed: "Request Processed",
   willNotify: "You'll get notified once the product is back in stock",
   RecommendedProducts: "Recommended Products",
@@ -252,4 +248,3 @@ const content = {
   product: 'Product',
 };
 
-export default content;
