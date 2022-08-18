@@ -175,7 +175,6 @@ export default class ProductDescription extends ProductDescriptionController {
     const product_attributes =
       this.state.productData?.attributes?.product_attributes;
     const isItemAvailable = this.checkSelectedInAvailable();
-
     if (product_attributes) {
       const attributes = Object.keys(product_attributes);
       attributes.sort();

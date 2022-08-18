@@ -71,7 +71,8 @@ const componentStyles = StyleSheet.create({
 		marginLeft: scale(16)
 	},
 	rubikFont: {
-		fontFamily: FONTS.GTWalsheimProBold
+		fontFamily: FONTS.GTWalsheimProBold,
+		fontSize:scale(14)
 	},
 	brandLogo: {
 		height: 26,

@@ -291,18 +291,45 @@ export default class ContactusController extends BlockComponent<Props, S, SS> {
 
   validateInput = () => {
     if (
-      this.state.textInputData.name.trim().length === 0 ||
-      !Validators.isNameValid(this.state.textInputData.name)
+      this.state.textInputData.name.trim().length === 0 
     ) {
       this.setState((prevState) => ({
         textInputErrorData: {
           ...prevState.textInputErrorData,
           nameError: true,
         },
+        isShowError: true,
+        showAlertModal: true,
+        message: "Name is required",
       }));
       return false;
-    } else if (
-      this.state.textInputData.email.trim().length === 0 ||
+    }
+    else if (!Validators.isNameValidNew(this.state.textInputData.name)) {
+      this.setState((prevState) => ({
+        textInputErrorData: {
+          ...prevState.textInputErrorData,
+          nameError: true,
+        },
+        isShowError: true,
+        showAlertModal: true,
+        message: "Enter a name with alphabets A-z",
+      }));
+      return false;
+      } else if (
+      this.state.textInputData.email.trim().length === 0 
+    ) {
+      this.setState((prevState) => ({
+        textInputErrorData: {
+          ...prevState.textInputErrorData,
+          emailError: true,
+        },
+        isShowError: true,
+        showAlertModal: true,
+        message: "Email is required",
+      }));
+      return false;
+    }
+    else if (
       !Validators.isEmailValid(this.state.textInputData.email)
     ) {
       this.setState((prevState) => ({
@@ -310,10 +337,26 @@ export default class ContactusController extends BlockComponent<Props, S, SS> {
           ...prevState.textInputErrorData,
           emailError: true,
         },
+        isShowError: true,
+        showAlertModal: true,
+        message: "Enter valid email",
       }));
       return false;
     } else if (
-      this.state.textInputData.phoneNo.trim().length === 0 ||
+      this.state.textInputData.phoneNo.trim().length === 0 
+    ) {
+      this.setState((prevState) => ({
+        textInputErrorData: {
+          ...prevState.textInputErrorData,
+          phoneNoError: true,
+        },
+        isShowError: true,
+        showAlertModal: true,
+        message: "Phone number is required",
+      }));
+      return false;
+    }
+    else if (
       !Validators.isPhoneNoValid(this.state.textInputData.phoneNo)
     ) {
       this.setState((prevState) => ({
@@ -321,10 +364,17 @@ export default class ContactusController extends BlockComponent<Props, S, SS> {
           ...prevState.textInputErrorData,
           phoneNoError: true,
         },
+        isShowError: true,
+        showAlertModal: true,
+        message: "Invalid phone number",
       }));
       return false;
     } else if (this.state.descriptionText.trim().length === 0) {
-      this.setState({ isInvalidDescription: true });
+      this.setState({ isInvalidDescription: true,
+        isShowError: true,
+        showAlertModal: true,
+        message: "Description is required", });
+      
       return false;
     } else {
       this.saveContactUs();

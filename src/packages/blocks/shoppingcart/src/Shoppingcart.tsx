@@ -306,7 +306,7 @@ export default class Shoppingcart extends ShoppingcartController {
 
             <View style={styles.devider} />
             <View style={[styles.tax, { marginTop: verticalScale(25) }]}>
-              <Text style={styles.product_name}>Subtotal</Text>
+              <Text style={styles.product_name}>Sub Total</Text>
               <Text style={styles.price}>
                 {themeJson.attributes.currency_type}{" "}
                 {this.state.cartData.attributes.sub_total}

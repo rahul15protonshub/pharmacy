@@ -472,7 +472,7 @@ export default class EditAddress extends EditAddressController {
           </View>
         </ScrollView>
         <GreenButton
-          title="SAVE ADDRESS"
+          title="Save Address"
           customStyle={styles.loginButton}
           customTxtStyle={styles.loginText}
           onPress={() => this.validateInput()}
