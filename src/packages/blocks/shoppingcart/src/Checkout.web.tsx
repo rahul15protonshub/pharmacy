@@ -1,5 +1,5 @@
 //@ts-nocheck;
-import React, { Fragment, useState,useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { emptyCheck, checkCheck, closeImg, addressImage } from "./assetsWeb";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -7,7 +7,7 @@ import CheckoutController, {
   Props,
   configJSON,
 } from "./CheckoutController.web";
-import { FaLongArrowAltLeft } from "react-icons/fa";
+import { FaLessThanEqual, FaLongArrowAltLeft } from "react-icons/fa";
 //@ts-ignore
 import isEmpty from "lodash/isEmpty";
 import {
@@ -26,6 +26,8 @@ import {
   Table,
   CardBody,
   Card,
+  Progress,
+  ModalFooter,
 } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import BreadCrumbs from "../../studio-store-ecommerce-components/src/BreadCrumbs";
@@ -37,6 +39,10 @@ import CustomCard from "../../studio-store-ecommerce-components/src/Card";
 import "../assets/css/index.scoped.css";
 import "../assets/css/modalAddressField.css";
 import "../assets/css/index.css";
+import { BsFileEarmarkText } from "react-icons/bs";
+import { toast } from "react-toastify";
+import Dropzone from "react-dropzone";
+import { MultiSelect } from "react-multi-select-component";
 
 // cart Amount //
 function CartAmount(props: any) {
@@ -46,11 +52,11 @@ function CartAmount(props: any) {
   const [couponCode, setCouponCode] = useState("");
   const [accordianOpen, setAccordianOpen] = useState("");
 
-  useEffect(()=>{
-    if(props.wholeCart?.coupon?.attributes?.code!=undefined){
-      setCouponCode(props.wholeCart?.coupon?.attributes?.code)
+  useEffect(() => {
+    if (props.wholeCart?.coupon?.attributes?.code != undefined) {
+      setCouponCode(props.wholeCart?.coupon?.attributes?.code);
     }
-  },[props.wholeCart?.coupon?.attributes?.code])
+  }, [props.wholeCart?.coupon?.attributes?.code]);
   function getProducts() {
     var items: any = [];
     wholeCart &&
@@ -215,42 +221,42 @@ function CartAmount(props: any) {
             <span className="cart-divider" />
             {/* {Object.keys(JSON.parse(localStorage.getItem("buyNow") || "{}"))
               .length == 0 && ( */}
-              <div style={{ marginBottom: 0 }} className="cart-coupon mt-3">
-                <Form className="yt-cart-disct-wrap">
-                  <FormGroup
-                    className={
-                      "m-0 " + "success"
-                      //(codeError || codeEmptyError ? "yt-form-cpn-err error" : "") +
-                      //(cart.coupon && !codeError && !codeEmptyError ? "success" : "")
-                    }
-                  >
-                    <input
-                      data-testid={"input-cart-coupon"}
-                      type="text"
-                      className="form-control"
-                      id="cart-total-products-amount"
-                      placeholder="Enter your promotion code"
-                      //@ts-ignore
-                      value={couponCode}
-                      onChange={(e) => {
-                        setCouponCode(e.target.value);
-                      }}
-                      disabled={wholeCart.coupon_code_id != null}
-                    />
-                    <div className="pb-3 d-flex align-items-center cart-coupon-bottom-wrapper justify-content-between">
-                      {wholeCart.coupon_code_id != null && (
-                        <span
-                          className="cart-coupon-code-message success-message"
-                          style={{ color: "#43b7a7", display: "block" }}
-                        >
-                          {content.couponApplied}
-                        </span>
-                      )}
-                      <span className="cart-coupon-code-message error-message">
-                        Coupon code can't be empty
-                        {/* {codeError} */}
+            <div style={{ marginBottom: 0 }} className="cart-coupon mt-3">
+              <Form className="yt-cart-disct-wrap">
+                <FormGroup
+                  className={
+                    "m-0 " + "success"
+                    //(codeError || codeEmptyError ? "yt-form-cpn-err error" : "") +
+                    //(cart.coupon && !codeError && !codeEmptyError ? "success" : "")
+                  }
+                >
+                  <input
+                    data-testid={"input-cart-coupon"}
+                    type="text"
+                    className="form-control"
+                    id="cart-total-products-amount"
+                    placeholder="Enter your promotion code"
+                    //@ts-ignore
+                    value={couponCode}
+                    onChange={(e) => {
+                      setCouponCode(e.target.value);
+                    }}
+                    disabled={wholeCart.coupon_code_id != null}
+                  />
+                  <div className="pb-3 d-flex align-items-center cart-coupon-bottom-wrapper justify-content-between">
+                    {wholeCart.coupon_code_id != null && (
+                      <span
+                        className="cart-coupon-code-message success-message"
+                        style={{ color: "#43b7a7", display: "block" }}
+                      >
+                        {content.couponApplied}
                       </span>
-                      {/* {cart.coupon && !enableInput)&& (
+                    )}
+                    <span className="cart-coupon-code-message error-message">
+                      Coupon code can't be empty
+                      {/* {codeError} */}
+                    </span>
+                    {/* {cart.coupon && !enableInput)&& (
                   <Button
                     color="link cart-coupon-change-btn p-0"
 
@@ -258,68 +264,66 @@ function CartAmount(props: any) {
                     Change Coupon
                   </Button>
                 )} */}
-                      {wholeCart.coupon_code_id != null && (
-                        <Button
-                          color="link cart-coupon-change-btn p-0"
-                          onClick={() => {
-                            props.deleteCoupon();
-                            setCouponCode("");
-                          }}
-                        >
-                          {content.removeCoupon}
-                        </Button>
-                      )}
-                    </div>
-
-                    <Button
-                      data-testid={"button-apply-coupon"}
-                      color="secondary cart-coupon-btn"
-                      onClick={() => {
-                        props.toApplyCoupon(couponCode, wholeCart.sub_total);
-                        //@ts-ignore
-                      }}
-                      disabled={
-                        couponCode == "" || wholeCart.coupon_code_id != null
-                      }
-                    >
-                      {content.apply}
-                    </Button>
-                  </FormGroup>
-                </Form>
-                {wholeCart.coupon_code_id != null && (
-                  <div>
-                    <Table
-                      className="mt-2 mb-0 cart-prodict-total-amount "
-                      borderless
-                    >
-                      <tbody>
-                        <tr>
-                          <td>
-                            <span className="cart-product-amount-ttl">
-                              Discount
-                            </span>
-                          </td>
-                          <td>
-                            <span className="cart-product-amount-price">
-                              {/* @ts-ignore  */}-{" "}
-                              {
-                                JSON.parse(
-                                  localStorage.getItem("countryCode") ?? "{}"
-                                )?.countryCode
-                              }{" "}
-                              {parseFloat(wholeCart.applied_discount).toFixed(
-                                2
-                              )}
-                              {/* - {content.inr} {wholeCart.applied_discount} */}
-                            </span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                    <span className="cart-divider" />
+                    {wholeCart.coupon_code_id != null && (
+                      <Button
+                        color="link cart-coupon-change-btn p-0"
+                        onClick={() => {
+                          props.deleteCoupon();
+                          setCouponCode("");
+                        }}
+                      >
+                        {content.removeCoupon}
+                      </Button>
+                    )}
                   </div>
-                )}
-              </div>
+
+                  <Button
+                    data-testid={"button-apply-coupon"}
+                    color="secondary cart-coupon-btn"
+                    onClick={() => {
+                      props.toApplyCoupon(couponCode, wholeCart.sub_total);
+                      //@ts-ignore
+                    }}
+                    disabled={
+                      couponCode == "" || wholeCart.coupon_code_id != null
+                    }
+                  >
+                    {content.apply}
+                  </Button>
+                </FormGroup>
+              </Form>
+              {wholeCart.coupon_code_id != null && (
+                <div>
+                  <Table
+                    className="mt-2 mb-0 cart-prodict-total-amount "
+                    borderless
+                  >
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span className="cart-product-amount-ttl">
+                            Discount
+                          </span>
+                        </td>
+                        <td>
+                          <span className="cart-product-amount-price">
+                            {/* @ts-ignore  */}-{" "}
+                            {
+                              JSON.parse(
+                                localStorage.getItem("countryCode") ?? "{}"
+                              )?.countryCode
+                            }{" "}
+                            {parseFloat(wholeCart.applied_discount).toFixed(2)}
+                            {/* - {content.inr} {wholeCart.applied_discount} */}
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                  <span className="cart-divider" />
+                </div>
+              )}
+            </div>
             {/* )} */}
             <Table className="mb-0 cart-prodict-sub-total-amount " borderless>
               <tbody>
@@ -372,6 +376,13 @@ const CartProductListData: any = withRouter((props: any) => {
     var products: any = [];
     products = props.cart.map((item: any, idx: any) => {});
   }
+  useEffect(()=>{
+    props.wholeCart?.order_items?.filter((item: any) => {
+        if(item.attributes.catalogue.attributes.prescription == true){
+          props.isPrescriptionExist(true)
+        }
+      });
+  },[props.wholeCart])
   return (
     <CartAmount
       wholeCart={props.wholeCart}
@@ -384,6 +395,374 @@ const CartProductListData: any = withRouter((props: any) => {
   // Customizable Area End
 });
 
+const PrescriptionModal = (props: any) => {
+  const [prescriptionFile, setPrescriptionFile] = useState<any>([]);
+  const [presProduct, setpresProduct] = useState<any>([]);
+  const [progress, setProgress] = useState<any>([]);
+  const [uploading, setUploading] = useState<any>([]);
+  const [selectedProduct, setSelectedProduct] = useState<any>([]);
+  const [preFiles, setPreFiles] = useState<any>([]);
+  const [dropDown, setDropdown] = useState([
+    {
+      id: 0,
+      options: presProduct && presProduct,
+      selected: [],
+    },
+  ]);
+  const { presModal, setIsPrescModal,wholeCart,uploadPrescription,submitValue,state,history } = props;
+
+  useEffect(() => {
+    let preProduct = wholeCart.order_items.filter((item: any) => {
+      return item.attributes.catalogue.attributes.prescription == true;
+    });
+    preProduct.filter((elm: any) => {
+      setpresProduct((presProduct: any) => [
+        ...presProduct,
+        { label: elm.attributes.catalogue.attributes.name, value: elm.id},
+      ]);
+    });
+  }, [props.wholeCart]);
+
+  useEffect(() => {
+    if (presProduct.length > 0) {
+      let arr1= [...new Map(presProduct?.map((item:any) =>[item["label"],item])).values()]
+      let newArr = dropDown.map((item, i) => {
+        return { ...item, options:arr1 };
+      });
+      setDropdown(newArr);
+    }
+  }, [presProduct]);
+
+  const getBase64 = (file: any) => {
+    return new Promise((resolve) => {
+      let fileInfo;
+      let baseURL: any = "";
+      // Make new FileReader
+      let reader = new FileReader();
+
+      // Convert the file to base64 text
+      reader.readAsDataURL(file);
+
+      // on reader load somthing...
+      reader.onload = () => {
+        baseURL = reader.result;
+        resolve(baseURL);
+      };
+    });
+  };
+
+  const handleUpload = () => {
+    let itemIds: any = [];
+    dropDown.map((elm: any) => {
+      elm.options.map((item: any) => {
+        itemIds.push(parseInt(item.value));
+      });
+    });
+    let itemIds1: any = [];
+    dropDown.map((elm: any) => {
+      elm.options.map((item: any) => {
+        let id = parseInt(item.value) + 1;
+        itemIds1.push(id);
+      });
+    });
+    let data: any = {
+      order_items: [
+        {
+          order_item_ids: itemIds,
+          prescription_files: preFiles,
+        },
+      ],
+    };
+  
+
+    let res = uploadPrescription(data);
+    if(res){
+      if(submitValue.isShippingAddressSame==true){
+         //  @ts-ignore
+              history.push({
+                pathname: "/order-summary",
+                state: {
+                  addressData: submitValue.billing_address,
+                  billing_address_Data: submitValue.billing_address,
+                  cardtData:state.wholeCart,
+                  cart:state.cart,
+                  couponData:state.couponSuccess,
+                },
+              });
+      }else{
+         //  @ts-ignore
+              history.push({
+                pathname: "/order-summary",
+                state: {
+                  addressData: submitValue.address,
+                  billing_address_Data: submitValue.billing_address,
+                  cardtData:state.wholeCart,
+                  cart:state.cart,
+                  couponData:state.couponSuccess,
+                },
+              });
+      }
+    }
+  
+  };
+  // cheek input value is valid or not {rf}
+  // const checkValidFile = (file: { target: { value: any } }) => {
+  const checkValidFile = (file: any) => {
+    const filePath = file[0].path;
+    var allowedExtensions = /(.jpg|.jpeg|.png|.gif|.pdf|.docx)/;
+
+    if (!allowedExtensions.exec(filePath)) {
+      toast.warning("Please Upload PDF or Image.");
+      return false;
+    }
+    return true;
+  };
+  // function for handle Prescription Upload {rf}
+  function handlePrescriptionUpload(event: any, index: any) {
+    if (checkValidFile(event)) {
+      var file = event[0];
+      event.map((elm: any) => {
+        getBase64(file)
+          .then((result) => {
+            file["base64"] = result;
+            setPreFiles((preFiles: any) => [...preFiles, result]);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function(event: any) {
+        file.url = reader.result;
+        setProgress([
+          ...progress,
+          Math.round((100 * event.loaded) / event.total),
+        ]);
+        setPrescriptionFile((prescriptionFile: any) => [
+          ...prescriptionFile,
+          file,
+        ]);
+        let obj = {
+          id: index,
+          file: file.path,
+        };
+        setUploading((uploading: any) => [...uploading, obj]);
+        toast.success("File upload Successfully");
+      };
+      reader.onerror = function(error) {
+        console.log("Error: ", error);
+      };
+    }
+  }
+
+  const handleDeleteUploadFile = (id: any) => {
+    setPrescriptionFile(
+      prescriptionFile.filter((elm: any, index: any) => index !== id)
+    );
+    setUploading(uploading.filter((el: any) => el.id !== id));
+    setProgress(progress.filter((item: any, index: any) => index != id));
+  };
+  const handleUploadAnotherPre = () => {
+    setSelectedProduct([]);
+    let remainProduct = dropDown[dropDown.length - 1].options.filter(
+      (o1: { value: any }) =>
+        !selectedProduct.some((o2: { value: any }) => o1.value === o2.value)
+    );
+    let obj = {
+      id: dropDown.length,
+      options: remainProduct.reduce((a: any, b: any) => a.concat(b), []),
+      selected: [],
+    };
+    setDropdown((dropDown) => [...dropDown, obj]);
+  };
+  const handleOnSelect = (e: any, index: number) => {
+    let proArr: any = [];
+    e.map((elm: any) => {
+      proArr.push(elm);
+    });
+    setSelectedProduct(proArr);
+    let newArr = dropDown.map((item, i) => {
+      if (index == i) {
+        return { ...item, selected: e };
+      } else {
+        return item;
+      }
+    });
+    setDropdown(newArr);
+  };
+  const removeUploadFile = (id: any) => {
+    let updateArray = dropDown.filter((elm: any, index: any) => index != id);
+    setDropdown(updateArray);
+  };
+  return (
+    <div className={` modal-wrap`}>
+      <Modal
+        isOpen={presModal}
+        toggle={() => setIsPrescModal(!presModal)}
+        centered
+      >
+        <ModalHeader
+          toggle={() => setIsPrescModal(!presModal)}
+          style={{ border: "none" }}
+          closed
+        >
+          <h5 className="modalTitle"> Prescription</h5>
+        </ModalHeader>
+        <ModalBody>
+          <div className="modalContent">
+            <h6 className="sub-heading">Please upload the prescription </h6>
+            {dropDown &&
+              dropDown.map((elm: any, index: any) => {
+                return (
+                  <>
+                    {index != 0 && (
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                        }}
+                      >
+                        <span
+                          style={{
+                            cursor: "pointer",
+                          }}
+                          onClick={() => removeUploadFile(index)}
+                        >
+                          x
+                        </span>
+                      </div>
+                    )}
+                    <div className="dropzone">
+                      {uploading.length > 0 &&
+                      uploading[index] &&
+                      uploading[index].id == index ? (
+                        <div className="d-flex justify-content-betweeen align-items-center w-100">
+                          <div className="file-icon">
+                            <BsFileEarmarkText size={"2rem"} />
+                          </div>
+                          <div style={{ width: "80%" }}>
+                            <div className="d-flex justify-content-between align-items-center w-100">
+                              <h6 style={{ color: "#000" }}>
+                                {prescriptionFile &&
+                                  prescriptionFile.length > 0 &&
+                                  prescriptionFile[index] &&
+                                  prescriptionFile[index].path}{" "}
+                                {(
+                                  prescriptionFile &&
+                                  prescriptionFile.length > 0 &&
+                                  prescriptionFile[index] &&
+                                  prescriptionFile[index].size / 1024 / 1024
+                                ).toFixed(2)}{" "}
+                                mb
+                              </h6>
+                              <div
+                                style={{
+                                  color: "#3FC1CB",
+                                  cursor: "pointer",
+                                }}
+                                onClick={() => handleDeleteUploadFile(index)}
+                              >
+                                x
+                              </div>
+                            </div>
+                            <Progress value={progress[index]} />
+                            <div className="d-flex justify-content-start mt-1">
+                              <span
+                                style={{ color: "#000" }}
+                              >{`${progress[index]}% done`}</span>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <Dropzone
+                          multiple={true}
+                          onDrop={(e: any) =>
+                            handlePrescriptionUpload(e, index)
+                          }
+                        >
+                          {({ getRootProps, getInputProps }) => (
+                            <div {...getRootProps()}>
+                              <input {...getInputProps()} />
+                              <p style={{ color: "#000000" }}>
+                                Drag & Drop the document here
+                              </p>
+                              <p style={{ color: "#000000" }}>OR</p>
+                              <Button color="secondary" className="browse-btn">
+                                Browse File
+                              </Button>
+                            </div>
+                          )}
+                        </Dropzone>
+                      )}
+                    </div>
+
+                    <div className="d-flex justify-content-between align-items-center mb-2">
+                      <span style={{ color: "#000000" }}>Prescription For</span>
+                      <MultiSelect
+                        options={elm.options}
+                        value={elm.selected}
+                        onChange={(e: any) => handleOnSelect(e, index)}
+                        labelledBy="Select Product"
+                        disableSearch={true}
+                        className="multiselect dropDownItem"
+                        disabled={dropDown.length > index + 1 ? true : false}
+                      />
+                    </div>
+                  </>
+                );
+              })}
+          </div>
+        </ModalBody>
+        <ModalFooter
+              className="justify-content-between"
+              style={{ border: "none" }}
+            >
+              {dropDown[dropDown.length - 1].options.length !=
+              selectedProduct.length ? (
+                <Button
+                  className="textDecorationNone px-0"
+                  color="link"
+                  onClick={handleUploadAnotherPre}
+                  disabled={
+                    selectedProduct.length != 0 && progress.length != 0
+                      ? false
+                      : true
+                  }
+                >
+                  + Add another prescription
+                </Button>
+              ) : (
+                <div className="w-50"></div>
+              )}
+              <div className="d-flex W-50">
+                <Button
+                  className="cancel px-1 mx-3 "
+                  color="link"
+                  onClick={() => setIsPrescModal(false)}
+                >
+                  cancel
+                </Button>{" "}
+                <Button
+                  disabled={
+                    dropDown[dropDown.length - 1].options.length !=
+                    selectedProduct.length
+                      ? true
+                      : false || progress != 100
+                      ? true
+                      : false
+                  }
+                  onClick={handleUpload}
+                  className=" btn-btn btn-secondary yt-login-btn btn-block px-4 py-1"
+                >
+                  Upload
+                </Button>
+              </div>
+            </ModalFooter> 
+      </Modal>
+    </div>
+  );
+};
 export class Checkout extends CheckoutController {
   // Customizable Area Start
   // Customizable Area End
@@ -503,7 +882,7 @@ export class Checkout extends CheckoutController {
                     is: false,
                     then: Yup.object({
                       name: Yup.string()
-                        .matches(/^[A-Za-z]+$/,"Only letters are allowed.")
+                        .matches(/^[A-Za-z]+$/, "Only letters are allowed.")
                         .min(2, "Name is Too Short")
                         .required("Name is Required"),
                       flat_no: Yup.string().required(
@@ -524,8 +903,9 @@ export class Checkout extends CheckoutController {
                       city: Yup.string()
                         .min(3, "City is Too Short")
                         .required("City is Required"),
-                      address_state_id:
-                        Yup.string().required("State is Required"),
+                      address_state_id: Yup.string().required(
+                        "State is Required"
+                      ),
                       country: Yup.string()
                         .min(2, "Country is Too Short")
                         .required("Country is Required"),
@@ -561,8 +941,9 @@ export class Checkout extends CheckoutController {
                     city: Yup.string()
                       .min(3, "City is Too Short")
                       .required("City is Required"),
-                    address_state_id:
-                      Yup.string().required("State is Required"),
+                    address_state_id: Yup.string().required(
+                      "State is Required"
+                    ),
                     country: Yup.string()
                       .min(2, "Country is Too Short")
                       .required("Country is Required"),
@@ -603,8 +984,9 @@ export class Checkout extends CheckoutController {
                       city: Yup.string()
                         .min(3, "City is Too Short")
                         .required("City is Required"),
-                      address_state_id:
-                        Yup.string().required("State is Required"),
+                      address_state_id: Yup.string().required(
+                        "State is Required"
+                      ),
                       country: Yup.string()
                         .min(2, "Country is Too Short")
                         .required("Country is Required"),
@@ -640,8 +1022,9 @@ export class Checkout extends CheckoutController {
                     city: Yup.string()
                       .min(3, "City is Too Short")
                       .required("City is Required"),
-                    address_state_id:
-                      Yup.string().required("State is Required"),
+                    address_state_id: Yup.string().required(
+                      "State is Required"
+                    ),
                     country: Yup.string()
                       .min(2, "Country is Too Short")
                       .required("Country is Required"),
@@ -664,32 +1047,45 @@ export class Checkout extends CheckoutController {
               country2: values.address.country.toLowerCase(),
               billingCountry2: values.billing_address.country.toLowerCase(),
             };
-            this.addNewAddressHandler(finalValues);
-            if (values.isShippingAddressSame == true) {
-              //  @ts-ignore
-              this.props.history.push({
-                pathname: "/order-summary",
-                state: {
-                  addressData: values.billing_address,
-                  billing_address_Data: values.billing_address,
-                  cardtData: this.state.wholeCart,
-                  cart: this.state.cart,
-                  couponData: this.state.couponSuccess,
-                },
+            this.setState({
+              submitValue:values
+            })
+            if(this.state.isPresExist){
+              if(values.isShippingAddressSame == false){
+                this.addNewAddressHandler(finalValues);
+              }
+              this.setState({
+                presModal: !this.state.presModal,
               });
-            } else {
-              //  @ts-ignore
-              this.props.history.push({
-                pathname: "/order-summary",
-                state: {
-                  addressData: values.address,
-                  billing_address_Data: values.billing_address,
-                  cardtData: this.state.wholeCart,
-                  cart: this.state.cart,
-                  couponData: this.state.couponSuccess,
-                },
-              });
+            }else{
+              if (values.isShippingAddressSame == true) {
+                //  @ts-ignore
+                this.props.history.push({
+                  pathname: "/order-summary",
+                  state: {
+                    addressData: values.billing_address,
+                    billing_address_Data: values.billing_address,
+                    cardtData: this.state.wholeCart,
+                    cart: this.state.cart,
+                    couponData: this.state.couponSuccess,
+                  },
+                });
+              } else {
+                this.addNewAddressHandler(finalValues);
+                //  @ts-ignore
+                this.props.history.push({
+                  pathname: "/order-summary",
+                  state: {
+                    addressData: values.address,
+                    billing_address_Data: values.billing_address,
+                    cardtData: this.state.wholeCart,
+                    cart: this.state.cart,
+                    couponData: this.state.couponSuccess,
+                  },
+                });
+              }
             }
+           
           }}
         >
           {(props) => {
@@ -865,7 +1261,7 @@ export class Checkout extends CheckoutController {
                                   )}
                                 </FormGroup>
                               </Col> */}
-                               <Col lg={6}>
+                              <Col lg={6}>
                                 <FormGroup>
                                   <span className="checkout-form-label">
                                     Pin Code{" "}
@@ -1023,7 +1419,7 @@ export class Checkout extends CheckoutController {
                                   )}
                                 </FormGroup>
                               </Col> */}
-                                   <Col lg={6}>
+                              <Col lg={6}>
                                 <FormGroup>
                                   <span className="checkout-form-label">
                                     City
@@ -1352,6 +1748,7 @@ export class Checkout extends CheckoutController {
                         isCheckedShippingCharge={
                           this.state.isCheckedShippingCharge
                         }
+                        isPrescriptionExist={this.isPrescriptionExist}
                       />
                     </Col>
                   </Row>
@@ -1374,6 +1771,7 @@ export class Checkout extends CheckoutController {
             );
           }}
         </Formik>
+
         <Modal
           className="cm-small-modal-6 select-address-model"
           isOpen={this.state && this.state.selectAddressCheck}
@@ -1401,10 +1799,16 @@ export class Checkout extends CheckoutController {
                       className="pp-sa-list-none p-0 m-0 pp-sa-all-addres-list"
                       style={{ listStyle: "none" }}
                     >
-                     
                       {this.state.userAddress &&
                       this.state.userAddress.length > 0 ? (
-                        [...new Map(this.state.userAddress?.map(item =>[item["address"],item])).values()].map((ele, index) => (
+                        [
+                          ...new Map(
+                            this.state.userAddress?.map((item) => [
+                              item["address"],
+                              item,
+                            ])
+                          ).values(),
+                        ].map((ele, index) => (
                           <li
                             key={index}
                             className={
@@ -1593,8 +1997,9 @@ export class Checkout extends CheckoutController {
                           city: Yup.string()
                             .min(3, "City is Too Short")
                             .required("City is Required"),
-                          address_state_id:
-                            Yup.string().required("State is Required"),
+                          address_state_id: Yup.string().required(
+                            "State is Required"
+                          ),
                           country: Yup.string()
                             .min(2, "Country is Too Short")
                             .required("Country is Required"),
@@ -1630,8 +2035,9 @@ export class Checkout extends CheckoutController {
                         city: Yup.string()
                           .min(3, "City is Too Short")
                           .required("City is Required"),
-                        address_state_id:
-                          Yup.string().required("State is Required"),
+                        address_state_id: Yup.string().required(
+                          "State is Required"
+                        ),
                         country: Yup.string()
                           .min(2, "Country is Too Short")
                           .required("Country is Required"),
@@ -1672,8 +2078,9 @@ export class Checkout extends CheckoutController {
                           city: Yup.string()
                             .min(3, "City is Too Short")
                             .required("City is Required"),
-                          address_state_id:
-                            Yup.string().required("State is Required"),
+                          address_state_id: Yup.string().required(
+                            "State is Required"
+                          ),
                           country: Yup.string()
                             .min(2, "Country is Too Short")
                             .required("Country is Required"),
@@ -1709,8 +2116,9 @@ export class Checkout extends CheckoutController {
                         city: Yup.string()
                           .min(3, "City is Too Short")
                           .required("City is Required"),
-                        address_state_id:
-                          Yup.string().required("State is Required"),
+                        address_state_id: Yup.string().required(
+                          "State is Required"
+                        ),
                         country: Yup.string()
                           .min(2, "Country is Too Short")
                           .required("Country is Required"),
@@ -2020,6 +2428,21 @@ export class Checkout extends CheckoutController {
           </ModalBody>
         </Modal>
         {/* Modal fro Add New Address End */}
+
+        {/* Modal for prescription upload start */}
+        {this.state.presModal && (
+          <PrescriptionModal
+            presModal={this.state.presModal}
+            setIsPrescModal={this.setIsPrescModal}
+            wholeCart={this.state.wholeCart}
+            uploadPrescription={this.postPrescriptionFile}
+            submitValue={this.state.submitValue}
+            state={this.state}
+            history={this.props.history}
+          />
+        )}
+
+        {/* Modal for prescription upload End */}
       </div>
     );
     // Customizable Area End
