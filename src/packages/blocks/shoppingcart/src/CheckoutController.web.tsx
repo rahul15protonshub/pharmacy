@@ -62,6 +62,9 @@ interface S {
   buyNowCartId?: any;
   // Customizable Area Start
   address:any
+  presModal:boolean;
+  submitValue:any;
+  isPresExist:boolean;
   // Customizable Area End
 }
 
@@ -90,6 +93,7 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
   delCouponApiCallId: string = "";
   postBuyNowApiCallId: string = "";
   updateDeliveryAddressAPiCallID: string = "";
+  postPrescription:string="";
   constructor(props: Props) {
     super(props);
     this.subScribedMessages = [
@@ -124,7 +128,10 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
       isCheckedShippingCharge: false,
       stateList: [],
       // Customizable Area Start
-      address:""
+      address:"",
+      presModal:false,
+      submitValue:{},
+      isPresExist:false
       // Customizable Area End
     };
     this.receive = this.receive.bind(this);
@@ -808,7 +815,6 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
 
   updateAddress = (selectedAddress: any) => {
     //@ts-nocheck;
-    console.log('this.state.deliveryAddressID', this.state.deliveryAddressID)
     this.setState({
       selectedAddress: this.state.deliveryAddressID,
       selectAddressCheck: false,
@@ -826,5 +832,50 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
     this.props.history.goBack();
   };
   // Customizable Area Start
+  setIsPrescModal=(value:boolean)=>{
+    this.setState({
+      presModal:value
+    })
+  }
+
+  postPrescriptionFile = (order_items: any): boolean => {
+    // Customizable Area End
+    const header = {
+      "Content-Type": configJSON.validationApiContentType,
+      token: localStorage.getItem("token"),
+    };
+    const requestMessage = new Message(
+      getName(MessageEnum.RestAPIRequestMessage)
+    );
+    
+    this.postPrescription = requestMessage.messageId;
+  
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIResponceEndPointMessage),
+      configJSON.endPointApiUploadPrescription
+    );
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIRequestHeaderMessage),
+      JSON.stringify(header)
+    );
+  
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIRequestBodyMessage),
+      JSON.stringify(order_items)
+    );
+  
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIRequestMethodMessage),
+      configJSON.putAPiMethod
+    );
+    runEngine.sendMessage(requestMessage.id, requestMessage);
+    return true;
+  };
+
+  isPrescriptionExist=(value:boolean)=>{
+    this.setState({
+      isPresExist:value
+    })
+  }
   // Customizable Area End
 }

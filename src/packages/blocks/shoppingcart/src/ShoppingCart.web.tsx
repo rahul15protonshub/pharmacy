@@ -627,48 +627,6 @@ const CartAmount: any = withRouter((props: any) => {
     wholeCart?.coupon?.attributes?.code
   );
 
-  const [prescriptionFile, setPrescriptionFile] = useState<any>([]);
-  const [isPrescModal, setIsPrescModal] = useState<any>(false);
-  const [presProduct, setpresProduct] = useState<any>([]);
-  const [progress, setProgress] = useState<any>([]);
-  const [uploading, setUploading] = useState<any>([]);
-  const [selectedProduct, setSelectedProduct] = useState<any>([]);
-  const [isPrescriptionFieldExist, setIsPrescriptionFieldExist] = useState<
-    boolean
-  >(false);
-  const [preFiles, setPreFiles] = useState<any>([]);
-  const [dropDown, setDropdown] = useState([
-    {
-      id: 0,
-      options: presProduct&&presProduct,
-      selected: [],
-    },
-  ]);
-  useEffect(() => {
-    let preProduct = wholeCart.order_items.filter((item: any) => {
-      return item.attributes.catalogue.attributes.prescription == true;
-    });
-    if (preProduct.length != 0) {
-      setIsPrescriptionFieldExist(true);
-    }
-    preProduct.filter((elm: any) => {
-      setpresProduct((presProduct: any) => [
-        ...presProduct,
-        { label: elm.attributes.catalogue.attributes.name, value: elm.id},
-      ]);
-    });
-  }, [props.wholeCart]);
-
-  useEffect(() => {
-    if (presProduct.length > 0) {
-      let arr1= [...new Map(presProduct?.map((item:any) =>[item["label"],item])).values()]
-      let newArr = dropDown.map((item, i) => {
-        return { ...item, options:arr1 };
-      });
-      setDropdown(newArr);
-    }
-  }, [presProduct]);
-
   function getProducts() {
     var items: any = [];
     wholeCart &&
@@ -724,159 +682,6 @@ const CartAmount: any = withRouter((props: any) => {
       localStorage.removeItem("catalogue_variant_id");
       props?.history?.push("./checkout");
     }
-  };
-
-  const getBase64 = (file: any) => {
-    return new Promise((resolve) => {
-      let fileInfo;
-      let baseURL: any = "";
-      // Make new FileReader
-      let reader = new FileReader();
-
-      // Convert the file to base64 text
-      reader.readAsDataURL(file);
-
-      // on reader load somthing...
-      reader.onload = () => {
-        baseURL = reader.result;
-        resolve(baseURL);
-      };
-    });
-  };
-
-  const proceedToCheckFileIsUploade = () => {
-    if (isPrescriptionFieldExist) {
-      setIsPrescModal(true);
-    } else {
-      proceedToCheckoutForm();
-    }
-  };
-  const handleUpload = () => {
-    let itemIds: any = [];
-    dropDown.map((elm: any) => {
-      elm.options.map((item: any) => {
-        itemIds.push(parseInt(item.value));
-      });
-    });
-    let itemIds1: any = [];
-    dropDown.map((elm: any) => {
-      elm.options.map((item: any) => {
-        let id=parseInt(item.value)+1
-        itemIds1.push(id);
-      });
-    });
-    let data: any = {
-      order_items: [
-        {
-          order_item_ids: itemIds,
-          prescription_files: preFiles,
-        },
-      ],
-    };
-    let data1: any = {
-      order_items: [
-        {
-          order_item_ids: itemIds1,
-          prescription_files: preFiles,
-        },
-      ],
-    };
-
-    let res = props.uploadPrescription(data);
-    let res1 = props.uploadPrescription(data1);
-    if (res||res1) {
-      proceedToCheckoutForm();
-    }
-  };
-  // cheek input value is valid or not {rf}
-  // const checkValidFile = (file: { target: { value: any } }) => {
-  const checkValidFile = (file: any) => {
-    const filePath = file[0].path;
-    var allowedExtensions = /(.jpg|.jpeg|.png|.gif|.pdf|.docx)/;
-
-    if (!allowedExtensions.exec(filePath)) {
-      toast.warning("Please Upload PDF or Image.");
-      return false;
-    }
-    return true;
-  };
-  // function for handle Prescription Upload {rf}
-  function handlePrescriptionUpload(event: any, index: any) {
-    if (checkValidFile(event)) {
-      var file = event[0];
-      event.map((elm: any) => {
-        getBase64(file)
-          .then((result) => {
-            file["base64"] = result;
-            setPreFiles((preFiles: any) => [...preFiles, result]);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      });
-      var reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = function(event: any) {
-        file.url = reader.result;
-        setProgress([
-          ...progress,
-          Math.round((100 * event.loaded) / event.total),
-        ]);
-        setPrescriptionFile((prescriptionFile: any) => [
-          ...prescriptionFile,
-          file,
-        ]);
-        let obj = {
-          id: index,
-          file: file.path,
-        };
-        setUploading((uploading: any) => [...uploading, obj]);
-        toast.success("File upload Successfully");
-      };
-      reader.onerror = function(error) {
-        console.log("Error: ", error);
-      };
-    }
-  }
-
-  const handleDeleteUploadFile = (id: any) => {
-    setPrescriptionFile(
-      prescriptionFile.filter((elm: any, index: any) => index !== id)
-    );
-    setUploading(uploading.filter((el: any) => el.id !== id));
-    setProgress(progress.filter((item: any, index: any) => index != id));
-  };
-  const handleUploadAnotherPre = () => {
-    setSelectedProduct([]);
-    let remainProduct = dropDown[dropDown.length - 1].options.filter(
-      (o1: { value: any }) =>
-        !selectedProduct.some((o2: { value: any }) => o1.value === o2.value)
-    );
-    let obj = {
-      id: dropDown.length,
-      options: remainProduct.reduce((a: any, b: any) => a.concat(b), []),
-      selected: [],
-    };
-    setDropdown((dropDown) => [...dropDown, obj]);
-  };
-  const handleOnSelect = (e: any, index: number) => {
-    let proArr: any = [];
-    e.map((elm: any) => {
-      proArr.push(elm);
-    });
-    setSelectedProduct(proArr);
-    let newArr = dropDown.map((item, i) => {
-      if (index == i) {
-        return { ...item, selected: e };
-      } else {
-        return item;
-      }
-    });
-    setDropdown(newArr);
-  };
-  const removeUploadFile = (id: any) => {
-    let updateArray = dropDown.filter((elm: any, index: any) => index != id);
-    setDropdown(updateArray);
   };
 
   return (
@@ -1170,14 +975,15 @@ const CartAmount: any = withRouter((props: any) => {
             color="btn btn-secondary yt-login-btn btn-block"
             //  onClick={()=> props.history.push("./checkout")}
             onClick={() => {
-              proceedToCheckFileIsUploade();
+              // proceedToCheckFileIsUploade();
+              proceedToCheckoutForm();
             }}
           >
             {content.proceed}
           </Button>
           {/* </Ripple> */}
         </div>
-        <div className={` modal-wrap`}>
+        {/* <div className={` modal-wrap`}>
           <Modal
             isOpen={isPrescModal}
             toggle={() => setIsPrescModal(false)}
@@ -1350,7 +1156,7 @@ const CartAmount: any = withRouter((props: any) => {
               </div>
             </ModalFooter>
           </Modal>
-        </div>
+        </div> */}
       </div>
     )
   );
@@ -1397,7 +1203,7 @@ const CartProductListData: any = withRouter((props: any) => {
                 deleteCoupon={props.deleteCoupon}
                 couponCodeError={props.couponCodeError}
                 changeCouponCode={props.changeCouponCode}
-                uploadPrescription={props.uploadPrescription}
+                // uploadPrescription={props.uploadPrescription}
               />
             </Col>
           </Row>
@@ -1445,7 +1251,7 @@ export default class Cart extends ShoppingCartController {
                 setDefaultImage={this.setDefaultImage}
                 couponCodeError={this.state.couponCodeError}
                 changeCouponCode={this.changeCouponCode}
-                uploadPrescription={this.postPrescriptionFile}
+                // uploadPrescription={this.postPrescriptionFile}
               />
             ) : (
               <EmptyCartContent />
