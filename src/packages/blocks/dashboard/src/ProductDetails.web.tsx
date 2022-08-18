@@ -535,7 +535,7 @@ class ProductDetails extends DashboardController {
                                         : productDetails?.id,
                                     });
                                     this?.onPressBuyNow();
-                                    history?.push("/cart");
+                                    history?.push("/checkout");
                                   }}
                                 >
                                   {content?.buyNow}

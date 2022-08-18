@@ -718,7 +718,7 @@ const PrescriptionModal = (props: any) => {
               className="justify-content-between"
               style={{ border: "none" }}
             >
-              {dropDown[dropDown.length - 1].options.length !=
+              {Object.keys(JSON.parse(localStorage.getItem("buyNow") || "{}")).length == 0 &&dropDown[dropDown.length - 1].options.length !=
               selectedProduct.length ? (
                 <Button
                   className="textDecorationNone px-0"
@@ -733,7 +733,7 @@ const PrescriptionModal = (props: any) => {
                   + Add another prescription
                 </Button>
               ) : (
-                <div className="w-50"></div>
+                <div style={{width:"55%"}}></div>
               )}
               <div className="d-flex W-50">
                 <Button
@@ -743,12 +743,14 @@ const PrescriptionModal = (props: any) => {
                 >
                   cancel
                 </Button>{" "}
+                {console.log('----------------------------------', dropDown[dropDown.length - 1].options.length,
+                    selectedProduct.length,progress)}
                 <Button
                   disabled={
                     dropDown[dropDown.length - 1].options.length !=
                     selectedProduct.length
                       ? true
-                      : false || progress != 100
+                      : false || progress[progress.length-1] != 100
                       ? true
                       : false
                   }
