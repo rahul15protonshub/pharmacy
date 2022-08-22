@@ -37,10 +37,8 @@ const screenProps = {
   }
 
   const feature = loadFeature('./__tests__/features/shoppingcart-web-scenario.feature');
-
+  
   defineFeature(feature, (test) => {
-
-
     beforeEach(() => {
         jest.resetModules()
         jest.doMock('react-native', () => ({ Platform: { OS: 'web' }}))
@@ -56,7 +54,7 @@ const screenProps = {
       });
 
       when('I navigate to the shoppingcart', () => {
-           instance = shoppingcartWrapper.instance() as  ShoppingCartWeb
+           instance = shoppingcartWrapper.instance() as ShoppingCartWeb
       });
 
       then('shoppingcart will load with out errors', () => {
@@ -87,7 +85,7 @@ const screenProps = {
              }
            );
      
-           instance.delCartItemApiCallId = msgValidationAPI.messageId;
+           instance.GetCartApiCallId = msgValidationAPI.messageId;
            runEngine.sendMessage("Unit Test", msgValidationAPI);
      
            
@@ -101,52 +99,8 @@ const screenProps = {
            msgError.addData(getName(MessageEnum.RestAPIResponceErrorMessage), {
              data: []
            });
-           instance.delCartItemApiCallId = msgValidationAPI.messageId;
+           instance.GetCartApiCallId = msgValidationAPI.messageId;
            runEngine.sendMessage("Unit Test", msgValidationAPI);
-     
-
-      });
-
-
-      then("I can upload shoping prescription without errors", () => {
-        const msgLoadDataAPI = new Message(
-          getName(MessageEnum.RestAPIResponceMessage)
-        );
-        msgLoadDataAPI.addData(
-          getName(MessageEnum.RestAPIResponceDataMessage),
-          msgLoadDataAPI.messageId
-        );
-        msgLoadDataAPI.addData(
-          getName(MessageEnum.RestAPIResponceSuccessMessage),
-          {
-            message: [{}],
-          }
-        );
-        instance.addPrescriptionApiCallId = msgLoadDataAPI.messageId;
-        runEngine.sendMessage("Unit Test", msgLoadDataAPI);
-      });
-  
-      then("Failed to upload  shoping prescription", () => {
-        const msgLoadPrivacyErrorRestAPI = new Message(
-          getName(MessageEnum.RestAPIResponceMessage)
-        );
-        msgLoadPrivacyErrorRestAPI.addData(
-          getName(MessageEnum.RestAPIResponceDataMessage),
-          msgLoadPrivacyErrorRestAPI
-        );
-        msgLoadPrivacyErrorRestAPI.addData(
-          getName(MessageEnum.RestAPIResponceSuccessMessage),
-          {
-            errors: [{}],
-          }
-        );
-  
-        msgLoadPrivacyErrorRestAPI.addData(
-          getName(MessageEnum.RestAPIResponceDataMessage),
-          msgLoadPrivacyErrorRestAPI.messageId
-        );
-        instance.addPrescriptionApiCallId = msgLoadPrivacyErrorRestAPI.messageId;
-        runEngine.sendMessage("Unit Test", msgLoadPrivacyErrorRestAPI);
       });
 
       then('I can leave the screen with out errors', () => {

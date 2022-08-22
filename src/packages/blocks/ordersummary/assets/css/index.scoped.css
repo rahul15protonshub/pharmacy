@@ -137,7 +137,16 @@
 .payment-container {
   display: flex;
 }
-
+.circularProgress{
+  position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999999999;
+}
+.opacity{
+  opacity: 0.2;
+}
 @media (max-width: 768px) {
   .cart-prodict-type-container {
     max-width: 54vw;

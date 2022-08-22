@@ -161,13 +161,13 @@ export class WishList extends WishListController {
                             >
                               <div className="product profile-pg-wl-sgl-product-cpnt text-center mb-4">
                                 <div className="d-flex justify-content-between align-items-center mt-3">
-                                  {catalogue_variant_in_stock?.attributes
+                                  {/* {catalogue_variant_in_stock?.attributes
                                     ?.on_sale && (
                                     <div className="yt-product-off text-center p-1">
                                       {parseInt(productData?.discount)}
                                       {content.productCard.off}
                                     </div>
-                                  )}
+                                  )} */}
                                   {productData.on_sale && false ? (
                                     <div className="profile-yt-sgl-product-off text-center p-1">
                                       {content.sale}
@@ -241,7 +241,7 @@ export class WishList extends WishListController {
                                     }
                                   />
                                   <div className="mt-3 profile-pg-wl-sgl-product-title text-center">
-                                    {productData?.name.slice(0,30)}...
+                                    {productData?.name.slice(0,20)}...
                                   </div>
 
                                   <div className="price profile-pg-wl-sgl-price-wrap text-center ">
@@ -420,7 +420,7 @@ export class WishList extends WishListController {
                               >
                                 <div className="product profile-pg-wl-sgl-product-cpnt text-center mb-4">
                                   <div className="d-flex justify-content-between align-items-center mt-3">
-                                    {catalogue_variant_in_stock.attributes
+                                    {/* {catalogue_variant_in_stock.attributes
                                       .on_sale && (
                                       <div className="yt-product-off text-center p-1">
                                         {`${Math.floor(
@@ -428,7 +428,7 @@ export class WishList extends WishListController {
                                             ?.discount_price
                                         )}${content.productCard.off}`}
                                       </div>
-                                    )}
+                                    )} */}
                                     {value.on_sale && false ? (
                                       <div className="profile-yt-sgl-product-off text-center p-1">
                                         {content.sale}

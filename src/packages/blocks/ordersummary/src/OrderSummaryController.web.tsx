@@ -26,6 +26,7 @@ interface S {
   addressData: any;
   razorpay_order_id: any;
   isOpen: any;
+  loading:boolean
   // Customizable Area End
 }
 
@@ -62,6 +63,7 @@ export default class OrderSummaryController extends BlockComponent<
       addressData: "",
       razorpay_order_id: "",
       cartId: null,
+      loading:false
     };
     // Customizable Area End
     runEngine.attachBuildingBlock(this as IBlock, this.subScribedMessages);
@@ -217,6 +219,9 @@ export default class OrderSummaryController extends BlockComponent<
           if (apiRequestCallId === this.releaseBlockId) {
           } else if (apiRequestCallId === this.placeOrderId) {
             if (responseJson) {
+              this.setState({
+                loading:false
+              })
               this.props.history.push({
                 pathname: "/order-placed",
                 state: {
@@ -484,6 +489,9 @@ export default class OrderSummaryController extends BlockComponent<
   };
 
   checkZipcodeAvailability = async () => {
+    this.setState({
+      loading:true
+    })
     this.toggleIsOpen();
 
     const shipping = this.state.addressData;
