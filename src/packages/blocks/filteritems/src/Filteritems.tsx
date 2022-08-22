@@ -232,13 +232,13 @@ export default class Filteritems extends FilteritemsController {
             </Text>
           )}
         </View> */}
-        {item.item.attributes.on_sale && (
+        {/* {item.item.attributes.on_sale && (
           <View style={styles.labelSticker}>
             <Text style={styles.stickerText}>
               Save {Number(item.item.attributes.discount).toFixed(1)}%
             </Text>
           </View>
-        )}
+        )} */}
       </TouchableOpacity>
     );
   };

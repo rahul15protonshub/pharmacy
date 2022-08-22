@@ -168,7 +168,7 @@ export default StyleSheet.create({
 
   price: {
     textAlign: 'center',
-    fontSize: scale(15),
+    fontSize: scale(13),
     lineHeight: scale(18),
     color: COLOR_CONST.newtheme,
     fontFamily: FONTS.GTWalsheimProMedium,
@@ -185,7 +185,7 @@ export default StyleSheet.create({
 
   discountPrice: {
     textAlign: 'center',
-    fontSize: scale(15),
+    fontSize: scale(13),
     lineHeight: scale(18),
     color: COLOR_CONST.lightgraycolor,
     fontFamily: FONTS.GTWalsheimProMedium,
@@ -354,7 +354,7 @@ export default StyleSheet.create({
     alignSelf: "center",
     width: scale(339),
     height: scale(42),
-    borderRadius: scale(21),
+    borderRadius: scale(5),
     opacity: 0.99,
     marginBottom: verticalScale(30.2),
   },

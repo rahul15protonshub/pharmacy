@@ -425,6 +425,9 @@ export default class ShoppingcartController extends BlockComponent<
         if (apiRequestCallId === this.getCartListApiCallId) {
           this.setState({ isFetching: false, emptyCart: true });
         }
+        if (apiRequestCallId === this.removeCartItemApiCallId) {
+          this.setState({ isFetching: false, });
+        }
         if (apiRequestCallId === this.apiApplyCouponCallId) {
           let errorMessage = this.parseApiCatchErrorResponse(
             responseJson.errors[0]

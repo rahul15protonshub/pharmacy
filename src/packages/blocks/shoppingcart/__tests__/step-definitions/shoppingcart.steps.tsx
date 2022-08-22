@@ -126,7 +126,7 @@ defineFeature(feature, (test) => {
           runEngine.sendMessage("Unit Test", msgLoadDataAPI);
         });
     
-        then("Failed to upload  shoping prescription", () => {
+        then("Failed to upload shoping prescription", () => {
           const msgLoadPrivacyErrorRestAPI = new Message(
             getName(MessageEnum.RestAPIResponceMessage)
           );

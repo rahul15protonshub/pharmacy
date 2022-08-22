@@ -280,7 +280,7 @@ export default StyleSheet.create({
     backgroundColor: themeJson.attributes.blue_grey_3,
   },
   wrapper: {
-    height: scale(93),
+    height: verticalScale(140),
   },
   swiperWrapper: {
     marginTop: scale(24),

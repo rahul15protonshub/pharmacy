@@ -292,7 +292,7 @@ export default class Catalogue extends CatalogueController {
                 </View>
               )}
               <View style={styles.ourProductsAndFilterButtonRow}>
-                <OurProductsButton onButtonPress={() => this.props.navigation.push("Categoriessubcategories")} />
+                <OurProductsButton onButtonPress={() => this.props.navigation.navigate("Categoriessubcategories")} />
                 <SortSelector onChange={(sortBy, sortOrder) => this.setCatalogueFilters(1, undefined, undefined, sortBy, sortOrder)} />
               </View>
               <View style={styles.catalogueTitleRow}>
@@ -332,7 +332,7 @@ export default class Catalogue extends CatalogueController {
                 }
                 
               </View>
-              <Footer brandSettings={this.state.brandSettings} navigation={this.props.navigation} />
+              {/* <Footer brandSettings={this.state.brandSettings} navigation={this.props.navigation} /> */}
             </ScrollView>
           )}
         </View>

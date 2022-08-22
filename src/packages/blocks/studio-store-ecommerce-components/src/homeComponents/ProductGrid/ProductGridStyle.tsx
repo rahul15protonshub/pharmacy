@@ -91,7 +91,7 @@ export default StyleSheet.create({
     },
 
     price: {
-        fontSize: scale(15),
+        fontSize: scale(13),
         lineHeight: scale(18),
         color: COLOR_CONST.newtheme,
         fontFamily: FONTS.GTWalsheimProMedium,
@@ -106,7 +106,7 @@ export default StyleSheet.create({
     },
 
     discountPrice: {
-        fontSize: scale(15),
+        fontSize: scale(13),
         lineHeight: scale(18),
         color: COLOR_CONST.lightgraycolor,
         fontFamily: FONTS.GTWalsheimProMedium,
