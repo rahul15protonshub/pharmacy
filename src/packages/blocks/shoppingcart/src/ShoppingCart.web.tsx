@@ -709,7 +709,7 @@ const CartAmount: any = withRouter((props: any) => {
               <tr>
                 <td style={{ paddingLeft: 0 }}>
                   <span className="cart-product-amount">
-                    {content.SubTotal}
+                    {content.SubTotal}(Inclusive Taxes)
                   </span>
                 </td>
                 <td style={{ paddingRight: 0, textAlign: "right" }}>
@@ -729,22 +729,7 @@ const CartAmount: any = withRouter((props: any) => {
 
           <Table className="mb-0 cart-prodict-total-amount " borderless>
             <tbody>
-              <tr>
-                <td>
-                  <span className="cart-product-amount">{content.taxes}</span>
-                </td>
-                <td style={{ textAlign: "right" }}>
-                  <span className="cart-product-amount">
-                    {/* @ts-ignore  */}
-                    {
-                      JSON.parse(localStorage.getItem("countryCode") ?? "{}")
-                        ?.countryCode
-                    }{" "}
-                    {parseFloat(wholeCart.total_tax).toFixed(2)}
-                    {/* + {content.inr} {wholeCart.total_tax} */}
-                  </span>
-                </td>
-              </tr>
+              
               <tr>
                 <td>
                   <span className="cart-product-amount">
@@ -1216,7 +1201,6 @@ const CartProductListData: any = withRouter((props: any) => {
 
 //// main class component
 export default class Cart extends ShoppingCartController {
-  addPrescriptionApiCallId: string;
   // Customizable Area Start
   // Customizable Area End
   constructor(props: Props) {

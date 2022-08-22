@@ -22,6 +22,7 @@ import {
 import Ripple from "react-ripples";
 import "../assets/css/order-summary.css";
 import "../assets/css/index.scoped.css";
+import CircularProgress from "@material-ui/core/CircularProgress";
 // Customizable Area End
 import { Link, withRouter } from "react-router-dom";
 import { FaLongArrowAltLeft } from "react-icons/fa";
@@ -134,7 +135,7 @@ const CartAmount: any = withRouter((props: any) => {
                 <tr>
                   <td style={{ paddingLeft: 0 }}>
                     <span className="cart-product-amount">
-                      {content.SubTotal}
+                      {content.SubTotal}(Inclusive Taxes)
                     </span>
                   </td>
                   <td style={{ paddingRight: 0, textAlign: "right" }}>
@@ -154,22 +155,20 @@ const CartAmount: any = withRouter((props: any) => {
 
             <Table className="mb-0 cart-prodict-total-amount " borderless>
               <tbody>
-                <tr>
+                {/* <tr>
                   <td>
                     <span className="cart-product-amount">{content.taxes}</span>
                   </td>
                   <td style={{ textAlign: "right" }}>
                     <span className="cart-product-amount">
-                      {/* @ts-ignore  */}
                       {
                         JSON.parse(localStorage.getItem("countryCode") ?? "{}")
                           ?.countryCode
                       }{" "}
                       {parseFloat(wholeCart.total_tax).toFixed(2)}
-                      {/* + {content.inr} {wholeCart.total_tax} */}
                     </span>
                   </td>
-                </tr>
+                </tr> */}
                 <tr>
                   <td>
                     <span className="cart-product-amount">
@@ -457,7 +456,8 @@ export default class OrderSummary extends OrderSummaryWebController {
     const { paymentType, isOpen } = this.state;
 
     return (
-      <div className="checkout-form-wrap">
+      <>
+      <div className={`checkout-form-wrap ${this.state.loading?"opacity":""}`}>
         <div style={{ width: "92%", margin: "0 auto" }}>
           <BreadCrumbs list={breadcrumbs} />
           <Row className="payment-container" style={{ display: "flex" }}>
@@ -523,6 +523,8 @@ export default class OrderSummary extends OrderSummaryWebController {
           />
         )}
       </div>
+        {this.state.loading&&<div className='circularProgress'><CircularProgress /></div>}
+    </>
     );
   }
 }

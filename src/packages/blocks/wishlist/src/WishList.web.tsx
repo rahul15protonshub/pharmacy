@@ -241,7 +241,7 @@ export class WishList extends WishListController {
                                     }
                                   />
                                   <div className="mt-3 profile-pg-wl-sgl-product-title text-center">
-                                    {productData?.name.slice(0,30)}...
+                                    {productData?.name.slice(0,20)}...
                                   </div>
 
                                   <div className="price profile-pg-wl-sgl-price-wrap text-center ">
