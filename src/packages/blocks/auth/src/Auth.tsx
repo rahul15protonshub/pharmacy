@@ -75,7 +75,7 @@ export default class Auth extends AuthController {
                   style={[
                     styles.loginView,
                     {
-                      backgroundColor: this.state.button1
+                      borderBottomColor: this.state.button1
                         ? COLOR_CONST.charcoalGrey
                         : "white",
                     },
@@ -84,7 +84,7 @@ export default class Auth extends AuthController {
                   <Text
                     style={[
                       styles.loginText,
-                      { color: this.state.button1 ? "white" : "black" },
+                      { color:  "black" },
                     ]}
                   >
                     Sign Up
@@ -95,7 +95,7 @@ export default class Auth extends AuthController {
                   style={[
                     styles.loginView,
                     {
-                      backgroundColor: this.state.button2
+                      borderBottomColor: this.state.button2
                         ? COLOR_CONST.charcoalGrey
                         : "white",
                     },
@@ -104,7 +104,7 @@ export default class Auth extends AuthController {
                   <Text
                     style={[
                       styles.loginText,
-                      { color: this.state.button2 ? "white" : "black" },
+                      { color: "black" },
                     ]}
                   >
                     Login

@@ -303,34 +303,75 @@ export default class EditAddressController extends BlockComponent<
           ...prevState.textInputErrorData,
           nameError: true,
         },
+        isShowError: true,
+        showAlertModal: true,
+        message: "Name is required",
       }));
-    } else if (this.state.textInputData.flat_no === "") {
+    }
+    else if (!Validators.isNameValidNew(this.state.textInputData.name)) {
+      this.setState((prevState) => ({
+        textInputErrorData: {
+          ...prevState.textInputErrorData,
+          nameError: true,
+        },
+        isShowError: true,
+        showAlertModal: true,
+        message: "Enter a name with alphabets A-z",
+      }));
+      }
+       else if (this.state.textInputData.flat_no === "") {
       this.setState((prevState) => ({
         textInputErrorData: {
           ...prevState.textInputErrorData,
           flatNoError: true,
         },
+        isShowError: true,
+        showAlertModal: true,
+        message: "Flat no. is required",
       }));
-    } else if (this.state.textInputData.address === "") {
+    } 
+    else if (this.state.textInputData.address === "") {
       this.setState((prevState) => ({
         textInputErrorData: {
           ...prevState.textInputErrorData,
           addressLine1Error: true,
         },
+        isShowError: true,
+        showAlertModal: true,
+        message: "Address is required",
       }));
-    } else if (this.state.textInputData.city === "") {
+    } 
+    else if (this.state.textInputData.city === "") {
       this.setState((prevState) => ({
         textInputErrorData: {
           ...prevState.textInputErrorData,
           cityError: true,
         },
+        isShowError: true,
+        showAlertModal: true,
+        message: "City is required",
       }));
-    } else if (this.state.textInputData.address_state_id === "") {
+    }
+    else if (!Validators.isNameValidNew(this.state.textInputData.city)) {
+      this.setState((prevState) => ({
+        textInputErrorData: {
+          ...prevState.textInputErrorData,
+          cityError: true,
+        },
+        isShowError: true,
+        showAlertModal: true,
+        message: "Enter a city with alphabets A-z",
+      }));
+      }
+       else if (this.state.textInputData.address_state_id === "") {
       this.setState((prevState) => ({
         textInputErrorData: {
           ...prevState.textInputErrorData,
           stateError: true,
         },
+        isShowError: true,
+        showAlertModal: true,
+        message: "State is required",
       }));
     } else if (this.state.textInputData.country === "") {
       this.setState((prevState) => ({
@@ -338,13 +379,31 @@ export default class EditAddressController extends BlockComponent<
           ...prevState.textInputErrorData,
           countryError: true,
         },
+        isShowError: true,
+        showAlertModal: true,
+        message: "Country is required",
       }));
-    } else if (this.state.textInputData.zip_code === "") {
+    } 
+    else if (!Validators.isNameValidNew(this.state.textInputData.country)) {
+      this.setState((prevState) => ({
+        textInputErrorData: {
+          ...prevState.textInputErrorData,
+          countryError: true,
+        },
+        isShowError: true,
+        showAlertModal: true,
+        message: "Enter a country with alphabets A-z",
+      }));
+      }
+      else if (this.state.textInputData.zip_code === "") {
       this.setState((prevState) => ({
         textInputErrorData: {
           ...prevState.textInputErrorData,
           pinCodeError: true,
         },
+        isShowError: true,
+        showAlertModal: true,
+        message: "Pin code is required",
       }));
     } else if (
       this.state.textInputData.phone_number === "" ||
@@ -355,8 +414,12 @@ export default class EditAddressController extends BlockComponent<
           ...prevState.textInputErrorData,
           phoneNoError: true,
         },
+        isShowError: true,
+        showAlertModal: true,
+        message: "Invalid Phone Number",
       }));
-    } else {
+    }
+     else {
       if (!this.props.navigation.getParam("isFromEdit")) {
         this.saveAddress();
       } else {

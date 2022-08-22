@@ -82,7 +82,7 @@ export default StyleSheet.create({
     width: scale(274),
     height: scale(38),
     zIndex: 8888,
-    borderRadius: scale(18),
+    borderRadius: scale(5),
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
@@ -319,7 +319,7 @@ export default StyleSheet.create({
     borderColor: COLOR_CONST.pastelRed,
     width: scale(312),
     height: scale(40),
-    borderRadius: scale(20),
+    borderRadius: scale(5),
   },
 
   SectionStyle: {
@@ -354,7 +354,7 @@ export default StyleSheet.create({
     borderColor: COLOR_CONST.white,
     width: scale(312),
     height: scale(40),
-    borderRadius: scale(20),
+    borderRadius: scale(5),
   },
 
   ImageStyleEmail: {

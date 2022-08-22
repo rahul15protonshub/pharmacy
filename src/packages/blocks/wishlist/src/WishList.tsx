@@ -146,13 +146,13 @@ export default class WishList extends WishListController {
             <Text style={styles.reviewCount}>| {data.reviews.length}</Text>
           )}
         </View> */}
-        {data.on_sale && (
+        {/* {data.on_sale && (
           <View style={styles.labelSticker}>
             <Text style={styles.stickerText}>
               Save {Number(data.discount).toFixed(1)}%
             </Text>
           </View>
-        )}
+        )} */}
       </TouchableOpacity>
       // Customizable Area End
     );

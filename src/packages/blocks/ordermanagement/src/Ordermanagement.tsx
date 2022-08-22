@@ -53,7 +53,7 @@ export default class Ordermanagement extends OrdermanagementController {
           <Text style={styles.youhave}>{staticString.emptyOrderSubText}</Text>
         </View>
         <GreenButton
-          title="BROWSE PRODUCTS"
+          title="Browse Products"
           customStyle={styles.loginButton}
           customTxtStyle={styles.loginText}
           onPress={() => this.props.navigation.navigate("Catalogue")}

@@ -91,9 +91,9 @@ export const ProductGrid = (props: any) => {
                     <Image source={reviewStar} style={styles.reviewStar} />
                     {item.attributes.reviews && <Text style={styles.reviewCount}>| {item.attributes.reviews.length}</Text>}
                 </View> */}
-                {item.attributes.on_sale && <View style={styles.labelSticker}>
+                {/* {item.attributes.on_sale && <View style={styles.labelSticker}>
                     <Text style={styles.stickerText}>Save {Number(item.attributes.discount).toFixed(1)}%</Text>
-                </View>}
+                </View>} */}
                 {/* <View style={styles.cartView}>
                         <Text style={styles.cartText}>Add to cart</Text>
                     </View> */}
