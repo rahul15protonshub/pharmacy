@@ -298,7 +298,7 @@ export class WishList extends WishListController {
                                       </span>
                                     )}
                                   </div>
-                                  <div className="ratings">
+                                  {/* <div className="ratings">
                                     <span>
                                       {productData?.average_rating?.toFixed(1)}
                                       <IoIosStar className="rating-star-icon" />
@@ -306,7 +306,7 @@ export class WishList extends WishListController {
                                         | {productData?.reviews.length}
                                       </span>
                                     </span>
-                                  </div>
+                                  </div> */}
                                 </div>
 
                                 {productData.stock_qty > 0 &&

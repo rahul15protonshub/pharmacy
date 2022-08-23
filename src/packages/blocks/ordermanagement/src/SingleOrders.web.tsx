@@ -363,7 +363,7 @@ class SingleOrders extends SingleOrdersController {
                             <Button
                               color="link od-cancel-btn"
                               onClick={
-                                ["placed", "confirmed"].includes(
+                                ["placed", "confirmed","under_process","in process"].includes(
                                   this.props.order?.attributes.status.toLowerCase()
                                 )
                                   ? () =>
@@ -374,7 +374,7 @@ class SingleOrders extends SingleOrdersController {
                                   : undefined
                               }
                               style={
-                                ["placed", "confirmed"].includes(
+                                ["placed", "confirmed","under_process","in process"].includes(
                                   this.props.order?.attributes.status.toLowerCase()
                                 )
                                   ? {}
@@ -385,7 +385,7 @@ class SingleOrders extends SingleOrdersController {
                               }
                             >
                               {
-                                ["placed", "confirmed"].includes(
+                                ["placed", "confirmed","under_process","in process"].includes(
                                   this.props.order?.attributes.status.toLowerCase()
                                 ) ? (
                                   <span style={{ color: "#e65e52" }}>
@@ -407,7 +407,7 @@ class SingleOrders extends SingleOrdersController {
                                 <Button
                                   color="link od-cancel-btn"
                                   onClick={
-                                    ["placed", "confirmed"].includes(
+                                    ["placed", "confirmed","under_process","in process"].includes(
                                       this.props.order?.attributes.status.toLowerCase()
                                     )
                                       ? () =>
@@ -418,7 +418,7 @@ class SingleOrders extends SingleOrdersController {
                                       : undefined
                                   }
                                   style={
-                                    ["placed", "confirmed"].includes(
+                                    ["placed", "confirmed","under_process","in process"].includes(
                                       this.props.order?.attributes.status.toLowerCase()
                                     )
                                       ? {}
@@ -429,7 +429,7 @@ class SingleOrders extends SingleOrdersController {
                                   }
                                 >
                                   {
-                                    ["placed", "confirmed"].includes(
+                                    ["placed", "confirmed","under_process","in process"].includes(
                                       this.props.order?.attributes.status.toLowerCase()
                                     ) ? (
                                       <span style={{ color: "#e65e52" }}>

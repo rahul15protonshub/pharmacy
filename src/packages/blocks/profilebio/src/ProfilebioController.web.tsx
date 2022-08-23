@@ -415,17 +415,32 @@ export default class ProfilebioController extends BlockComponent<Props, S, SS> {
   };
 
   profileImageHandler = (e: any = []) => {
+    console.log('upload image')
     const files = e?.target ? e?.target?.files : [];
     if (files.length > 0) {
       const file = files[0];
+      console.log('files[0]', files[0])
       if (file.type == "image/svg+xml") {
+        console.log("file shoud image");
+
         this.setState({
           ...this.state,
           showAlertPassword: true,
           message: ".svg file are not allowed",
           messageType: "warning",
         });
-      } else {
+      } 
+      else if (file.size<60453) {
+        console.log("file shoud be less then 16kb");
+        
+        this.setState({
+          ...this.state,
+          showAlertPassword: true,
+          message: "Image should be less then 59 kb",
+          messageType: "warning",
+        });
+      }
+      else {
         this.imgBase64(file, (result: any) => {
           this.setState({
             ...this.state,

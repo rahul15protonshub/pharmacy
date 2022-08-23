@@ -1286,6 +1286,12 @@ form.yt-cart-disct-wrap .success.form-group {
 }
 }
 @media (max-width:360px) {
+  .textDecorationNone{
+    font-size: 14px;
+  }
+  .btnsize{
+    width: 157px!important;
+   }
   .cart-prodict-info {
     flex: 0 0 47%;
 }
@@ -1294,9 +1300,7 @@ form.yt-cart-disct-wrap .success.form-group {
 }
 }
 @media (max-width:280px) {
-  .multiselect {
-    width: 50% !important;
-}
+  
   .cart-prodict-info {
     flex: 0 0 32%;
 }
