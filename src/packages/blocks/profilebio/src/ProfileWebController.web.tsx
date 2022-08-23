@@ -39,6 +39,7 @@ interface S {
   isLoadMoreOrders?: boolean;
   currentOrdersPageNo?: number;
   // Customizable Area Start
+  loadingData:boolean;
   isConnectedAccountsShow?: boolean;
   // Customizable Area End
 }
@@ -90,6 +91,7 @@ export default class ProfileWebController extends BlockComponent<Props, S, SS> {
       loadingWishlist: false,
       isConnectedAccountsShow: false,
       // Customizable Area Start
+      loadingData:true
       // Customizable Area End
     };
     this.emailReg = new RegExp("");
@@ -187,6 +189,7 @@ export default class ProfileWebController extends BlockComponent<Props, S, SS> {
             this.setState({
               wishlist:
                 responseJSON.data.wishlist.data.attributes.wishlist_items,
+              loadingData:false
             });
           } else if (responseJSON?.errors) {
             map(responseJSON.errors, (error: any) => {
@@ -341,6 +344,8 @@ export default class ProfileWebController extends BlockComponent<Props, S, SS> {
   }
 
   getWishList() {
+    console.log('getwishlist---2')
+
     this.setState({ loadingWishlist: true, commonLoader: true });
     const token = localStorage.getItem("token");
     const headers = {

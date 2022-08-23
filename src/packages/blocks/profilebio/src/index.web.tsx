@@ -47,6 +47,7 @@ import {
   orderImg,
 } from "./assets";
 // Customizable Area Start
+import CircularProgress from "@material-ui/core/CircularProgress";
 import ConnectedAccounts from "../../connectedaccounts/src/ConnectedAccounts.web";
 // Customizable Area End
 
@@ -162,6 +163,8 @@ class ProfileBlock extends ProfileWebController {
       });
     }
     this.getOrders();
+    console.log("getishlist---3");
+
     this.getWishList();
   };
 
@@ -433,14 +436,21 @@ class ProfileBlock extends ProfileWebController {
                 </TabContent>
                 <TabContent activeTab={this.state.activeTab}>
                   <TabPane tabId="2">
-                    {/* @ts-ignore */}
-                    {isEmpty(this.state.wishlist) && <NoWishList />}
-                    {!isEmpty(this.state.wishlist) && (
-                      <WishList
-                        // @ts-ignore
-                        productList={this.state.wishlist}
-                        getWishList={this.getWishList}
-                      />
+                    {this.state.loadingData ? (
+                      <CircularProgress />
+                    ) : (
+                      <>
+                        {/* @ts-ignore */}
+
+                        {isEmpty(this.state.wishlist) && <NoWishList />}
+                        {!isEmpty(this.state.wishlist) && (
+                          <WishList
+                            // @ts-ignore
+                            productList={this.state.wishlist}
+                            getWishList={this.getWishList}
+                          />
+                        )}
+                      </>
                     )}
                   </TabPane>
                 </TabContent>
