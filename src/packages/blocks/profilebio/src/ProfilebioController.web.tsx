@@ -425,14 +425,6 @@ export default class ProfilebioController extends BlockComponent<Props, S, SS> {
           messageType: "warning",
         });
       } 
-      else if (file.size<60453) {
-        this.setState({
-          ...this.state,
-          showAlertPassword: true,
-          message: "Image should be less then 59 kb",
-          messageType: "warning",
-        });
-      }
       else {
         this.imgBase64(file, (result: any) => {
           this.setState({
