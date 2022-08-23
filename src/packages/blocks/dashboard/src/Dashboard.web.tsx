@@ -131,25 +131,6 @@ class HomeDashboard extends DashboardController {
               className="home-layout__col home-layout__right"
             >
               <RightContent
-                // toggeProduct={this.toggeProduct}
-                // banners={this.state.banners || []}
-                // products={this.state.dashboardFilteredProducts}
-                // onScrollEnd={() => {
-                //   if (this.state.dashboardFilteredProductsTotalPages > this.state.dashboardFilteredProductsActivePage) {
-                //     this.setDashboardFilters(this.state.dashboardFilteredProductsActivePage + 1)
-                //   }
-                // }}
-                // loading={this.state.dashboardFilterLoading}
-                // onProductAddToWishlist={id => this.postWishlist(id)}
-                // onProductDeleteFromWishlist={id => this.delWishlist(id)}
-                // onSortingChange={(sortBy, sortOrder) => this.setDashboardFilters(1, undefined, undefined, sortBy, sortOrder)}
-                // productListTitle={this.state.selectedCategory.name || 'All Products'}
-                // onProductAddToCart={product => this.addToCart(product)}
-                // productsAddingToCart={this.state.productsAddingToCart}
-                // onProductDecreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, -1)}
-                // onProductIncreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, 1)}
-                // fetchMoreData={this.fetchMoreData}
-                // productWishlisting={this.state.productWishlisting}
                 toggleOurProducts={this.toggleOurProducts}
                 banners={this.state.banners || []}
                 products={this.state.dashboardFilteredProducts}
