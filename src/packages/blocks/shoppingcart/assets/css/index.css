@@ -886,6 +886,9 @@ form.yt-cart-disct-wrap .success.form-group {
 */
 
 @media (max-width: 767.92px) {
+  .yt-login-btn{
+    margin-top: 7px !important;
+  }
   .presBox{
     margin: 0px 0px 10px 117px !important
   }
@@ -1100,6 +1103,9 @@ form.yt-cart-disct-wrap .success.form-group {
 }
 
 @media (max-width: 575.98px) {
+  .multiselect {
+    width: 65% !important;
+}
   .empty-cart-text {
     max-width: 233px;
     margin-left: auto;
@@ -1288,6 +1294,9 @@ form.yt-cart-disct-wrap .success.form-group {
 }
 }
 @media (max-width:280px) {
+  .multiselect {
+    width: 50% !important;
+}
   .cart-prodict-info {
     flex: 0 0 32%;
 }

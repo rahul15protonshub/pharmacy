@@ -731,7 +731,7 @@ const PrescriptionModal = (props: any) => {
                   + Add another prescription
                 </Button>
               ) : (
-                <div style={{width:"55%"}}></div>
+                <div></div>
               )}
               <div className="d-flex W-50">
                 <Button
