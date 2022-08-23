@@ -158,7 +158,7 @@ export default StyleSheet.create({
 
   titleNameStyle: {
     textAlign: 'center',
-    fontSize: scale(17),
+    fontSize: scale(15),
     lineHeight: scale(19),
     height: scale(19),
     color: COLOR_CONST.black,

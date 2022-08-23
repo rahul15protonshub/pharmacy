@@ -104,8 +104,12 @@ export default class WishListController extends BlockComponent<Props, S, SS> {
 
   async componentWillUnmount() {
     super.componentWillUnmount();
-    this._unsubscribe.remove();
     // Customizable Area Start
+    this._unsubscribe && this._unsubscribe.remove();
+    BackHandler.removeEventListener(
+      "hardwareBackPress",
+      this.handleBackButtonClick
+    );
     // Customizable Area End
   }
   getToken = async () => {

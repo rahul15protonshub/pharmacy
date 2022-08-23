@@ -131,10 +131,6 @@ const Footer = createBottomTabNavigator(
       screen: Categoriessubcategories,
       navigationOptions: { header: null, },
     },
-    WishList: {
-      screen: WishList,
-      navigationOptions: { header: null, },
-    },
     Profilebio: {
       screen: Profilebio,
       navigationOptions: { header: null, },
@@ -165,14 +161,6 @@ const Footer = createBottomTabNavigator(
             <View style={styles.outerContainer}>
               <View style={[styles.tabContainer, { borderTopColor: focused ? themeJson.attributes.primary_color : 'transparent' }]}>
                 <Image source={focused ? IMG_CONST.EXPLORE_ACTIVE : IMG_CONST.EXPLORE_INACTIVE} style={styles.exploreIcons} />
-              </View>
-            </View>
-          )
-        } else if (routeName === 'WishList') {
-          return (
-            <View style={styles.outerContainer}>
-              <View style={[styles.tabContainer, { borderTopColor: focused ? themeJson.attributes.primary_color : 'transparent' }]}>
-                <Image source={focused ? IMG_CONST.WISH_ACTIVE : IMG_CONST.WISH_INACTIVE} style={styles.wishListIcons} />
               </View>
             </View>
           )
@@ -229,7 +217,10 @@ const MainNavigator = createStackNavigator({
     screen: SubscriptionOrderList,
     navigationOptions: { header: null }
   },
-
+  WishList: {
+    screen: WishList,
+    navigationOptions: { header: null }
+  },
 
   Search: { screen: Search, navigationOptions: { header: null } },
   Sorting: { screen: Sorting, navigationOptions: { title: 'Sorting' } },

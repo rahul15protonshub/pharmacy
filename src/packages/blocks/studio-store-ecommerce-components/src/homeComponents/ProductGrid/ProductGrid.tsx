@@ -72,7 +72,7 @@ export const ProductGrid = (props: any) => {
                 </TouchableOpacity>
                 <View style={styles.imageMainContainer}>
                     <Image source={{ uri: productImage }} style={styles.BottalImage} />
-                    <Text numberOfLines={2} style={styles.titleNameStyle}>{item?.attributes?.name}</Text>
+                    <Text numberOfLines={1} style={styles.titleNameStyle}>{item?.attributes?.name}</Text>
                     {item.attributes?.on_sale ? (<View style={styles.discountRow}>
                         <Text style={styles.price}>{themeJson.attributes.currency_type} {item?.attributes?.price_including_tax}</Text>
                         <Text style={styles.discountPrice}> {themeJson.attributes.currency_type} {item?.attributes?.actual_price_including_tax}</Text>

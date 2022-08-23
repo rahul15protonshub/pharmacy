@@ -36,6 +36,8 @@ const staticString = require("./../../studio-store-ecommerce-translations/en.jso
 export const configJSON = require("./config");
 
 // Customizable Area Start
+import R from "../../studio-store-ecommerce-components/src/R";
+import Scale, { verticalScale } from "../../../framework/src/utils/Scale";
 // Customizable Area End
 
 export default class WishList extends WishListController {
@@ -111,7 +113,7 @@ export default class WishList extends WishListController {
         </TouchableOpacity>
         <View style={styles.titleContainer}>
           <Image source={{ uri: productImage }} style={styles.BottalImage} />
-          <Text numberOfLines={2} style={styles.titleNameStyle}>
+          <Text numberOfLines={1} style={styles.titleNameStyle}>
             {data.name}
           </Text>
           {data?.on_sale ? (
@@ -131,14 +133,20 @@ export default class WishList extends WishListController {
             </Text>
           )}
         </View>
-        <TouchableOpacity onPress={() => this.onAddtocartPress(item.item.data)} style={styles.addtocartitem}>
+       {data.stock_qty? <TouchableOpacity onPress={() => this.onAddtocartPress(item.item.data)} style={styles.addtocartitem}>
           <View >
             <Text style={styles.addtocarttext}> {!isInCart
               ? "Add to cart"
               : "Go to cart"}</Text>
           </View>
 
-        </TouchableOpacity>
+        </TouchableOpacity>:
+        <View  style={styles.addtocartitem}>
+        <View >
+          <Text style={[styles.addtocarttext,{opacity:0.5}]}> {"Out of Stock"}</Text>
+        </View>
+      </View>
+        }
         {/* <View style={styles.reviewRow}>
           <Text style={styles.avgReview}>{data.average_rating}</Text>
           <Image source={reviewStar} style={styles.reviewStar} />
@@ -175,6 +183,12 @@ export default class WishList extends WishListController {
         />
         <TopHeader
           headerTitle={"Wishlist"}
+          headerLeftIconName={R.contactUsImage.backIcon}
+          headerLeftIconStyle={{
+            resizeMode: "contain",
+            width: Scale(12),
+            height: verticalScale(20),
+          }}
           headerRightIcons={[
             {
               src: CART_BLACK_ICON,
@@ -190,7 +204,6 @@ export default class WishList extends WishListController {
             this.props.navigation.goBack();
           }}
           navigation={this.props.navigation}
-          headerLeftIconStyle={{}}
           headerTitleStyle={{}}
           headerStyle={{ elevation: 2 }}
         />

@@ -191,7 +191,7 @@ export default class Filteritems extends FilteritemsController {
             source={{ uri: productImage }}
             style={styles.BottalImage}
           />
-          <Text numberOfLines={2} style={styles.titleNameStyle}>
+          <Text numberOfLines={1} style={styles.titleNameStyle}>
             {item?.item.attributes?.name}
           </Text>
           {item.item?.attributes?.on_sale ? (
@@ -213,14 +213,20 @@ export default class Filteritems extends FilteritemsController {
             </Text>
           )}
         </View>
-        <TouchableOpacity onPress={() => this.addToCart(item)} style={styles.addtocartitem}>
+       {item?.item?.attributes?.stock_qty ? <TouchableOpacity onPress={() => this.addToCart(item)} style={styles.addtocartitem}>
           <View >
             <Text style={styles.addtocarttext}> {!isInCart
               ? "Add to cart"
               : "Go to cart"}</Text>
           </View>
 
-        </TouchableOpacity>
+        </TouchableOpacity>:
+        <View  style={styles.addtocartitem}>
+        <View >
+          <Text style={[styles.addtocarttext,{opacity:0.5}]}> {"Out of Stock"}</Text>
+        </View>
+
+      </View>}
         {/* <View style={styles.reviewRow}>
           <Text style={styles.avgReview}>
             {item.item.attributes.average_rating}

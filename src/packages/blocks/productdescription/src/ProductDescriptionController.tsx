@@ -827,7 +827,7 @@ export default class ProductDescriptionController extends BlockComponent<
     const { catalogue_variants } = attributes;
     if (catalogue_variants?.length > 0) {
       catalogue_variants?.map((varient: any, index: any) => {
-        if (varient.id == this.state?.catalogue_variant_id) {
+        if (varient.attributes.is_default == true) {
           const { images } = varient?.attributes;
           let isVarientImage = images?.data?.length > 0;
           let selectedAttributes = {};

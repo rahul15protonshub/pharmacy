@@ -84,7 +84,7 @@ export default class ProductDescription extends ProductDescriptionController {
                 : COLOR_CONST.white,
               borderWidth: scale(1),
               borderColor: isSelected
-                ? COLOR_CONST.white
+                ? COLOR_CONST.newtheme
                 : COLOR_CONST.newtheme,
               opacity: 0.7,
             },
@@ -93,11 +93,6 @@ export default class ProductDescription extends ProductDescriptionController {
           <Text
             style={[
               styles.labelText,
-              {
-                color: isSelected
-                  ? COLOR_CONST.black
-                  : COLOR_CONST.black,
-              },
             ]}
           >
             {item.name}
@@ -127,20 +122,15 @@ export default class ProductDescription extends ProductDescriptionController {
               },
             ]}
           >
-            {!isFromColor && (
+          
               <Text
                 style={[
                   styles.labelText,
-                  {
-                    color: !isSelected
-                      ? COLOR_CONST.black
-                      : COLOR_CONST.black,
-                  },
                 ]}
               >
                 {item.name}
               </Text>
-            )}
+           
           </TouchableOpacity>
         )}
       </>
@@ -544,7 +534,21 @@ export default class ProductDescription extends ProductDescriptionController {
                     <Text style={styles.plus}>+</Text>
                   </TouchableOpacity>
                 </View>
-              ) : null}
+              ) : 
+              <View style={[styles.tools, {}]}>
+                  <View  style={[styles.minusview,{opacity:0.5}]}
+                  >
+                    <Text style={styles.minus}>-</Text>
+                  </View>
+                  <View style={[styles.countview,{opacity:0.5}]}>
+                    <Text style={styles.count}>{'1'}</Text>
+                  </View>
+                  <View style={[styles.plusview,{opacity:0.5}]}
+                  >
+                    <Text style={styles.plus}>+</Text>
+                  </View>
+                </View>
+              }
             </View>
           </View>
           {prescription ? (<View style={[styles.outDesctription]}>
@@ -691,11 +695,11 @@ export default class ProductDescription extends ProductDescriptionController {
           </Text>
         ) : (
           <>
-            <View style={styles.NotificationTitle}>
+            {/* <View style={styles.NotificationTitle}>
               <Text style={styles.currentlyOut}>
                 The Item is currently out of stock
               </Text>
-            </View>
+            </View> */}
 
             <TouchableOpacity
               onPress={() => {

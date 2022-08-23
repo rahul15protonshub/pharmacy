@@ -734,6 +734,24 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
             customErrorMessage: this.parseApiErrorResponse(responseJson),
           });
         }
+        if (apiRequestCallId === this.postCreateCartApiCallId) {
+          this.setState({
+            customErrorModal: true,
+            isFetching: false,
+            isShowError: true,
+            productsAddingToCart: [],
+            customErrorMessage: this.parseApiErrorResponse(responseJson),
+          });
+        }
+        if (apiRequestCallId === this.putItemToCartApiCallId) {
+          this.setState({
+            customErrorModal: true,
+            isFetching: false,
+            isShowError: true,
+            productsAddingToCart: [],
+            customErrorMessage: this.parseApiErrorResponse(responseJson),
+          });
+        }
       } else if (responseJson.error) {
         this.setState({ isFetching: false });
       } else if (errorReponse) {
