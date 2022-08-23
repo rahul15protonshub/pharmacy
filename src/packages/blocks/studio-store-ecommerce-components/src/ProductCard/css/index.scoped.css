@@ -333,8 +333,8 @@
 }
 .likebuttononimage {
   position: absolute;
-  top: 40px;
-  right: 22px;
+  /* top: 40px;
+  right: 22px; */
   stroke: var(--color-cyan);
   cursor: pointer;
   fill: #fff !important;

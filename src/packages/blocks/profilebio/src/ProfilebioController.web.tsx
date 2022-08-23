@@ -84,7 +84,6 @@ export default class ProfilebioController extends BlockComponent<Props, S, SS> {
     const nameCountry = JSON.parse(
       localStorage.getItem("countryCode") ?? "{}"
     )?.countryName;
-    console.log("conyru", nameCountry);
     //@ts-ignore
     switch (nameCountry?.toLowerCase()) {
       case "india":
@@ -425,7 +424,16 @@ export default class ProfilebioController extends BlockComponent<Props, S, SS> {
           message: ".svg file are not allowed",
           messageType: "warning",
         });
-      } else {
+      } 
+      else if (file.size<60453) {
+        this.setState({
+          ...this.state,
+          showAlertPassword: true,
+          message: "Image should be less then 59 kb",
+          messageType: "warning",
+        });
+      }
+      else {
         this.imgBase64(file, (result: any) => {
           this.setState({
             ...this.state,

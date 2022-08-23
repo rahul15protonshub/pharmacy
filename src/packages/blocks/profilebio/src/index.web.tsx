@@ -131,7 +131,6 @@ class ProfileBlock extends ProfileWebController {
         isConnectedAccountsShow: true,
       });
     }
-    console.log(nextProps, "nextProps");
     if (nextProps?.location?.state?.activeTab) {
       if (nextProps?.location?.state?.activeTab !== this.state.activeTab) {
         if (nextProps?.location?.state?.activeTab === "logout") {
@@ -163,8 +162,6 @@ class ProfileBlock extends ProfileWebController {
       });
     }
     this.getOrders();
-    console.log("getishlist---3");
-
     this.getWishList();
   };
 
@@ -476,7 +473,7 @@ class ProfileBlock extends ProfileWebController {
                             }
                           )}
                         </div>
-                        {this.state.isLoadMoreOrders && (
+                        {/* {this.state.isLoadMoreOrders && (
                           // load more button content come here
                           <div className="loadMoreBtn">
                             <div
@@ -493,7 +490,7 @@ class ProfileBlock extends ProfileWebController {
                               {this.state?.isLoadMoreOrders && content.loadMore}
                             </div>
                           </div>
-                        )}
+                        )} */}
                       </>
                     )}
                   </TabPane>
