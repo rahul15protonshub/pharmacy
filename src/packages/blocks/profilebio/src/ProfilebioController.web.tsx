@@ -9,6 +9,7 @@ import MessageEnum, {
   getName,
 } from "../../../framework/src/Messages/MessageEnum";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
 export const configJSON = require("./config");
 export const getValidationsSchema = require("../../studio-store-ecommerce-components/src/Validations/ValidationSchema");
 // Customizable Area Start
@@ -417,16 +418,17 @@ export default class ProfilebioController extends BlockComponent<Props, S, SS> {
     const files = e?.target ? e?.target?.files : [];
     if (files.length > 0) {
       const file = files[0];
-      if (file.type == "image/svg+xml") {
+      if (file.type != "image/png") {
         this.setState({
           ...this.state,
           showAlertPassword: true,
-          message: ".svg file are not allowed",
+          message: "Please upload png file",
           messageType: "warning",
         });
       } 
       else {
-        this.imgBase64(file, (result: any) => {
+        if(file.size<204800){
+          this.imgBase64(file, (result: any) => {
           this.setState({
             ...this.state,
             // profileImgBase64: result,
@@ -434,6 +436,14 @@ export default class ProfilebioController extends BlockComponent<Props, S, SS> {
             newProfileImgBase64: result,
           });
         });
+        }else{
+          this.setState({
+            ...this.state,
+            showAlertPassword: true,
+            message: "Image should be less then 200 kb",
+            messageType: "warning",
+          });
+        }
       }
     }
   };

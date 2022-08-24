@@ -453,29 +453,32 @@ class ProfileBlock extends ProfileWebController {
                 </TabContent>
                 <TabContent activeTab={this.state.activeTab}>
                   <TabPane tabId="3">
-                    {/* @ts-ignore */}
-                    {isEmpty(this.state.orders) && <NoOrder />}
-                    {!isEmpty(this.state.orders) && (
+                    {loadingOrder ? (
+                      <CircularProgress />
+                    ) : (
                       <>
-                        <div className="order-data-scroll">
-                          {map(
-                            this.state.orders,
-                            (ordr: any, index: number) => {
-                              return (
-                                <SingleOrder
-                                  // @ts-ignore
-                                  order={ordr}
-                                  key={index}
-                                  cancelOrder={this.cancelOrder}
-                                  getOrders={this.getOrders}
-                                />
-                              );
-                            }
-                          )}
-                        </div>
-                        {/* {this.state.isLoadMoreOrders && (
+                        {/* @ts-ignore */}
+                        {isEmpty(this.state.orders) && <NoOrder />}
+                        {!isEmpty(this.state.orders) && (
+                          <>
+                            <div className="order-data-scroll">
+                              {map(
+                                this.state.orders,
+                                (ordr: any, index: number) => {
+                                  return (
+                                    <SingleOrder
+                                      // @ts-ignore
+                                      order={ordr}
+                                      key={index}
+                                      cancelOrder={this.cancelOrder}
+                                      getOrders={this.getOrders}
+                                    />
+                                  );
+                                }
+                              )}
+                            </div>
+                            {this.state.isLoadMoreOrders && (
                           // load more button content come here
-                          <div className="loadMoreBtn">
                             <div
                               // @ts-ignore
                               outline
@@ -489,8 +492,9 @@ class ProfileBlock extends ProfileWebController {
                             >
                               {this.state?.isLoadMoreOrders && content.loadMore}
                             </div>
-                          </div>
-                        )} */}
+                        )}
+                          </>
+                        )}
                       </>
                     )}
                   </TabPane>

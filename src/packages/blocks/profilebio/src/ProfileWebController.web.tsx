@@ -344,8 +344,6 @@ export default class ProfileWebController extends BlockComponent<Props, S, SS> {
   }
 
   getWishList() {
-    console.log('getwishlist---2')
-
     this.setState({ loadingWishlist: true, commonLoader: true });
     const token = localStorage.getItem("token");
     const headers = {

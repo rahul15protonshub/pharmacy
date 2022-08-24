@@ -144,6 +144,7 @@ class HomeDashboard extends DashboardController {
                 productsAddingToCart={this.state.productsAddingToCart}
                 onProductDecreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, -1, product.attributes.default_variant?.id)}
                 onProductIncreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, 1, product.attributes.default_variant?.id)}
+                isProductAddtoCart={this.state.isProductAddtoCart}
               />
             </Col>
           </Row>

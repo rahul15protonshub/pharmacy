@@ -94,7 +94,6 @@ export class WishList extends WishListController {
   }
   render() {
     // Customizable Area Start
-    console.log('this.state.loading ', this.state.loading )
     return (
       <>
         {this.state.loading && <Loader loading={this.state.loading} />}
