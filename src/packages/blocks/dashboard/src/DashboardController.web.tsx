@@ -115,8 +115,8 @@ interface S {
   selectedTemplate: any;
   showProducts: boolean;
   deleteProduct: boolean;
-  isReadMore:boolean
-
+  isReadMore:boolean,
+  isProductAddtoCart:boolean
   // Customizable Area End
 }
 interface SS {
@@ -246,7 +246,8 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
       // Customizable Area Start
       deleteProduct: false,
-      isReadMore:true
+      isReadMore:true,
+      isProductAddtoCart:false
       // Customizable Area End
     };
     runEngine.attachBuildingBlock(this as IBlock, this.subScribedMessages);
@@ -353,6 +354,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
             // if cart not created then creating cart
             if (apiRequestCallId === this.postCreateCartApiCallId) {
               if (responseJson?.data) {
+                this.setState({
+                  isProductAddtoCart:false
+                })
                 //@ts-ignore
                 window.notify([
                   {
@@ -379,6 +383,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
             // add items to the cart
             if (apiRequestCallId === this.putItemToCartApiCallId) {
+              this.setState({
+                isProductAddtoCart:false
+              })
               this.state.dashboardFilteredProducts?.forEach((product: any) => {
                 const orderItem = responseJson.data.attributes.order_items.find(
                   (item: any) =>
@@ -693,6 +700,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
           // Customizable Area End
         }
         if (responseJson?.errors) {
+          this.setState({
+            isProductAddtoCart:false
+          })
           const errors = responseJson?.errors[0]?.order;
           this.setState({
             dashboardLoader: false,
@@ -1454,6 +1464,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
   //  cart function
   addToCart = (product: any) => {
+    this.setState({
+      isProductAddtoCart:true
+    })
     setTimeout(() => {
       this.setState({
         productToBeAdded: product,
@@ -1754,6 +1767,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     });
   };
   addToCartWithSubscription = (data: any) => {
+    this.setState({
+      isProductAddtoCart:true
+    })
     this.setState(
       ({ SubscriptionRequestBody }) => ({
         isSubscriptionUpdate: this.state.productDetails.attributes

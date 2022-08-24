@@ -728,14 +728,14 @@ const PrescriptionModal = (props: any) => {
                       : true
                   }
                 >
-                  + Add another prescription
+                  + Add prescription
                 </Button>
               ) : (
                 <div></div>
               )}
-              <div className="d-flex W-50">
+              <div className="d-flex btnsize">
                 <Button
-                  className="cancel px-1 mx-3 "
+                  className="cancel px-1 me-3 "
                   color="link"
                   onClick={() => setIsPrescModal(false)}
                 >

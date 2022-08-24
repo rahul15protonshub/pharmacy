@@ -21,6 +21,7 @@ interface RightContentProps {
     onProductIncreaseCartQuantity: (product: any) => void
     onProductDecreaseCartQuantity: (product: any) => void
     productWishlisting: number | null
+    isProductAddtoCart:boolean
 }
 
 const sortMenu = [
@@ -36,7 +37,7 @@ const RightContent: React.FunctionComponent<RightContentProps> = (props: RightCo
         banners, toggleOurProducts, products, loading, onProductAddToWishlist,
         onProductDeleteFromWishlist, onSortingChange, productListTitle, onProductAddToCart,
         productsAddingToCart, onProductIncreaseCartQuantity, onProductDecreaseCartQuantity,
-        productWishlisting
+        productWishlisting,isProductAddtoCart
     } = props;
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -141,6 +142,7 @@ const RightContent: React.FunctionComponent<RightContentProps> = (props: RightCo
                                             onProductIncreaseCartQuantity={onProductIncreaseCartQuantity}
                                             addToCartLoading={productsAddingToCart.includes(product.id)}
                                             wishlistLoading={productWishlisting === product.id}
+                                            isProductAddtoCart={isProductAddtoCart}
                                         />
                                     </Col>
                                 ))
