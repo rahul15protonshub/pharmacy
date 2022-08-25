@@ -166,6 +166,23 @@ export default class Filteritems extends FilteritemsController {
         productImage = item?.item?.attributes?.images?.data[0].attributes.url;
       }
     }
+    let datanew= item?.item;
+    let productDefaultWeight = `${datanew.attributes.weight ?? ""} ${datanew.attributes.weight_unit ?? ""}`;
+    var productDefaultPrice = datanew.attributes.on_sale ? datanew.attributes.price_including_tax : datanew.attributes.actual_price_including_tax
+    if (datanew.attributes.default_variant) {
+        const defaultVariantDetails = datanew.attributes.catalogue_variants.find((v: any) => (
+            parseInt(v.id) === datanew.attributes.default_variant.id
+        ))
+        if (defaultVariantDetails) {
+            productDefaultPrice = defaultVariantDetails.attributes.on_sale ? defaultVariantDetails.attributes.price_including_tax : defaultVariantDetails.attributes.actual_price_including_tax
+            const weightDetails = defaultVariantDetails.attributes.catalogue_variant_properties.find((p: any) => (
+                p.attributes.variant_name.trim().toLowerCase() === "weight" || p.attributes.variant_name.trim().toLowerCase() === "size"
+            ))
+            if (weightDetails) {
+                productDefaultWeight = weightDetails.attributes.property_name
+            }
+        }
+    }
     const isInCart = item?.item?.attributes?.cart_quantity > 0 ? true : false;
     return (
       <TouchableOpacity
@@ -212,6 +229,7 @@ export default class Filteritems extends FilteritemsController {
               {item.item.attributes.price_including_tax}
             </Text>
           )}
+            <Text style={styles.weight}>{productDefaultWeight}</Text>
         </View>
        {item?.item?.attributes?.stock_qty ? <TouchableOpacity onPress={() => this.addToCart(item)} style={styles.addtocartitem}>
           <View >

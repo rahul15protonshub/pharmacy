@@ -59,7 +59,23 @@ export const ProductGrid = (props: any) => {
                 productImage = item?.attributes?.images?.data[0].attributes.url
             }
         }
-
+        let productDefaultWeight = `${item.attributes.weight ?? ""} ${item.attributes.weight_unit ?? ""}`;
+        let productDefaultPrice = item.attributes.on_sale ? item.attributes.price_including_tax : item.attributes.actual_price_including_tax
+  
+        if (item.attributes.default_variant) {
+            const defaultVariantDetails = item.attributes.catalogue_variants.find((v: any) => (
+                parseInt(v.id) === item.attributes.default_variant.id
+            ))
+            if (defaultVariantDetails) {
+                productDefaultPrice = defaultVariantDetails.attributes.on_sale ? defaultVariantDetails.attributes.price_including_tax : defaultVariantDetails.attributes.actual_price_including_tax
+                const weightDetails = defaultVariantDetails.attributes.catalogue_variant_properties.find((p: any) => (
+                    p.attributes.variant_name.trim().toLowerCase() === "weight" || p.attributes.variant_name.trim().toLowerCase() === "size"
+                ))
+                if (weightDetails) {
+                    productDefaultWeight = weightDetails.attributes.property_name
+                }
+            }
+        }
         const isInCart = item?.attributes?.cart_quantity > 0 ? true : false;
         return (
             <TouchableOpacity onPress={() => props.onPress(item)} style={styles.productGridStyle}>
@@ -77,6 +93,7 @@ export const ProductGrid = (props: any) => {
                         <Text style={styles.price}>{themeJson.attributes.currency_type} {item?.attributes?.price_including_tax}</Text>
                         <Text style={styles.discountPrice}> {themeJson.attributes.currency_type} {item?.attributes?.actual_price_including_tax}</Text>
                     </View>) : (<Text style={[styles.price, {}]}>{themeJson.attributes.currency_type} {item?.attributes?.price_including_tax}</Text>)}
+                    <Text style={styles.weight}>{productDefaultWeight}</Text>
                 </View>
                 <TouchableOpacity onPress={() => props.onAddtocartPress(item)} style={styles.addtocartitem}>
                     <View >

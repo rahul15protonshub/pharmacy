@@ -422,6 +422,7 @@ export default class ProductDescription extends ProductDescriptionController {
     if (productImage === "") {
       productImage = productData?.attributes?.images.data[0]?.attributes?.url;
     }
+    console.log('productData',productData)
     return (
       <>
         <ScrollView
@@ -515,6 +516,35 @@ export default class ProductDescription extends ProductDescriptionController {
           )}
 
           {productData && this.renderSelectorTools()}
+          {productData?.attributes?.catalogue_variants.length==0 &&
+           <View style={styles.selectorToolContainer}>
+               <View >
+                   <Text  style={styles.colorText}>
+                     {"Weight"}
+                   </Text>
+                   <View            
+                    style={[
+                      styles.toolItemSizeCell,
+                      {
+                        backgroundColor:  COLOR_CONST.newtheme,
+                        borderWidth: scale(1),
+                        borderColor: COLOR_CONST.newtheme,
+                        opacity: 0.7,
+                        width: scale(90),
+                        marginLeft:scale(18),
+                        paddingHorizontal: scale(15),
+                      },
+                    ]}
+                  >
+                  <Text style={[styles.labelText,]}>
+                    {`${productData.attributes.weight ?? ""} ${productData.attributes.weight_unit ?? ""}`}  
+                  </Text>
+                  </View>
+               </View>
+             
+         </View>
+          }
+
           <View style={{ backgroundColor: COLOR_CONST.white }}>
             <Text style={[styles.specifictaionTitle, { marginLeft: scale(18), }]}>Quantity</Text>
             <View style={[styles.insidePriceBox2]}>

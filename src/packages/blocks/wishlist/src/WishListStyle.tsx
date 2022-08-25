@@ -158,11 +158,11 @@ export default StyleSheet.create({
 
   titleNameStyle: {
     textAlign: 'center',
-    fontSize: scale(15),
+    fontSize: scale(14),
     lineHeight: scale(19),
     height: scale(19),
     color: COLOR_CONST.black,
-    marginTop: verticalScale(7),
+    marginBottom: verticalScale(4),
     marginHorizontal: scale(12),
     fontFamily: FONTS.GTWalsheimProRegular,
   },
@@ -491,17 +491,25 @@ export default StyleSheet.create({
     marginLeft: scale(4.5),
   },
   addtocartitem: {
-    backgroundColor: COLOR_CONST.newtheme_another,
     alignItems: 'center',
     paddingVertical: verticalScale(12),
-    marginTop: verticalScale(14)
+    marginTop: verticalScale(14),
+    borderTopColor: themeJson.attributes.light_grey,
+    borderTopWidth: scale(1),
   },
   addtocarttext: {
     fontFamily: FONTS.GTWalsheimProRegular,
-    color: COLOR_CONST.white,
+    color: COLOR_CONST.black,
     fontSize: scale(14),
     textAlign: "center",
     lineHeight: scale(16),
   },
+  weight: {
+    fontFamily: FONTS.GTWalsheimProRegular,
+    fontSize: scale(13),
+    lineHeight: scale(24),
+    color: themeJson.attributes.dark_grey,
+    alignSelf:'center'
+},
   // Customizable Area End
 });

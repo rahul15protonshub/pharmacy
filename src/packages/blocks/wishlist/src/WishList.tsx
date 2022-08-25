@@ -89,7 +89,8 @@ export default class WishList extends WishListController {
         productImage = data?.images?.data[0].attributes.url;
       }
     }
-    const isInCart = data?.cart_quantity > 0 ? true : false;
+    let productDefaultWeight = `${data.weight ?? ""} ${data.weight_unit ?? ""}`;
+     const isInCart = data?.cart_quantity > 0 ? true : false;
     return (
       // Customizable Area Start
       <TouchableOpacity
@@ -132,6 +133,7 @@ export default class WishList extends WishListController {
               {themeJson.attributes.currency_type} {data.price_including_tax}
             </Text>
           )}
+           <Text style={styles.weight}>{productDefaultWeight}</Text>
         </View>
        {data.stock_qty? <TouchableOpacity onPress={() => this.onAddtocartPress(item.item.data)} style={styles.addtocartitem}>
           <View >
