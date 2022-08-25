@@ -480,6 +480,8 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
               }
 
               //this.getFilteredProducts();
+              this.getProductDetails()
+
               //@ts-ignore
               window.notify([
                 { message: "Quantity changed successfully", type: "success" },

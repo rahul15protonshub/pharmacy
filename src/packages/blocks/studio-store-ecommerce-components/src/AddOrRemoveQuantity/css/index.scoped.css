@@ -22,7 +22,9 @@
     text-align: center;
     padding: 4px 0 !important;
 }
-
+.product-quantity-container input.form-control{
+    text-indent: 10px !important;
+}
 .product-quantity-container .btn.plus {
     color: white;
     background-color: var(--color-cyan);
