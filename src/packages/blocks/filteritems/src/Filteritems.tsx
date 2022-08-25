@@ -39,6 +39,7 @@ const themeJson = require("../../studio-store-ecommerce-theme/src/theme.json");
 const staticString = require("./../../studio-store-ecommerce-translations/en.json");
 // Customizable Area Start
 import FastImage from "react-native-fast-image";
+import ProductBox from "../../../blocks/catalogue/src/components/ProductBox";
 // Customizable Area End
 
 export default class Filteritems extends FilteritemsController {
@@ -332,13 +333,30 @@ export default class Filteritems extends FilteritemsController {
         {!this.state.noProductFound ? (
           <View style={styles.listContainerOne}>
             <FlatList
+              columnWrapperStyle={{justifyContent: 'space-between'}}
               numColumns={2}
               extraData={this.state.productList}
               data={this.state.productList}
               keyExtractor={(item: any, index: any) => {
                 return index.toString();
               }}
-              renderItem={this.renderListItem}
+              // renderItem={this.renderListItem}
+              renderItem={({item})=>(
+                <ProductBox product={item}
+                onProductPress={() =>
+                  this.props.navigation.push("ProductDescription", { productData: item })
+                }
+                onAddToCartPress={() => this.addToCart(item)}
+                onAddToWishlistPress={() => this.onHeartPress(item)}
+                onQuantityDecrease={() => this.increaseOrDecreaseCartQuantity(item, -1)}
+                onQuantityIncrease={() => this.increaseOrDecreaseCartQuantity(item, 1)}
+                addToCartLoading={this.state.productsAddingToCart.includes(item.id)}
+                addToWishlistLoading={this.state.productWishlisting === item.id}
+                currency={'INR'}
+              />
+              )
+
+              }
               // onEndReachedThreshold={0.01}
               onEndReached={(number) => {
                 this.setState(

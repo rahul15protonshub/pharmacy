@@ -117,8 +117,7 @@ export default StyleSheet.create({
   },
 
   listContainerOne: {
-    flex: 1,
-    marginLeft: scale(11),
+    paddingHorizontal: scale(16),
     marginTop: verticalScale(10),
   },
 

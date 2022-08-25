@@ -51,6 +51,7 @@ export const configJSON = require("./config");
 // Customizable Area Start
 import Prescriptionuploads from '../../../components/src/precriptionuploads'
 import { Console } from "console";
+import ProductBox from "../../../blocks/catalogue/src/components/ProductBox";
 // Customizable Area End
 
 export default class ProductDescription extends ProductDescriptionController {
@@ -638,7 +639,7 @@ export default class ProductDescription extends ProductDescriptionController {
 
           {productData?.attributes?.similar_products?.data?.length > 0 && (
             <View style={styles.productGrid}>
-              <ProductGrid
+              {/* <ProductGrid
                 name={"Similar Products"}
                 data={productData.attributes.similar_products.data}
                 onPress={(item: any) => this.similarProducts(item)}
@@ -646,7 +647,31 @@ export default class ProductDescription extends ProductDescriptionController {
                   this.onHeartPress(item, "similarProducts")
                 }
                 onAddtocartPress={((item: any) => this.addToCartPress(item))}
+              /> */}
+               <FlatList
+              columnWrapperStyle={{justifyContent: 'space-between'}}
+              numColumns={2}
+              data={this.state.similarproductList}
+              keyExtractor={(item: any, index: any) => {
+                return index.toString();
+              }}
+              // renderItem={this.renderListItem}
+              renderItem={({item})=>(
+                <ProductBox product={item}
+                onProductPress={() =>
+                  this.props.navigation.push("ProductDescription", { productData: item })
+                }
+                onAddToCartPress={() => this.addToCartsimilar(item)}
+                onAddToWishlistPress={() =>  this.onHeartPress(item, "similarProducts")}
+                onQuantityDecrease={() => this.increaseOrDecreaseCartQuantity(item, -1)}
+                onQuantityIncrease={() => this.increaseOrDecreaseCartQuantity(item, 1)}
+                addToCartLoading={this.state.productsAddingToCart.includes(item.id)}
+                addToWishlistLoading={this.state.productWishlisting === item.id}
+                currency={'INR'}
               />
+              )
+              }
+            />
             </View>
           )}
         </ScrollView>

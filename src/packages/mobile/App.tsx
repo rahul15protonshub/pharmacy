@@ -284,8 +284,6 @@ const MainNavigator = createStackNavigator({
   },
 
   Profilebio: { screen: Profilebio, navigationOptions: { header: null } },
-  WishList: { screen: WishList, navigationOptions: { header: null } },
-
   Ordersummary: {
     screen: Ordersummary,
     navigationOptions: { header: null },
