@@ -592,7 +592,7 @@ class ProductDetails extends DashboardController {
               this?.state?.productDetails?.attributes?.similar_products?.data
                 ?.length > 0 && (
                 <Col sm="12" className="mb-4">
-                  <Card className="border-0 shadow-sm bg-white rounded py-5">
+                  <Card className="border-0 shadow-sm bg-white rounded py-5 similarProductcontainer">
                     {this?.state?.productDetails?.attributes?.similar_products
                       ?.data && (
                       <>
