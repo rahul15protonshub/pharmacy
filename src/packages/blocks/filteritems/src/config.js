@@ -22,8 +22,7 @@ exports.priceAPiEndPoint = "filter_items/filtering?";
 exports.sortProductAPiEndPoint = "sorting/sorting";
 exports.sizeAPIEndPoint = "catalogue/catalogues_variants_sizes";
 exports.priceRangeAPIEndPoint = "catalogue/catalogues/price_value";
-exports.getCartApiEndPoint = "cart/carts";
-exports.addToCartApiEndPoint = "cart/carts/";
+exports.endPointApiPutUpdateCartQuantity = "cart/carts/";
 exports.cartHasProductAPIEndPoint = "cart/user/carts/has_product";
 
 // cart feature
@@ -41,4 +40,5 @@ exports.NoProductFoundTitle =
 exports.buttonTitle = "Browse Products";
 exports.btnExampleTitle = "CLICK ME";
 exports.currency = "₹";
+exports.endPointApiPutUpdateCartQuantity = "cart/carts/";
 // Customizable Area End

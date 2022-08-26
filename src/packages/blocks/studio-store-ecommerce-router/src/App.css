@@ -221,7 +221,7 @@
 
 .btn-secondary {
   background-color: var(--color-ButtonBackRegular);
-  border-color: var(--color-ButtonBackRegular) !important;
+  /* border-color: var(--color-ButtonBackRegular) !important; */
   color: var(--color-ButtonTextRegular);
 }
 

@@ -4,12 +4,12 @@
 .price {
   /* width: 53px; */
   height: 28px;
-  margin: 5px 23px 22px 18px;
-  font-size: 24px;
-  font-weight: 500;
+  /* margin: 5px 23px 22px 18px; */
+  font-size: 18px;
+  font-weight: 400;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.17;
+  line-height:24px;
   letter-spacing: 0.92px;
   text-align: left;
   color: var(--color-primary);

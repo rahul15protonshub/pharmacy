@@ -930,9 +930,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     if (product == "subscription") {
       httpBody = this.state.SubscriptionRequestBody;
     } else {
-      if (product?.catalogue_id) {
+      if (product?.attributes?.catalogue_id) {
         httpBody = {
-          catalogue_id: product.catalogue_id,
+          catalogue_id: product?.attributes?.catalogue_id,
           catalogue_variant_id: parseInt(this.state.catalogue_variant_id),
           quantity: this.state.itemQuantity,
         };
@@ -1166,7 +1166,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
   postPrescriptionFile = (order_items: any): boolean => {
     // Customizable Area End
-    // console.log('order_items', order_items)
     const header = {
       "Content-Type": configJSON.validationApiContentType,
       token: localStorage.getItem("token"),
@@ -2339,7 +2338,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     }
   };
   setCurrentImage = (data: any) => {
-    // console.log(data, "data")
     let imga: any;
     data?.map((ele: any, index: number) => {
       if (ele?.attributes?.is_default) {
