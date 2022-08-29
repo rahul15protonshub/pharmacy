@@ -452,7 +452,7 @@ export default class Profilebio extends ProfilebioController {
                     handleChange,
                   } = props;
                   return (
-                    <form onSubmit={handleSubmit} noValidate>
+                    <form onSubmit={handleSubmit} noValidate className="my-3">
                       <FormGroup>
                         <Label
                           htmlFor="currentPassword"
@@ -460,6 +460,7 @@ export default class Profilebio extends ProfilebioController {
                         >
                           {content.enterCurrentPassword}
                         </Label>
+                        <div className="input-password-box my-2">
                         <Input
                           type={
                             this.state.showCurrentPassword ? "text" : "password"
@@ -518,6 +519,7 @@ export default class Profilebio extends ProfilebioController {
                             }
                           />
                         )}
+                        </div>
                         <FormText color="danger">
                           {errors.currentPassword && touched.currentPassword
                             ? errors.currentPassword
@@ -531,6 +533,7 @@ export default class Profilebio extends ProfilebioController {
                         >
                           Enter new password
                         </Label>
+                        <div className="input-password-box my-2">
                         <Input
                           type={this.state.showPassword ? "text" : "password"}
                           onChange={handleChange}
@@ -581,6 +584,7 @@ export default class Profilebio extends ProfilebioController {
                             }
                           />
                         )}
+                        </div>
                         <FormText color="danger">
                           {errors.newPassword && touched.newPassword
                             ? errors.newPassword
@@ -594,6 +598,7 @@ export default class Profilebio extends ProfilebioController {
                         >
                           {content.reEnterNewPassword}
                         </Label>
+                        <div className="input-password-box my-2">
                         <Input
                           type={
                             this.state.showConfirmPassword ? "text" : "password"
@@ -652,6 +657,7 @@ export default class Profilebio extends ProfilebioController {
                             }
                           />
                         )}
+                        </div>
                         <FormText color="danger">
                           {errors.confirmPassword && touched.confirmPassword
                             ? errors.confirmPassword

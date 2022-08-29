@@ -191,7 +191,6 @@
   object-fit: contain;
 }
 .modalTitleInputLable {
-  font-family: "GTWalsheimPro-Regular-";
   font-size: 14px !important;
   font-weight: normal;
   font-stretch: normal;
@@ -245,12 +244,12 @@
   font-family: "GTWalsheimPro-Medium" !important;
 }
 .content-updatePwd {
-  font-family: "GTWalsheimPro-Regular-";
-  font-size: 16px !important;
+  font-size: 14px !important;
+  font-weight: 400;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.25 !important;
+  line-height: 24px !important;
   letter-spacing: normal;
   text-align: left;
   color: #3e454f !important;
@@ -377,8 +376,8 @@
 }
 .yt-change-pass-vie-icn {
   position: absolute;
-  top: 43%;
-  transform: translateY(-50%);
+  /* top: 43%;
+  transform: translateY(-50%); */
   right: 25px;
   color: var(--color-dark-grey);
   cursor: pointer;
@@ -386,8 +385,8 @@
 
 .yt-change-pass-vie-icn2 {
   position: absolute;
-  top: 40.95%;
-  transform: translateY(-50%);
+  /* top: 40.95%;
+  transform: translateY(-50%); */
   right: 25px;
   color: var(--color-dark-grey);
   cursor: pointer;
@@ -395,33 +394,37 @@
 
 .yt-current-pass-vie-icn2 {
   position: absolute;
-  top: 20.95%;
-  transform: translateY(-50%);
+  /* transform: translateY(-50%); */
   right: 25px;
   color: var(--color-dark-grey);
   cursor: pointer;
 }
+.input-password-box{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
 
 .yt-current-pass-vie-icn {
   position: absolute;
-  top: 20.5%;
-  transform: translateY(-50%);
+  /* top: 20.5%;
+  transform: translateY(-50%); */
   right: 25px;
   color: var(--color-dark-grey);
   cursor: pointer;
 }
 .yt-confirm-pass-vie-icn2 {
   position: absolute;
-  top: 63.95%;
-  transform: translateY(-50%);
+  /* top: 63.95%;
+  transform: translateY(-50%); */
   right: 25px;
   color: var(--color-dark-grey);
   cursor: pointer;
 }
 .yt-confirm-pass-vie-icn {
   position: absolute;
-  top: 63%;
-  transform: translateY(-50%);
+  /* top: 63%;
+  transform: translateY(-50%); */
   right: 25px;
   color: var(--color-dark-grey);
   cursor: pointer;
@@ -431,22 +434,22 @@
   * Screen for under 768 Resolution 
   */
 @media (max-width: 767.92px) {
-  .yt-change-pass-vie-icn {
+  /* .yt-change-pass-vie-icn {
     top: 47%;
-  }
-  .yt-change-pass-vie-icn2 {
+  } */
+  /* .yt-change-pass-vie-icn2 {
     top: 45.05%;
-  }
-  .yt-current-pass-vie-icn {
+  } */
+  /* .yt-current-pass-vie-icn {
     top: 24.5%;
-  }
-  .yt-current-pass-vie-icn2 {
+  } */
+  /* .yt-current-pass-vie-icn2 {
     top: 23%;
-  }
-  .yt-confirm-pass-vie-icn2 {
+  } */
+  /* .yt-confirm-pass-vie-icn2 {
     top: 67.05%;
-  }
-  .yt-confirm-pass-vie-icn {
+  } */
+  /* .yt-confirm-pass-vie-icn {
     top: 68%;
-  }
+  } */
 }

@@ -920,6 +920,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
   /// create cart
   postCreateCart = (product: any): boolean => {
+    console.log('postitem to cart')
     const { productDetails } = this.state;
     this.setState({ productDescriptionLoader: true });
     const header = {
@@ -975,7 +976,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     return true;
   };
 
-  putItemToCart = (cartId: any, type: string): boolean => {
+  putItemToCart = (cartId: any, type: string,selProduct:any): boolean => {
+    console.log("pudItemtocart=================>,",selProduct);
+    
     const product = this.state.productToBeAdded;
     const header = {
       "Content-Type": configJSON.dashboarContentType,
@@ -1000,7 +1003,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
         this.state.productDetails?.attributes?.cart_quantity == null
       ) {
         httpBody = {
-          catalogue_id: this.state.productDetails.id,
+          catalogue_id: product.id,
           quantity: this.state.itemQuantity,
         };
       } else {
@@ -1465,6 +1468,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
   //  cart function
   addToCart = (product: any) => {
+  console.log('product----->>>>>', product)
     this.setState({
       isProductAddtoCart:true
     })
@@ -1473,7 +1477,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
         productToBeAdded: product,
       });
       this.state.cartId != ""
-        ? this.putItemToCart(this.state.cartId, "")
+        ? this.putItemToCart(this.state.cartId, "",product)
         : this.postCreateCart(product);
     }, 500);
   };
@@ -1786,7 +1790,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
       }),
       () => {
         this.state.cartId != ""
-          ? this.putItemToCart(this.state.cartId, "subscription")
+          ? this.putItemToCart(this.state.cartId, "subscription",data)
           : this.postCreateCart("subscription");
       }
     );
