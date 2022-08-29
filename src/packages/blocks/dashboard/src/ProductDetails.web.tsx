@@ -21,6 +21,7 @@ import "../assets/css/index.css";
 import "../assets/css/subscribeModal.css";
 import { prescription } from "./assets";
 import ReadMoreReact from "read-more-react";
+import ProductBox from "./components/ProductBox";
 
 class ProductDetails extends DashboardController {
   constructor(props: Props) {
@@ -591,30 +592,56 @@ class ProductDetails extends DashboardController {
               this?.state?.productDetails?.attributes?.similar_products?.data
                 ?.length > 0 && (
                 <Col sm="12" className="mb-4">
-                  <Card className="border-0 shadow-sm bg-white rounded py-5">
+                  <Card className="border-0 shadow-sm bg-white rounded py-5 ">
                     {this?.state?.productDetails?.attributes?.similar_products
                       ?.data && (
                       <>
                         <h4 className="similar-product-heading mb-4">
                           Similar Products
                         </h4>
-                        <SimilarProductListCard
-                          collection={
-                            this?.state?.productDetails?.attributes
-                              ?.similar_products?.data
-                          }
-                          onViewMore={() =>
-                            //@ts-ignore
-                            this?.props?.history?.push("/Filteroptions")
-                          }
-                          addToCart={this?.addToCart}
-                          createWishlist={this?.postWishlist}
-                          deleteWishlist={this?.delWishlist}
-                          toSetDefaultVariant={this?.toSetDefaultVariant}
-                          defaultCarousel={false}
-                        />
                       </>
                     )}
+                    <Row className="mx-3">
+                    {this?.state?.productDetails?.attributes?.similar_products
+                      ?.data &&
+                      this?.state?.productDetails?.attributes?.similar_products?.data.map(
+                        (product) => {
+                          return (
+                            <Col lg="3" md="4" xs="6" key={product.id} className="d-flex px-3">
+                              <ProductBox
+                                onProductAddToWishlist={this?.postWishlist}
+                                onProductDeleteFromWishlist={this?.delWishlist}
+                                product={product}
+                                onProductAddToCart={this?.addToCart}
+                                onProductDecreaseCartQuantity={(product) =>
+                                  this.increaseOrDecreaseCartQuantity(
+                                    product,
+                                    -1,
+                                    product.attributes.default_variant?.id
+                                  )
+                                }
+                                onProductIncreaseCartQuantity={(product) =>
+                                  this.increaseOrDecreaseCartQuantity(
+                                    product,
+                                    1,
+                                    product.attributes.default_variant?.id
+                                  )
+                                }
+                                addToCartLoading={this.state.productsAddingToCart.includes(
+                                  product.id
+                                )}
+                                wishlistLoading={
+                                  this.state.productWishlisting === product.id
+                                }
+                                isProductAddtoCart={
+                                  this.state.isProductAddtoCart
+                                }
+                              />
+                            </Col>
+                          );
+                        }
+                      )}
+                      </Row>
                   </Card>
                 </Col>
               )}

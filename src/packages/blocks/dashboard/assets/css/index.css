@@ -243,7 +243,7 @@ a {
   font-size: 14px;
   line-height: 24px;
   display: flex;
-  flex: 1;
+  /* flex: 1; */
   align-items: center;
   justify-content: center;
   /* identical to box height, or 133% */
@@ -273,6 +273,7 @@ a {
   font-size: 14px;
   line-height: 24px;
   text-align: center;
+  height: 15px;
 
   color: #757575;
 }
@@ -569,7 +570,7 @@ a {
     text-align: center;
     color: #3FC1CB;
     display: flex;
-    flex: 1;
+    /* flex: 1; */
     align-items: center;
     justify-content: center;
   }
@@ -582,6 +583,7 @@ a {
     line-height: 24px;
     text-align: center;
     color: #757575;
+    height: 30px;
   }
 
   .product_add_cart {
@@ -615,7 +617,11 @@ a {
     justify-content: space-between;
     align-items: flex-start;
   }
-
+}
+@media screen and (max-width:550px) {
+  .product_price{
+    font-size: 10px;
+  }
 }
 
 @media screen and (max-width: 360px) {

@@ -115,8 +115,8 @@ interface S {
   selectedTemplate: any;
   showProducts: boolean;
   deleteProduct: boolean;
-  isReadMore:boolean
-
+  isReadMore:boolean,
+  isProductAddtoCart:boolean
   // Customizable Area End
 }
 interface SS {
@@ -246,7 +246,8 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
       // Customizable Area Start
       deleteProduct: false,
-      isReadMore:true
+      isReadMore:true,
+      isProductAddtoCart:false
       // Customizable Area End
     };
     runEngine.attachBuildingBlock(this as IBlock, this.subScribedMessages);
@@ -353,6 +354,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
             // if cart not created then creating cart
             if (apiRequestCallId === this.postCreateCartApiCallId) {
               if (responseJson?.data) {
+                this.setState({
+                  isProductAddtoCart:false
+                })
                 //@ts-ignore
                 window.notify([
                   {
@@ -379,6 +383,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
             // add items to the cart
             if (apiRequestCallId === this.putItemToCartApiCallId) {
+              this.setState({
+                isProductAddtoCart:false
+              })
               this.state.dashboardFilteredProducts?.forEach((product: any) => {
                 const orderItem = responseJson.data.attributes.order_items.find(
                   (item: any) =>
@@ -473,6 +480,8 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
               }
 
               //this.getFilteredProducts();
+              this.getProductDetails()
+
               //@ts-ignore
               window.notify([
                 { message: "Quantity changed successfully", type: "success" },
@@ -693,6 +702,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
           // Customizable Area End
         }
         if (responseJson?.errors) {
+          this.setState({
+            isProductAddtoCart:false
+          })
           const errors = responseJson?.errors[0]?.order;
           this.setState({
             dashboardLoader: false,
@@ -918,9 +930,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     if (product == "subscription") {
       httpBody = this.state.SubscriptionRequestBody;
     } else {
-      if (product?.catalogue_id) {
+      if (product?.attributes?.catalogue_id) {
         httpBody = {
-          catalogue_id: product.catalogue_id,
+          catalogue_id: product?.attributes?.catalogue_id,
           catalogue_variant_id: parseInt(this.state.catalogue_variant_id),
           quantity: this.state.itemQuantity,
         };
@@ -1154,7 +1166,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
   postPrescriptionFile = (order_items: any): boolean => {
     // Customizable Area End
-    // console.log('order_items', order_items)
     const header = {
       "Content-Type": configJSON.validationApiContentType,
       token: localStorage.getItem("token"),
@@ -1454,6 +1465,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
   //  cart function
   addToCart = (product: any) => {
+    this.setState({
+      isProductAddtoCart:true
+    })
     setTimeout(() => {
       this.setState({
         productToBeAdded: product,
@@ -1754,6 +1768,9 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     });
   };
   addToCartWithSubscription = (data: any) => {
+    this.setState({
+      isProductAddtoCart:true
+    })
     this.setState(
       ({ SubscriptionRequestBody }) => ({
         isSubscriptionUpdate: this.state.productDetails.attributes
@@ -2321,7 +2338,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     }
   };
   setCurrentImage = (data: any) => {
-    // console.log(data, "data")
     let imga: any;
     data?.map((ele: any, index: number) => {
       if (ele?.attributes?.is_default) {

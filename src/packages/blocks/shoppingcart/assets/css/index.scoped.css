@@ -23,7 +23,9 @@
   margin-top: 52px;
   margin-bottom: 40px;
 }
-
+.modal-footer {
+  justify-content: space-between !important;
+}
 .cart-pg-current {
   color: var(--color-black);
   font-size: 12px;

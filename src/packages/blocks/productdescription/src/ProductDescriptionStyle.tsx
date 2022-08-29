@@ -1161,7 +1161,7 @@ export default StyleSheet.create({
   },
 
   descriptionContainer: {
-    height: 80,
+    height:scale(79) ,
     marginRight: scale(20),
   },
 

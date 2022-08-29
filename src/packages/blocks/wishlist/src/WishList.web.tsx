@@ -94,7 +94,6 @@ export class WishList extends WishListController {
   }
   render() {
     // Customizable Area Start
-    console.log('this.state.loading ', this.state.loading )
     return (
       <>
         {this.state.loading && <Loader loading={this.state.loading} />}
@@ -115,6 +114,11 @@ export class WishList extends WishListController {
                 <Row className="profile-pg-wl-cm-row-margin">
                   {this.props.productList &&
                     this.props.productList.map((product: any, index: any) => {
+                      let productDefaultWeight = (
+                        <>
+                          {product?.data?.attributes?.id?.data?.attributes.weight ?? ""} {product?.data?.attributes?.id?.data?.attributes.weight_unit ?? ""}
+                        </>
+                      );
                       const productData: any =
                         product?.data?.attributes?.id?.data?.attributes;
                       const productID = product?.data?.attributes?.id?.data?.id;
@@ -241,7 +245,7 @@ export class WishList extends WishListController {
                                         ?.name
                                     }
                                   />
-                                  <div className="mt-3 profile-pg-wl-sgl-product-title text-center">
+                                  <div className="mt-3 profile-pg-wl-sgl-product-title text-center mb-1">
                                     {productData?.name.slice(0,20)}...
                                   </div>
 
@@ -298,7 +302,9 @@ export class WishList extends WishListController {
                                       </span>
                                     )}
                                   </div>
-                                  <div className="ratings">
+                                  <div className="product_quantity">{productDefaultWeight}</div>
+
+                                  {/* <div className="ratings">
                                     <span>
                                       {productData?.average_rating?.toFixed(1)}
                                       <IoIosStar className="rating-star-icon" />
@@ -306,7 +312,7 @@ export class WishList extends WishListController {
                                         | {productData?.reviews.length}
                                       </span>
                                     </span>
-                                  </div>
+                                  </div> */}
                                 </div>
 
                                 {productData.stock_qty > 0 &&

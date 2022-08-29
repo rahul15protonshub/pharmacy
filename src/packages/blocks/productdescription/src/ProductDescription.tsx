@@ -531,7 +531,7 @@ export default class ProductDescription extends ProductDescriptionController {
                         borderWidth: scale(1),
                         borderColor: COLOR_CONST.newtheme,
                         opacity: 0.7,
-                        width: scale(90),
+                        width: scale(95),
                         marginLeft:scale(18),
                         paddingHorizontal: scale(15),
                       },
@@ -608,7 +608,8 @@ export default class ProductDescription extends ProductDescriptionController {
                         "</body></html>",
                     }}
                     style={{
-                      flex: 1
+                      flex: 1,
+
                     }}
                   />
                 </View>

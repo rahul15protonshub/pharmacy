@@ -881,7 +881,7 @@ export default class ProductDescriptionController extends BlockComponent<
           }
         );
         temp.attributes.similar_products.data = TempData;
-        this.setState({ productData: temp });
+        this.setState({ productData: temp ,similarproductList:temp?.attributes?.similar_products?.data});
       }
     } catch (exc) {
       // console.log(" the data is ",exc)

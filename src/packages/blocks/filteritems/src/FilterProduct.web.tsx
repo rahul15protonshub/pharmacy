@@ -21,6 +21,7 @@ export const configJSON = require("./config");
 import ProductListCard from "../../studio-store-ecommerce-components/src/ProductCard/productListCard";
 import PageLoadingBlock from "./noProductFound.web";
 import "../assets/css/index.scoped.css";
+import ProductBox from "../../dashboard/src/components/ProductBox";
 // Customizable Area Start
 // Customizable Area End
 
@@ -32,7 +33,7 @@ class FilterProduct extends FilterProductController {
   }
 
   toggle = (event) => {
-    localStorage.removeItem("newest");
+    localStorage.removeItem("newest");  
     this.setState({
       dropdownOpen: !this.state.dropdownOpen,
       value: event.currentTarget.textContent
@@ -337,11 +338,16 @@ class FilterProduct extends FilterProductController {
         {this.state.filterProducList.length != 0 ? (
           <ProductListCard
             collection={this.state.filterProducList}
-            addToCart={this.addToCart}
+            addToCart={product => this.addToCart(product, product.attributes.default_variant?.id)}
             createWishlist={this.postWishlist}
             deleteWishlist={this.delWishlist}
             toSetDefaultVariant={this.toSetDefaultVariant}
             loading={this.state.loading}
+            productsAddingToCart={this.state.productsAddingToCart}
+            isProductAddtoCart={this.state.isProductAddtoCart}
+            productWishlisting={this.state.productWishlisting}
+            onProductDecreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, -1, product.attributes.default_variant?.id)}
+            onProductIncreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, 1, product.attributes.default_variant?.id)}
           />
         ) : (
           !this.state.loading && <PageLoadingBlock />

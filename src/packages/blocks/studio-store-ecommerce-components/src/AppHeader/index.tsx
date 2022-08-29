@@ -1016,12 +1016,7 @@ class AppHeaderScreen extends HeaderController {
                       >
                         <span>
                           <img
-                            // src={this.state.userProfileImg && this.state.userProfileImg && this.state.userProfileImg !== 'null' ? this.state.userProfileImg : require('./images/user.png')}
-                            src={
-                              this.state.userProfileImg != null
-                                ? img
-                                : this.state.userProfileImg
-                            }
+                            src={this.state.userProfileImg != "null"? this.state.userProfileImg:img}
                             alt="user"
                             className="usericon"
                           />

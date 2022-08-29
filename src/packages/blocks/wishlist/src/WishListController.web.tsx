@@ -195,11 +195,12 @@ export default class WishListController extends BlockComponent<Props, S, SS> {
             // window.notify([
             //   { message: "Item added in cart successfully", type: "success" },
             // ]);
-            setTimeout(() => {
-              this.removeProductFromWishList();
-            }, 200);
+            // setTimeout(() => {
+            //   this.removeProductFromWishList();
+            // }, 200);
 
             this.getIsCartCreated();
+            this.props.getWishList();
             // @ts-ignore
             const cart_length = parseInt(
               localStorage.getItem("cart_length") || "1"
@@ -218,14 +219,16 @@ export default class WishListController extends BlockComponent<Props, S, SS> {
                 responseJson.data?.attributes?.order_items[0]?.attributes
                   ?.catalogue_id,
             });
-            setTimeout(() => {
-              this.removeProductFromWishList();
-            }, 900);
+
+            // setTimeout(() => {
+            //   this.removeProductFromWishList();
+            // }, 900);
             // @ts-ignore
             // window.notify([
             //   { message: "Item added in cart successfully", type: "success" },
             // ]);
             // @ts-ignore
+            this.props.getWishList();
             const cart_length = parseInt(
               localStorage.getItem("cart_length") || "1"
             );
