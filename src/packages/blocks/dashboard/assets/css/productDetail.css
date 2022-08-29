@@ -63,10 +63,6 @@
 }
 
 @media (min-width: 768px) {
-    .similarProductcontainer{
-        margin-left: 3rem;
-        margin-right: 3rem;
-    }
     .product-container .product-wrapper {
         padding: 2rem !important;
         padding-top: 0 !important;
