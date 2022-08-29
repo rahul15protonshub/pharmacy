@@ -592,7 +592,7 @@ class ProductDetails extends DashboardController {
               this?.state?.productDetails?.attributes?.similar_products?.data
                 ?.length > 0 && (
                 <Col sm="12" className="mb-4">
-                  <Card className="border-0 shadow-sm bg-white rounded py-5 similarProductcontainer">
+                  <Card className="border-0 shadow-sm bg-white rounded py-5 ">
                     {this?.state?.productDetails?.attributes?.similar_products
                       ?.data && (
                       <>
@@ -601,12 +601,13 @@ class ProductDetails extends DashboardController {
                         </h4>
                       </>
                     )}
+                    <Row className="mx-3">
                     {this?.state?.productDetails?.attributes?.similar_products
                       ?.data &&
                       this?.state?.productDetails?.attributes?.similar_products?.data.map(
                         (product) => {
                           return (
-                            <Col lg="3" md="4" xs="6" key={product.id} className="d-flex px-4">
+                            <Col lg="3" md="4" xs="6" key={product.id} className="d-flex px-3">
                               <ProductBox
                                 onProductAddToWishlist={this?.postWishlist}
                                 onProductDeleteFromWishlist={this?.delWishlist}
@@ -640,6 +641,7 @@ class ProductDetails extends DashboardController {
                           );
                         }
                       )}
+                      </Row>
                   </Card>
                 </Col>
               )}
