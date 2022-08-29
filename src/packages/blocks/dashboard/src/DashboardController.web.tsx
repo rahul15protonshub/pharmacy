@@ -975,7 +975,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     return true;
   };
 
-  putItemToCart = (cartId: any, type: string,selProduct:any): boolean => {
+  putItemToCart = (cartId: any, type: string): boolean => {
     const product = this.state.productToBeAdded;
     const header = {
       "Content-Type": configJSON.dashboarContentType,
@@ -1473,7 +1473,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
         productToBeAdded: product,
       });
       this.state.cartId != ""
-        ? this.putItemToCart(this.state.cartId, "",product)
+        ? this.putItemToCart(this.state.cartId, "")
         : this.postCreateCart(product);
     }, 500);
   };
@@ -1786,7 +1786,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
       }),
       () => {
         this.state.cartId != ""
-          ? this.putItemToCart(this.state.cartId, "subscription",data)
+          ? this.putItemToCart(this.state.cartId, "subscription")
           : this.postCreateCart("subscription");
       }
     );
