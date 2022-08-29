@@ -920,7 +920,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
   /// create cart
   postCreateCart = (product: any): boolean => {
-    console.log('postitem to cart')
     const { productDetails } = this.state;
     this.setState({ productDescriptionLoader: true });
     const header = {
@@ -977,8 +976,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
   };
 
   putItemToCart = (cartId: any, type: string,selProduct:any): boolean => {
-    console.log("pudItemtocart=================>,",selProduct);
-    
     const product = this.state.productToBeAdded;
     const header = {
       "Content-Type": configJSON.dashboarContentType,
@@ -1468,7 +1465,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
   //  cart function
   addToCart = (product: any) => {
-  console.log('product----->>>>>', product)
     this.setState({
       isProductAddtoCart:true
     })
