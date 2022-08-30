@@ -80,6 +80,10 @@ interface S {
   prescriptionModal: boolean;
   buyNowDoneCartID: any
   productDataArr: any;
+  productsAddingToCart: any[];
+  productWishlisting: number | null;
+  itemQuantity:any;
+  similarproductList:any
   // Customizable Area End
 }
 
@@ -107,6 +111,8 @@ export default class ProductDescriptionController extends BlockComponent<
   LikeFlag: any;
   LikeFlagId: any;
   addPrescriptionApiCallId: any
+  putItemToCartApiCallId:any
+  increaseOrDecreaseCartQuantityApiCallId:string
   // Customizable Area End
   constructor(props: Props) {
     super(props);
@@ -177,6 +183,10 @@ export default class ProductDescriptionController extends BlockComponent<
       prescriptionModal: false,
       buyNowDoneCartID: '',
       productDataArr: [],
+      productsAddingToCart: [],
+      productWishlisting: null,
+      itemQuantity:1,
+      similarproductList: [],
       // Customizable Area End
     };
 
@@ -243,7 +253,7 @@ export default class ProductDescriptionController extends BlockComponent<
     const token = await StorageProvider?.get("Userdata");
     this.setState({ token: token });
     this.getProductDescriptionRequest(token);
-    this.getCartHasProduct();
+    this.getCartHasProduct(0);
   };
 
   uploadproduct = async (productdata: any) => {
@@ -335,6 +345,7 @@ export default class ProductDescriptionController extends BlockComponent<
             isShowError: false,
             customErrorModal: true,
             message: "Product added to wishlist.",
+            productWishlisting: null,
           });
           // this.getProductDescriptionRequest(this.state.token);
           this.updateMyWhishList();
@@ -344,6 +355,7 @@ export default class ProductDescriptionController extends BlockComponent<
             isShowError: true,
             customErrorModal: true,
             message: "Product removed from wishlist.",
+            productWishlisting: null,
           });
           // this.getProductDescriptionRequest(this.state.token);
           this.updateMyWhishList();
@@ -368,12 +380,47 @@ export default class ProductDescriptionController extends BlockComponent<
               showAlertModal: true,
               message: message,
               isFromSubscription: false,
+              productsAddingToCart: [],
             },
             () => {
               this.getToken();
             }
           );
-        } else if (apiRequestCallId === this.updateQtyApiCallId) {
+        }else if(apiRequestCallId === this.putItemToCartApiCallId){ 
+          this.getCartHasProduct(1);
+          this.state.similarproductList?.forEach((product: any) => {
+            const orderItem = responseJson.data.attributes.order_items.find((item: any) => parseInt(product.id) === item.attributes.catalogue_id);
+            if (!product.attributes.cart_quantity) {
+              product.attributes.cart_quantity = orderItem ? orderItem.attributes.quantity ?? 1 : null;
+            }
+          })
+          this.setState({
+            productsAddingToCart: [],
+            similarproductList: this.state.similarproductList ? [...this.state.similarproductList] : [],
+          });
+          // @ts-ignore
+          // @ts-ignore
+          await StorageProvider.set("cart_length", responseJson.data.attributes.order_items.length.toString());
+
+          
+        } 
+        else if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
+          this.getCartHasProduct(1)
+          this.state.similarproductList?.forEach((product: any) => {
+            const orderItem = responseJson.data.attributes.order_items.find((item: any) => parseInt(product.id) === item.attributes.catalogue_id);
+            product.attributes.cart_quantity = orderItem ? orderItem.attributes.quantity : null;
+          })
+          this.setState({
+            productsAddingToCart: [],
+            similarproductList: this.state.similarproductList ? [...this.state.similarproductList] : [],
+          });
+
+          // @ts-ignore
+
+          // await StorageProvider.set("cart_length", responseJson.data.attributes.order_items.length.toString());
+          //this.getFilteredProducts();
+          //@ts-ignore
+        }else if (apiRequestCallId === this.updateQtyApiCallId) {
           let message = "Updated product quantity successfully.";
 
           if (this.state.isFromSubscription) {
@@ -433,8 +480,29 @@ export default class ProductDescriptionController extends BlockComponent<
             showAlertModal: true,
             customErrorModal: true,
             message: this.parseApiErrorResponse(responseJson),
+            productsAddingToCart: [],
           });
-        } else if (apiRequestCallId === this.getCartProductDescriptionId) {
+        }else if (apiRequestCallId === this.putItemToCartApiCallId) {
+          this.setState({
+            productsAddingToCart: [],
+            isFetching: false,
+            isShowError: true,
+            showAlertModal: true,
+            customErrorModal: true,
+            message: this.parseApiErrorResponse(responseJson),
+          });
+        }
+        else if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
+          this.setState({
+            productsAddingToCart: [],
+            isFetching: false,
+            isShowError: true,
+            showAlertModal: true,
+            customErrorModal: true,
+            message: this.parseApiErrorResponse(responseJson),
+          });
+        }
+         else if (apiRequestCallId === this.getCartProductDescriptionId) {
           this.setState({
             isShowError: true,
             showAlertModal: true,
@@ -461,6 +529,7 @@ export default class ProductDescriptionController extends BlockComponent<
             showAlertModal: true,
             isFetching: false,
             message: responseJson.errors,
+            productWishlisting: null,
           });
         } else if (apiRequestCallId === this.removeFromWishlistApiCallId) {
           this.setState({
@@ -468,6 +537,7 @@ export default class ProductDescriptionController extends BlockComponent<
             showAlertModal: true,
             isFetching: false,
             message: responseJson.errors,
+            productWishlisting: null,
           });
         } else if (apiRequestCallId === this.getCartProductId) {
           this.setState({ cartProduct: null });
@@ -500,10 +570,27 @@ export default class ProductDescriptionController extends BlockComponent<
             isFetching: false,
             isShowError: false,
             showAlertModal: true,
-            customErrorModal: true,
+            message: responseJson?.message,
+            productsAddingToCart: [],
+          });
+        }
+        else if (apiRequestCallId === this.putItemToCartApiCallId) {
+          this.setState({
+            productsAddingToCart: [],
+            isFetching: false,
+            isShowError: true,
+            showAlertModal: true,
             message: responseJson?.message,
           });
-        } else if (apiRequestCallId === this.getCartProductDescriptionId) {
+        }else if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
+          this.setState({
+            productsAddingToCart: [],
+            isFetching: false,
+            isShowError: true,
+            showAlertModal: true,
+            message: responseJson?.message,
+          });
+        }else if (apiRequestCallId === this.getCartProductDescriptionId) {
         } else if (apiRequestCallId === this.getNotifyProductApiCallId) {
           this.setState({
             isShowError: true,
@@ -517,6 +604,7 @@ export default class ProductDescriptionController extends BlockComponent<
             showAlertModal: true,
             isFetching: false,
             message: responseJson?.message,
+            productWishlisting: null,
           });
         } else if (apiRequestCallId === this.removeFromWishlistApiCallId) {
           this.setState({
@@ -524,6 +612,7 @@ export default class ProductDescriptionController extends BlockComponent<
             showAlertModal: true,
             isFetching: false,
             message: responseJson?.message,
+            productWishlisting: null,
           });
         } else if (apiRequestCallId === this.getCartProductId) {
           this.setState({ cartProduct: null });
@@ -533,8 +622,26 @@ export default class ProductDescriptionController extends BlockComponent<
             showAlertModal: true,
             isFetching: false,
             message: responseJson?.message,
+            productsAddingToCart: [],
           });
-        } else if (apiRequestCallId === this.updateQtyApiCallId) {
+        }
+        else if (apiRequestCallId === this.putItemToCartApiCallId) {
+          this.setState({
+            productsAddingToCart: [],
+            isFetching: false,
+            isShowError: true,
+            showAlertModal: true,
+            message: responseJson?.message,
+          });
+        }  else if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
+          this.setState({
+            productsAddingToCart: [],
+            isFetching: false,
+            isShowError: true,
+            showAlertModal: true,
+            message: responseJson?.message,
+          });
+        }else if (apiRequestCallId === this.updateQtyApiCallId) {
           this.setState({
             isShowError: false,
             showAlertModal: true,
@@ -565,8 +672,26 @@ export default class ProductDescriptionController extends BlockComponent<
             isShowError: true,
             showAlertModal: true,
             message: errorReponse,
+            productsAddingToCart: [],
           });
-        } else if (apiRequestCallId === this.getCartProductDescriptionId) {
+        }
+        else if (apiRequestCallId === this.putItemToCartApiCallId) {
+          this.setState({
+            productsAddingToCart: [],
+            isFetching: false,
+            isShowError: true,
+            showAlertModal: true,
+            message: errorReponse,
+          });
+        }  else if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
+          this.setState({
+            productsAddingToCart: [],
+            isFetching: false,
+            isShowError: true,
+            showAlertModal: true,
+            message: responseJson?.message,
+          });
+        }else if (apiRequestCallId === this.getCartProductDescriptionId) {
           this.setState({
             isFetching: false,
             isShowError: true,
@@ -586,6 +711,7 @@ export default class ProductDescriptionController extends BlockComponent<
             isShowError: true,
             showAlertModal: true,
             message: errorReponse,
+            productWishlisting: null,
           });
         } else if (apiRequestCallId === this.removeFromWishlistApiCallId) {
           this.setState({
@@ -593,6 +719,7 @@ export default class ProductDescriptionController extends BlockComponent<
             isShowError: true,
             showAlertModal: true,
             message: errorReponse,
+            productWishlisting: null,
           });
         } else if (apiRequestCallId === this.getCartProductId) {
           this.setState({
@@ -608,9 +735,27 @@ export default class ProductDescriptionController extends BlockComponent<
             isShowError: true,
             showAlertModal: true,
             message: errorReponse,
+            productsAddingToCart: [],
           });
         }
         // Customizable Area Start
+        else if (apiRequestCallId === this.putItemToCartApiCallId) {
+          this.setState({
+            productsAddingToCart: [],
+            isFetching: false,
+            isShowError: true,
+            showAlertModal: true,
+            message: errorReponse,
+          });
+        } else if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
+          this.setState({
+            productsAddingToCart: [],
+            isFetching: false,
+            isShowError: true,
+            showAlertModal: true,
+            message: responseJson?.message,
+          });
+        }
         // Customizable Area End
       }
     }
@@ -667,6 +812,7 @@ export default class ProductDescriptionController extends BlockComponent<
       {
         isFetching: false,
         productData: responseJson?.data,
+        similarproductList:responseJson?.data?.attributes?.similar_products?.data,
         selectedProduct: selectedProduct || null,
         catalogue_id: responseJson?.data.id,
         showNotifyButton: responseJson?.data.attributes.product_notified,
@@ -735,7 +881,7 @@ export default class ProductDescriptionController extends BlockComponent<
           }
         );
         temp.attributes.similar_products.data = TempData;
-        this.setState({ productData: temp });
+        this.setState({ productData: temp ,similarproductList:temp?.attributes?.similar_products?.data});
       }
     } catch (exc) {
       // console.log(" the data is ",exc)
@@ -827,7 +973,7 @@ export default class ProductDescriptionController extends BlockComponent<
     const { catalogue_variants } = attributes;
     if (catalogue_variants?.length > 0) {
       catalogue_variants?.map((varient: any, index: any) => {
-        if (varient.id == this.state?.catalogue_variant_id) {
+        if (varient.attributes.is_default == true) {
           const { images } = varient?.attributes;
           let isVarientImage = images?.data?.length > 0;
           let selectedAttributes = {};
@@ -1017,7 +1163,6 @@ export default class ProductDescriptionController extends BlockComponent<
     runEngine.sendMessage(requestMessage.id, requestMessage);
     return requestMessage.messageId;
   };
-
   addToCart = async () => {
     const { productData, selectedProduct, quantity, cartProduct } = this.state;
     const { cart_quantity } = productData.attributes;
@@ -1151,8 +1296,6 @@ export default class ProductDescriptionController extends BlockComponent<
   };
 
   addToWishlist = async (id: any) => {
-    this.setState({ isFetching: true });
-
     const httpBody = {
       catalogue_id: id,
     };
@@ -1165,7 +1308,6 @@ export default class ProductDescriptionController extends BlockComponent<
   };
 
   removeFromWishlist = async (id: any) => {
-    this.setState({ isFetching: true });
     this.removeFromWishlistApiCallId = await this.apiCall({
       contentType: configJSON.productApiContentType,
       method: configJSON.DeleteMethodType,
@@ -1175,8 +1317,9 @@ export default class ProductDescriptionController extends BlockComponent<
 
   onHeartPress = (item: any, pageName: string) => {
     this.LikeFlag = pageName;
-
+    this.setState({ productWishlisting: item.id })
     if (pageName === "description") {
+      this.setState({ isFetching: true });
       item.attributes?.wishlisted
         ? this.removeFromWishlist(item.id)
         : this.addToWishlist(item.id);
@@ -1205,8 +1348,6 @@ export default class ProductDescriptionController extends BlockComponent<
         catalogue_variant_id: item.attributes.catalogue_variants[0].id,
         quantity: 1,
       };
-
-      this.setState({ isFetching: true });
       this.addToCartApiCallId = await this.apiCall({
         contentType: configJSON.productApiContentType,
         method: configJSON.apiMethodTypePost,
@@ -1218,8 +1359,6 @@ export default class ProductDescriptionController extends BlockComponent<
         catalogue_id: item.id,
         quantity: 1,
       };
-
-      this.setState({ isFetching: true });
       this.addToCartApiCallId = await this.apiCall({
         contentType: configJSON.productApiContentType,
         method: configJSON.apiMethodTypePost,
@@ -1229,8 +1368,10 @@ export default class ProductDescriptionController extends BlockComponent<
     }
   };
 
-  getCartHasProduct = async () => {
-    this.setState({ isFetching: true });
+  getCartHasProduct = async (num:number) => {
+    if(num<=0){
+      this.setState({ isFetching: true });
+    }
     this.getCartProductId = await this.apiCall({
       contentType: configJSON.productApiContentType,
       method: configJSON.apiMethodTypeGet,
@@ -1875,5 +2016,84 @@ export default class ProductDescriptionController extends BlockComponent<
     }
   };
   // Customizable Area Start
+  addToCartsimilar = (product: any) => {
+    this.setState({
+      productsAddingToCart: [...this.state.productsAddingToCart, product.id],
+    });
+    if (this.state.cart_id) {
+      this.putItemToCart(this.state.cart_id, product, "")
+    }
+    else {
+      this.addToCartPress(product);
+    }
+  };
+
+  putItemToCart = async (cartId: any, product: any, type: string) => {
+    let httpBody: any;
+      if (product.catalogue_id && product?.attributes.catalogue_variants[0].id) {
+        httpBody = {
+          catalogue_id: product.catalogue_id,
+          catalogue_variant_id: parseInt(product?.attributes.catalogue_variants[0].id),
+          quantity: this.state.itemQuantity,
+        };
+        await StorageProvider.set(
+          "catalogue_variant_id",
+          product?.attributes.catalogue_variants[0].id
+        );
+      } else {
+        httpBody = {
+          catalogue_id: product.id,
+          quantity: this.state.itemQuantity,
+        };
+      }
+
+      this.putItemToCartApiCallId = await this.apiCall({
+        contentType: configJSON.productApiContentType,
+        method: configJSON.apiMethodTypePut,
+        endPoint: configJSON.addToCartApiEndPoint+
+        `${cartId}/add_item`,
+        body: httpBody,
+      });
+  };
+
+  increaseOrDecreaseCartQuantity = async (product: any, increment: number) => {
+    this.setState({
+      productsAddingToCart: [...this.state.productsAddingToCart, product.id]
+    });
+    let httpBody: any;
+    let endPointFullPath: string;
+    let method: string;
+
+    if (product.attributes.cart_quantity + increment > 0) {
+      httpBody = {
+        quantity: product.attributes.cart_quantity + increment,
+        catalogue_id: product.id,
+      };
+      endPointFullPath = configJSON.addToCartApiEndPoint +
+        `${this.state.cart_id}/update_item_quantity`
+      this.increaseOrDecreaseCartQuantityApiCallId = await this.apiCall({
+        contentType: configJSON.productApiContentType,
+        method: configJSON.apiMethodTypePut,
+        endPoint: endPointFullPath,
+        body: httpBody,
+      });
+    }
+    else {
+      httpBody = {
+        catalogue_id: product.id,
+        catalogue_variant_id: ""
+      }
+      endPointFullPath = configJSON.addToCartApiEndPoint +
+        `${this.state.cart_id}/delete_item`
+      this.increaseOrDecreaseCartQuantityApiCallId = await this.apiCall({
+        contentType: configJSON.productApiContentType,
+        method: configJSON.DeleteMethodType,
+        endPoint: endPointFullPath,
+        body: httpBody,
+      });
+    }
+
+   
+  }
   // Customizable Area End
 }

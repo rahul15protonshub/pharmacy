@@ -60,7 +60,6 @@ const ProductBox: React.FC<ProductBoxProps> = ({
     product, onAddToCartPress, onAddToWishlistPress, onProductPress, addToCartLoading,
     onQuantityDecrease, onQuantityIncrease, addToWishlistLoading, currency
 }) => {
-
     let productDefaultWeight = `${product.attributes.weight ?? ""} ${product.attributes.weight_unit ?? ""}`;
     let productDefaultPrice = product.attributes.on_sale ? product.attributes.price_including_tax : product.attributes.actual_price_including_tax
     if (product.attributes.default_variant) {
@@ -118,14 +117,22 @@ const ProductBox: React.FC<ProductBoxProps> = ({
                         onQuantityIncrease={onQuantityIncrease}
                     />
                 ) : (
-                    <TouchableOpacity style={componentStyles.addToCartButtonWrapper} onPress={onAddToCartPress}
+                    product.attributes.stock_qty? <TouchableOpacity style={componentStyles.addToCartButtonWrapper} onPress={onAddToCartPress}
                         disabled={addToCartLoading}>
                         {
                             addToCartLoading ? <ActivityIndicator size="small" color={themeJson.attributes.primary_color} /> :
                                 <Text style={componentStyles.addToCartButtonText}>Add to cart</Text>
                         }
 
-                    </TouchableOpacity>
+                    </TouchableOpacity>:
+                    <TouchableOpacity style={componentStyles.addToCartButtonWrapper} 
+                    disabled={true}>
+                    {
+                        addToCartLoading ? <ActivityIndicator size="small" color={themeJson.attributes.primary_color} /> :
+                            <Text style={[componentStyles.addToCartButtonText,{opacity:0.5}]}>Out of Stock</Text>
+                    }
+
+                </TouchableOpacity>
                 )
             }
               {/* {product.attributes.on_sale && (

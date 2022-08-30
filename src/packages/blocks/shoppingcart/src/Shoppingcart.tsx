@@ -306,7 +306,7 @@ export default class Shoppingcart extends ShoppingcartController {
 
             <View style={styles.devider} />
             <View style={[styles.tax, { marginTop: verticalScale(25) }]}>
-              <Text style={styles.product_name}>Sub Total</Text>
+              <Text style={styles.product_name}>Sub Total (Inclusive Tax) </Text>
               <Text style={styles.price}>
                 {themeJson.attributes.currency_type}{" "}
                 {this.state.cartData.attributes.sub_total}
@@ -315,13 +315,13 @@ export default class Shoppingcart extends ShoppingcartController {
             <View style={styles.devider} />
 
             <View>
-              <View style={styles.tax}>
+              {/* <View style={styles.tax}>
                 <Text style={styles.product_name}>Taxes</Text>
                 <Text style={styles.price}>{'+ '}
                   {themeJson.attributes.currency_type}{" "}
                   {this.state.cartData.attributes.total_tax || 0.0}
                 </Text>
-              </View>
+              </View> */}
               <View style={styles.tax}>
                 <Text style={styles.product_name}>Delivery Charges</Text>
                 <Text style={styles.price}>{'+ '}

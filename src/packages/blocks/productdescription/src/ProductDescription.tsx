@@ -51,6 +51,7 @@ export const configJSON = require("./config");
 // Customizable Area Start
 import Prescriptionuploads from '../../../components/src/precriptionuploads'
 import { Console } from "console";
+import ProductBox from "../../../blocks/catalogue/src/components/ProductBox";
 // Customizable Area End
 
 export default class ProductDescription extends ProductDescriptionController {
@@ -84,7 +85,7 @@ export default class ProductDescription extends ProductDescriptionController {
                 : COLOR_CONST.white,
               borderWidth: scale(1),
               borderColor: isSelected
-                ? COLOR_CONST.white
+                ? COLOR_CONST.newtheme
                 : COLOR_CONST.newtheme,
               opacity: 0.7,
             },
@@ -93,11 +94,6 @@ export default class ProductDescription extends ProductDescriptionController {
           <Text
             style={[
               styles.labelText,
-              {
-                color: isSelected
-                  ? COLOR_CONST.black
-                  : COLOR_CONST.black,
-              },
             ]}
           >
             {item.name}
@@ -127,20 +123,15 @@ export default class ProductDescription extends ProductDescriptionController {
               },
             ]}
           >
-            {!isFromColor && (
+          
               <Text
                 style={[
                   styles.labelText,
-                  {
-                    color: !isSelected
-                      ? COLOR_CONST.black
-                      : COLOR_CONST.black,
-                  },
                 ]}
               >
                 {item.name}
               </Text>
-            )}
+           
           </TouchableOpacity>
         )}
       </>
@@ -432,6 +423,7 @@ export default class ProductDescription extends ProductDescriptionController {
     if (productImage === "") {
       productImage = productData?.attributes?.images.data[0]?.attributes?.url;
     }
+    console.log('productData',productData)
     return (
       <>
         <ScrollView
@@ -525,6 +517,35 @@ export default class ProductDescription extends ProductDescriptionController {
           )}
 
           {productData && this.renderSelectorTools()}
+          {productData?.attributes?.catalogue_variants.length==0 &&
+           <View style={styles.selectorToolContainer}>
+               <View >
+                   <Text  style={styles.colorText}>
+                     {"Weight"}
+                   </Text>
+                   <View            
+                    style={[
+                      styles.toolItemSizeCell,
+                      {
+                        backgroundColor:  COLOR_CONST.newtheme,
+                        borderWidth: scale(1),
+                        borderColor: COLOR_CONST.newtheme,
+                        opacity: 0.7,
+                        width: scale(95),
+                        marginLeft:scale(18),
+                        paddingHorizontal: scale(15),
+                      },
+                    ]}
+                  >
+                  <Text style={[styles.labelText,]}>
+                    {`${productData.attributes.weight ?? ""} ${productData.attributes.weight_unit ?? ""}`}  
+                  </Text>
+                  </View>
+               </View>
+             
+         </View>
+          }
+
           <View style={{ backgroundColor: COLOR_CONST.white }}>
             <Text style={[styles.specifictaionTitle, { marginLeft: scale(18), }]}>Quantity</Text>
             <View style={[styles.insidePriceBox2]}>
@@ -544,7 +565,21 @@ export default class ProductDescription extends ProductDescriptionController {
                     <Text style={styles.plus}>+</Text>
                   </TouchableOpacity>
                 </View>
-              ) : null}
+              ) : 
+              <View style={[styles.tools, {}]}>
+                  <View  style={[styles.minusview,{opacity:0.5}]}
+                  >
+                    <Text style={styles.minus}>-</Text>
+                  </View>
+                  <View style={[styles.countview,{opacity:0.5}]}>
+                    <Text style={styles.count}>{'1'}</Text>
+                  </View>
+                  <View style={[styles.plusview,{opacity:0.5}]}
+                  >
+                    <Text style={styles.plus}>+</Text>
+                  </View>
+                </View>
+              }
             </View>
           </View>
           {prescription ? (<View style={[styles.outDesctription]}>
@@ -573,7 +608,8 @@ export default class ProductDescription extends ProductDescriptionController {
                         "</body></html>",
                     }}
                     style={{
-                      flex: 1
+                      flex: 1,
+
                     }}
                   />
                 </View>
@@ -604,7 +640,7 @@ export default class ProductDescription extends ProductDescriptionController {
 
           {productData?.attributes?.similar_products?.data?.length > 0 && (
             <View style={styles.productGrid}>
-              <ProductGrid
+              {/* <ProductGrid
                 name={"Similar Products"}
                 data={productData.attributes.similar_products.data}
                 onPress={(item: any) => this.similarProducts(item)}
@@ -612,7 +648,31 @@ export default class ProductDescription extends ProductDescriptionController {
                   this.onHeartPress(item, "similarProducts")
                 }
                 onAddtocartPress={((item: any) => this.addToCartPress(item))}
+              /> */}
+               <FlatList
+              columnWrapperStyle={{justifyContent: 'space-between'}}
+              numColumns={2}
+              data={this.state.similarproductList}
+              keyExtractor={(item: any, index: any) => {
+                return index.toString();
+              }}
+              // renderItem={this.renderListItem}
+              renderItem={({item})=>(
+                <ProductBox product={item}
+                onProductPress={() =>
+                  this.props.navigation.push("ProductDescription", { productData: item })
+                }
+                onAddToCartPress={() => this.addToCartsimilar(item)}
+                onAddToWishlistPress={() =>  this.onHeartPress(item, "similarProducts")}
+                onQuantityDecrease={() => this.increaseOrDecreaseCartQuantity(item, -1)}
+                onQuantityIncrease={() => this.increaseOrDecreaseCartQuantity(item, 1)}
+                addToCartLoading={this.state.productsAddingToCart.includes(item.id)}
+                addToWishlistLoading={this.state.productWishlisting === item.id}
+                currency={'INR'}
               />
+              )
+              }
+            />
             </View>
           )}
         </ScrollView>
@@ -691,11 +751,11 @@ export default class ProductDescription extends ProductDescriptionController {
           </Text>
         ) : (
           <>
-            <View style={styles.NotificationTitle}>
+            {/* <View style={styles.NotificationTitle}>
               <Text style={styles.currentlyOut}>
                 The Item is currently out of stock
               </Text>
-            </View>
+            </View> */}
 
             <TouchableOpacity
               onPress={() => {

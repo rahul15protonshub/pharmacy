@@ -81,11 +81,11 @@ export default StyleSheet.create({
     },
 
     titleNameStyle: {
-        fontSize: scale(17),
+        fontSize: scale(14),
         height: scale(19),
         marginHorizontal: scale(12),
-        lineHeight: scale(19),
-        marginTop: verticalScale(7),
+        lineHeight: scale(20),
+        marginBottom: verticalScale(4),
         color: COLOR_CONST.black,
         fontFamily: FONTS.GTWalsheimProRegular
     },
@@ -96,7 +96,7 @@ export default StyleSheet.create({
         color: COLOR_CONST.newtheme,
         fontFamily: FONTS.GTWalsheimProMedium,
         marginTop: verticalScale(8),
-        marginBottom: verticalScale(9),
+        marginBottom: verticalScale(5),
         height: scale(18),
     },
 
@@ -113,7 +113,7 @@ export default StyleSheet.create({
         textDecorationLine: 'line-through',
         marginTop: verticalScale(8),
         marginLeft: scale(2),
-        marginBottom: verticalScale(9),
+        marginBottom: verticalScale(5),
         height: scale(18),
     },
 
@@ -239,7 +239,13 @@ export default StyleSheet.create({
         textAlign: "center",
         lineHeight: scale(16),
         marginLeft: scale(4.5),
-    }
+    },
+    weight: {
+        fontFamily: FONTS.GTWalsheimProRegular,
+        fontSize: scale(13),
+        lineHeight: scale(24),
+        color: themeJson.attributes.dark_grey,
+    },
 
 
 

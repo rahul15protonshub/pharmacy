@@ -39,6 +39,7 @@ const themeJson = require("../../studio-store-ecommerce-theme/src/theme.json");
 const staticString = require("./../../studio-store-ecommerce-translations/en.json");
 // Customizable Area Start
 import FastImage from "react-native-fast-image";
+import ProductBox from "../../../blocks/catalogue/src/components/ProductBox";
 // Customizable Area End
 
 export default class Filteritems extends FilteritemsController {
@@ -166,6 +167,23 @@ export default class Filteritems extends FilteritemsController {
         productImage = item?.item?.attributes?.images?.data[0].attributes.url;
       }
     }
+    let datanew= item?.item;
+    let productDefaultWeight = `${datanew.attributes.weight ?? ""} ${datanew.attributes.weight_unit ?? ""}`;
+    var productDefaultPrice = datanew.attributes.on_sale ? datanew.attributes.price_including_tax : datanew.attributes.actual_price_including_tax
+    if (datanew.attributes.default_variant) {
+        const defaultVariantDetails = datanew.attributes.catalogue_variants.find((v: any) => (
+            parseInt(v.id) === datanew.attributes.default_variant.id
+        ))
+        if (defaultVariantDetails) {
+            productDefaultPrice = defaultVariantDetails.attributes.on_sale ? defaultVariantDetails.attributes.price_including_tax : defaultVariantDetails.attributes.actual_price_including_tax
+            const weightDetails = defaultVariantDetails.attributes.catalogue_variant_properties.find((p: any) => (
+                p.attributes.variant_name.trim().toLowerCase() === "weight" || p.attributes.variant_name.trim().toLowerCase() === "size"
+            ))
+            if (weightDetails) {
+                productDefaultWeight = weightDetails.attributes.property_name
+            }
+        }
+    }
     const isInCart = item?.item?.attributes?.cart_quantity > 0 ? true : false;
     return (
       <TouchableOpacity
@@ -191,7 +209,7 @@ export default class Filteritems extends FilteritemsController {
             source={{ uri: productImage }}
             style={styles.BottalImage}
           />
-          <Text numberOfLines={2} style={styles.titleNameStyle}>
+          <Text numberOfLines={1} style={styles.titleNameStyle}>
             {item?.item.attributes?.name}
           </Text>
           {item.item?.attributes?.on_sale ? (
@@ -212,15 +230,22 @@ export default class Filteritems extends FilteritemsController {
               {item.item.attributes.price_including_tax}
             </Text>
           )}
+            <Text style={styles.weight}>{productDefaultWeight}</Text>
         </View>
-        <TouchableOpacity onPress={() => this.addToCart(item)} style={styles.addtocartitem}>
+       {item?.item?.attributes?.stock_qty ? <TouchableOpacity onPress={() => this.addToCart(item)} style={styles.addtocartitem}>
           <View >
             <Text style={styles.addtocarttext}> {!isInCart
               ? "Add to cart"
               : "Go to cart"}</Text>
           </View>
 
-        </TouchableOpacity>
+        </TouchableOpacity>:
+        <View  style={styles.addtocartitem}>
+        <View >
+          <Text style={[styles.addtocarttext,{opacity:0.5}]}> {"Out of Stock"}</Text>
+        </View>
+
+      </View>}
         {/* <View style={styles.reviewRow}>
           <Text style={styles.avgReview}>
             {item.item.attributes.average_rating}
@@ -308,13 +333,30 @@ export default class Filteritems extends FilteritemsController {
         {!this.state.noProductFound ? (
           <View style={styles.listContainerOne}>
             <FlatList
+              columnWrapperStyle={{justifyContent: 'space-between'}}
               numColumns={2}
               extraData={this.state.productList}
               data={this.state.productList}
               keyExtractor={(item: any, index: any) => {
                 return index.toString();
               }}
-              renderItem={this.renderListItem}
+              // renderItem={this.renderListItem}
+              renderItem={({item})=>(
+                <ProductBox product={item}
+                onProductPress={() =>
+                  this.props.navigation.push("ProductDescription", { productData: item })
+                }
+                onAddToCartPress={() => this.addToCart(item)}
+                onAddToWishlistPress={() => this.onHeartPress(item)}
+                onQuantityDecrease={() => this.increaseOrDecreaseCartQuantity(item, -1)}
+                onQuantityIncrease={() => this.increaseOrDecreaseCartQuantity(item, 1)}
+                addToCartLoading={this.state.productsAddingToCart.includes(item.id)}
+                addToWishlistLoading={this.state.productWishlisting === item.id}
+                currency={'INR'}
+              />
+              )
+
+              }
               // onEndReachedThreshold={0.01}
               onEndReached={(number) => {
                 this.setState(

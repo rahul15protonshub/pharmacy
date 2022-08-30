@@ -160,7 +160,6 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
       productInCart: "",
       itemQuantity: 1,
       productWishlisting: null,
-
       productQuantity: 1,
       isProductAvailable: false,
       updateCart: false,
@@ -496,7 +495,7 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
           });
         } else if (apiRequestCallId === this.getCartProductId) {
           let array = responseJson?.data;
-          this.setState({ isFetching: false, cartProduct: array });
+          this.setState({ isFetching: false, cartProduct: array ,cartId: responseJson?.data?.order_id});
         } else if (apiRequestCallId === this.getCartListId) {
           let selectedCatalogues = [];
           let array = responseJson?.data[0].attributes.order_items;
@@ -731,6 +730,24 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
             customErrorModal: true,
             isFetching: false,
             isShowError: true,
+            customErrorMessage: this.parseApiErrorResponse(responseJson),
+          });
+        }
+        if (apiRequestCallId === this.postCreateCartApiCallId) {
+          this.setState({
+            customErrorModal: true,
+            isFetching: false,
+            isShowError: true,
+            productsAddingToCart: [],
+            customErrorMessage: this.parseApiErrorResponse(responseJson),
+          });
+        }
+        if (apiRequestCallId === this.putItemToCartApiCallId) {
+          this.setState({
+            customErrorModal: true,
+            isFetching: false,
+            isShowError: true,
+            productsAddingToCart: [],
             customErrorMessage: this.parseApiErrorResponse(responseJson),
           });
         }

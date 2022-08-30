@@ -599,6 +599,7 @@ export default StyleSheet.create({
   },
 
   productGrid: {
+    paddingHorizontal: scale(16),
     paddingTop: verticalScale(2),
     paddingBottom: verticalScale(25),
   },
@@ -1160,7 +1161,7 @@ export default StyleSheet.create({
   },
 
   descriptionContainer: {
-    height: 80,
+    height:scale(79) ,
     marginRight: scale(20),
   },
 

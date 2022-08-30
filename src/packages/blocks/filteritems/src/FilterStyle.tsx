@@ -117,8 +117,7 @@ export default StyleSheet.create({
   },
 
   listContainerOne: {
-    flex: 1,
-    marginLeft: scale(11),
+    paddingHorizontal: scale(16),
     marginTop: verticalScale(10),
   },
 
@@ -158,7 +157,7 @@ export default StyleSheet.create({
 
   titleNameStyle: {
     textAlign: 'center',
-    fontSize: scale(17),
+    fontSize: scale(15),
     lineHeight: scale(19),
     height: scale(19),
     color: COLOR_CONST.black,
@@ -173,7 +172,7 @@ export default StyleSheet.create({
     color: COLOR_CONST.newtheme,
     fontFamily: FONTS.GTWalsheimProMedium,
     marginTop: verticalScale(8),
-    marginBottom: verticalScale(9),
+    marginBottom: verticalScale(5),
     height: scale(18),
   },
 
@@ -192,7 +191,7 @@ export default StyleSheet.create({
     textDecorationLine: "line-through",
     marginTop: verticalScale(8),
     marginLeft: scale(2),
-    marginBottom: verticalScale(9),
+    marginBottom: verticalScale(5),
     height: scale(18),
   },
 
@@ -512,5 +511,12 @@ export default StyleSheet.create({
     textAlign: "center",
     lineHeight: scale(16),
   },
+  weight: {
+    fontFamily: FONTS.GTWalsheimProRegular,
+    fontSize: scale(13),
+    lineHeight: scale(24),
+    color: themeJson.attributes.dark_grey,
+    alignSelf:'center'
+},
   // Customizable Area End
 });

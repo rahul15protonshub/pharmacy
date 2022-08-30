@@ -630,7 +630,7 @@ export default class FilteroptionsController extends BlockComponent<
   };
 
   clearFilterData = () => {
-    this.setState({ discount: false });
+    this.setState({ discount: false,brandsText:'',  searchText:'' ,tagsText:'' });
     this.props.navigation.setParams({ filterData: [] });
     this.getToken();
   };
