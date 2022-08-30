@@ -1000,7 +1000,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
         this.state.productDetails?.attributes?.cart_quantity == null
       ) {
         httpBody = {
-          catalogue_id: this.state.productDetails.id,
+          catalogue_id: product.id,
           quantity: this.state.itemQuantity,
         };
       } else {
