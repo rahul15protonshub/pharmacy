@@ -30,3 +30,8 @@
     background-color: var(--color-cyan);
     border-color: var(--color-cyan) !important;
 }
+@media screen and (max-width:767.4px) {
+    .product-quantity-container input.form-control{
+        text-indent: 0px !important;
+    }
+}
