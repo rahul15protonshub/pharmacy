@@ -42,11 +42,56 @@ defineFeature(feature, (test) => {
     then("contactus will load with out errors", () => {
       expect(ContactUsWrapper).toBeTruthy();
     });
-
+    then("contactus save without errors", () => {
+      const addCategoryAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      addCategoryAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        addCategoryAPI
+      );
+      addCategoryAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      addCategoryAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        addCategoryAPI.messageId
+      );
+      instance.saveContactUsApiCallId = addCategoryAPI.messageId;
+      runEngine.sendMessage("Unit Test", addCategoryAPI);
+    });
+    then("contactus get profile without errors", () => {
+      const addCategoryAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      addCategoryAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        addCategoryAPI
+      );
+      addCategoryAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      addCategoryAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        addCategoryAPI.messageId
+      );
+      instance.getUserProfileApiCallId = addCategoryAPI.messageId;
+      runEngine.sendMessage("Unit Test", addCategoryAPI);
+    });
+    
     then("I can leave the screen with out errors", () => {
       instance.componentWillUnmount();
       expect(ContactUsWrapper).toBeTruthy();
     });
+   
+
+
   });
 
   test("Empty fields", ({ given, when, then }) => {

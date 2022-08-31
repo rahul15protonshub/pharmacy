@@ -34,6 +34,8 @@ defineFeature(feature, (test) => {
 
     given("I am a User loading Catalogue", () => {
       catalogueBlock = shallow(<Catalogue {...screenProps} />);
+      expect(catalogueBlock).toBeTruthy();
+      instance = catalogueBlock.instance() as Catalogue;
     });
 
     when("I navigate to the Catalogue", () => {
@@ -230,12 +232,157 @@ defineFeature(feature, (test) => {
       instance.notificationMessageId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
-
-    then("Catalogue button actions without errors", () => {
-      const buttonComponent = catalogueBlock.findWhere(
-        (node) => node.prop("testID") === "btn-top-home"
+    
+    then("Catalogue remove from whishlist without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.removeFromNewProductWishlistApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("Catalogue add to whishlist without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.addToWishNewlistApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("Catalogue update to whishlist without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.UpdateWishlistTempId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("Catalogue get filter product without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.getFilteredProductsApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("Catalogue add cart without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.postCreateCartApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("Catalogue add more item to cart without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.increaseOrDecreaseCartQuantityApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("Catalogue get brandsetting without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.getBrandSettingsCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("Catalogue update item to cart without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.putItemToCartApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    
+    then("I can add item to wishlist", () => {
+      let buttonComponent = catalogueBlock.findWhere(
+        (node) => node.prop("testID") === "addToWishlist"
       );
       buttonComponent.simulate("press");
+     
+    });
+    then("I can select the detail button", () => {
+      let buttonComponent = catalogueBlock.findWhere(
+        (node) => node.prop("testID") === "productDescription"
+      );
+      buttonComponent.simulate("press");
+     
     });
 
     then("I can leave the screen with out errors", () => {

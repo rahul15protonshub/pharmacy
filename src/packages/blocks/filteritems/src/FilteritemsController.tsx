@@ -75,7 +75,7 @@ export default class FilteritemsController extends BlockComponent<
   getCartListId: any;
   // Customizable Area Start
   _unsubscribe: any;
-  increaseOrDecreaseCartQuantityApiCallId: string = "";
+  increaseOrDecreaseCartQuantityApiCallId: any = "";
   putItemToCartApiCallId:any;
   // Customizable Area End
   constructor(props: Props) {

@@ -15,5 +15,14 @@ Feature: Catalogue
         Then Catalogue add to cart without errors
         Then Catalogue send device token without errors
         Then Catalogue notification without errors
-        Then Catalogue button actions without errors
+        Then Catalogue remove from whishlist without errors
+        Then Catalogue add to whishlist without errors
+        Then Catalogue update to whishlist without errors
+        Then Catalogue get filter product without errors
+        Then Catalogue add cart without errors
+        Then Catalogue add more item to cart without errors
+        Then Catalogue get brandsetting without errors
+        Then Catalogue update item to cart without errors
+        Then I can add item to wishlist
+        Then I can select the detail button
         And I can leave the screen with out errors

@@ -68,6 +68,7 @@ export default class Catalogue extends CatalogueController {
     }
     return (
       <TouchableOpacity
+      testID="productDescription"
         key={item?.id}
         onPress={() =>
           this.props.navigation.push("ProductDescription", {
@@ -77,6 +78,7 @@ export default class Catalogue extends CatalogueController {
         style={styles.productGridStyle}
       >
         <TouchableOpacity
+        testID="addToWishlist"
           onPress={() => {
             this.onHeartPress(item, type);
           }}
@@ -306,7 +308,7 @@ export default class Catalogue extends CatalogueController {
                       numColumns={2}
                       data={this.state.catalogueFilteredProducts}
                       renderItem={({ item }) => (
-                        <ProductBox product={item}
+                        <ProductBox  product={item}
                           onProductPress={() =>
                             this.props.navigation.push("ProductDescription", { productData: item })
                           }

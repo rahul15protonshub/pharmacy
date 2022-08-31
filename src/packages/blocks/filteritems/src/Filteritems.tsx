@@ -79,7 +79,7 @@ export default class Filteritems extends FilteritemsController {
           this.setState({ showSortByModal: false });
         }}
       >
-        <TouchableOpacity activeOpacity={1} style={styles.modalContainer}>
+        <View  style={styles.modalContainer}>
           <View style={styles.sortByContiner}>
             <View style={styles.sortRow}>
               <Text style={styles.sortByText}>Sort by</Text>
@@ -147,7 +147,7 @@ export default class Filteritems extends FilteritemsController {
               )}
             </TouchableOpacity>
           </View>
-        </TouchableOpacity>
+        </View>
       </Modal>
     );
   };
@@ -187,6 +187,7 @@ export default class Filteritems extends FilteritemsController {
     const isInCart = item?.item?.attributes?.cart_quantity > 0 ? true : false;
     return (
       <TouchableOpacity
+      testID={"productdescriptionpress"}
         onPress={() =>
           this.props.navigation.navigate("ProductDescription", {
             productData: item.item,

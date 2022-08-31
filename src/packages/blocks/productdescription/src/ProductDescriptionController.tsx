@@ -112,7 +112,7 @@ export default class ProductDescriptionController extends BlockComponent<
   LikeFlagId: any;
   addPrescriptionApiCallId: any
   putItemToCartApiCallId:any
-  increaseOrDecreaseCartQuantityApiCallId:string
+  increaseOrDecreaseCartQuantityApiCallId:any
   // Customizable Area End
   constructor(props: Props) {
     super(props);

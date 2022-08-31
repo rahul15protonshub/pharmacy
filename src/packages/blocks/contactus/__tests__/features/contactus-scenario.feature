@@ -4,6 +4,8 @@ Feature: contactus
         Given I am a User loading contactus
         When I navigate to the contactus
         Then contactus will load with out errors
+        Then contactus save without errors
+        Then contactus get profile without errors
         And I can leave the screen with out errors
 
     Scenario: Empty fields

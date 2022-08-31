@@ -380,7 +380,7 @@ export default class Ordersummary extends OrdersummaryController {
             />
             <Text style={styles.paymentOption}>COD</Text>
           </TouchableOpacity>
-          {currencyType !== "INR" &&
+          {currencyType == "INR" &&
             themeJson.attributes.razorpay &&
             themeJson.attributes.razorpay.api_key && (
               <TouchableOpacity
