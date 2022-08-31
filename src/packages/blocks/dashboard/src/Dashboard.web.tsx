@@ -131,7 +131,7 @@ class HomeDashboard extends DashboardController {
               className="home-layout__col home-layout__right"
             >
               <RightContent
-                toggleOurProducts={this.toggleOurProducts}
+                toggleOurProducts={this.toggeProduct}
                 banners={this.state.banners || []}
                 products={this.state.dashboardFilteredProducts}
                 loading={this.state.dashboardFilterLoading}
