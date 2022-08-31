@@ -60,6 +60,7 @@
     "react-image-magnify": "^2.7.4",
     "react-infinite-scroll-component": "^6.1.0",
     "react-input-range": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-input-range",
+    "react-multi-carousel": "^2.8.2",
     "react-multi-select-component": "^4.3.0",
     "react-native": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-native",
     "react-native-check-box": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-native-check-box",
