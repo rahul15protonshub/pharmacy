@@ -1000,7 +1000,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
         this.state.productDetails?.attributes?.cart_quantity == null
       ) {
         httpBody = {
-          catalogue_id: product.id,
+          catalogue_id: product.id!=undefined?product.id:this.state.productDetails.id,
           quantity: this.state.itemQuantity,
         };
       } else {
@@ -1473,7 +1473,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
         productToBeAdded: product,
       });
       this.state.cartId != ""
-        ? this.putItemToCart(this.state.cartId, "")
+        ? this.putItemToCart(this.state.cartId,"")
         : this.postCreateCart(product);
     }, 500);
   };
