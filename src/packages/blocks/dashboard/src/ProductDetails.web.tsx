@@ -621,28 +621,28 @@ class ProductDetails extends DashboardController {
                         </h4>
                       </>
                     )}
-                    <Row className="mx-3">
-                      <Carousel 
+                    <div class="d-flex flex-row flex-nowrap overflow-auto mx-3">
+                      {/* <Carousel 
                       responsive={responsive}
                       keyBoardControl={true}
-                      swipeable={true}
-                      showDots={true}
-                      infinite={true}
-                      rewindWithAnimation={true}
-                      autoPlay={true}
+                      // swipeable={true}
+                      // showDots={true}
+                      // infinite={true}
+                      // rewindWithAnimation={true}
+                      // autoPlay={true}
                       arrows={true}
-                      autoPlaySpeed={1000}
+                      // autoPlaySpeed={1000}
                       keyBoardControl={true}
-                      customTransition="all .5"
+                      // customTransition="all .5"
                       transitionDuration={500}
-                      rewind={true}
-                      >
+                      // rewind={true}
+                      > */}
                         {this?.state?.productDetails?.attributes
                           ?.similar_products?.data &&
                           this?.state?.productDetails?.attributes?.similar_products?.data.map(
                             (product) => {
                               return (
-                                <div className="ms-2">
+                                <div className="similarProductCard">
                                   <ProductBox
                                     onProductAddToWishlist={this?.postWishlist}
                                     onProductDeleteFromWishlist={
@@ -679,8 +679,8 @@ class ProductDetails extends DashboardController {
                               );
                             }
                           )}
-                      </Carousel>
-                    </Row>
+                      {/* </Carousel> */}
+                    </div>
                   </Card>
                 </Col>
               )}

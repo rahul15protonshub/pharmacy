@@ -1379,7 +1379,6 @@ export default class FilteritemsController extends BlockComponent<
       let httpBody: any;
       let endPointFullPath: string;
       let method: string;
-
       if (product.attributes.cart_quantity + increment > 0) {
         httpBody = {
           quantity: product.attributes.cart_quantity + increment,
@@ -1398,7 +1397,7 @@ export default class FilteritemsController extends BlockComponent<
         };
         endPointFullPath =
           configJSON.endPointApiPutUpdateCartQuantity + `${this.state.cartId}/delete_item`;
-        method = configJSON.delAPiMethod;
+        method = configJSON.DeleteMethodType;
       }
 
       const requestMessage = new Message(
@@ -1428,7 +1427,7 @@ export default class FilteritemsController extends BlockComponent<
       );
 
       runEngine.sendMessage(requestMessage.id, requestMessage);
-    }, 500);
+    }, 100);
 
     return true;
   }

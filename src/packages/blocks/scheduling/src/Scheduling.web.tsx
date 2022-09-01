@@ -122,7 +122,7 @@ export class Scheduling extends SchedulingController {
                 })
               ),
                 //@ts-ignore
-                this.props?.history?.push("/cart");
+                this.props?.history?.push("/checkout");
             }
           }}
         >
@@ -142,10 +142,10 @@ export class Scheduling extends SchedulingController {
               availableDeliveryTimeSlotOptions,
             } = this.getSubscriptionOptions(productDetails, values);
             const hasChanged = !shallowEqual(initialValues, values);
-            console.log(productDetails, "data");
+            // console.log(productDetails, "data");
             return (
               <form onSubmit={handleSubmit}>
-                <ModalBody className="py-4 px-5 yt-add-modal-body text-start">
+                <ModalBody className="pt-4 px-5 yt-add-modal-body text-start">
                   <div className="right-price-sec">
                     <div className="sp-price-right-content">
                       <div className="d-flex align-items-center justify-content-between">
@@ -229,6 +229,7 @@ export class Scheduling extends SchedulingController {
                       <p className="quantity subscription-timeslot pr-2">
                         {content.subscriptionTimeslot}
                       </p>
+                      <div className="d-flex">
                       {availableDeliveryPeriod.map(
                         (per: string, key: number) => (
                           <Radio
@@ -247,6 +248,7 @@ export class Scheduling extends SchedulingController {
                           />
                         )
                       )}
+                      </div>
                       <ErrorMessage name="preferred_delivery_period">
                         {(str: string) => (
                           <FormFeedback className="d-block">{str}</FormFeedback>
@@ -279,10 +281,10 @@ export class Scheduling extends SchedulingController {
                   <hr style={{ border: "solid 1px #cae2fe" }} />
                   <div className="sp-price-right-content">
                     <div className="col d-flex">
-                      <p className="quantity sp-quantity-tag-name pr-2">
+                      <p className="m-0 sp-quantity-tag-name pe-2">
                         {content.totalPrice} :{" "}
                       </p>
-                      <p className="price pr-2">
+                      <p className="price m-0">
                         {
                           JSON.parse(
                             localStorage.getItem("countryCode") ?? "{}"
@@ -303,7 +305,7 @@ export class Scheduling extends SchedulingController {
                     </div>
                   </div>
                 </ModalBody>
-                <ModalFooter className="d-flex flex-nowrap px-5">
+                <ModalFooter className="d-flex flex-nowrap modalFooter">
                   <Button
                     className="mr-4"
                     color="primary-1"

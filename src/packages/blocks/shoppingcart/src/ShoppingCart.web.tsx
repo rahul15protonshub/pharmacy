@@ -93,7 +93,7 @@ function CartProduct(props: any) {
                 SUBSCRIPTION
               </div>
             ))}
-          <div className="d-flex flex-wrap cart-pg-product-list-row justify-content-between">
+          <div className="d-flex flex-wrap cart-pg-product-list-row justify-content-between mt-2">
             <div
               className={`cart-pg-list-prdt-info d-flex justify-content-between ${
                 props.product?.attributes?.catalogue.attributes.prescription
@@ -226,32 +226,59 @@ function CartProduct(props: any) {
                   )}
 
                 {variant?.subscription_package != null && (
-                  <div className="sub-items">
-                    <span className="head">
-                      {["9am to 12pm", "6am to 9am"].includes(
-                        variant?.preferred_delivery_slot
-                      )
-                        ? "Morning"
-                        : "Evening"}
-                    </span>
-                    {" | "}
-                    <span className="sub-head text-capitalize">
-                      {`${variant.subscription_package} for ${
-                        variant.subscription_period
-                      } ${
-                        variant.subscription_period > 1 ? "Months" : "Month"
-                      } `}
-                    </span>{" "}
-                    <button
-                      type="button"
+                  // <div className="sub-items">
+                  //   <span className="head">
+                  //     {["9am to 12pm", "6am to 9am"].includes(
+                  //       variant?.preferred_delivery_slot
+                  //     )
+                  //       ? "Morning"
+                  //       : "Evening"}
+                  //   </span>
+                  //   {" | "}
+                  //   <span className="sub-head text-capitalize">
+                  //     {`${variant.subscription_package} for ${
+                  //       variant.subscription_period
+                  //     } ${
+                  //       variant.subscription_period > 1 ? "Months" : "Month"
+                  //     } `}
+                  //   </span>{" "}
+                  //   <button
+                  //     type="button"
+                  //     className="change subscription_changeBtn"
+                  //     onClick={() =>
+                  //       props.toSetdefaultVariant(index, variant.catalogue_id)
+                  //     }
+                  //   >
+                  //     Change
+                  //   </button>
+                  // </div>
+                  <>
+                  <div className="sub-items subscription_period_text d-flex flex-column">
+                    <div className="head">
+                      {
+                        ["9am to 12pm", "6am to 9am"].includes(variant?.preferred_delivery_slot)
+                        ? `Morning (${variant?.preferred_delivery_slot
+                          .replace(' to ', ' - ').replace(/am/g, 'AM').replace(/pm/g, 'PM')})`
+                        : `Evening (${variant?.preferred_delivery_slot.replace(' to ', ' - ')
+                        .replace(' to ', ' - ').replace(/am/g, 'AM').replace(/pm/g, 'PM')})`
+                      }
+                    </div>
+                    <div className="sub-head text-capitalize">
+                      {`Duration: ${variant.subscription_package} (${variant.subscription_period
+                        } ${variant.subscription_period > 1 ? "Months" : "Month"})`}
+                    </div>
+                  </div>
+                  <div>
+                    <span
                       className="change subscription_changeBtn"
                       onClick={() =>
                         props.toSetdefaultVariant(index, variant.catalogue_id)
                       }
                     >
                       Change
-                    </button>
+                    </span>
                   </div>
+                </>
                 )}
                 {variant?.catalogue_variant_properties &&
                 variant?.catalogue_variant_properties.length > 0 ? (

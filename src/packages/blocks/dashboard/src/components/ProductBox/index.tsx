@@ -216,7 +216,7 @@ const ProductBox: React.FC<ProductBoxProps> = ({
               )}
             </button>
           </div>
-          <div className="d-flex flex-column flex-fill">
+          <div className="d-flex flex-column flex-fill" style={{width:"210px"}}>
             <div className="product_name">{product.attributes.name}</div>
             <div className="product_price">
               <div>
