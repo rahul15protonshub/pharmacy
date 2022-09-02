@@ -625,15 +625,15 @@ class ProductDetails extends DashboardController {
                       {/* <Carousel 
                       responsive={responsive}
                       keyBoardControl={true}
-                      // swipeable={true}
-                      // showDots={true}
-                      // infinite={true}
-                      // rewindWithAnimation={true}
-                      // autoPlay={true}
+                      // // swipeable={true}
+                      // // showDots={true}
+                      // // infinite={true}
+                      // // rewindWithAnimation={true}
+                      // // autoPlay={true}
                       arrows={true}
-                      // autoPlaySpeed={1000}
+                      // // autoPlaySpeed={1000}
                       keyBoardControl={true}
-                      // customTransition="all .5"
+                      // // customTransition="all .5"
                       transitionDuration={500}
                       // rewind={true}
                       > */}
