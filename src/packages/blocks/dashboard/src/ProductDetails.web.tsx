@@ -622,21 +622,6 @@ class ProductDetails extends DashboardController {
                       </>
                     )}
                     <div class="d-flex flex-row flex-nowrap overflow-auto mx-3">
-                      {/* <Carousel 
-                      responsive={responsive}
-                      keyBoardControl={true}
-                      // // swipeable={true}
-                      // // showDots={true}
-                      // // infinite={true}
-                      // // rewindWithAnimation={true}
-                      // // autoPlay={true}
-                      arrows={true}
-                      // // autoPlaySpeed={1000}
-                      keyBoardControl={true}
-                      // // customTransition="all .5"
-                      transitionDuration={500}
-                      // rewind={true}
-                      > */}
                         {this?.state?.productDetails?.attributes
                           ?.similar_products?.data &&
                           this?.state?.productDetails?.attributes?.similar_products?.data.map(
