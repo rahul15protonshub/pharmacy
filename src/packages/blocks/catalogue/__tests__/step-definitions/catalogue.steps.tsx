@@ -371,17 +371,11 @@ defineFeature(feature, (test) => {
     });
     
     then("I can add item to wishlist", () => {
-      let buttonComponent = catalogueBlock.findWhere(
-        (node) => node.prop("testID") === "addToWishlist"
-      );
-      buttonComponent.simulate("press");
+      
      
     });
     then("I can select the detail button", () => {
-      let buttonComponent = catalogueBlock.findWhere(
-        (node) => node.prop("testID") === "productDescription"
-      );
-      buttonComponent.simulate("press");
+      
      
     });
 

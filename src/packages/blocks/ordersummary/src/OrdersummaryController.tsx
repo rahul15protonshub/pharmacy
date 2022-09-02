@@ -72,12 +72,7 @@ export default class OrdersummaryController extends BlockComponent<
   S,
   SS
 > {
-  apiApplyCouponCallId: any;
   getCartListApiCallId: any;
-  updateQtyApiCallId: any;
-  emptyCartApiCallId: any;
-  removeCartItemApiCallId: any;
-  removeCouponApiCallId: any;
   getCartProductId: any;
   saveAddressId: any;
   checkZipcodeId: any;
@@ -196,12 +191,6 @@ export default class OrdersummaryController extends BlockComponent<
         getName(MessageEnum.RestAPIResponceErrorMessage)
       );
 
-      if (apiRequestCallId === this.emptyCartApiCallId) {
-        this.setState({
-          emptyCart: true,
-          isFetching: false,
-        });
-      }
       if (responseJson.data) {
         if (apiRequestCallId === this.getUserProfileApiCallId) {
           this.getUserProfileSuccessCallBack(responseJson.data);
@@ -792,7 +781,7 @@ export default class OrdersummaryController extends BlockComponent<
           }
         );
       }
-    } catch (error) {
+    } catch (error:any) {
       let message = "";
       if (this.isPlatformiOS()) {
         message = String(error.message);

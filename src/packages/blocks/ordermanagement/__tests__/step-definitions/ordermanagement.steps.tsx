@@ -287,6 +287,23 @@ defineFeature(feature, (test) => {
       instance.submitOrderReviewAPICallID = submitReviewSucessRestAPI.messageId;
       runEngine.sendMessage("Unit Test", submitReviewSucessRestAPI);
     });
+    then("Rest Api will return hascart response", () => {
+      const submitReviewSucessRestAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      submitReviewSucessRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        submitReviewSucessRestAPI.messageId
+      );
+      submitReviewSucessRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.cartHasProductAPICallID = submitReviewSucessRestAPI.messageId;
+      runEngine.sendMessage("Unit Test", submitReviewSucessRestAPI);
+    });
 
     then("ordermangement failed to submit order review", () => {
       const msgCancelOrderErrorRestAPI = new Message(

@@ -25,4 +25,5 @@ Feature: ordermanagement
         And I click on submit review
         And I click on cancel review
         And Rest Api will return success response
+        And Rest Api will return hascart response
         And ordermangement failed to submit order review

@@ -29,7 +29,7 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({ product, loading, o
 
     return (
         <View style={componentStyles.quantitySelectorWrapper}>
-            <TouchableOpacity style={[componentStyles.quantityMinusPlus, loading ? { opacity: 0.5 } : {}]}
+            <TouchableOpacity testID='productQuantitydecrease' style={[componentStyles.quantityMinusPlus, loading ? { opacity: 0.5 } : {}]}
                 disabled={loading} onPress={() => {
                     onQuantityDecrease()
                 }}>
@@ -39,7 +39,7 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({ product, loading, o
                 loading ? <ActivityIndicator size="small" color={themeJson.attributes.primary_color} /> :
                     <Text style={componentStyles.quantityText}>{product.attributes.cart_quantity}</Text>
             }
-            <TouchableOpacity style={[
+            <TouchableOpacity testID='productQuantityincrease' style={[
                 componentStyles.quantityMinusPlus,
                 loading || product.attributes.cart_quantity === product.attributes.stock_qty ? { opacity: 0.5 } : {}
             ]}
@@ -79,14 +79,14 @@ const ProductBox: React.FC<ProductBoxProps> = ({
 
     return (
         <View style={componentStyles.componentWrapper}>
-            <TouchableOpacity disabled={addToWishlistLoading} style={componentStyles.heartIconWrapper} onPress={onAddToWishlistPress} >
+            <TouchableOpacity testID='Productaddtocart' disabled={addToWishlistLoading} style={componentStyles.heartIconWrapper} onPress={onAddToWishlistPress} >
                 {
                     addToWishlistLoading ? <ActivityIndicator size="small" color={themeJson.attributes.primary_color} /> :
                         product.attributes.wishlisted ? <Image source={GR_HEART_BLUE} style={componentStyles.heartIcon} /> :
                             <Image source={GR_HEART_WHITE} style={componentStyles.heartIcon} />
                 }
             </TouchableOpacity>
-            <TouchableOpacity style={componentStyles.productInfoWrapper} onPress={onProductPress}>
+            <TouchableOpacity testID='productDetails' style={componentStyles.productInfoWrapper} onPress={onProductPress}>
                 <FastImage source={{ uri: product.attributes.images?.data[0].attributes.url }}
                     style={componentStyles.productImage}
                 />
@@ -117,7 +117,7 @@ const ProductBox: React.FC<ProductBoxProps> = ({
                         onQuantityIncrease={onQuantityIncrease}
                     />
                 ) : (
-                    product.attributes.stock_qty? <TouchableOpacity style={componentStyles.addToCartButtonWrapper} onPress={onAddToCartPress}
+                    product.attributes.stock_qty? <TouchableOpacity testID='productBottomAddtocart' style={componentStyles.addToCartButtonWrapper} onPress={onAddToCartPress}
                         disabled={addToCartLoading}>
                         {
                             addToCartLoading ? <ActivityIndicator size="small" color={themeJson.attributes.primary_color} /> :

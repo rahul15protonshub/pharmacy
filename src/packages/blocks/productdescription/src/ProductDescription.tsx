@@ -781,7 +781,7 @@ export default class ProductDescription extends ProductDescriptionController {
 
   renderButton = () => {
     // Customizable Area Start
-    const { productData, selectedProduct, quantity, isSubscriptionAvailable } =
+    const { productData, selectedProduct, quantity, isSubscriptionAvailable,cart } =
       this.state;
     const { cart_quantity } = productData.attributes;
     const isUpdate = selectedProduct
@@ -791,6 +791,10 @@ export default class ProductDescription extends ProductDescriptionController {
     const isInCart = selectedProduct
       ? selectedProduct?.attributes?.cart_quantity > 0
       : cart_quantity > 0;
+      const isAlreadySubscribed = cart?.attributes.order_items.find((item: any) => (
+        (item.attributes.catalogue.id === productData.id) && item.attributes.subscription_quantity
+      ))
+  
     return (
       <View style={styles.InnerConatiner}>
         <TouchableOpacity
@@ -820,8 +824,9 @@ export default class ProductDescription extends ProductDescriptionController {
           <TouchableOpacity
             style={[styles.AddbuttonCustom, { marginTop: verticalScale(15), }]}
             onPress={() => this.onPressSubscriptionButton()}
+            disabled={isAlreadySubscribed}
           >
-            <Text style={styles.AddcustomTxtStyle}>Subscribe</Text>
+            <Text style={styles.AddcustomTxtStyle}>{ isAlreadySubscribed ? "Subscribed" : "Subscribe" }</Text>
           </TouchableOpacity>
         )}
         <TouchableOpacity

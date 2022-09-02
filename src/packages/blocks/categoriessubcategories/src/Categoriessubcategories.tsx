@@ -100,7 +100,8 @@ export default class Categoriessubcategories extends CategoriessubcategoriesCont
   renderSubCategories = (subItem: any, subIndex: number, item: any) => {
     // Customizable Area Start
     return (
-      <TouchableOpacity
+      <TouchableOpacity 
+      testID="openfilter"
         onPress={() => this.navigateToFilters(item, subItem, true)}
         style={styles.innerExpendTableBox}
       >

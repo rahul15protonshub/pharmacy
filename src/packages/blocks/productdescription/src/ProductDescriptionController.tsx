@@ -84,6 +84,7 @@ interface S {
   productWishlisting: number | null;
   itemQuantity:any;
   similarproductList:any
+  cart: any;
   // Customizable Area End
 }
 
@@ -113,6 +114,7 @@ export default class ProductDescriptionController extends BlockComponent<
   addPrescriptionApiCallId: any
   putItemToCartApiCallId:any
   increaseOrDecreaseCartQuantityApiCallId:any
+  getCartId: any;
   // Customizable Area End
   constructor(props: Props) {
     super(props);
@@ -187,6 +189,7 @@ export default class ProductDescriptionController extends BlockComponent<
       productWishlisting: null,
       itemQuantity:1,
       similarproductList: [],
+      cart: null,
       // Customizable Area End
     };
 
@@ -254,6 +257,7 @@ export default class ProductDescriptionController extends BlockComponent<
     this.setState({ token: token });
     this.getProductDescriptionRequest(token);
     this.getCartHasProduct(0);
+    this.getCart();
   };
 
   uploadproduct = async (productdata: any) => {
@@ -368,7 +372,16 @@ export default class ProductDescriptionController extends BlockComponent<
             });
           }
           this.setState({ isFetching: false, cartProduct: responseJson?.data });
-        } else if (apiRequestCallId === this.addToCartApiCallId) {
+        }
+        else if (apiRequestCallId === this.getCartId) {
+          if (responseJson?.data) {
+            this.setState({
+              cart: responseJson?.data[0],
+              cart_id: responseJson?.data[0].id,
+            });
+          }
+          this.setState({ isFetching: false });
+        }  else if (apiRequestCallId === this.addToCartApiCallId) {
           let message = "Product added to cart successfully.";
           if (this.state.isFromSubscription) {
             message = "Product subscribed successfully.";
@@ -539,7 +552,9 @@ export default class ProductDescriptionController extends BlockComponent<
             message: responseJson.errors,
             productWishlisting: null,
           });
-        } else if (apiRequestCallId === this.getCartProductId) {
+        } else if (apiRequestCallId === this.getCartId) {
+          this.setState({ cart: null });
+        }else if (apiRequestCallId === this.getCartProductId) {
           this.setState({ cartProduct: null });
         } else if (apiRequestCallId === this.updateQtyApiCallId) {
           this.setState({
@@ -728,6 +743,15 @@ export default class ProductDescriptionController extends BlockComponent<
             showAlertModal: true,
             message: errorReponse,
             cartProduct: null,
+          });
+        }
+        else if (apiRequestCallId === this.getCartId) {
+          this.setState({
+            isFetching: false,
+            isShowError: true,
+            showAlertModal: true,
+            message: errorReponse,
+            cart: null,
           });
         } else if (apiRequestCallId === this.addToCartApiCallId) {
           this.setState({
@@ -1376,6 +1400,14 @@ export default class ProductDescriptionController extends BlockComponent<
       contentType: configJSON.productApiContentType,
       method: configJSON.apiMethodTypeGet,
       endPoint: configJSON.cartHasProductAPIEndPoint,
+    });
+  };
+  getCart = async () => {
+    this.setState({ isFetching: true });
+    this.getCartId = await this.apiCall({
+      contentType: configJSON.productApiContentType,
+      method: configJSON.apiMethodTypeGet,
+      endPoint: configJSON.getCartApiEndPoint,
     });
   };
 

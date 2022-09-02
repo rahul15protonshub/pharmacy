@@ -135,7 +135,7 @@ export default StyleSheet.create({
   },
 
   tools1: {
-    borderWidth: scale(1),
+    borderWidth: scale(0),
     borderColor: COLOR_CONST.borderduckEggBlue,
     backgroundColor: COLOR_CONST.white,
     marginRight: scale(26),
@@ -145,13 +145,13 @@ export default StyleSheet.create({
   },
 
   minus: {
-    fontSize: scale(15),
-    marginLeft: scale(8),
-    marginRight: scale(15.4),
-    lineHeight: scale(18),
+    fontSize: scale(22),
+    lineHeight: scale(25),
     fontFamily: FONTS.GTWalsheimProMedium,
-    color: COLOR_CONST.charcoalGrey,
-    opacity: 0.5,
+    color: COLOR_CONST.lightgraycolor,
+    opacity: 1,
+   
+    
   },
 
   count: {
@@ -162,13 +162,12 @@ export default StyleSheet.create({
   },
 
   plus: {
-    fontSize: scale(15),
-    lineHeight: scale(18),
-    marginLeft: scale(15.4),
-    marginRight: scale(8),
+    fontSize: scale(22),
+    lineHeight: scale(25),
     fontFamily: FONTS.GTWalsheimProMedium,
-    color: COLOR_CONST.charcoalGrey,
-    opacity: 0.5,
+    color: COLOR_CONST.white,
+    opacity: 1,
+   
   },
 
   emptyText: {
@@ -191,8 +190,19 @@ export default StyleSheet.create({
   cartButtonCustom: {
     width: scale(161),
     height: scale(44),
-    borderRadius: scale(21),
+    borderRadius: scale(5),
     backgroundColor: themeJson.attributes.primary_color,
+    opacity: 0.99,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  cartButtonCustom1: {
+    width: scale(161),
+    height: scale(44),
+    borderRadius: scale(5),
+    borderColor:themeJson.attributes.primary_color,
+    borderWidth:1,
+    backgroundColor: 'white',
     opacity: 0.99,
     alignItems: "center",
     justifyContent: "center",
@@ -215,6 +225,33 @@ export default StyleSheet.create({
     lineHeight: scale(16),
     letterSpacing: 0.4,
   },
-
+  plusview: {
+    backgroundColor: COLOR_CONST.newtheme,
+    paddingVertical: scale(2),
+    paddingHorizontal: scale(10),
+    alignItems: 'center',
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5,
+    opacity: 1,
+  },
+  minusview: {
+    backgroundColor: COLOR_CONST.newlightcolor,
+    paddingVertical: scale(2),
+    paddingHorizontal: scale(10),
+    alignItems: 'center',
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
+    opacity: 1,
+  },
+  countview: {
+    backgroundColor: COLOR_CONST.white,
+    paddingVertical: scale(4.5),
+    width: scale(38),
+    alignItems: 'center',
+    borderTopColor: COLOR_CONST.newlightcolor,
+    borderBottomColor: COLOR_CONST.newlightcolor,
+    borderTopWidth: 1,
+    borderBottomWidth: 1
+  },
   // Customizable Area End
 });

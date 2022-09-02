@@ -82,7 +82,7 @@ export default class Filteritems extends FilteritemsController {
         <View  style={styles.modalContainer}>
           <View style={styles.sortByContiner}>
             <View style={styles.sortRow}>
-              <Text style={styles.sortByText}>Sort by</Text>
+              <Text  style={styles.sortByText}>Sort by</Text>
               <TouchableOpacity
                 testID={"buttonSortBy"}
                 onPress={() =>
@@ -187,7 +187,7 @@ export default class Filteritems extends FilteritemsController {
     const isInCart = item?.item?.attributes?.cart_quantity > 0 ? true : false;
     return (
       <TouchableOpacity
-      testID={"productdescriptionpress"}
+      
         onPress={() =>
           this.props.navigation.navigate("ProductDescription", {
             productData: item.item,

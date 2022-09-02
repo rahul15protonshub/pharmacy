@@ -639,7 +639,7 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
         userToken
       );
       console.log("@@@ Google SignIn Response =========== ", userInfo);
-    } catch (error) {
+    } catch (error:any) {
       console.log("@@@ Message ==============================", error);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         console.log("User Cancelled the Login Flow");
