@@ -41,10 +41,6 @@ export default class NewPassword extends NewPasswordController {
         }}
       >
         <Image source={APP_LOGO} style={styles.brandLogo} />
-        {/* <Text style={styles.brandName}>{themeJson.attributes.heading}</Text>
-        <Text style={styles.getStartedText}>
-          {themeJson.attributes.sub_heading}
-        </Text> */}
       </View>
       // Customizable Area End
     );

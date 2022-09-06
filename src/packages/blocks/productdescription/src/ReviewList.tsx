@@ -16,7 +16,6 @@ import {
 import TopHeader from "../../studio-store-ecommerce-components/src/TopHeader/TopHeader";
 import FocusAwareStatusBar from "../../studio-store-ecommerce-components/src/FocusAwareStatusBar/FocusAwareStatusBar";
 import styles from "./ReviewListStyle";
-import R from "../../studio-store-ecommerce-components/src/R";
 import Scale, { verticalScale } from "../../../framework/src/utils/Scale";
 import COLOR_CONST, {
   FONTS,

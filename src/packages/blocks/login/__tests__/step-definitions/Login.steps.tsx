@@ -37,10 +37,90 @@ defineFeature(feature, (test) => {
 
         when('I navigate to the Login', () => {
              instance = loginWrapper.instance() as Login
+             instance.setState({ isFetching:false})
         });
 
         then('Login will load with out errors', () => {
             expect(loginWrapper).toBeTruthy()
+        });
+        then("Login with email without errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{}],
+              }
+            );
+            instance.apiEmailLoginCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("Login send otp without errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{}],
+              }
+            );
+            instance.sendOtpApiCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("Login with guest without errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{}],
+              }
+            );
+            instance.apiGuestLoginCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("Login with socail without errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{}],
+              }
+            );
+            instance.apiSocialLoginCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+           then("I can press button without error", () => {
+            let textInputComponent = loginWrapper.findWhere((node) => node.prop('testID') === 'loginguestbutton');
+            textInputComponent.simulate('press');
+
+            textInputComponent = loginWrapper.findWhere((node) => node.prop('testID') === 'loginbutton');
+            textInputComponent.simulate('press');
+            textInputComponent = loginWrapper.findWhere((node) => node.prop('testID') === 'showhidebutton');
+            textInputComponent.simulate('press');
+            textInputComponent = loginWrapper.findWhere((node) => node.prop('testID') === 'forgotbutton');
+            textInputComponent.simulate('press');
         });
 
         then('I can leave the screen with out errors', () => {

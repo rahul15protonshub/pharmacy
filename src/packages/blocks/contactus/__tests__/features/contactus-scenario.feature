@@ -21,6 +21,8 @@ Feature: contactus
     Scenario: Wrong phone number
         Given I am a user attempting to add a contact
         When I am adding a contact with wrong phone number
+        Then add text without error
+        Then header press without error
         Then add contact should fail
 
     Scenario: Add contact with correct data

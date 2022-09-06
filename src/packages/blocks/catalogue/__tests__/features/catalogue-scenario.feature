@@ -7,6 +7,7 @@ Feature: Catalogue
         Then Catalogue will pre-load data without errors
         Then Catalogue load products data without errors
         Then Catalogue load recommended data without errors
+        Then Catalogue banner load without errors
         Then Catalogue load categories data without errors
         Then Catalogue load cart product data without errors
         Then Catalogue load cart list data without errors
@@ -24,5 +25,6 @@ Feature: Catalogue
         Then Catalogue get brandsetting without errors
         Then Catalogue update item to cart without errors
         Then I can add item to wishlist
+        Then I can navigate to subcategories
         Then I can select the detail button
         And I can leave the screen with out errors

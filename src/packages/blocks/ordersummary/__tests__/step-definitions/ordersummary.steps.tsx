@@ -385,7 +385,9 @@ defineFeature(feature, (test) => {
       msgLoadDataAPI.addData(
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
-          data: [{}],
+          data: [{
+            order:{placeat:'',placed_at:''}
+          }],
         }
       );
       instance.verifyRazorPayId = msgLoadDataAPI.messageId;

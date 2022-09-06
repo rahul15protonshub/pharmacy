@@ -132,9 +132,6 @@ export default class ConnectedAccountsController extends BlockComponent<
   setupGoogleConfiguration = () => {
     // Customizable Area Start
     GoogleSignin.configure({
-      //It is mandatory to call this method before attempting to call signIn()
-      // scopes: ['https://www.googleapis.com/auth/drive.readonly'],
-      // Repleace with your webClientId generated from Firebase console
       webClientId:
         "60789253831-jm71v8bdhhptl8qn7dg7je6o8e6lno6v.apps.googleusercontent.com",
     });
@@ -197,11 +194,6 @@ export default class ConnectedAccountsController extends BlockComponent<
         // Customizable Area Start
         // Customizable Area End
       } else if (errorReponse) {
-        // Customizable Area Start
-        // this.setState({
-        //     isShowError: true, message: errorReponse, showAlertModal: true,
-        //     isFetching: false,
-        // })
         // Customizable Area End
       }
     }
@@ -250,7 +242,6 @@ export default class ConnectedAccountsController extends BlockComponent<
             access_token: token,
             provider: "facebook",
             display_name: json.name,
-            // uuid: DeviceInfo.getUniqueId(),
             account_id: userID,
             unique_auth_id: json.id,
           };
@@ -313,7 +304,6 @@ export default class ConnectedAccountsController extends BlockComponent<
       let data = {
         access_token: userToken.accessToken,
         provider: "google",
-        // uuid: DeviceInfo.getUniqueId(),
         display_name: userInfo.user.name,
         account_id: userID,
         unique_auth_id: userInfo.user.id,
@@ -350,7 +340,6 @@ export default class ConnectedAccountsController extends BlockComponent<
         LoginManager.logOut();
       }
     });
-    //Remove user session from the device.
     try {
       const userInfo = await GoogleSignin.isSignedIn();
       if (userInfo) {

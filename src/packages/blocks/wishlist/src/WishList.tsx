@@ -21,8 +21,6 @@ import {
   CART_BLACK_ICON,
   NOT_FOUND_ICON,
   shapeHeart,
-  UN_SELECTED_HEART,
-  reviewStar,
   shapeHeartActive
 } from "../../studio-store-ecommerce-theme/src/AppAssets/appassets";
 import GreenButton from "../../studio-store-ecommerce-components/src/GreenButton/GreenButton";
@@ -149,20 +147,6 @@ export default class WishList extends WishListController {
         </View>
       </View>
         }
-        {/* <View style={styles.reviewRow}>
-          <Text style={styles.avgReview}>{data.average_rating}</Text>
-          <Image source={reviewStar} style={styles.reviewStar} />
-          {data.reviews && (
-            <Text style={styles.reviewCount}>| {data.reviews.length}</Text>
-          )}
-        </View> */}
-        {/* {data.on_sale && (
-          <View style={styles.labelSticker}>
-            <Text style={styles.stickerText}>
-              Save {Number(data.discount).toFixed(1)}%
-            </Text>
-          </View>
-        )} */}
       </TouchableOpacity>
       // Customizable Area End
     );

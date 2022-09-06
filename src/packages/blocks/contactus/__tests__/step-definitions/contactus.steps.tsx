@@ -84,7 +84,8 @@ defineFeature(feature, (test) => {
       instance.getUserProfileApiCallId = addCategoryAPI.messageId;
       runEngine.sendMessage("Unit Test", addCategoryAPI);
     });
-    
+
+   
     then("I can leave the screen with out errors", () => {
       instance.componentWillUnmount();
       expect(ContactUsWrapper).toBeTruthy();
@@ -170,6 +171,35 @@ defineFeature(feature, (test) => {
         descriptionText: "Test",
       });
     });
+
+    then("add text without error", () => {
+    let textInputComponent = ContactUsWrapper.findWhere((node) => node.prop('testID') === 'txtcontactname');
+    textInputComponent.simulate('changeText', 'test');
+
+    textInputComponent = ContactUsWrapper.findWhere((node) => node.prop('testID') === 'txtcontactemail');
+    textInputComponent.simulate('changeText', 'hello@aol.com');
+
+    textInputComponent = ContactUsWrapper.findWhere((node) => node.prop('testID') === 'txtcontactphone');
+    textInputComponent.simulate('changeText', '123456789');
+
+    textInputComponent = ContactUsWrapper.findWhere((node) => node.prop('testID') === 'txtcontactdecs');
+    textInputComponent.simulate('changeText', 'this is testing');
+
+    });
+    then("header press without error", () => {
+      let textInputComponent = ContactUsWrapper.findWhere((node) => node.prop('testID') === 'onheaderpress');
+      textInputComponent.simulate('click');
+  
+      textInputComponent = ContactUsWrapper.findWhere((node) => node.prop('testID') === 'ongreenbuttonpress');
+      textInputComponent.simulate('press');
+  
+      // textInputComponent = ContactUsWrapper.findWhere((node) => node.prop('testID') === 'txtcontactphone');
+      // textInputComponent.simulate('changeText', '123456789');
+  
+      // textInputComponent = ContactUsWrapper.findWhere((node) => node.prop('testID') === 'txtcontactdecs');
+      // textInputComponent.simulate('changeText', 'this is testing');
+  
+      });
 
     then("add contact should fail", () => {
 

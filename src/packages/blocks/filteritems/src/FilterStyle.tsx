@@ -119,6 +119,7 @@ export default StyleSheet.create({
   listContainerOne: {
     paddingHorizontal: scale(16),
     marginTop: verticalScale(10),
+    paddingBottom:scale(82)
   },
 
   productGridStyle: {

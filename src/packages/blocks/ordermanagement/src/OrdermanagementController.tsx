@@ -68,7 +68,6 @@ export default class OrdermanagementController extends BlockComponent<
   submitOrderReviewAPICallID: any;
   cartHasProductAPICallID: any;
   cancelOrderAPICallID: any;
-
   _unsubscribe: any;
   // Customizable Area Start
   // Customizable Area End

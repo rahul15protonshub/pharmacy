@@ -1,11 +1,9 @@
 //*> Splash Assets
-export const SPLASH_BG = require('../assets/Splash/splash1.png');
 export const SPLASH_LOGO_WHITE = require('../assets/Splash/splash.png');
 export const COMPASS = require('../assets/Notification/compass1.png');
 export const BELL = require('../assets/bell/bell1.png');
 
 //*> Notifications Screen
-export const EMPTY_NOTIFICATIONS_BOX = require('../assets/notifications/emptyNotificationImage.png');
 export const NOTIFICATION_BELL_ICON = require('../assets/notifications/notificationBell.png');
 export const DELETE_ICON = require('../assets/notifications/deleteIcon.png');
 
@@ -17,15 +15,11 @@ export const CROSS_ICON = require('../assets/paymentInformation/cross.png');
 //*> Home Screen
 export const SEARCH = require('../assets/Home/search.png');
 export const MEDICINE = require('../assets/Home/medicine1.png');
-export const ILLUSTRATION = require('../assets/Home/illustration.png');
 export const HEARTWISHLIST = require('../assets/Home/heartwishlist.png');
 export const REDHEART = require('../assets/redHeart.png');
 export const NOTFIY_ON = require('../assets/Home/notifOn.png');
 export const NOTFIY_ON_WHITE = require('../assets/Home/notifOnWhite.png');
 
-//*> Checkout
-export const CHECK_BOX_SELECTED = require('../assets/checkout/selectedCheckbox.png')
-export const CHECK_BOX_UNSELECTED = require('../assets/checkout/checkboxUnselected.png')
 
 //*> Header
 export const BACK_ICON = require('../assets/header/backIcon.png');
@@ -44,12 +38,6 @@ export const FILE = require('../assets/orderMedicine/file.png');
 export const PHONE = require('../assets/orderMedicine/phone.png');
 export const DRUGS = require('../assets/orderMedicine/drugs.png');
 export const GROUP = require('../assets/orderMedicine/group.png');
-export const ILLUSTRATION1 = require('../assets/orderMedicine/HomeoHouse.png');
-
-//Explore screen
-export const BOTTLE = require('../assets/Home/bottle.png');
-export const CLOTH = require('../assets/Home/sampleCloth.png');
-export const PRODUCT_ASSET = require('../assets/Home/productAsset.png');
 
 // Login Screen
 export const LOGIN_SUCCESS = require('../assets/Login/loginSuccess.png');
@@ -85,7 +73,6 @@ export const NOTIFICATIONS_ICON = require('../assets/Profile/notificationsIcon.p
 export const NOTIFICATIONS_PROFILE_ICON = require('../assets/Profile/notifProfile.png');
 export const CART_BLACK_ICON = require('../assets/Profile/cartBlack.png');
 export const SAVED_ICON = require('../assets/Profile/savedIcon.png');
-export const INVITE_ICON = require('../assets/Profile/invite.png');
 export const NOTIF_OFF_ICON = require('../assets/Profile/notifOff.png');
 export const NOTIF_ON_ICON = require('../assets/Profile/notifOn.png');
 export const CONTACT_ICON = require('../assets/Profile/contact.png');
@@ -93,7 +80,6 @@ export const CAMERA_ICONS = require('../assets/Profile/cameraIcons.png');
 export const CROSS_ICONS = require('../assets/Profile/crossIcon.png');
 export const GALLERY_ICON = require('../assets/Profile/galleryIcon.png');
 export const FAQ_ICON = require('../assets/Profile/question.png');
-export const CART_ENABLE_ICON = require('../assets/Profile/cartOnIcon.png');
 export const WHITE_CAMERA_ICON = require('../assets/Profile/whiteCamera.png');
 
 //*> Explore
@@ -157,23 +143,12 @@ export const SORT_ICON = require('../assets/Filter/sort.png')
 export const FILTER_ICON = require('../assets/Filter/filter.png')
 
 //*> Home
-export const CAT1 = require('../assets/Home/categories/cat1.png')
+
 export const BANNER = require('../assets/Home/banner.png')
-export const DAIRY_CAT = require('../assets/Home/dairyCategory.png')
-export const GROCERY_CAT = require('../assets/Home/groceryCategory.png')
-export const HEALTH_CAT = require('../assets/Home/healthCategory.png')
-export const IDLY_CAT = require('../assets/Home/idlyCategory.png')
-export const MILLETS_CAT = require('../assets/Home/milletsCategory.png')
-export const VEG_CAT = require('../assets/Home/vegCategory.png')
-export const ORGLIV_TEXT = require('../assets/Home/orglivText.png')
 export const SELECTED_HEART = require('../assets/Home/selectedHeart.png');
 export const UN_SELECTED_HEART = require('../assets/Home/unselectedHeart.png');
 
 //*> SEARCH 
 export const SEARCH_NO_RESULTS = require('../assets/Search/searchNoResults.png')
 
-//*> SEARCH 
-export const EMPTY_WISHLIST_ICON = require('../assets/Wishlist/emptyWishlistIcon.png')
 
-//*> HELP CENTER
-export const HELP_CENTER_DETAIL = require('../assets/Profile/HelpCenterDetail.png')

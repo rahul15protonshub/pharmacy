@@ -280,7 +280,6 @@ export default class OrderdetailviewController extends BlockComponent<
   };
 
   getTrackIdDetailsSuccessCallBack = (res: any) => {
-    // console.log("@@@ Get Track ID Details ==============", res);
     this.setState(
       {
         trackingDetails: res.tracking_detail.data,
@@ -318,7 +317,6 @@ export default class OrderdetailviewController extends BlockComponent<
   };
 
   cartHasProductSuccessCallBack = (res: any) => {
-    // console.log("@@@ Cart Has Product Success CallBack ===================");
     this.setState({ cartHasProduct: res.has_cart_product });
     // Customizable Area Start
     this.setState({ cartcount: res.total_cart_item });
@@ -326,7 +324,6 @@ export default class OrderdetailviewController extends BlockComponent<
   };
 
   cartHasProductFailureCallBack = () => {
-    // console.log("@@@ Cart Has Product Failure CallBack ===================");
     // Customizable Area Start
     // Customizable Area End
   };
@@ -479,7 +476,6 @@ export default class OrderdetailviewController extends BlockComponent<
 
   getSubscrptionOrders = async () => {
     const orderData = this.props.navigation.state.params.orderData;
-    // console.log("@@@ Order Data ===========", orderData);
     if (orderData.attributes.subscription_package) {
       this.getSubscrptionOrdersAPICallID = await this.apiCall({
         contentType: configJSON.ApiContentType,
@@ -490,7 +486,6 @@ export default class OrderdetailviewController extends BlockComponent<
   };
 
   getSubscrptionOrdersSuccess = (res: any) => {
-    // console.log("@@@ Get Subscription Orders Success CallBack =========", res);
     this.setState({ subscriptionOrders: res, isFetching: false });
   };
 

@@ -107,6 +107,7 @@ defineFeature(feature, (test) => {
     });
 
     then("ordermanagement will load with out errors", () => {
+      instance.setState({myOrderList:mockOrderItem})
       expect(OrderWrapper).toBeTruthy();
 
     });
@@ -146,7 +147,17 @@ defineFeature(feature, (test) => {
       expect(OrderWrapper).toBeTruthy();
 
     });
+    
+    then("I click on star", () => {
+      instance = OrderWrapper.instance() as Ordermanagement;
+      instance.setState({showSubmitReviewModal:true,ratingList:mockOrderItem.attributes.order_items,onEndReachedCalledDuringMomentum:true})
+      let btnCancelOrder = OrderWrapper.findWhere(
+        (node) => node.prop("testID") === "pressStar"
+      );
+      btnCancelOrder.simulate("press");
+      expect(OrderWrapper).toBeTruthy();
 
+    });
     then("I can leave the screen with out errors", () => {
       instance.componentWillUnmount();
       expect(OrderWrapper).toBeTruthy();

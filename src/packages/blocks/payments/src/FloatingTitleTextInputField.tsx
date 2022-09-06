@@ -63,7 +63,6 @@ export class FloatingTitleTextInputField extends Component<S> {
   _handleBlur = () => {
     //@ts-ignore
     if (this.state.isFieldActive && !this.props.value) {
-      // console.log('TextINput UNFocused')
       this.setState({ isFieldActive: false });
       Animated.timing(this.position, {
         toValue: 0,

@@ -37,18 +37,95 @@ defineFeature(feature, (test) => {
 
         when('I navigate to the forgotpassword', () => {
              instance = forgotPassword.instance() as ForgotPassword
+             instance.setState({ showTimer: true, isOTPSent:true,emailInput:'test',otpInput:'gg' });
         });
 
         then('forgotpassword will load with out errors', () => {
             expect(forgotPassword).toBeTruthy()
 
         });
+        then("forgotpassword will get validation without errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{}],
+              }
+            );
+            instance.validationAPICallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("forgotpassword will requestEmailOtpCallId without errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{}],
+              }
+            );
+            instance.requestEmailOtpCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("forgotpassword will apiGuestLoginCallId without errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                success: true,
+              }
+            );
+            instance.apiGuestLoginCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("forgotpassword will verifyOtpApiCallId without errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{}],
+              }
+            );
+            instance.verifyOtpApiCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          
+          
+        then("I can change text without error", () => {
+            let textInputComponent = forgotPassword.findWhere((node) => node.prop('testID') === 'otpimage');
+            textInputComponent.simulate('onFocus', '123456789');
 
+            
+        });
         then('I can leave the screen with out errors', () => {
             instance.componentWillUnmount()
             expect(forgotPassword).toBeTruthy()
 
         });
+       
     });
 
     test('User navigates to newpassword', ({ given, when, then }) => {
@@ -61,10 +138,45 @@ defineFeature(feature, (test) => {
 
         when('I navigate to the newpassword', () => {
              instance = newPassword.instance() as NewPassword
+             instance.setState({enablePasswordField:false})
         });
 
         then('newpassword will load with out errors', () => {
             expect(newPassword).toBeTruthy()
+        });
+        then("newpassword will get validation without errors", () => {
+          const msgLoadDataAPI = new Message(
+            getName(MessageEnum.RestAPIResponceMessage)
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceDataMessage),
+            msgLoadDataAPI.messageId
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceSuccessMessage),
+            {
+              data: [{}],
+            }
+          );
+          instance.validationAPICallId = msgLoadDataAPI.messageId;
+          runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+        });
+        then("newpassword will resetPasswordApiCallIdwithout errors", () => {
+          const msgLoadDataAPI = new Message(
+            getName(MessageEnum.RestAPIResponceMessage)
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceDataMessage),
+            msgLoadDataAPI.messageId
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceSuccessMessage),
+            {
+              data: [{}],
+            }
+          );
+          instance.resetPasswordApiCallId = msgLoadDataAPI.messageId;
+          runEngine.sendMessage("Unit Test", msgLoadDataAPI);
         });
 
         then('I can leave the screen with out errors', () => {

@@ -167,12 +167,6 @@ export default class Orderdetailview extends OrderdetailviewController {
                 {orderDetails.total_price}
               </Text>
             )}
-            {/* <Text style={styles.trackingID}>
-              Tracking ID:{" "}
-              {trackingDetails && trackingDetails.length > 0 && trackingDetails[0].attributes
-                ? trackingDetails[0].attributes.tracking_number
-                : ""}{" "}
-            </Text> */}
           </View>
         </View>
         <View style={styles.bottomPopupView} />
@@ -346,7 +340,7 @@ export default class Orderdetailview extends OrderdetailviewController {
 
   renderOrderShippingAddressView = () => {
     if (!this.state.shippingAddressData) {
-      return;
+      return false;
     }
     const { name, address, phone_number, flat_no, city, state } =
       this.state.shippingAddressData;

@@ -142,13 +142,11 @@ export default class Ordermanagement extends OrdermanagementController {
             </View>
           )}
           <View style={styles.row}>
-            {/* <Image source={{ uri: productImage ? productImage : '' }} style={styles.productImage} /> */}
-            <FastImage
+             <FastImage
               style={styles.productImage}
               source={{
                 uri: productImage,
               }}
-            //resizeMode={'stretch'}
             />
 
             <View style={styles.middleInfo}>
@@ -264,7 +262,7 @@ export default class Ordermanagement extends OrdermanagementController {
             Order Number : {orderItem.attributes.order_number}
           </Text>
         </View>
-        {orderItem.attributes.order_items.map((item: any, index: any) => {
+        {orderItem?.attributes?.order_items?.map((item: any, index: any) => {
           return (
             <TouchableOpacity
               onPress={() =>
@@ -373,18 +371,17 @@ export default class Ordermanagement extends OrdermanagementController {
         <KeyboardAwareScrollView
           contentContainerStyle={styles.modalContainerContent}
         >
-          <TouchableOpacity
-            activeOpacity={1}
-            onPress={() => { }}
+          <View
             style={styles.modalContainer}
           >
             <View style={styles.reviewPopup}>
               <Text style={styles.deleteAddress}>Rate and Review</Text>
               <Text style={styles.areYouSure}>Rate our Product</Text>
               <View style={styles.starContainer}>
-                {this.state.ratingList.map((item: any) => {
+                {this.state.ratingList?.map((item: any) => {
                   return (
                     <TouchableOpacity
+                    testID="pressStar"
                       key="ratingList"
                       onPress={() => this.onPressStar(item)}
                     >
@@ -437,7 +434,7 @@ export default class Ordermanagement extends OrdermanagementController {
                 </TouchableOpacity>
               </View>
             </View>
-          </TouchableOpacity>
+          </View>
         </KeyboardAwareScrollView>
       </Modal>
     );

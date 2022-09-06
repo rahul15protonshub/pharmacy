@@ -238,6 +238,7 @@ defineFeature(feature, (test) => {
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
     then("I can select the button with with out errors", () => {
+      instance.setState({ showSortByModal: false });
       let buttonComponent = filterItemsBlock.findWhere(
         (node) => node.prop("testID") === "buttonSort"
       );
@@ -270,10 +271,7 @@ defineFeature(feature, (test) => {
         (node) => node.prop("testID") === "buttonSortPopularity"
       );
       buttonComponent.simulate("press");
-      buttonComponent = filterItemsBlock.findWhere(
-        (node) => node.prop("testID") === "productdescriptionpress"
-      );
-      buttonComponent.simulate("press");
+      
     });
 
     then("I can leave the screen with out errors", () => {

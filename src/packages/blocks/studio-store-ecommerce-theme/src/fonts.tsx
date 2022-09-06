@@ -1,6 +1,6 @@
 export const fonts = {
-  GTWalsheimProBold: 'GTWalsheimPro-Bold',
-  GTWalsheimProLight: 'GTWalsheimPro-Light',
-  GTWalsheimProMedium: 'GTWalsheimPro-Medium',
-  GTWalsheimProRegular: 'GTWalsheimPro-Regular',
+  GTWalsheimProBold: 'Rubik-Bold',
+  GTWalsheimProLight: 'Rubik-Light',
+  GTWalsheimProMedium: 'Rubik-Medium',
+  GTWalsheimProRegular: 'Rubik-Regular',
 };

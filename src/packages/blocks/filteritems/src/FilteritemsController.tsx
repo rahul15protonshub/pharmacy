@@ -53,7 +53,7 @@ interface S {
   addToCartId: any;
   productsAddingToCart: any[];
   productWishlisting: number | null;
-  itemQuantity:any;
+  itemQuantity: any;
   // Customizable Area End
 }
 
@@ -76,7 +76,7 @@ export default class FilteritemsController extends BlockComponent<
   // Customizable Area Start
   _unsubscribe: any;
   increaseOrDecreaseCartQuantityApiCallId: any = "";
-  putItemToCartApiCallId:any;
+  putItemToCartApiCallId: any;
   // Customizable Area End
   constructor(props: Props) {
     super(props);
@@ -132,7 +132,7 @@ export default class FilteritemsController extends BlockComponent<
       addToCartId: '',
       productsAddingToCart: [],
       productWishlisting: null,
-      itemQuantity:1
+      itemQuantity: 1
     };
     // Customizable Area End
     runEngine.attachBuildingBlock(this as IBlock, this.subScribedMessages);
@@ -199,7 +199,7 @@ export default class FilteritemsController extends BlockComponent<
         getName(MessageEnum.RestAPIRequestBodyMessage),
         JSON.stringify(body)
       );
-      console.log("requestMessage==", requestMessage);
+    console.log("requestMessage==", requestMessage);
     runEngine.sendMessage(requestMessage.id, requestMessage);
     return requestMessage.messageId;
   };
@@ -297,12 +297,12 @@ export default class FilteritemsController extends BlockComponent<
           );
         } else if (apiRequestCallId === this.getCartProductId) {
           let array = responseJson?.data;
-          this.setState({ cartProduct: array, isFetching: false,addToCartId: responseJson?.data?.order_id });
+          this.setState({ cartProduct: array, isFetching: false, addToCartId: responseJson?.data?.order_id });
         } else if (apiRequestCallId === this.addToCartApiCallId) {
           this.getCartHasProduct();
           this.updateAddToCart(responseJson);
           this.setState({ isFetching: false });
-        }else if(apiRequestCallId === this.putItemToCartApiCallId) {
+        } else if (apiRequestCallId === this.putItemToCartApiCallId) {
           this.getCartHasProduct();
           this.state.productList?.forEach((product: any) => {
             const orderItem = responseJson.data.attributes.order_items.find((item: any) => parseInt(product.id) === item.attributes.catalogue_id);
@@ -320,10 +320,10 @@ export default class FilteritemsController extends BlockComponent<
           await StorageProvider.set("cart_length", responseJson.data.attributes.order_items.length.toString());
 
         }
-         else if (apiRequestCallId === this.getCartListId) {
+        else if (apiRequestCallId === this.getCartListId) {
           let array = responseJson?.data;
           this.setState({ cartLength: array.length, isFetching: false });
-        }else if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
+        } else if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
           this.state.productList?.forEach((product: any) => {
             const orderItem = responseJson.data.attributes.order_items.find((item: any) => parseInt(product.id) === item.attributes.catalogue_id);
             product.attributes.cart_quantity = orderItem ? orderItem.attributes.quantity : null;
@@ -377,12 +377,12 @@ export default class FilteritemsController extends BlockComponent<
           this.setState({ isFetching: false });
         } else if (apiRequestCallId === this.getCartListId) {
           this.setState({ isFetching: false });
-        }else if (apiRequestCallId === this.putItemToCartApiCallId) {
-            this.setState({
-              isFetching: false,
-              productsAddingToCart: [],
-            });
-          }
+        } else if (apiRequestCallId === this.putItemToCartApiCallId) {
+          this.setState({
+            isFetching: false,
+            productsAddingToCart: [],
+          });
+        }
       } else if (responseJson?.errors) {
         if (apiRequestCallId === this.getProductApiCallId) {
           this.setState({ noProductFound: true, isFetching: false });
@@ -410,7 +410,7 @@ export default class FilteritemsController extends BlockComponent<
           this.setState({ isFetching: false });
         } else if (apiRequestCallId === this.getCartListId) {
           this.setState({ isFetching: false });
-        }else if (apiRequestCallId === this.putItemToCartApiCallId) {
+        } else if (apiRequestCallId === this.putItemToCartApiCallId) {
           this.setState({
             customErrorModal: true,
             isFetching: false,
@@ -420,7 +420,7 @@ export default class FilteritemsController extends BlockComponent<
           });
         }
       } else if (errorReponse) {
-        this.setState({productsAddingToCart: [],})
+        this.setState({ productsAddingToCart: [], })
         if (apiRequestCallId === this.getProductApiCallId) {
           this.setState({
             customErrorModal: true,
@@ -860,7 +860,7 @@ export default class FilteritemsController extends BlockComponent<
   };
 
   addToWishlist = async (id: any) => {
-    this.setState({  addFromWishListId: id });
+    this.setState({ addFromWishListId: id });
 
     const httpBody = {
       catalogue_id: id,
@@ -874,7 +874,7 @@ export default class FilteritemsController extends BlockComponent<
   };
 
   removeFromWishlist = async (id: any) => {
-    
+
     this.setState({ removeFromWishListId: id });
     this.removeFromWishlistApiCallId = await this.apiCall({
       contentType: configJSON.productApiContentType,
@@ -932,12 +932,8 @@ export default class FilteritemsController extends BlockComponent<
     }
   };
   postCreateCart = async (item: any) => {
-    console.log('iadd_tem',item)
+    console.log('iadd_tem', item)
     const isInCart = item?.attributes?.cart_quantity > 0 ? true : false
-    // if (isInCart) {
-    //   this.props.navigation.navigate("Shoppingcart");
-    //   return;
-    // }
     var data = this.state.cartProduct
     this.setState({ addToCartId: item?.item?.id });
     if (item?.item?.attributes?.catalogue_variants?.length > 0) {
@@ -980,30 +976,30 @@ export default class FilteritemsController extends BlockComponent<
   };
   putItemToCart = async (cartId: any, product: any, type: string) => {
     let httpBody: any;
-      if (product.catalogue_id && product?.attributes.catalogue_variants[0].id) {
-        httpBody = {
-          catalogue_id: product.catalogue_id,
-          catalogue_variant_id: parseInt(product?.attributes.catalogue_variants[0].id),
-          quantity: this.state.itemQuantity,
-        };
-        await StorageProvider.set(
-          "catalogue_variant_id",
-          product?.attributes.catalogue_variants[0].id
-        );
-      } else {
-        httpBody = {
-          catalogue_id: product.id,
-          quantity: this.state.itemQuantity,
-        };
-      }
+    if (product.catalogue_id && product?.attributes.catalogue_variants[0].id) {
+      httpBody = {
+        catalogue_id: product.catalogue_id,
+        catalogue_variant_id: parseInt(product?.attributes.catalogue_variants[0].id),
+        quantity: this.state.itemQuantity,
+      };
+      await StorageProvider.set(
+        "catalogue_variant_id",
+        product?.attributes.catalogue_variants[0].id
+      );
+    } else {
+      httpBody = {
+        catalogue_id: product.id,
+        quantity: this.state.itemQuantity,
+      };
+    }
 
-      this.putItemToCartApiCallId = await this.apiCall({
-        contentType: configJSON.productApiContentType,
-        method: configJSON.putAPiMethod,
-        endPoint: configJSON.addToCartApiEndPoint+
+    this.putItemToCartApiCallId = await this.apiCall({
+      contentType: configJSON.productApiContentType,
+      method: configJSON.putAPiMethod,
+      endPoint: configJSON.addToCartApiEndPoint +
         `${cartId}/add_item`,
-        body: httpBody,
-      });
+      body: httpBody,
+    });
   };
   //Pagination in productListing Api
   _onMomentumScrollBegin = () =>
@@ -1073,7 +1069,7 @@ export default class FilteritemsController extends BlockComponent<
     });
     this.setState({ productList: UpdatedArray });
   };
-  updateAddToCart = (responseJson:any) => {
+  updateAddToCart = (responseJson: any) => {
     this.state.productList?.forEach((product: any) => {
       const orderItem = responseJson.data.attributes.order_items.find((item: any) => parseInt(product.id) === item.attributes.catalogue_id);
       if (!product.attributes.cart_quantity) {
@@ -1086,21 +1082,6 @@ export default class FilteritemsController extends BlockComponent<
       productList: this.state.productList ? [...this.state.productList] : [],
       cartLength: responseJson.data.attributes.order_items.length
     });
-
-    
-    // let UpdatedArray = this.state.productList.map((item: any) => {
-    //   if (item.id == this.state.addToCartId) {
-    //     let itemsUpdate = Object.assign({}, item.attributes, {
-    //       cart_quantity: 1,
-    //     });
-
-    //     return Object.assign({}, item, {
-    //       attributes: itemsUpdate,
-    //     });
-    //   }
-    //   return item;
-    // });
-    // this.setState({ productList: UpdatedArray });
   };
 
   increaseOrDecreaseCartQuantity = async (product: any, increment: number) => {
@@ -1140,6 +1121,5 @@ export default class FilteritemsController extends BlockComponent<
       });
     }
 
-   
   }
 }

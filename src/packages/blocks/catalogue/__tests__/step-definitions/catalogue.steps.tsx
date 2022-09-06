@@ -10,7 +10,6 @@ import MessageEnum, {
 } from "../../../../framework/src/Messages/MessageEnum";
 import React from "react";
 import Catalogue from "../../src/Catalogue";
-// const navigation = require("react-navigation");
 
 const screenProps = {
   navigation: {
@@ -23,7 +22,6 @@ const feature = loadFeature("./__tests__/features/catalogue-scenario.feature");
 
 defineFeature(feature, (test) => {
   beforeEach(() => {
-    // jest.resetModules();
     jest.doMock("react-native", () => ({ Platform: { OS: "web" } }));
     jest.spyOn(helpers, "getOS").mockImplementation(() => "web");
   });
@@ -88,6 +86,24 @@ defineFeature(feature, (test) => {
       instance.getRecommendedApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
+    then("Catalogue banner load without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.getBannerImagesAPICallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+
 
     then("Catalogue load categories data without errors", () => {
       const msgLoadDataAPI = new Message(
@@ -232,7 +248,7 @@ defineFeature(feature, (test) => {
       instance.notificationMessageId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
-    
+
     then("Catalogue remove from whishlist without errors", () => {
       const msgLoadDataAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
@@ -369,14 +385,27 @@ defineFeature(feature, (test) => {
       instance.putItemToCartApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
-    
+
     then("I can add item to wishlist", () => {
+
+    });
+
+    then("I can navigate to subcategories", () => {
+      let formComponent = catalogueBlock.findWhere(
+        (node) => node.prop("data-testid") === "opencategories"
+      );
+      formComponent.simulate("press");
       
-     
+      formComponent = catalogueBlock.findWhere(
+        (node) => node.prop("data-testid") === "scrollviewscroll"
+      );
+      formComponent.simulate("press");
+      
+
     });
     then("I can select the detail button", () => {
-      
-     
+
+
     });
 
     then("I can leave the screen with out errors", () => {

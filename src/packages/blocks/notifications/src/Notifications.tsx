@@ -127,16 +127,16 @@ export default class Notifications extends NotificationsController {
           });
         }}
         buttonWidth={scale(188)}
-        onClose={() => {}}
+        onClose={() => { }}
       >
         <TouchableOpacity onLongPress={() => this.readNotification(item)}>
           <LinearGradient
             colors={
               !item.is_read
                 ? [
-                    COLOR_CONST.lightNotificationColor,
-                    COLOR_CONST.newNotificationColor,
-                  ]
+                  COLOR_CONST.lightNotificationColor,
+                  COLOR_CONST.newNotificationColor,
+                ]
                 : [COLOR_CONST.white, COLOR_CONST.white]
             }
             style={[styles.cellContainer]}

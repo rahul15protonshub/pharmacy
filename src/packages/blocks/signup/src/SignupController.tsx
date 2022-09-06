@@ -56,7 +56,7 @@ interface S {
   // Customizable Area End
 }
 
-interface SS {}
+interface SS { }
 
 export default class SignupController extends BlockComponent<Props, S, SS> {
   emailReg: RegExp;
@@ -143,9 +143,6 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
       var responseJson = message.getData(
         getName(MessageEnum.RestAPIResponceSuccessMessage)
       );
-
-      console.log('responseJson===',responseJson)
-
       var errorReponse = message.getData(
         getName(MessageEnum.RestAPIResponceErrorMessage)
       );
@@ -486,7 +483,6 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
   };
 
   onSocialLoginSuccessCallBack = async (res: any) => {
-    console.log("@@@ Social Login Success CallBack ===================", res);
     await StorageProvider.remove("GUEST_USER");
     await StorageProvider.set("SOCIAL_LOGIN_USER", "true");
     // Customizable Area Start
@@ -498,7 +494,7 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
           showAlertModal: true,
           isFetching: false,
         },
-        async () => {}
+        async () => { }
       );
       setTimeout(() => {
         this.saveLoggedInUserData(res);
@@ -508,7 +504,6 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
   };
 
   onSocialLoginFailureCallBack = (error: any) => {
-    console.log("@@@ Social Login Failure CallBack ===================", error);
     if (error) {
       setTimeout(() => {
         this.setState({
@@ -551,7 +546,6 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
   };
 
   onGuestLoginSuccessCallBack = async (res: any) => {
-    console.log("@@@ Guest Login Success CallBack ===================", res);
     // Customizable Area Start
     setTimeout(() => {
       this.setState(
@@ -561,7 +555,7 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
           showAlertModal: true,
           isFetching: false,
         },
-        async () => {}
+        async () => { }
       );
       setTimeout(() => {
         this.saveLoggedInUserData(res, true);
@@ -572,7 +566,6 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
 
   onGuestLoginFailureCallBack = (error: any) => {
     // Customizable Area Start
-    console.log("@@@ Guest Login Failure CallBack ===================", error);
     if (error) {
       setTimeout(() => {
         this.setState({
@@ -598,21 +591,18 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
   initUser = async (token: string) => {
     fetch(
       "https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=" +
-        token
+      token
     )
       .then((response) => {
         response.json().then((json) => {
-          console.log("@@@ Facebook Login Response ============", json);
           let data = {
             access_token: token,
             provider: "facebook",
-            // uuid: DeviceInfo.getUniqueId()
           };
           this.onSocialLogin(data);
         });
       })
       .catch(() => {
-        console.log("ERROR GETTING DATA FROM FACEBOOK");
       });
   };
 
@@ -622,28 +612,17 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
     }
     LoginManager.logInWithPermissions(["public_profile", "email"]).then(
       (result) => {
-        console.log("@@@ Result============", result);
         if (result.isCancelled) {
-          console.log("Login cancelled");
         } else {
           AccessToken.getCurrentAccessToken().then((data) => {
             if (data) {
               const { accessToken } = data;
-              console.log("@@@ Access Token ===========", accessToken);
               this.initUser(accessToken);
             }
           });
-
-          if (result && result.grantedPermissions) {
-            console.log(
-              "Login success with permissions: " +
-                result.grantedPermissions.toString()
-            );
-          }
         }
       },
       function (error) {
-        console.log("Login fail with error: " + error);
       }
     );
   };
@@ -658,21 +637,11 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
       let data = {
         access_token: userToken.accessToken,
         provider: "google",
-        // uuid: DeviceInfo.getUniqueId()
+
       };
       this.onSocialLogin(data);
-      console.log("@@@ Google SignIn Response =========== ", userInfo);
     } catch (error) {
-      // console.log("@@@ Message ==============================", error);
-      // if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-      //   console.log("User Cancelled the Login Flow");
-      // } else if (error.code === statusCodes.IN_PROGRESS) {
-      //   console.log("Signing In");
-      // } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-      //   console.log("Play Services Not Available or Outdated");
-      // } else {
-      //   console.log("Some Other Error Happened");
-      // }
+
     }
   };
 
@@ -682,15 +651,9 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
       requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
     });
 
-    console.log(
-      "@@@ Apple Login Response ================",
-      appleAuthRequestResponse
-    );
-    console.log("identityToken", appleAuthRequestResponse.identityToken);
     let data = {
       access_token: appleAuthRequestResponse.identityToken,
       provider: "apple",
-      // uuid: DeviceInfo.getUniqueId()
     };
     this.onSocialLogin(data);
   };
@@ -705,7 +668,6 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
   }
 
   async saveLoggedInUserData(responseJson: any, isGuestUser: any = false) {
-    console.log("@@@ SAVE LOGGED IN USER DATA ============", responseJson);
     await StorageProvider.set("Userdata", responseJson.meta.token);
     await StorageProvider.set("USER_ID", responseJson.data.id);
     if (isGuestUser) {
@@ -723,10 +685,6 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
   };
 
   getHelpCenterDataSuccessCallBack = async (res: any) => {
-    console.log(
-      "@@@ Get Help Center Data Success CallBack ===================",
-      res.data
-    );
     // Customizable Area Start
     this.setState({ helpCenterList: res.data }, () => {
       let privacyIndex = this.state.helpCenterList.findIndex(
@@ -736,7 +694,7 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
       let termsIndex = this.state.helpCenterList.findIndex(
         (item: any) =>
           item.attributes.help_center_type.toLowerCase() ===
-            "terms & conditions" ||
+          "terms & conditions" ||
           item.attributes.help_center_type.toLowerCase() === "terms of service"
       );
       if (privacyIndex !== -1) {
@@ -753,10 +711,6 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
 
   getHelpCenterDataFailureCallBack = (error: any) => {
     // Customizable Area Start
-    console.log(
-      "@@@ Get Help Center Data Failure CallBack ===================",
-      error
-    );
     if (error) {
       setTimeout(() => {
         this.setState({
