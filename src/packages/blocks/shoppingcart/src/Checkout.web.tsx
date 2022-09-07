@@ -504,7 +504,6 @@ const PrescriptionModal = (props: any) => {
   
   };
   // cheek input value is valid or not {rf}
-  // const checkValidFile = (file: { target: { value: any } }) => {
   const checkValidFile = (file: any) => {
     const filePath = file[0].path;
     var allowedExtensions = /(.jpg|.jpeg|.png|.gif|.pdf|.docx)/;
@@ -1355,68 +1354,6 @@ export class Checkout extends CheckoutController {
                                 </FormGroup>
                               </Col>
 
-                              {/* <Col lg={6}>
-                                <FormGroup>
-                                  <span className="checkout-form-label">
-                                    Country
-                                  </span>
-                                  <Input
-                                    type="text"
-                                    className="py-2 border-0 ps-0"
-                                    name="billing_address.country"
-                                    id="country"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values?.billing_address?.country}
-                                  />
-                                  {errors?.billing_address?.country &&
-                                  touched?.billing_address?.country ? (
-                                    <FormText color="danger" className="mt-1">
-                                      {errors?.billing_address?.country}
-                                    </FormText>
-                                  ) : (
-                                    ""
-                                  )}
-                                </FormGroup>
-                              </Col> */}
-
-                              {/* <Col lg={6}>
-                                <FormGroup>
-                                  <span className="checkout-form-label">
-                                    Pin Code{" "}
-                                  </span>
-                                  <Input
-                                    // @ts-ignore
-                                    type={
-                                      this.state?.countryName?.toLowerCase() ==
-                                      "india"
-                                        ? "number"
-                                        : "text"
-                                    }
-                                    data-testid={"text-input-zip-code"}
-                                    className="py-2 border-0 ps-0"
-                                    name="billing_address.zip_code"
-                                    id="zip_code"
-                                    onChange={(event) => {
-                                      this.setZipCode(event.target.value);
-                                      handleChange(event);
-                                    }}
-                                    onBlur={(event) => {
-                                      this.checkShippingAggressCharge();
-                                      handleBlur(event);
-                                    }}
-                                    value={values?.billing_address?.zip_code}
-                                  />
-                                  {errors?.billing_address?.zip_code &&
-                                  touched?.billing_address?.zip_code ? (
-                                    <FormText color="danger" className="mt-1">
-                                      {errors?.billing_address?.zip_code}
-                                    </FormText>
-                                  ) : (
-                                    ""
-                                  )}
-                                </FormGroup>
-                              </Col> */}
                               <Col lg={6}>
                                 <FormGroup>
                                   <span className="checkout-form-label">

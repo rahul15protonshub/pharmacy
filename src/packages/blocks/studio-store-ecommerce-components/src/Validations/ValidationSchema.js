@@ -1,17 +1,6 @@
 //@ts-nocheck;
 import * as yup from 'yup';
 
-/** validations for EditProfileForm Start */
-// export function EditProfile() {
-//     const editFormValidations = validations();
-//     return yup.object().shape({
-//         name: editFormValidations.name.required('Name is Required'),
-//         email: editFormValidations.email.required('Email is Required'),
-//         phone: editFormValidations.phone.required('Phone Number is Required')
-//     });
-// };
-/** validations for EditProfileForm End */
-
 /**************************** Common Validations Start ***************************/
 export default function validations() {
   return {

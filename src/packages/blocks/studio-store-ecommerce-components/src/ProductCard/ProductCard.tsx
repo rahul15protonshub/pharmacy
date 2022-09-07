@@ -118,7 +118,6 @@ const ProductCard: any = withRouter((props: ProductCardProps) => {
                                                         else {
                                                             addToCart(
                                                                 catalogue_variant_in_stock
-                                                                // .attributes
                                                             );
                                                         }
                                                     }}
@@ -140,7 +139,6 @@ const ProductCard: any = withRouter((props: ProductCardProps) => {
                                                     } else {
                                                         addToCart(
                                                             catalogue_variant_in_stock
-                                                            // .attributes
                                                         );
                                                     }
                                                 }}

@@ -131,7 +131,6 @@ export default {
   verifyOTP: "Verify OTP",
   forgotPasswordContentText:
     "Enter your registered Email / Phone Number and we’ll sent you OTP to reset your password",
-  // "Enter your registered Email and we’ll sent you OTP to reset your password",
   category: "Category",
   price: "Price Range",
   color: "Color",

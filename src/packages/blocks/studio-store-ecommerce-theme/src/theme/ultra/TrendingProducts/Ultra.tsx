@@ -15,7 +15,6 @@ export const Ultra: any = withRouter((props: any) => {
     let list: any = [];
 
     props.collection && props.collection.forEach((product: any, index: number) => {
-      // console.log(props.collection, "props.collection", product)
       let catalogue_variant_in_stock: any, productOnSale: any, productSlaeprice: any, ProductPrice: any;
       if (product.attributes.default_variant) {
         catalogue_variant_in_stock =
@@ -41,20 +40,6 @@ export const Ultra: any = withRouter((props: any) => {
       productOnSale = catalogue_variant_in_stock ? catalogue_variant_in_stock.attributes.on_sale : catalogue_variant_in_stock.attributes.on_sale;
       ProductPrice = catalogue_variant_in_stock ? productOnSale ? catalogue_variant_in_stock.attributes?.actual_price_including_tax : catalogue_variant_in_stock.attributes?.price_including_tax : productOnSale ? catalogue_variant_in_stock?.attributes?.actual_price_including_tax : catalogue_variant_in_stock?.attributes?.price_including_tax;
       productSlaeprice = catalogue_variant_in_stock ? catalogue_variant_in_stock.attributes.price_including_tax : catalogue_variant_in_stock?.attributes.price_including_tax;
-
-      // console.log("catalogue_variant_in_stock", catalogue_variant_in_stock)
-      // let catalogue_variant_in_stock =
-      //   catalogue_variant_in_stock && product.attributes.stock_qty > 0
-      //     ? catalogue_variant_in_stock
-      //     : product;
-
-      let percentageValue =
-        (
-          (
-            parseInt(catalogue_variant_in_stock.attributes.price) - parseInt(catalogue_variant_in_stock.attributes.sale_price)
-          ) /
-          parseInt(catalogue_variant_in_stock.attributes.price)
-        ) * 100;
 
       list.push(
         <div className="templateone1-product-container slider-container" key={index}>
@@ -99,8 +84,6 @@ export const Ultra: any = withRouter((props: any) => {
                 </span>
               </p>
             </div>
-            {/* </Link> */}
-
           </div>
         </div>
       );
@@ -124,7 +107,6 @@ export const Ultra: any = withRouter((props: any) => {
   return (
     <section className="templateone-product-slider product-slider ds-mb-40 ds-mb-md-80 ds-mb-lg-104">
       <Container className="carousel-responsive-container">
-        {/* <TitleBar name={props.name} onViewMore={props.onViewMore} /> */}
         <SectionHeading
           className='px-3 px-lg-0 mb-2 mb-md-40'
           name="TRENDING PRODUCTS"
@@ -171,5 +153,4 @@ export const Ultra: any = withRouter((props: any) => {
   )
 });
 
-// export default ProductCard;
 

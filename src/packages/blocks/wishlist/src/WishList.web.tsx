@@ -29,7 +29,6 @@ function FavouriteProductSet(props: any) {
       {props.isFav ? (
         <FaHeart
           className="yt-sglproduct-fav likebuttononimage active"
-          // color="red"
           style={{ cursor: "pointer" }}
           onClick={() => props.onClick()}
         />
@@ -166,13 +165,6 @@ export class WishList extends WishListController {
                             >
                               <div className="product profile-pg-wl-sgl-product-cpnt text-center mb-4">
                                 <div className="d-flex justify-content-between align-items-center mt-3">
-                                  {/* {catalogue_variant_in_stock?.attributes
-                                    ?.on_sale && (
-                                    <div className="yt-product-off text-center p-1">
-                                      {parseInt(productData?.discount)}
-                                      {content.productCard.off}
-                                    </div>
-                                  )} */}
                                   {productData.on_sale && false ? (
                                     <div className="profile-yt-sgl-product-off text-center p-1">
                                       {content.sale}
@@ -205,7 +197,6 @@ export class WishList extends WishListController {
                                             removeData:
                                               product?.data?.attributes?.id
                                                 ?.data?.attributes?.id,
-                                            // isVaraintId: catalogue_variant_in_stock.id,
                                           });
                                         }
                                         productData.wishlisted
@@ -233,13 +224,8 @@ export class WishList extends WishListController {
                                         productWishlIstData?.attributes?.images
                                           ?.data
                                       )
-                                      // productWishlIstData?.attributes.images
-                                      //   ? productWishlIstData?.attributes.images
-                                      //     .data[0].attributes.url
-                                      //   : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
                                     }
                                     className="yt-product-bg-image img-fluid"
-                                    // alt="ytrend"
                                     alt={
                                       catalogue_variant_in_stock?.attributes
                                         ?.name
@@ -338,7 +324,6 @@ export class WishList extends WishListController {
                                       catalogue_variant_in_stock?.attributes
                                         ?.cart_quantity >= 1 ? (
                                         <Button
-                                          // color="secondary button-cart"
                                           data-testid={"button-goto-cart"}
                                           color="secondary profile-pg-wl-sgl-product-add-btn buttoncart py-3"
                                           onClick={() => {

@@ -107,7 +107,6 @@ export default class SortingController extends BlockComponent<Props, S, SS> {
       this.props.navigation
     );
     if (resultSesseion) {
-      // this.setState({isFetching:false});
       ChangeStackNow(this.props.navigation);
     }
 
@@ -122,9 +121,6 @@ export default class SortingController extends BlockComponent<Props, S, SS> {
           data: responseJson.data,
         });
       } else {
-        // var errorReponse = message.getData(
-        //   getName(MessageEnum.RestAPIResponceErrorMessage)
-        // );
         this.parseApiErrorResponse(responseJson);
         this.parseApiCatchErrorResponse(errorReponse);
       }
