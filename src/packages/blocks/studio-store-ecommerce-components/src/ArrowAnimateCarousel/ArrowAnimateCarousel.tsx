@@ -73,7 +73,6 @@ export const ArrowAnimateCarousel: React.FunctionComponent<ArrowAnimateCarouselP
             pagination={false}
             showEmptySlots={true}
             outerSpacing={issmallDevice ? defaultSmSpacing : 0}
-            //ref={(ref: any) => (carousel = ref)}
             breakPoints={[
                 {
                     width: 0,

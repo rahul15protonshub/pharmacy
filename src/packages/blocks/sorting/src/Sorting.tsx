@@ -302,7 +302,6 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
   },
   ImgContainer: {
-    //marginBottom: 15,
     height: 150,
   },
   productName: {

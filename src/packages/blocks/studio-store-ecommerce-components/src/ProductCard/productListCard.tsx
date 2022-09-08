@@ -147,62 +147,12 @@ const ProductCard: any = withRouter((props: any) => {
       <div className="">
         <TitleBar name={props.name} onViewMore={props.onViewMore} />
         <Row className="yt-component-wrapper yt-slider-component">
-          {/* <button
-          className="carousel__back-button"
-          style={{
-            border: "none",
-            outline: "none",
-            background: "transparent",
-            color: "#324688",
-          }}
-        >
-          <IoIosArrowDropleft
-            className="slider-left img-fluid"
-            //@ts-ignore
-            onClick={() => carousel.current.slidePrev()}
-          />
-        </button> */}
-          {/* <button
-          className="carousel__next-button"
-          style={{
-            border: "none",
-            outline: "none",
-            background: "transparent",
-            color: "#324688",
-          }}
-        >
-          <IoIosArrowDropright
-            className="slider-right img-fluid"
-            width="20"
-            height="20"
-            //@ts-ignore
-            onClick={() => carousel.current.slideNext()}
-          />
-        </button> */}
-          {/* <Carousel
-          isRTL={false}
-          itemsToShow={15}
-          itemsToScroll={0}
-          pagination={false}
-          showArrows={false}
-          //ref={(ref: any) => (carousel = ref)}
-          //@ts-ignore
-          ref={carousel}
-          breakPoints={Breakpoints}
-        >
-        </Carousel> */}
           {list}
         </Row>
       </div>
     </section>
   ) : (
     <Loader loading={props.loading} />
-    // <section className="hp-product-slider">
-    //   <TitleBar name={props.name} />
-    //   <div className="yt-component-wrapper yt-slider-component mt-4">
-    //     No Products Found.
-    //   </div>
-    // </section>
   );
 });
 

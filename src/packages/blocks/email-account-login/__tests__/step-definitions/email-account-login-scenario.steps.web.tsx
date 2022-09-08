@@ -7,7 +7,6 @@ import { Message } from "../../../../framework/src/Message"
 
 import MessageEnum, { getName } from "../../../../framework/src/Messages/MessageEnum";
 import React from "react";
-// import LoginScreen from "../../src/LoginScreen.web"
 import { EmailAccountLoginBlock } from '../../src/EmailAccountLogin.web';
 const navigation = require("react-navigation")
 
@@ -64,7 +63,6 @@ defineFeature(feature, (test) => {
       );
 
       instance.loginAPICallID = msgRegistrationAPI.messageId;
-      // instance.guestLoginApiCallId = msgRegistrationAPI.messageId;
       runEngine.sendMessage("Unit Test", msgRegistrationAPI);
 
       const msgValidationAPI = new Message(

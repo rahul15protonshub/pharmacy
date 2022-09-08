@@ -73,7 +73,6 @@ export const ArrowCarousel: React.FunctionComponent<ArrowCarouselProps> = (props
             itemPadding={isTabletMid ? [0, 12, 0, 12] : [0, 8, 0, 8]}
             pagination={false}
             showEmptySlots={true}
-            //ref={(ref: any) => (carousel = ref)}
             breakPoints={[
                 {
                     width: 0,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment, useRef } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Container,
@@ -9,17 +9,11 @@ import {
   Nav,
   NavItem,
   NavLink,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Dropdown,
   Button,
   ListGroup,
   ListGroupItem,
 } from "reactstrap";
-import { FaChevronRight, FaChevronDown, FaRegHeart } from "react-icons/fa";
 import { AiFillCaretRight } from "react-icons/ai";
-import { RiHeadphoneLine } from "react-icons/ri";
 import { withRouter } from "react-router-dom";
 //@ts-ignore
 import classnames from "classnames";
@@ -29,9 +23,6 @@ import HeaderController, { Props } from "./HeaderController.Web";
 import "./css/index.scoped.css";
 // @ts-ignore
 import content from "../content";
-
-// import { _ } from '../../../framework/src/IBlock';
-
 //@ts-ignore
 import isEmpty from "lodash/isEmpty";
 import NotsearchFound from "./NotsearchFound";
@@ -41,9 +32,7 @@ const MobileSideNav: any = withRouter((props: any) => {
   const isOpen = props.isOpen;
   const toggle = props.toggle;
   const setShowLogout = props.setShowLogout;
-  const [showShopMenu, setShowShopMenu] = useState(false);
   const currentPageActive = props.currentPageActive;
-  const category = props.category;
 
   const routeToAll = (value: any) => {
     if (value !== undefined) {
@@ -93,11 +82,6 @@ const MobileSideNav: any = withRouter((props: any) => {
             {!isLoggedIn ? (
               <div
                 className="yt-mb-user-profile d-flex"
-                // onClick={() => {
-                //  console.log(props)
-                //  window.location.hrefy
-                //   toggle();
-                // }}
                 onClick={() => {
                   if (
                     !isEmpty(localStorage.getItem("token")) &&
@@ -193,7 +177,6 @@ const MobileSideNav: any = withRouter((props: any) => {
                         active: currentPageActive === "shop",
                       })}
                       onClick={() => {
-                        // routeToAll("/home-page");
                         //@ts-ignore
                         if (localStorage.getItem("token")) {
                           localStorage.setItem("newest", "By Popularity");
@@ -225,20 +208,6 @@ const MobileSideNav: any = withRouter((props: any) => {
                       {content.shop}
                     </NavLink>
                   </NavItem>
-                  {/* <NavItem>
-                    <NavLink
-                      className={classnames({
-                        active: currentPageActive === 'shop',
-                      })}
-                      onClick={() => {
-                        routeToAll('shop?page=1&per_page=15');
-                        // window.location.assign("/shop?page=1&per_page=15");
-                      }}
-                    >
-                      {content.market}
-                    </NavLink>
-                  </NavItem> */}
-
                   <NavItem>
                     <NavLink
                       className={classnames({
@@ -283,7 +252,6 @@ const MobileSideNav: any = withRouter((props: any) => {
                         active: currentPageActive == "aboutus",
                       })}
                       onClick={() => {
-                        // props?.history?.push('/aboutus')
                         routeToAll("aboutus");
                         toggle();
                       }}
@@ -297,7 +265,6 @@ const MobileSideNav: any = withRouter((props: any) => {
                         active: currentPageActive === "contactus",
                       })}
                       onClick={() => {
-                        // routeToAll('contact-us');
                         //@ts-ignore
                         if (localStorage.getItem("token")) {
                           props?.history?.push("/contact-us");
@@ -441,7 +408,6 @@ const MobileSideNav: any = withRouter((props: any) => {
                     <NavItem>
                       <NavLink
                         onClick={() => {
-                          // history.push('/help-center');
                           toggle();
                         }}
                       >
@@ -451,7 +417,6 @@ const MobileSideNav: any = withRouter((props: any) => {
                     <NavItem>
                       <NavLink
                         onClick={() => {
-                          // history.push('/faq');
                           toggle();
                         }}
                       >
@@ -488,8 +453,6 @@ const ItemWithRouter: any = withRouter((props: any) => {
       {...props}
       onClick={() => {
         let query;
-        // props.hideSearch();
-        //q[name]=Product 8&q[id]=60
         props.isQuickResults
           ? (localStorage.setItem(
               "searchQuery",
@@ -631,7 +594,7 @@ class AppHeaderScreen extends HeaderController {
               <Col xs={1} md={3} lg={1} className="yt-head-col logo-txt">
                 <Link to={localStorage.getItem("token") ? "/home-page" : "/"}>
                   <div
-                  className="w-100"
+                    className="w-100"
                     onClick={() =>
                       this.props.history.pathname == "/home-page"
                         ? window.location.reload()
@@ -656,15 +619,11 @@ class AppHeaderScreen extends HeaderController {
                       <Nav className="mr-auto" navbar style={{ gap: "24px" }}>
                         <NavItem>
                           <NavLink
-                            // className={classnames({
-                            //   active: this.state.activeTab === '0',
-                            // })}
                             onClick={() => {
                               //@ts-ignore
                               this.activeTabToggle("0");
                               if (localStorage.getItem("token")) {
                                 localStorage.setItem("newest", "By Popularity");
-
                                 const route = "../";
                                 //@ts-ignore
                                 this.props.history.location.pathname
@@ -694,15 +653,11 @@ class AppHeaderScreen extends HeaderController {
 
                         <NavItem>
                           <NavLink
-                            // className={classnames({
-                            //   active: this.state.activeTab === '1',
-                            // })}
                             onClick={() => {
                               //@ts-ignore
                               this.activeTabToggle("1");
                               if (localStorage.getItem("token")) {
                                 localStorage.setItem("newest", "By Newest");
-
                                 const route = "../";
                                 //@ts-ignore
                                 this.props.history.location.pathname
@@ -851,7 +806,6 @@ class AppHeaderScreen extends HeaderController {
                             !isEmpty(localStorage.getItem("guestUUID")) &&
                             isEmpty(localStorage.getItem("userData"))
                           ) {
-                            // this.props.history.push("/")
                             this.props.history.push({
                               pathname: "/",
                               state: {
@@ -877,24 +831,9 @@ class AppHeaderScreen extends HeaderController {
                       >
                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                       </svg>
-                      {/* <FaRegHeart
-        className="favoriteicon w3-ripple"
-        onClick={() => {
-          if (!isEmpty(localStorage.getItem("token")) && !isEmpty(localStorage.getItem("guestUUID")) && isEmpty(localStorage.getItem("userData"))) {
-            // this.props.history.push("/")
-            this.props.history.push({ pathname: "/", state: { "calledFrom": "cart", "redirect": "wishlist" } });
-          } else {
-            this.props.history.push({
-              pathname: "/profilebio",
-              state: { activeTab: "wishlist" }
-            })
-          }
-        }}
-      /> */}
                       {parseInt(this.state.wishlistLength) > 0 && (
                         <span className="w3-green cart-notify wishlist">
                           {/* @ts-ignore */}
-
                           {parseInt(this.state.wishlistLength) > 9
                             ? "9+"
                             : this.state.wishlistLength}
@@ -1016,13 +955,15 @@ class AppHeaderScreen extends HeaderController {
                       >
                         <span>
                           <img
-                            src={this.state.userProfileImg != "null"? this.state.userProfileImg:img}
+                            src={
+                              this.state.userProfileImg != "null"
+                                ? this.state.userProfileImg
+                                : img
+                            }
                             alt="user"
                             className="usericon"
                           />
                         </span>
-                        {/* <span className="uname">{name.split(' ')[0]}</span> */}
-                        {/* <span className="uname">{this.state?.user?.name?.split(' ')[0]}</span> */}
                         <span className="uname">
                           {
                             JSON.parse(
@@ -1030,8 +971,6 @@ class AppHeaderScreen extends HeaderController {
                             )?.name?.split(" ")[0]
                           }
                         </span>
-                        {/* <span className="uname">Shubham</span> */}
-
                         <AiFillCaretRight
                           style={{ marginLeft: "10px", color: "#8b8f95" }}
                         />
@@ -1047,88 +986,8 @@ class AppHeaderScreen extends HeaderController {
                 </div>
               </Col>
             </Row>
-            {/* <div className=" yt-head-mb-search-panel">
-              {this.state.SearchDropDown && this.state.searchQuery != "" && (
-                <SearchData
-                  hideSearch={() => {
-                    this.setState({
-                      searchQuery: "",
-                    });
-                    this.setSearchDropDown(false);
-                  }}
-                  results={this.state.quickResults}
-                  isQuickResults={true}
-                  isMobile={true}
-                >
-                  <div className="yt-mb-header-search-bar-wrap">
-                    <input
-                      type="text"
-                      placeholder="Search ..."
-                      className=""
-                      onClick={() => this.setSearchDropDown(true)}
-                      value={this.state.searchQuery}
-                      onChange={(e) => {
-                        this.setState({
-                          searchQuery: e.target.value,
-                        });
-                        setTimeout(() => {
-                          this.state.searchQuery != "" && this.getLiveSearch();
-                        }, 100);
-                      }}
-                      onKeyUp={(e) => {
-                        if (e.key === "Enter") {
-                          this.search();
-                          this.setSearchDropDown(false);
-                        } else {
-                          this.quickSearch();
-                        }
-                      }}
-                      onFocus={() => {
-                        this.setSearchDropDown(true);
-                        this.getRecentSearch();
-                      }}
-                    />
-                  </div>
-                </SearchData>
-              )}
-              {this.state.SearchDropDown && this.state.searchQuery == "" && (
-                <>
-                  <div className="yt-mb-header-search-bar-wrap">
-                    <input
-                      type="text"
-                      placeholder="Search ..."
-                      className=""
-                      onClick={() => this.setSearchDropDown(true)}
-                      value={this.state.searchQuery}
-                      onChange={(e) => {
-                        this.setState({
-                          searchQuery: e.target.value,
-                        });
-                        setTimeout(() => {
-                          this.state.searchQuery != "" && this.getLiveSearch();
-                        }, 300);
-                      }}
-                      onKeyUp={(e) => {
-                        if (e.key === "Enter") {
-                          this.search();
-                          // this.setSearchDropDown(false);
-                        } else {
-                          this.quickSearch();
-                        }
-                      }}
-                      onFocus={() => {
-                        this.setSearchDropDown(true);
-                        this.getRecentSearch();
-                      }}
-                      autoFocus={true}
-                    />
-                  </div>
-                </>
-              )}
-            </div> */}
           </div>
         </div>
-
         {this.state.collectionCategory && (
           <MobileSideNav
             themData={this.state.themData}
@@ -1159,7 +1018,6 @@ class AppHeaderScreen extends HeaderController {
                 type="text"
                 placeholder={"Search"}
                 className="srchinput px-3"
-                // onClick={() => this.setSearchDropDown(true)}
                 value={this.state.searchQuery}
                 onChange={(e) => {
                   this.setState({
@@ -1178,7 +1036,6 @@ class AppHeaderScreen extends HeaderController {
                   }
                 }}
                 onFocus={() => {
-                  // this.setSearchDropDown(true);
                   this.getRecentSearch();
                 }}
               />
@@ -1211,7 +1068,6 @@ class AppHeaderScreen extends HeaderController {
                         (item: any, index: number) => {
                           return (
                             <ItemWithRouter
-                              // hideSearch={this.props.hideSearch}
                               className="px-0 w3-hover-opacity"
                               style={{ cursor: "default" }}
                               query={item}
@@ -1236,7 +1092,6 @@ class AppHeaderScreen extends HeaderController {
                         (item: any, index: number) => {
                           return (
                             <ItemWithRouter
-                              // hideSearch={this.props.hideSearch}
                               className="px-0 w3-hover-opacity"
                               style={{ cursor: "default" }}
                               query={item}
@@ -1267,4 +1122,3 @@ class AppHeaderScreen extends HeaderController {
 }
 // @ts-ignore
 export default withRouter(AppHeaderScreen);
-// export default  withRouter(App)
