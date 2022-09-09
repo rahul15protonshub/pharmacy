@@ -3,11 +3,12 @@ import { Message } from "../../../../framework/src/Message";
 import { BlockComponent } from "../../../../framework/src/BlockComponent";
 import { runEngine } from "../../../../framework/src/RunEngine";
 import MessageEnum, {
-  getName,
+  getName
 } from "../../../../framework/src/Messages/MessageEnum";
 import { isEmpty } from "../../../../framework/src/Utilities";
 
 // Customizable Area Start
+
 // Customizable Area End
 
 export const configJSON = require("./config");
@@ -19,6 +20,7 @@ export interface Props {
 }
 
 export interface S {
+
   user: any;
   isOpen: boolean;
   name: string;
@@ -41,13 +43,13 @@ export interface S {
   currentPageArray?: string;
   currentpagestr?: string;
   cartLength: any;
-  wishlistLength: any;
+  wishlistLength: any,
   collectionCategory: any;
 
   isConnectedAccountsShow?: boolean;
-  windWidth?: any;
-  searchModal?: boolean;
-  noData?: boolean;
+  windWidth?:any;
+  searchModal?:boolean;
+  noData?:boolean;
   // Customizable Area End
 }
 
@@ -64,10 +66,11 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
 > {
   // Customizable Area Start
   getLiveSearchApiCallId: string = "";
-  getRecentSearchApiCallId: string = "";
-  GetCategoryListApiCallId: string = "";
-  GetCartApiCallId: string = "";
-  getAllWishlistApiCallId: string = "";
+  getRecentSearchApiCallId: string = ""
+  GetCategoryListApiCallId: string = ""
+  GetCartApiCallId: string = ""
+  getAllWishlistApiCallId: string = ""
+
 
   currentCountryCode: any;
   // Customizable Area End
@@ -78,7 +81,7 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
       getName(MessageEnum.RestAPIResponceMessage),
       getName(MessageEnum.NavigationPayLoadMessage),
       getName(MessageEnum.CountryCodeMessage),
-      getName(MessageEnum.UpdateWishlist),
+      getName(MessageEnum.UpdateWishlist)
     ];
     this.receive = this.receive.bind(this);
 
@@ -100,15 +103,16 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
       menuCategory: undefined,
       currentPageActive: "",
       isLoggedIn: false,
+      // themData: {},
       themData: JSON.parse(localStorage.getItem("appThemData") ?? "{}"),
       cartLength: "",
       wishlistLength: "",
       collectionCategory: "",
-      activeTab: "3",
+      activeTab: '3',
       isConnectedAccountsShow: false,
-      windWidth: "0",
-      searchModal: false,
-      noData: false,
+      windWidth:"0",
+      searchModal:false,
+      noData:false
       // Customizable Area End
     };
     // Customizable Area Start
@@ -120,15 +124,16 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
     this.onRouteChange();
     this.setState({
       cartLength: localStorage.getItem("cart_length"),
-    });
-
+      // wishlistLength: localStorage.getItem("wishlist_len")
+    })
+    
     if (getName(MessageEnum.UpdateWishlist) === message.id) {
       const UpdateWishlistLen = message.getData(
         getName(MessageEnum.UpdateWishlistLen)
       );
       this.setState({
-        wishlistLength: UpdateWishlistLen,
-      });
+        wishlistLength:UpdateWishlistLen
+      })
     }
 
     if (getName(MessageEnum.RestAPIResponceMessage) === message.id) {
@@ -151,23 +156,28 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
         if (apiRequestCallId != null) {
           /// search live
           if (apiRequestCallId && responseJson) {
+
             // category list
             if (apiRequestCallId === this.GetCategoryListApiCallId) {
+              // console.log(responseJson.data, "shop category list")
               this.setState({
                 collectionCategory: responseJson.data,
-              });
+
+              })
             }
+
 
             //search live
             if (apiRequestCallId === this.getLiveSearchApiCallId) {
-              if (responseJson.products.data.length == 0) {
+              console.log(responseJson.products.data, "live search");
+              if(responseJson.products.data.length==0){
                 this.setState({
-                  noData: true,
-                });
-              } else {
+                  noData:true
+                })
+              }else{
                 this.setState({
-                  noData: false,
-                });
+                  noData:false
+                })
               }
               this.setState({
                 quickResults: responseJson.products.data,
@@ -176,42 +186,43 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
 
             //recent search
             if (apiRequestCallId === this.getRecentSearchApiCallId) {
+              //console.log(responseJson, "recent search");
               this.setState({
                 recentSearches: responseJson.search,
               });
+
             }
 
-            //all wishlist
+            //all wishlist 
             if (apiRequestCallId === this.getAllWishlistApiCallId) {
-              localStorage.setItem(
-                "wishlist_len",
-                responseJson?.data?.wishlist?.data?.attributes?.wishlist_items
-                  ?.length
-              );
+              // console.log(responseJson.data.wishlist.data.attributes.wishlist_items.length, "wishlist-length")
+              localStorage.setItem("wishlist_len", responseJson?.data?.wishlist?.data?.attributes?.wishlist_items?.length)
               this.setState({
-                wishlistLength:
-                  responseJson?.data?.wishlist?.data?.attributes?.wishlist_items
-                    ?.length,
-              });
+                wishlistLength: responseJson?.data?.wishlist?.data?.attributes?.wishlist_items?.length
+              })
+
+
             }
 
-            //get cart
+            //get cart 
+
             if (apiRequestCallId === this.GetCartApiCallId) {
               if (responseJson && responseJson.data) {
+                // console.log(responseJson.data[0].attributes.order_items, "here iscart")
                 this.setState({
-                  cartLength:
-                    responseJson.data[0].attributes.order_items.length,
-                });
-                localStorage.setItem(
-                  "cart_length",
-                  responseJson.data[0].attributes.order_items.length
-                );
+                  cartLength: responseJson.data[0].attributes.order_items.length
+                  // loading: false
+                })
+                localStorage.setItem("cart_length", responseJson.data[0].attributes.order_items.length)
+
+
               }
             }
           }
         }
       }
     }
+
 
     if (getName(MessageEnum.NavigationPayLoadMessage) === message.id) {
       const otpAuthTkn = message.getData(
@@ -230,74 +241,65 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
       );
     }
 
+
+
     // Customizable Area End
   }
 
   // Customizable Area Start
 
   async componentDidMount() {
+
     //this.getCart()
+
+
   }
 
   componentWillReceiveProps(nextProps: any) {
     // const user = JSON.parse(localStorage.getItem("user") ?? "{}")
-    if (
-      JSON.parse(localStorage.getItem("appThemData") ?? "{}")?.ExtraFields
-        ?.is_facebook_login ||
-      JSON.parse(localStorage.getItem("appThemData") ?? "{}")?.ExtraFields
-        ?.is_google_login
-    ) {
+    if (JSON.parse(localStorage.getItem("appThemData") ?? "{}")?.ExtraFields?.is_facebook_login || JSON.parse(localStorage.getItem("appThemData") ?? "{}")?.ExtraFields?.is_google_login) {
       this.setState({
-        isConnectedAccountsShow: true,
-      });
+        isConnectedAccountsShow: true
+      })
     }
     this.setState({
       cartLength: localStorage.getItem("cart_length"),
       wishlistLength: localStorage.getItem("wishlist_len"),
-      themData: JSON.parse(localStorage.getItem("appThemData") ?? "{}"),
-    });
+      themData: JSON.parse(localStorage.getItem("appThemData") ?? "{}")
+    })
 
-    const users = localStorage.getItem("userData");
-    const profileimage = localStorage.getItem("profileImage");
+    const users = localStorage.getItem('userData');
+    const profileimage = localStorage.getItem('profileImage');
     if (!isEmpty(users)) {
-      this.setState({
-        isLoggedIn: true,
-        user: localStorage.getItem("userData"),
-        userProfileImg: localStorage.getItem("profileImage"),
-      });
+      this.setState({ isLoggedIn: true, user: localStorage.getItem('userData'), userProfileImg: localStorage.getItem('profileImage') })
     } else {
-      this.setState({ isLoggedIn: false, user: {} });
+      this.setState({ isLoggedIn: false, user: {} })
     }
-    if (!this.state.collectionCategory?.length) {
+    if(!this.state.collectionCategory?.length){
       this.getCategoryList();
     }
   }
 
+
   search = () => {
-    const route = "../";
-    //@ts-ignore
-    this.props.history.location.pathname.split("/").join(",").length < 1
-      ? this.props.history.push(
-          `./Filteroptions?&page=${1}&per_page=${15}&sort[order_by]=&sort[direction]=&q[name]=${
-            this.state.searchQuery
-          }`
-        )
-      : this.props.history.push(
-          `./${route.repeat(
-            this.props.history.location.pathname.split("/").join(",").length - 1
-          )}Filteroptions?&page=${1}&per_page=${15}&sort[order_by]=&sort[direction]=&q[name]=${
-            this.state.searchQuery
-          }`
-        );
-    localStorage.setItem("searchQuery", `&q[name]=${this.state.searchQuery}`);
-  };
+
+
+    const route = "../"
+    //@ts-ignore                       
+    this.props.history.location.pathname.split("/").join(",").length < 1 ?
+      this.props.history.push(`./Filteroptions?&page=${1}&per_page=${15}&sort[order_by]=&sort[direction]=&q[name]=${this.state.searchQuery}`) :
+      this.props.history.push(`./${route.repeat(this.props.history.location.pathname.split("/").join(",").length - 1)}Filteroptions?&page=${1}&per_page=${15}&sort[order_by]=&sort[direction]=&q[name]=${this.state.searchQuery}`)
+    localStorage.setItem("searchQuery", `&q[name]=${this.state.searchQuery}`)
+  }
+
+
 
   routeToAll(route: string) {
     if (route !== undefined) {
-      let path = "/" + route;
+      let path = '/' + route;
       this.props.history.push(path);
     } else {
-      let path = "/";
+      let path = '/';
       this.props.history.push(path);
     }
   }
@@ -310,34 +312,41 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
   }
 
   setSearchDropDown(value: any) {
-    this.setState({ SearchDropDown: value });
+    this.setState({ SearchDropDown: value })
   }
   setSearchModal(value: any) {
-    this.setState({ searchModal: value });
+    this.setState({ searchModal: value })
   }
 
-  setSearchQuery(value: string) {}
+  setSearchQuery(value: string) {
+
+  }
 
   setDesktopToggle(value: boolean) {
-    this.setState({ desktopToggle: value, activeTab: "2" });
+    this.setState({ desktopToggle: value, activeTab: '2' });
   }
 
-  quickSearch() {}
+  quickSearch() {
 
-  setShowLogout() {}
+  }
+
+  setShowLogout() {
+
+  }
+
 
   showToggleMenu = () => {
     this.setState({
-      isOpen: !this.state.isOpen,
-    });
-  };
+      isOpen: !this.state.isOpen
+    })
+  }
 
   // get cart items
   getCart = (): boolean => {
     this.setState({
       ...this.state,
       // loading: true,
-    });
+    })
     const headers = {
       "Content-Type": configJSON.validationApiContentType,
       token: localStorage.getItem("token"),
@@ -402,6 +411,7 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
     return true;
   };
 
+
   // get category list
   getCategoryList = (): boolean => {
     const headers = {
@@ -435,6 +445,7 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
     return true;
   };
 
+
   /// get search live
   getLiveSearch = (): boolean => {
     const headers = {
@@ -450,8 +461,7 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
 
     requestMessage.addData(
       getName(MessageEnum.RestAPIResponceEndPointMessage),
-      configJSON.endPointApiGetLiveSearch +
-        `${this.state.searchQuery}&uuid=2b385abaca68d58b`
+      configJSON.endPointApiGetLiveSearch + `${this.state.searchQuery}&uuid=2b385abaca68d58b`
     );
 
     requestMessage.addData(
@@ -468,6 +478,7 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
 
     return true;
   };
+
 
   /// get search live
   getRecentSearch = (): boolean => {
@@ -504,50 +515,54 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
 
   onRouteChange = () => {
     this.props.history.listen((location: any, action: any) => {
-      window.scrollTo(0, 0);
-      location.pathname != "/Filteroptions" &&
-        (localStorage.removeItem("category"),
+      window.scrollTo(0, 0)
+      //console.log(location,"location")
+      location.pathname != "/Filteroptions" && (
+        localStorage.removeItem("category"),
         localStorage.removeItem("subCategory"),
         localStorage.removeItem("searchQuery"),
-        this.searchnull());
+        this.searchnull()
+      );
       this.setState({
-        themData: JSON.parse(localStorage.getItem("appThemData") ?? "{}"),
-      });
+        themData: JSON.parse(localStorage.getItem("appThemData") ?? "{}")
+      })
       setTimeout(() => {
-        if (this.state.activeTab === "1") {
-          localStorage.getItem("newest") == "By Newest" &&
-          location.pathname == "/Filteroptions"
-            ? this.activeTabToggle("1")
-            : this.activeTabToggle("0");
+
+        if (this.state.activeTab === '1') {
+          (localStorage.getItem('newest') == "By Newest" &&
+            location.pathname == "/Filteroptions") ? this.activeTabToggle('1') : this.activeTabToggle('0')
+
+
         }
-        if (this.state.activeTab === "3") {
-          location.pathname == "/aboutus"
-            ? this.activeTabToggle("3")
-            : this.activeTabToggle("0");
+        if (this.state.activeTab === '3') {
+          location.pathname == "/aboutus" ? this.activeTabToggle('3') : this.activeTabToggle('0')
         }
-        if (this.state.activeTab === "4") {
-          location.pathname == "/contact-us"
-            ? this.activeTabToggle("4")
-            : this.activeTabToggle("0");
+        if (this.state.activeTab === '4') {
+          location.pathname == "/contact-us" ? this.activeTabToggle('4') : this.activeTabToggle('0')
         }
-      }, 300);
+
+
+
+      }, 300)
+
 
       //this.getCart()
       //this.getAllWishlist()
     });
-  };
+  }
   activeTabToggle = (tab: any) => {
     if (this.state.activeTab !== tab) {
       this.setState({
-        activeTab: tab,
-      });
+        activeTab: tab
+      })
     }
-  };
+  }
 
   searchnull = () => {
+    //console.log("console working")
     this.setState({
       searchQuery: "",
-    });
-  };
+    })
+  }
   // Customizable Area End
 }

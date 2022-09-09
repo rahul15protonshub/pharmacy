@@ -109,6 +109,7 @@ export const Essence: any = withRouter((props: any) => {
         <SectionHeading
           className='mb-3 mb-md-4 heading-center justify-content-center justify-content-lg-start'
           name="TRENDING PRODUCTS"
+        // link={props.onViewMore}
         />
       </Container>
 
@@ -162,4 +163,5 @@ export const Essence: any = withRouter((props: any) => {
     </section>
   );
 });
+// export default ProductCard;
 

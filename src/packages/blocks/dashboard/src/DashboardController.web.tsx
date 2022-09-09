@@ -417,6 +417,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
               );
               // @ts-ignore
               localStorage.setItem("cart_length", cart_length + 1);
+              // console.log(window.location.pathname.endsWith("/home-page") ? "" : this.state.catalogue_id && this.getProductDetails())
               // window.location.pathname.endsWith("/home-page") ? "" : this.state.catalogue_id && this.getProductDetails()
               this.getIsCartCreated();
               this.getNewCollection();
@@ -2590,5 +2591,19 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
       this.setDashboardFilters(1, [], []);
     })
   }
+
+  // fetchMoreData = () => {
+  //   if (
+  //     this.state.dashboardFilteredProducts &&
+  //     this.state.dashboardFilteredProducts?.length >= 16
+  //   ) {
+  //     this.setState({
+  //       dashboardFilteredProductsActivePage:
+  //         this.state.dashboardFilteredProductsActivePage + 1,
+  //     });
+  //     this.getFilteredProducts();
+  //   }
+  // };
+
   // Customizable Area End
 }

@@ -1,4 +1,5 @@
 export const images = {
+  //BottomTab Image../res/images/bottomTabs/Home.png
   home_active: require('../assets/bottomTabs/Home.png'),
   search_inactive: require('../assets/bottomTabs/Search.png'),
   menu_inactive: require('../assets/bottomTabs/menu1.png'),
@@ -128,10 +129,13 @@ export const authImages = {
 }
 
 export const catalogueImages = {
+  // imgPasswordVisible : require("../assets/ic_password_visible.png"),
+  // imgPasswordInVisible : require("../assets/ic_password_invisible.png"),
   selectedsHeart: require("../assets/Home/selectedHeart.png"),
   unselectedHeart: require("../assets/Home/unselectedHeart.png"),
   redHeart: require("../assets/redHeart.png"),
   heartWishlist: require("../assets/heartwishlist.png"),
+  // locationGreen : require("../assets/Group_3839.png"),
   soldOutIcon: require("../assets/ProductDescription/soldOutIcon.png"),
   stockTick: require("../assets/ProductDescription/stockTick.png"),
   backIcon: require("../assets/header/backIcon.png"),

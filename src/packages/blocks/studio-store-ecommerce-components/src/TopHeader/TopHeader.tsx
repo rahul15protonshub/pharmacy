@@ -48,10 +48,12 @@ const TopHeader = (props: any) => {
                         :
                         headerRightIcons.length === 0 ? Scale(375) : Scale(235),
                     height: "100%",
+                    // justifyContent: "center"
                 }} />
                 :
                 <View style={[{
                     width: Scale(235),
+                    // marginTop:verticalScale(18),
                     justifyContent: "center",
                     alignItems: "center",
                     height: "100%",

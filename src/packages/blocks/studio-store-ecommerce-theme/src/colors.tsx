@@ -18,4 +18,5 @@ export const colors = {
   coolGreyTwo :"#8b8f95",
   whiteTwo:"#ededed",
   darkBlueGrey: "#101c2f",
+  // lightBackgroudcolor: '#eaf0fb',
 };
