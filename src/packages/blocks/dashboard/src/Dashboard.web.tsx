@@ -53,98 +53,282 @@ class HomeDashboard extends DashboardController {
 
   render() {
     // Customizable Area Start
+    let carousel = React.createRef();
+    let Breakpoints = [
+      { width: 200, itemsToShow: 2, itemsToScroll: 2 },
+      { width: 320, itemsToShow: 2, itemsToScroll: 2 },
+      { width: 500, itemsToShow: 3, itemsToScroll: 1 },
+      { width: 769, itemsToShow: 5, itemsToScroll: 2 },
+      { width: 1000, itemsToShow: 6, itemsToScroll: 2 },
+      { width: 1300, itemsToShow: 7, itemsToScroll: 3 },
+    ];
+    let BreakpointsForCollection = [
+      { width: 1, itemsToShow: 2.5 },
+      { width: 500, itemsToShow: 3.5 },
+      { width: 1000, itemsToShow: 4 },
+    ];
+    const banner_one =
+      this.state.banners.length > 1 &&
+      this.state.banners[0].attributes.images.data[0].attributes.url;
+    localStorage.removeItem("newest");
+    const selectedBanner =
+      this.state.selectedTemplate &&
+      templates[this.state.selectedTemplate].find(
+        (temp) => temp.sectionName === "headerBanner"
+      );
+    // const selectedCategory =
+    //   this.state.selectedTemplate &&
+    //   templates[this.state.selectedTemplate].find(
+    //     (temp) => temp.sectionName === "categories"
+    //   );
+    // const selectedTrendingProducts =
+    //   this.state.selectedTemplate &&
+    //   templates[this.state.selectedTemplate].find(
+    //     (temp) => temp.sectionName === "TrendingProduct"
+    //   );
+
     return (
       <>
-        <Container
-          className={`home-layout ${
-            !this.state.showProducts ? "home-layout--show" : ""
-          } h-100 mb-40`}
-        >
+        {/* {this.state.dashboardLoader && (
+          <Loader loading={this.state.dashboardLoader} />
+        )} */}
+
+        {/* Shib start */}
+        <Container className={`home-layout ${!this.state.showProducts ? 'home-layout--show' : ''} h-100 mb-40`}>
           <Row className="home-layout__row gx-40 h-100">
-            <Col xs="auto" className="home-layout__col home-layout__left">
-              <div
-                className="home-layout__toggle-icon"
-                onClick={this.toggeProduct}
-              >
-                <IoMdClose />
+            <Col
+              xs="auto"
+              className="home-layout__col home-layout__left"
+            >
+              <div className="home-layout__toggle-icon" onClick={this.toggeProduct}>
+                <IoMdClose/>
               </div>
-              <LeftContent
-                data={this.state.collectionCategory}
-                banners={
-                  this.state.bannerPosition2?.attributes?.images?.data || []
-                }
-                onSelectSubCategory={(category) => {
-                  this.setSelectedCategory(category);
+              <LeftContent data={this.state.collectionCategory} banners={this.state.bannerPosition2?.attributes?.images?.data || []}
+               onSelectSubCategory={category => {
+                this.setSelectedCategory(category)
+                setTimeout(() => {
+                  if (this.state.showOurProducts) {
+                    this.closeOurProducts()
+                  }
+                }, 300) // dont close immediately
+              }}
+              onSelectCategory={id => {
+                if (id === 0) {
+                  this.clearSelectedCategory()
                   setTimeout(() => {
                     if (this.state.showOurProducts) {
-                      this.closeOurProducts();
+                      this.closeOurProducts()
                     }
-                  }, 300); // dont close immediately
-                }}
-                onSelectCategory={(id) => {
-                  if (id === 0) {
-                    this.clearSelectedCategory();
-                    setTimeout(() => {
-                      if (this.state.showOurProducts) {
-                        this.closeOurProducts();
-                      }
-                    }, 300); // dont close immediately
-                  }
-                }}
+                  }, 300) // dont close immediately
+                }
+              }} 
+              
               />
             </Col>
-            <Col xs="12" lg="" className="home-layout__col home-layout__right">
+            <Col
+              xs="12"
+              lg=""
+              className="home-layout__col home-layout__right"
+            >
               <RightContent
                 toggleOurProducts={this.toggeProduct}
                 banners={this.state.banners || []}
                 products={this.state.dashboardFilteredProducts}
                 loading={this.state.dashboardFilterLoading}
-                onProductAddToWishlist={(id) => this.postWishlist(id)}
-                onProductDeleteFromWishlist={(id) => this.delWishlist(id)}
-                onSortingChange={(sortBy, sortOrder) =>
-                  this.setDashboardFilters(
-                    1,
-                    undefined,
-                    undefined,
-                    sortBy,
-                    sortOrder
-                  )
-                }
-                productListTitle={
-                  this.state.selectedCategory?.name || "New Arrivals"
-                }
-                onProductAddToCart={(product) =>
-                  this.addToCart(
-                    product,
-                    product.attributes.default_variant?.id
-                  )
-                }
+                onProductAddToWishlist={id => this.postWishlist(id)}
+                onProductDeleteFromWishlist={id => this.delWishlist(id)}
+                onSortingChange={(sortBy, sortOrder) => this.setDashboardFilters(1, undefined, undefined, sortBy, sortOrder)}
+                productListTitle={this.state.selectedCategory?.name || 'New Arrivals'}
+                onProductAddToCart={product => this.addToCart(product, product.attributes.default_variant?.id)}
                 productWishlisting={this.state.productWishlisting}
                 productsAddingToCart={this.state.productsAddingToCart}
-                onProductDecreaseCartQuantity={(product) =>
-                  this.increaseOrDecreaseCartQuantity(
-                    product,
-                    -1,
-                    product.attributes.default_variant?.id
-                  )
-                }
-                onProductIncreaseCartQuantity={(product) =>
-                  this.increaseOrDecreaseCartQuantity(
-                    product,
-                    1,
-                    product.attributes.default_variant?.id
-                  )
-                }
+                onProductDecreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, -1, product.attributes.default_variant?.id)}
+                onProductIncreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, 1, product.attributes.default_variant?.id)}
                 isProductAddtoCart={this.state.isProductAddtoCart}
               />
             </Col>
           </Row>
-          <div
-            className="home-layout__backdrop"
-            onClick={this.toggeProduct}
-          ></div>
+          <div className="home-layout__backdrop" onClick={this.toggeProduct}></div>
         </Container>
-      </>
+        {/* Shib end */}
+
+        {/* {this.state.selectedTemplate && templates[this.state.selectedTemplate] && (
+          <>
+            {dynamicComponentLoad(
+              {
+                data:
+                  (this.state.banners.length > 0 &&
+                    this.state.banners[0].attributes.images.data) ||
+                  [],
+              },
+              SECTIONS_PATH.HEADER_BANNER,
+              selectedBanner,
+              this.state.selectedTemplate,
+              "HeaderBanner"
+            )} */}
+{/* 
+            {dynamicComponentLoad(
+              {
+                collection: this.state.collectionCategory,
+                onViewMore: () => {
+                  localStorage.setItem("newest", "By Newest");
+                  //@ts-ignore
+                  this.props?.history?.push(
+                    `./Filteroptions?&page=${1}&per_page=${15}&sort[order_by]=created_at&sort[direction]=desc`
+                  );
+                },
+                disablePropertyName: "isNewCollectionPrevButtonActive",
+                isNewCollectionPrevButtonActive:
+                  this.state.isNewCollectionPrevButtonActive,
+                setPrvsButtonDisabled: (carousel) => {
+                  setTimeout(() => {
+                    this.setState({
+                      isNewCollectionPrevButtonActive:
+                        carousel?.current?.state.activePage != 0,
+                    });
+                  }, 500);
+                },
+                addToCart: this.addToCart,
+                createWishlist: this.postWishlist,
+                deleteWishlist: this.delWishlist,
+                toSetDefaultVariant: this.toSetDefaultVariant,
+              },
+              SECTIONS_PATH.CATEGORY,
+              selectedCategory,
+              this.state.selectedTemplate,
+              "Categories"
+            )} */}
+{/* 
+            {dynamicComponentLoad(
+              {
+                collection: this.state.newCollection,
+                onViewMore: () => {
+                  localStorage.setItem("newest", "By Newest");
+                  //@ts-ignore
+                  this.props?.history?.push(
+                    `./Filteroptions?&page=${1}&per_page=${15}&sort[order_by]=created_at&sort[direction]=desc`
+                  );
+                },
+                disablePropertyName: "isNewCollectionPrevButtonActive",
+                isNewCollectionPrevButtonActive:
+                  this.state.isNewCollectionPrevButtonActive,
+                setPrvsButtonDisabled: (carousel) => {
+                  setTimeout(() => {
+                    this.setState({
+                      isNewCollectionPrevButtonActive:
+                        carousel?.current?.state.activePage != 0,
+                    });
+                  }, 500);
+                },
+                addToCart: this.addToCart,
+                createWishlist: this.postWishlist,
+                deleteWishlist: this.delWishlist,
+                toSetDefaultVariant: this.toSetDefaultVariant,
+              },
+              SECTIONS_PATH.NEW_ARRIVALS,
+              selectedCategory,
+              this.state.selectedTemplate,
+              "NewArrivals"
+            )} */}
+
+            {/* <section className="container ds-mb-40 ds-mb-md-80 ds-mb-lg-104">
+              {this.state.banners.length > 0 &&
+                this.state.bannerPosition2 &&
+                this.state.bannerPosition2.attributes.images != null && (
+                  <div className="banner-single">
+                    <img
+                      src={
+                        this.state.bannerPosition2.attributes.images.data[0]
+                          .attributes.url
+                      }
+                      style={
+                        this.state.bannerPosition2.attributes.images.data[0]
+                          .attributes.url_link
+                          ? { cursor: "pointer" }
+                          : { cursor: "default" }
+                      }
+                      alt="Card image cap"
+                      onClick={() => {
+                        //@ts-ignore
+                        this.state.bannerPosition2.attributes.images.data[0]
+                          .attributes.url_link &&
+                          window.location.replace(
+                            this.state.bannerPosition2.attributes.images.data[0]
+                              .attributes.url_link
+                          );
+                      }}
+                    />
+                  </div>
+                )}
+            </section> */}
+            {/* {this.state.selectedTemplate &&
+              templates[this.state.selectedTemplate] &&
+              selectedTrendingProducts &&
+              dynamicComponentLoad(
+                {
+                  collection: this.state.featuredProduct,
+                  name: "Trending Products",
+                  onViewMore: () => {
+                    localStorage.setItem("newest", "Recommended");
+                    //@ts-ignore
+                    this.props?.history?.push(
+                      `./Filteroptions?&page=${1}&per_page=${15}&sort[order_by]=sold&sort[direction]=desc`
+                    );
+                  },
+                  disablePropertyName: "isrcmdCollectionPrevButtonActive",
+                  isrcmdCollectionPrevButtonActive:
+                    this.state.isrcmdCollectionPrevButtonActive,
+                  setPrvsButtonDisabled: (carousel) => {
+                    setTimeout(() => {
+                      this.setState({
+                        isrcmdCollectionPrevButtonActive:
+                          carousel?.current?.state.activePage != 0,
+                      });
+                    }, 500);
+                  },
+                  addToCart: this.addToCart,
+                  createWishlist: this.postWishlist,
+                  deleteWishlist: this.delWishlist,
+                  toSetDefaultVariant: this.toSetDefaultVariant,
+                },
+                SECTIONS_PATH.TRENDINGPRODUCTS,
+                selectedTrendingProducts,
+                this.state.selectedTemplate,
+                "TrendingProducts"
+              )} */}
+            {/* <section className="container ds-mb-40 ds-mb-md-80 ds-mb-lg-104">
+              {this.state.banners.length > 0 &&
+                this.state.bannerPosition4 &&
+                this.state.bannerPosition4.attributes.images != null && (
+                  <div className="banner-single">
+                    <img
+                      src={
+                        this.state.bannerPosition4.attributes.images.data[0]
+                          .attributes.url
+                      }
+                      style={
+                        this.state.bannerPosition4.attributes.images.data[0]
+                          .attributes.url_link
+                          ? { cursor: "pointer" }
+                          : { cursor: "default" }
+                      }
+                      alt="Card image cap"
+                      onClick={() => {
+                        //@ts-ignore
+                        this.state.bannerPosition4.attributes.images.data[0]
+                          .attributes.url_link &&
+                          window.location.replace(
+                            this.state.bannerPosition4.attributes.images.data[0]
+                              .attributes.url_link
+                          );
+                      }}
+                    />
+                  </div>
+                )}
+            </section> */}
+          </>
+        // )}
+      // </>
     );
     // Customizable Area End
   }

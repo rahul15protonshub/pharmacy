@@ -5,6 +5,7 @@ interface SimpleCardProps {
     image?: string,
     content: any,
     onClick?: Function
+    // size:'lg'|'md'
 }
 
 const SimpleCard: React.FunctionComponent<SimpleCardProps> = (props) => {

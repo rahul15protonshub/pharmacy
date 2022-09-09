@@ -66,7 +66,7 @@ const ProductBox: React.FC<ProductBoxProps> = ({
       productDefaultStockQuantity = defaultVariantDetails.attributes.stock_qty;
     }
   }
-
+ 
   return (
     <div className="product_card_single">
       <Link to={`/shop/${product.id}`} className="d-flex flex-fill flex-column">
@@ -112,10 +112,7 @@ const ProductBox: React.FC<ProductBoxProps> = ({
               )}
             </button>
           </div>
-          <div
-            className="d-flex flex-column flex-fill"
-            style={{ width: "210px" }}
-          >
+          <div className="d-flex flex-column flex-fill" style={{width:"210px"}}>
             <div className="product_name">{product.attributes.name}</div>
             <div className="product_price">
               <div>
@@ -144,56 +141,58 @@ const ProductBox: React.FC<ProductBoxProps> = ({
         </div>
       </Link>
       <div>
-        {product.attributes.stock_qty > 0 ? (
-          <>
-            {productDefaultCartQuantity ? (
-              <div className="product_add_cart_count">
-                <button
-                  className="cart_decrease"
-                  disabled={addToCartLoading}
-                  onClick={() => {
-                    onProductDecreaseCartQuantity(product);
-                  }}
-                >
-                  -
-                </button>
-                <div className="cart_count flex-fill">
-                  {productDefaultCartQuantity}
-                </div>
-                <button
-                  className="cart_increase"
-                  disabled={
-                    addToCartLoading ||
-                    productDefaultCartQuantity >= productDefaultStockQuantity
-                  }
-                  onClick={() => {
-                    if (
-                      productDefaultCartQuantity < productDefaultStockQuantity
-                    ) {
-                      onProductIncreaseCartQuantity(product);
-                    }
-                  }}
-                >
-                  +
-                </button>
-              </div>
-            ) : (
-              <button
-                disabled={isProductAddtoCart}
-                className="product_add_cart"
-                onClick={() => {
-                  onProductAddToCart(product);
-                }}
-              >
-                {content.addToCart}
-              </button>
-            )}
-          </>
+        {product.attributes.stock_qty>0?(
+<>
+{productDefaultCartQuantity ? (
+          <div className="product_add_cart_count">
+            <button
+              className="cart_decrease"
+              disabled={addToCartLoading}
+              onClick={() => {
+                onProductDecreaseCartQuantity(product);
+              }}
+            >
+              -
+            </button>
+            <div className="cart_count flex-fill">
+              {productDefaultCartQuantity}
+            </div>
+            <button
+              className="cart_increase"
+              disabled={
+                addToCartLoading ||
+                productDefaultCartQuantity >= productDefaultStockQuantity
+              }
+              onClick={() => {
+                if (productDefaultCartQuantity < productDefaultStockQuantity) {
+                  onProductIncreaseCartQuantity(product);
+                }
+              }}
+            >
+              +
+            </button>
+          </div>
         ) : (
-          <button disabled={true} className="product_add_cart">
-            Out of Stock
+          <button
+            disabled={isProductAddtoCart}
+            className="product_add_cart"
+            onClick={() => {
+              onProductAddToCart(product);
+            }}
+          >
+            {content.addToCart}
           </button>
         )}
+</>
+        ):(
+            <button
+            disabled={true}
+            className="product_add_cart"
+          >
+            Out of Stock
+          </button> 
+        )}
+        
       </div>
     </div>
   );

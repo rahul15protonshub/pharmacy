@@ -60,6 +60,8 @@ import ProtectRouting from "./ProtectRouting.web";
 //@ts-ignore
 const themes = require("../../studio-store-ecommerce-theme/src/theme.json");
 import "./App.css";
+
+// import AppLoader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader"
 import Loader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader.web";
 
 class DebugRouter extends Router {

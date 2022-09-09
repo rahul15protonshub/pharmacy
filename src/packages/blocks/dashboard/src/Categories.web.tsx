@@ -86,6 +86,11 @@ class Categories extends CategoriesController {
     ];
     return (
       <>
+        {/* <CategoryCarousel /> */}
+        {/* <MediaQuery maxWidth={480}>
+        <p>Hello</p>
+      </MediaQuery> */}
+        {/* Categories 1 Start */}
         <section className="collections-category">
           <div className="main-container">
             <div
@@ -136,6 +141,10 @@ class Categories extends CategoriesController {
             </Container>
           </div>
         </section>
+        {/* Categories 1 End  */}
+        {/* Category 2 Start */}
+        {/* Categories 2 End  */}
+        {/* Category 3 Start */}
         <section className="collections-category">
           <div className="main-container">
             <div
@@ -185,6 +194,8 @@ class Categories extends CategoriesController {
             </Container>
           </div>
         </section>
+        {/* Category 3 End */}
+        {/* Category 4 Start */}
         <section
           className="collections-category"
           style={{ backgroundColor: "#F5F5F5" }}
@@ -240,6 +251,7 @@ class Categories extends CategoriesController {
             </Container>
           </div>
         </section>
+        {/* Category 4 Ends */}
       </>
     );
     // Customizable Area End

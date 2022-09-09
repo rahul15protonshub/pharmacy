@@ -62,8 +62,12 @@ class Footer extends FooterController {
   render() {
     const appThemData = JSON.parse(localStorage.getItem("appThemData") ?? "{}");
     if (this.state.isBrandSettingsLoaded) {
+      // // @ts-ignore
+      // return <PageLoadingBlog title="Loading ..." />
+      // @ts-ignore
       return <div title="Loading ..." />;
     }
+    //console.log("============== This state ===============>>>>>>>", this.state);
     return (
       <footer className="footer-border">
         <div className="container footer-internal-content">

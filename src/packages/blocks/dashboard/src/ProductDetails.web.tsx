@@ -90,6 +90,7 @@ class ProductDetails extends DashboardController {
               ...item,
               label: item.name,
               value: item.variant_property_id,
+              // disabled: this.isProductAttrDisabled(item)
             }));
             return (
               <div key={i} className="product-detail-price">
@@ -156,6 +157,7 @@ class ProductDetails extends DashboardController {
   };
 
   renderImages = (product: any) => {
+    // console?.log(this?.state?.currentImage, "this?.state?.currentImage", this?.state?.dashboardData)
     return (
       <ProductImageWithSlider
         images={
@@ -489,6 +491,7 @@ class ProductDetails extends DashboardController {
                               content?.willNotify
                             ) : (
                               <div class="d-grid gap-3 product-btn-group">
+                                {/* <p className="product-stock-message mb-0">{content?.itemOutOfStock}</p> */}
                                 <button
                                   type="button"
                                   class="btn btn-outline-primary-1"
@@ -661,6 +664,7 @@ class ProductDetails extends DashboardController {
                               );
                             }
                           )}
+                      {/* </Carousel> */}
                     </div>
                   </Card>
                 </Col>

@@ -125,7 +125,7 @@ class Filteroptions extends FilteroptionsListController {
                                       }
                                     >
                                       <div
-                                        className={classNames("yt- -name", {
+                                        className={classNames("yt-cat-name", {
                                           "mr-3": this.state.windowSize < 1280,
                                         })}
                                       >
@@ -753,10 +753,6 @@ class Filteroptions extends FilteroptionsListController {
                                           }}
                                           name={subcat.name + index}
                                           checked={subcat.checked}
-                                        />
-                                        <label
-                                          className="yt-filter-label"
-                                          htmlFor={subcat.name}
                                         />
                                       </div>
                                     </li>

@@ -134,6 +134,8 @@ function CartProduct(props: any) {
                       objectPosition: "center",
                     }}
                     src={props.setDefaultImage(props.product?.attributes)}
+                    // src={props.product?.attributes?.catalogue_variant ? variant?.images?.data[0]?.attributes?.url : variant?.catalogue?.attributes?.images?.data[0]?.attributes?.url}
+                    // className="img-fluid"
                   />
                 </div>
               </div>
@@ -201,10 +203,55 @@ function CartProduct(props: any) {
                           }
                         )}
                       </div>
+                      {/* <Table className="cart-prodict-type w-auto" borderless>
+                      <thead>
+                        <tr>
+                          {variant.catalogue_variant_properties.map((item: any, idx: any) => {
+                            console.log(props.product?.attributes?.catalogue_variant_id, "ANNNNNNNNNN", item.attributes.catalogue_variant_id)
+                            return props.product?.attributes?.catalogue_variant_id == item.attributes.catalogue_variant_id && <th key={idx}>{item?.attributes?.variant_name}</th>
+                          }
+                          )}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          {variant.catalogue_variant_properties.map(
+                            (item: any, idx: any) => {
+                              return props.product?.attributes?.catalogue_variant_id == item.attributes.catalogue_variant_id && <th key={idx}>{item?.attributes?.property_name}</th>
+                            })}
+                        </tr>
+                      </tbody>
+                    </Table> */}
                     </div>
                   )}
 
                 {variant?.subscription_package != null && (
+                  // <div className="sub-items">
+                  //   <span className="head">
+                  //     {["9am to 12pm", "6am to 9am"].includes(
+                  //       variant?.preferred_delivery_slot
+                  //     )
+                  //       ? "Morning"
+                  //       : "Evening"}
+                  //   </span>
+                  //   {" | "}
+                  //   <span className="sub-head text-capitalize">
+                  //     {`${variant.subscription_package} for ${
+                  //       variant.subscription_period
+                  //     } ${
+                  //       variant.subscription_period > 1 ? "Months" : "Month"
+                  //     } `}
+                  //   </span>{" "}
+                  //   <button
+                  //     type="button"
+                  //     className="change subscription_changeBtn"
+                  //     onClick={() =>
+                  //       props.toSetdefaultVariant(index, variant.catalogue_id)
+                  //     }
+                  //   >
+                  //     Change
+                  //   </button>
+                  // </div>
                   <>
                   <div className="sub-items subscription_period_text d-flex flex-column">
                     <div className="head">
@@ -425,6 +472,14 @@ function CartProduct(props: any) {
                     <Fragment>
                       <div
                       className="d-flex align-items-center preCription presBox"
+                        // className={`${variant?.catalogue_variant_properties &&
+                        //   variant?.catalogue_variant_properties.length == 1 ?
+                        //   "varientAvl1":""}
+                        // ${variant?.catalogue_variant_properties &&
+                        //   variant?.catalogue_variant_properties.length == 2 ?
+                        //   "varientAvl2":""} ${variant?.catalogue_variant_properties &&
+                        //   variant?.catalogue_variant_properties.length > 2 ?
+                        //   "varientAvl3":""} d-flex align-items-center `}
                       >
                         <div className="sp-verify-icn-wrap mx-2">
                           <img
@@ -472,6 +527,7 @@ function CartProduct(props: any) {
                                   : "";
                                 if (
                                   qty - 1 <
+                                  // props.product?.attributes.quantity - 1 <
                                   1
                                 ) {
                                   //@ts-ignore
@@ -489,6 +545,7 @@ function CartProduct(props: any) {
                                     props.updateitemQuantity(
                                       variant.catalogue_id,
                                       isVarintId,
+                                      // props.product?.attributes.quantity - 1
                                       qty - 1,
                                       "subscription"
                                     );
@@ -496,6 +553,7 @@ function CartProduct(props: any) {
                                     props.updateitemQuantity(
                                       variant.catalogue_id,
                                       isVarintId,
+                                      // props.product?.attributes.quantity - 1
                                       qty - 1
                                     );
                                   }
@@ -531,6 +589,7 @@ function CartProduct(props: any) {
                                   : "";
                                 if (
                                   qty + 1 >
+                                  // props.product?.attributes.quantity + 1 >
                                   variant.stock_qty
                                 ) {
                                   //@ts-ignore
@@ -555,6 +614,7 @@ function CartProduct(props: any) {
                                     props.updateitemQuantity(
                                       variant.catalogue_id,
                                       isVarintId,
+                                      // props.product?.attributes.quantity + 1
                                       qty + 1,
                                       "subscription"
                                     );
@@ -562,6 +622,7 @@ function CartProduct(props: any) {
                                     props.updateitemQuantity(
                                       variant.catalogue_id,
                                       isVarintId,
+                                      // props.product?.attributes.quantity + 1
                                       qty + 1
                                     );
                                   }
@@ -712,6 +773,7 @@ const CartAmount: any = withRouter((props: any) => {
                     {wholeCart.shipping_total != null
                       ? wholeCart.shipping_total
                       : 0.0}
+                    {/* + {content.inr} {wholeCart.shipping_total!= null? wholeCart.shipping_total: 0} */}
                   </span>
                 </td>
               </tr>
@@ -726,6 +788,8 @@ const CartAmount: any = withRouter((props: any) => {
                 <FormGroup
                   className={
                     "m-0 " + "success"
+                    //(codeError || codeEmptyError ? "yt-form-cpn-err error" : "") +
+                    //(cart.coupon && !codeError && !codeEmptyError ? "success" : "")
                   }
                 >
                   <input
@@ -759,7 +823,16 @@ const CartAmount: any = withRouter((props: any) => {
                     ) : null}
                     <span className="cart-coupon-code-message error-message">
                       Coupon code can't be empty
+                      {/* {codeError} */}
                     </span>
+                    {/* {cart.coupon && !enableInput)&& (
+                  <Button
+                    color="link cart-coupon-change-btn p-0"
+
+                  >
+                    Change Coupon
+                  </Button>
+                )} */}
                     {wholeCart.coupon_code_id != null && (
                       <Button
                         color="link cart-coupon-change-btn p-0"
@@ -869,6 +942,7 @@ const CartAmount: any = withRouter((props: any) => {
                               )?.countryCode
                             }{" "}
                             {parseFloat(wholeCart.applied_discount).toFixed(2)}
+                            {/* - {content.inr} {wholeCart.applied_discount} */}
                           </span>
                         </td>
                       </tr>
@@ -898,6 +972,7 @@ const CartAmount: any = withRouter((props: any) => {
                         ?.countryCode
                     }{" "}
                     {parseFloat(wholeCart.total).toFixed(2)}
+                    {/* {content.inr} {parseInt(wholeCart.total).toFixed(2)} */}
                   </span>
                 </td>
               </tr>
@@ -905,17 +980,195 @@ const CartAmount: any = withRouter((props: any) => {
           </Table>
         </div>
         <div className="proceed-btn cart-proceed-btn">
+          {/* <Ripple style={{width}}> */}
           <Button
             style={{ width: "100%" }}
             data-testid={"button-proceed-checkout"}
             color="btn btn-secondary yt-login-btn btn-block"
+            //  onClick={()=> props.history.push("./checkout")}
             onClick={() => {
+              // proceedToCheckFileIsUploade();
               proceedToCheckoutForm();
             }}
           >
             {content.proceed}
           </Button>
+          {/* </Ripple> */}
         </div>
+        {/* <div className={` modal-wrap`}>
+          <Modal
+            isOpen={isPrescModal}
+            toggle={() => setIsPrescModal(false)}
+            centered
+          >
+            <ModalHeader
+              toggle={() => setIsPrescModal(false)}
+              style={{ border: "none" }}
+              closed
+            >
+              <h5 className="modalTitle"> Prescription</h5>
+            </ModalHeader>
+            <ModalBody>
+              <div className="modalContent">
+                <h6 className="sub-heading">Please upload the prescription </h6>
+                {dropDown &&
+                  dropDown.map((elm: any, index: any) => {
+                    return (
+                      <>
+                        {index != 0 && (
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "flex-end",
+                            }}
+                          >
+                            <span
+                              style={{
+                                cursor: "pointer",
+                              }}
+                              onClick={() => removeUploadFile(index)}
+                            >
+                              x
+                            </span>
+                          </div>
+                        )}
+                        <div className="dropzone">
+                          {uploading.length > 0 &&
+                          uploading[index] &&
+                          uploading[index].id == index ? (
+                            <div className="d-flex justify-content-betweeen align-items-center w-100">
+                              <div className="file-icon">
+                                <BsFileEarmarkText size={"2rem"} />
+                              </div>
+                              <div style={{ width: "80%" }}>
+                                <div className="d-flex justify-content-between align-items-center w-100">
+                                  <h6 style={{ color: "#000" }}>
+                                    {prescriptionFile &&
+                                      prescriptionFile.length > 0 &&
+                                      prescriptionFile[index] &&
+                                      prescriptionFile[index].path}{" "}
+                                    {(
+                                      prescriptionFile &&
+                                      prescriptionFile.length > 0 &&
+                                      prescriptionFile[index] &&
+                                      prescriptionFile[index].size / 1024 / 1024
+                                    ).toFixed(2)}{" "}
+                                    mb
+                                  </h6>
+                                  <div
+                                    style={{
+                                      color: "#3FC1CB",
+                                      cursor: "pointer",
+                                    }}
+                                    onClick={() =>
+                                      handleDeleteUploadFile(index)
+                                    }
+                                  >
+                                    x
+                                  </div>
+                                </div>
+                                <Progress value={progress[index]} />
+                                <div className="d-flex justify-content-start mt-1">
+                                  <span
+                                    style={{ color: "#000" }}
+                                  >{`${progress[index]}% done`}</span>
+                                </div>
+                              </div>
+                            </div>
+                          ) : (
+                            <Dropzone
+                              multiple={true}
+                              onDrop={(e: any) =>
+                                handlePrescriptionUpload(e, index)
+                              }
+                            >
+                              {({ getRootProps, getInputProps }) => (
+                                <div {...getRootProps()}>
+                                  <input {...getInputProps()} />
+                                  <p style={{ color: "#000000" }}>
+                                    Drag & Drop the document here
+                                  </p>
+                                  <p style={{ color: "#000000" }}>OR</p>
+                                  <Button
+                                    color="secondary"
+                                    className="browse-btn"
+                                  >
+                                    Browse File
+                                  </Button>
+                                </div>
+                              )}
+                            </Dropzone>
+                          )}
+                        </div>
+
+                        <div className="d-flex justify-content-between align-items-center mb-2">
+                          <span style={{ color: "#000000" }}>
+                            Prescription For
+                          </span>
+                          <MultiSelect
+                            options={elm.options}
+                            value={elm.selected}
+                            onChange={(e: any) => handleOnSelect(e, index)}
+                            labelledBy="Select Product"
+                            disableSearch={true}
+                            className="multiselect dropDownItem"
+                            disabled={
+                              dropDown.length > index + 1 ? true : false
+                            }
+                          />
+                        </div>
+                      </>
+                    );
+                  })}
+              </div>
+            </ModalBody>
+            <ModalFooter
+              className="justify-content-between"
+              style={{ border: "none" }}
+            >
+              {dropDown[dropDown.length - 1].options.length !=
+              selectedProduct.length ? (
+                <Button
+                  className="textDecorationNone px-0"
+                  color="link"
+                  onClick={handleUploadAnotherPre}
+                  disabled={
+                    selectedProduct.length != 0 && progress.length != 0
+                      ? false
+                      : true
+                  }
+                >
+                  + Add another prescription
+                </Button>
+              ) : (
+                <div className="w-50"></div>
+              )}
+              <div className="d-flex W-50">
+                <Button
+                  className="cancel px-1 mx-3 "
+                  color="link"
+                  onClick={() => setIsPrescModal(false)}
+                >
+                  cancel
+                </Button>{" "}
+                <Button
+                  disabled={
+                    dropDown[dropDown.length - 1].options.length !=
+                    selectedProduct.length
+                      ? true
+                      : false || progress != 100
+                      ? true
+                      : false
+                  }
+                  onClick={handleUpload}
+                  className=" btn-btn btn-secondary yt-login-btn btn-block px-4 py-1"
+                >
+                  Upload
+                </Button>
+              </div>
+            </ModalFooter>
+          </Modal>
+        </div> */}
       </div>
     )
   );
@@ -962,6 +1215,7 @@ const CartProductListData: any = withRouter((props: any) => {
                 deleteCoupon={props.deleteCoupon}
                 couponCodeError={props.couponCodeError}
                 changeCouponCode={props.changeCouponCode}
+                // uploadPrescription={props.uploadPrescription}
               />
             </Col>
           </Row>
@@ -985,6 +1239,7 @@ export default class Cart extends ShoppingCartController {
     // Customizable Area Start
     return (
       <section style={{ width: "93%", margin: "0 auto" }}>
+        {/* {localStorage.removeItem("newest")} */}
         {this.state.loading ? (
           <Loader loading={this.state.loading} />
         ) : (
@@ -1007,6 +1262,7 @@ export default class Cart extends ShoppingCartController {
                 setDefaultImage={this.setDefaultImage}
                 couponCodeError={this.state.couponCodeError}
                 changeCouponCode={this.changeCouponCode}
+                // uploadPrescription={this.postPrescriptionFile}
               />
             ) : (
               <EmptyCartContent />
