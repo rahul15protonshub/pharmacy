@@ -144,29 +144,6 @@ class EmailRegistartion extends EmailAccountRegistrationController {
                         </span>
                       )}
                     </FormGroup>
-                    {/* <FormGroup>
-                                            <img alt="Phone Icon" src={numberImg} className={
-                                                errors.Email && touched.Email
-                                                    ? ' yt-login-icn2' : 'yt-login-icn'
-                                            }
-                                            />
-                                            <Field name="fullPhoneNumber" type="text" placeholder='Phone Number'
-                                                className={
-                                                    'form-control' +
-                                                    (errors.fullPhoneNumber && touched.fullPhoneNumber
-                                                        ? ' is-invalid invalid'
-                                                        : '')
-                                                }
-                                            />
-
-                                            {touched.fullPhoneNumber && errors.fullPhoneNumber &&
-                                                (
-                                                    <span className="invalid-feedback" style={{ position: 'absolute' }}>
-                                                        {errors.fullPhoneNumber}
-                                                    </span>
-                                                )
-                                            }
-                                        </FormGroup> */}
                     <FormGroup className="mb-4">
                       <img
                         alt="Password Icon"

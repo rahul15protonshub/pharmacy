@@ -155,6 +155,30 @@ function CartAmount(props: any) {
               <tbody>{getProducts()}</tbody>
             </Table>
             <span className="cart-divider" />
+            {wholeCart.sub_discounted_total_price ?
+            <Table className="yt-sub-ttl-tbl-wrap">
+              <tbody>
+                <tr>
+                  <td style={{ paddingLeft: 0 }}>
+                    <span className="cart-product-amount">
+                      Subscription Discount
+                    </span>
+                  </td>
+                  <td style={{ paddingRight: 0, textAlign: "right" }}>
+                    <span className="cart-product-amount cart-sub-total">
+                      {/* @ts-ignore  */}-{" "} 
+                      {
+                        JSON.parse(localStorage.getItem("countryCode") ?? "{}")
+                          ?.countryCode
+                      }{" "}
+                      {parseFloat(wholeCart.sub_discounted_total_price).toFixed(2)}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+            : ''
+          }
             <Table className="yt-sub-ttl-tbl-wrap">
               <tbody>
                 <tr>
@@ -171,7 +195,6 @@ function CartAmount(props: any) {
                           ?.countryCode
                       }{" "}
                       {parseFloat(wholeCart.sub_total).toFixed(2)}
-                      {/* {content.inr} {wholeCart.sub_total} */}
                     </span>
                   </td>
                 </tr>
@@ -202,8 +225,6 @@ function CartAmount(props: any) {
               </tbody>
             </Table>
             <span className="cart-divider" />
-            {/* {Object.keys(JSON.parse(localStorage.getItem("buyNow") || "{}"))
-              .length == 0 && ( */}
             <div style={{ marginBottom: 0 }} className="cart-coupon mt-3">
               <Form className="yt-cart-disct-wrap">
                 <FormGroup
@@ -295,7 +316,6 @@ function CartAmount(props: any) {
                 </div>
               )}
             </div>
-            {/* )} */}
             <Table className="mb-0 cart-prodict-sub-total-amount " borderless>
               <tbody>
                 <tr>

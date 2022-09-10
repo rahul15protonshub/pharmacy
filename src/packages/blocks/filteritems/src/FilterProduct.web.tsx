@@ -206,16 +206,6 @@ class FilterProduct extends FilterProductController {
                           className="yt-product-page-recommend-btn"
                           style={{ display: "flex", minWidth: "12 rem " }}
                         >
-                          {/* <div className="yt-sp-mb-recomment-wrap">
-                                <div className="d-flex align-items-center">
-                                  <div className="yt-sp-recmnd-icn">
-                                    <BsFilterLeft />
-                                  </div>
-                                  <div className="yt-recmnd-mb-txt">
-                                    {content.responsiveSort}
-                                  </div>
-                                </div>
-                              </div> */}
                           <span className="selected-sort-name">
                             {this.state.value}
                           </span>
@@ -354,9 +344,6 @@ class FilterProduct extends FilterProductController {
         )}
 
         <div className="loadMoreBtn">
-          {/* <div outline='true' className="yt-load-more" type="button" onClick={this.loadMore} >
-            {this.state.loadMoreShow && this.state.filterProducList.length != 0 && content.loadMore}
-          </div> */}
           {!this.state.loading && this.state.filterProducList.length != 0 && (
             <div className="productPagination">
               <div

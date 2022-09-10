@@ -344,17 +344,6 @@ export const Bold: any = withRouter((props: any) => {
                   backgroundImage: `url(${product.attributes.images.data[0].attributes.url})`,
                 }}
               >
-                {/* <div style={{ position: 'relative', width: 'fit-content', margin: '0 auto' }}> */}
-                {/* <img style={{ position: 'relative' }} alt={catalogue_variant_in_stock.attributes.name} src={product.attributes.images
-                  ? product.attributes.images.data[0].attributes.url
-                  : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}
-                  className="px-3 img-fluid yt-td-product-img prodimage w3-ripple ml-auto mr-auto"
-                  onClick={() => {
-                    setTimeout(() => {
-                      props.history.push(`/shop/${product.id}`);
-                    }, 500);
-                  }}
-                /> */}
                 {product.attributes.wishlisted ? (
                   <svg
                     className="templatetwo-product-wishlist addtowishlistt2"
@@ -403,9 +392,6 @@ export const Bold: any = withRouter((props: any) => {
                       }
                     </p>
                   </div>
-                  {/* </div> */}
-
-                  {/* </Link> */}
                 </div>
               </div>
             </div>
@@ -437,8 +423,6 @@ export const Bold: any = withRouter((props: any) => {
     showCard ? (
     <section className="templatetwo-product-slider product-slider ds-mb-40 ds-mb-md-80 ds-mb-lg-104">
       <Container>
-        {/* <TitleBar name={props.name} onViewMore={props.onViewMore} /> */}
-
         <SectionHeading
           className="mx-3 mx-md-0 mb-2 mb-md-40"
           name="TRENDING PRODUCTS"

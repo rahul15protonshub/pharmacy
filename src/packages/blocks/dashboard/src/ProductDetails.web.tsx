@@ -491,7 +491,6 @@ class ProductDetails extends DashboardController {
                               content?.willNotify
                             ) : (
                               <div class="d-grid gap-3 product-btn-group">
-                                {/* <p className="product-stock-message mb-0">{content?.itemOutOfStock}</p> */}
                                 <button
                                   type="button"
                                   class="btn btn-outline-primary-1"
