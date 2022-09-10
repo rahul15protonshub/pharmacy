@@ -51,7 +51,6 @@ export default class PrivateRoute extends PureComponent<Props, S>{
                     this.state.token !== '' && (this.state.guestdata || localStorage.getItem('userFullName'))
                         ?
                         (
-                            // <Redirect to='/login' />
                             <Redirect to={{ pathname: '/login', state: { calledFrom: this.props.location?.state?.calledFrom === "cart" ? "guest-login" : "", redirect: this.props.location?.state?.redirect === "wishlist" ? "wishlist" : '' } }} />
                         )
                         :

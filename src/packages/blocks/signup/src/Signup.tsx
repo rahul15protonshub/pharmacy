@@ -380,7 +380,6 @@ export default class Signup extends SignupController {
             }
           </View>
         </View>
-        {/* {this.renderAlertModal()} */}
         <ApplicationLoader isFetching={this.state.isFetching} />
         <CustomErrorModal
           showModal={this.state.showAlertModal}

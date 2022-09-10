@@ -10,12 +10,8 @@ class RunEngine {
   channels: Map<string, Channel>;
 
   debugLog = (tag: any, data: any = null) => {
-   // console.log('=====================Debug Log Start======================');
     if (data !== undefined) {
-      //console.log(tag + '====>' + JSON.stringify(data));
     }
-    //console.log('=====================Debug Log End======================');
-    //console.log('        ');
   };
 
   constructor() {

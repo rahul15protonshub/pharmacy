@@ -27,7 +27,6 @@ class FCMService {
                     this.requestPermission(onRegister);
                 }
             }).catch(error => {
-                //  console.log('@@@ FCM SERVICE PERMISSION REJECT ERROR ===========', error);
             })
     }
 
@@ -38,10 +37,8 @@ class FCMService {
                     await StorageProvider.set('USER_FCM_TOKEN', fcmToken);
                     onRegister(fcmToken);
                 } else {
-                    //  console.log('@@@ FCM SERVICE USER DOES NOT HAVE DEVICE TOKEN ===========');
                 }
             }).catch(error => {
-                //  console.log('@@@ FCM SERVICE GET TOKEN ERROR ===========', error);
             })
     }
 
@@ -50,7 +47,6 @@ class FCMService {
             .then(() => {
                 this.getToken(onRegister);
             }).catch(error => {
-                //  console.log('@@@ FCM SERVICE REQUEST PERMISSION REJECTED ===========', error);
             })
     }
 
@@ -58,7 +54,6 @@ class FCMService {
         //@ts-ignore
         messaging.deleteToken()
             .catch((error: any) => {
-                //  console.log('@@@ FCM SERVICE DELETE TOKEN ERROR ===========', error);
             })
     }
 
@@ -67,7 +62,6 @@ class FCMService {
         // When the application is running, but in the background
         messaging()
             .onNotificationOpenedApp(remoteMessage => {
-                //  console.log('@@@ FCM SERVICE ON NOTIFICATION CAUSED APP TO OPEN FROM BACKGROUND STATE ===========', remoteMessage);
                 if (remoteMessage) {
                     const notification = remoteMessage.notification
                     if (!remoteMessage.data) {
@@ -77,7 +71,6 @@ class FCMService {
                     //@ts-ignore
                     notification.userInteraction = true;
                     onOpenNotification(Platform.OS === 'ios' ? remoteMessage.data.item : remoteMessage);
-                    // this.removeDeliveredNotification(notification.notificationId)
                 }
             });
 
@@ -85,7 +78,6 @@ class FCMService {
         messaging()
             .getInitialNotification()
             .then(remoteMessage => {
-                //  console.log('@@@ FCM SERVICE ON NOTIFICATION CAUSED APP TO OPEN FROM KILLED STATE ===========', remoteMessage);
                 if (remoteMessage) {
                     const notification = remoteMessage.notification;
                     if (!remoteMessage.data) {
@@ -95,13 +87,11 @@ class FCMService {
                     //@ts-ignore
                     notification.userInteraction = true;
                     onOpenNotification(Platform.OS === 'ios' ? remoteMessage.data.item : remoteMessage);
-                    //this.removeDeliveredNotification(notification.notificationId)
                 }
             });
 
         // Foreground state messages
         messaging().onMessage(async (remoteMessage: any) => {
-            //  console.log('@@@ FCM SERVICE A NEW FCM MESSAGE IS ARRIVED FOREGROUND ===========', remoteMessage);
             if (remoteMessage) {
                 let notification: any = null;
                 if (Platform.OS === 'ios') {
@@ -117,15 +107,10 @@ class FCMService {
 
         // Triggered when have new token
         messaging().onTokenRefresh(fcmToken => {
-            //  console.log('@@@ FCM SERVICE A NEW TOKEN REFRESH ===========', fcmToken);
             onRegister(fcmToken);
         });
 
     }
-
-    // unRegister = () => {
-    //     this.messageListener();
-    // }
 
 }
 

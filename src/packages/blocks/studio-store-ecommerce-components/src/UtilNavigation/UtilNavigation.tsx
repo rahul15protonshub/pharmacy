@@ -7,12 +7,9 @@ export const OnManageNavigation = (response: any, error: any, navigation: any) =
         console.log(" error ", error)
 
         if (response?.errors[0]?.token == "Invalid token") {
-            // console.log(" hello worlds data ", response)
             return true;
         } else {
             return false;
-
-            console.log(" hello worlds data else call")
         }
         //        OG   response  {"errors": [{"token": "Invalid token"}]}
         //  LOG   error  undefined
@@ -23,7 +20,6 @@ export const OnManageNavigation = (response: any, error: any, navigation: any) =
         //  LOG   error  undefined 
 
     } catch (exc) {
-        // console.log(" error is ", exc);
     }
 }
 

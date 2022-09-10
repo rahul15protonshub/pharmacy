@@ -104,7 +104,6 @@ export default class FooterController extends BlockComponent<Props, S, SS>{
         }
 
         if (this.FAQAPICallId === apiRequestCallID) {
-          //console.log("nfbgmnbdfg", this.state.FaqData)
           if (responseJSON && responseJSON.data && responseJSON.data.faqs && responseJSON.data.faqs.length > 0) {
             this.setState({
               FaqData: responseJSON,

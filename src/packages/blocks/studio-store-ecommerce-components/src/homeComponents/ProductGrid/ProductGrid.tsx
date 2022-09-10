@@ -14,10 +14,7 @@ export const ProductGrid = (props: any) => {
     const [wishlist_item, setwishlist_item] = useState(props.data);
 
     const onHeartPress = (data: any) => {
-        //if(!data.is_wishlisted)
         props.onAddToWishlist(data);
-        // else
-        //     props.onRemoveFromWishlist(data);
         data.wishlist_item = !data.wishlist_item;
         const index = wishlist_item.findIndex((x: any) => x.id == data.id);
         wishlist_item[index] = data;

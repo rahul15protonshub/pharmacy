@@ -180,20 +180,6 @@ function CartAmount(props: any) {
 
             <Table className="mb-0 cart-prodict-total-amount " borderless>
               <tbody>
-                {/* <tr>
-                  <td>
-                    <span className="cart-product-amount">{content.taxes}</span>
-                  </td>
-                  <td style={{ textAlign: "right" }}>
-                    <span className="cart-product-amount">
-                      {
-                        JSON.parse(localStorage.getItem("countryCode") ?? "{}")
-                          ?.countryCode
-                      }{" "}
-                      {parseFloat(wholeCart.total_tax).toFixed(2)}
-                    </span>
-                  </td>
-                </tr> */}
                 <tr>
                   <td>
                     <span className="cart-product-amount">
@@ -210,7 +196,6 @@ function CartAmount(props: any) {
                       {wholeCart.shipping_total != null
                         ? wholeCart.shipping_total
                         : 0.0}
-                      {/* + {content.inr} {wholeCart.shipping_total!= null? wholeCart.shipping_total: 0} */}
                     </span>
                   </td>
                 </tr>
@@ -224,8 +209,6 @@ function CartAmount(props: any) {
                 <FormGroup
                   className={
                     "m-0 " + "success"
-                    //(codeError || codeEmptyError ? "yt-form-cpn-err error" : "") +
-                    //(cart.coupon && !codeError && !codeEmptyError ? "success" : "")
                   }
                 >
                   <input
@@ -252,16 +235,7 @@ function CartAmount(props: any) {
                     )}
                     <span className="cart-coupon-code-message error-message">
                       Coupon code can't be empty
-                      {/* {codeError} */}
                     </span>
-                    {/* {cart.coupon && !enableInput)&& (
-                  <Button
-                    color="link cart-coupon-change-btn p-0"
-
-                  >
-                    Change Coupon
-                  </Button>
-                )} */}
                     {wholeCart.coupon_code_id != null && (
                       <Button
                         color="link cart-coupon-change-btn p-0"
@@ -312,7 +286,6 @@ function CartAmount(props: any) {
                               )?.countryCode
                             }{" "}
                             {parseFloat(wholeCart.applied_discount).toFixed(2)}
-                            {/* - {content.inr} {wholeCart.applied_discount} */}
                           </span>
                         </td>
                       </tr>
@@ -342,7 +315,6 @@ function CartAmount(props: any) {
                           ?.countryCode
                       }{" "}
                       {parseFloat(wholeCart.total).toFixed(2)}
-                      {/* {content.inr} {parseInt(wholeCart.total).toFixed(2)} */}
                     </span>
                   </td>
                 </tr>
@@ -351,7 +323,6 @@ function CartAmount(props: any) {
           </div>
         </div>
         <div className="proceed-btn checkoutbutton">
-          {/* <Ripple style={{width}}> */}
           <Button
             type="submit"
             style={{ width: "100%" }}
@@ -360,7 +331,6 @@ function CartAmount(props: any) {
           >
             {content.proceed}
           </Button>
-          {/* </Ripple> */}
         </div>
       </div>
     )
@@ -503,8 +473,6 @@ const PrescriptionModal = (props: any) => {
     }
   
   };
-  // cheek input value is valid or not {rf}
-  // const checkValidFile = (file: { target: { value: any } }) => {
   const checkValidFile = (file: any) => {
     const filePath = file[0].path;
     var allowedExtensions = /(.jpg|.jpeg|.png|.gif|.pdf|.docx)/;
@@ -1234,31 +1202,6 @@ export class Checkout extends CheckoutController {
                                   )}
                                 </FormGroup>
                               </Col>
-
-                              {/* <Col lg={6}>
-                                <FormGroup>
-                                  <span className="checkout-form-label">
-                                    City
-                                  </span>
-                                  <Input
-                                    type="text"
-                                    className="py-2 border-0 ps-0"
-                                    name="billing_address.city"
-                                    id="city"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values?.billing_address?.city}
-                                  />
-                                  {errors?.billing_address?.city &&
-                                  touched?.billing_address?.city ? (
-                                    <FormText color="danger" className="mt-1">
-                                      {errors?.billing_address?.city}
-                                    </FormText>
-                                  ) : (
-                                    ""
-                                  )}
-                                </FormGroup>
-                              </Col> */}
                               <Col lg={6}>
                                 <FormGroup>
                                   <span className="checkout-form-label">
@@ -1354,69 +1297,6 @@ export class Checkout extends CheckoutController {
                                   )}
                                 </FormGroup>
                               </Col>
-
-                              {/* <Col lg={6}>
-                                <FormGroup>
-                                  <span className="checkout-form-label">
-                                    Country
-                                  </span>
-                                  <Input
-                                    type="text"
-                                    className="py-2 border-0 ps-0"
-                                    name="billing_address.country"
-                                    id="country"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values?.billing_address?.country}
-                                  />
-                                  {errors?.billing_address?.country &&
-                                  touched?.billing_address?.country ? (
-                                    <FormText color="danger" className="mt-1">
-                                      {errors?.billing_address?.country}
-                                    </FormText>
-                                  ) : (
-                                    ""
-                                  )}
-                                </FormGroup>
-                              </Col> */}
-
-                              {/* <Col lg={6}>
-                                <FormGroup>
-                                  <span className="checkout-form-label">
-                                    Pin Code{" "}
-                                  </span>
-                                  <Input
-                                    // @ts-ignore
-                                    type={
-                                      this.state?.countryName?.toLowerCase() ==
-                                      "india"
-                                        ? "number"
-                                        : "text"
-                                    }
-                                    data-testid={"text-input-zip-code"}
-                                    className="py-2 border-0 ps-0"
-                                    name="billing_address.zip_code"
-                                    id="zip_code"
-                                    onChange={(event) => {
-                                      this.setZipCode(event.target.value);
-                                      handleChange(event);
-                                    }}
-                                    onBlur={(event) => {
-                                      this.checkShippingAggressCharge();
-                                      handleBlur(event);
-                                    }}
-                                    value={values?.billing_address?.zip_code}
-                                  />
-                                  {errors?.billing_address?.zip_code &&
-                                  touched?.billing_address?.zip_code ? (
-                                    <FormText color="danger" className="mt-1">
-                                      {errors?.billing_address?.zip_code}
-                                    </FormText>
-                                  ) : (
-                                    ""
-                                  )}
-                                </FormGroup>
-                              </Col> */}
                               <Col lg={6}>
                                 <FormGroup>
                                   <span className="checkout-form-label">
@@ -1851,7 +1731,6 @@ export class Checkout extends CheckoutController {
                                               }
                                               alt=""
                                               className="img-fluid d-block ml-auto mb-2"
-                                              // onClick={() => this.changeDefaultAddressHandler(ele.attributes)}
                                               width="20"
                                               height="20"
                                             />
@@ -1864,7 +1743,6 @@ export class Checkout extends CheckoutController {
                                               }
                                               alt=""
                                               className="img-fluid d-block ml-auto mb-2"
-                                              // onClick={() => this.changeDefaultAddressHandler(ele.attributes)}
                                               width="20"
                                               height="20"
                                             />

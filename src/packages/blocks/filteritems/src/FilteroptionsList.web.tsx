@@ -754,6 +754,10 @@ class Filteroptions extends FilteroptionsListController {
                                           name={subcat.name + index}
                                           checked={subcat.checked}
                                         />
+                                         <label
+                                          className="yt-filter-label"
+                                          htmlFor={subcat.name}
+                                        />
                                       </div>
                                     </li>
                                   )
