@@ -127,22 +127,37 @@ export default class Ordersummary extends OrdersummaryController {
                 {item.attributes.catalogue.attributes.name}
               </Text>
               {isFromSubscription && (
-                <View style={styles.changeRow}>
-                  <Text style={styles.periodText}>
-                    {item.attributes.preferred_delivery_slot
-                      ? `${this.getSlotString(
-                        item.attributes.preferred_delivery_slot
-                      )} | `
-                      : ""}
-                    <Text style={styles.packageText}>
-                      {item.attributes.subscription_package
-                        .charAt(0)
-                        .toUpperCase() +
-                        item.attributes.subscription_package.slice(1)}{" "}
-                      for {item.attributes.subscription_period} Month
-                    </Text>
-                  </Text>
+                <View>
+                <Text style={[styles.periodText1]}>
+                          {
+                            ["9am to 12pm", "6am to 9am"].includes(item.attributes.preferred_delivery_slot)
+                            ? `Morning (${item.attributes.preferred_delivery_slot
+                              .replace(' to ', ' - ').replace(/am/g, 'AM').replace(/pm/g, 'PM')})`
+                            : `Evening (${item.attributes.preferred_delivery_slot.replace(' to ', ' - ')
+                            .replace(' to ', ' - ').replace(/am/g, 'AM').replace(/pm/g, 'PM')})`
+                          }
+                          </Text>
+                          <Text style={[styles.periodText1]}>
+                            {`Duration: ${item.attributes.subscription_package} (${item.attributes.subscription_period
+                            } ${item.attributes.subscription_period > 1 ? "Months" : "Month"})`}
+                          </Text>
                 </View>
+                // <View style={styles.changeRow}>
+                //   <Text style={styles.periodText}>
+                //     {item.attributes.preferred_delivery_slot
+                //       ? `${this.getSlotString(
+                //         item.attributes.preferred_delivery_slot
+                //       )} | `
+                //       : ""}
+                //     <Text style={styles.packageText}>
+                //       {item.attributes.subscription_package
+                //         .charAt(0)
+                //         .toUpperCase() +
+                //         item.attributes.subscription_package.slice(1)}{" "}
+                //       for {item.attributes.subscription_period} Month
+                //     </Text>
+                //   </Text>
+                // </View>
               )}
               {isProductVarient && (
                 <View style={styles.changeRow}>
@@ -220,6 +235,17 @@ export default class Ordersummary extends OrdersummaryController {
                 {this.state.cartData.attributes.total_tax}
               </Text>
             </View>
+            {
+                this.state.cartData.attributes.sub_discounted_total_price ? (
+                  <View style={styles.delivery}>
+                    <Text style={styles.productName}>Subscription Discount</Text>
+                    <Text style={styles.price}>{'- '}
+                      {themeJson.attributes.currency_type}{" "}
+                      {(this.state.cartData.attributes.sub_discounted_total_price) || 0.0}
+                    </Text>
+                  </View>
+                ) : null
+              }
             <View style={styles.delivery}>
               <Text style={styles.productName}>Delivery Charges</Text>
               <Text style={styles.price}>
@@ -380,7 +406,7 @@ export default class Ordersummary extends OrdersummaryController {
             />
             <Text style={styles.paymentOption}>COD</Text>
           </TouchableOpacity>
-          {currencyType !== "INR" &&
+          {currencyType == "INR" &&
             themeJson.attributes.razorpay &&
             themeJson.attributes.razorpay.api_key && (
               <TouchableOpacity

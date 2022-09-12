@@ -19,7 +19,6 @@ import scale from "../../../framework/src/utils/Scale";
 import TopHeader from "../../../blocks/studio-store-ecommerce-components/src/TopHeader/TopHeader";
 import COLOR_CONST from "../../studio-store-ecommerce-theme/src/AppFonts";
 import * as IMG_CONST from "../../studio-store-ecommerce-theme/src/ImageConstants";
-
 import CustomErrorModal from "../../studio-store-ecommerce-components/src/CustomErrorModal/CustomErrorModal";
 import ApplicationLoader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader";
 
@@ -30,7 +29,6 @@ const themeJson = require("../../studio-store-ecommerce-theme/src/theme.json");
 
 import FilteroptionsController, {
   Props,
-  //configJSON
 } from "./FilteroptionsController";
 
 export default class Filteroptions extends FilteroptionsController {

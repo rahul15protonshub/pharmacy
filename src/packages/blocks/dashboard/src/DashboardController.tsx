@@ -129,7 +129,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
       this.props.navigation
     );
     if (resultSesseion) {
-      // this.setState({isFetching:false});
       ChangeStackNow(this.props.navigation);
     }
 

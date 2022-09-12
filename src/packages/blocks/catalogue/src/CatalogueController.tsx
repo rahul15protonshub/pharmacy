@@ -90,7 +90,6 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
   getRecommendedApiCallId: any;
   addToWishlistApiCallId: any;
   removeFromWishlistApiCallId: any;
-
   getCategoriesApiCallId: any;
   getCartProductId: any;
   addToCartApiCallId: any;
@@ -165,7 +164,6 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
       updateCart: false,
       isSubscribeClicked: false,
       brandSettings: null,
-
       // Customizable Area End
     };
 
@@ -409,18 +407,14 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
   getToken = async () => {
     // Customizable Area Start
     let token = await StorageProvider.get("Userdata");
-    // token=token
     this.setState({ token: token });
     this.getBrandSettings();
     this.getCartList();
-    // this.getListRequest(token);
-
     this.getRecommendedListRequest(token);
     this.getCartHasProduct();
     this.getBannerImages();
     this.getCategories();
     this.getFilteredProducts();
-
     // Customizable Area End
   };
 
@@ -468,7 +462,6 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
         getName(MessageEnum.RestAPIResponceSuccessMessage)
       );
 
-      // console.log("responseJson", responseJson);
       var errorReponse = message.getData(
         getName(MessageEnum.RestAPIResponceErrorMessage)
       );
@@ -478,7 +471,6 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
       console.log(apiRequestCallId, responseJson)
 
       if (responseJson.data) {
-        // console.log("responseJson.data",responseJson.data)
         if (apiRequestCallId == this.getProductApiCallId) {
           let array = responseJson?.data?.catalogue?.data;
           this.setState({ isFetching: false, arrayHolder: array });
@@ -539,9 +531,7 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
             this.UpdateWishlistTempId,
             "Recommended"
           );
-          // this.getListRequest(this.state.token);
-          // this.getRecommendedListRequest(this.state.token);
-        } else if (apiRequestCallId === this.removeFromNewProductWishlistApiCallId) {
+          } else if (apiRequestCallId === this.removeFromNewProductWishlistApiCallId) {
           const wishlistItem = this.state.catalogueFilteredProducts?.find((item: any) => this.state.productWishlisting === item.id);
           if (wishlistItem) {
             wishlistItem.attributes.wishlisted = false;
@@ -552,14 +542,11 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
             catalogueFilteredProducts: this.state.catalogueFilteredProducts ? [...this.state.catalogueFilteredProducts] : [],
 
           });
-          // this.updateWhiseList([...this.state.recommendedList],this.UpdateWishlistTempId,"newProducts");
           this.updateWhiseList(
             [...this.state.arrayHolder],
             this.UpdateWishlistTempId,
             "newProducts"
           );
-          // this.getListRequest(this.state.token);
-          // this.getRecommendedListRequest(this.state.token);
         } else if (apiRequestCallId === this.removeFromWishlistApiCallId) {
           console.log("removeFromWishlistApiCallId", responseJson);
           const wishlistItem = this.state.catalogueFilteredProducts?.find((item: any) => this.state.productWishlisting === item.id);
@@ -577,10 +564,7 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
             this.UpdateWishlistTempId,
             "Recommended"
           );
-          // this.updateWhiseList([...this.state.arrayHolder],this.UpdateWishlistTempId,"Recommended");
-          // this.getListRequest(this.state.token);
-          // this.getRecommendedListRequest(this.state.token);
-        } else if (apiRequestCallId === this.getCategoriesApiCallId) {
+           } else if (apiRequestCallId === this.getCategoriesApiCallId) {
           let array = responseJson?.data;
           this.setState({ categoriesArray: array, isFetching: false });
         } else if (apiRequestCallId === this.sendDeviceTokenApiCallId) {
@@ -619,11 +603,8 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
             catalogueFilteredProducts: this.state.catalogueFilteredProducts ? [...this.state.catalogueFilteredProducts] : [],
             cartLength: responseJson.data.attributes.order_items.length
           });
-
           // @ts-ignore
-
           await StorageProvider.set("cart_length", responseJson.data.attributes.order_items.length.toString());
-          //this.getFilteredProducts();
           //@ts-ignore
         } else if (apiRequestCallId === this.putItemToCartApiCallId) {
           console.log("put item to cart response", responseJson)
@@ -642,14 +623,7 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
           // @ts-ignore
           // @ts-ignore
           await StorageProvider.set("cart_length", responseJson.data.attributes.order_items.length.toString());
-
-          // console.log(window.location.pathname.endsWith("/home-page") ? "" : this.state.catalogue_id && this.getProductDetails())
-          // window.location.pathname.endsWith("/home-page") ? "" : this.state.catalogue_id && this.getProductDetails()
-
-        } else if (apiRequestCallId === this.postCreateCartApiCallId) {
-
-          console.log("create cart response", responseJson)
-
+ } else if (apiRequestCallId === this.postCreateCartApiCallId) {
           this.state.catalogueFilteredProducts?.forEach((product: any) => {
             const orderItem = responseJson.data.attributes.order_items.find((item: any) => parseInt(product.id) === item.attributes.catalogue_id);
             if (!product.attributes.cart_quantity) {
@@ -665,9 +639,7 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
           });
 
           await StorageProvider.set("cart_length", responseJson.data.attributes.order_items.length.toString());
-
         }
-
 
       } else if (responseJson && (responseJson.message || responseJson.brand_setting)) {
         if (responseJson.message === "No catalogue found") {
@@ -816,16 +788,8 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
     }
   };
 
-  viewAll(productType: string) {
-    this.props.navigation.navigate("Filteritems", {
-      screenName: productType,
-      productType: productType,
-    });
-  }
-
   onHeartPress = (item: any, source: any) => {
     this.UpdateWishlistTempId = item.id;
-
     this.setState({ productWishlisting: item.id })
     item.attributes.wishlisted
       ? this.removeFromWishlist(item.id, source)
@@ -897,7 +861,6 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
 
   getCategories = async () => {
     this.setState({ categoriesArray: [] });
-
     this.getCategoriesApiCallId = await this.apiCall({
       contentType: configJSON.categoryApiContentType,
       method: configJSON.apiMethodTypeGet,
@@ -921,9 +884,6 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
     });
   };
 
-  unsubscribeMessages = () => {
-    runEngine.unSubscribeFromMessages(this, this.subScribedMessages);
-  };
   // Customizable Area Start
   getBrandSettings = async () => {
     this.getBrandSettingsCallId = await this.apiCall({
@@ -934,10 +894,8 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
   };
   updateWhiseList = (Data: any, id: any, flag: any) => {
     try {
-      // console.log(" the id is ",id)
       if (flag == "newProducts") {
         let dataNew = Data.filter((item: any) => {
-          // console.log(id,"data ",JSON.stringify(item));
           try {
             if (item.id == id) {
               item.attributes.wishlisted = !item?.attributes?.wishlisted;
@@ -948,8 +906,7 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
         this.setState({ arrayHolder: dataNew });
       } else {
         let dataNew = Data.filter((item: any) => {
-          // console.log(id,"data ",JSON.stringify(item));
-          try {
+         try {
             if (item.id == id) {
               item.attributes.wishlisted = !item?.attributes?.wishlisted;
             }
@@ -990,8 +947,6 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
       method: configJSON.apiMethodTypeGet,
       endPoint: filteredUrl,
     });
-
-
 
   };
 
@@ -1057,12 +1012,7 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
       getName(MessageEnum.RestAPIRequestMethodMessage),
       configJSON.apiMethodTypePut
     );
-
-    console.log("putItemToCart product", product);
-    console.log("putItemToCart requestMessage", requestMessage);
-
     runEngine.sendMessage(requestMessage.id, requestMessage);
-
     return true;
   };
 
@@ -1085,7 +1035,6 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
       } else {
         httpBody = {
           catalogue_id: productDetails?.id ?? product.id,
-          // "catalogue_variant_id": product.id,
           quantity: this.state.itemQuantity ?? 1,
         };
       }
@@ -1190,10 +1139,7 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
       getName(MessageEnum.RestAPIRequestMethodMessage),
       method
     );
-
-    console.log("increaseOrDecreaseCartQuantity requestMessage", requestMessage);
-
-    runEngine.sendMessage(requestMessage.id, requestMessage);
+ runEngine.sendMessage(requestMessage.id, requestMessage);
 
     return true;
   }
@@ -1211,10 +1157,6 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
     })
   }
 
-  setSelectedCategory(category: any) {
-    this.setState({ selectedCategory: category }, () => {
-      this.setCatalogueFilters(1, [category.category_id], [category.id]);
-    })
-  }
+  
   // Customizable Area End
 }

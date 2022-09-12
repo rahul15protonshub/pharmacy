@@ -175,8 +175,6 @@ export default class CategoriessubcategoriesController extends BlockComponent<
             cartHasProduct: responseJson.data.has_cart_product,
             isFetching: false,
           });
-
-
           // Customizable Area Start
           this.setState({
             cartcount: responseJson.data.total_cart_item,
@@ -205,46 +203,11 @@ export default class CategoriessubcategoriesController extends BlockComponent<
       subCategoryData: subCategoryData,
       isFromExplore: true,
       screenName:
-        subCategoryData && subCategoryData.name
-          ? subCategoryData.name || data.attributes.name
-          : data.attributes.name,
+        subCategoryData && subCategoryData?.name
+          ? subCategoryData?.name || data?.attributes?.name
+          : data?.attributes?.name,
       isFromCategory: true,
       isFromSubcategory: fromSubcategory,
-    });
-  };
-
-  setCategoryTxt = (text: string) => {
-    this.setState({ category: text });
-  };
-
-  setSubCategoryTxt = (text: string) => {
-    this.setState({ subCategory: text });
-  };
-
-  clickCategory = (item: any, Index: number) => {
-    let array = this.state.categoriesArray;
-    let idarray = this.state.selectedCategoryID;
-    let index = idarray.indexOf(item.attributes.id);
-
-    if (index > -1) {
-      idarray.splice(index, 1);
-      array[Index].Check = false;
-      this.setState({ categoriesArray: array });
-    } else {
-      idarray.push(item.attributes.id);
-      array[Index].Check = true;
-      this.setState({ categoriesArray: array });
-      this.setState({ selectedCategoryID: idarray });
-    }
-  };
-
-  toggleModal = (type: string) => {
-    this.setState({ activeModalType: type, isVisible: !this.state.isVisible });
-  };
-
-  expandCategoryView = () => {
-    this.setState({
-      dropdownCategoryStatus: !this.state.dropdownCategoryStatus,
     });
   };
 
@@ -257,10 +220,6 @@ export default class CategoriessubcategoriesController extends BlockComponent<
     }
     this.setState({ categoriesArray: array });
   };
-
-  isStringNullOrBlank(str: string) {
-    return str === null || str.length === 0;
-  }
 
   getCategories = (token: string) => {
     this.setState({ isFetching: true });

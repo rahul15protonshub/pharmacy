@@ -16,7 +16,6 @@ import Scale, { verticalScale } from "../../../framework/src/utils/Scale";
 import R from "../../studio-store-ecommerce-components/src/R";
 import COLOR_CONST from "../../studio-store-ecommerce-theme/src/AppFonts";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
 import GreenButton from "../../studio-store-ecommerce-components/src/GreenButton/GreenButton";
 import ApplicationLoader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader";
 import CustomErrorModal from "../../studio-store-ecommerce-components/src/CustomErrorModal/CustomErrorModal";
@@ -56,6 +55,7 @@ export default class Contactus extends ContactusController {
               Name
             </Text>
             <TextInput
+              testID="txtcontactname"
               style={[
                 styles.textInput,
                 {
@@ -69,7 +69,7 @@ export default class Contactus extends ContactusController {
               onFocus={() =>
                 this.setState((prevState) => ({
                   textInputFocusData: {
-                    ...prevState.textInputFocusData,
+                    ...prevState?.textInputFocusData,
                     nameFocus: true,
                   },
                 }))
@@ -77,7 +77,7 @@ export default class Contactus extends ContactusController {
               onBlur={() =>
                 this.setState((prevState) => ({
                   textInputFocusData: {
-                    ...prevState.textInputFocusData,
+                    ...prevState?.textInputFocusData,
                     nameFocus: false,
                   },
                 }))
@@ -88,7 +88,7 @@ export default class Contactus extends ContactusController {
               style={[
                 styles.inputText,
                 {
-                  color: this.state.textInputErrorData.emailError
+                  color: this.state.textInputErrorData?.emailError
                     ? COLOR_CONST.pastelRed
                     : COLOR_CONST.charcoalGrey,
                 },
@@ -97,10 +97,11 @@ export default class Contactus extends ContactusController {
               Email
             </Text>
             <TextInput
+             testID="txtcontactemail"
               style={[
                 styles.textInput,
                 {
-                  borderBottomColor: this.state.textInputFocusData.emailFocus
+                  borderBottomColor: this.state.textInputFocusData?.emailFocus
                     ? themeJson.attributes.primary_color
                     : COLOR_CONST.lightGreyText,
                 },
@@ -110,7 +111,7 @@ export default class Contactus extends ContactusController {
               onFocus={() =>
                 this.setState((prevState) => ({
                   textInputFocusData: {
-                    ...prevState.textInputFocusData,
+                    ...prevState?.textInputFocusData,
                     emailFocus: true,
                   },
                 }))
@@ -118,7 +119,7 @@ export default class Contactus extends ContactusController {
               onBlur={() =>
                 this.setState((prevState) => ({
                   textInputFocusData: {
-                    ...prevState.textInputFocusData,
+                    ...prevState?.textInputFocusData,
                     emailFocus: false,
                   },
                 }))
@@ -138,10 +139,11 @@ export default class Contactus extends ContactusController {
               Phone Number
             </Text>
             <TextInput
+             testID="txtcontactphone"
               style={[
                 styles.textInput,
                 {
-                  borderBottomColor: this.state.textInputFocusData.phoneNoFocus
+                  borderBottomColor: this.state.textInputFocusData?.phoneNoFocus
                     ? themeJson.attributes.primary_color
                     : COLOR_CONST.lightGreyText,
                 },
@@ -151,7 +153,7 @@ export default class Contactus extends ContactusController {
               onFocus={() =>
                 this.setState((prevState) => ({
                   textInputFocusData: {
-                    ...prevState.textInputFocusData,
+                    ...prevState?.textInputFocusData,
                     phoneNoFocus: true,
                   },
                 }))
@@ -159,7 +161,7 @@ export default class Contactus extends ContactusController {
               onBlur={() =>
                 this.setState((prevState) => ({
                   textInputFocusData: {
-                    ...prevState.textInputFocusData,
+                    ...prevState?.textInputFocusData,
                     phoneNoFocus: false,
                   },
                 }))
@@ -168,6 +170,7 @@ export default class Contactus extends ContactusController {
               keyboardType={"number-pad"}
             />
             <TextInput
+             testID="txtcontactdecs"
               style={styles.ratingInput}
               multiline={true}
               textAlignVertical={"top"}
@@ -191,18 +194,19 @@ export default class Contactus extends ContactusController {
           </View>
         </KeyboardAwareScrollView>
         <GreenButton
+         testID='ongreenbuttonpress'
           title="Submit"
           disabled={
-            this.state.textInputData.name.trim() === "" ||
-            this.state.textInputData.email.trim() === "" ||
-            this.state.textInputData.phoneNo.trim() === "" ||
+            this.state.textInputData?.name.trim() === "" ||
+            this.state.textInputData?.email.trim() === "" ||
+            this.state.textInputData?.phoneNo.trim() === "" ||
             this.state.descriptionText.trim() === ""
           }
           customStyle={[
             styles.loginButton,
             {
               opacity:
-                this.state.textInputData.name.trim() === "" ||
+                this.state.textInputData?.name.trim() === "" ||
                   this.state.textInputData.email.trim() === "" ||
                   this.state.textInputData.phoneNo.trim() === "" ||
                   this.state.descriptionText.trim() === ""
@@ -223,6 +227,7 @@ export default class Contactus extends ContactusController {
       // Customizable Area Start
       <SafeAreaView style={styles.container}>
         <TopHeader
+          testID='onheaderpress'
           headerTitle={"Contact Us"}
           headerLeftIconName={R.contactUsImage.backIcon}
           headerLeftIconStyle={{

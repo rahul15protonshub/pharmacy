@@ -77,6 +77,103 @@ defineFeature(feature, (test) => {
 
         });
 
+        then("wishlist getWishlistApiCallId without error", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{
+                  
+                }],
+              }
+            );
+            instance.getWishlistApiCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("wishlist removeFromWishlistApiCallId without error", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{
+                  
+                }],
+              }
+            );
+            instance.removeFromWishlistApiCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("wishlist addToCartApiCallId without error", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{
+                  
+                }],
+              }
+            );
+            instance.addToCartApiCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+         
+          then("wishlist getCartListId without error", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{
+                  
+                }],
+              }
+            );
+            instance.getCartListId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("wishlist getCartProductId without error", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{
+                  
+                }],
+              }
+            );
+            instance.getCartProductId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+
         then('Wishlist will load with out errors', () => {
             expect(wishlistWrapper).toBeTruthy()
         });

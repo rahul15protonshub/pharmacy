@@ -29,7 +29,7 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({ product, loading, o
 
     return (
         <View style={componentStyles.quantitySelectorWrapper}>
-            <TouchableOpacity style={[componentStyles.quantityMinusPlus, loading ? { opacity: 0.5 } : {}]}
+            <TouchableOpacity testID='productQuantitydecrease' style={[componentStyles.quantityMinusPlus, loading ? { opacity: 0.5 } : {}]}
                 disabled={loading} onPress={() => {
                     onQuantityDecrease()
                 }}>
@@ -39,7 +39,7 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({ product, loading, o
                 loading ? <ActivityIndicator size="small" color={themeJson.attributes.primary_color} /> :
                     <Text style={componentStyles.quantityText}>{product.attributes.cart_quantity}</Text>
             }
-            <TouchableOpacity style={[
+            <TouchableOpacity testID='productQuantityincrease' style={[
                 componentStyles.quantityMinusPlus,
                 loading || product.attributes.cart_quantity === product.attributes.stock_qty ? { opacity: 0.5 } : {}
             ]}
@@ -79,35 +79,34 @@ const ProductBox: React.FC<ProductBoxProps> = ({
 
     return (
         <View style={componentStyles.componentWrapper}>
-            <TouchableOpacity disabled={addToWishlistLoading} style={componentStyles.heartIconWrapper} onPress={onAddToWishlistPress} >
+            <TouchableOpacity testID='Productaddtocart' disabled={addToWishlistLoading} style={componentStyles.heartIconWrapper} onPress={onAddToWishlistPress} >
                 {
                     addToWishlistLoading ? <ActivityIndicator size="small" color={themeJson.attributes.primary_color} /> :
                         product.attributes.wishlisted ? <Image source={GR_HEART_BLUE} style={componentStyles.heartIcon} /> :
                             <Image source={GR_HEART_WHITE} style={componentStyles.heartIcon} />
                 }
             </TouchableOpacity>
-            <TouchableOpacity style={componentStyles.productInfoWrapper} onPress={onProductPress}>
+            <TouchableOpacity testID='productDetails' style={componentStyles.productInfoWrapper} onPress={onProductPress}>
                 <FastImage source={{ uri: product.attributes.images?.data[0].attributes.url }}
                     style={componentStyles.productImage}
                 />
                 <Text style={componentStyles.productTitleText} numberOfLines={1}>{product.attributes.name}</Text>
                 {product.attributes.on_sale ? (
-            <View style={componentStyles.discountRow}>
-              <Text style={componentStyles.price}>
-                {themeJson.attributes.currency_type} {Number(product.attributes.price_including_tax.toString()).toFixed(1)}
-              </Text>
-              <Text style={componentStyles.discountPrice}>
-                {" "}
-                {themeJson.attributes.currency_type}{" "}
-                {product.attributes.actual_price_including_tax}
-              </Text>
-            </View>
-          ) : (
-            <Text style={[componentStyles.price, {}]}>
-              {themeJson.attributes.currency_type} {Number(product.attributes.price_including_tax.toString()).toFixed(1)}
-            </Text>
-          )}
-                {/* <Text style={componentStyles.price}>{currency} {Number(productDefaultPrice.toString()).toFixed(2)}</Text> */}
+                    <View style={componentStyles.discountRow}>
+                        <Text style={componentStyles.price}>
+                            {themeJson.attributes.currency_type} {Number(product.attributes.price_including_tax.toString()).toFixed(1)}
+                        </Text>
+                        <Text style={componentStyles.discountPrice}>
+                            {" "}
+                            {themeJson.attributes.currency_type}{" "}
+                            {product.attributes.actual_price_including_tax}
+                        </Text>
+                    </View>
+                ) : (
+                    <Text style={[componentStyles.price, {}]}>
+                        {themeJson.attributes.currency_type} {Number(product.attributes.price_including_tax.toString()).toFixed(1)}
+                    </Text>
+                )}
                 <Text style={componentStyles.weight}>{productDefaultWeight}</Text>
             </TouchableOpacity>
             {
@@ -117,31 +116,24 @@ const ProductBox: React.FC<ProductBoxProps> = ({
                         onQuantityIncrease={onQuantityIncrease}
                     />
                 ) : (
-                    product.attributes.stock_qty? <TouchableOpacity style={componentStyles.addToCartButtonWrapper} onPress={onAddToCartPress}
+                    product.attributes.stock_qty ? <TouchableOpacity testID='productBottomAddtocart' style={componentStyles.addToCartButtonWrapper} onPress={onAddToCartPress}
                         disabled={addToCartLoading}>
                         {
                             addToCartLoading ? <ActivityIndicator size="small" color={themeJson.attributes.primary_color} /> :
                                 <Text style={componentStyles.addToCartButtonText}>Add to cart</Text>
                         }
 
-                    </TouchableOpacity>:
-                    <TouchableOpacity style={componentStyles.addToCartButtonWrapper} 
-                    disabled={true}>
-                    {
-                        addToCartLoading ? <ActivityIndicator size="small" color={themeJson.attributes.primary_color} /> :
-                            <Text style={[componentStyles.addToCartButtonText,{opacity:0.5}]}>Out of Stock</Text>
-                    }
+                    </TouchableOpacity> :
+                        <TouchableOpacity style={componentStyles.addToCartButtonWrapper}
+                            disabled={true}>
+                            {
+                                addToCartLoading ? <ActivityIndicator size="small" color={themeJson.attributes.primary_color} /> :
+                                    <Text style={[componentStyles.addToCartButtonText, { opacity: 0.5 }]}>Out of Stock</Text>
+                            }
 
-                </TouchableOpacity>
+                        </TouchableOpacity>
                 )
             }
-              {/* {product.attributes.on_sale && (
-          <View style={componentStyles.labelSticker}>
-            <Text style={componentStyles.stickerText}>
-              Save {Number(product.attributes.discount).toFixed(1)}%
-            </Text>
-          </View>
-        )} */}
         </View>
     )
 }
@@ -190,7 +182,7 @@ const componentStyles = StyleSheet.create({
         fontFamily: FONTS.GTWalsheimProRegular,
         textDecorationLine: 'line-through',
         marginLeft: scale(2),
-      },
+    },
     weight: {
         fontFamily: FONTS.GTWalsheimProRegular,
         fontSize: scale(13),
@@ -202,12 +194,12 @@ const componentStyles = StyleSheet.create({
         top: scale(14),
         right: scale(10),
         zIndex: 10,
-       
+
     },
     heartIcon: {
         width: scale(22),
         height: scale(22),
-        resizeMode:'contain'
+        resizeMode: 'contain'
     },
     addToCartButtonWrapper: {
         padding: scale(8),
@@ -257,20 +249,20 @@ const componentStyles = StyleSheet.create({
         left: 0,
         top: scale(16),
         alignItems: "center",
-      },
-      stickerText: {
+    },
+    stickerText: {
         fontFamily: FONTS.GTWalsheimProMedium,
         color: COLOR_CONST.white,
         fontSize: scale(10),
         textAlign: "center",
         lineHeight: scale(11),
-      },
-      discountRow: {
+    },
+    discountRow: {
         flexDirection: "row",
         marginHorizontal: scale(12),
         alignSelf: 'center',
-        alignItems:'center'
-      },
+        alignItems: 'center'
+    },
 });
 
 export default ProductBox

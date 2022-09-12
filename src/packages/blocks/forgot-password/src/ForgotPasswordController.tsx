@@ -68,9 +68,6 @@ export default class ForgotPasswordController extends BlockComponent<
 > {
   validationAPICallId: any;
   requestEmailOtpCallId: any;
-  requestPhoneOtpCallId: any;
-  requestChangePasswordCallId: any;
-  requestGoToConfirmationCallId: any;
   apiGuestLoginCallId: any;
   otpToken: any;
   _unsubscribe: any;

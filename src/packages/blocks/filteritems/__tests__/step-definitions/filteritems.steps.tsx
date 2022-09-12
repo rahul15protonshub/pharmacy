@@ -96,6 +96,23 @@ defineFeature(feature, (test) => {
       instance.applyFilterApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
+    then("filteritems will add in wishlist without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.addToWishlistApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
 
     then("filteritems will add to wishlist without errors", () => {
       const msgLoadDataAPI = new Message(
@@ -186,8 +203,42 @@ defineFeature(feature, (test) => {
       instance.getCartListId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
-
+    then("filteritems will increament without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.increaseOrDecreaseCartQuantityApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("filteritems will update without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.putItemToCartApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
     then("I can select the button with with out errors", () => {
+      instance.setState({ showSortByModal: false });
       let buttonComponent = filterItemsBlock.findWhere(
         (node) => node.prop("testID") === "buttonSort"
       );
@@ -220,6 +271,7 @@ defineFeature(feature, (test) => {
         (node) => node.prop("testID") === "buttonSortPopularity"
       );
       buttonComponent.simulate("press");
+      
     });
 
     then("I can leave the screen with out errors", () => {

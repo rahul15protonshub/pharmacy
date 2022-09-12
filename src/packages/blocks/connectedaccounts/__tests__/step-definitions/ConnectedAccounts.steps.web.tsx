@@ -97,7 +97,6 @@ defineFeature(feature, (test) => {
 
         when('I navigate to the ConnectedAccounts and press backbutton', () => {
              instance = connectedAccountsWrapper.instance() as ConnectedAccounts
-            //  instance.handleBackButtonClick();
         });
 
         then('The App will go back in navigation', () => {

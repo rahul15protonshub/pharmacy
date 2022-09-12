@@ -10,6 +10,7 @@ import MessageEnum, {
 } from "../../../../framework/src/Messages/MessageEnum";
 import React from "react";
 import Orderdetailview from "../../src/Orderdetailview";
+import SubscriptionOrderList from "../../src/SubscriptionOrderList";
 
 jest.useFakeTimers();
 
@@ -436,6 +437,71 @@ defineFeature(feature, (test) => {
     then("I can leave the screen with out errors", () => {
       instance.componentWillUnmount();
       expect(orderdetailviewBlock).toBeTruthy();
+
+    });
+  });
+  //subscription test
+  test("User navigates to subscriptionorderlist", ({ given, when, then }) => {
+    let SubscriptionOrderListblock: ShallowWrapper;
+    let instance: SubscriptionOrderList;
+
+    given("I am a User loading subscriptionorderlist", () => {
+      SubscriptionOrderListblock = shallow(<SubscriptionOrderList {...screenProps} />);
+    });
+
+    when("I navigate to the subscriptionorderlist", async () => {
+      instance = SubscriptionOrderListblock.instance() as SubscriptionOrderList;
+      await instance.componentDidMount();
+      instance.setState({ subscriptionOrders: {} });
+    });
+
+    then("subscriptionorderlist will load with out errors", () => {
+      expect(SubscriptionOrderListblock).toBeTruthy();
+
+    });
+
+    then("Load subscription data without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: {
+            tracking: {},
+          },
+        }
+      );
+      instance.getSubscrptionOrdersAPICallID = msgLoadDataAPI.messageId;
+      instance.onCancelDelivery("");
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+
+    then("Extend deleviry without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.extendDeliveryAPICallID = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+
+    then("I can leave the screen with out errors", () => {
+      instance.componentWillUnmount();
+      expect(SubscriptionOrderListblock).toBeTruthy();
 
     });
   });

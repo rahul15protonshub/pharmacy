@@ -82,8 +82,9 @@ interface S {
   productDataArr: any;
   productsAddingToCart: any[];
   productWishlisting: number | null;
-  itemQuantity:any;
-  similarproductList:any
+  itemQuantity: any;
+  similarproductList: any
+  cart: any;
   // Customizable Area End
 }
 
@@ -111,8 +112,9 @@ export default class ProductDescriptionController extends BlockComponent<
   LikeFlag: any;
   LikeFlagId: any;
   addPrescriptionApiCallId: any
-  putItemToCartApiCallId:any
-  increaseOrDecreaseCartQuantityApiCallId:string
+  putItemToCartApiCallId: any
+  increaseOrDecreaseCartQuantityApiCallId: any
+  getCartId: any;
   // Customizable Area End
   constructor(props: Props) {
     super(props);
@@ -185,8 +187,9 @@ export default class ProductDescriptionController extends BlockComponent<
       productDataArr: [],
       productsAddingToCart: [],
       productWishlisting: null,
-      itemQuantity:1,
+      itemQuantity: 1,
       similarproductList: [],
+      cart: null,
       // Customizable Area End
     };
 
@@ -254,6 +257,7 @@ export default class ProductDescriptionController extends BlockComponent<
     this.setState({ token: token });
     this.getProductDescriptionRequest(token);
     this.getCartHasProduct(0);
+    this.getCart();
   };
 
   uploadproduct = async (productdata: any) => {
@@ -368,6 +372,15 @@ export default class ProductDescriptionController extends BlockComponent<
             });
           }
           this.setState({ isFetching: false, cartProduct: responseJson?.data });
+        }
+        else if (apiRequestCallId === this.getCartId) {
+          if (responseJson?.data) {
+            this.setState({
+              cart: responseJson?.data[0],
+              cart_id: responseJson?.data[0].id,
+            });
+          }
+          this.setState({ isFetching: false });
         } else if (apiRequestCallId === this.addToCartApiCallId) {
           let message = "Product added to cart successfully.";
           if (this.state.isFromSubscription) {
@@ -386,7 +399,7 @@ export default class ProductDescriptionController extends BlockComponent<
               this.getToken();
             }
           );
-        }else if(apiRequestCallId === this.putItemToCartApiCallId){ 
+        } else if (apiRequestCallId === this.putItemToCartApiCallId) {
           this.getCartHasProduct(1);
           this.state.similarproductList?.forEach((product: any) => {
             const orderItem = responseJson.data.attributes.order_items.find((item: any) => parseInt(product.id) === item.attributes.catalogue_id);
@@ -402,8 +415,8 @@ export default class ProductDescriptionController extends BlockComponent<
           // @ts-ignore
           await StorageProvider.set("cart_length", responseJson.data.attributes.order_items.length.toString());
 
-          
-        } 
+
+        }
         else if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
           this.getCartHasProduct(1)
           this.state.similarproductList?.forEach((product: any) => {
@@ -420,12 +433,10 @@ export default class ProductDescriptionController extends BlockComponent<
           // await StorageProvider.set("cart_length", responseJson.data.attributes.order_items.length.toString());
           //this.getFilteredProducts();
           //@ts-ignore
-        }else if (apiRequestCallId === this.updateQtyApiCallId) {
+        } else if (apiRequestCallId === this.updateQtyApiCallId) {
           let message = "Updated product quantity successfully.";
 
           if (this.state.isFromSubscription) {
-            // console.log(" the data is now ");
-
             message = "Product subscribed successfully.";
           }
 
@@ -452,8 +463,6 @@ export default class ProductDescriptionController extends BlockComponent<
           let message = "Updated product quantity successfully.";
 
           if (this.state.isFromSubscription) {
-            // console.log(" the data is now ");
-
             message = "Product subscribed successfully.";
           }
 
@@ -482,7 +491,7 @@ export default class ProductDescriptionController extends BlockComponent<
             message: this.parseApiErrorResponse(responseJson),
             productsAddingToCart: [],
           });
-        }else if (apiRequestCallId === this.putItemToCartApiCallId) {
+        } else if (apiRequestCallId === this.putItemToCartApiCallId) {
           this.setState({
             productsAddingToCart: [],
             isFetching: false,
@@ -502,7 +511,7 @@ export default class ProductDescriptionController extends BlockComponent<
             message: this.parseApiErrorResponse(responseJson),
           });
         }
-         else if (apiRequestCallId === this.getCartProductDescriptionId) {
+        else if (apiRequestCallId === this.getCartProductDescriptionId) {
           this.setState({
             isShowError: true,
             showAlertModal: true,
@@ -539,6 +548,8 @@ export default class ProductDescriptionController extends BlockComponent<
             message: responseJson.errors,
             productWishlisting: null,
           });
+        } else if (apiRequestCallId === this.getCartId) {
+          this.setState({ cart: null });
         } else if (apiRequestCallId === this.getCartProductId) {
           this.setState({ cartProduct: null });
         } else if (apiRequestCallId === this.updateQtyApiCallId) {
@@ -582,7 +593,7 @@ export default class ProductDescriptionController extends BlockComponent<
             showAlertModal: true,
             message: responseJson?.message,
           });
-        }else if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
+        } else if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
           this.setState({
             productsAddingToCart: [],
             isFetching: false,
@@ -590,7 +601,7 @@ export default class ProductDescriptionController extends BlockComponent<
             showAlertModal: true,
             message: responseJson?.message,
           });
-        }else if (apiRequestCallId === this.getCartProductDescriptionId) {
+        } else if (apiRequestCallId === this.getCartProductDescriptionId) {
         } else if (apiRequestCallId === this.getNotifyProductApiCallId) {
           this.setState({
             isShowError: true,
@@ -633,7 +644,7 @@ export default class ProductDescriptionController extends BlockComponent<
             showAlertModal: true,
             message: responseJson?.message,
           });
-        }  else if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
+        } else if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
           this.setState({
             productsAddingToCart: [],
             isFetching: false,
@@ -641,7 +652,7 @@ export default class ProductDescriptionController extends BlockComponent<
             showAlertModal: true,
             message: responseJson?.message,
           });
-        }else if (apiRequestCallId === this.updateQtyApiCallId) {
+        } else if (apiRequestCallId === this.updateQtyApiCallId) {
           this.setState({
             isShowError: false,
             showAlertModal: true,
@@ -683,7 +694,7 @@ export default class ProductDescriptionController extends BlockComponent<
             showAlertModal: true,
             message: errorReponse,
           });
-        }  else if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
+        } else if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
           this.setState({
             productsAddingToCart: [],
             isFetching: false,
@@ -691,7 +702,7 @@ export default class ProductDescriptionController extends BlockComponent<
             showAlertModal: true,
             message: responseJson?.message,
           });
-        }else if (apiRequestCallId === this.getCartProductDescriptionId) {
+        } else if (apiRequestCallId === this.getCartProductDescriptionId) {
           this.setState({
             isFetching: false,
             isShowError: true,
@@ -728,6 +739,15 @@ export default class ProductDescriptionController extends BlockComponent<
             showAlertModal: true,
             message: errorReponse,
             cartProduct: null,
+          });
+        }
+        else if (apiRequestCallId === this.getCartId) {
+          this.setState({
+            isFetching: false,
+            isShowError: true,
+            showAlertModal: true,
+            message: errorReponse,
+            cart: null,
           });
         } else if (apiRequestCallId === this.addToCartApiCallId) {
           this.setState({
@@ -805,14 +825,12 @@ export default class ProductDescriptionController extends BlockComponent<
     }
     let isVariantProduct =
       responseJson?.data?.attributes?.catalogue_variants.length > 0;
-    // console.log('@@@ Product Description Success CallBack =============', responseJson?.data);
-
 
     this.setState(
       {
         isFetching: false,
         productData: responseJson?.data,
-        similarproductList:responseJson?.data?.attributes?.similar_products?.data,
+        similarproductList: responseJson?.data?.attributes?.similar_products?.data,
         selectedProduct: selectedProduct || null,
         catalogue_id: responseJson?.data.id,
         showNotifyButton: responseJson?.data.attributes.product_notified,
@@ -881,10 +899,10 @@ export default class ProductDescriptionController extends BlockComponent<
           }
         );
         temp.attributes.similar_products.data = TempData;
-        this.setState({ productData: temp ,similarproductList:temp?.attributes?.similar_products?.data});
+        this.setState({ productData: temp, similarproductList: temp?.attributes?.similar_products?.data });
       }
     } catch (exc) {
-      // console.log(" the data is ",exc)
+
     }
   };
   getCartProductDescriptionSuccessCallBack = (responseJson: any) => {
@@ -1014,7 +1032,6 @@ export default class ProductDescriptionController extends BlockComponent<
         selectedAttributes[attribute].variant_property_id;
       delete selectedAttributes[attribute];
       this.setState({ selectedAttributes: selectedAttributes }, () => {
-        // console.log('@@@ Item selected Removed ===========', item, this.state.selectedAttributes, lastSelectedVariantPropertyID, item.variant_property_id)
         if (lastSelectedVariantPropertyID !== item.variant_property_id) {
           this.setState(
             {
@@ -1025,7 +1042,6 @@ export default class ProductDescriptionController extends BlockComponent<
               currentSelection: attribute,
             },
             () => {
-              // console.log('@@@ Item selected ===========', item, this.state.selectedAttributes)
               this.setSelectedProduct();
             }
           );
@@ -1043,7 +1059,6 @@ export default class ProductDescriptionController extends BlockComponent<
           currentSelection: attribute,
         },
         () => {
-          // console.log('@@@ Item selected ===========', item, this.state.selectedAttributes)
           this.setSelectedProduct();
         }
       );
@@ -1086,9 +1101,6 @@ export default class ProductDescriptionController extends BlockComponent<
     if (isFromVariant) {
       httpBody.catalogue_variant_id = this.state.catalogue_variant_id;
     }
-
-    // console.log(" PATH ", configJSON.updateQtyEndPoint + this.state.cart_id + "/update_item_quantity");
-    // console.log(" httpBody ", httpBody);
 
     this.updateQtyApiCallId = await this.apiCall({
       contentType: configJSON.productApiContentType,
@@ -1164,7 +1176,7 @@ export default class ProductDescriptionController extends BlockComponent<
     return requestMessage.messageId;
   };
   addToCart = async () => {
-    const { productData, selectedProduct, quantity, cartProduct } = this.state;
+    const { productData, selectedProduct, quantity } = this.state;
     const { cart_quantity } = productData.attributes;
     const isUpdate = selectedProduct
       ? selectedProduct?.attributes?.cart_quantity !== Number(quantity) &&
@@ -1254,7 +1266,7 @@ export default class ProductDescriptionController extends BlockComponent<
   };
 
   onPressBuyNow = async () => {
-    const { productData, selectedProduct, quantity, cartProduct } = this.state;
+    const { productData } = this.state;
     if (this.state.isGuestUser) {
       this.setState({ showGuestModal: true });
       return;
@@ -1329,8 +1341,6 @@ export default class ProductDescriptionController extends BlockComponent<
       item.attributes?.wishlisted
         ? this.removeFromWishlist(item.id)
         : this.addToWishlist(item.id);
-    } else {
-      // item.attributes?.wishlisted ? this.removeFromWishlist(item.id) : this.addToWishlist(item.id)
     }
   };
 
@@ -1368,14 +1378,22 @@ export default class ProductDescriptionController extends BlockComponent<
     }
   };
 
-  getCartHasProduct = async (num:number) => {
-    if(num<=0){
+  getCartHasProduct = async (num: number) => {
+    if (num <= 0) {
       this.setState({ isFetching: true });
     }
     this.getCartProductId = await this.apiCall({
       contentType: configJSON.productApiContentType,
       method: configJSON.apiMethodTypeGet,
       endPoint: configJSON.cartHasProductAPIEndPoint,
+    });
+  };
+  getCart = async () => {
+    this.setState({ isFetching: true });
+    this.getCartId = await this.apiCall({
+      contentType: configJSON.productApiContentType,
+      method: configJSON.apiMethodTypeGet,
+      endPoint: configJSON.getCartApiEndPoint,
     });
   };
 
@@ -1430,13 +1448,10 @@ export default class ProductDescriptionController extends BlockComponent<
     const {
       productData,
       selectedAttributes,
-      currentSelection,
       selectedProduct,
     } = this.state;
     const {
-      availabity,
       catalogue_variants,
-      product_attributes,
       variants_in_cart,
       cart_quantity,
     } = productData.attributes;
@@ -1505,7 +1520,6 @@ export default class ProductDescriptionController extends BlockComponent<
               : false,
         },
         () => {
-          // console.log('@@@ Available Attributes ===========', availableAttributes);
         }
       );
     }
@@ -1526,7 +1540,6 @@ export default class ProductDescriptionController extends BlockComponent<
           availablePropertIds.push(item.variant_property_id);
         });
       }
-      // console.log('@@@ Item Check =============', selectedVarientPropertyIds, availablePropertIds)
       return (
         JSON.stringify(selectedVarientPropertyIds.sort()) ===
         JSON.stringify(availablePropertIds.sort())
@@ -1540,7 +1553,6 @@ export default class ProductDescriptionController extends BlockComponent<
     const { catalogue_variants } = productData?.attributes;
     let isSelectedFound = false;
     catalogue_variants?.map((item: any, index: number) => {
-      // console.log('@@@ Item ===============', item.attributes);
       let varientPropertyIds: any = [];
       let selectedVarientPropertyIds: any = [];
       const { catalogue_variant_properties } = item.attributes;
@@ -1571,10 +1583,6 @@ export default class ProductDescriptionController extends BlockComponent<
       if (isSelectedFound) {
         return;
       }
-
-      // console.log('@@@ Item Selected Attributes ===============', selectedAttributes);
-      // console.log('@@@ Item varientPropertyIds ===============', varientPropertyIds);
-      // console.log('@@@ Item selectedVarientPropertyIds ===============', selectedVarientPropertyIds);
 
       if (varientPropertyIds.length === selectedVarientPropertyIds.length) {
         if (
@@ -1777,17 +1785,11 @@ export default class ProductDescriptionController extends BlockComponent<
     const {
       available_subscription,
       subscription_package,
-      subscription_quantity,
       subscription_period,
       is_subscription_available,
-      available_slots,
-      catalogue_subscriptions,
+
     } = this.state.productData.attributes;
-    // console.log('@@@ Subscription Available ===========', available_subscription);
-    // console.log('@@@ Subscription Package ===========', subscription_package);
-    // console.log('@@@ Subscription Period ===========', subscription_period);
-    // console.log('@@@ Subscription Quantity ===========', subscription_quantity);
-    // console.log('@@@ Subscription Catalogue ===========', catalogue_subscriptions);
+
     if (!is_subscription_available) {
       return;
     }
@@ -1849,7 +1851,6 @@ export default class ProductDescriptionController extends BlockComponent<
           if (subscription_period) {
             let subscriptionPeriod = subscription_period.split(" ");
             this.setState({ period: subscriptionPeriod[0] }, () => {
-              // console.log('@@@ Subscription Period ===========', this.state.period, this.state.subscriptionPeriodData);
               this.setSubSlots(0);
             });
           } else {
@@ -1893,8 +1894,6 @@ export default class ProductDescriptionController extends BlockComponent<
         selectedSlotId: 0,
       },
       () => {
-        // console.log('@@@ Subscription Package Data =============', this.state.subscriptionPackageData)
-        // console.log('@@@ Subscription Period Data =============', this.state.subscriptionPeriodData)
         this.setSubSlots(0);
       }
     );
@@ -1995,7 +1994,6 @@ export default class ProductDescriptionController extends BlockComponent<
         slots: localSlots,
       },
       () => {
-        // console.log('@@@ Subscription Time Slot Data ============', this.state.subscriptionTimeSlotData);
       }
     );
   };
@@ -2030,30 +2028,30 @@ export default class ProductDescriptionController extends BlockComponent<
 
   putItemToCart = async (cartId: any, product: any, type: string) => {
     let httpBody: any;
-      if (product.catalogue_id && product?.attributes.catalogue_variants[0].id) {
-        httpBody = {
-          catalogue_id: product.catalogue_id,
-          catalogue_variant_id: parseInt(product?.attributes.catalogue_variants[0].id),
-          quantity: this.state.itemQuantity,
-        };
-        await StorageProvider.set(
-          "catalogue_variant_id",
-          product?.attributes.catalogue_variants[0].id
-        );
-      } else {
-        httpBody = {
-          catalogue_id: product.id,
-          quantity: this.state.itemQuantity,
-        };
-      }
+    if (product.catalogue_id && product?.attributes.catalogue_variants[0].id) {
+      httpBody = {
+        catalogue_id: product.catalogue_id,
+        catalogue_variant_id: parseInt(product?.attributes.catalogue_variants[0].id),
+        quantity: this.state.itemQuantity,
+      };
+      await StorageProvider.set(
+        "catalogue_variant_id",
+        product?.attributes.catalogue_variants[0].id
+      );
+    } else {
+      httpBody = {
+        catalogue_id: product.id,
+        quantity: this.state.itemQuantity,
+      };
+    }
 
-      this.putItemToCartApiCallId = await this.apiCall({
-        contentType: configJSON.productApiContentType,
-        method: configJSON.apiMethodTypePut,
-        endPoint: configJSON.addToCartApiEndPoint+
+    this.putItemToCartApiCallId = await this.apiCall({
+      contentType: configJSON.productApiContentType,
+      method: configJSON.apiMethodTypePut,
+      endPoint: configJSON.addToCartApiEndPoint +
         `${cartId}/add_item`,
-        body: httpBody,
-      });
+      body: httpBody,
+    });
   };
 
   increaseOrDecreaseCartQuantity = async (product: any, increment: number) => {
@@ -2093,7 +2091,7 @@ export default class ProductDescriptionController extends BlockComponent<
       });
     }
 
-   
+
   }
   // Customizable Area End
 }

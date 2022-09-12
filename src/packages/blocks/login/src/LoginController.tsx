@@ -14,7 +14,6 @@ import {
   imgEmailIcon,
   imgPasswordIcon,
 } from "./../../studio-store-ecommerce-theme/src/AppAssets/appassets";
-
 import { LoginManager, AccessToken } from "react-native-fbsdk";
 import {
   GoogleSignin,
@@ -348,15 +347,13 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
         email_or_mobile: phoneNo,
         password: this.state.passwordInput,
         device_token: fcmToken,
-        // uuid: DeviceInfo.getUniqueId()
       };
     } else {
       data = {
         email_or_mobile: this.state.emailInput.toLowerCase(),
         password: this.state.passwordInput,
         device_token: fcmToken,
-        // uuid: DeviceInfo.getUniqueId()
-      };
+          };
     }
     this.setState({ isFetching: true });
     this.apiEmailLoginCallId = await this.apiCall({
@@ -369,7 +366,6 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
 
   onLoginUserSuccessCallBack = async (res: any) => {
     await StorageProvider.remove("GUEST_USER");
-    console.log("@@@ Login Success CallBack ===================", res);
     setTimeout(() => {
       this.setState(
         {
@@ -387,7 +383,6 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
   };
 
   onLoginUserFailureCallBack = (error: any) => {
-    console.log("@@@ Login User Failure CallBack ===================", error);
     if (error) {
       setTimeout(() => {
         this.setState(
@@ -399,7 +394,6 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
           },
           () => {
             setTimeout(() => {
-              console.log("@@@ Error Message ===========", this.state.message);
               if (
                 this.state.message ===
                 "Sorry, You need to confirm your account first."
@@ -425,7 +419,6 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
   onSocialLoginSuccessCallBack = async (res: any) => {
     await StorageProvider.remove("GUEST_USER");
     await StorageProvider.set("SOCIAL_LOGIN_USER", "true");
-    console.log("@@@ Social Login Success CallBack ===================", res);
     setTimeout(() => {
       this.setState(
         {
@@ -443,7 +436,6 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
   };
 
   onSocialLoginFailureCallBack = (error: any) => {
-    console.log("@@@ Social Login Failure CallBack ===================", error);
     if (error) {
       setTimeout(() => {
         this.setState({
@@ -467,7 +459,6 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
 
   onGuestLoginSuccessCallBack = async (res: any) => {
     await StorageProvider.remove("GUEST_USER");
-    console.log("@@@ Guest Login Success CallBack ===================", res);
     setTimeout(() => {
       this.setState(
         {
@@ -485,7 +476,6 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
   };
 
   onGuestLoginFailureCallBack = (error: any) => {
-    console.log("@@@ Guest Login Failure CallBack ===================", error);
     if (error) {
       setTimeout(() => {
         this.setState({
@@ -543,7 +533,6 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
   };
 
   onSendVerificationOTPSuccessCallBack = async (res: any) => {
-    console.log("@@@ Send OTP User Success CallBack =============", res);
     this.setState({ isFetching: false }, () => {
       this.props.navigation.navigate("OTPInputAuth", {
         token: res.meta.token,
@@ -555,10 +544,6 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
   };
 
   onSendVerificationOTPFailureCallBack = (error: any) => {
-    console.log(
-      "@@@ Send OTP User Failure CallBack ===================",
-      error
-    );
     if (error) {
       setTimeout(() => {
         this.setState({
@@ -587,7 +572,6 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
     )
       .then((response) => {
         response.json().then((json) => {
-          console.log("@@@ Facebook Login Response ============", json);
           let data = {
             access_token: token,
             provider: "facebook",
@@ -596,7 +580,6 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
         });
       })
       .catch(() => {
-        console.log("ERROR GETTING DATA FROM FACEBOOK");
       });
   };
 
@@ -607,7 +590,6 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
     LoginManager.logInWithPermissions(["public_profile", "email"]).then(
       (result) => {
         if (result.isCancelled) {
-          console.log("Login cancelled");
         } else {
           AccessToken.getCurrentAccessToken().then((data) => {
             const accessToken =
@@ -617,7 +599,6 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
         }
       },
       function (error) {
-        console.log("Login fail with error: " + error);
       }
     );
   };
@@ -634,21 +615,16 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
         provider: "google",
       };
       this.onSocialLogin(data);
-      console.log(
-        "@@@ Google SignIn Response ACCESS TOKEN =========== ",
-        userToken
-      );
-      console.log("@@@ Google SignIn Response =========== ", userInfo);
-    } catch (error) {
-      console.log("@@@ Message ==============================", error);
+    } catch (error:any) {
+     
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        console.log("User Cancelled the Login Flow");
+        
       } else if (error.code === statusCodes.IN_PROGRESS) {
-        console.log("Signing In");
+       
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        console.log("Play Services Not Available or Outdated");
+        
       } else {
-        console.log("Some Other Error Happened");
+        
       }
     }
   };
@@ -658,12 +634,6 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
       requestedOperation: appleAuth.Operation.LOGIN,
       requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
     });
-
-    console.log(
-      "@@@ Apple Login Response ================",
-      appleAuthRequestResponse
-    );
-    console.log("identityToken", appleAuthRequestResponse.identityToken);
     let data = {
       access_token: appleAuthRequestResponse.identityToken,
       provider: "apple",
@@ -681,7 +651,6 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
   }
 
   async saveLoggedInUserData(responseJson: any, isGuestUser: any = false) {
-    console.log("@@@ SAVE LOGGED IN USER DATA ============", responseJson);
     await StorageProvider.set("Userdata", responseJson.meta.token);
     await StorageProvider.set("USER_ID", responseJson.data.id);
     if (isGuestUser) {
@@ -697,7 +666,6 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
         type: "social_account",
         attributes: item,
       },
-      // uuid: DeviceInfo.getUniqueId()
     };
     this.apiSocialLoginCallId = await this.apiCall({
       contentType: configJSON.loginApiContentType,
@@ -726,5 +694,9 @@ export default class LoginController extends BlockComponent<Props, S, SS> {
   };
 
   // Customizable Area Start
+
+    goforgotpassword=async()=>{
+    this.props.navigation.replace("ForgotPassword")
+  }
   // Customizable Area End
 }

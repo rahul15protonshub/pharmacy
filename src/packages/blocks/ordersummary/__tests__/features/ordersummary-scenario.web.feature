@@ -20,13 +20,3 @@ Feature: ordersummary
         And I can select the button with with out errors
         And Show guest modal without errors
         And I can leave the screen with out errors
-        And ordersummary createOrderId without error
-        And ordersummary verifyRazorPayId without error
-        And ordersummary releaseBlockQuantityApiCallId without error
-        And ordersummary releaseShippingChargeCalculationApiCallID without error
-        And ordersummary shippingChargeCalculationApiCallID without error
-        And ordersummary save address without error
-        And ordersummary check zipcode without error
-        And ordersummary check availablity without error
-        And ordersummary releaseblock without error
-        And ordersummary confirmStripePaymentID without error

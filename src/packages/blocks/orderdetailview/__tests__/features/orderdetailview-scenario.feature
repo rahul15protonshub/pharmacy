@@ -24,3 +24,11 @@ Feature: orderdetailview
         And I can select the button with with out errors
         And Render view with different states with out errors
         And I can leave the screen with out errors
+
+      Scenario: User navigates to subscriptionorderlist
+        Given I am a User loading subscriptionorderlist
+        When I navigate to the subscriptionorderlist
+        Then subscriptionorderlist will load with out errors
+        Then Load subscription data without errors
+        Then Extend deleviry without errors
+        And I can leave the screen with out errors   

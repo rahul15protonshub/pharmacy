@@ -56,7 +56,7 @@ interface S {
   // Customizable Area End
 }
 
-interface SS {}
+interface SS { }
 
 export default class SignupController extends BlockComponent<Props, S, SS> {
   emailReg: RegExp;
@@ -143,7 +143,6 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
       var responseJson = message.getData(
         getName(MessageEnum.RestAPIResponceSuccessMessage)
       );
-
       var errorReponse = message.getData(
         getName(MessageEnum.RestAPIResponceErrorMessage)
       );
@@ -495,7 +494,7 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
           showAlertModal: true,
           isFetching: false,
         },
-        async () => {}
+        async () => { }
       );
       setTimeout(() => {
         this.saveLoggedInUserData(res);
@@ -556,7 +555,7 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
           showAlertModal: true,
           isFetching: false,
         },
-        async () => {}
+        async () => { }
       );
       setTimeout(() => {
         this.saveLoggedInUserData(res, true);
@@ -592,14 +591,13 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
   initUser = async (token: string) => {
     fetch(
       "https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=" +
-        token
+      token
     )
       .then((response) => {
         response.json().then((json) => {
           let data = {
             access_token: token,
             provider: "facebook",
-            // uuid: DeviceInfo.getUniqueId()
           };
           this.onSocialLogin(data);
         });
@@ -629,7 +627,6 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
         }
       },
       function (error) {
-        console.log("Login fail with error: " + error);
       }
     );
   };
@@ -644,7 +641,7 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
       let data = {
         access_token: userToken.accessToken,
         provider: "google",
-        // uuid: DeviceInfo.getUniqueId()
+
       };
       this.onSocialLogin(data);
     } catch (error) {
@@ -661,7 +658,6 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
     let data = {
       access_token: appleAuthRequestResponse.identityToken,
       provider: "apple",
-      // uuid: DeviceInfo.getUniqueId()
     };
     this.onSocialLogin(data);
   };
@@ -702,7 +698,7 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
       let termsIndex = this.state.helpCenterList.findIndex(
         (item: any) =>
           item.attributes.help_center_type.toLowerCase() ===
-            "terms & conditions" ||
+          "terms & conditions" ||
           item.attributes.help_center_type.toLowerCase() === "terms of service"
       );
       if (privacyIndex !== -1) {

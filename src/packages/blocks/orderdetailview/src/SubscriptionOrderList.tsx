@@ -5,9 +5,7 @@ import {
   TouchableOpacity,
   View,
   ActivityIndicator,
-  ScrollView,
   FlatList,
-  Modal,
   SafeAreaView,
   // Customizable Area Start
   // Customizable Area End
@@ -29,9 +27,6 @@ import {
 import ApplicationLoader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader";
 import CustomErrorModal from "../../studio-store-ecommerce-components/src/CustomErrorModal/CustomErrorModal";
 import FocusAwareStatusBar from "../../../blocks/studio-store-ecommerce-components/src/FocusAwareStatusBar/FocusAwareStatusBar";
-import { capitalize } from "../../../framework/src/utils/Utils";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import scale from "../../../framework/src/utils/Scale";
 import COLOR_CONST from "../../studio-store-ecommerce-theme/src/AppFonts";
 
 // Customizable Area Start
@@ -47,11 +42,11 @@ export default class SubscriptionOrderList extends SubscriptionOrderListControll
   }
 
   renderSubscriptionCell = (item: any, index: any) => {
-    const orderData = this.props.navigation.state.params.orderData;
+    const orderData = this.props.navigation?.state?.params?.orderData;
     let productImage = "";
 
-    if (orderData.attributes.product_images.data?.length > 0) {
-      orderData.attributes.product_images.data.map((item: any) => {
+    if (orderData.attributes?.product_images?.data?.length > 0) {
+      orderData.attributes?.product_images?.data.map((item: any) => {
         if (item.attributes.is_default) {
           productImage = item.attributes.url;
         }
@@ -74,12 +69,6 @@ export default class SubscriptionOrderList extends SubscriptionOrderListControll
             .url;
       }
     }
-    console.log(
-      "@@@ Order =============",
-      productImage,
-      orderData.attributes.product_images
-    );
-
     return (
       <View style={styles.statusView}>
         <View style={styles.tickView}>
