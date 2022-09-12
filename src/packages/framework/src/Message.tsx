@@ -21,7 +21,6 @@ export class Message {
     if (val) {
       return val;
     }
-    // console.log('properties = ', this.properties, key);
   }
 
   initializeFromObject = (from: any) => {

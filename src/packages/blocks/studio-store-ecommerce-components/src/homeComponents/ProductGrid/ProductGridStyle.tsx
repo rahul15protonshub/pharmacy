@@ -9,7 +9,6 @@ export default StyleSheet.create({
         backgroundColor: COLOR_CONST.white,
         paddingBottom: verticalScale(20),
         width: scale(375),
-        // height: scale(313)
     },
 
     flexstyle: {
@@ -70,7 +69,6 @@ export default StyleSheet.create({
     BottalImage: {
         width: scale(166),
         height: scale(150),
-        // marginTop: scale(14),
     },
 
     titleContainer: {
@@ -131,7 +129,6 @@ export default StyleSheet.create({
         fontFamily: FONTS.GTWalsheimProRegular,
         fontSize: scale(13),
         lineHeight: scale(15),
-        // marginTop: verticalScale(14)
     },
 
     spinner: {
@@ -152,7 +149,6 @@ export default StyleSheet.create({
     },
 
     TouchableOpacityStyle: {
-        // backgroundColor:COLOR_CONST.white,
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',

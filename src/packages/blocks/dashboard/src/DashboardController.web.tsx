@@ -983,6 +983,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     };
     let httpBody: any;
     if (type == "subscription") {
+      console.log('first', this.state.SubscriptionRequestBody)
       httpBody = this.state.SubscriptionRequestBody;
     } else {
       if (product.catalogue_id && this.state.catalogue_variant_id) {
@@ -1000,7 +1001,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
         this.state.productDetails?.attributes?.cart_quantity == null
       ) {
         httpBody = {
-          catalogue_id: product.id,
+          catalogue_id: product.id!=undefined?product.id:this.state.productDetails.id,
           quantity: this.state.itemQuantity,
         };
       } else {
@@ -1473,7 +1474,7 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
         productToBeAdded: product,
       });
       this.state.cartId != ""
-        ? this.putItemToCart(this.state.cartId, "")
+        ? this.putItemToCart(this.state.cartId,"")
         : this.postCreateCart(product);
     }, 500);
   };
@@ -1779,9 +1780,12 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
           : false,
         SubscriptionRequestBody: {
           ...SubscriptionRequestBody,
-          subscription_quantity: this.state.subscriptionqty,
-          subscription_package: this.state.selectedPackageName,
-          subscription_period: this.state.selectedPackagePeriod,
+          catalogue_id: Number(data.catalogue_id),
+          preferred_delivery_slot:data.preferred_delivery_slot,
+          subscription_discount: data.subscription_discount,
+          subscription_quantity: data.subscription_quantity?data.subscription_quantity:this.state.subscriptionqty,
+          subscription_package: data.subscription_package?data.subscription_package:this.state.selectedPackageName,
+          subscription_period: data.subscription_period?data.subscription_period:this.state.selectedPackagePeriod,
         },
       }),
       () => {

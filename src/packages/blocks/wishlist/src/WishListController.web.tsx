@@ -191,14 +191,6 @@ export default class WishListController extends BlockComponent<Props, S, SS> {
                 responseJson.data?.attributes?.order_items[0]?.attributes
                   ?.catalogue_id,
             });
-            //@ts-ignore
-            // window.notify([
-            //   { message: "Item added in cart successfully", type: "success" },
-            // ]);
-            // setTimeout(() => {
-            //   this.removeProductFromWishList();
-            // }, 200);
-
             this.getIsCartCreated();
             this.props.getWishList();
             // @ts-ignore
@@ -220,13 +212,6 @@ export default class WishListController extends BlockComponent<Props, S, SS> {
                   ?.catalogue_id,
             });
 
-            // setTimeout(() => {
-            //   this.removeProductFromWishList();
-            // }, 900);
-            // @ts-ignore
-            // window.notify([
-            //   { message: "Item added in cart successfully", type: "success" },
-            // ]);
             // @ts-ignore
             this.props.getWishList();
             const cart_length = parseInt(
@@ -238,16 +223,6 @@ export default class WishListController extends BlockComponent<Props, S, SS> {
             );
             // @ts-ignore
             localStorage.setItem("cart_length", cart_length + 1);
-            // @ts-ignore
-            // localStorage.setItem("wishlist_len", wishlist_len - 1);
-            // var wishlistupdateMessage = new Message(
-            //   getName(MessageEnum.UpdateWishlist)
-            // );
-            // wishlistupdateMessage.addData(
-            //   getName(MessageEnum.UpdateWishlistLen),
-            //   wishlist_len - 1
-            // );
-            // runEngine.sendMessage(wishlistupdateMessage.id, wishlistupdateMessage);
           }
           if (
             responseJson &&
@@ -431,7 +406,6 @@ export default class WishListController extends BlockComponent<Props, S, SS> {
     } else {
       httpBody = {
         catalogue_id: product.id,
-        // catalogue_variant_id: product.id,
         quantity: 1,
       };
     }

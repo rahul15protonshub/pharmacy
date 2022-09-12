@@ -76,24 +76,8 @@ class HomeDashboard extends DashboardController {
       templates[this.state.selectedTemplate].find(
         (temp) => temp.sectionName === "headerBanner"
       );
-    // const selectedCategory =
-    //   this.state.selectedTemplate &&
-    //   templates[this.state.selectedTemplate].find(
-    //     (temp) => temp.sectionName === "categories"
-    //   );
-    // const selectedTrendingProducts =
-    //   this.state.selectedTemplate &&
-    //   templates[this.state.selectedTemplate].find(
-    //     (temp) => temp.sectionName === "TrendingProduct"
-    //   );
-
     return (
       <>
-        {/* {this.state.dashboardLoader && (
-          <Loader loading={this.state.dashboardLoader} />
-        )} */}
-
-        {/* Shib start */}
         <Container className={`home-layout ${!this.state.showProducts ? 'home-layout--show' : ''} h-100 mb-40`}>
           <Row className="home-layout__row gx-40 h-100">
             <Col
@@ -131,7 +115,7 @@ class HomeDashboard extends DashboardController {
               className="home-layout__col home-layout__right"
             >
               <RightContent
-                toggleOurProducts={this.toggleOurProducts}
+                toggleOurProducts={this.toggeProduct}
                 banners={this.state.banners || []}
                 products={this.state.dashboardFilteredProducts}
                 loading={this.state.dashboardFilterLoading}
@@ -150,185 +134,7 @@ class HomeDashboard extends DashboardController {
           </Row>
           <div className="home-layout__backdrop" onClick={this.toggeProduct}></div>
         </Container>
-        {/* Shib end */}
-
-        {/* {this.state.selectedTemplate && templates[this.state.selectedTemplate] && (
-          <>
-            {dynamicComponentLoad(
-              {
-                data:
-                  (this.state.banners.length > 0 &&
-                    this.state.banners[0].attributes.images.data) ||
-                  [],
-              },
-              SECTIONS_PATH.HEADER_BANNER,
-              selectedBanner,
-              this.state.selectedTemplate,
-              "HeaderBanner"
-            )} */}
-{/* 
-            {dynamicComponentLoad(
-              {
-                collection: this.state.collectionCategory,
-                onViewMore: () => {
-                  localStorage.setItem("newest", "By Newest");
-                  //@ts-ignore
-                  this.props?.history?.push(
-                    `./Filteroptions?&page=${1}&per_page=${15}&sort[order_by]=created_at&sort[direction]=desc`
-                  );
-                },
-                disablePropertyName: "isNewCollectionPrevButtonActive",
-                isNewCollectionPrevButtonActive:
-                  this.state.isNewCollectionPrevButtonActive,
-                setPrvsButtonDisabled: (carousel) => {
-                  setTimeout(() => {
-                    this.setState({
-                      isNewCollectionPrevButtonActive:
-                        carousel?.current?.state.activePage != 0,
-                    });
-                  }, 500);
-                },
-                addToCart: this.addToCart,
-                createWishlist: this.postWishlist,
-                deleteWishlist: this.delWishlist,
-                toSetDefaultVariant: this.toSetDefaultVariant,
-              },
-              SECTIONS_PATH.CATEGORY,
-              selectedCategory,
-              this.state.selectedTemplate,
-              "Categories"
-            )} */}
-{/* 
-            {dynamicComponentLoad(
-              {
-                collection: this.state.newCollection,
-                onViewMore: () => {
-                  localStorage.setItem("newest", "By Newest");
-                  //@ts-ignore
-                  this.props?.history?.push(
-                    `./Filteroptions?&page=${1}&per_page=${15}&sort[order_by]=created_at&sort[direction]=desc`
-                  );
-                },
-                disablePropertyName: "isNewCollectionPrevButtonActive",
-                isNewCollectionPrevButtonActive:
-                  this.state.isNewCollectionPrevButtonActive,
-                setPrvsButtonDisabled: (carousel) => {
-                  setTimeout(() => {
-                    this.setState({
-                      isNewCollectionPrevButtonActive:
-                        carousel?.current?.state.activePage != 0,
-                    });
-                  }, 500);
-                },
-                addToCart: this.addToCart,
-                createWishlist: this.postWishlist,
-                deleteWishlist: this.delWishlist,
-                toSetDefaultVariant: this.toSetDefaultVariant,
-              },
-              SECTIONS_PATH.NEW_ARRIVALS,
-              selectedCategory,
-              this.state.selectedTemplate,
-              "NewArrivals"
-            )} */}
-
-            {/* <section className="container ds-mb-40 ds-mb-md-80 ds-mb-lg-104">
-              {this.state.banners.length > 0 &&
-                this.state.bannerPosition2 &&
-                this.state.bannerPosition2.attributes.images != null && (
-                  <div className="banner-single">
-                    <img
-                      src={
-                        this.state.bannerPosition2.attributes.images.data[0]
-                          .attributes.url
-                      }
-                      style={
-                        this.state.bannerPosition2.attributes.images.data[0]
-                          .attributes.url_link
-                          ? { cursor: "pointer" }
-                          : { cursor: "default" }
-                      }
-                      alt="Card image cap"
-                      onClick={() => {
-                        //@ts-ignore
-                        this.state.bannerPosition2.attributes.images.data[0]
-                          .attributes.url_link &&
-                          window.location.replace(
-                            this.state.bannerPosition2.attributes.images.data[0]
-                              .attributes.url_link
-                          );
-                      }}
-                    />
-                  </div>
-                )}
-            </section> */}
-            {/* {this.state.selectedTemplate &&
-              templates[this.state.selectedTemplate] &&
-              selectedTrendingProducts &&
-              dynamicComponentLoad(
-                {
-                  collection: this.state.featuredProduct,
-                  name: "Trending Products",
-                  onViewMore: () => {
-                    localStorage.setItem("newest", "Recommended");
-                    //@ts-ignore
-                    this.props?.history?.push(
-                      `./Filteroptions?&page=${1}&per_page=${15}&sort[order_by]=sold&sort[direction]=desc`
-                    );
-                  },
-                  disablePropertyName: "isrcmdCollectionPrevButtonActive",
-                  isrcmdCollectionPrevButtonActive:
-                    this.state.isrcmdCollectionPrevButtonActive,
-                  setPrvsButtonDisabled: (carousel) => {
-                    setTimeout(() => {
-                      this.setState({
-                        isrcmdCollectionPrevButtonActive:
-                          carousel?.current?.state.activePage != 0,
-                      });
-                    }, 500);
-                  },
-                  addToCart: this.addToCart,
-                  createWishlist: this.postWishlist,
-                  deleteWishlist: this.delWishlist,
-                  toSetDefaultVariant: this.toSetDefaultVariant,
-                },
-                SECTIONS_PATH.TRENDINGPRODUCTS,
-                selectedTrendingProducts,
-                this.state.selectedTemplate,
-                "TrendingProducts"
-              )} */}
-            {/* <section className="container ds-mb-40 ds-mb-md-80 ds-mb-lg-104">
-              {this.state.banners.length > 0 &&
-                this.state.bannerPosition4 &&
-                this.state.bannerPosition4.attributes.images != null && (
-                  <div className="banner-single">
-                    <img
-                      src={
-                        this.state.bannerPosition4.attributes.images.data[0]
-                          .attributes.url
-                      }
-                      style={
-                        this.state.bannerPosition4.attributes.images.data[0]
-                          .attributes.url_link
-                          ? { cursor: "pointer" }
-                          : { cursor: "default" }
-                      }
-                      alt="Card image cap"
-                      onClick={() => {
-                        //@ts-ignore
-                        this.state.bannerPosition4.attributes.images.data[0]
-                          .attributes.url_link &&
-                          window.location.replace(
-                            this.state.bannerPosition4.attributes.images.data[0]
-                              .attributes.url_link
-                          );
-                      }}
-                    />
-                  </div>
-                )}
-            </section> */}
           </>
-        // )}
-      // </>
     );
     // Customizable Area End
   }
@@ -340,53 +146,4 @@ export { HomeDashboard };
 //@ts-ignore
 export default withRouter(HomeDashboard);
 
-{
-  /* <div className="main-container">
-                <div className="service-steps d-none">
-                  <div className="step">
-                    <img src={Serviceicon1} className="banner-image" />
-                    <div>
-                      <p>
-                        <strong>
-                          {content.homeFreeDeliveryStrip.FreeDelivery}
-                        </strong>
-                      </p>
-                      <p>
-                        {content.homeFreeDeliveryStrip.FreeDeliveryDescription}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="step">
-                    <img src={Serviceicon2} className="banner-image" />
-                    <div>
-                      <p>
-                        <strong>
-                          {content.homeFreeDeliveryStrip.SecurePayment}
-                        </strong>
-                      </p>
-                      <p>
-                        {content.homeFreeDeliveryStrip.SecurePaymentDescription}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="step">
-                    <img src={Serviceicon3} className="banner-image" />
-                    <div>
-                      <p>
-                        <strong>{content.homeFreeDeliveryStrip.return}</strong>
-                      </p>
-                      <p>{content.homeFreeDeliveryStrip.returnDescription}</p>
-                    </div>
-                  </div>
-                  <div className="step border-0">
-                    <img src={Serviceicon4} className="banner-image" />
-                    <div>
-                      <p>
-                        <strong>{content.homeFreeDeliveryStrip.support}</strong>
-                      </p>
-                      <p>{content.homeFreeDeliveryStrip.supportDescrip}</p>
-                    </div>
-                  </div>
-                </div>
-              </div> */
-}
+

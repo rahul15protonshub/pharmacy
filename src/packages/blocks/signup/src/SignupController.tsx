@@ -620,6 +620,10 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
               this.initUser(accessToken);
             }
           });
+
+          if (result && result.grantedPermissions) {
+           
+          }
         }
       },
       function (error) {
@@ -641,7 +645,7 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
       };
       this.onSocialLogin(data);
     } catch (error) {
-
+     
     }
   };
 

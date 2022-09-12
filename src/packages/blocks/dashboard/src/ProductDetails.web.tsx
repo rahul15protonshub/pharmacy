@@ -22,7 +22,27 @@ import "../assets/css/subscribeModal.css";
 import { prescription } from "./assets";
 import ReadMoreReact from "read-more-react";
 import ProductBox from "./components/ProductBox";
-
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
 class ProductDetails extends DashboardController {
   constructor(props: Props) {
     super(props);
@@ -471,7 +491,6 @@ class ProductDetails extends DashboardController {
                               content?.willNotify
                             ) : (
                               <div class="d-grid gap-3 product-btn-group">
-                                {/* <p className="product-stock-message mb-0">{content?.itemOutOfStock}</p> */}
                                 <button
                                   type="button"
                                   class="btn btn-outline-primary-1"
@@ -601,47 +620,51 @@ class ProductDetails extends DashboardController {
                         </h4>
                       </>
                     )}
-                    <Row className="mx-3">
-                    {this?.state?.productDetails?.attributes?.similar_products
-                      ?.data &&
-                      this?.state?.productDetails?.attributes?.similar_products?.data.map(
-                        (product) => {
-                          return (
-                            <Col lg="3" md="4" xs="6" key={product.id} className="d-flex px-3">
-                              <ProductBox
-                                onProductAddToWishlist={this?.postWishlist}
-                                onProductDeleteFromWishlist={this?.delWishlist}
-                                product={product}
-                                onProductAddToCart={this?.addToCart}
-                                onProductDecreaseCartQuantity={(product) =>
-                                  this.increaseOrDecreaseCartQuantity(
-                                    product,
-                                    -1,
-                                    product.attributes.default_variant?.id
-                                  )
-                                }
-                                onProductIncreaseCartQuantity={(product) =>
-                                  this.increaseOrDecreaseCartQuantity(
-                                    product,
-                                    1,
-                                    product.attributes.default_variant?.id
-                                  )
-                                }
-                                addToCartLoading={this.state.productsAddingToCart.includes(
-                                  product.id
-                                )}
-                                wishlistLoading={
-                                  this.state.productWishlisting === product.id
-                                }
-                                isProductAddtoCart={
-                                  this.state.isProductAddtoCart
-                                }
-                              />
-                            </Col>
-                          );
-                        }
-                      )}
-                      </Row>
+                    <div class="d-flex flex-row flex-nowrap overflow-auto mx-3">
+                        {this?.state?.productDetails?.attributes
+                          ?.similar_products?.data &&
+                          this?.state?.productDetails?.attributes?.similar_products?.data.map(
+                            (product) => {
+                              return (
+                                <div className="similarProductCard">
+                                  <ProductBox
+                                    onProductAddToWishlist={this?.postWishlist}
+                                    onProductDeleteFromWishlist={
+                                      this?.delWishlist
+                                    }
+                                    product={product}
+                                    onProductAddToCart={this?.addToCart}
+                                    onProductDecreaseCartQuantity={(product) =>
+                                      this.increaseOrDecreaseCartQuantity(
+                                        product,
+                                        -1,
+                                        product.attributes.default_variant?.id
+                                      )
+                                    }
+                                    onProductIncreaseCartQuantity={(product) =>
+                                      this.increaseOrDecreaseCartQuantity(
+                                        product,
+                                        1,
+                                        product.attributes.default_variant?.id
+                                      )
+                                    }
+                                    addToCartLoading={this.state.productsAddingToCart.includes(
+                                      product.id
+                                    )}
+                                    wishlistLoading={
+                                      this.state.productWishlisting ===
+                                      product.id
+                                    }
+                                    isProductAddtoCart={
+                                      this.state.isProductAddtoCart
+                                    }
+                                  />
+                                </div>
+                              );
+                            }
+                          )}
+                      {/* </Carousel> */}
+                    </div>
                   </Card>
                 </Col>
               )}

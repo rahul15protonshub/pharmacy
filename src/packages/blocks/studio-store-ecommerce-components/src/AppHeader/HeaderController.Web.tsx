@@ -8,7 +8,6 @@ import MessageEnum, {
 import { isEmpty } from "../../../../framework/src/Utilities";
 
 // Customizable Area Start
-
 // Customizable Area End
 
 export const configJSON = require("./config");
@@ -103,7 +102,6 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
       menuCategory: undefined,
       currentPageActive: "",
       isLoggedIn: false,
-      // themData: {},
       themData: JSON.parse(localStorage.getItem("appThemData") ?? "{}"),
       cartLength: "",
       wishlistLength: "",
@@ -124,7 +122,6 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
     this.onRouteChange();
     this.setState({
       cartLength: localStorage.getItem("cart_length"),
-      // wishlistLength: localStorage.getItem("wishlist_len")
     })
     
     if (getName(MessageEnum.UpdateWishlist) === message.id) {
@@ -159,17 +156,14 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
 
             // category list
             if (apiRequestCallId === this.GetCategoryListApiCallId) {
-              // console.log(responseJson.data, "shop category list")
               this.setState({
                 collectionCategory: responseJson.data,
 
               })
             }
 
-
             //search live
             if (apiRequestCallId === this.getLiveSearchApiCallId) {
-              console.log(responseJson.products.data, "live search");
               if(responseJson.products.data.length==0){
                 this.setState({
                   noData:true
@@ -186,7 +180,6 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
 
             //recent search
             if (apiRequestCallId === this.getRecentSearchApiCallId) {
-              //console.log(responseJson, "recent search");
               this.setState({
                 recentSearches: responseJson.search,
               });
@@ -195,7 +188,6 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
 
             //all wishlist 
             if (apiRequestCallId === this.getAllWishlistApiCallId) {
-              // console.log(responseJson.data.wishlist.data.attributes.wishlist_items.length, "wishlist-length")
               localStorage.setItem("wishlist_len", responseJson?.data?.wishlist?.data?.attributes?.wishlist_items?.length)
               this.setState({
                 wishlistLength: responseJson?.data?.wishlist?.data?.attributes?.wishlist_items?.length
@@ -208,14 +200,10 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
 
             if (apiRequestCallId === this.GetCartApiCallId) {
               if (responseJson && responseJson.data) {
-                // console.log(responseJson.data[0].attributes.order_items, "here iscart")
                 this.setState({
                   cartLength: responseJson.data[0].attributes.order_items.length
-                  // loading: false
                 })
                 localStorage.setItem("cart_length", responseJson.data[0].attributes.order_items.length)
-
-
               }
             }
           }
@@ -229,8 +217,6 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
         getName(MessageEnum.AuthTokenDataMessage)
       );
       if (otpAuthTkn && otpAuthTkn.length > 0) {
-        // this.setState({ otpAuthToken: otpAuthTkn });
-        // runEngine.debugLog("otpAuthTkn", this.state.otpAuthToken);
         runEngine.unSubscribeFromMessages(this as IBlock, [message.id]);
       }
     }
@@ -240,23 +226,11 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
         getName(MessageEnum.CountyCodeDataMessage)
       );
     }
-
-
-
     // Customizable Area End
   }
 
   // Customizable Area Start
-
-  async componentDidMount() {
-
-    //this.getCart()
-
-
-  }
-
   componentWillReceiveProps(nextProps: any) {
-    // const user = JSON.parse(localStorage.getItem("user") ?? "{}")
     if (JSON.parse(localStorage.getItem("appThemData") ?? "{}")?.ExtraFields?.is_facebook_login || JSON.parse(localStorage.getItem("appThemData") ?? "{}")?.ExtraFields?.is_google_login) {
       this.setState({
         isConnectedAccountsShow: true
@@ -292,8 +266,6 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
     localStorage.setItem("searchQuery", `&q[name]=${this.state.searchQuery}`)
   }
 
-
-
   routeToAll(route: string) {
     if (route !== undefined) {
       let path = '/' + route;
@@ -305,7 +277,6 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
   }
 
   toggle() {
-    // console.log("This you clicked me !!")
     // this.setState({
     //   isOpen: !this.state.isOpen
     // })
@@ -516,7 +487,6 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
   onRouteChange = () => {
     this.props.history.listen((location: any, action: any) => {
       window.scrollTo(0, 0)
-      //console.log(location,"location")
       location.pathname != "/Filteroptions" && (
         localStorage.removeItem("category"),
         localStorage.removeItem("subCategory"),
@@ -544,10 +514,6 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
 
 
       }, 300)
-
-
-      //this.getCart()
-      //this.getAllWishlist()
     });
   }
   activeTabToggle = (tab: any) => {
@@ -559,7 +525,6 @@ export default class EmailLoginRegistrationControllerWeb extends BlockComponent<
   }
 
   searchnull = () => {
-    //console.log("console working")
     this.setState({
       searchQuery: "",
     })

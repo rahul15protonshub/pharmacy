@@ -607,7 +607,11 @@ a {
     align-items: flex-start;
   }
 }
-
+@media screen and (max-width:767.4px) {
+  .res-description{
+    display: none;
+  }
+}
 @media screen and (min-width:550px) {
   .card_group {
     height: 100%;

@@ -39,14 +39,6 @@ function PageLoadingBlock() {
                   Update or remove some of the filters you used
                 </p>
               </div>
-              {/* <Button color="secondary trans-fl-btn py-3 px-5 mt-3" onClick={() => window.location.assign("/shop")}>
-                Clear Filters
-              </Button>
-              <div className="mt-2" style={{ opacity: 0 }}>
-                <Button color="link trans-fl-cancel-btn">
-                  Cancel transaction?
-                </Button>
-              </div> */}
             </div>
           </div>
         </Container>

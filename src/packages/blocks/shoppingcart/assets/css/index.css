@@ -24,18 +24,22 @@
   text-align: left;
   color: var(--color-green);
 }
+.subscription_period_text{
+  font-size: 14px;
+}
 .head {
   color: var(--color-green);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .sub-head {
   color: var(--color-green);
-  font-weight: 500;
+  font-weight: 400;
 }
 .subscription_changeBtn {
   color: var(--color-dark-grey);
-  font-weight: 500;
+  font-weight: 400;
+  font-size: 16px;
   cursor: pointer;
   text-decoration: underline;
   background-color: transparent !important;
@@ -50,7 +54,7 @@
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   padding: 4px 10px 4px 4px !important;
 }
 .mr-2,
@@ -660,11 +664,26 @@ form.yt-cart-disct-wrap .success.form-group {
   }
 }
 @media(min-width:768px)and (max-width: 819px){
+  .subscription_changeBtn{
+    font-size: 14px;
+  }
+  .subscription-tag {
+    font-size: 10px;
+  }
   .presBox{
     margin: 0px 0px 10px 117px;
   }
 }
 @media(min-width:820px)and (max-width: 912px){
+  .subscription_changeBtn{
+    font-size: 14px;
+  }
+  .subscription-tag {
+    font-size: 10px;
+  }
+  .subscription_period_text{
+    font-size: 12px;
+  }
   .presBox{
     margin: 0px 0px 10px 137px;
   }
@@ -884,7 +903,17 @@ form.yt-cart-disct-wrap .success.form-group {
 /*
 * Screen for under 768 Resolution 
 */
-
+@media (max-width: 992px) {
+  .subscription_changeBtn{
+    font-size: 14px;
+  }
+  .subscription-tag {
+    font-size: 10px;
+  }
+  .subscription_period_text{
+    font-size: 12px;
+  }
+}
 @media (max-width: 767.92px) {
   .yt-login-btn{
     margin-top: 7px !important;
@@ -1119,6 +1148,7 @@ form.yt-cart-disct-wrap .success.form-group {
   }
   .cart-pg-product-list-row {
     flex-direction: column;
+    margin-top: 15px;
   }
   .cart-pg-list-prdt-info {
     width: 100% !important;
@@ -1281,6 +1311,9 @@ form.yt-cart-disct-wrap .success.form-group {
 }
 }
 @media (max-width:376px) {
+  .subscription_period_text{
+    font-size: 9px;
+  }
 .presBox{
   margin: 0px 0px 10px 110px !important
 }
