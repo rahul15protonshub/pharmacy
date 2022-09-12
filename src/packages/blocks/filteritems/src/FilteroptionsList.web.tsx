@@ -72,7 +72,6 @@ class Filteroptions extends FilteroptionsListController {
         {this.state.mobileOrTablet && this.state.windowSize < 768
           ? this.props.mbOpenState && (
               <Fragment>
-                {/* <h2 className="yt-filter-title mt-0 mb-3">Filter</h2> */}
                 <div className="filter-close" onClick={this.props?.cancel}>
                   <img src={require("../assets/images/close-icn.png")} alt="" />
                 </div>
@@ -559,7 +558,6 @@ class Filteroptions extends FilteroptionsListController {
                               });
                             }}
                           />
-                          {/* <div style={{ display: 'flex', flexDirection: 'row' }}> */}
                           <Button
                             className="button-apply"
                             disabled={
@@ -619,22 +617,6 @@ class Filteroptions extends FilteroptionsListController {
                             {" "}
                             Apply{" "}
                           </Button>
-                          {/* <Button style={{ background: 'none', border: 'none', color: 'black' }} title={"Clear"}
-                        color='link' onClick={() => {
-                          const dat = {
-                            min: "",
-                            max: ""
-                          }
-                          this.setState({
-                            givenMaxValue: '',
-                            givenMinValue: '',
-                            value: dat
-                          });
-                          setTimeout(() => {
-                            this.toggleCheckBox(dat, "price")
-                          }, 300);
-                        }}> <FaTimesCircle /> </Button> */}
-                          {/* </div> */}
                         </div>
                       </div>
                     </Col>
@@ -682,7 +664,6 @@ class Filteroptions extends FilteroptionsListController {
             )
           : (this.state.windowSize >= 1280 || this.props.mbOpenState) && (
               <Fragment>
-                {/* <h2 className="yt-filter-title mt-0 mb-3">Filter</h2> */}
                 <div className="filter-close" onClick={this.props?.cancel}>
                   <img src={require("../assets/images/close-icn.png")} alt="" />
                 </div>
@@ -753,6 +734,10 @@ class Filteroptions extends FilteroptionsListController {
                                           }}
                                           name={subcat.name + index}
                                           checked={subcat.checked}
+                                        />
+                                         <label
+                                          className="yt-filter-label"
+                                          htmlFor={subcat.name}
                                         />
                                       </div>
                                     </li>
@@ -1170,7 +1155,6 @@ class Filteroptions extends FilteroptionsListController {
                               });
                             }}
                           />
-                          {/* <div style={{ display: 'flex', flexDirection: 'row' }}> */}
                           <Button
                             className="button-apply"
                             disabled={
@@ -1230,22 +1214,6 @@ class Filteroptions extends FilteroptionsListController {
                             {" "}
                             Apply{" "}
                           </Button>
-                          {/* <Button style={{ background: 'none', border: 'none', color: 'black' }} title={"Clear"}
-                        color='link' onClick={() => {
-                          const dat = {
-                            min: "",
-                            max: ""
-                          }
-                          this.setState({
-                            givenMaxValue: '',
-                            givenMinValue: '',
-                            value: dat
-                          });
-                          setTimeout(() => {
-                            this.toggleCheckBox(dat, "price")
-                          }, 300);
-                        }}> <FaTimesCircle /> </Button> */}
-                          {/* </div> */}
                         </div>
                       </div>
                     </Col>

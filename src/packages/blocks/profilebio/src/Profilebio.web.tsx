@@ -52,7 +52,6 @@ export default class Profilebio extends ProfilebioController {
     return (
       <>
         {this.state.loading && <Loader loading={this.state.loading} />}
-        {/* <div className='profile-pg-inner-wrap p-4 bg-white radius-10 profile-pg-mb-30 mb-4 yt-my-order-wrap yt-cc-ord'> */}
         <div className="profile-pg-inner-wrap p-4 bg-white radius-10 profile-pg-mb-30">
           <div className="profile-pg-inner-wrapper">
             <div className="profile-tab-content">
@@ -113,14 +112,6 @@ export default class Profilebio extends ProfilebioController {
                 )}
               </Row>
               <Row className="yt-cm-ptc-row yt-btm-inf">
-                {/* <Col md={6} className="yt-cm-ptc-col">
-                                    <div className="profile-data-wrap">
-                                        <span className="profile-data-tag">
-                                            {content.phoneNo}
-                                        </span>
-                                        <p className="profile-user-name py-2">{this.state.getUserDeatils && this.state.getUserDeatils.attributes.full_phone_number}</p>
-                                    </div>
-                                </Col> */}
                 <Col md={12}>
                   <div
                     className={
@@ -152,7 +143,6 @@ export default class Profilebio extends ProfilebioController {
                 </Col>
               </Row>
             </div>
-            {/* <h1>Profile</h1> */}
           </div>
 
           {/* Modal Edit profile start */}
@@ -497,7 +487,6 @@ export default class Profilebio extends ProfilebioController {
                           )
                         ) : this.state.showCurrentPassword ? (
                           <>
-                            {/* {console.log(this.state.currentPasswordErr, "%%%%%%%%%%%%%%", this.state.showCurrentPassword)} */}
                             <FaEyeSlash
                               onClick={(e) =>
                                 this.showCurrentPasswordHandler(e)
@@ -564,7 +553,6 @@ export default class Profilebio extends ProfilebioController {
                           )
                         ) : this.state.showPassword ? (
                           <>
-                            {/* {console.log(this.state.passwordError, "%%%%%%%%%%%%%%", this.state.showPassword)} */}
                             <FaEyeSlash
                               onClick={(e) => this.showPasswordHandler(e)}
                               className={
@@ -635,7 +623,6 @@ export default class Profilebio extends ProfilebioController {
                           )
                         ) : this.state.showConfirmPassword ? (
                           <>
-                            {/* {console.log(this.state.confirmPasswordError, "%%%%%%%%%%%%%%", this.state.showConfirmPassword)} */}
                             <FaEyeSlash
                               onClick={(e) =>
                                 this.showConfirmPasswordHandler(e)
@@ -691,13 +678,6 @@ export default class Profilebio extends ProfilebioController {
                   );
                 }}
               </Formik>
-              {/* {this.state.showAlertPassword
-                            ?
-                            <Alert color={this.state.messageType && this.state.messageType} style={{ position: 'absolute', left: 200, top: 0 }}>
-                                {this.state.message && this.state.message}
-                            </Alert>
-                            :
-                            ''} */}
             </ModalBody>
           </Modal>
           {/* Modal for ChnagePassword end */}

@@ -149,20 +149,6 @@ export default class WishList extends WishListController {
         </View>
       </View>
         }
-        {/* <View style={styles.reviewRow}>
-          <Text style={styles.avgReview}>{data.average_rating}</Text>
-          <Image source={reviewStar} style={styles.reviewStar} />
-          {data.reviews && (
-            <Text style={styles.reviewCount}>| {data.reviews.length}</Text>
-          )}
-        </View> */}
-        {/* {data.on_sale && (
-          <View style={styles.labelSticker}>
-            <Text style={styles.stickerText}>
-              Save {Number(data.discount).toFixed(1)}%
-            </Text>
-          </View>
-        )} */}
       </TouchableOpacity>
       // Customizable Area End
     );

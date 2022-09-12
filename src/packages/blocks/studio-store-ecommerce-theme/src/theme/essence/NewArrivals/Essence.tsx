@@ -21,7 +21,6 @@ export const Essence: any = withRouter((props: EssenceProps) => {
     const getItemProps = (product: any) => {
         let catalogue_variant_in_stock: any = product,
             productOnSale: any,
-            // productSaleprice: any,
             ProductPrice: any,
             countryCode: any = JSON.parse(localStorage.getItem('countryCode') ?? "{}")?.countryCode;
         if (product.attributes.default_variant) {
@@ -47,7 +46,6 @@ export const Essence: any = withRouter((props: EssenceProps) => {
         ProductPrice = (catalogue_variant_in_stock && productOnSale) ?
             catalogue_variant_in_stock.attributes?.actual_price_including_tax :
             catalogue_variant_in_stock.attributes?.price_including_tax
-        // productSaleprice = catalogue_variant_in_stock ? catalogue_variant_in_stock.attributes.price_including_tax : catalogue_variant_in_stock?.attributes.price_including_tax;
         return (
             {
                 productName: product.attributes.name,

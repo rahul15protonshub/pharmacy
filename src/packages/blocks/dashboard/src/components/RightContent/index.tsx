@@ -104,11 +104,6 @@ const RightContent: React.FunctionComponent<RightContentProps> = (props: RightCo
                 {productListTitle}
             </div>
             <div className='home-main-product-list'>
-                {/*loading && <div style={{
-                        position: 'absolute', zIndex: 999, width: '100%', height: '100%', display: "flex", alignItems: 'center', justifyContent: 'center'
-                        }}>
-                        <CircularProgress />
-                        </div>*/}
                 <Container fluid className='p-0'>
                     <Row>
                         {

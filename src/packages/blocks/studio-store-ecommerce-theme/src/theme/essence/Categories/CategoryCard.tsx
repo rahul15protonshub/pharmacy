@@ -5,7 +5,6 @@ interface CategoryCardProps {
     categoryName: string,
     image?: string,
     onClick?: Function
-    // size:'lg'|'md'
 }
 
 const CategoryCard: React.FunctionComponent<CategoryCardProps> = (props) => {

@@ -20,7 +20,6 @@ const SimilarProductListCard: any = withRouter((props: any) => {
     function getList() {
         let list: any = [];
         props.collection && props.collection.forEach((product: any, index: number) => {
-            // console.log(props.collection, "props.collection", product)
             let catalogue_variant_in_stock: any, productOnSale: any, productSlaeprice: any, ProductPrice: any;
             if (product.attributes.default_variant) {
                 catalogue_variant_in_stock =
@@ -46,13 +45,6 @@ const SimilarProductListCard: any = withRouter((props: any) => {
             productOnSale = catalogue_variant_in_stock ? catalogue_variant_in_stock.attributes.on_sale : catalogue_variant_in_stock.attributes.on_sale;
             ProductPrice = catalogue_variant_in_stock ? productOnSale ? catalogue_variant_in_stock.attributes?.actual_price_including_tax : catalogue_variant_in_stock.attributes?.price_including_tax : productOnSale ? catalogue_variant_in_stock?.attributes?.actual_price_including_tax : catalogue_variant_in_stock?.attributes?.price_including_tax;
             productSlaeprice = catalogue_variant_in_stock ? catalogue_variant_in_stock.attributes.price_including_tax : catalogue_variant_in_stock?.attributes.price_including_tax;
-
-            // console.log("catalogue_variant_in_stock", catalogue_variant_in_stock)
-            // let catalogue_variant_in_stock =
-            //   catalogue_variant_in_stock && product.attributes.stock_qty > 0
-            //     ? catalogue_variant_in_stock
-            //     : product;
-
             let percentageValue =
                 (
                     (
@@ -82,14 +74,6 @@ const SimilarProductListCard: any = withRouter((props: any) => {
                                     ) : (
                                         <svg className=" addtowishlist likebuttononimage" onClick={() => props.createWishlist(product.id)} width="21" height="21" viewBox="0 0 24 24" fill="#fff" stroke="#8899A4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                                     )
-                                    // ? (
-                                    //   <img className="addtowishlist" src={require("./images/like.png")} alt="add to wishlist" onClick={() => props.deleteWishlist(product.id)}
-                                    //   />
-                                    // )
-                                    // : (
-                                    //   <img className="addtowishlist" src={require("./images/heart-icon.svg")} alt="add to wishlist" onClick={() => props.createWishlist(product.id)}
-                                    //   />
-                                    // )
                                 }
                             </div>
 
@@ -158,7 +142,6 @@ const SimilarProductListCard: any = withRouter((props: any) => {
                                                                 else {
                                                                     props.addToCart(
                                                                         catalogue_variant_in_stock
-                                                                        // .attributes
                                                                     );
                                                                 }
                                                             }}
@@ -180,7 +163,6 @@ const SimilarProductListCard: any = withRouter((props: any) => {
                                                             } else {
                                                                 props.addToCart(
                                                                     catalogue_variant_in_stock
-                                                                    // .attributes
                                                                 );
                                                             }
                                                         }}
