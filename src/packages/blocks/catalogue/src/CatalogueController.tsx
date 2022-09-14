@@ -468,8 +468,6 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
 
       OnManageNavigation(responseJson, errorReponse, this.props.navigation);
 
-      console.log(apiRequestCallId, responseJson)
-
       if (responseJson.data) {
         if (apiRequestCallId == this.getProductApiCallId) {
           let array = responseJson?.data?.catalogue?.data;
@@ -548,7 +546,6 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
             "newProducts"
           );
         } else if (apiRequestCallId === this.removeFromWishlistApiCallId) {
-          console.log("removeFromWishlistApiCallId", responseJson);
           const wishlistItem = this.state.catalogueFilteredProducts?.find((item: any) => this.state.productWishlisting === item.id);
           if (wishlistItem) {
             wishlistItem.attributes.wishlisted = false;
@@ -592,8 +589,6 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
           })
 
         } else if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
-
-          console.log("increase response", responseJson)
           this.state.catalogueFilteredProducts?.forEach((product: any) => {
             const orderItem = responseJson.data.attributes.order_items.find((item: any) => parseInt(product.id) === item.attributes.catalogue_id);
             product.attributes.cart_quantity = orderItem ? orderItem.attributes.quantity : null;
@@ -607,7 +602,6 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
           await StorageProvider.set("cart_length", responseJson.data.attributes.order_items.length.toString());
           //@ts-ignore
         } else if (apiRequestCallId === this.putItemToCartApiCallId) {
-          console.log("put item to cart response", responseJson)
           this.state.catalogueFilteredProducts?.forEach((product: any) => {
             const orderItem = responseJson.data.attributes.order_items.find((item: any) => parseInt(product.id) === item.attributes.catalogue_id);
             if (!product.attributes.cart_quantity) {

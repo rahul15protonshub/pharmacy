@@ -261,7 +261,6 @@ export default class ConnectedAccountsController extends BlockComponent<
         });
       })
       .catch(() => {
-        console.log("ERROR GETTING DATA FROM FACEBOOK");
       });
   };
   onPressLoginWithFacebook = () => {
@@ -271,7 +270,6 @@ export default class ConnectedAccountsController extends BlockComponent<
     LoginManager.logInWithPermissions(["public_profile", "email"]).then(
       (result) => {
         if (result.isCancelled) {
-          console.log("Login cancelled");
         } else {
           AccessToken.getCurrentAccessToken().then((data) => {
             const accessToken =
@@ -279,16 +277,10 @@ export default class ConnectedAccountsController extends BlockComponent<
             this.initUser(accessToken);
           });
 
-          if (result && result.grantedPermissions) {
-            console.log(
-              "Login success with permissions: " +
-                result.grantedPermissions.toString()
-            );
-          }
         }
       },
       function (error) {
-        console.log("Login fail with error: " + error);
+        
       }
     );
   };
@@ -322,15 +314,6 @@ export default class ConnectedAccountsController extends BlockComponent<
         body: socialData,
       });
     } catch (error) {
-      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        console.log("User Cancelled the Login Flow");
-      } else if (error.code === statusCodes.IN_PROGRESS) {
-        console.log("Signing In");
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        console.log("Play Services Not Available or Outdated");
-      } else {
-        console.log("Some Other Error Happened");
-      }
     }
   };
 

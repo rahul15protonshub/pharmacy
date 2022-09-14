@@ -1,6 +1,6 @@
+/// <reference types="@types/jest" />
 import { defineFeature, loadFeature } from "jest-cucumber";
 import { shallow, ShallowWrapper } from "enzyme";
-
 import * as helpers from "../../../../framework/src/Helpers";
 import { runEngine } from "../../../../framework/src/RunEngine";
 import { Message } from "../../../../framework/src/Message";
@@ -30,6 +30,27 @@ const screenProps = {
 const feature = loadFeature(
   "./__tests__/features/filteritems-scenario.feature"
 );
+const mockOrderItem = {
+  id: "34",
+  type: "order",
+  attributes: {
+    created_at: "2022-07-14T12:55:58.499Z",
+    id: 9,
+    name: "Covid essential",
+    product_image: { id: 92, url: 'https://internalsspharmacydemo-216579-ruby.b216579…35610d8afc42f5d2d8ff8178761a99f/cropped_image.png' },
+    sub_categories: [{
+      category_id: 9,
+      created_at: "2022-08-18T07:43:35.935Z",
+      disabled: false,
+      id: 19,
+      name: "Face Mask",
+      updated_at: "2022-08-18T07:46:32.395Z"
+    }],
+    cart_quantity: 1,
+    catalogue_variants:[{id:0}],
+    updated_at: "2022-07-14T12:55:58.571Z",
+  },
+};
 
 defineFeature(feature, (test) => {
   beforeEach(() => {
@@ -72,7 +93,10 @@ defineFeature(feature, (test) => {
       msgLoadDataAPI.addData(
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
-          data: [{}],
+          data: [{
+
+          }],
+          meta:{pagination:{total_pages:1}}
         }
       );
       instance.getProductApiCallId = msgLoadDataAPI.messageId;
@@ -183,6 +207,9 @@ defineFeature(feature, (test) => {
         }
       );
       instance.addToCartApiCallId = msgLoadDataAPI.messageId;
+      instance.addToCart(mockOrderItem);
+      instance.setState({addToCartId:false})
+      instance.postCreateCart(mockOrderItem)
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
 
@@ -235,6 +262,8 @@ defineFeature(feature, (test) => {
         }
       );
       instance.putItemToCartApiCallId = msgLoadDataAPI.messageId;
+      instance.setState({addToCartId:true})
+      instance.putItemToCart(1,mockOrderItem,"")
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
     then("I can select the button with with out errors", () => {
@@ -275,7 +304,9 @@ defineFeature(feature, (test) => {
     });
 
     then("I can leave the screen with out errors", () => {
+      instance.handleBackButtonClick();
       instance.componentWillUnmount();
+      
       expect(filterItemsBlock).toBeTruthy();
 
     });

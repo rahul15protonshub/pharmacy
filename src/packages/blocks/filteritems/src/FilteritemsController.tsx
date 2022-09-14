@@ -199,8 +199,7 @@ export default class FilteritemsController extends BlockComponent<
         getName(MessageEnum.RestAPIRequestBodyMessage),
         JSON.stringify(body)
       );
-    console.log("requestMessage==", requestMessage);
-    runEngine.sendMessage(requestMessage.id, requestMessage);
+      runEngine.sendMessage(requestMessage.id, requestMessage);
     return requestMessage.messageId;
   };
 
@@ -932,7 +931,6 @@ export default class FilteritemsController extends BlockComponent<
     }
   };
   postCreateCart = async (item: any) => {
-    console.log('iadd_tem', item)
     const isInCart = item?.attributes?.cart_quantity > 0 ? true : false
     var data = this.state.cartProduct
     this.setState({ addToCartId: item?.item?.id });
@@ -1072,7 +1070,7 @@ export default class FilteritemsController extends BlockComponent<
   updateAddToCart = (responseJson: any) => {
     this.state.productList?.forEach((product: any) => {
       const orderItem = responseJson.data.attributes.order_items.find((item: any) => parseInt(product.id) === item.attributes.catalogue_id);
-      if (!product.attributes.cart_quantity) {
+      if (!product?.attributes?.cart_quantity) {
         product.attributes.cart_quantity = orderItem ? orderItem.attributes.quantity ?? 1 : null;
       }
     })
