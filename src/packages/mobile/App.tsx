@@ -364,9 +364,6 @@ export default class App extends Component {
       isDeepLinkUtilised: false,
     };
     console.disableYellowBox = true;
-    if (!__DEV__) {
-      console.log = () => { };
-    }
   }
 
   componentDidMount() {

@@ -268,7 +268,6 @@ export default class EmailAccountLoginController extends BlockComponent<
           responseJson.errors &&
           responseJson.errors.length > 0
         ) {
-          console.log("fgbfdgbb", responseJson.errors[0]);
           this.setShowSpinner(false);
           // @ts-ignore
           window.notify([
@@ -501,7 +500,6 @@ export default class EmailAccountLoginController extends BlockComponent<
         }
       })
       .catch((err) => {
-        console.log("Googleerrr", err);
         // @ts-ignore
         window.notify([
           {
@@ -530,8 +528,7 @@ export default class EmailAccountLoginController extends BlockComponent<
         }
       })
       .catch((err) => {
-        console.log("fbErr", err);
-        // @ts-ignore
+         // @ts-ignore
         window.notify([
           {
             message:

@@ -277,8 +277,7 @@ export const Essence: any = withRouter((props: any) => {
 
     props.collection &&
       props.collection.forEach((product: any, index: number) => {
-        // console.log(props.collection, "props.collection", product)
-        let catalogue_variant_in_stock: any,
+         let catalogue_variant_in_stock: any,
           productOnSale: any,
           productSlaeprice: any,
           ProductPrice: any;

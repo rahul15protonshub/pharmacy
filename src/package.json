@@ -80,6 +80,7 @@
     "react-native-modal": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-native-modal",
     "react-native-multi-slider": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-native-multi-slider",
     "react-native-multiple-select": "^0.5.9",
+    "deprecated-react-native-prop-types": "^2.3.0",
     "react-native-pell-rich-editor": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-native-pell-rich-editor",
     "react-native-push-notification": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-native-push-notification",
     "react-native-razorpay": "file:./packages/blocks/studio-store-ecommerce-core/node_modules/react-native-razorpay",
