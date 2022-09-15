@@ -136,7 +136,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
             // get cart
             if (apiRequestCallId === this.GetCartApiCallId) {
               if (responseJson && responseJson.data) {
-                //console.log(responseJson.data[0], "here iscart")
                 this.setState(
                   {
                     cart: responseJson.data[0]?.attributes?.order_items,
@@ -656,7 +655,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
 
   //buy now post
   postBuyNow = (catalogue_id: any, catalogue_variant_id: any): boolean => {
-    console.log('catalogue_id', catalogue_id,"catalogue_variant_id",catalogue_variant_id)
     // Customizable Area Start
     const header = {
       "Content-Type": configJSON.validationApiContentType,

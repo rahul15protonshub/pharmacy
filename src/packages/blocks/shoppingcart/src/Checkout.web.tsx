@@ -155,6 +155,28 @@ function CartAmount(props: any) {
               <tbody>{getProducts()}</tbody>
             </Table>
             <span className="cart-divider" />
+           
+            <Table className="yt-sub-ttl-tbl-wrap">
+              <tbody>
+                <tr>
+                  <td style={{ paddingLeft: 0 }}>
+                    <span className="cart-product-amount">
+                      {content.SubTotal}(Inclusive Taxes)
+                    </span>
+                  </td>
+                  <td style={{ paddingRight: 0, textAlign: "right" }}>
+                    <span className="cart-product-amount cart-sub-total">
+                      {/* @ts-ignore  */}
+                      {
+                        JSON.parse(localStorage.getItem("countryCode") ?? "{}")
+                          ?.countryCode
+                      }{" "}
+                      {parseFloat(wholeCart.sub_total).toFixed(2)}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
             {wholeCart.sub_discounted_total_price ?
             <Table className="yt-sub-ttl-tbl-wrap">
               <tbody>
@@ -179,28 +201,6 @@ function CartAmount(props: any) {
             </Table>
             : ''
           }
-            <Table className="yt-sub-ttl-tbl-wrap">
-              <tbody>
-                <tr>
-                  <td style={{ paddingLeft: 0 }}>
-                    <span className="cart-product-amount">
-                      {content.SubTotal}(Inclusive Taxes)
-                    </span>
-                  </td>
-                  <td style={{ paddingRight: 0, textAlign: "right" }}>
-                    <span className="cart-product-amount cart-sub-total">
-                      {/* @ts-ignore  */}
-                      {
-                        JSON.parse(localStorage.getItem("countryCode") ?? "{}")
-                          ?.countryCode
-                      }{" "}
-                      {parseFloat(wholeCart.sub_total).toFixed(2)}
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
-
             <Table className="mb-0 cart-prodict-total-amount " borderless>
               <tbody>
                 <tr>
@@ -274,7 +274,7 @@ function CartAmount(props: any) {
                     data-testid={"button-apply-coupon"}
                     color="secondary cart-coupon-btn"
                     onClick={() => {
-                      props.toApplyCoupon(couponCode, wholeCart.sub_total);
+                      props.toApplyCoupon(couponCode, wholeCart.total);
                       //@ts-ignore
                     }}
                     disabled={
