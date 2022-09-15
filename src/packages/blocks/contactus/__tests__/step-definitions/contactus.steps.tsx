@@ -9,6 +9,7 @@ import MessageEnum, {
 } from "../../../../framework/src/Messages/MessageEnum";
 import React from "react";
 import Contactus from "../../src/Contactus";
+import TopHeader from "../../../studio-store-ecommerce-components/src/TopHeader/TopHeader";
 
 const navigation = require("react-navigation");
 
@@ -85,7 +86,9 @@ defineFeature(feature, (test) => {
       runEngine.sendMessage("Unit Test", addCategoryAPI);
     });
 
-   
+    then(`Contactus load TopHeader without errors`, () => {
+      ContactUsWrapper.find(TopHeader).first().prop('onPressLeft')
+  });
     then("I can leave the screen with out errors", () => {
       instance.componentWillUnmount();
       expect(ContactUsWrapper).toBeTruthy();
@@ -173,17 +176,26 @@ defineFeature(feature, (test) => {
     });
 
     then("add text without error", () => {
-    let textInputComponent = ContactUsWrapper.findWhere((node) => node.prop('testID') === 'txtcontactname');
-    textInputComponent.simulate('changeText', 'test');
+    let textInputContactname = ContactUsWrapper.findWhere((node) => node.prop('testID') === 'txtcontactname');
+    textInputContactname.simulate('focus')
+    textInputContactname.simulate('changeText', 'test');
+    textInputContactname.simulate('blur')
+ 
 
-    textInputComponent = ContactUsWrapper.findWhere((node) => node.prop('testID') === 'txtcontactemail');
-    textInputComponent.simulate('changeText', 'hello@aol.com');
+    let textInputContactemail = ContactUsWrapper.findWhere((node) => node.prop('testID') === 'txtcontactemail');
+    textInputContactemail.simulate('focus')
+    textInputContactemail.simulate('changeText', 'hello@aol.com');
+    textInputContactemail.simulate('blur')
 
-    textInputComponent = ContactUsWrapper.findWhere((node) => node.prop('testID') === 'txtcontactphone');
-    textInputComponent.simulate('changeText', '123456789');
+    let textInputContactphone = ContactUsWrapper.findWhere((node) => node.prop('testID') === 'txtcontactphone');
+    textInputContactphone.simulate('focus')
+    textInputContactphone.simulate('changeText', '123456789');
+    textInputContactphone.simulate('blur')
 
-    textInputComponent = ContactUsWrapper.findWhere((node) => node.prop('testID') === 'txtcontactdecs');
-    textInputComponent.simulate('changeText', 'this is testing');
+   let  textInputContactdesc = ContactUsWrapper.findWhere((node) => node.prop('testID') === 'txtcontactdecs');
+    textInputContactdesc.simulate('focus')
+    textInputContactdesc.simulate('changeText', 'this is testing');
+    textInputContactdesc.simulate('blur')
 
     });
     then("header press without error", () => {
