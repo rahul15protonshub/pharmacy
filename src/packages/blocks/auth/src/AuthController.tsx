@@ -75,10 +75,7 @@ export default class AuthController extends BlockComponent<Props, S, SS> {
         this.props.navigation.state.params.isFromReset
       ) {
         this.setState({ button1: true, button2: false }, () => {
-          console.log(
-            "@@@ Current Index =============",
-            this.state.currentindex
-          );
+         
         });
       }
     });

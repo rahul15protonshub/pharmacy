@@ -24,7 +24,7 @@ const screenProps = {
 };
 
 const feature = loadFeature(
-  "./__tests__/features/ordersummary-scenario.feature"
+  "./__tests__/features/ordersummary-scenario.web.feature"
 );
 
 const mockOrderItem = {

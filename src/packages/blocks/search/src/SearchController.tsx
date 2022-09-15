@@ -178,8 +178,7 @@ export default class SearchController extends BlockComponent<Props, S, SS> {
             let localProductSearchList = searchResponse.filter(
               (item: any) => item.attributes.type === "Catalogue"
             );
-            console.log("localProductSearchList");
-            let localCategorySearchList = searchResponse.filter(
+           let localCategorySearchList = searchResponse.filter(
               (item: any) => item.attributes.type === "Category"
             );
             let localSubCategorySearchList = searchResponse.filter(

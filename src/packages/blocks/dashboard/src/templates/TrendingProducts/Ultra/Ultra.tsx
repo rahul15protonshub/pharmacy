@@ -276,7 +276,6 @@ export const Ultra: any = withRouter((props: any) => {
 
     props.collection &&
       props.collection.forEach((product: any, index: number) => {
-        // console.log(props.collection, "props.collection", product)
         let catalogue_variant_in_stock: any,
           productOnSale: any,
           productSlaeprice: any,
@@ -316,12 +315,7 @@ export const Ultra: any = withRouter((props: any) => {
           ? catalogue_variant_in_stock.attributes.price_including_tax
           : catalogue_variant_in_stock?.attributes.price_including_tax;
 
-        // console.log("catalogue_variant_in_stock", catalogue_variant_in_stock)
-        // let catalogue_variant_in_stock =
-        //   catalogue_variant_in_stock && product.attributes.stock_qty > 0
-        //     ? catalogue_variant_in_stock
-        //     : product;
-
+       
         let percentageValue =
           ((parseInt(catalogue_variant_in_stock.attributes.price) -
             parseInt(catalogue_variant_in_stock.attributes.sale_price)) /

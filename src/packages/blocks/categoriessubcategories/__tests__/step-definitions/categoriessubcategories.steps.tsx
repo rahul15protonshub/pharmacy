@@ -18,6 +18,25 @@ const screenProps = {
   },
   id: "Categoriessubcategories",
 };
+const mockOrderItem = {
+  id: "34",
+  type: "order",
+  attributes: {
+    created_at: "2022-07-14T12:55:58.499Z",
+    id: 9,
+    name: "Covid essential",
+    product_image: { id: 92, url: 'https://internalsspharmacydemo-216579-ruby.b216579…35610d8afc42f5d2d8ff8178761a99f/cropped_image.png' },
+    sub_categories: [{
+      category_id: 9,
+      created_at: "2022-08-18T07:43:35.935Z",
+      disabled: false,
+      id: 19,
+      name: "Face Mask",
+      updated_at: "2022-08-18T07:46:32.395Z"
+    }],
+    updated_at: "2022-07-14T12:55:58.571Z",
+  },
+};
 
 const feature = loadFeature(
   "./__tests__/features/categoriessubcategories-scenario.feature"
@@ -84,6 +103,17 @@ defineFeature(feature, (test) => {
       await instance.getToken();
       await instance.getCartHasProduct();
       expect(categoryWrapper).toBeTruthy();
+    });
+
+    then("I can select the button with with out errors", () => {
+
+      instance.setState({ categoriesArray: mockOrderItem.attributes.sub_categories, }, () => {
+      });
+
+      let buttonComponent = categoryWrapper.findWhere(
+        (node) => node.prop("testID") === "openfilter1"
+      );
+      buttonComponent.simulate("press");
     });
 
     then("I can leave the screen with out errors", () => {

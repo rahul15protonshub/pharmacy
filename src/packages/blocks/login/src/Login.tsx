@@ -186,6 +186,7 @@ export default class Login extends LoginController {
                   {...this.txtInputPasswordProps}
                 />
                 <TouchableOpacity
+                testID="showhidebutton"
                   style={styles.eye}
                   {...this.btnPasswordShowHideProps}
                 >
@@ -205,6 +206,7 @@ export default class Login extends LoginController {
                 />
               ) : (
                 <TouchableOpacity
+                testID="loginbutton"
                   style={[
                     styles.loginButton,
                     {
@@ -227,7 +229,8 @@ export default class Login extends LoginController {
               )}
             </View>
             <TouchableOpacity
-              onPress={() => this.props.navigation.replace("ForgotPassword")}
+             testID="forgotbutton"
+              onPress={() => {this.goforgotpassword()}}
             >
               <Text style={styles.forgotText}>Forgot Password ?</Text>
             </TouchableOpacity>
@@ -255,6 +258,7 @@ export default class Login extends LoginController {
             <View style={styles.socialButtonContainer}>
               {themeJson.attributes.isFacebookLogin && (
                 <TouchableOpacity
+                testID="loginfbbutton"
                   onPress={() => this.onPressLoginWithFacebook()}
                   style={styles.socialButton}
                 >
@@ -264,6 +268,7 @@ export default class Login extends LoginController {
               )}
               {themeJson.attributes.isGoogleLogin && (
                 <TouchableOpacity
+                testID="logingooglebutton"
                   onPress={() => this.onPressGoogleSignIn()}
                   style={[
                     styles.socialButton,
@@ -280,6 +285,7 @@ export default class Login extends LoginController {
                 Platform.OS === "ios" &&
                 themeJson.attributes.isAppleLogin && (
                   <TouchableOpacity
+                  testID="loginapplebutton"
                     onPress={() => this.onPressLoginWithApple()}
                     style={[
                       styles.appleSocialButton,
@@ -293,11 +299,12 @@ export default class Login extends LoginController {
                   </TouchableOpacity>
                 )}
             </View>
-            <TouchableOpacity onPress={() => this.onGuestLogin()}>
+            <TouchableOpacity
+             testID="loginguestbutton"
+              onPress={() => this.onGuestLogin()}>
               <Text style={styles.skipText}>Skip & Continue as Guest</Text>
             </TouchableOpacity>
           </View>
-          {/* {this.renderAlertModal()} */}
           <ApplicationLoader isFetching={this.state.isFetching} />
           <CustomErrorModal
             showModal={this.state.showAlertModal}

@@ -7,8 +7,6 @@ import MessageEnum, {
   getName,
 } from "../../../framework/src/Messages/MessageEnum";
 import { runEngine } from "../../../framework/src/RunEngine";
-import StorageProvider from "../../../framework/src/StorageProvider";
-import * as IMG_CONST from "../../studio-store-ecommerce-theme/src/ImageConstants";
 import {
   ChangeStackNow,
   OnManageNavigation,

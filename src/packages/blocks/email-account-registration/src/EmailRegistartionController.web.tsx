@@ -513,7 +513,6 @@ export default class EmailAccountRegistrationController extends BlockComponent<
         }
       })
       .catch((err) => {
-        console.log("Googleerrr", err);
         // @ts-ignore
         window.notify([
           {
@@ -540,7 +539,6 @@ export default class EmailAccountRegistrationController extends BlockComponent<
         }
       })
       .catch((err) => {
-        console.log("fbErr", err);
         // @ts-ignore
         window.notify([
           {

@@ -383,7 +383,6 @@ export default class ConnnectedAccountsController extends BlockComponent<
         }
       })
       .catch((err) => {
-        console.log("Googleerrr", err);
         // @ts-ignore
         window.notify([
           {
@@ -412,7 +411,6 @@ export default class ConnnectedAccountsController extends BlockComponent<
         }
       })
       .catch((err) => {
-        console.log("facebookErr", err);
         // @ts-ignore
         window.notify([
           {

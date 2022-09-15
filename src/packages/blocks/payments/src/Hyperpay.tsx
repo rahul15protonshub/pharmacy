@@ -73,7 +73,6 @@ export default class Hyperpay extends HyperpayController {
                         style={{
                           flex: 1,
                           flexDirection: "row",
-                          // justifyContent: "space-between",
                           alignItems: "center",
                         }}
                       >
@@ -105,7 +104,6 @@ export default class Hyperpay extends HyperpayController {
                         justifyContent: "flex-start",
                         alignItems: "center",
                         marginVertical: hp("3%"),
-                        // backgroundColor: "green",
                       }}
                     >
                       <Text style={styles.cardTxt}>{"VISA"}</Text>
@@ -127,7 +125,6 @@ export default class Hyperpay extends HyperpayController {
                       updateMasterState={this._updateMasterState}
                       textInputStyles={{
                         color: "rgb(84, 89, 95)",
-                        //fontSize: 10,//131, 132, 134)',
                       }}
                       otherTextInputProps={{
                         maxLength: 19,
@@ -148,7 +145,6 @@ export default class Hyperpay extends HyperpayController {
                       updateMasterState={this._updateMasterState}
                       textInputStyles={{
                         color: "rgb(84, 89, 95)",
-                        //fontSize: 10,//131, 132, 134)',
                       }}
                       otherTextInputProps={{
                         maxLength: 45,
@@ -175,7 +171,6 @@ export default class Hyperpay extends HyperpayController {
                         updateMasterState={this._updateMasterState}
                         textInputStyles={{
                           color: "rgb(84, 89, 95)",
-                          //fontSize: 10,//131, 132, 134)',
                         }}
                         otherTextInputProps={{
                           maxLength: 5,
@@ -213,7 +208,6 @@ export default class Hyperpay extends HyperpayController {
                         updateMasterState={this._updateMasterState}
                         textInputStyles={{
                           color: "rgb(84, 89, 95)",
-                          //fontSize: 10,//131, 132, 134)',
                         }}
                         otherTextInputProps={{
                           maxLength: 4,
@@ -266,7 +260,6 @@ export default class Hyperpay extends HyperpayController {
                   <WebView
                     source={{ uri: this.state.redirectURL }}
                     onNavigationStateChange={(navState) => {
-                      // console.log(navState.url);
                       if (navState.url.includes("payments://result")) {
                         this.handleTrasaction();
                       }

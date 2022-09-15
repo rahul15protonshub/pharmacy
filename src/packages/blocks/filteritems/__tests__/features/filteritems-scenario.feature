@@ -6,11 +6,14 @@ Feature: filteritems
         Then filteritems will load with out errors
         And filteritems will load products without errors
         And filteritems will filter data without errors
+        And filteritems will add in wishlist without errors
         And filteritems will add to wishlist without errors
         And filteritems will remove from wishlist without errors
         And filteritems will get products with id without errors
         And filteritems will add to cart without errors
         And filteritems will get cart list without errors
+        And filteritems will increament without errors
+        And filteritems will update without errors
         And I can select the button with with out errors
         And I can leave the screen with out errors
 

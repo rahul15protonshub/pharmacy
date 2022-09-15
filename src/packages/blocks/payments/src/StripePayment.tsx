@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 // @ts-ignore
 import Cards from "react-credit-cards";
-import axios from "axios";
+
 
 import {
   useStripe,
@@ -81,23 +81,16 @@ const StripPayment = (props: any) => {
                     // @ts-ignore
                     options={options}
                     onReady={() => {
-                      console.log("CardNumberElement [ready]");
+                   
                     }}
                     onChange={(event: any) => {
-                      console.log(
-                        "CardNumberElement [change]",
-                        event,
-                        //@ts-ignore
-                        window.notify([
-                          { type: "danger", message: event?.error?.message },
-                        ])
-                      );
+                     
                     }}
                     onBlur={() => {
-                      console.log("CardNumberElement [blur]");
+                     
                     }}
                     onFocus={() => {
-                      console.log("CardNumberElement [focus]");
+                      
                     }}
                   />
                 </Col>
@@ -111,23 +104,16 @@ const StripPayment = (props: any) => {
                     // @ts-ignore
                     options={options}
                     onReady={() => {
-                      console.log("CardNumberElement [ready]");
+                     
                     }}
                     onChange={(event: any) => {
-                      console.log(
-                        "CardNumberElement [change]",
-                        event,
-                        //@ts-ignore
-                        window.notify([
-                          { type: "danger", message: event?.error?.message },
-                        ])
-                      );
+                     
                     }}
                     onBlur={() => {
-                      console.log("CardNumberElement [blur]");
+                   
                     }}
                     onFocus={() => {
-                      console.log("CardNumberElement [focus]");
+                     
                     }}
                     className="card-expiration"
                   />
@@ -142,23 +128,16 @@ const StripPayment = (props: any) => {
                     // @ts-ignore
                     options={options}
                     onReady={() => {
-                      console.log("CardNumberElement [ready]");
+                     
                     }}
                     onChange={(event: any) => {
-                      console.log(
-                        "CardNumberElement [change]",
-                        event,
-                        //@ts-ignore
-                        window.notify([
-                          { type: "danger", message: event?.error?.message },
-                        ])
-                      );
+                     
                     }}
                     onBlur={() => {
-                      console.log("CardNumberElement [blur]");
+                   
                     }}
                     onFocus={() => {
-                      console.log("CardNumberElement [focus]");
+                      
                     }}
                   />
                 </Col>

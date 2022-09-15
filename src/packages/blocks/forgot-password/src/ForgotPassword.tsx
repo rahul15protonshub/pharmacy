@@ -47,10 +47,6 @@ export default class ForgotPassword extends ForgotPasswordController {
         }}
       >
         <Image source={APP_LOGO} style={styles.brandLogo} />
-        {/* <Text style={styles.brandName}>{themeJson.attributes.heading}</Text>
-        <Text style={styles.getStartedText}>
-          {themeJson.attributes.sub_heading}
-        </Text> */}
       </View>
       //Customizable Area End
     );
@@ -155,6 +151,7 @@ export default class ForgotPassword extends ForgotPasswordController {
                     ]}
                   />
                   <TextInput
+                  testID="txtforgotemail"
                     style={[
                       styles.input,
                       {
@@ -193,6 +190,7 @@ export default class ForgotPassword extends ForgotPasswordController {
                     }
                   >
                     <Image
+                    testID="otpimage"
                       {...this.imgOTPIcon}
                       style={[
                         styles.ImageStylekey,
@@ -204,6 +202,7 @@ export default class ForgotPassword extends ForgotPasswordController {
                       ]}
                     />
                     <TextInput
+                    testID="txtforgotnum"
                       style={[
                         styles.input,
                         {
