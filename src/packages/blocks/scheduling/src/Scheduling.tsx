@@ -66,15 +66,17 @@ export default class Scheduling extends SchedulingController {
             <View style={styles.selectRow}>
               <Text style={styles.selectQuantityText}>Select Quantity</Text>
               <View style={styles.tools1}>
-                <TouchableOpacity
+                <TouchableOpacity style={styles.minusview}
                   onPress={() => this.props.onChangeSubscriptionQuantity(false)}
                 >
                   <Text style={styles.minus}>-</Text>
                 </TouchableOpacity>
+                <View style={styles.countview}>
                 <Text style={styles.count}>
                   {this.props.subscriptionQuantity}
                 </Text>
-                <TouchableOpacity
+                </View>
+                <TouchableOpacity style={styles.plusview}
                   onPress={() => this.props.onChangeSubscriptionQuantity(true)}
                 >
                   <Text style={styles.plus}>+</Text>
@@ -82,7 +84,7 @@ export default class Scheduling extends SchedulingController {
               </View>
             </View>
             <Text style={styles.selectSubscription}>
-              SELECT SUBSCRIPTION PACKAGE
+              Select Subscription Package
             </Text>
             <View style={styles.subscriptionRow}>
               {this.props.subscriptionPackageData.map((item: any) => {
@@ -108,7 +110,7 @@ export default class Scheduling extends SchedulingController {
               </Text>
             )}
             <Text style={styles.selectSubscriptionPeriod}>
-              SELECT SUBSCRIPTION PERIOD
+              Select Subscription Period
             </Text>
             <DropDownPicker
               items={this.props.subscriptionPeriodData}
@@ -137,7 +139,7 @@ export default class Scheduling extends SchedulingController {
             {this.props.subscriptionTimeSlotData.length > 0 && (
               <Text style={styles.selectSubscription}>
                 {" "}
-                PREFERRED TIME SLOT{" "}
+                Preferred Time Slot{" "}
               </Text>
             )}
             <View style={styles.subscriptionRow}>
@@ -207,12 +209,12 @@ export default class Scheduling extends SchedulingController {
               >
                 <LinearGradient
                   colors={[
-                    themeJson.attributes.primary_color,
-                    themeJson.attributes.primary_color,
+                    'white',
+                    'white',
                   ]}
-                  style={styles.cartButtonCustom}
+                  style={styles.cartButtonCustom1}
                 >
-                  <Text style={styles.AddcustomTxtStyle}>ADD TO CART</Text>
+                  <Text style={[styles.AddcustomTxtStyle,{ color: themeJson.attributes.primary_color}]}>Add To Cart</Text>
                 </LinearGradient>
               </TouchableOpacity>
               <TouchableOpacity
@@ -220,10 +222,11 @@ export default class Scheduling extends SchedulingController {
                 onPress={() => this.props.onPressBuyNowSubscription()}
               >
                 <LinearGradient
-                  colors={[COLOR_CONST.buyNowButton, COLOR_CONST.buyNowButton]}
+                  colors={[themeJson.attributes.primary_color,
+                    themeJson.attributes.primary_color,]}
                   style={styles.cartButtonCustom}
                 >
-                  <Text style={styles.BUYcustomTxtStyle}>BUY NOW</Text>
+                  <Text style={styles.BUYcustomTxtStyle}>Buy Now</Text>
                 </LinearGradient>
               </TouchableOpacity>
             </View>

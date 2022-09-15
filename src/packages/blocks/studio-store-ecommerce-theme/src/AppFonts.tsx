@@ -79,7 +79,8 @@ const COLOR_CONST = {
     newtheme: '#3FC1CB',
     newlightcolor: '#DFDFDF',
     newtheme_another: '#364F6B',
-    removered: '#FC5185'
+    removered: '#FC5185',
+    subscriptionDetailColor: '#038b57'
 };
 export default COLOR_CONST
 export const FONTS = {

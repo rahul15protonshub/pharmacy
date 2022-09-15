@@ -18,7 +18,7 @@ const screenProps = {
     history: null
   }
 
-const feature = loadFeature('./__tests__/features/forgotpassword-scenario.feature');
+const feature = loadFeature('./__tests__/features/forgotpassword-scenario.web.feature');
 
 defineFeature(feature, (test) => {
 
@@ -44,7 +44,7 @@ defineFeature(feature, (test) => {
             expect(forgotPassword).toBeTruthy()
 
         });
-
+       
         then('I can leave the screen with out errors', () => {
             instance.componentWillUnmount()
             expect(forgotPassword).toBeTruthy()

@@ -37,70 +37,11 @@ export default class Categoriessubcategories extends CategoriessubcategoriesCont
     // Customizable Area End
   }
 
-  renderCategories = (mainItem: any) => {
-    // Customizable Area Start
-    return (
-      <View key={mainItem.id} style={styles.containerFlex}>
-        <View style={styles.tableBox}>
-          <View style={styles.innerTableBox}>
-            <TouchableOpacity
-              onPress={() => this.navigateToFilters(mainItem, [], false)}
-              style={styles.containerDirection}
-            >
-              {/* <Image
-                style={styles.catIcon}
-                source={{
-                  uri: mainItem.attributes.product_image
-                    ? mainItem.attributes.product_image.url
-                    : ""
-                }} /> */}
-              <FastImage
-                style={styles.catIcon}
-                source={{
-                  uri: mainItem.attributes.product_image
-                    ? mainItem.attributes.product_image.url
-                    : "",
-                }}
-              //resizeMode={'stretch'}
-              />
-
-              <View style={styles.infoText}>
-                <Text style={styles.labelText}>{mainItem.attributes.name}</Text>
-              </View>
-            </TouchableOpacity>
-            {mainItem.attributes.sub_categories.length > 0 ? (
-              <TouchableOpacity
-                onPress={() => this.expand(mainItem.id)}
-                style={{ paddingRight: Scale(30), paddingVertical: Scale(10) }}
-              >
-                <Image
-                  style={styles.arrow}
-                  source={mainItem.expand ? DOWN_ARROW : RIGHT_ARROW}
-                />
-              </TouchableOpacity>
-            ) : null}
-          </View>
-        </View>
-        <View style={styles.innerExpendTable}>
-          {mainItem.expand && (
-            <FlatList
-              data={mainItem.attributes.sub_categories}
-              extraData={this.state}
-              renderItem={({ item, index }) =>
-                this.renderSubCategories(item, index, mainItem)
-              }
-            />
-          )}
-        </View>
-      </View>
-    );
-    // Customizable Area End
-  };
-
   renderSubCategories = (subItem: any, subIndex: number, item: any) => {
     // Customizable Area Start
     return (
       <TouchableOpacity
+        testID="openfilter"
         onPress={() => this.navigateToFilters(item, subItem, true)}
         style={styles.innerExpendTableBox}
       >
@@ -146,11 +87,56 @@ export default class Categoriessubcategories extends CategoriessubcategoriesCont
         />
         <ScrollView>
           <View style={styles.mainTableContainer}>
-            <FlatList
-              data={this.state.categoriesArray}
-              extraData={this.state}
-              renderItem={({ item }) => this.renderCategories(item)}
-            />
+            {this.state.categoriesArray.map((mainItem: any) => {
+              return (
+                <View key={mainItem.id} style={styles.containerFlex}>
+                  <View style={styles.tableBox}>
+                    <View style={styles.innerTableBox}>
+                      <TouchableOpacity
+                        testID="openfilter1"
+                        onPress={() => this.navigateToFilters(mainItem, [], false)}
+                        style={styles.containerDirection}
+                      >
+                        <FastImage
+                          style={styles.catIcon}
+                          source={{
+                            uri: mainItem?.attributes?.product_image
+                              ? mainItem?.attributes?.product_image?.url
+                              : "",
+                          }}
+                        />
+
+                        <View style={styles.infoText}>
+                          <Text style={styles.labelText}>{mainItem?.attributes?.name}</Text>
+                        </View>
+                      </TouchableOpacity>
+                      {mainItem?.attributes?.sub_categories?.length > 0 ? (
+                        <TouchableOpacity
+                          onPress={() => this.expand(mainItem.id)}
+                          style={{ paddingRight: Scale(30), paddingVertical: Scale(10) }}
+                        >
+                          <Image
+                            style={styles.arrow}
+                            source={mainItem?.expand ? DOWN_ARROW : RIGHT_ARROW}
+                          />
+                        </TouchableOpacity>
+                      ) : null}
+                    </View>
+                  </View>
+                  <View style={styles.innerExpendTable}>
+                    {mainItem.expand && (
+                      <FlatList
+                        data={mainItem?.attributes?.sub_categories}
+                        extraData={this.state}
+                        renderItem={({ item, index }) =>
+                          this.renderSubCategories(item, index, mainItem)
+                        }
+                      />
+                    )}
+                  </View>
+                </View>
+              );
+            })}
           </View>
         </ScrollView>
         <ApplicationLoader isFetching={this.state.isFetching} />

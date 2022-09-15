@@ -250,8 +250,6 @@ export default class PaymentsController extends BlockComponent<Props, S, SS> {
         );
       })
       .catch((error: any) => {
-        console.log(error);
-        // handle failure
         // Customizable Area Start
         // Customizable Area End
       });
@@ -305,7 +303,6 @@ export default class PaymentsController extends BlockComponent<Props, S, SS> {
             message = error.description;
           } else {
             let localError = JSON.parse(error.description);
-            console.log("localError in localError", localError);
             message = localError.error.description;
           }
           // Customizable Area Start
@@ -422,7 +419,7 @@ export default class PaymentsController extends BlockComponent<Props, S, SS> {
     requestMessage.addData(
       getName(MessageEnum.RestAPIResponceEndPointMessage),
       configJSON.razorpayAPiEndPoint +
-        `/verify_signature?razorpay_order_id=${razorpay_order_id}&razorpay_payment_id=${razorpay_payment_id}&razorpay_signature=${razorpay_signature}`
+      `/verify_signature?razorpay_order_id=${razorpay_order_id}&razorpay_payment_id=${razorpay_payment_id}&razorpay_signature=${razorpay_signature}`
     );
     requestMessage.addData(
       getName(MessageEnum.RestAPIRequestHeaderMessage),

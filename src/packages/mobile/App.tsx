@@ -127,10 +127,6 @@ const Footer = createBottomTabNavigator(
   {
     Catalogue: { screen: Catalogue, navigationOptions: { header: null, gestureEnabled: false } },
     Home: { screen: Search, navigationOptions: { header: null, title: 'Search' } },
-    Categoriessubcategories: {
-      screen: Categoriessubcategories,
-      navigationOptions: { header: null, },
-    },
     Profilebio: {
       screen: Profilebio,
       navigationOptions: { header: null, },
@@ -265,7 +261,10 @@ const MainNavigator = createStackNavigator({
     screen: Contactus,
     navigationOptions: { header: null },
   },
-
+  Categoriessubcategories: {
+    screen: Categoriessubcategories,
+    navigationOptions: { header: null, },
+  },
   Splashscreen: {
     screen: Splashscreen,
     navigationOptions: { title: 'Splashscreen' },
@@ -365,9 +364,6 @@ export default class App extends Component {
       isDeepLinkUtilised: false,
     };
     console.disableYellowBox = true;
-    if (!__DEV__) {
-      console.log = () => { };
-    }
   }
 
   componentDidMount() {

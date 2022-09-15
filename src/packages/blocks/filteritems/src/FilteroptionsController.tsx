@@ -156,10 +156,6 @@ export default class FilteroptionsController extends BlockComponent<
   }
   async componentDidMount() {
     super.componentDidMount();
-    // console.log(
-    //   "this.props.navigation.state.params",
-    //   this.props.navigation.state.params
-    // );
     this._unsubscribe = this.props.navigation.addListener("willFocus", () => {
       this.getToken();
       BackHandler.addEventListener(
@@ -192,7 +188,6 @@ export default class FilteroptionsController extends BlockComponent<
     const { params } = this.props.navigation.state;
     this.setState({ token: token });
     let filterData = params ? params.filterData : [];
-    // console.log("@@@ In filteroptions params=============", params);
     if (filterData.length === 0) {
       //*> When Filter Data is empty
       if (params && params.isFromExplore) {
@@ -210,7 +205,6 @@ export default class FilteroptionsController extends BlockComponent<
             subCategory: true,
           });
         } else {
-          // console.log("inside else");
           this.getListRequest();
           this.getBrandList();
           this.getTagsList();
@@ -528,7 +522,6 @@ export default class FilteroptionsController extends BlockComponent<
       this.props.navigation.state.params &&
       this.props.navigation.state.params.isFromExplore
     ) {
-      // console.log("inside filterSubCategories");
       filterData.filterSubCategories = this.state.categoryFilterList;
     } else {
       filterData.filterCategories = this.state.categoryFilterList;
@@ -550,7 +543,6 @@ export default class FilteroptionsController extends BlockComponent<
     if (this.props.navigation.state.params.isFromExplore) {
       localCategories.map((item: any) => {
         if (item.active) {
-          // console.log;
           queryParams.push(`q[sub_category_id][]=${item.id}`);
         }
       });
@@ -561,7 +553,6 @@ export default class FilteroptionsController extends BlockComponent<
         }
       });
     }
-    // console.log("localCategories", queryParams);
     queryParams.push("q[price][from]=" + `${this.state.rangeLow}`);
     queryParams.push("q[price][to]=" + `${this.state.rangeHigh}`);
     this.state.discount &&

@@ -66,10 +66,8 @@ export default class OrdermanagementController extends BlockComponent<
 > {
   getMyOrdersListAPICallID: any;
   submitOrderReviewAPICallID: any;
-  createCartAPICallID: any;
   cartHasProductAPICallID: any;
   cancelOrderAPICallID: any;
-
   _unsubscribe: any;
   // Customizable Area Start
   // Customizable Area End
@@ -190,10 +188,6 @@ export default class OrdermanagementController extends BlockComponent<
           this.cancelOrderSuccessCallBack();
         }
 
-        if (apiRequestCallId === this.createCartAPICallID) {
-          this.createCartSuccessCallBack();
-        }
-
         if (apiRequestCallId === this.cartHasProductAPICallID) {
           this.cartHasProductSuccessCallBack(responseJson.data);
         }
@@ -210,10 +204,6 @@ export default class OrdermanagementController extends BlockComponent<
 
         if (apiRequestCallId === this.cancelOrderAPICallID) {
           this.cancelOrderFailureCallBack(responseJson);
-        }
-
-        if (apiRequestCallId === this.createCartAPICallID) {
-          this.createCartFailureCallBack(responseJson);
         }
 
         if (apiRequestCallId === this.cartHasProductAPICallID) {

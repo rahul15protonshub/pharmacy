@@ -356,5 +356,180 @@ defineFeature(feature, (test) => {
       expect(ordersummaryBlock).toBeTruthy();
 
     });
+
+    then("ordersummary createOrderId without error", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.createOrderId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("ordersummary verifyRazorPayId without error", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{
+            order:{placeat:'',placed_at:''}
+          }],
+        }
+      );
+      instance.verifyRazorPayId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("ordersummary releaseBlockQuantityApiCallId without error", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.releaseBlockQuantityApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("ordersummary releaseShippingChargeCalculationApiCallID without error", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.releaseShippingChargeCalculationApiCallID = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("ordersummary shippingChargeCalculationApiCallID without error", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.shippingChargeCalculationApiCallID = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    //rahul
+    then("ordersummary save address without error", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.saveAddressId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("ordersummary check zipcode without error", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.checkZipcodeId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("ordersummary check availablity without error", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.checkAvailabilityId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("ordersummary releaseblock without error", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.releaseBlockId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("ordersummary confirmStripePaymentID without error", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.confirmStripePaymentID = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    //rahul
   });
 });

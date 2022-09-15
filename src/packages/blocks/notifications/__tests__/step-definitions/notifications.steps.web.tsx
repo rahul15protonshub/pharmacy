@@ -39,7 +39,7 @@ defineFeature(feature, (test) => {
 
     when("I navigate to the notifications", () => {
       instance = notificationsBlock.instance() as Notifications;
-      // instance.componentDidMount();
+       instance//.componentDidMount();
       // instance.getNotificationList();
     });
 

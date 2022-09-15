@@ -133,7 +133,15 @@ export default class Shoppingcart extends ShoppingcartController {
           onPress={() => this.onPressProduct(item)}
           style={styles.rowContainer}
         >
-
+         {
+            isFromSubscription ? (
+              <View style={styles.subscription_discount_badge}>
+                <Text style={styles.subscription_discount_badge_text}>
+                  SUBSCRIPTION {item.attributes.subscription_discount}%
+                </Text>
+              </View>
+            ) : null
+          }
           <View style={styles.row}>
 
             <FastImage
@@ -292,9 +300,31 @@ export default class Shoppingcart extends ShoppingcartController {
 
 
             {this.state.cartList.map((item: any) => {
+              console.log('myitem',item)
               return (
                 <View style={styles.tax}>
-                  <Text style={styles.product_name}>{item.attributes.catalogue.attributes.name}</Text>
+                  <View>
+                    <Text style={styles.product_name}>{item.attributes.catalogue.attributes.name}</Text>
+                    {
+                      item.attributes.subscription_package ? (
+                        <>
+                          <Text style={styles.product_subscription_details}>
+                          {
+                            ["9am to 12pm", "6am to 9am"].includes(item.attributes.preferred_delivery_slot)
+                            ? `Morning (${item.attributes.preferred_delivery_slot
+                              .replace(' to ', ' - ').replace(/am/g, 'AM').replace(/pm/g, 'PM')})`
+                            : `Evening (${item.attributes.preferred_delivery_slot.replace(' to ', ' - ')
+                            .replace(' to ', ' - ').replace(/am/g, 'AM').replace(/pm/g, 'PM')})`
+                          }
+                          </Text>
+                          <Text style={styles.product_subscription_details}>
+                            {`Duration: ${item.attributes.subscription_package} (${item.attributes.subscription_period
+                            } ${item.attributes.subscription_period > 1 ? "Months" : "Month"})`}
+                          </Text>
+                        </>
+                      ) : null
+                    }
+                  </View>
                   <Text style={[styles.product_middle_name]}>x{item.attributes.quantity}</Text>
                   <Text style={styles.price}>
                     {themeJson.attributes.currency_type}{" "}
@@ -322,6 +352,17 @@ export default class Shoppingcart extends ShoppingcartController {
                   {this.state.cartData.attributes.total_tax || 0.0}
                 </Text>
               </View> */}
+                {
+                this.state.cartData.attributes.sub_discounted_total_price ? (
+                  <View style={styles.tax}>
+                    <Text style={styles.product_name}>Subscription Discount</Text>
+                    <Text style={styles.price}>{'- '}
+                      {themeJson.attributes.currency_type}{" "}
+                      {(this.state.cartData.attributes.sub_discounted_total_price) || 0.0}
+                    </Text>
+                  </View>
+                ) : null
+              }
               <View style={styles.tax}>
                 <Text style={styles.product_name}>Delivery Charges</Text>
                 <Text style={styles.price}>{'+ '}

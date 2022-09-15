@@ -21,8 +21,6 @@ import {
   CART_BLACK_ICON,
   NOT_FOUND_ICON,
   shapeHeart,
-  UN_SELECTED_HEART,
-  reviewStar,
   shapeHeartActive
 } from "../../studio-store-ecommerce-theme/src/AppAssets/appassets";
 import GreenButton from "../../studio-store-ecommerce-components/src/GreenButton/GreenButton";

@@ -14,13 +14,10 @@ var data = JSON.stringify({
 })
 
 exec(`cd ../../../.. && node endPointTest.js --host ${host} --path ${config.loginAPiEndPoint} --body '${data}'`, (error, stdout, stderr) => {
-    if (error) {
-        console.log(`EndPoint Returned Error: ${error}`);
-    }
     
     if (stderr) {
-        console.log(`stderr: ${stderr}`);
+     
         return;
     }
-    console.log(`stdout: ${stdout}`);
+   
 });

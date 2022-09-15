@@ -12,11 +12,8 @@ import {
   // Customizable Area End
 } from "react-native";
 import FilteritemsController, { Props } from "./FilteritemsController";
-import scale from "../../../framework/src/utils/Scale";
 import styles from "./FilterStyle";
 import {
-  SELECTED_HEART,
-  UN_SELECTED_HEART,
   NOTIFICATIONS_ICON,
   NEW_ICON,
   NOT_FOUND_ICON,
@@ -28,17 +25,14 @@ import {
   CROSS_ICON1,
   CART_BLACK_ICON,
   BACK_ICON,
-  reviewStar,
 } from "../../studio-store-ecommerce-theme/src/AppAssets/appassets";
 import GreenButton from "../../../blocks/studio-store-ecommerce-components/src/GreenButton/GreenButton";
 import TopHeader from "../../../blocks/studio-store-ecommerce-components/src/TopHeader/TopHeader";
 import CustomErrorModal from "../../studio-store-ecommerce-components/src/CustomErrorModal/CustomErrorModal";
 import ApplicationLoader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader";
 export const configJSON = require("./config");
-const themeJson = require("../../studio-store-ecommerce-theme/src/theme.json");
 const staticString = require("./../../studio-store-ecommerce-translations/en.json");
 // Customizable Area Start
-import FastImage from "react-native-fast-image";
 import ProductBox from "../../../blocks/catalogue/src/components/ProductBox";
 // Customizable Area End
 
@@ -79,7 +73,7 @@ export default class Filteritems extends FilteritemsController {
           this.setState({ showSortByModal: false });
         }}
       >
-        <TouchableOpacity activeOpacity={1} style={styles.modalContainer}>
+        <View style={styles.modalContainer}>
           <View style={styles.sortByContiner}>
             <View style={styles.sortRow}>
               <Text style={styles.sortByText}>Sort by</Text>
@@ -147,124 +141,8 @@ export default class Filteritems extends FilteritemsController {
               )}
             </TouchableOpacity>
           </View>
-        </TouchableOpacity>
+        </View>
       </Modal>
-    );
-  };
-
-  renderListItem = (item: any) => {
-    let productImage = "";
-    if (
-      item?.item?.attributes?.images?.data &&
-      item?.item?.attributes?.images?.data.length > 0
-    ) {
-      item?.item?.attributes?.images.data.map((variant: any) => {
-        if (variant.attributes.is_default) {
-          productImage = variant.attributes.url;
-        }
-      });
-      if (productImage === "") {
-        productImage = item?.item?.attributes?.images?.data[0].attributes.url;
-      }
-    }
-    let datanew= item?.item;
-    let productDefaultWeight = `${datanew.attributes.weight ?? ""} ${datanew.attributes.weight_unit ?? ""}`;
-    var productDefaultPrice = datanew.attributes.on_sale ? datanew.attributes.price_including_tax : datanew.attributes.actual_price_including_tax
-    if (datanew.attributes.default_variant) {
-        const defaultVariantDetails = datanew.attributes.catalogue_variants.find((v: any) => (
-            parseInt(v.id) === datanew.attributes.default_variant.id
-        ))
-        if (defaultVariantDetails) {
-            productDefaultPrice = defaultVariantDetails.attributes.on_sale ? defaultVariantDetails.attributes.price_including_tax : defaultVariantDetails.attributes.actual_price_including_tax
-            const weightDetails = defaultVariantDetails.attributes.catalogue_variant_properties.find((p: any) => (
-                p.attributes.variant_name.trim().toLowerCase() === "weight" || p.attributes.variant_name.trim().toLowerCase() === "size"
-            ))
-            if (weightDetails) {
-                productDefaultWeight = weightDetails.attributes.property_name
-            }
-        }
-    }
-    const isInCart = item?.item?.attributes?.cart_quantity > 0 ? true : false;
-    return (
-      <TouchableOpacity
-        onPress={() =>
-          this.props.navigation.navigate("ProductDescription", {
-            productData: item.item,
-          })
-        }
-        style={styles.productGridStyle}
-      >
-        <TouchableOpacity
-          onPress={() => this.onHeartPress(item.item)}
-          style={styles.touchableOpacityStyle}
-        >
-          {item?.item.attributes?.wishlisted ? (
-            <Image source={SELECTED_HEART} style={styles.heartIcon} />
-          ) : (
-            <Image source={UN_SELECTED_HEART} style={styles.heartIcon} />
-          )}
-        </TouchableOpacity>
-        <View style={styles.titleContainer}>
-          <FastImage
-            source={{ uri: productImage }}
-            style={styles.BottalImage}
-          />
-          <Text numberOfLines={1} style={styles.titleNameStyle}>
-            {item?.item.attributes?.name}
-          </Text>
-          {item.item?.attributes?.on_sale ? (
-            <View style={styles.discountRow}>
-              <Text style={styles.price}>
-                {themeJson.attributes.currency_type}{" "}
-                {item.item.attributes.price_including_tax}
-              </Text>
-              <Text style={styles.discountPrice}>
-                {" "}
-                {themeJson.attributes.currency_type}{" "}
-                {item.item.attributes.actual_price_including_tax}
-              </Text>
-            </View>
-          ) : (
-            <Text style={[styles.price, {}]}>
-              {themeJson.attributes.currency_type}{" "}
-              {item.item.attributes.price_including_tax}
-            </Text>
-          )}
-            <Text style={styles.weight}>{productDefaultWeight}</Text>
-        </View>
-       {item?.item?.attributes?.stock_qty ? <TouchableOpacity onPress={() => this.addToCart(item)} style={styles.addtocartitem}>
-          <View >
-            <Text style={styles.addtocarttext}> {!isInCart
-              ? "Add to cart"
-              : "Go to cart"}</Text>
-          </View>
-
-        </TouchableOpacity>:
-        <View  style={styles.addtocartitem}>
-        <View >
-          <Text style={[styles.addtocarttext,{opacity:0.5}]}> {"Out of Stock"}</Text>
-        </View>
-
-      </View>}
-        {/* <View style={styles.reviewRow}>
-          <Text style={styles.avgReview}>
-            {item.item.attributes.average_rating}
-          </Text>
-          <Image source={reviewStar} style={styles.reviewStar} />
-          {item.item.attributes.reviews && (
-            <Text style={styles.reviewCount}>
-              | {item.item.attributes.reviews.length}
-            </Text>
-          )}
-        </View> */}
-        {/* {item.item.attributes.on_sale && (
-          <View style={styles.labelSticker}>
-            <Text style={styles.stickerText}>
-              Save {Number(item.item.attributes.discount).toFixed(1)}%
-            </Text>
-          </View>
-        )} */}
-      </TouchableOpacity>
     );
   };
 
@@ -333,31 +211,29 @@ export default class Filteritems extends FilteritemsController {
         {!this.state.noProductFound ? (
           <View style={styles.listContainerOne}>
             <FlatList
-              columnWrapperStyle={{justifyContent: 'space-between'}}
+              columnWrapperStyle={{ justifyContent: 'space-between' }}
               numColumns={2}
               extraData={this.state.productList}
               data={this.state.productList}
               keyExtractor={(item: any, index: any) => {
                 return index.toString();
               }}
-              // renderItem={this.renderListItem}
-              renderItem={({item})=>(
+              renderItem={({ item }) => (
                 <ProductBox product={item}
-                onProductPress={() =>
-                  this.props.navigation.push("ProductDescription", { productData: item })
-                }
-                onAddToCartPress={() => this.addToCart(item)}
-                onAddToWishlistPress={() => this.onHeartPress(item)}
-                onQuantityDecrease={() => this.increaseOrDecreaseCartQuantity(item, -1)}
-                onQuantityIncrease={() => this.increaseOrDecreaseCartQuantity(item, 1)}
-                addToCartLoading={this.state.productsAddingToCart.includes(item.id)}
-                addToWishlistLoading={this.state.productWishlisting === item.id}
-                currency={'INR'}
-              />
+                  onProductPress={() =>
+                    this.props.navigation.push("ProductDescription", { productData: item })
+                  }
+                  onAddToCartPress={() => this.addToCart(item)}
+                  onAddToWishlistPress={() => this.onHeartPress(item)}
+                  onQuantityDecrease={() => this.increaseOrDecreaseCartQuantity(item, -1)}
+                  onQuantityIncrease={() => this.increaseOrDecreaseCartQuantity(item, 1)}
+                  addToCartLoading={this.state.productsAddingToCart.includes(item.id)}
+                  addToWishlistLoading={this.state.productWishlisting === item.id}
+                  currency={'INR'}
+                />
               )
 
               }
-              // onEndReachedThreshold={0.01}
               onEndReached={(number) => {
                 this.setState(
                   { onEndReachedCalledDuringMomentum: false },

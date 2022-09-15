@@ -698,16 +698,16 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
         customErrorMessage: "Name is required",
       }));
     }
-   else if (!Validators.isNameValidNew(this.state.textInputData.name)) {
-    this.setState((prevState) => ({
-      textInputErrorData: {
-        ...prevState.textInputErrorData,
-        nameError: true,
-      },
-      isShowError: true,
-      customErrorModal: true,
-      customErrorMessage: "Enter a name with alphabets A-z",
-    }));
+    else if (!Validators.isNameValidNew(this.state.textInputData.name)) {
+      this.setState((prevState) => ({
+        textInputErrorData: {
+          ...prevState.textInputErrorData,
+          nameError: true,
+        },
+        isShowError: true,
+        customErrorModal: true,
+        customErrorMessage: "Enter a name with alphabets A-z",
+      }));
     } else if (this.state.textInputData.flat_no === "") {
       this.setState((prevState) => ({
         textInputErrorData: {
@@ -738,7 +738,7 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
         customErrorModal: true,
         customErrorMessage: "City is required",
       }));
-    }  else if (!Validators.isNameValidNew(this.state.textInputData.city)) {
+    } else if (!Validators.isNameValidNew(this.state.textInputData.city)) {
       this.setState((prevState) => ({
         textInputErrorData: {
           ...prevState.textInputErrorData,
@@ -748,7 +748,7 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
         customErrorModal: true,
         customErrorMessage: "Enter a city with alphabets A-z",
       }));
-      }
+    }
     else if (this.state.textInputData.address_state_id === "") {
       this.setState((prevState) => ({
         textInputErrorData: {
@@ -769,7 +769,7 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
         customErrorModal: true,
         customErrorMessage: "Country is required",
       }));
-    } 
+    }
     else if (!Validators.isNameValidNew(this.state.textInputData.country)) {
       this.setState((prevState) => ({
         textInputErrorData: {
@@ -780,7 +780,7 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
         customErrorModal: true,
         customErrorMessage: "Enter a country with alphabets A-z",
       }));
-      }else if (this.state.textInputData.zip_code === "") {
+    } else if (this.state.textInputData.zip_code === "") {
       this.setState((prevState) => ({
         textInputErrorData: {
           ...prevState.textInputErrorData,
@@ -811,7 +811,7 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
         customErrorModal: true,
         customErrorMessage: "Invalid Phone Number",
       }));
-      } else if (this.state.shippingtextInputData.name === "") {
+    } else if (this.state.shippingtextInputData.name === "") {
       this.setState((prevState) => ({
         shippingtextInputErrorData: {
           ...prevState.shippingtextInputErrorData,
@@ -832,7 +832,7 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
         customErrorModal: true,
         customErrorMessage: "Enter a name with alphabets A-z",
       }));
-      } else if (this.state.shippingtextInputData.flat_no === "") {
+    } else if (this.state.shippingtextInputData.flat_no === "") {
       this.setState((prevState) => ({
         shippingtextInputErrorData: {
           ...prevState.shippingtextInputErrorData,
@@ -873,7 +873,7 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
         customErrorModal: true,
         customErrorMessage: "Enter a city with alphabets A-z",
       }));
-      } else if (this.state.shippingtextInputData.address_state_id === "") {
+    } else if (this.state.shippingtextInputData.address_state_id === "") {
       this.setState((prevState) => ({
         shippingtextInputErrorData: {
           ...prevState.shippingtextInputErrorData,
@@ -904,7 +904,7 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
         customErrorModal: true,
         customErrorMessage: "Enter a country with alphabets A-z",
       }));
-      } else if (this.state.shippingtextInputData.zip_code === "") {
+    } else if (this.state.shippingtextInputData.zip_code === "") {
       this.setState((prevState) => ({
         shippingtextInputErrorData: {
           ...prevState.shippingtextInputErrorData,
@@ -935,7 +935,7 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
         customErrorModal: true,
         customErrorMessage: "Invalid Phone Number",
       }));
-      } else {
+    } else {
       this.onAddressSave();
     }
     // Customizable Area End

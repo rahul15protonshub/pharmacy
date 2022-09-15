@@ -355,6 +355,7 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
 
   //add a new address
   addNewAddressHandler = (values: any) => {
+    console.log('values :>> ', values);
     const token = localStorage.getItem("token");
     const requestMessage = new Message(
       getName(MessageEnum.RestAPIRequestMessage)
@@ -805,6 +806,7 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
   };
 
   changeDefaultAddressHandler = (data: any) => {
+    console.log('data changeDefaultAddressHandler :>> ', data);
     this.setState({
       ...this.state,
       defaultAddressCheck: true,
@@ -839,6 +841,7 @@ export default class CheckoutController extends BlockComponent<Props, S, SS> {
   }
 
   postPrescriptionFile = (order_items: any): boolean => {
+    console.log('order_items', order_items)
     // Customizable Area End
     const header = {
       "Content-Type": configJSON.validationApiContentType,

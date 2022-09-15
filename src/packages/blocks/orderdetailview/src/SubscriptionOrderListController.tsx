@@ -9,7 +9,6 @@ import MessageEnum, {
   getName,
 } from "../../../framework/src/Messages/MessageEnum";
 import { runEngine } from "../../../framework/src/RunEngine";
-import { initialRatingList } from "../../studio-store-ecommerce-theme/src/constants";
 import StorageProvider from "../../../framework/src/StorageProvider";
 import {
   ChangeStackNow,
@@ -218,7 +217,6 @@ export default class SubscriptionOrderListController extends BlockComponent<
       this.setState({ isFetching: true });
     }
     const orderData = this.props.navigation.state.params.orderData;
-    console.log("@@@ Order Data ===========", orderData);
     if (orderData.attributes.subscription_package) {
       this.getSubscrptionOrdersAPICallID = await this.apiCall({
         contentType: configJSON.ApiContentType,
@@ -229,7 +227,6 @@ export default class SubscriptionOrderListController extends BlockComponent<
   };
 
   getSubscrptionOrdersSuccess = (res: any) => {
-    console.log("@@@ Get Subscription Orders Success CallBack =========", res);
     this.setState({
       subscriptionOrders: this.state.subscriptionOrders.concat(res),
       pageLoader: false,
@@ -342,13 +339,6 @@ export default class SubscriptionOrderListController extends BlockComponent<
   };
 
   onEndReached = () => {
-    console.log(
-      "@@@ On End Reached ==============",
-      this.state.onEndReachedCalledDuringMomentum,
-      this.state.lastLoadCount,
-      this.state.limit,
-      this.state.notFinalLoad
-    );
     if (!this.state.onEndReachedCalledDuringMomentum) {
       this.setState({ onEndReachedCalledDuringMomentum: true }, () => {
         setTimeout(() => {

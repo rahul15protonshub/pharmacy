@@ -53,12 +53,7 @@ export const images = {
   googlePlus: require('../assets/googlePlus.png'),
   faceBook: require('../assets/facebook.png'),
   //Category
-  cat1: require('../assets/Home/categories/cat1.png'),
-  cat2: require('../assets/Home/categories/cat2.png'),
-  cat3: require('../assets/Home/categories/cat3.png'),
-  bottle: require('../assets/Home/bottle.png'),
-  cloth: require('../assets/Home/productAsset.png'),
-  illustration: require('../assets/Home/illustration.png'),
+ 
   heartwishlist: require('../assets/Home/heartwishlist.png'),
   redheart: require('../assets/redHeart.png'),
   //save addresses
@@ -96,7 +91,6 @@ export const signUpImages = {
   imgPasswordIcon: require("../assets/icon/door.png"),
   imgPasswordShowIcon: require("../assets/icon/eye.png"),
   imgPasswordHideIcon: require("../assets/icon/eyeClosed.png"),
-  imgLoginSuccess: require("../assets/icon/loginSuccess.png"),
   imgFullName: require("../assets/icon/account1.png"),
   imgPhoneIcon: require("../assets/icon/phoneIcon.png"),
   crossIcon: require("../assets/icon/cross.png"),
@@ -110,7 +104,6 @@ export const loginImages = {
   imgPasswordIcon: require("../assets/icon/door.png"),
   imgPasswordShowIcon: require("../assets/icon/eye.png"),
   imgPasswordHideIcon: require("../assets/icon/eyeClosed.png"),
-  imgLoginSuccess: require("../assets/icon/loginSuccess.png"),
   crossIcon: require("../assets/icon/cross.png"),
   facebook: require('../assets/icon/Facebook_1.png'),
   google: require('../assets/icon/gmail.png'),
@@ -122,7 +115,6 @@ export const authImages = {
   imgPasswordIcon: require("../assets/icon/door.png"),
   imgPasswordShowIcon: require("../assets/icon/eye.png"),
   imgPasswordHideIcon: require("../assets/icon/eyeClosed.png"),
-  imgLoginSuccess: require("../assets/icon/loginSuccess.png"),
   crossIcon: require("../assets/icon/cross.png"),
   backIcon: require("../assets/icon/backIcon.png"),
   notificationIcon: require("../assets/icon/notificationsIcon.png")
@@ -184,7 +176,6 @@ export const forgotPasswordImage = {
   imgPasswordIcon: require("../assets/icon/door.png"),
   imgPasswordShowIcon: require("../assets/icon/eye.png"),
   imgPasswordHideIcon: require("../assets/icon/eyeClosed.png"),
-  imgLoginSuccess: require("../assets/icon/loginSuccess.png"),
   crossIcon: require("../assets/icon/cross.png")
 }
 

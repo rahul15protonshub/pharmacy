@@ -132,9 +132,6 @@ export default class ConnectedAccountsController extends BlockComponent<
   setupGoogleConfiguration = () => {
     // Customizable Area Start
     GoogleSignin.configure({
-      //It is mandatory to call this method before attempting to call signIn()
-      // scopes: ['https://www.googleapis.com/auth/drive.readonly'],
-      // Repleace with your webClientId generated from Firebase console
       webClientId:
         "60789253831-jm71v8bdhhptl8qn7dg7je6o8e6lno6v.apps.googleusercontent.com",
     });
@@ -197,11 +194,6 @@ export default class ConnectedAccountsController extends BlockComponent<
         // Customizable Area Start
         // Customizable Area End
       } else if (errorReponse) {
-        // Customizable Area Start
-        // this.setState({
-        //     isShowError: true, message: errorReponse, showAlertModal: true,
-        //     isFetching: false,
-        // })
         // Customizable Area End
       }
     }
@@ -250,7 +242,6 @@ export default class ConnectedAccountsController extends BlockComponent<
             access_token: token,
             provider: "facebook",
             display_name: json.name,
-            // uuid: DeviceInfo.getUniqueId(),
             account_id: userID,
             unique_auth_id: json.id,
           };
@@ -270,7 +261,6 @@ export default class ConnectedAccountsController extends BlockComponent<
         });
       })
       .catch(() => {
-        console.log("ERROR GETTING DATA FROM FACEBOOK");
       });
   };
   onPressLoginWithFacebook = () => {
@@ -280,7 +270,6 @@ export default class ConnectedAccountsController extends BlockComponent<
     LoginManager.logInWithPermissions(["public_profile", "email"]).then(
       (result) => {
         if (result.isCancelled) {
-          console.log("Login cancelled");
         } else {
           AccessToken.getCurrentAccessToken().then((data) => {
             const accessToken =
@@ -288,16 +277,10 @@ export default class ConnectedAccountsController extends BlockComponent<
             this.initUser(accessToken);
           });
 
-          if (result && result.grantedPermissions) {
-            console.log(
-              "Login success with permissions: " +
-                result.grantedPermissions.toString()
-            );
-          }
         }
       },
       function (error) {
-        console.log("Login fail with error: " + error);
+        
       }
     );
   };
@@ -313,7 +296,6 @@ export default class ConnectedAccountsController extends BlockComponent<
       let data = {
         access_token: userToken.accessToken,
         provider: "google",
-        // uuid: DeviceInfo.getUniqueId(),
         display_name: userInfo.user.name,
         account_id: userID,
         unique_auth_id: userInfo.user.id,
@@ -332,15 +314,6 @@ export default class ConnectedAccountsController extends BlockComponent<
         body: socialData,
       });
     } catch (error) {
-      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        console.log("User Cancelled the Login Flow");
-      } else if (error.code === statusCodes.IN_PROGRESS) {
-        console.log("Signing In");
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        console.log("Play Services Not Available or Outdated");
-      } else {
-        console.log("Some Other Error Happened");
-      }
     }
   };
 
@@ -350,7 +323,6 @@ export default class ConnectedAccountsController extends BlockComponent<
         LoginManager.logOut();
       }
     });
-    //Remove user session from the device.
     try {
       const userInfo = await GoogleSignin.isSignedIn();
       if (userInfo) {

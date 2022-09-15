@@ -270,28 +270,9 @@ export default class ContactusController extends BlockComponent<Props, S, SS> {
     }
   };
 
-  onChangeTextInput = (input: any, text: any) => {
-    this.setState({ isInvalidDescription: false });
-    this.setState((prevState) => ({
-      textInputErrorData: {
-        ...prevState.textInputErrorData,
-        nameError: false,
-        emailError: false,
-        phoneNoError: false,
-      },
-    }));
-    this.setState({ ...this.state.textInputData, [input]: text });
-    this.setState((prevState) => ({
-      textInputData: {
-        ...prevState.textInputData,
-        [input]: text,
-      },
-    }));
-  };
-
   validateInput = () => {
     if (
-      this.state.textInputData.name.trim().length === 0 
+      this.state.textInputData.name.trim().length === 0
     ) {
       this.setState((prevState) => ({
         textInputErrorData: {
@@ -315,8 +296,8 @@ export default class ContactusController extends BlockComponent<Props, S, SS> {
         message: "Enter a name with alphabets A-z",
       }));
       return false;
-      } else if (
-      this.state.textInputData.email.trim().length === 0 
+    } else if (
+      this.state.textInputData.email.trim().length === 0
     ) {
       this.setState((prevState) => ({
         textInputErrorData: {
@@ -343,7 +324,7 @@ export default class ContactusController extends BlockComponent<Props, S, SS> {
       }));
       return false;
     } else if (
-      this.state.textInputData.phoneNo.trim().length === 0 
+      this.state.textInputData.phoneNo.trim().length === 0
     ) {
       this.setState((prevState) => ({
         textInputErrorData: {
@@ -370,11 +351,13 @@ export default class ContactusController extends BlockComponent<Props, S, SS> {
       }));
       return false;
     } else if (this.state.descriptionText.trim().length === 0) {
-      this.setState({ isInvalidDescription: true,
+      this.setState({
+        isInvalidDescription: true,
         isShowError: true,
         showAlertModal: true,
-        message: "Description is required", });
-      
+        message: "Description is required",
+      });
+
       return false;
     } else {
       this.saveContactUs();

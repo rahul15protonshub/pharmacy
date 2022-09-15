@@ -377,32 +377,7 @@ export default class NotificationsController extends BlockComponent<
     });
   };
 
-  readAllNotificationSuccessCallBack = async () => {
-    this.setState({ notificationList: [], pageCount: 1 }, () => {
-      this.getNotificationList();
-    });
-  };
-
-  readAllNotificationFailureCallBack = (error: any) => {
-    if (error) {
-      setTimeout(() => {
-        this.setState({
-          message: this.parseApiErrorResponse(error),
-          isShowError: true,
-          showAlertModal: true,
-        });
-      }, 0);
-    } else {
-      setTimeout(() => {
-        this.setState({
-          message: "Network Error!",
-          isShowError: true,
-          showAlertModal: true,
-        });
-      }, 0);
-    }
-  };
-
+ 
   onEndReached = () => {
     if (!this.state.onEndReachedCalledDuringMomentum) {
       this.setState({ onEndReachedCalledDuringMomentum: true }, () => {

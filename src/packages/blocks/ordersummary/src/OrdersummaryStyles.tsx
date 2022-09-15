@@ -649,10 +649,17 @@ export default StyleSheet.create({
   },
 
   periodText: {
+    marginLeft:scale(11),
     fontSize: scale(10),
     lineHeight: scale(19),
     fontFamily: FONTS.GTWalsheimProMedium,
     color: themeJson.attributes.primary_color,
+  },
+  periodText1: {
+    marginLeft:scale(11),
+    fontSize: scale(10),
+    fontFamily: FONTS.GTWalsheimProRegular,
+    color: '#038b57',
   },
 
   packageText: {

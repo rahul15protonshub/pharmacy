@@ -34,8 +34,8 @@
         "isGoogleLogin": false,
         "isAppleLogin": false,
         "razorpay": {
-            "api_key": "rzp_test_bcTUPBfgspyEkV",
-            "secret_key": "cTcQ5qsr4GpdgpDIl95oyJ8V"
+            "api_key": "rzp_test_XlBKYZFDDGSKTC",
+            "secret_key": "iYW5grAC0Tm0FAqGMIYRSTu5"
         },
         "stripe": {
             "stripe_pub_key": null,

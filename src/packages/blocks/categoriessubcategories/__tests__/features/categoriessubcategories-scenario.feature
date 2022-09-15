@@ -4,6 +4,7 @@ Feature: categoriessubcategories
         Given I am a User loading categoriessubcategories
         When I navigate to the categoriessubcategories
         Then categoriessubcategories will load with out errors
+        Then I can select the button with with out errors
         And I can leave the screen with out errors
 
     Scenario: User can delete any category

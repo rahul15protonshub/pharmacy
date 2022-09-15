@@ -41,4 +41,5 @@ exports.buttonTitle = "Browse Products";
 exports.btnExampleTitle = "CLICK ME";
 exports.currency = "₹";
 exports.endPointApiPutUpdateCartQuantity = "cart/carts/";
+exports.addToCartApiEndPoint = "cart/carts/";
 // Customizable Area End

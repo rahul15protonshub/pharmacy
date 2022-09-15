@@ -879,6 +879,32 @@ export default StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
     marginBottom: verticalScale(10)
-  }
+  },
+  product_subscription_details: {
+    fontSize: scale(10),
+    width: mobW * 0.50,
+    marginLeft: mobW * 0.05,
+    fontFamily: FONTS.GTWalsheimProRegular,
+    color: COLOR_CONST.subscriptionDetailColor,
+  },
+  subscription_discount_badge: {
+    position: "absolute",
+    height: scale(22.2),
+    borderTopRightRadius: scale(50),
+    borderBottomRightRadius: scale(50),
+    backgroundColor: COLOR_CONST.pastelRed,
+    alignSelf: "flex-start",
+    justifyContent: "center",
+  },
+
+  subscription_discount_badge_text: {
+    fontSize: scale(10),
+    lineHeight: scale(11),
+    letterSpacing: scale(0.3),
+    fontFamily: FONTS.GTWalsheimProMedium,
+    color: COLOR_CONST.white,
+    marginLeft: scale(12.1),
+    paddingHorizontal: scale(5),
+  },
   // Customizable Area End
 });

@@ -65,11 +65,6 @@ export default class NewPasswordController extends BlockComponent<
 > {
   // Customizable Area Start
   validationAPICallId: any;
-  requestEmailOtpCallId: any;
-  requestPhoneOtpCallId: any;
-  requestChangePasswordCallId: any;
-  requestGoToConfirmationCallId: any;
-  otpToken: any;
   resetPasswordApiCallId: any;
   secondTextInput: any;
 
@@ -264,11 +259,6 @@ export default class NewPasswordController extends BlockComponent<
     });
   }
 
-  onCloseAlertModal = () => {
-    this.setState({ showAlertModal: false }, () => {
-      this.resetErrors();
-    });
-  };
   resetErrors = () => {
     this.setState({
       message: "",
