@@ -7,6 +7,9 @@ Feature: notifications
         And notifications will load notification list without errors
         And notifications will read notification without errors
         And notifications will delete notification without errors
+        And notifications will load notification list with errors
+        And notifications will read notification with errors
+        And notifications will delete notification with errors
         And Set different states to render different views
         And I can select the button with with out errors
         And I can leave the screen with out errors

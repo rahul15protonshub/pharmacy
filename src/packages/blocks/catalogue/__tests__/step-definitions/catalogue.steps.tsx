@@ -48,6 +48,10 @@ defineFeature(feature, (test) => {
 
     when("I navigate to the Catalogue", () => {
       instance = catalogueBlock.instance() as Catalogue;
+      instance.componentDidMount()
+      instance.getToken()
+      instance.onRegister('353456')
+      instance.onNotification('454354543')
     });
 
     then("Catalogue will load with out errors", () => {

@@ -36,6 +36,8 @@ defineFeature(feature, (test) => {
 
         when('I navigate to the search', () => {
              instance = searchBlock.instance() as Search
+             instance.componentDidMount()
+             instance.getSearchData()
         });
 
         then('search will load with out errors', () => {

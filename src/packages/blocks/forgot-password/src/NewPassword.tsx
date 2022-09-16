@@ -96,6 +96,7 @@ export default class NewPassword extends NewPasswordController {
                     ]}
                   />
                   <TextInput
+                  testID="txtnewpassword"
                     style={[
                       styles.input1,
                       {
@@ -151,6 +152,7 @@ export default class NewPassword extends NewPasswordController {
                     ]}
                   />
                   <TextInput
+                  testID="txtconfrmpassword"
                     ref={(input) => {
                       this.secondTextInput = input;
                     }}

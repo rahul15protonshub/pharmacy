@@ -55,6 +55,7 @@ defineFeature(feature, (test) => {
               getName(MessageEnum.RestAPIResponceSuccessMessage),
               {
                 data: [{}],
+                meta:{token:"1233445"}
               }
             );
             instance.apiEmailLoginCallId = msgLoadDataAPI.messageId;
@@ -72,6 +73,7 @@ defineFeature(feature, (test) => {
               getName(MessageEnum.RestAPIResponceSuccessMessage),
               {
                 data: [{}],
+                meta:{token:"1233445"}
               }
             );
             instance.sendOtpApiCallId = msgLoadDataAPI.messageId;
@@ -89,6 +91,7 @@ defineFeature(feature, (test) => {
               getName(MessageEnum.RestAPIResponceSuccessMessage),
               {
                 data: [{}],
+                meta:{token:"1233445"}
               }
             );
             instance.apiGuestLoginCallId = msgLoadDataAPI.messageId;
@@ -106,6 +109,107 @@ defineFeature(feature, (test) => {
               getName(MessageEnum.RestAPIResponceSuccessMessage),
               {
                 data: [{}],
+                meta:{token:"1233445"}
+              }
+            );
+            instance.apiSocialLoginCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("Login with email with errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                errors: [{}],
+                
+              }
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceErrorMessage),
+              {
+                errors: [{}],
+                
+              }
+            );
+            instance.apiEmailLoginCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("Login send otp with errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                errors: [{}],
+                
+              }
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceErrorMessage),
+              {
+                errors: [{}],
+                
+              }
+            );
+            instance.sendOtpApiCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("Login with guest with errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                errors: [{}],
+                
+              }
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceErrorMessage),
+              {
+                errors: [{}],
+                
+              }
+            );
+            instance.apiGuestLoginCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("Login with socail with errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                errors: [{}],
+                
+              }
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceErrorMessage),
+              {
+                errors: [{}],
+                
               }
             );
             instance.apiSocialLoginCallId = msgLoadDataAPI.messageId;
@@ -124,6 +228,7 @@ defineFeature(feature, (test) => {
         });
 
         then('I can leave the screen with out errors', () => {
+          instance.onCloseAlertModal()
             instance.componentWillUnmount()
             expect(loginWrapper).toBeTruthy()
         });

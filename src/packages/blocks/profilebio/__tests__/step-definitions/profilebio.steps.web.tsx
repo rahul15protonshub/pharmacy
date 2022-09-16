@@ -23,7 +23,7 @@ const screenProps = {
     location: null
   }
 
-const feature = loadFeature('./__tests__/features/profilebio-scenario.feature');
+const feature = loadFeature('./__tests__/features/profilebio-scenario.web.feature');
 
 defineFeature(feature, (test) => {
 

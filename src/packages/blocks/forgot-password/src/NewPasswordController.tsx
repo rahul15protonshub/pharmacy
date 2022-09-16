@@ -208,7 +208,7 @@ export default class NewPasswordController extends BlockComponent<
   resetPasswordSuccessCallBack = async (res: any) => {
     // Customizable Area Start
     let message = "";
-    if (res && res.meta && res.meta.message) {
+    if (res && res?.meta && res?.meta?.message) {
       message = res.meta.message;
     }
     this.setState(
@@ -253,11 +253,7 @@ export default class NewPasswordController extends BlockComponent<
     // Customizable Area End
   };
 
-  startForgotPassword(accountType: String) {
-    this.setState({
-      accountStatus: accountType === "sms" ? "EnterPhone" : "EnterEmail",
-    });
-  }
+ 
 
   resetErrors = () => {
     this.setState({

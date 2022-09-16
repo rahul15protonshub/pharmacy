@@ -8,11 +8,20 @@ import MessageEnum, {
 } from "../../../../framework/src/Messages/MessageEnum";
 import { runEngine } from "../../../../framework/src/RunEngine";
 import Ordermanagement from "../../src/Ordermanagement";
+import CustomErrorModal from "../../../studio-store-ecommerce-components/src/CustomErrorModal/CustomErrorModal";
+import TopHeader from "../../../studio-store-ecommerce-components/src/TopHeader/TopHeader";
 
 const screenProps = {
   navigation: {
+    replace: jest.fn(),
     navigate: jest.fn(),
     addListener: jest.fn(),
+    state: {
+      params: {
+        isFromPlaced: true,
+        mainOrderData: {},
+      },
+    }
   },
   id: "Ordermanagement",
 };
@@ -85,7 +94,13 @@ defineFeature(feature, (test) => {
       instance = OrderWrapper.instance() as Ordermanagement;
       instance.componentDidMount();
       instance.getMyOrderListData();
+      instance.renderSubmitReviewModal;
+     
+    
     });
+
+  
+    
 
     then("ordermangement will load order list without errors", () => {
       const getOrdersAPI = new Message(
@@ -159,6 +174,8 @@ defineFeature(feature, (test) => {
 
     });
     then("I can leave the screen with out errors", () => {
+      OrderWrapper.find(CustomErrorModal).first().prop('hideErrorModal')();
+      OrderWrapper.find(TopHeader).first().prop('onPressLeft')()
       instance.componentWillUnmount();
       expect(OrderWrapper).toBeTruthy();
 
@@ -259,7 +276,8 @@ defineFeature(feature, (test) => {
       let ratingInput = OrderWrapper.findWhere(
         (node) => node.prop("testID") === "ratingInput"
       );
-      ratingInput.simulate("valueChange", "test rate");
+      ratingInput.simulate("focus");
+      ratingInput.simulate("changetext", "test rate");
 
     });
 

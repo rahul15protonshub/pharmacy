@@ -391,12 +391,12 @@ export default class ProductDescription extends ProductDescriptionController {
     const { productData, selectedProduct, selectedImage } = this.state;
     const { attributes } = productData;
     const stock_qty = selectedProduct
-      ? selectedProduct.attributes.stock_qty
-      : attributes.stock_qty;
+      ? selectedProduct?.attributes?.stock_qty
+      : attributes?.stock_qty;
     const on_sale = selectedProduct
-      ? selectedProduct.attributes.on_sale
-      : attributes.on_sale;
-    const prescription = attributes.prescription;
+      ? selectedProduct?.attributes?.on_sale
+      : attributes?.on_sale;
+    const prescription = attributes?.prescription;
     const price = selectedProduct
       ? on_sale
         ? selectedProduct.attributes?.actual_price_including_tax
@@ -406,7 +406,7 @@ export default class ProductDescription extends ProductDescriptionController {
         : attributes?.price_including_tax;
     const sale_price = selectedProduct
       ? selectedProduct?.attributes?.price_including_tax
-      : attributes.price_including_tax;
+      : attributes?.price_including_tax;
     let productImage = "";
     productData?.attributes?.images?.data?.map((variant: any) => {
       if (variant?.attributes?.is_default) {
@@ -462,7 +462,7 @@ export default class ProductDescription extends ProductDescriptionController {
               </View>
               <View style={styles.reviewRow}>
                 <Text style={styles.avgReview}>
-                  {(productData?.attributes?.average_rating).toFixed(1)}
+                  {(productData?.attributes?.average_rating)?.toFixed(1)}
                 </Text>
                 <Image source={shapestar} style={styles.reviewStar} />
                 {productData?.attributes?.reviews && (
@@ -748,7 +748,7 @@ export default class ProductDescription extends ProductDescriptionController {
     // Customizable Area Start
     const { productData, selectedProduct, quantity, isSubscriptionAvailable, cart } =
       this.state;
-    const { cart_quantity } = productData.attributes;
+    const { cart_quantity } = productData?.attributes;
     const isUpdate = selectedProduct
       ? selectedProduct?.attributes?.cart_quantity !== Number(quantity) &&
       selectedProduct?.attributes?.cart_quantity > 0

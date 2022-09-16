@@ -70,6 +70,7 @@ export default class EditAddress extends EditAddressController {
                   Name
                 </Text>
                 <TextInput
+                testID="txtname"
                   style={[
                     styles.textInput,
                     {
@@ -115,6 +116,7 @@ export default class EditAddress extends EditAddressController {
                   Flat / House / Apartment No.
                 </Text>
                 <TextInput
+                 testID="txtflat"
                   style={[
                     styles.textInput,
                     {
@@ -164,6 +166,7 @@ export default class EditAddress extends EditAddressController {
                   Address Line 1
                 </Text>
                 <TextInput
+                testID="inputaddresline1"
                   style={[
                     styles.textInput,
                     {
@@ -213,6 +216,7 @@ export default class EditAddress extends EditAddressController {
                   Address Line 2
                 </Text>
                 <TextInput
+                testID="inputaddresline2"
                   style={[
                     styles.textInput,
                     {
@@ -262,6 +266,7 @@ export default class EditAddress extends EditAddressController {
                   City
                 </Text>
                 <TextInput
+                testID="txtcity"
                   style={[
                     styles.textInput,
                     {

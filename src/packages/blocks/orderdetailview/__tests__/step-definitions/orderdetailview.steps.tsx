@@ -11,7 +11,10 @@ import MessageEnum, {
 import React from "react";
 import Orderdetailview from "../../src/Orderdetailview";
 import SubscriptionOrderList from "../../src/SubscriptionOrderList";
-
+import CustomErrorModal from "../../../studio-store-ecommerce-components/src/CustomErrorModal/CustomErrorModal";
+import TopHeader from "../../../studio-store-ecommerce-components/src/TopHeader/TopHeader";
+const orders = require("./orders.json");
+const subscriptioniitem = require("./subscriptionitem.json");
 jest.useFakeTimers();
 
 const screenProps = {
@@ -20,13 +23,15 @@ const screenProps = {
     addListener: jest.fn(),
     state: {
       params: {
-        orderData: {},
+        orderData: orders.data.order.data[0].attributes.order_items[5],
         mainOrderData: {},
       },
     },
   },
+
   id: "Orderdetailview",
 };
+
 
 const feature = loadFeature(
   "./__tests__/features/orderdetailview-scenario.feature"
@@ -51,7 +56,9 @@ defineFeature(feature, (test) => {
       instance = orderdetailviewBlock.instance() as Orderdetailview;
       await instance.componentDidMount();
       await instance.getTrackIdDetails();
+      instance.renderOrderShippingAddressView()
       instance.setState({ orderDetails: {} });
+      instance.renderCompleteOrderStatusView()
     });
 
     then("orderdetailview will load with out errors", () => {
@@ -452,7 +459,11 @@ defineFeature(feature, (test) => {
     when("I navigate to the subscriptionorderlist", async () => {
       instance = SubscriptionOrderListblock.instance() as SubscriptionOrderList;
       await instance.componentDidMount();
-      instance.setState({ subscriptionOrders: {} });
+      instance.setState({subscriptionOrders:subscriptioniitem.data})
+      instance.renderSubscriptionList()
+      SubscriptionOrderListblock.find(CustomErrorModal).first().prop('hideErrorModal')()
+      SubscriptionOrderListblock.find(TopHeader).first().prop('onPressLeft')
+      
     });
 
     then("subscriptionorderlist will load with out errors", () => {

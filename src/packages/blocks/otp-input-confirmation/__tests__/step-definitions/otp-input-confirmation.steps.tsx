@@ -1,3 +1,4 @@
+/// <reference types="@types/jest" />
 import { defineFeature, loadFeature} from "jest-cucumber"
 import { shallow, ShallowWrapper } from 'enzyme'
 
@@ -36,13 +37,137 @@ defineFeature(feature, (test) => {
 
         when('I navigate to the OTPInputAuth', () => {
              instance = otpInputAuth.instance() as OTPInputAuth
+             instance.loadScreen();
+             expect(otpInputAuth).toBeTruthy()
         });
 
         then('OTPInputAuth will load with out errors', () => {
             expect(otpInputAuth).toBeTruthy()
         });
+        then("OTPInputAuth verifyOtpApiCallId without errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{}],
+              }
+            );
+            instance.verifyOtpApiCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("OTPInputAuth verifyOtpApiCallId with errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                errors: [{}],
+              }
+            );
+            msgLoadDataAPI.addData(
+                getName(MessageEnum.RestAPIResponceErrorMessage),
+                {
+                  errors: [{}],
+                }
+              );
+            instance.verifyOtpApiCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("OTPInputAuth sendOtpApiCallId without errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{}],
+              }
+            );
+            instance.sendOtpApiCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("OTPInputAuth sendOtpApiCallId with errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                errors: [{}],
+              }
+            );
+            msgLoadDataAPI.addData(
+                getName(MessageEnum.RestAPIResponceErrorMessage),
+                {
+                  errors: [{}],
+                }
+              );
+            instance.sendOtpApiCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+         then("OTPInputAuth  signupApiCallId without errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{}],
+              }
+            );
+            instance. signupApiCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("OTPInputAuth  signupApiCallId with errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                errors: [{}],
+              }
+            );
+            msgLoadDataAPI.addData(
+                getName(MessageEnum.RestAPIResponceErrorMessage),
+                {
+                  errors: [{}],
+                }
+              );
+            instance. signupApiCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+
 
         then('I can leave the screen with out errors', () => {
+            instance.handleBackButtonClick
             instance.componentWillUnmount()
             expect(otpInputAuth).toBeTruthy()
         });
