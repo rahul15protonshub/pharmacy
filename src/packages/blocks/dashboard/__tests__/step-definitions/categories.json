@@ -1,0 +1,314 @@
+[
+    {
+        "id": "5",
+        "type": "category",
+        "attributes": {
+            "id": 5,
+            "name": "Fresh Fruits",
+            "created_at": "2022-07-04T12:47:16.004Z",
+            "updated_at": "2022-08-09T10:41:14.520Z",
+            "product_image": {
+                "id": 60,
+                "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBRUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--95db367c657ecfbcdf46090e6c1137985482b49b/cropped_image.png"
+            },
+            "sub_categories": [
+                {
+                    "id": 9,
+                    "name": "Apples",
+                    "created_at": "2022-07-04T12:58:30.094Z",
+                    "updated_at": "2022-07-04T12:58:30.104Z",
+                    "category_id": 5,
+                    "disabled": false
+                },
+                {
+                    "id": 10,
+                    "name": "Bananas",
+                    "created_at": "2022-07-04T12:58:30.104Z",
+                    "updated_at": "2022-07-04T12:58:30.115Z",
+                    "category_id": 5,
+                    "disabled": false
+                },
+                {
+                    "id": 11,
+                    "name": "Cherries",
+                    "created_at": "2022-07-04T12:58:30.116Z",
+                    "updated_at": "2022-07-04T12:58:30.123Z",
+                    "category_id": 5,
+                    "disabled": false
+                },
+                {
+                    "id": 12,
+                    "name": "Grapes",
+                    "created_at": "2022-07-04T12:58:30.123Z",
+                    "updated_at": "2022-07-04T12:58:30.130Z",
+                    "category_id": 5,
+                    "disabled": false
+                },
+                {
+                    "id": 13,
+                    "name": "Lemon",
+                    "created_at": "2022-07-04T12:58:30.131Z",
+                    "updated_at": "2022-07-04T12:58:30.139Z",
+                    "category_id": 5,
+                    "disabled": false
+                },
+                {
+                    "id": 14,
+                    "name": "Melons",
+                    "created_at": "2022-07-04T12:58:30.139Z",
+                    "updated_at": "2022-07-04T12:58:30.148Z",
+                    "category_id": 5,
+                    "disabled": false
+                },
+                {
+                    "id": 15,
+                    "name": "Oranges",
+                    "created_at": "2022-07-04T12:58:30.148Z",
+                    "updated_at": "2022-07-04T12:58:30.156Z",
+                    "category_id": 5,
+                    "disabled": false
+                },
+                {
+                    "id": 16,
+                    "name": "Peaches",
+                    "created_at": "2022-07-04T12:58:30.156Z",
+                    "updated_at": "2022-07-04T12:58:30.167Z",
+                    "category_id": 5,
+                    "disabled": false
+                },
+                {
+                    "id": 26,
+                    "name": "Others",
+                    "created_at": "2022-07-04T13:12:43.929Z",
+                    "updated_at": "2022-07-04T13:12:43.938Z",
+                    "category_id": 5,
+                    "disabled": false
+                }
+            ]
+        }
+    },
+    {
+        "id": "4",
+        "type": "category",
+        "attributes": {
+            "id": 4,
+            "name": "Fresh Vegetables",
+            "created_at": "2022-05-27T08:15:49.611Z",
+            "updated_at": "2022-07-04T12:44:41.561Z",
+            "product_image": {
+                "id": 59,
+                "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBRQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--59b8887a3337af944e6d7fba4195fdb27df67b55/cropped_image.png"
+            },
+            "sub_categories": [
+                {
+                    "id": 18,
+                    "name": "Cabbage",
+                    "created_at": "2022-07-04T13:03:15.833Z",
+                    "updated_at": "2022-07-04T13:03:15.841Z",
+                    "category_id": 4,
+                    "disabled": false
+                },
+                {
+                    "id": 19,
+                    "name": "Cauliflower",
+                    "created_at": "2022-07-04T13:03:15.842Z",
+                    "updated_at": "2022-07-04T13:03:15.850Z",
+                    "category_id": 4,
+                    "disabled": false
+                },
+                {
+                    "id": 21,
+                    "name": "Cucumber",
+                    "created_at": "2022-07-04T13:03:15.865Z",
+                    "updated_at": "2022-07-04T13:03:15.875Z",
+                    "category_id": 4,
+                    "disabled": false
+                },
+                {
+                    "id": 25,
+                    "name": "Others",
+                    "created_at": "2022-07-04T13:12:14.425Z",
+                    "updated_at": "2022-07-04T13:12:14.439Z",
+                    "category_id": 4,
+                    "disabled": false
+                },
+                {
+                    "id": 17,
+                    "name": "Potato",
+                    "created_at": "2022-07-04T13:03:15.820Z",
+                    "updated_at": "2022-08-09T10:40:53.385Z",
+                    "category_id": 4,
+                    "disabled": false
+                },
+                {
+                    "id": 20,
+                    "name": "Corns",
+                    "created_at": "2022-07-04T13:03:15.851Z",
+                    "updated_at": "2022-08-09T10:40:53.387Z",
+                    "category_id": 4,
+                    "disabled": false
+                },
+                {
+                    "id": 22,
+                    "name": "Onion",
+                    "created_at": "2022-07-04T13:03:15.876Z",
+                    "updated_at": "2022-08-09T10:40:53.389Z",
+                    "category_id": 4,
+                    "disabled": false
+                },
+                {
+                    "id": 23,
+                    "name": "Tomato",
+                    "created_at": "2022-07-04T13:03:15.890Z",
+                    "updated_at": "2022-08-09T10:40:53.413Z",
+                    "category_id": 4,
+                    "disabled": false
+                },
+                {
+                    "id": 24,
+                    "name": "Brocoli",
+                    "created_at": "2022-07-04T13:03:15.899Z",
+                    "updated_at": "2022-08-09T10:40:53.415Z",
+                    "category_id": 4,
+                    "disabled": false
+                }
+            ]
+        }
+    },
+    {
+        "id": "3",
+        "type": "category",
+        "attributes": {
+            "id": 3,
+            "name": "Dairy & Eggs",
+            "created_at": "2022-05-27T08:15:49.092Z",
+            "updated_at": "2022-08-09T10:39:58.228Z",
+            "product_image": {
+                "id": 52,
+                "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBPUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4c7cdd761ebb2df6dbd9d0047c52d98a14041ad4/cropped_image.png"
+            },
+            "sub_categories": [
+                {
+                    "id": 4,
+                    "name": "Butter",
+                    "created_at": "2022-07-04T12:38:52.776Z",
+                    "updated_at": "2022-07-04T12:38:52.787Z",
+                    "category_id": 3,
+                    "disabled": false
+                },
+                {
+                    "id": 6,
+                    "name": "Cream cheese",
+                    "created_at": "2022-07-04T12:38:52.796Z",
+                    "updated_at": "2022-07-04T12:38:52.804Z",
+                    "category_id": 3,
+                    "disabled": false
+                },
+                {
+                    "id": 5,
+                    "name": "Eggs",
+                    "created_at": "2022-07-04T12:38:52.788Z",
+                    "updated_at": "2022-08-09T10:39:58.230Z",
+                    "category_id": 3,
+                    "disabled": false
+                },
+                {
+                    "id": 7,
+                    "name": "Other dairy products",
+                    "created_at": "2022-07-04T12:38:52.804Z",
+                    "updated_at": "2022-08-09T10:39:58.233Z",
+                    "category_id": 3,
+                    "disabled": false
+                }
+            ]
+        }
+    },
+    {
+        "id": "2",
+        "type": "category",
+        "attributes": {
+            "id": 2,
+            "name": "Breads & Bakery",
+            "created_at": "2022-05-27T08:15:48.550Z",
+            "updated_at": "2022-08-09T10:39:42.686Z",
+            "product_image": {
+                "id": 48,
+                "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBOUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--8ff221b86bf75913669c4984b94ac287e280923f/cropped_image.png"
+            },
+            "sub_categories": [
+                {
+                    "id": 3,
+                    "name": "Cookies",
+                    "created_at": "2022-07-04T12:32:32.932Z",
+                    "updated_at": "2022-07-04T12:32:32.943Z",
+                    "category_id": 2,
+                    "disabled": false
+                },
+                {
+                    "id": 1,
+                    "name": "Breads",
+                    "created_at": "2022-07-04T12:30:37.956Z",
+                    "updated_at": "2022-08-09T10:39:42.688Z",
+                    "category_id": 2,
+                    "disabled": false
+                },
+                {
+                    "id": 2,
+                    "name": "Cakes",
+                    "created_at": "2022-07-04T12:32:32.923Z",
+                    "updated_at": "2022-08-09T10:39:42.690Z",
+                    "category_id": 2,
+                    "disabled": false
+                }
+            ]
+        }
+    },
+    {
+        "id": "1",
+        "type": "category",
+        "attributes": {
+            "id": 1,
+            "name": "Frozen foods",
+            "created_at": "2022-05-27T08:15:48.078Z",
+            "updated_at": "2022-08-09T10:39:07.780Z",
+            "product_image": {
+                "id": 46,
+                "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBNdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--94339143008a42879798222833f4528247ea3317/cropped_image.png"
+            },
+            "sub_categories": [
+                {
+                    "id": 27,
+                    "name": "Frozen Veggies",
+                    "created_at": "2022-07-05T07:45:34.274Z",
+                    "updated_at": "2022-07-05T07:45:34.282Z",
+                    "category_id": 1,
+                    "disabled": false
+                },
+                {
+                    "id": 29,
+                    "name": "Frozen Veg Snacks",
+                    "created_at": "2022-07-05T07:45:34.291Z",
+                    "updated_at": "2022-08-09T10:39:07.783Z",
+                    "category_id": 1,
+                    "disabled": false
+                },
+                {
+                    "id": 30,
+                    "name": "Ice creams",
+                    "created_at": "2022-07-05T07:45:34.298Z",
+                    "updated_at": "2022-08-09T10:39:07.785Z",
+                    "category_id": 1,
+                    "disabled": false
+                },
+                {
+                    "id": 31,
+                    "name": "Frozen Non-Veg Snacks",
+                    "created_at": "2022-07-05T07:45:34.318Z",
+                    "updated_at": "2022-08-09T10:39:07.787Z",
+                    "category_id": 1,
+                    "disabled": false
+                }
+            ]
+        }
+    }
+  ]

@@ -417,7 +417,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
               );
               // @ts-ignore
               localStorage.setItem("cart_length", cart_length + 1);
-              // console.log(window.location.pathname.endsWith("/home-page") ? "" : this.state.catalogue_id && this.getProductDetails())
               // window.location.pathname.endsWith("/home-page") ? "" : this.state.catalogue_id && this.getProductDetails()
               this.getIsCartCreated();
               this.getNewCollection();
@@ -604,7 +603,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
                 this.getNewCollection();
                 this.getFeaturedProduct();
                 this.getFilteredProducts();
-              // console.log(window.location.pathname);
               if (window.location.pathname.startsWith("/shop/")) {
                 window.scrollTo(0, 0);
                 this.getProductDetails();
@@ -983,7 +981,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     };
     let httpBody: any;
     if (type == "subscription") {
-      console.log('first', this.state.SubscriptionRequestBody)
       httpBody = this.state.SubscriptionRequestBody;
     } else {
       if (product.catalogue_id && this.state.catalogue_variant_id) {
@@ -1482,7 +1479,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
   /// post notify me
 
   postNotifyMe = (variant_id: any): boolean => {
-    // console.log("fgnmdf", variant_id);
     const header = {
       "Content-Type": configJSON.dashboarContentType,
       token: localStorage.getItem("token"),
@@ -1892,7 +1888,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
           variantIndex = vitem.id;
         }
       });
-    // console.log("variantIndex", variantIndex);
     if (this.state.available_sizes != "") {
       if (variantIndex) {
         this.setState({
@@ -1939,7 +1934,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
         selectedAttributes[attribute].variant_property_id;
       delete selectedAttributes[attribute];
       this.setState({ selectedAttributes: selectedAttributes }, () => {
-        // console.log('@@@ Item selected Removed ===========', item, this.state.selectedAttributes, lastSelectedVariantPropertyID, item.variant_property_id)
         if (lastSelectedVariantPropertyID !== item.variant_property_id) {
           this.setState(
             {
@@ -1950,7 +1944,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
               currentSelection: attribute,
             },
             () => {
-              // console.log('@@@ Item selected ===========', item, this.state.selectedAttributes)
               this.setSelectedProduct();
             }
           );
@@ -1968,7 +1961,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
           currentSelection: attribute,
         },
         () => {
-          // console.log('@@@ Item selected ===========', item, this.state.selectedAttributes)
           this.setSelectedProduct();
         }
       );
@@ -1980,7 +1972,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
     const { catalogue_variants } = productData.attributes;
     let isSelectedFound = false;
     catalogue_variants.map((item: any, index: number) => {
-      // console.log('@@@ Item ===============', item.attributes);
       let varientPropertyIds: any = [];
       let selectedVarientPropertyIds: any = [];
       const { catalogue_variant_properties } = item.attributes;
@@ -2011,16 +2002,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
       if (isSelectedFound) {
         return;
       }
-
-      // console.log('@@@ Item Selected Attributes ===============', selectedAttributes);
-      // console.log('@@@ Item varientPropertyIds ===============', varientPropertyIds);
-      // console.log('@@@ Item selectedVarientPropertyIds ===============', selectedVarientPropertyIds);
-      // console.log("selectedProduct", item);
-      // console.log("currentImage", item.attributes.images.data?.length > 0 ?
-      //     item.attributes.images.data[0].attributes.url
-      //     : "");
-      // console.log("productImages", item.attributes.images.data);
-      // console.log("@@@catalogue_variant_id", item.id)
 
       if (varientPropertyIds.length === selectedVarientPropertyIds.length) {
         if (
@@ -2065,8 +2046,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
             }
           );
         } else {
-          // console.log("I am in else case", item, this.state.selectedProduct);
-
           this.setState({
             itemQuantity: 1,
             isProductAvailable: false,
@@ -2170,7 +2149,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
             : false,
         },
         () => {
-          // console.log('@@@ Available Attributes ===========', availableAttributes);
         }
       );
     }
@@ -2190,11 +2168,6 @@ export default class DashboardController extends BlockComponent<Props, S, SS> {
           availablePropertIds.push(item.variant_property_id);
         });
       }
-      // console.log(
-      //   "@@@ Item Check =============",
-      //   selectedVarientPropertyIds,
-      //   availablePropertIds
-      // );
       return (
         JSON.stringify(selectedVarientPropertyIds.sort()) ===
         JSON.stringify(availablePropertIds.sort())

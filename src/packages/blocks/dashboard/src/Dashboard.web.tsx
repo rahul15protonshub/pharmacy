@@ -7,38 +7,6 @@ import { Container, Row, Col } from "reactstrap";
 import Loader from "../../studio-store-ecommerce-components/src/AppLoader/AppLoader.web";
 // Customizable Area Start
 import { setTimeout } from "timers";
-const templates = require("../../studio-store-ecommerce-theme/src/templates.json");
-const THEMEPATH = "../../studio-store-ecommerce-theme/src/theme";
-const SECTIONS_PATH = {
-  HEADER_BANNER: "./templates/HeaderBanner",
-  CATEGORY: "./templates/Categories",
-  NEW_ARRIVALS: "./templates/NewArrivals",
-  TRENDINGPRODUCTS: "./templates/TrendingProducts",
-};
-const dynamicComponentLoad = (
-  block: any,
-  PATH: string,
-  template: any,
-  templateName,
-  sectionName
-) => {
-  try {
-    let Component =
-      require(`../../studio-store-ecommerce-theme/src/theme/${templateName}/${sectionName}`)?.default;
-    if (typeof Component !== "undefined") {
-      return React.createElement(Component, { ...block });
-    }
-    // component doesn't exist yet
-    return React.createElement(
-      () => (
-        <div>The component {block.component} has not been created yet.</div>
-      ),
-      { key: block._uid }
-    );
-  } catch (err) {
-    console.log(err, "err");
-  }
-};
 import "../assets/css/index.css";
 import { IoMdClose } from "react-icons/io";
 import LeftContent from "./components/LeftContent";
@@ -53,29 +21,29 @@ class HomeDashboard extends DashboardController {
 
   render() {
     // Customizable Area Start
-    let carousel = React.createRef();
-    let Breakpoints = [
-      { width: 200, itemsToShow: 2, itemsToScroll: 2 },
-      { width: 320, itemsToShow: 2, itemsToScroll: 2 },
-      { width: 500, itemsToShow: 3, itemsToScroll: 1 },
-      { width: 769, itemsToShow: 5, itemsToScroll: 2 },
-      { width: 1000, itemsToShow: 6, itemsToScroll: 2 },
-      { width: 1300, itemsToShow: 7, itemsToScroll: 3 },
-    ];
-    let BreakpointsForCollection = [
-      { width: 1, itemsToShow: 2.5 },
-      { width: 500, itemsToShow: 3.5 },
-      { width: 1000, itemsToShow: 4 },
-    ];
-    const banner_one =
-      this.state.banners.length > 1 &&
-      this.state.banners[0].attributes.images.data[0].attributes.url;
-    localStorage.removeItem("newest");
-    const selectedBanner =
-      this.state.selectedTemplate &&
-      templates[this.state.selectedTemplate].find(
-        (temp) => temp.sectionName === "headerBanner"
-      );
+    // let carousel = React.createRef();
+    // let Breakpoints = [
+    //   { width: 200, itemsToShow: 2, itemsToScroll: 2 },
+    //   { width: 320, itemsToShow: 2, itemsToScroll: 2 },
+    //   { width: 500, itemsToShow: 3, itemsToScroll: 1 },
+    //   { width: 769, itemsToShow: 5, itemsToScroll: 2 },
+    //   { width: 1000, itemsToShow: 6, itemsToScroll: 2 },
+    //   { width: 1300, itemsToShow: 7, itemsToScroll: 3 },
+    // ];
+    // let BreakpointsForCollection = [
+    //   { width: 1, itemsToShow: 2.5 },
+    //   { width: 500, itemsToShow: 3.5 },
+    //   { width: 1000, itemsToShow: 4 },
+    // ];
+    // const banner_one =
+    //   this.state.banners.length > 1 &&
+    //   this.state.banners[0].attributes.images.data[0].attributes.url;
+    // localStorage.removeItem("newest");
+    // const selectedBanner =
+    //   this.state.selectedTemplate &&
+    //   templates[this.state.selectedTemplate].find(
+    //     (temp) => temp.sectionName === "headerBanner"
+    //   );
     return (
       <>
         <Container className={`home-layout ${!this.state.showProducts ? 'home-layout--show' : ''} h-100 mb-40`}>
