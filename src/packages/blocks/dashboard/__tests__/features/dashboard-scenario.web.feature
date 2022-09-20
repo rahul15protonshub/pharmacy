@@ -4,6 +4,7 @@ Feature: dashboard
         Given I am a User loading dashboard
         When I navigate to the dashboard
         Then dashboard will load with out errors
+        Then dashboard will load dashboard data with out errors
         And Dashboard will display messages
         And Dashboard will display notifcation if no messages
         And Dashboard will display notifcation if API failure

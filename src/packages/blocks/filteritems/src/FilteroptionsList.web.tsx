@@ -30,7 +30,7 @@ import classNames from "classnames";
 import { withRouter } from "react-router-dom";
 // Customizable Area Start
 // Customizable Area End
-class Filteroptions extends FilteroptionsListController {
+export default class Filteroptions extends FilteroptionsListController {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -1266,7 +1266,7 @@ class Filteroptions extends FilteroptionsListController {
   }
 }
 
-export default withRouter(Filteroptions);
-export { Filteroptions };
+// export default withRouter(Filteroptions);
+// export { Filteroptions };
 // Customizable Area Start
 // Customizable Area End

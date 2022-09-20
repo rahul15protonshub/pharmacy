@@ -60,6 +60,7 @@ interface S {
   qParams: string;
   loading: boolean;
   // Customizable Area Start
+  productDetails?:any;
   // presentFetchUrl: string;
   isLoaderWithoutFilters?: boolean;
   totalPage: number;
@@ -206,6 +207,7 @@ export default class FilteritemsController extends BlockComponent<
   }
 
   removeFilter = (data, type, itemId) => {
+    console.log('object :>> ', data, type, itemId);
     if (type == "category") {
       Object.keys(JSON.parse(localStorage.getItem("subCategory") || "{}"))
         .length != 0 &&
@@ -1368,6 +1370,7 @@ export default class FilteritemsController extends BlockComponent<
 
   // Customizable Area Start
   increaseOrDecreaseCartQuantity(product: any, increment: number) {
+    console.log('product :>> ', product);
     this.setState({
       productsAddingToCart: [...this.state.productsAddingToCart, product.id],
     });
