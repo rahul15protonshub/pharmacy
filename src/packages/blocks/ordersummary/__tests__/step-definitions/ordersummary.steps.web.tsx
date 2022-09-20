@@ -89,6 +89,20 @@ defineFeature(feature, (test) => {
     });
 
     then("ordersummary will load with out errors", () => {
+      instance.componentDidMount()
+      instance.getCartHasProduct();
+      instance.getUserProfile()
+      instance.saveAddress()
+      instance.releaseBlockQuantity()
+      instance.toggleIsOpen()
+      // instance.onConfirmingOrder()
+      instance.placeOrder()
+      instance.getRazorpayOrderId()
+      instance.placeConfirmOrder()
+      // instance.onHandleBack()
+      instance.deleteCoupon()
+      instance.getCart()
+      instance.releaseShippingCharge()
       expect(ordersummaryBlock).toBeTruthy();
 
     });
