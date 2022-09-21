@@ -24,7 +24,11 @@ const screenProps = {
   }
 
 const feature = loadFeature('./__tests__/features/profilebio-scenario.feature');
-
+const values={
+    currentPassword:"12345",
+    newPassword:"2351",
+    confirmPassword:"2351"
+}
 defineFeature(feature, (test) => {
 
     beforeEach(() => {
@@ -58,8 +62,13 @@ defineFeature(feature, (test) => {
              instanceProfileBlock = profileBlockWrapper.instance() as ProfileBlock
              instanceAddress = addressWrapper.instance() as Address
         });
-
+     
         then('profilebio will load with out errors', () => {
+            instance.componentDidMount();
+            instance.editProfileSchema();
+            instance.updatePasswordHandler(values);
+            instance.getUserProfileHandler();
+            instance.uploadImage();
 
             const msgLoadDataAPI = new Message(
                 getName(MessageEnum.RestAPIResponceMessage)

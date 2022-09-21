@@ -11,6 +11,7 @@ import { runEngine } from "../../../../framework/src/RunEngine";
 import Ordermanagement from "../../src/Ordermanagement";
 import { SingleOrders } from "../../src/SingleOrders.web"
 import { NoOrderFound } from "../../src/NoOrder.web"
+import ProductRating from "../../src/ProductRating.web";
 const screenProps = {
   navigation: {
     navigate: jest.fn(),
@@ -28,6 +29,8 @@ jest.useFakeTimers();
 const feature = loadFeature(
   "./__tests__/features/ordermanagement-scenario.web.feature"
 );
+
+const reviewData={ orderId:"1", orderItemId:"45", reviewId:"1", reviewText:"good", reviewRating:"4" }
 
 defineFeature(feature, (test) => {
   beforeEach(() => {
@@ -52,13 +55,71 @@ defineFeature(feature, (test) => {
     });
 
     then("ordermangement will mount and preload data", () => {
-      // instance.componentDidMount();
+      instance.componentDidMount();
+      instance.sendLoginFailMessage();
+      // instance.getOrders();
+      instance.routeToProfile("profile");
+      instance.openProductRatingModal();
+      // instance.setProductAndOpenPM()
+      // instance.openCancelOrderModal()
+      // instance.confirmCancelOrder();
+      instance.toggleCancelModal();
+      // instance.routeToOrderDetails();
+      // instance.writeReview();
+      // instance.getAllNotificationsList();
+      // instance.setCurrentImage()
     });
 
+    
+    then("ordermangement will order data with out errors", () => {
+      const msgSuccessRestAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgSuccessRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgSuccessRestAPI.messageId
+      );
+      msgSuccessRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: {},
+        }
+      );
+      instance.getOrdersCallId = msgSuccessRestAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgSuccessRestAPI);
+    });
     then("I can leave the screen with out errors", () => {
       // instance.componentWillUnmount();
     });
   });
+
+  test("User navigates to product rating", ({ given, when, then }) => {
+    let productRating: ShallowWrapper;
+    let instance: ProductRating;
+
+
+    given("I am a User loading product rating", () => {
+      productRating = shallow(<ProductRating reviewData={reviewData} toggle={undefined} isOpen={false} onSuccess={undefined} {...screenProps} />);
+      expect(productRating).toBeTruthy();
+
+    });
+
+    when("I navigate to the product rating", () => {
+      instance = productRating.instance() as ProductRating;
+    });
+
+    then("product rating will mount and preload data", () => {
+      instance.componentDidMount();
+      instance.setRating(4)
+    });
+
+    then("I can leave the screen with out errors", () => {
+      instance.componentWillUnmount();
+      expect(productRating).toBeTruthy();
+
+    });
+  });
+
 
   test("User navigates to no order found", ({ given, when, then }) => {
     let NoOrderFoundWrapper: ShallowWrapper;
