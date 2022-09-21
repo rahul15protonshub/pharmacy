@@ -4,6 +4,7 @@ Feature: shoppingcart
         Given I am a User loading shoppingcart
         When I navigate to the shoppingcart
         Then shoppingcart will load with out errors
+        Then shoppingcart will load shoppingcart data with out errors
         Then shoppingcart failed to load carts
         Then shoppingcart will refresh shipping address without errors
         Then shoppingcart failed to refresh shipping address
@@ -25,6 +26,7 @@ Feature: shoppingcart
     Scenario: User navigates to checkout
         Given I am a User loading checkout
         When I navigate to the checkout
+        Then checkout will load data with out errors
         Then checkout will add new address without errors
         Then checkout failed to add new address
         Then checkout will get user delivery address without errors
@@ -56,3 +58,15 @@ Feature: shoppingcart
         Then Show select address modal without errors
         Then I can select the button with out errors
         And I can leave the screen with out errors
+
+    Scenario: User navigates to editaddress
+        Given I am a User loading editaddress
+        When I navigate to the editaddress
+        Then editaddress will load with out errors
+        And I can leave the screen with out errors
+
+    Scenario: User navigates to saved address
+        Given I am a User loading saved address
+        When I navigate to the saved address
+        Then saved address will without errors
+        Then I can leave the screen with out errors

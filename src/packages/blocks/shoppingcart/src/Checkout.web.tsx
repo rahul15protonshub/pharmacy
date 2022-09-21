@@ -45,7 +45,7 @@ import Dropzone from "react-dropzone";
 import { MultiSelect } from "react-multi-select-component";
 
 // cart Amount //
-function CartAmount(props: any) {
+export function CartAmount(props: any) {
   // Customizable Area Start
   const wholeCart = props.wholeCart;
   const isCheckedShippingCharge = props.isCheckedShippingCharge;
@@ -57,6 +57,7 @@ function CartAmount(props: any) {
       setCouponCode(props.wholeCart?.coupon?.attributes?.code);
     }
   }, [props.wholeCart?.coupon?.attributes?.code]);
+
   function getProducts() {
     var items: any = [];
     wholeCart &&
@@ -155,6 +156,28 @@ function CartAmount(props: any) {
               <tbody>{getProducts()}</tbody>
             </Table>
             <span className="cart-divider" />
+           
+            <Table className="yt-sub-ttl-tbl-wrap">
+              <tbody>
+                <tr>
+                  <td style={{ paddingLeft: 0 }}>
+                    <span className="cart-product-amount">
+                      {content.SubTotal}(Inclusive Taxes)
+                    </span>
+                  </td>
+                  <td style={{ paddingRight: 0, textAlign: "right" }}>
+                    <span className="cart-product-amount cart-sub-total">
+                      {/* @ts-ignore  */}
+                      {
+                        JSON.parse(localStorage.getItem("countryCode") ?? "{}")
+                          ?.countryCode
+                      }{" "}
+                      {parseFloat(wholeCart.sub_total).toFixed(2)}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
             {wholeCart.sub_discounted_total_price ?
             <Table className="yt-sub-ttl-tbl-wrap">
               <tbody>
@@ -179,28 +202,6 @@ function CartAmount(props: any) {
             </Table>
             : ''
           }
-            <Table className="yt-sub-ttl-tbl-wrap">
-              <tbody>
-                <tr>
-                  <td style={{ paddingLeft: 0 }}>
-                    <span className="cart-product-amount">
-                      {content.SubTotal}(Inclusive Taxes)
-                    </span>
-                  </td>
-                  <td style={{ paddingRight: 0, textAlign: "right" }}>
-                    <span className="cart-product-amount cart-sub-total">
-                      {/* @ts-ignore  */}
-                      {
-                        JSON.parse(localStorage.getItem("countryCode") ?? "{}")
-                          ?.countryCode
-                      }{" "}
-                      {parseFloat(wholeCart.sub_total).toFixed(2)}
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
-
             <Table className="mb-0 cart-prodict-total-amount " borderless>
               <tbody>
                 <tr>
@@ -274,7 +275,7 @@ function CartAmount(props: any) {
                     data-testid={"button-apply-coupon"}
                     color="secondary cart-coupon-btn"
                     onClick={() => {
-                      props.toApplyCoupon(couponCode, wholeCart.sub_total);
+                      props.toApplyCoupon(couponCode, wholeCart.total);
                       //@ts-ignore
                     }}
                     disabled={
@@ -358,7 +359,7 @@ function CartAmount(props: any) {
   // Customizable Area End
 }
 
-const CartProductListData: any = withRouter((props: any) => {
+export const CartProductListData: any = withRouter((props: any) => {
   // Customizable Area Start
   function getProducts() {
     var products: any = [];
@@ -383,7 +384,7 @@ const CartProductListData: any = withRouter((props: any) => {
   // Customizable Area End
 });
 
-const PrescriptionModal = (props: any) => {
+export const PrescriptionModal = (props: any) => {
   const [prescriptionFile, setPrescriptionFile] = useState<any>([]);
   const [presProduct, setpresProduct] = useState<any>([]);
   const [progress, setProgress] = useState<any>([]);
@@ -1699,14 +1700,15 @@ export class Checkout extends CheckoutController {
                     >
                       {this.state.userAddress &&
                       this.state.userAddress.length > 0 ? (
-                        [
-                          ...new Map(
-                            this.state.userAddress?.map((item) => [
-                              item["address"],
-                              item,
-                            ])
-                          ).values(),
-                        ].map((ele, index) => (
+                        // [
+                        //   ...new Map(
+                        //     this.state.userAddress?.map((item) => [
+                        //       item["address"],
+                        //       item,
+                        //     ])
+                        //   ).values(),
+                        // ]
+                        this.state.userAddress.map((ele, index) => (
                           <li
                             key={index}
                             className={

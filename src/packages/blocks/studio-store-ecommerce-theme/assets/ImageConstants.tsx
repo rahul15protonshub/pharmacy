@@ -152,4 +152,3 @@ export const UN_SELECTED_HEART = require('../assets/Home/unselectedHeart.png');
 //*> SEARCH 
 export const SEARCH_NO_RESULTS = require('../assets/Search/searchNoResults.png')
 
-/

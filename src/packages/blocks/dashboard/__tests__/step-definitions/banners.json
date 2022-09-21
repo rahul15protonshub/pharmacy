@@ -1,0 +1,313 @@
+[
+    {
+        "id": "1",
+        "type": "banner",
+        "attributes": {
+            "id": 1,
+            "banner_position": 1,
+            "created_at": "2022-05-27T08:15:47.622Z",
+            "updated_at": "2022-05-27T08:15:47.622Z",
+            "images": {
+                "data": [
+                    {
+                        "id": "1",
+                        "type": "attachment",
+                        "attributes": {
+                            "attachable_type": "BxBlockBanner::Banner",
+                            "attachable_id": 1,
+                            "position": 1,
+                            "is_default": null,
+                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBKdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f6bfa6f7350af0afc9b926a9c5fcfb2f556593fb/1.jpg",
+                            "url_link": "",
+                            "is_present?": false,
+                            "url_id": null,
+                            "url_type": null
+                        }
+                    },
+                    {
+                        "id": "21",
+                        "type": "attachment",
+                        "attributes": {
+                            "attachable_type": "BxBlockBanner::Banner",
+                            "attachable_id": 1,
+                            "position": 2,
+                            "is_default": null,
+                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBLQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--fe4953031569ba428d5ae69224c89123ca3dd41b/2.jpg",
+                            "url_link": "",
+                            "is_present?": false,
+                            "url_id": null,
+                            "url_type": null
+                        }
+                    },
+                    {
+                        "id": "22",
+                        "type": "attachment",
+                        "attributes": {
+                            "attachable_type": "BxBlockBanner::Banner",
+                            "attachable_id": 1,
+                            "position": 3,
+                            "is_default": null,
+                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBLUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--58f7992bec47dc28a5dc70fb1b53471e215d50f2/3.jpg",
+                            "url_link": "",
+                            "is_present?": false,
+                            "url_id": null,
+                            "url_type": null
+                        }
+                    },
+                    {
+                        "id": "23",
+                        "type": "attachment",
+                        "attributes": {
+                            "attachable_type": "BxBlockBanner::Banner",
+                            "attachable_id": 1,
+                            "position": 4,
+                            "is_default": null,
+                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBLZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--fdca2fa5ef4d4bd8451401ed04b0f3eed546e277/4.jpg",
+                            "url_link": "",
+                            "is_present?": false,
+                            "url_id": null,
+                            "url_type": null
+                        }
+                    },
+                    {
+                        "id": "24",
+                        "type": "attachment",
+                        "attributes": {
+                            "attachable_type": "BxBlockBanner::Banner",
+                            "attachable_id": 1,
+                            "position": 5,
+                            "is_default": null,
+                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBLdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--abc8bd5daa9cb82ee3cfb1958d96a2157c25e643/5.jpg",
+                            "url_link": "",
+                            "is_present?": false,
+                            "url_id": null,
+                            "url_type": null
+                        }
+                    },
+                    {
+                        "id": "25",
+                        "type": "attachment",
+                        "attributes": {
+                            "attachable_type": "BxBlockBanner::Banner",
+                            "attachable_id": 1,
+                            "position": 6,
+                            "is_default": null,
+                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBMQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c5e2906611526a0514f6a56ac5771199eea41bfa/6.jpg",
+                            "url_link": "",
+                            "is_present?": false,
+                            "url_id": null,
+                            "url_type": null
+                        }
+                    },
+                    {
+                        "id": "26",
+                        "type": "attachment",
+                        "attributes": {
+                            "attachable_type": "BxBlockBanner::Banner",
+                            "attachable_id": 1,
+                            "position": 7,
+                            "is_default": null,
+                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBMUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--e5b9825b2334b08e31eea1434d8d7b7414a99ea1/7.jpg",
+                            "url_link": "",
+                            "is_present?": false,
+                            "url_id": null,
+                            "url_type": null
+                        }
+                    },
+                    {
+                        "id": "27",
+                        "type": "attachment",
+                        "attributes": {
+                            "attachable_type": "BxBlockBanner::Banner",
+                            "attachable_id": 1,
+                            "position": 8,
+                            "is_default": null,
+                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBMZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--ef93fe2090a1c64eddb19f95e98f6073c32b966d/8.jpg",
+                            "url_link": "",
+                            "is_present?": false,
+                            "url_id": null,
+                            "url_type": null
+                        }
+                    },
+                    {
+                        "id": "28",
+                        "type": "attachment",
+                        "attributes": {
+                            "attachable_type": "BxBlockBanner::Banner",
+                            "attachable_id": 1,
+                            "position": 9,
+                            "is_default": null,
+                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBMdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--19438358cf468128f10050779cad0bb658e4f98c/9.jpg",
+                            "url_link": "",
+                            "is_present?": false,
+                            "url_id": null,
+                            "url_type": null
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2",
+        "type": "banner",
+        "attributes": {
+            "id": 2,
+            "banner_position": 2,
+            "created_at": "2022-05-27T08:15:48.170Z",
+            "updated_at": "2022-05-27T08:15:48.170Z",
+            "images": {
+                "data": [
+                    {
+                        "id": "2",
+                        "type": "attachment",
+                        "attributes": {
+                            "attachable_type": "BxBlockBanner::Banner",
+                            "attachable_id": 2,
+                            "position": 1,
+                            "is_default": null,
+                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBZjg9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2e4159df8312714bcd57d2c6cfbc8518da72138c/Banner.jpg",
+                            "url_link": "",
+                            "is_present?": false,
+                            "url_id": null,
+                            "url_type": null
+                        }
+                    },
+                    {
+                        "id": "3",
+                        "type": "attachment",
+                        "attributes": {
+                            "attachable_type": "BxBlockBanner::Banner",
+                            "attachable_id": 2,
+                            "position": 2,
+                            "is_default": null,
+                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBEQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--d78d094dcda8df2176303670851d490fcb51df03/Banner_2.2.png",
+                            "url_link": "",
+                            "is_present?": false,
+                            "url_id": null,
+                            "url_type": null
+                        }
+                    },
+                    {
+                        "id": "4",
+                        "type": "attachment",
+                        "attributes": {
+                            "attachable_type": "BxBlockBanner::Banner",
+                            "attachable_id": 2,
+                            "position": 3,
+                            "is_default": null,
+                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBEUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--41453b62dfdbc348f3bd33ae20e4db52efa50f7f/Banner_2.3.png",
+                            "url_link": "",
+                            "is_present?": false,
+                            "url_id": null,
+                            "url_type": null
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "3",
+        "type": "banner",
+        "attributes": {
+            "id": 3,
+            "banner_position": 3,
+            "created_at": "2022-05-27T08:15:48.646Z",
+            "updated_at": "2022-05-27T08:15:48.646Z",
+            "images": {
+                "data": [
+                    {
+                        "id": "5",
+                        "type": "attachment",
+                        "attributes": {
+                            "attachable_type": "BxBlockBanner::Banner",
+                            "attachable_id": 3,
+                            "position": 1,
+                            "is_default": null,
+                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBEdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--6b0103e997e7d92f230775c085ccb044f7076afb/Banner_3.1.png",
+                            "url_link": null,
+                            "is_present?": false,
+                            "url_id": null,
+                            "url_type": null
+                        }
+                    },
+                    {
+                        "id": "6",
+                        "type": "attachment",
+                        "attributes": {
+                            "attachable_type": "BxBlockBanner::Banner",
+                            "attachable_id": 3,
+                            "position": 2,
+                            "is_default": null,
+                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBFQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4d303b5a5aa6ab94dc9403d46910c13163611ef4/Banner_3.2.png",
+                            "url_link": null,
+                            "is_present?": false,
+                            "url_id": null,
+                            "url_type": null
+                        }
+                    },
+                    {
+                        "id": "7",
+                        "type": "attachment",
+                        "attributes": {
+                            "attachable_type": "BxBlockBanner::Banner",
+                            "attachable_id": 3,
+                            "position": 3,
+                            "is_default": null,
+                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBFUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--af29fd7e2f8b16ae616cb7928ca607f3b3abb4e3/Banner_3.3.png",
+                            "url_link": null,
+                            "is_present?": false,
+                            "url_id": null,
+                            "url_type": null
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "4",
+        "type": "banner",
+        "attributes": {
+            "id": 4,
+            "banner_position": 4,
+            "created_at": "2022-05-27T08:15:49.221Z",
+            "updated_at": "2022-05-27T08:15:49.221Z",
+            "images": {
+                "data": [
+                    {
+                        "id": "8",
+                        "type": "attachment",
+                        "attributes": {
+                            "attachable_type": "BxBlockBanner::Banner",
+                            "attachable_id": 4,
+                            "position": 1,
+                            "is_default": null,
+                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBNUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--bb7aaf242e73687782b2355a86e24dae7523173a/pb_Brand_range_png_145405-29-2022-204253.webp",
+                            "url_link": "",
+                            "is_present?": false,
+                            "url_id": null,
+                            "url_type": null
+                        }
+                    },
+                    {
+                        "id": "9",
+                        "type": "attachment",
+                        "attributes": {
+                            "attachable_type": "BxBlockBanner::Banner",
+                            "attachable_id": 4,
+                            "position": 2,
+                            "is_default": null,
+                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBGQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--30ffe582181e5c6cf779f86418870d13b63549c1/Banner_4.2.png",
+                            "url_link": "",
+                            "is_present?": false,
+                            "url_id": null,
+                            "url_type": null
+                        }
+                    }
+                ]
+            }
+        }
+    }
+  ]
