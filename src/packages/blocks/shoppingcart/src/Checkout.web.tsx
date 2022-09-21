@@ -296,7 +296,7 @@ export function CartAmount(props: any) {
                       <tr>
                         <td>
                           <span className="cart-product-amount-ttl">
-                            Discount
+                          Coupon Discount
                           </span>
                         </td>
                         <td>

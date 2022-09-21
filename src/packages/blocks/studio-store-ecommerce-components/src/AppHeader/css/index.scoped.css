@@ -403,7 +403,7 @@ button.loginbutton.header-log-btn.w3-ripple.ml-2.btn.btn-secondary:hover {
 
 .yt-main-header .header-search-field-wrap {
   position: relative;
-  /* left: 25px; */
+  left: -25px;
 }
 
 .yt-main-header .yt-recent-search-wrap {
@@ -1553,6 +1553,9 @@ button.loginbutton.header-log-btn.w3-ripple.ml-2.btn.btn-secondary:hover {
   }
 }
 @media (max-width: 340px) {
+  .yt-main-header .header-search-field-wrap {
+    left: -10px;
+  }
   .yt-head-hide-srch-col {
     right: 32% !important;
   }
