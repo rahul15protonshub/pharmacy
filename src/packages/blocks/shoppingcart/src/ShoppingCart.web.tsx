@@ -784,7 +784,7 @@ export const CartAmount: any = withRouter((props: any) => {
                     data-testid={"button-apply-coupon"}
                     color="secondary cart-coupon-btn"
                     onClick={() => {
-                      props.toApplyCoupon(couponCode, wholeCart.total);
+                      props.toApplyCoupon(couponCode, wholeCart.sub_total);
                       //@ts-ignore
                     }}
                     disabled={
