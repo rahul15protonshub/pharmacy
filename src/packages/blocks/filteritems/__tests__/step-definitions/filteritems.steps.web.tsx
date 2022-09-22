@@ -12,6 +12,7 @@ import React from "react";
 import {FilterProduct} from "../../src/FilterProduct.web";
 import Filteroptions from "../../src/Filteroptions.web";
 // import FilteroptionsList from "../../src/FilteroptionsList.web";
+import FilteroptionsListWithRouter, {FilteroptionsList} from "../../src/FilteroptionsList.web";
 import content from "../../../studio-store-ecommerce-components/src/content";
 import ProductListCard from "../../../studio-store-ecommerce-components/src/ProductCard/productListCard";
 
@@ -1344,131 +1345,131 @@ defineFeature(feature, (test) => {
     });
   });
 
-  // test("User navigates to filteroptionslist", ({ given, when, then }) => {
-  //   let filterOptionListBlock: ShallowWrapper;
-  //   let instance: FilteroptionsList;
+  test("User navigates to filteroptionslist", ({ given, when, then }) => {
+    let filterOptionListBlock: ShallowWrapper;
+    let instance: FilteroptionsList;
 
-  //   given("I am a User loading filteroptionslist", () => {
-  //     filterOptionListBlock = shallow(<FilteroptionsList {...screenProps} />);
-  //     expect(filterOptionListBlock).toBeTruthy();
-  //     instance = filterOptionListBlock.instance() as FilteroptionsList;
-  //   });
+    given("I am a User loading filteroptionslist", () => {
+      filterOptionListBlock = shallow(<FilteroptionsList {...screenProps} />);
+      expect(filterOptionListBlock).toBeTruthy();
+      instance = filterOptionListBlock.instance() as FilteroptionsList;
+    });
 
-  //   when("I navigate to the filteroptionslist", () => {
-  //     expect(filterOptionListBlock).toBeTruthy();
-  //     instance = filterOptionListBlock.instance() as FilteroptionsList
-  //   });
+    when("I navigate to the filteroptionslist", () => {
+      expect(filterOptionListBlock).toBeTruthy();
+      instance = filterOptionListBlock.instance() as FilteroptionsList
+    });
 
-  //   then("filteroptionslist will load with out errors", async () => {
-  //     instance.componentDidMount();
-  //     instance.setState({
-  //       brandList:brandList,
-  //       categoryList:categoryList,
-  //       tagsList:tagsList
-  //     })
-  //     instance.resizeWindow();
-  //     instance.getToken();
-  //     instance.forBannertoggleCheckBox("1","category")
-  //     instance.toggleCheckBox("1","category");
-  //     instance.categoryChecked();
-  //     instance.subCategoryChecked();
-  //     instance.unCheckCheckBox("category","1")
-  //     instance.getBrandList("");
-  //     instance.getCategoryList("")
-  //     instance.getTagList("")
-  //     instance.getColorList("")
-  //     instance.getPriceList("");
-  //     instance.getListRequest("");
-  //     instance.getSizeList();
-  //     instance.getPriceRangeList();
-  //     instance.onchange(e);
-  //     instance.toggle("");
-  //     instance.resizeWindow();
-  //     instance.toggleDiscounted(e);
-  //     instance.toggleOutofstock(e);
+    then("filteroptionslist will load with out errors", async () => {
+      instance.componentDidMount();
+      instance.setState({
+        brandList:brandList,
+        categoryList:categoryList,
+        tagsList:tagsList
+      })
+      instance.resizeWindow();
+      instance.getToken();
+      instance.forBannertoggleCheckBox("1","category")
+      instance.toggleCheckBox("1","category");
+      instance.categoryChecked();
+      instance.subCategoryChecked();
+      instance.unCheckCheckBox("category","1")
+      instance.getBrandList("");
+      instance.getCategoryList("")
+      instance.getTagList("")
+      instance.getColorList("")
+      instance.getPriceList("");
+      instance.getListRequest("");
+      instance.getSizeList();
+      instance.getPriceRangeList();
+      instance.onchange(e);
+      instance.toggle("");
+      instance.resizeWindow();
+      instance.toggleDiscounted(e);
+      instance.toggleOutofstock(e);
 
-  //   });
+    });
 
-  //   then("filteroptionslist will get product details without errors", () => {
-  //     const msgSuccessRestAPI = new Message(
-  //       getName(MessageEnum.RestAPIResponceMessage)
-  //     );
-  //     msgSuccessRestAPI.addData(
-  //       getName(MessageEnum.RestAPIResponceDataMessage),
-  //       msgSuccessRestAPI.messageId
-  //     );
-  //     msgSuccessRestAPI.addData(
-  //       getName(MessageEnum.RestAPIResponceSuccessMessage),
-  //       {
-  //         data: {},
-  //       }
-  //     );
-  //     instance.getProductApiCallId = msgSuccessRestAPI.messageId;
-  //     runEngine.sendMessage("Unit Test", msgSuccessRestAPI);
-  //   });
-  //   then("filteroptionslist will get category without errors", () => {
-  //     const msgSuccessRestAPI = new Message(
-  //       getName(MessageEnum.RestAPIResponceMessage)
-  //     );
-  //     msgSuccessRestAPI.addData(
-  //       getName(MessageEnum.RestAPIResponceDataMessage),
-  //       msgSuccessRestAPI.messageId
-  //     );
-  //     msgSuccessRestAPI.addData(
-  //       getName(MessageEnum.RestAPIResponceSuccessMessage),
-  //       {
-  //         data: {},
-  //       }
-  //     );
-  //     instance.getProductCategoryApiCallId = msgSuccessRestAPI.messageId;
-  //     runEngine.sendMessage("Unit Test", msgSuccessRestAPI);
-  //   });
+    then("filteroptionslist will get product details without errors", () => {
+      const msgSuccessRestAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgSuccessRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgSuccessRestAPI.messageId
+      );
+      msgSuccessRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: {},
+        }
+      );
+      instance.getProductApiCallId = msgSuccessRestAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgSuccessRestAPI);
+    });
+    then("filteroptionslist will get category without errors", () => {
+      const msgSuccessRestAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgSuccessRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgSuccessRestAPI.messageId
+      );
+      msgSuccessRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: {},
+        }
+      );
+      instance.getProductCategoryApiCallId = msgSuccessRestAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgSuccessRestAPI);
+    });
 
-  //   then("filteroptionslist will get brand without errors", () => {
-  //     const msgSuccessRestAPI = new Message(
-  //       getName(MessageEnum.RestAPIResponceMessage)
-  //     );
-  //     msgSuccessRestAPI.addData(
-  //       getName(MessageEnum.RestAPIResponceDataMessage),
-  //       msgSuccessRestAPI.messageId
-  //     );
-  //     msgSuccessRestAPI.addData(
-  //       getName(MessageEnum.RestAPIResponceSuccessMessage),
-  //       {
-  //         data: {},
-  //       }
-  //     );
-  //     instance.getBrandProductApiCallId = msgSuccessRestAPI.messageId;
-  //     runEngine.sendMessage("Unit Test", msgSuccessRestAPI);
-  //   });
+    then("filteroptionslist will get brand without errors", () => {
+      const msgSuccessRestAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgSuccessRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgSuccessRestAPI.messageId
+      );
+      msgSuccessRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: {},
+        }
+      );
+      instance.getBrandProductApiCallId = msgSuccessRestAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgSuccessRestAPI);
+    });
 
-  //   then("filteroptionslist will get tags without errors", () => {
-  //     const msgSuccessRestAPI = new Message(
-  //       getName(MessageEnum.RestAPIResponceMessage)
-  //     );
-  //     msgSuccessRestAPI.addData(
-  //       getName(MessageEnum.RestAPIResponceDataMessage),
-  //       msgSuccessRestAPI.messageId
-  //     );
-  //     msgSuccessRestAPI.addData(
-  //       getName(MessageEnum.RestAPIResponceSuccessMessage),
-  //       {
-  //         data: {},
-  //       }
-  //     );
-  //     instance.getTagProductApiCallId = msgSuccessRestAPI.messageId;
-  //     runEngine.sendMessage("Unit Test", msgSuccessRestAPI);
-  //   });
+    then("filteroptionslist will get tags without errors", () => {
+      const msgSuccessRestAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgSuccessRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgSuccessRestAPI.messageId
+      );
+      msgSuccessRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: {},
+        }
+      );
+      instance.getTagProductApiCallId = msgSuccessRestAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgSuccessRestAPI);
+    });
 
-  //   then("I can select the button with with out errors", () => {
+    then("I can select the button with with out errors", () => {
      
-  //   });
+    });
 
-  //   then("I can leave the screen with out errors", () => {
-  //     instance.componentWillUnmount();
-  //     expect(filterOptionListBlock).toBeTruthy();
-  //   });
-  // });
+    then("I can leave the screen with out errors", () => {
+      instance.componentWillUnmount();
+      expect(filterOptionListBlock).toBeTruthy();
+    });
+  });
 
   test("User navigates to filterProduct", ({ given, when, then }) => {
     let filterProductBlock: ShallowWrapper;
