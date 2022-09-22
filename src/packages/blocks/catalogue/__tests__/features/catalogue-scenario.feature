@@ -4,8 +4,10 @@ Feature: Catalogue
         Given I am a User loading Catalogue
         When I navigate to the Catalogue
         Then Catalogue will load with out errors
+        Then Catalogue load TopHeader without errors
         Then Catalogue will pre-load data without errors
         Then Catalogue load products data without errors
+        Then Catalogue load SortSelector without errors
         Then Catalogue load recommended data without errors
         Then Catalogue banner load without errors
         Then Catalogue load categories data without errors
@@ -27,4 +29,8 @@ Feature: Catalogue
         Then I can add item to wishlist
         Then I can navigate to subcategories
         Then I can select the detail button
+        Then Catalogue load ProductBox without errors
         And I can leave the screen with out errors
+
+
+ 

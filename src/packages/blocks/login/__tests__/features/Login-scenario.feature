@@ -8,5 +8,9 @@ Feature: Login
         Then Login send otp without errors
         Then Login with guest without errors
         Then Login with socail without errors
+        Then Login with email with errors
+        Then Login send otp with errors
+        Then Login with guest with errors
+        Then Login with socail with errors
         Then I can press button without error
         And I can leave the screen with out errors

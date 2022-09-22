@@ -73,11 +73,89 @@ defineFeature(feature, (test) => {
               getName(MessageEnum.RestAPIResponceSuccessMessage),
               {
                 data: [{}],
+                meta:{token:'1233445'}
               }
             );
             instance.requestEmailOtpCallId = msgLoadDataAPI.messageId;
             runEngine.sendMessage("Unit Test", msgLoadDataAPI);
           });
+          then("forgotpassword will requestEmailOtpCallId with errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                errors: [{}],
+                
+              }
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceErrorMessage),
+              {
+                errors: [{}],
+                
+              }
+            );
+            instance.requestEmailOtpCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+
+          then("forgotpassword will apiGuestLoginCallId with errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                errors: [{}],
+                
+              }
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceErrorMessage),
+              {
+                errors: [{}],
+                
+              }
+            );
+            instance.apiGuestLoginCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("forgotpassword will verifyOtpApiCallId with errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                errors: [{}],
+                
+              }
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceErrorMessage),
+              {
+                errors: [{}],
+                
+              }
+            );
+            instance.verifyOtpApiCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+
           then("forgotpassword will apiGuestLoginCallId without errors", () => {
             const msgLoadDataAPI = new Message(
               getName(MessageEnum.RestAPIResponceMessage)
@@ -118,10 +196,23 @@ defineFeature(feature, (test) => {
             let textInputComponent = forgotPassword.findWhere((node) => node.prop('testID') === 'otpimage');
             textInputComponent.simulate('onFocus', '123456789');
 
+            let textInputContactname = forgotPassword.findWhere((node) => node.prop('testID') === 'txtforgotnum');
+          textInputContactname.simulate('focus')
+          textInputContactname.simulate('changeText', 'testtt');
+          textInputContactname.simulate('blur')
+       
+      
+          let textInputContactemail = forgotPassword.findWhere((node) => node.prop('testID') === 'txtforgotemail');
+          textInputContactemail.simulate('focus')
+          textInputContactemail.simulate('changeText', 'testtt');
+          textInputContactemail.simulate('blur')
+
             
         });
         then('I can leave the screen with out errors', () => {
+          instance.handleBackButtonClick;
             instance.componentWillUnmount()
+            instance.onCloseAlertModal()
             expect(forgotPassword).toBeTruthy()
 
         });
@@ -173,11 +264,43 @@ defineFeature(feature, (test) => {
             getName(MessageEnum.RestAPIResponceSuccessMessage),
             {
               data: [{}],
+              meta:{message:''}
             }
           );
           instance.resetPasswordApiCallId = msgLoadDataAPI.messageId;
           runEngine.sendMessage("Unit Test", msgLoadDataAPI);
         });
+        then("newpassword will resetPasswordApiCallId with errors", () => {
+          const msgLoadDataAPI = new Message(
+            getName(MessageEnum.RestAPIResponceMessage)
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceDataMessage),
+            msgLoadDataAPI.messageId
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceSuccessMessage),
+            {
+              errors: [{}],
+            }
+          );
+          instance.resetPasswordApiCallId = msgLoadDataAPI.messageId;
+          runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+        });
+
+        then("newpassword will changetext with out errors", () => {
+          let textInputContactname = newPassword.findWhere((node) => node.prop('testID') === 'txtconfrmpassword');
+          textInputContactname.simulate('focus')
+          textInputContactname.simulate('changeText', 'testtt');
+          textInputContactname.simulate('blur')
+       
+      
+          let textInputContactemail = newPassword.findWhere((node) => node.prop('testID') === 'txtnewpassword');
+          textInputContactemail.simulate('focus')
+          textInputContactemail.simulate('changeText', 'testtt');
+          textInputContactemail.simulate('blur')
+
+        })
 
         then('I can leave the screen with out errors', () => {
             instance.componentWillUnmount()

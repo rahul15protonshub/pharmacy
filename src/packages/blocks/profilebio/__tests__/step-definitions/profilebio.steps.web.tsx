@@ -23,12 +23,13 @@ const screenProps = {
     location: null
   }
 
-const feature = loadFeature('./__tests__/features/profilebio-scenario.feature');
+const feature = loadFeature('./__tests__/features/profilebio-scenario.web.feature');
 const values={
     currentPassword:"12345",
     newPassword:"2351",
     confirmPassword:"2351"
 }
+
 defineFeature(feature, (test) => {
 
     beforeEach(() => {

@@ -1,0 +1,2253 @@
+{
+    "data": {
+        "message": "Coupon applied successfully",
+        "coupon": {
+            "data": {
+                "id": "457",
+                "type": "order",
+                "attributes": {
+                    "id": 457,
+                    "order_number": "OD00000425",
+                    "amount": null,
+                    "account_id": 8981,
+                    "coupon_code_id": 1,
+                    "delivery_address_id": null,
+                    "sub_total": "1486.8",
+                    "total": "1486.8",
+                    "status": "in_cart",
+                    "applied_discount": "170.0",
+                    "cancellation_reason": null,
+                    "order_date": null,
+                    "is_gift": false,
+                    "placed_at": null,
+                    "confirmed_at": null,
+                    "in_transit_at": null,
+                    "delivered_at": null,
+                    "cancelled_at": null,
+                    "refunded_at": null,
+                    "source": null,
+                    "shipment_id": null,
+                    "delivery_charges": null,
+                    "tracking_url": null,
+                    "schedule_time": null,
+                    "payment_failed_at": null,
+                    "payment_pending_at": null,
+                    "returned_at": null,
+                    "tax_charges": "0.0",
+                    "deliver_by": null,
+                    "tracking_number": null,
+                    "is_error": false,
+                    "delivery_error_message": null,
+                    "order_status_id": 9,
+                    "is_group": true,
+                    "is_availability_checked": false,
+                    "shipping_charge": "50.0",
+                    "shipping_discount": "50.0",
+                    "shipping_net_amt": "0.0",
+                    "shipping_total": "0.0",
+                    "total_tax": 72.87,
+                    "created_at": "2022-09-07T20:00:49.488Z",
+                    "updated_at": "2022-09-07T20:16:21.759Z",
+                    "delivery_addresses": [],
+                    "razorpay_order_id": null,
+                    "logistics_ship_rocket_enabled": false,
+                    "order_items": [
+                        {
+                            "id": "2002",
+                            "type": "order_item",
+                            "attributes": {
+                                "id": 2002,
+                                "order_id": 457,
+                                "quantity": 2,
+                                "unit_price": "36.0",
+                                "total_price": "72.0",
+                                "old_unit_price": null,
+                                "status": "in_cart",
+                                "catalogue_id": 91,
+                                "catalogue_variant_id": null,
+                                "order_status_id": 9,
+                                "placed_at": null,
+                                "confirmed_at": null,
+                                "in_transit_at": null,
+                                "delivered_at": null,
+                                "cancelled_at": null,
+                                "refunded_at": null,
+                                "manage_placed_status": false,
+                                "manage_cancelled_status": false,
+                                "created_at": "2022-09-07T20:00:58.278Z",
+                                "updated_at": "2022-09-07T20:02:25.311Z",
+                                "subscription_quantity": null,
+                                "subscription_package": null,
+                                "subscription_period": null,
+                                "subscription_discount": null,
+                                "preferred_delivery_slot": null,
+                                "subscription_discounted_price": null,
+                                "total_price_after_sub_discount": null,
+                                "subscription_days_count": null,
+                                "order_statuses": null,
+                                "delivery_addresses": [],
+                                "catalogue": {
+                                    "id": "91",
+                                    "type": "catalogue",
+                                    "attributes": {
+                                        "name": "Coconut",
+                                        "description": "",
+                                        "manufacture_date": "2022-07-04T18:01:00.000Z",
+                                        "block_qty": 2,
+                                        "price": 40,
+                                        "on_sale": false,
+                                        "sale_price": null,
+                                        "discount": null,
+                                        "recommended": false,
+                                        "sku": "COD0000091",
+                                        "length": null,
+                                        "breadth": null,
+                                        "tax_amount": "1.9",
+                                        "price_including_tax": "40.0",
+                                        "height": null,
+                                        "weight": "2",
+                                        "weight_unit": "pcs",
+                                        "brand": {
+                                            "id": 1,
+                                            "name": "Dummy",
+                                            "created_at": "2022-05-27T08:15:47.600Z",
+                                            "updated_at": "2022-05-27T08:15:47.600Z"
+                                        },
+                                        "tags": [
+                                            {
+                                                "id": 1,
+                                                "name": "Dummy",
+                                                "created_at": "2022-05-27T08:15:47.516Z",
+                                                "updated_at": "2022-05-27T08:15:47.516Z"
+                                            }
+                                        ],
+                                        "reviews": [
+                                            {
+                                                "id": "1",
+                                                "type": "review",
+                                                "attributes": {
+                                                    "id": 1,
+                                                    "catalogue_id": 91,
+                                                    "rating": 4,
+                                                    "comment": "Builder grocery coconut are the best in universe .\n\ni would to love to buy more coconut but please keep some stock .\n",
+                                                    "created_at": "2022-08-05T12:43:06.802Z",
+                                                    "updated_at": "2022-08-05T12:51:56.639Z",
+                                                    "account_id": 35,
+                                                    "order_id": null,
+                                                    "account": {
+                                                        "activated": true,
+                                                        "full_name": "Sibaram ",
+                                                        "user_name": null,
+                                                        "email": "hereiseverything123@gmail.com",
+                                                        "full_phone_number": null,
+                                                        "phone_number": null,
+                                                        "type": "EmailAccount",
+                                                        "created_at": "2022-07-11T08:48:38.221Z",
+                                                        "updated_at": "2022-09-05T07:33:28.857Z",
+                                                        "device_id": null,
+                                                        "provider": null,
+                                                        "unique_auth_id": null,
+                                                        "guest": null,
+                                                        "uuid": null,
+                                                        "is_notification_enabled": true,
+                                                        "fcm_token": "ftvrTUvyQ-qxYt37qWijIW:APA91bHgkVtSvA1TMW0V9JGKnuH2D5zul9KT4cTdmsmS0PQwQJghmBBmSkL9lAGL3H4I1qd300z4BMREUDb6eheADSNQjzunqLmpC64OjMOkMzY5UVkwpJoL034kH0oXYU7ntNY3iglQ",
+                                                        "country_code": null,
+                                                        "image_url": "https://minio.b232512.dev.centralindia.az.svc.builder.ai/sbucket/jsm9tz6wzjfhxa8pq2fe0ttwmaj4?response-content-disposition=inline%3B%20filename%3D%22profile_pic.png%22%3B%20filename%2A%3DUTF-8%27%27profile_pic.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=hello%2F20220907%2Fbuilder-1%2Fs3%2Faws4_request&X-Amz-Date=20220907T201621Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=0890084d13b38b7224cfccae5112da6f70c7d73d2ae5049fde1b3f6326d05cd9",
+                                                        "is_social_login": false,
+                                                        "wishlist_quantity": 0
+                                                    },
+                                                    "review_date": "05 Aug 2022",
+                                                    "review_datetime": "Fri, 5th August 2022 - 06:13 PM",
+                                                    "product_name": "Coconut",
+                                                    "user_name": "Sibaram "
+                                                }
+                                            }
+                                        ],
+                                        "current_availibility": "in_stock",
+                                        "default_variant": null,
+                                        "stock_qty": 21,
+                                        "actual_price_including_tax": 40,
+                                        "cart_quantity": null,
+                                        "subscription_quantity": null,
+                                        "subscription_package": null,
+                                        "subscription_period": null,
+                                        "subscription_days_count": null,
+                                        "preferred_delivery_slot": null,
+                                        "wishlisted": false,
+                                        "product_notified": false,
+                                        "cart_items": null,
+                                        "average_rating": 4,
+                                        "images": {
+                                            "data": [
+                                                {
+                                                    "id": "124",
+                                                    "type": "attachment",
+                                                    "attributes": {
+                                                        "attachable_type": "BxBlockCatalogue::Catalogue",
+                                                        "attachable_id": 91,
+                                                        "position": null,
+                                                        "is_default": true,
+                                                        "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBZWc9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--1344ba40595058e9b6403fa91217c5b29138d045/cropped_image.jpeg",
+                                                        "url_link": null,
+                                                        "is_present?": false,
+                                                        "url_id": null,
+                                                        "url_type": null
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "product_attributes": null,
+                                        "availability": null,
+                                        "deep_link": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai//share/share/dl?catalogue_id=91",
+                                        "catalogue_variants": [],
+                                        "variants_in_cart": [],
+                                        "can_review": false,
+                                        "similar_products": {
+                                            "data": [
+                                                {
+                                                    "id": "90",
+                                                    "type": "catalogue",
+                                                    "attributes": {
+                                                        "name": "Green Guava",
+                                                        "description": "<p>The delightful&nbsp;<em>guava</em>&nbsp;fruit is round or oval shaped, around 4-12cm long. The outer skin may be rough&nbsp;&amp; bitter or soft &amp; sweet, depending on the verity. The skin can be thick or thin too. It is usually green when raw and becomes yellow, pink or light-green as it ripens. A ripe guava is soft and yield slightly when pressed. It has a strong and sweet fragrance. Depending on the verity, the flesh is white, red, salmon-colored and flavour too varies from tart to very sweet.</p>\r\n",
+                                                        "manufacture_date": "2022-07-05T19:57:00.000Z",
+                                                        "block_qty": 2,
+                                                        "price": 95,
+                                                        "on_sale": true,
+                                                        "sale_price": "80.0",
+                                                        "discount": "15.79",
+                                                        "recommended": false,
+                                                        "sku": "COD0000090",
+                                                        "length": null,
+                                                        "breadth": null,
+                                                        "tax_amount": "3.81",
+                                                        "price_including_tax": "80.0",
+                                                        "height": null,
+                                                        "weight": "1",
+                                                        "weight_unit": "kg",
+                                                        "brand": {
+                                                            "id": 1,
+                                                            "name": "Dummy",
+                                                            "created_at": "2022-05-27T08:15:47.600Z",
+                                                            "updated_at": "2022-05-27T08:15:47.600Z"
+                                                        },
+                                                        "tags": [
+                                                            {
+                                                                "id": 1,
+                                                                "name": "Dummy",
+                                                                "created_at": "2022-05-27T08:15:47.516Z",
+                                                                "updated_at": "2022-05-27T08:15:47.516Z"
+                                                            }
+                                                        ],
+                                                        "reviews": [],
+                                                        "current_availibility": "in_stock",
+                                                        "default_variant": null,
+                                                        "stock_qty": 45,
+                                                        "actual_price_including_tax": 95,
+                                                        "cart_quantity": null,
+                                                        "subscription_quantity": null,
+                                                        "subscription_package": null,
+                                                        "subscription_period": null,
+                                                        "subscription_days_count": null,
+                                                        "preferred_delivery_slot": null,
+                                                        "wishlisted": false,
+                                                        "product_notified": false,
+                                                        "cart_items": null,
+                                                        "average_rating": 0,
+                                                        "images": {
+                                                            "data": [
+                                                                {
+                                                                    "id": "123",
+                                                                    "type": "attachment",
+                                                                    "attributes": {
+                                                                        "attachable_type": "BxBlockCatalogue::Catalogue",
+                                                                        "attachable_id": 90,
+                                                                        "position": null,
+                                                                        "is_default": true,
+                                                                        "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBZXM9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--081b242a48be583099ffee6ebd0b152dae6b49ca/cropped_image.jpeg",
+                                                                        "url_link": null,
+                                                                        "is_present?": false,
+                                                                        "url_id": null,
+                                                                        "url_type": null
+                                                                    }
+                                                                }
+                                                            ]
+                                                        },
+                                                        "product_attributes": null,
+                                                        "availability": null,
+                                                        "deep_link": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai//share/share/dl?catalogue_id=90",
+                                                        "catalogue_variants": [],
+                                                        "variants_in_cart": [],
+                                                        "can_review": false,
+                                                        "similar_products": [],
+                                                        "category": [
+                                                            {
+                                                                "data": {
+                                                                    "id": "5",
+                                                                    "type": "category",
+                                                                    "attributes": {
+                                                                        "id": 5,
+                                                                        "name": "Fresh Fruits",
+                                                                        "created_at": "2022-07-04T12:47:16.004Z",
+                                                                        "updated_at": "2022-08-09T10:41:14.520Z",
+                                                                        "product_image": {
+                                                                            "id": 60,
+                                                                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBRUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--95db367c657ecfbcdf46090e6c1137985482b49b/cropped_image.png"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        ],
+                                                        "catalogue_subscriptions": [
+                                                            {
+                                                                "id": "88",
+                                                                "type": "catalogue_subscription",
+                                                                "attributes": {
+                                                                    "id": 88,
+                                                                    "catalogue_id": 90,
+                                                                    "subscription_package": "daily",
+                                                                    "subscription_period": "3 month",
+                                                                    "discount": "15.0",
+                                                                    "morning_slot": "[\"\", \"6am to 11am\"]",
+                                                                    "evening_slot": "[\"\", \"5pm to 9pm\"]",
+                                                                    "subscription_number": null
+                                                                }
+                                                            }
+                                                        ],
+                                                        "is_subscription_available": true,
+                                                        "available_subscription": {
+                                                            "daily": [
+                                                                "3"
+                                                            ]
+                                                        },
+                                                        "available_slots": {
+                                                            "morning_slots": [
+                                                                "",
+                                                                "6am to 11am"
+                                                            ],
+                                                            "evening_slots": [
+                                                                "",
+                                                                "5pm to 9pm"
+                                                            ]
+                                                        },
+                                                        "is_notify_product": null
+                                                    }
+                                                },
+                                                {
+                                                    "id": "89",
+                                                    "type": "catalogue",
+                                                    "attributes": {
+                                                        "name": "Papaya Ripe",
+                                                        "description": "<p>When Papaya Ripe its skin turns from green to yellow. If properly ripened, it has a mild to fairly sweet flavor and a creamy, butter-like texture. A&nbsp;<strong>Ripe Papaya&rsquo;s</strong>&nbsp;flesh melts in your mouth. People say ripe papaya tastes like cantaloupe melon or tropical mango.</p>\r\n\r\n<p>Papayas are an excellent source of Vitamin A, Vitamin C, Vitamin B-9, Calories, Carbohydrate, Fiber, Potassium and Sugar.</p>\r\n\r\n<p><strong>Health Benefits of Ripe Papaya :</strong></p>\r\n\r\n<ul>\r\n\t<li>Has Powerful Antioxidant Effects</li>\r\n\t<li>Has Anticancer Properties</li>\r\n\t<li>May Improve Heart Health</li>\r\n\t<li>May Fight Inflammation</li>\r\n\t<li>May Improve Digestion</li>\r\n\t<li>Protects Against Skin Damage</li>\r\n</ul>\r\n",
+                                                        "manufacture_date": "2022-07-04T12:20:00.000Z",
+                                                        "block_qty": -6,
+                                                        "price": 75,
+                                                        "on_sale": true,
+                                                        "sale_price": "59.0",
+                                                        "discount": "21.33",
+                                                        "recommended": false,
+                                                        "sku": "COD0000089",
+                                                        "length": null,
+                                                        "breadth": null,
+                                                        "tax_amount": "2.81",
+                                                        "price_including_tax": "59.0",
+                                                        "height": null,
+                                                        "weight": "1",
+                                                        "weight_unit": "pcs",
+                                                        "brand": {
+                                                            "id": 1,
+                                                            "name": "Dummy",
+                                                            "created_at": "2022-05-27T08:15:47.600Z",
+                                                            "updated_at": "2022-05-27T08:15:47.600Z"
+                                                        },
+                                                        "tags": [
+                                                            {
+                                                                "id": 1,
+                                                                "name": "Dummy",
+                                                                "created_at": "2022-05-27T08:15:47.516Z",
+                                                                "updated_at": "2022-05-27T08:15:47.516Z"
+                                                            }
+                                                        ],
+                                                        "reviews": [],
+                                                        "current_availibility": "in_stock",
+                                                        "default_variant": null,
+                                                        "stock_qty": 36,
+                                                        "actual_price_including_tax": 75,
+                                                        "cart_quantity": null,
+                                                        "subscription_quantity": null,
+                                                        "subscription_package": null,
+                                                        "subscription_period": null,
+                                                        "subscription_days_count": null,
+                                                        "preferred_delivery_slot": null,
+                                                        "wishlisted": false,
+                                                        "product_notified": false,
+                                                        "cart_items": null,
+                                                        "average_rating": 0,
+                                                        "images": {
+                                                            "data": [
+                                                                {
+                                                                    "id": "120",
+                                                                    "type": "attachment",
+                                                                    "attributes": {
+                                                                        "attachable_type": "BxBlockCatalogue::Catalogue",
+                                                                        "attachable_id": 89,
+                                                                        "position": null,
+                                                                        "is_default": true,
+                                                                        "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBZXc9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--51c05780768276e7dff88c6a22b143c500017f3a/cropped_image.jpeg",
+                                                                        "url_link": null,
+                                                                        "is_present?": false,
+                                                                        "url_id": null,
+                                                                        "url_type": null
+                                                                    }
+                                                                }
+                                                            ]
+                                                        },
+                                                        "product_attributes": null,
+                                                        "availability": null,
+                                                        "deep_link": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai//share/share/dl?catalogue_id=89",
+                                                        "catalogue_variants": [],
+                                                        "variants_in_cart": [],
+                                                        "can_review": false,
+                                                        "similar_products": [],
+                                                        "category": [
+                                                            {
+                                                                "data": {
+                                                                    "id": "5",
+                                                                    "type": "category",
+                                                                    "attributes": {
+                                                                        "id": 5,
+                                                                        "name": "Fresh Fruits",
+                                                                        "created_at": "2022-07-04T12:47:16.004Z",
+                                                                        "updated_at": "2022-08-09T10:41:14.520Z",
+                                                                        "product_image": {
+                                                                            "id": 60,
+                                                                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBRUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--95db367c657ecfbcdf46090e6c1137985482b49b/cropped_image.png"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        ],
+                                                        "catalogue_subscriptions": [
+                                                            {
+                                                                "id": "87",
+                                                                "type": "catalogue_subscription",
+                                                                "attributes": {
+                                                                    "id": 87,
+                                                                    "catalogue_id": 89,
+                                                                    "subscription_package": "daily",
+                                                                    "subscription_period": "2 month",
+                                                                    "discount": "12.0",
+                                                                    "morning_slot": "[\"\", \"6am to 9am\"]",
+                                                                    "evening_slot": "[\"\", \"1pm to 5pm\"]",
+                                                                    "subscription_number": null
+                                                                }
+                                                            }
+                                                        ],
+                                                        "is_subscription_available": true,
+                                                        "available_subscription": {
+                                                            "daily": [
+                                                                "2"
+                                                            ]
+                                                        },
+                                                        "available_slots": {
+                                                            "morning_slots": [
+                                                                "",
+                                                                "6am to 9am"
+                                                            ],
+                                                            "evening_slots": [
+                                                                "",
+                                                                "1pm to 5pm"
+                                                            ]
+                                                        },
+                                                        "is_notify_product": null
+                                                    }
+                                                },
+                                                {
+                                                    "id": "78",
+                                                    "type": "catalogue",
+                                                    "attributes": {
+                                                        "name": "Turkel Apricot 200 Gm",
+                                                        "description": "",
+                                                        "manufacture_date": null,
+                                                        "block_qty": 2,
+                                                        "price": 325,
+                                                        "on_sale": true,
+                                                        "sale_price": "260.0",
+                                                        "discount": "20.0",
+                                                        "recommended": false,
+                                                        "sku": "COD0000078",
+                                                        "length": null,
+                                                        "breadth": null,
+                                                        "tax_amount": "0.0",
+                                                        "price_including_tax": "260.0",
+                                                        "height": null,
+                                                        "weight": "200",
+                                                        "weight_unit": "gm",
+                                                        "brand": {
+                                                            "id": 1,
+                                                            "name": "Dummy",
+                                                            "created_at": "2022-05-27T08:15:47.600Z",
+                                                            "updated_at": "2022-05-27T08:15:47.600Z"
+                                                        },
+                                                        "tags": [
+                                                            {
+                                                                "id": 1,
+                                                                "name": "Dummy",
+                                                                "created_at": "2022-05-27T08:15:47.516Z",
+                                                                "updated_at": "2022-05-27T08:15:47.516Z"
+                                                            }
+                                                        ],
+                                                        "reviews": [],
+                                                        "current_availibility": "in_stock",
+                                                        "default_variant": null,
+                                                        "stock_qty": 97,
+                                                        "actual_price_including_tax": 325,
+                                                        "cart_quantity": null,
+                                                        "subscription_quantity": null,
+                                                        "subscription_package": null,
+                                                        "subscription_period": null,
+                                                        "subscription_days_count": null,
+                                                        "preferred_delivery_slot": null,
+                                                        "wishlisted": false,
+                                                        "product_notified": false,
+                                                        "cart_items": null,
+                                                        "average_rating": 0,
+                                                        "images": {
+                                                            "data": [
+                                                                {
+                                                                    "id": "96",
+                                                                    "type": "attachment",
+                                                                    "attributes": {
+                                                                        "attachable_type": "BxBlockCatalogue::Catalogue",
+                                                                        "attachable_id": 78,
+                                                                        "position": null,
+                                                                        "is_default": true,
+                                                                        "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBYUk9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9e2a7887a7fc01e2c3f696f0b28bc986777c010d/cropped_image.png",
+                                                                        "url_link": null,
+                                                                        "is_present?": false,
+                                                                        "url_id": null,
+                                                                        "url_type": null
+                                                                    }
+                                                                }
+                                                            ]
+                                                        },
+                                                        "product_attributes": null,
+                                                        "availability": null,
+                                                        "deep_link": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai//share/share/dl?catalogue_id=78",
+                                                        "catalogue_variants": [],
+                                                        "variants_in_cart": [],
+                                                        "can_review": false,
+                                                        "similar_products": [],
+                                                        "category": [
+                                                            {
+                                                                "data": {
+                                                                    "id": "5",
+                                                                    "type": "category",
+                                                                    "attributes": {
+                                                                        "id": 5,
+                                                                        "name": "Fresh Fruits",
+                                                                        "created_at": "2022-07-04T12:47:16.004Z",
+                                                                        "updated_at": "2022-08-09T10:41:14.520Z",
+                                                                        "product_image": {
+                                                                            "id": 60,
+                                                                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBRUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--95db367c657ecfbcdf46090e6c1137985482b49b/cropped_image.png"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        ],
+                                                        "catalogue_subscriptions": [
+                                                            {
+                                                                "id": "78",
+                                                                "type": "catalogue_subscription",
+                                                                "attributes": {
+                                                                    "id": 78,
+                                                                    "catalogue_id": 78,
+                                                                    "subscription_package": "monthly",
+                                                                    "subscription_period": "4 month",
+                                                                    "discount": "10.0",
+                                                                    "morning_slot": "[\"\", \"9am to 12pm\"]",
+                                                                    "evening_slot": "[\"\"]",
+                                                                    "subscription_number": null
+                                                                }
+                                                            }
+                                                        ],
+                                                        "is_subscription_available": true,
+                                                        "available_subscription": {
+                                                            "monthly": [
+                                                                "4"
+                                                            ]
+                                                        },
+                                                        "available_slots": {
+                                                            "morning_slots": [
+                                                                "",
+                                                                "9am to 12pm"
+                                                            ],
+                                                            "evening_slots": [
+                                                                ""
+                                                            ]
+                                                        },
+                                                        "is_notify_product": null
+                                                    }
+                                                },
+                                                {
+                                                    "id": "77",
+                                                    "type": "catalogue",
+                                                    "attributes": {
+                                                        "name": "Kiwi 3 Piece Pack",
+                                                        "description": "",
+                                                        "manufacture_date": null,
+                                                        "block_qty": -1,
+                                                        "price": 130,
+                                                        "on_sale": false,
+                                                        "sale_price": null,
+                                                        "discount": null,
+                                                        "recommended": false,
+                                                        "sku": "COD0000077",
+                                                        "length": null,
+                                                        "breadth": null,
+                                                        "tax_amount": "0.0",
+                                                        "price_including_tax": "130.0",
+                                                        "height": null,
+                                                        "weight": "1",
+                                                        "weight_unit": "packets",
+                                                        "brand": {
+                                                            "id": 1,
+                                                            "name": "Dummy",
+                                                            "created_at": "2022-05-27T08:15:47.600Z",
+                                                            "updated_at": "2022-05-27T08:15:47.600Z"
+                                                        },
+                                                        "tags": [
+                                                            {
+                                                                "id": 1,
+                                                                "name": "Dummy",
+                                                                "created_at": "2022-05-27T08:15:47.516Z",
+                                                                "updated_at": "2022-05-27T08:15:47.516Z"
+                                                            }
+                                                        ],
+                                                        "reviews": [],
+                                                        "current_availibility": "in_stock",
+                                                        "default_variant": null,
+                                                        "stock_qty": 96,
+                                                        "actual_price_including_tax": 130,
+                                                        "cart_quantity": null,
+                                                        "subscription_quantity": null,
+                                                        "subscription_package": null,
+                                                        "subscription_period": null,
+                                                        "subscription_days_count": null,
+                                                        "preferred_delivery_slot": null,
+                                                        "wishlisted": false,
+                                                        "product_notified": false,
+                                                        "cart_items": null,
+                                                        "average_rating": 0,
+                                                        "images": {
+                                                            "data": [
+                                                                {
+                                                                    "id": "95",
+                                                                    "type": "attachment",
+                                                                    "attributes": {
+                                                                        "attachable_type": "BxBlockCatalogue::Catalogue",
+                                                                        "attachable_id": 77,
+                                                                        "position": null,
+                                                                        "is_default": true,
+                                                                        "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBYUU9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--037c5820f9dddf2552086d07031b6feadc4c79f1/cropped_image.png",
+                                                                        "url_link": null,
+                                                                        "is_present?": false,
+                                                                        "url_id": null,
+                                                                        "url_type": null
+                                                                    }
+                                                                }
+                                                            ]
+                                                        },
+                                                        "product_attributes": null,
+                                                        "availability": null,
+                                                        "deep_link": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai//share/share/dl?catalogue_id=77",
+                                                        "catalogue_variants": [],
+                                                        "variants_in_cart": [],
+                                                        "can_review": false,
+                                                        "similar_products": [],
+                                                        "category": [
+                                                            {
+                                                                "data": {
+                                                                    "id": "5",
+                                                                    "type": "category",
+                                                                    "attributes": {
+                                                                        "id": 5,
+                                                                        "name": "Fresh Fruits",
+                                                                        "created_at": "2022-07-04T12:47:16.004Z",
+                                                                        "updated_at": "2022-08-09T10:41:14.520Z",
+                                                                        "product_image": {
+                                                                            "id": 60,
+                                                                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBRUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--95db367c657ecfbcdf46090e6c1137985482b49b/cropped_image.png"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        ],
+                                                        "catalogue_subscriptions": [
+                                                            {
+                                                                "id": "77",
+                                                                "type": "catalogue_subscription",
+                                                                "attributes": {
+                                                                    "id": 77,
+                                                                    "catalogue_id": 77,
+                                                                    "subscription_package": "monthly",
+                                                                    "subscription_period": "4 month",
+                                                                    "discount": "10.0",
+                                                                    "morning_slot": "[\"\", \"9am to 12pm\"]",
+                                                                    "evening_slot": "[\"\", \"5pm to 9pm\"]",
+                                                                    "subscription_number": null
+                                                                }
+                                                            }
+                                                        ],
+                                                        "is_subscription_available": true,
+                                                        "available_subscription": {
+                                                            "monthly": [
+                                                                "4"
+                                                            ]
+                                                        },
+                                                        "available_slots": {
+                                                            "morning_slots": [
+                                                                "",
+                                                                "9am to 12pm"
+                                                            ],
+                                                            "evening_slots": [
+                                                                "",
+                                                                "5pm to 9pm"
+                                                            ]
+                                                        },
+                                                        "is_notify_product": null
+                                                    }
+                                                },
+                                                {
+                                                    "id": "27",
+                                                    "type": "catalogue",
+                                                    "attributes": {
+                                                        "name": "Avocado – 500gm",
+                                                        "description": "<p>vocado is a pear-shaped fruit with a rich creamy flavor. It has gained attention in health circles due to its high level of good fat content and extremely low level of cholesterol. Avocados are available in many varieties, but the most popular of all is the creamy Hass variety.</p>\r\n\r\n<p>&nbsp;</p>\r\n",
+                                                        "manufacture_date": null,
+                                                        "block_qty": null,
+                                                        "price": 200,
+                                                        "on_sale": true,
+                                                        "sale_price": "180.0",
+                                                        "discount": "10.0",
+                                                        "recommended": false,
+                                                        "sku": "COD0000027",
+                                                        "length": null,
+                                                        "breadth": null,
+                                                        "tax_amount": "0.0",
+                                                        "price_including_tax": "180.0",
+                                                        "height": null,
+                                                        "weight": "500",
+                                                        "weight_unit": "gm",
+                                                        "brand": {
+                                                            "id": 1,
+                                                            "name": "Dummy",
+                                                            "created_at": "2022-05-27T08:15:47.600Z",
+                                                            "updated_at": "2022-05-27T08:15:47.600Z"
+                                                        },
+                                                        "tags": [
+                                                            {
+                                                                "id": 1,
+                                                                "name": "Dummy",
+                                                                "created_at": "2022-05-27T08:15:47.516Z",
+                                                                "updated_at": "2022-05-27T08:15:47.516Z"
+                                                            }
+                                                        ],
+                                                        "reviews": [],
+                                                        "current_availibility": "in_stock",
+                                                        "default_variant": null,
+                                                        "stock_qty": 100,
+                                                        "actual_price_including_tax": 200,
+                                                        "cart_quantity": null,
+                                                        "subscription_quantity": null,
+                                                        "subscription_package": null,
+                                                        "subscription_period": null,
+                                                        "subscription_days_count": null,
+                                                        "preferred_delivery_slot": null,
+                                                        "wishlisted": false,
+                                                        "product_notified": false,
+                                                        "cart_items": null,
+                                                        "average_rating": 0,
+                                                        "images": {
+                                                            "data": [
+                                                                {
+                                                                    "id": "45",
+                                                                    "type": "attachment",
+                                                                    "attributes": {
+                                                                        "attachable_type": "BxBlockCatalogue::Catalogue",
+                                                                        "attachable_id": 27,
+                                                                        "position": null,
+                                                                        "is_default": true,
+                                                                        "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBiZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--60d39ad67a147a668b0aee1d111754fdd0ad4562/cropped_image.png",
+                                                                        "url_link": null,
+                                                                        "is_present?": false,
+                                                                        "url_id": null,
+                                                                        "url_type": null
+                                                                    }
+                                                                }
+                                                            ]
+                                                        },
+                                                        "product_attributes": null,
+                                                        "availability": null,
+                                                        "deep_link": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai//share/share/dl?catalogue_id=27",
+                                                        "catalogue_variants": [],
+                                                        "variants_in_cart": [],
+                                                        "can_review": false,
+                                                        "similar_products": [],
+                                                        "category": [
+                                                            {
+                                                                "data": {
+                                                                    "id": "5",
+                                                                    "type": "category",
+                                                                    "attributes": {
+                                                                        "id": 5,
+                                                                        "name": "Fresh Fruits",
+                                                                        "created_at": "2022-07-04T12:47:16.004Z",
+                                                                        "updated_at": "2022-08-09T10:41:14.520Z",
+                                                                        "product_image": {
+                                                                            "id": 60,
+                                                                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBRUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--95db367c657ecfbcdf46090e6c1137985482b49b/cropped_image.png"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        ],
+                                                        "catalogue_subscriptions": [
+                                                            {
+                                                                "id": "27",
+                                                                "type": "catalogue_subscription",
+                                                                "attributes": {
+                                                                    "id": 27,
+                                                                    "catalogue_id": 27,
+                                                                    "subscription_package": "monthly",
+                                                                    "subscription_period": "2 month",
+                                                                    "discount": "15.0",
+                                                                    "morning_slot": "[\"\", \"9am to 12pm\"]",
+                                                                    "evening_slot": "[\"\"]",
+                                                                    "subscription_number": null
+                                                                }
+                                                            }
+                                                        ],
+                                                        "is_subscription_available": true,
+                                                        "available_subscription": {
+                                                            "monthly": [
+                                                                "2"
+                                                            ]
+                                                        },
+                                                        "available_slots": {
+                                                            "morning_slots": [
+                                                                "",
+                                                                "9am to 12pm"
+                                                            ],
+                                                            "evening_slots": [
+                                                                ""
+                                                            ]
+                                                        },
+                                                        "is_notify_product": null
+                                                    }
+                                                },
+                                                {
+                                                    "id": "25",
+                                                    "type": "catalogue",
+                                                    "attributes": {
+                                                        "name": "Fresh Blueberry – Imported (Pack) – 125 gm",
+                                                        "description": "",
+                                                        "manufacture_date": null,
+                                                        "block_qty": null,
+                                                        "price": 140,
+                                                        "on_sale": true,
+                                                        "sale_price": "125.0",
+                                                        "discount": "10.71",
+                                                        "recommended": false,
+                                                        "sku": "COD0000025",
+                                                        "length": null,
+                                                        "breadth": null,
+                                                        "tax_amount": "0.0",
+                                                        "price_including_tax": "125.0",
+                                                        "height": null,
+                                                        "weight": "125",
+                                                        "weight_unit": "gm",
+                                                        "brand": {
+                                                            "id": 1,
+                                                            "name": "Dummy",
+                                                            "created_at": "2022-05-27T08:15:47.600Z",
+                                                            "updated_at": "2022-05-27T08:15:47.600Z"
+                                                        },
+                                                        "tags": [
+                                                            {
+                                                                "id": 1,
+                                                                "name": "Dummy",
+                                                                "created_at": "2022-05-27T08:15:47.516Z",
+                                                                "updated_at": "2022-05-27T08:15:47.516Z"
+                                                            }
+                                                        ],
+                                                        "reviews": [],
+                                                        "current_availibility": "in_stock",
+                                                        "default_variant": null,
+                                                        "stock_qty": 100,
+                                                        "actual_price_including_tax": 140,
+                                                        "cart_quantity": null,
+                                                        "subscription_quantity": null,
+                                                        "subscription_package": null,
+                                                        "subscription_period": null,
+                                                        "subscription_days_count": null,
+                                                        "preferred_delivery_slot": null,
+                                                        "wishlisted": false,
+                                                        "product_notified": false,
+                                                        "cart_items": null,
+                                                        "average_rating": 0,
+                                                        "images": {
+                                                            "data": [
+                                                                {
+                                                                    "id": "43",
+                                                                    "type": "attachment",
+                                                                    "attributes": {
+                                                                        "attachable_type": "BxBlockCatalogue::Catalogue",
+                                                                        "attachable_id": 25,
+                                                                        "position": null,
+                                                                        "is_default": true,
+                                                                        "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBiQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c95754522539dd72a047f11d0fd6a5f8e67d466b/cropped_image.png",
+                                                                        "url_link": null,
+                                                                        "is_present?": false,
+                                                                        "url_id": null,
+                                                                        "url_type": null
+                                                                    }
+                                                                }
+                                                            ]
+                                                        },
+                                                        "product_attributes": null,
+                                                        "availability": null,
+                                                        "deep_link": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai//share/share/dl?catalogue_id=25",
+                                                        "catalogue_variants": [],
+                                                        "variants_in_cart": [],
+                                                        "can_review": false,
+                                                        "similar_products": [],
+                                                        "category": [
+                                                            {
+                                                                "data": {
+                                                                    "id": "5",
+                                                                    "type": "category",
+                                                                    "attributes": {
+                                                                        "id": 5,
+                                                                        "name": "Fresh Fruits",
+                                                                        "created_at": "2022-07-04T12:47:16.004Z",
+                                                                        "updated_at": "2022-08-09T10:41:14.520Z",
+                                                                        "product_image": {
+                                                                            "id": 60,
+                                                                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBRUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--95db367c657ecfbcdf46090e6c1137985482b49b/cropped_image.png"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        ],
+                                                        "catalogue_subscriptions": [
+                                                            {
+                                                                "id": "25",
+                                                                "type": "catalogue_subscription",
+                                                                "attributes": {
+                                                                    "id": 25,
+                                                                    "catalogue_id": 25,
+                                                                    "subscription_package": "monthly",
+                                                                    "subscription_period": "3 month",
+                                                                    "discount": "15.0",
+                                                                    "morning_slot": "[\"\"]",
+                                                                    "evening_slot": "[\"\"]",
+                                                                    "subscription_number": null
+                                                                }
+                                                            }
+                                                        ],
+                                                        "is_subscription_available": true,
+                                                        "available_subscription": {
+                                                            "monthly": [
+                                                                "3"
+                                                            ]
+                                                        },
+                                                        "available_slots": {
+                                                            "morning_slots": [
+                                                                ""
+                                                            ],
+                                                            "evening_slots": [
+                                                                ""
+                                                            ]
+                                                        },
+                                                        "is_notify_product": null
+                                                    }
+                                                },
+                                                {
+                                                    "id": "13",
+                                                    "type": "catalogue",
+                                                    "attributes": {
+                                                        "name": "Mango  – 1Kg",
+                                                        "description": "",
+                                                        "manufacture_date": null,
+                                                        "block_qty": null,
+                                                        "price": 70,
+                                                        "on_sale": false,
+                                                        "sale_price": null,
+                                                        "discount": null,
+                                                        "recommended": false,
+                                                        "sku": "COD0000013",
+                                                        "length": null,
+                                                        "breadth": null,
+                                                        "tax_amount": "0.0",
+                                                        "price_including_tax": "70.0",
+                                                        "height": null,
+                                                        "weight": "1",
+                                                        "weight_unit": "kg",
+                                                        "brand": {
+                                                            "id": 1,
+                                                            "name": "Dummy",
+                                                            "created_at": "2022-05-27T08:15:47.600Z",
+                                                            "updated_at": "2022-05-27T08:15:47.600Z"
+                                                        },
+                                                        "tags": [
+                                                            {
+                                                                "id": 1,
+                                                                "name": "Dummy",
+                                                                "created_at": "2022-05-27T08:15:47.516Z",
+                                                                "updated_at": "2022-05-27T08:15:47.516Z"
+                                                            }
+                                                        ],
+                                                        "reviews": [],
+                                                        "current_availibility": "in_stock",
+                                                        "default_variant": null,
+                                                        "stock_qty": 100,
+                                                        "actual_price_including_tax": 70,
+                                                        "cart_quantity": null,
+                                                        "subscription_quantity": null,
+                                                        "subscription_package": null,
+                                                        "subscription_period": null,
+                                                        "subscription_days_count": null,
+                                                        "preferred_delivery_slot": null,
+                                                        "wishlisted": false,
+                                                        "product_notified": false,
+                                                        "cart_items": null,
+                                                        "average_rating": 0,
+                                                        "images": {
+                                                            "data": [
+                                                                {
+                                                                    "id": "31",
+                                                                    "type": "attachment",
+                                                                    "attributes": {
+                                                                        "attachable_type": "BxBlockCatalogue::Catalogue",
+                                                                        "attachable_id": 13,
+                                                                        "position": null,
+                                                                        "is_default": true,
+                                                                        "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBZQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--bd8c7af230214304f6fdfd99615482a2b7e8b700/cropped_image.png",
+                                                                        "url_link": null,
+                                                                        "is_present?": false,
+                                                                        "url_id": null,
+                                                                        "url_type": null
+                                                                    }
+                                                                }
+                                                            ]
+                                                        },
+                                                        "product_attributes": null,
+                                                        "availability": null,
+                                                        "deep_link": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai//share/share/dl?catalogue_id=13",
+                                                        "catalogue_variants": [],
+                                                        "variants_in_cart": [],
+                                                        "can_review": false,
+                                                        "similar_products": [],
+                                                        "category": [
+                                                            {
+                                                                "data": {
+                                                                    "id": "5",
+                                                                    "type": "category",
+                                                                    "attributes": {
+                                                                        "id": 5,
+                                                                        "name": "Fresh Fruits",
+                                                                        "created_at": "2022-07-04T12:47:16.004Z",
+                                                                        "updated_at": "2022-08-09T10:41:14.520Z",
+                                                                        "product_image": {
+                                                                            "id": 60,
+                                                                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBRUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--95db367c657ecfbcdf46090e6c1137985482b49b/cropped_image.png"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        ],
+                                                        "catalogue_subscriptions": [
+                                                            {
+                                                                "id": "13",
+                                                                "type": "catalogue_subscription",
+                                                                "attributes": {
+                                                                    "id": 13,
+                                                                    "catalogue_id": 13,
+                                                                    "subscription_package": "weekly",
+                                                                    "subscription_period": "3 month",
+                                                                    "discount": "15.0",
+                                                                    "morning_slot": "[\"\"]",
+                                                                    "evening_slot": "[\"\"]",
+                                                                    "subscription_number": null
+                                                                }
+                                                            }
+                                                        ],
+                                                        "is_subscription_available": true,
+                                                        "available_subscription": {
+                                                            "weekly": [
+                                                                "3"
+                                                            ]
+                                                        },
+                                                        "available_slots": {
+                                                            "morning_slots": [
+                                                                ""
+                                                            ],
+                                                            "evening_slots": [
+                                                                ""
+                                                            ]
+                                                        },
+                                                        "is_notify_product": null
+                                                    }
+                                                },
+                                                {
+                                                    "id": "11",
+                                                    "type": "catalogue",
+                                                    "attributes": {
+                                                        "name": "Pomegranate  – 1Kg",
+                                                        "description": "",
+                                                        "manufacture_date": null,
+                                                        "block_qty": 0,
+                                                        "price": 300,
+                                                        "on_sale": false,
+                                                        "sale_price": null,
+                                                        "discount": null,
+                                                        "recommended": false,
+                                                        "sku": "COD0000011",
+                                                        "length": null,
+                                                        "breadth": null,
+                                                        "tax_amount": "0.0",
+                                                        "price_including_tax": "300.0",
+                                                        "height": null,
+                                                        "weight": "1",
+                                                        "weight_unit": "kg",
+                                                        "brand": {
+                                                            "id": 1,
+                                                            "name": "Dummy",
+                                                            "created_at": "2022-05-27T08:15:47.600Z",
+                                                            "updated_at": "2022-05-27T08:15:47.600Z"
+                                                        },
+                                                        "tags": [
+                                                            {
+                                                                "id": 1,
+                                                                "name": "Dummy",
+                                                                "created_at": "2022-05-27T08:15:47.516Z",
+                                                                "updated_at": "2022-05-27T08:15:47.516Z"
+                                                            }
+                                                        ],
+                                                        "reviews": [],
+                                                        "current_availibility": "in_stock",
+                                                        "default_variant": null,
+                                                        "stock_qty": 99,
+                                                        "actual_price_including_tax": 300,
+                                                        "cart_quantity": null,
+                                                        "subscription_quantity": null,
+                                                        "subscription_package": null,
+                                                        "subscription_period": null,
+                                                        "subscription_days_count": null,
+                                                        "preferred_delivery_slot": null,
+                                                        "wishlisted": false,
+                                                        "product_notified": false,
+                                                        "cart_items": null,
+                                                        "average_rating": 0,
+                                                        "images": {
+                                                            "data": [
+                                                                {
+                                                                    "id": "29",
+                                                                    "type": "attachment",
+                                                                    "attributes": {
+                                                                        "attachable_type": "BxBlockCatalogue::Catalogue",
+                                                                        "attachable_id": 11,
+                                                                        "position": null,
+                                                                        "is_default": true,
+                                                                        "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBYZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--cb7c630190b769e3dc9592481e86fcf4c8fb5d66/cropped_image.png",
+                                                                        "url_link": null,
+                                                                        "is_present?": false,
+                                                                        "url_id": null,
+                                                                        "url_type": null
+                                                                    }
+                                                                }
+                                                            ]
+                                                        },
+                                                        "product_attributes": null,
+                                                        "availability": null,
+                                                        "deep_link": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai//share/share/dl?catalogue_id=11",
+                                                        "catalogue_variants": [],
+                                                        "variants_in_cart": [],
+                                                        "can_review": false,
+                                                        "similar_products": [],
+                                                        "category": [
+                                                            {
+                                                                "data": {
+                                                                    "id": "5",
+                                                                    "type": "category",
+                                                                    "attributes": {
+                                                                        "id": 5,
+                                                                        "name": "Fresh Fruits",
+                                                                        "created_at": "2022-07-04T12:47:16.004Z",
+                                                                        "updated_at": "2022-08-09T10:41:14.520Z",
+                                                                        "product_image": {
+                                                                            "id": 60,
+                                                                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBRUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--95db367c657ecfbcdf46090e6c1137985482b49b/cropped_image.png"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        ],
+                                                        "catalogue_subscriptions": [
+                                                            {
+                                                                "id": "11",
+                                                                "type": "catalogue_subscription",
+                                                                "attributes": {
+                                                                    "id": 11,
+                                                                    "catalogue_id": 11,
+                                                                    "subscription_package": "weekly",
+                                                                    "subscription_period": "2 month",
+                                                                    "discount": "30.0",
+                                                                    "morning_slot": "[\"\"]",
+                                                                    "evening_slot": "[\"\"]",
+                                                                    "subscription_number": null
+                                                                }
+                                                            }
+                                                        ],
+                                                        "is_subscription_available": true,
+                                                        "available_subscription": {
+                                                            "weekly": [
+                                                                "2"
+                                                            ]
+                                                        },
+                                                        "available_slots": {
+                                                            "morning_slots": [
+                                                                ""
+                                                            ],
+                                                            "evening_slots": [
+                                                                ""
+                                                            ]
+                                                        },
+                                                        "is_notify_product": null
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "category": [
+                                            {
+                                                "data": {
+                                                    "id": "5",
+                                                    "type": "category",
+                                                    "attributes": {
+                                                        "id": 5,
+                                                        "name": "Fresh Fruits",
+                                                        "created_at": "2022-07-04T12:47:16.004Z",
+                                                        "updated_at": "2022-08-09T10:41:14.520Z",
+                                                        "product_image": {
+                                                            "id": 60,
+                                                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBRUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--95db367c657ecfbcdf46090e6c1137985482b49b/cropped_image.png"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "catalogue_subscriptions": [
+                                            {
+                                                "id": "89",
+                                                "type": "catalogue_subscription",
+                                                "attributes": {
+                                                    "id": 89,
+                                                    "catalogue_id": 91,
+                                                    "subscription_package": "daily",
+                                                    "subscription_period": "3 month",
+                                                    "discount": "15.0",
+                                                    "morning_slot": "[\"\"]",
+                                                    "evening_slot": "[\"\"]",
+                                                    "subscription_number": null
+                                                }
+                                            }
+                                        ],
+                                        "is_subscription_available": true,
+                                        "available_subscription": {
+                                            "daily": [
+                                                "3"
+                                            ]
+                                        },
+                                        "available_slots": {
+                                            "morning_slots": [
+                                                ""
+                                            ],
+                                            "evening_slots": [
+                                                ""
+                                            ]
+                                        },
+                                        "is_notify_product": null
+                                    }
+                                },
+                                "catalogue_variant": null,
+                                "product_name": "Coconut",
+                                "overall_order_status": "in_cart",
+                                "product_price": 40,
+                                "product_sale_price": null,
+                                "product_on_sale": false,
+                                "product_discount": null,
+                                "product_variant_price": null,
+                                "product_variant_sale_price": null,
+                                "product_variant_on_sale": null,
+                                "product_variant_discount": null,
+                                "product_variant_is_deliverable": null,
+                                "is_item_cancelled": false,
+                                "is_review_present": false,
+                                "review": null,
+                                "delivery_address": null,
+                                "order_date": null,
+                                "order_number": "OD00000425",
+                                "is_deliverable": true,
+                                "product_images": null,
+                                "item_history": []
+                            }
+                        },
+                        {
+                            "id": "1998",
+                            "type": "order_item",
+                            "attributes": {
+                                "id": 1998,
+                                "order_id": 457,
+                                "quantity": 3,
+                                "unit_price": "270.0",
+                                "total_price": "810.0",
+                                "old_unit_price": null,
+                                "status": "in_cart",
+                                "catalogue_id": 101,
+                                "catalogue_variant_id": null,
+                                "order_status_id": 9,
+                                "placed_at": null,
+                                "confirmed_at": null,
+                                "in_transit_at": null,
+                                "delivered_at": null,
+                                "cancelled_at": null,
+                                "refunded_at": null,
+                                "manage_placed_status": false,
+                                "manage_cancelled_status": false,
+                                "created_at": "2022-09-07T20:00:49.498Z",
+                                "updated_at": "2022-09-07T20:02:39.108Z",
+                                "subscription_quantity": null,
+                                "subscription_package": null,
+                                "subscription_period": null,
+                                "subscription_discount": null,
+                                "preferred_delivery_slot": null,
+                                "subscription_discounted_price": null,
+                                "total_price_after_sub_discount": null,
+                                "subscription_days_count": null,
+                                "order_statuses": {
+                                    "order_number": "OD00000425",
+                                    "placed_at": null,
+                                    "confirmed_at": null,
+                                    "in_transit_at": null,
+                                    "delivered_at": null,
+                                    "cancelled_at": null,
+                                    "refunded_at": null
+                                },
+                                "delivery_addresses": [],
+                                "catalogue": {
+                                    "id": "101",
+                                    "type": "catalogue",
+                                    "attributes": {
+                                        "name": "my second product111",
+                                        "description": "",
+                                        "manufacture_date": "2022-08-29T17:16:00.000Z",
+                                        "block_qty": 1,
+                                        "price": 300,
+                                        "on_sale": false,
+                                        "sale_price": null,
+                                        "discount": null,
+                                        "recommended": false,
+                                        "sku": "COD0000101",
+                                        "length": null,
+                                        "breadth": null,
+                                        "tax_amount": "14.29",
+                                        "price_including_tax": "300.0",
+                                        "height": null,
+                                        "weight": "12",
+                                        "weight_unit": "g",
+                                        "brand": {
+                                            "id": 1,
+                                            "name": "Dummy",
+                                            "created_at": "2022-05-27T08:15:47.600Z",
+                                            "updated_at": "2022-05-27T08:15:47.600Z"
+                                        },
+                                        "tags": [
+                                            {
+                                                "id": 1,
+                                                "name": "Dummy",
+                                                "created_at": "2022-05-27T08:15:47.516Z",
+                                                "updated_at": "2022-05-27T08:15:47.516Z"
+                                            }
+                                        ],
+                                        "reviews": [],
+                                        "current_availibility": "in_stock",
+                                        "default_variant": null,
+                                        "stock_qty": 12,
+                                        "actual_price_including_tax": 300,
+                                        "cart_quantity": null,
+                                        "subscription_quantity": null,
+                                        "subscription_package": null,
+                                        "subscription_period": null,
+                                        "subscription_days_count": null,
+                                        "preferred_delivery_slot": null,
+                                        "wishlisted": false,
+                                        "product_notified": false,
+                                        "cart_items": null,
+                                        "average_rating": 0,
+                                        "images": {
+                                            "data": [
+                                                {
+                                                    "id": "149",
+                                                    "type": "attachment",
+                                                    "attributes": {
+                                                        "attachable_type": "BxBlockCatalogue::Catalogue",
+                                                        "attachable_id": 101,
+                                                        "position": null,
+                                                        "is_default": true,
+                                                        "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBaDBCIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9f1ad676061ee2d27f858d8732d051016a37f781/cropped_image.png",
+                                                        "url_link": null,
+                                                        "is_present?": false,
+                                                        "url_id": null,
+                                                        "url_type": null
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "product_attributes": null,
+                                        "availability": null,
+                                        "deep_link": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai//share/share/dl?catalogue_id=101",
+                                        "catalogue_variants": [],
+                                        "variants_in_cart": [],
+                                        "can_review": false,
+                                        "similar_products": [],
+                                        "category": null,
+                                        "catalogue_subscriptions": [
+                                            {
+                                                "id": "98",
+                                                "type": "catalogue_subscription",
+                                                "attributes": {
+                                                    "id": 98,
+                                                    "catalogue_id": 101,
+                                                    "subscription_package": "daily",
+                                                    "subscription_period": "1 month",
+                                                    "discount": "10.0",
+                                                    "morning_slot": "[\"\", \"9am to 11am\"]",
+                                                    "evening_slot": "[\"\", \"1pm to 5pm\"]",
+                                                    "subscription_number": null
+                                                }
+                                            }
+                                        ],
+                                        "is_subscription_available": true,
+                                        "available_subscription": {
+                                            "daily": [
+                                                "1"
+                                            ]
+                                        },
+                                        "available_slots": {
+                                            "morning_slots": [
+                                                "",
+                                                "9am to 11am"
+                                            ],
+                                            "evening_slots": [
+                                                "",
+                                                "1pm to 5pm"
+                                            ]
+                                        },
+                                        "is_notify_product": null
+                                    }
+                                },
+                                "catalogue_variant": null,
+                                "product_name": "my second product111",
+                                "overall_order_status": "in_cart",
+                                "product_price": 300,
+                                "product_sale_price": null,
+                                "product_on_sale": false,
+                                "product_discount": null,
+                                "product_variant_price": null,
+                                "product_variant_sale_price": null,
+                                "product_variant_on_sale": null,
+                                "product_variant_discount": null,
+                                "product_variant_is_deliverable": null,
+                                "is_item_cancelled": false,
+                                "is_review_present": false,
+                                "review": null,
+                                "delivery_address": null,
+                                "order_date": null,
+                                "order_number": "OD00000425",
+                                "is_deliverable": true,
+                                "product_images": null,
+                                "item_history": []
+                            }
+                        },
+                        {
+                            "id": "1999",
+                            "type": "order_item",
+                            "attributes": {
+                                "id": 1999,
+                                "order_id": 457,
+                                "quantity": 1,
+                                "unit_price": "180.0",
+                                "total_price": "180.0",
+                                "old_unit_price": null,
+                                "status": "in_cart",
+                                "catalogue_id": 100,
+                                "catalogue_variant_id": null,
+                                "order_status_id": 9,
+                                "placed_at": null,
+                                "confirmed_at": null,
+                                "in_transit_at": null,
+                                "delivered_at": null,
+                                "cancelled_at": null,
+                                "refunded_at": null,
+                                "manage_placed_status": false,
+                                "manage_cancelled_status": false,
+                                "created_at": "2022-09-07T20:00:50.823Z",
+                                "updated_at": "2022-09-07T20:00:51.124Z",
+                                "subscription_quantity": null,
+                                "subscription_package": null,
+                                "subscription_period": null,
+                                "subscription_discount": null,
+                                "preferred_delivery_slot": null,
+                                "subscription_discounted_price": null,
+                                "total_price_after_sub_discount": null,
+                                "subscription_days_count": null,
+                                "order_statuses": {
+                                    "order_number": "OD00000425",
+                                    "placed_at": null,
+                                    "confirmed_at": null,
+                                    "in_transit_at": null,
+                                    "delivered_at": null,
+                                    "cancelled_at": null,
+                                    "refunded_at": null
+                                },
+                                "delivery_addresses": [],
+                                "catalogue": {
+                                    "id": "100",
+                                    "type": "catalogue",
+                                    "attributes": {
+                                        "name": "first product1212",
+                                        "description": "",
+                                        "manufacture_date": "2022-09-05T00:37:00.000Z",
+                                        "block_qty": 3,
+                                        "price": 200,
+                                        "on_sale": false,
+                                        "sale_price": null,
+                                        "discount": null,
+                                        "recommended": false,
+                                        "sku": "COD0000100",
+                                        "length": null,
+                                        "breadth": null,
+                                        "tax_amount": "9.52",
+                                        "price_including_tax": "200.0",
+                                        "height": null,
+                                        "weight": "12",
+                                        "weight_unit": "gm",
+                                        "brand": {
+                                            "id": 1,
+                                            "name": "Dummy",
+                                            "created_at": "2022-05-27T08:15:47.600Z",
+                                            "updated_at": "2022-05-27T08:15:47.600Z"
+                                        },
+                                        "tags": [
+                                            {
+                                                "id": 1,
+                                                "name": "Dummy",
+                                                "created_at": "2022-05-27T08:15:47.516Z",
+                                                "updated_at": "2022-05-27T08:15:47.516Z"
+                                            }
+                                        ],
+                                        "reviews": [],
+                                        "current_availibility": "in_stock",
+                                        "default_variant": null,
+                                        "stock_qty": 12,
+                                        "actual_price_including_tax": 200,
+                                        "cart_quantity": null,
+                                        "subscription_quantity": null,
+                                        "subscription_package": null,
+                                        "subscription_period": null,
+                                        "subscription_days_count": null,
+                                        "preferred_delivery_slot": null,
+                                        "wishlisted": false,
+                                        "product_notified": false,
+                                        "cart_items": null,
+                                        "average_rating": 0,
+                                        "images": {
+                                            "data": [
+                                                {
+                                                    "id": "148",
+                                                    "type": "attachment",
+                                                    "attributes": {
+                                                        "attachable_type": "BxBlockCatalogue::Catalogue",
+                                                        "attachable_id": 100,
+                                                        "position": null,
+                                                        "is_default": true,
+                                                        "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBaHdCIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--efa9446e62cd4a0c6e22a6970f98e1b4510850db/cropped_image.png",
+                                                        "url_link": null,
+                                                        "is_present?": false,
+                                                        "url_id": null,
+                                                        "url_type": null
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "product_attributes": null,
+                                        "availability": null,
+                                        "deep_link": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai//share/share/dl?catalogue_id=100",
+                                        "catalogue_variants": [],
+                                        "variants_in_cart": [],
+                                        "can_review": false,
+                                        "similar_products": [],
+                                        "category": null,
+                                        "catalogue_subscriptions": [
+                                            {
+                                                "id": "97",
+                                                "type": "catalogue_subscription",
+                                                "attributes": {
+                                                    "id": 97,
+                                                    "catalogue_id": 100,
+                                                    "subscription_package": "monthly",
+                                                    "subscription_period": "2 month",
+                                                    "discount": "10.0",
+                                                    "morning_slot": "[\"\", \"9am to 11am\"]",
+                                                    "evening_slot": "[\"\", \"5pm to 9pm\"]",
+                                                    "subscription_number": null
+                                                }
+                                            }
+                                        ],
+                                        "is_subscription_available": true,
+                                        "available_subscription": {
+                                            "monthly": [
+                                                "2"
+                                            ]
+                                        },
+                                        "available_slots": {
+                                            "morning_slots": [
+                                                "",
+                                                "9am to 11am"
+                                            ],
+                                            "evening_slots": [
+                                                "",
+                                                "5pm to 9pm"
+                                            ]
+                                        },
+                                        "is_notify_product": null
+                                    }
+                                },
+                                "catalogue_variant": null,
+                                "product_name": "first product1212",
+                                "overall_order_status": "in_cart",
+                                "product_price": 200,
+                                "product_sale_price": null,
+                                "product_on_sale": false,
+                                "product_discount": null,
+                                "product_variant_price": null,
+                                "product_variant_sale_price": null,
+                                "product_variant_on_sale": null,
+                                "product_variant_discount": null,
+                                "product_variant_is_deliverable": null,
+                                "is_item_cancelled": false,
+                                "is_review_present": false,
+                                "review": null,
+                                "delivery_address": null,
+                                "order_date": null,
+                                "order_number": "OD00000425",
+                                "is_deliverable": true,
+                                "product_images": null,
+                                "item_history": []
+                            }
+                        },
+                        {
+                            "id": "2001",
+                            "type": "order_item",
+                            "attributes": {
+                                "id": 2001,
+                                "order_id": 457,
+                                "quantity": 1,
+                                "unit_price": "144.0",
+                                "total_price": "144.0",
+                                "old_unit_price": null,
+                                "status": "in_cart",
+                                "catalogue_id": 102,
+                                "catalogue_variant_id": 20,
+                                "order_status_id": 9,
+                                "placed_at": null,
+                                "confirmed_at": null,
+                                "in_transit_at": null,
+                                "delivered_at": null,
+                                "cancelled_at": null,
+                                "refunded_at": null,
+                                "manage_placed_status": false,
+                                "manage_cancelled_status": false,
+                                "created_at": "2022-09-07T20:00:56.041Z",
+                                "updated_at": "2022-09-07T20:00:56.068Z",
+                                "subscription_quantity": null,
+                                "subscription_package": null,
+                                "subscription_period": null,
+                                "subscription_discount": null,
+                                "preferred_delivery_slot": null,
+                                "subscription_discounted_price": null,
+                                "total_price_after_sub_discount": null,
+                                "subscription_days_count": null,
+                                "order_statuses": {
+                                    "order_number": "OD00000425",
+                                    "placed_at": null,
+                                    "confirmed_at": null,
+                                    "in_transit_at": null,
+                                    "delivered_at": null,
+                                    "cancelled_at": null,
+                                    "refunded_at": null
+                                },
+                                "delivery_addresses": [],
+                                "catalogue": {
+                                    "id": "102",
+                                    "type": "catalogue",
+                                    "attributes": {
+                                        "name": "without sub product",
+                                        "description": "",
+                                        "manufacture_date": "2022-08-29T17:37:00.000Z",
+                                        "block_qty": null,
+                                        "price": 160,
+                                        "on_sale": false,
+                                        "sale_price": null,
+                                        "discount": null,
+                                        "recommended": false,
+                                        "sku": "COD0000102",
+                                        "length": null,
+                                        "breadth": null,
+                                        "tax_amount": "7.62",
+                                        "price_including_tax": "160.0",
+                                        "height": null,
+                                        "weight": "12",
+                                        "weight_unit": "multipack",
+                                        "brand": {
+                                            "id": 1,
+                                            "name": "Dummy",
+                                            "created_at": "2022-05-27T08:15:47.600Z",
+                                            "updated_at": "2022-05-27T08:15:47.600Z"
+                                        },
+                                        "tags": [
+                                            {
+                                                "id": 1,
+                                                "name": "Dummy",
+                                                "created_at": "2022-05-27T08:15:47.516Z",
+                                                "updated_at": "2022-05-27T08:15:47.516Z"
+                                            }
+                                        ],
+                                        "reviews": [],
+                                        "current_availibility": "in_stock",
+                                        "default_variant": {
+                                            "id": 20,
+                                            "catalogue_id": 102,
+                                            "price": "160.0",
+                                            "stock_qty": 111,
+                                            "on_sale": false,
+                                            "sale_price": null,
+                                            "discount_price": null,
+                                            "length": null,
+                                            "breadth": null,
+                                            "height": null,
+                                            "created_at": "2022-09-07T12:13:33.132Z",
+                                            "updated_at": "2022-09-07T12:30:48.000Z",
+                                            "block_qty": 1,
+                                            "is_default": true,
+                                            "sold": null,
+                                            "current_availability": "in_stock",
+                                            "remaining_stock": null,
+                                            "variant_property_id": null,
+                                            "tax_amount": "7.62",
+                                            "price_including_tax": "160.0",
+                                            "tax_id": 2
+                                        },
+                                        "stock_qty": 111,
+                                        "actual_price_including_tax": 160,
+                                        "cart_quantity": null,
+                                        "subscription_quantity": null,
+                                        "subscription_package": null,
+                                        "subscription_period": null,
+                                        "subscription_days_count": null,
+                                        "preferred_delivery_slot": null,
+                                        "wishlisted": false,
+                                        "product_notified": false,
+                                        "cart_items": null,
+                                        "average_rating": 0,
+                                        "images": {
+                                            "data": [
+                                                {
+                                                    "id": "151",
+                                                    "type": "attachment",
+                                                    "attributes": {
+                                                        "attachable_type": "BxBlockCatalogue::Catalogue",
+                                                        "attachable_id": 102,
+                                                        "position": null,
+                                                        "is_default": true,
+                                                        "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBaDhCIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--877b3684c7718783fbae5e9d6c3e2c9b80eb6000/cropped_image.png",
+                                                        "url_link": null,
+                                                        "is_present?": false,
+                                                        "url_id": null,
+                                                        "url_type": null
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "product_attributes": {
+                                            "Pack of ": [
+                                                {
+                                                    "name": "2",
+                                                    "variant_property_id": 8
+                                                }
+                                            ],
+                                            "Weight ": [],
+                                            "Pcs": []
+                                        },
+                                        "availability": [
+                                            {
+                                                "variant_attributes": [
+                                                    {
+                                                        "variant_id": 3,
+                                                        "variant_name": "Pack of ",
+                                                        "variant_property_name": "2",
+                                                        "variant_property_id": 8
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "variant_attributes": []
+                                            },
+                                            {
+                                                "variant_attributes": []
+                                            }
+                                        ],
+                                        "deep_link": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai//share/share/dl?catalogue_id=102",
+                                        "catalogue_variants": [
+                                            {
+                                                "id": "20",
+                                                "type": "catalogue_variant",
+                                                "attributes": {
+                                                    "id": 20,
+                                                    "catalogue_id": 102,
+                                                    "price": "160.0",
+                                                    "stock_qty": 111,
+                                                    "on_sale": false,
+                                                    "sale_price": null,
+                                                    "discount_price": null,
+                                                    "length": null,
+                                                    "breadth": null,
+                                                    "height": null,
+                                                    "is_default": true,
+                                                    "created_at": "2022-09-07T12:13:33.132Z",
+                                                    "updated_at": "2022-09-07T12:30:48.000Z",
+                                                    "tax_amount": "7.62",
+                                                    "price_including_tax": "160.0",
+                                                    "catalogue_variant_properties": [
+                                                        {
+                                                            "id": "23",
+                                                            "type": "catalogue_variant_property",
+                                                            "attributes": {
+                                                                "id": 23,
+                                                                "catalogue_id": 102,
+                                                                "catalogue_variant_id": 20,
+                                                                "variant_id": 3,
+                                                                "variant_property_id": 8,
+                                                                "created_at": "2022-09-07T12:13:33.139Z",
+                                                                "updated_at": "2022-09-07T12:13:33.139Z",
+                                                                "variant_name": "Pack of ",
+                                                                "property_name": "2"
+                                                            }
+                                                        }
+                                                    ],
+                                                    "images": {
+                                                        "data": [
+                                                            {
+                                                                "id": "150",
+                                                                "type": "attachment",
+                                                                "attributes": {
+                                                                    "attachable_type": "BxBlockCatalogue::CatalogueVariant",
+                                                                    "attachable_id": 20,
+                                                                    "position": null,
+                                                                    "is_default": true,
+                                                                    "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBaDRCIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--880d5f8965ef4aeda42b788b4b66d04a358cdf11/cropped_image.png",
+                                                                    "url_link": null,
+                                                                    "is_present?": false,
+                                                                    "url_id": null,
+                                                                    "url_type": null
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    "actual_price_including_tax": "160.0",
+                                                    "cart_quantity": null,
+                                                    "is_notify_product": null
+                                                }
+                                            }
+                                        ],
+                                        "variants_in_cart": [],
+                                        "can_review": false,
+                                        "similar_products": [],
+                                        "category": null,
+                                        "catalogue_subscriptions": [],
+                                        "is_subscription_available": false,
+                                        "available_subscription": {},
+                                        "available_slots": {
+                                            "morning_slots": null,
+                                            "evening_slots": null
+                                        },
+                                        "is_notify_product": null
+                                    }
+                                },
+                                "catalogue_variant": {
+                                    "id": "20",
+                                    "type": "catalogue_variant",
+                                    "attributes": {
+                                        "id": 20,
+                                        "catalogue_id": 102,
+                                        "price": "160.0",
+                                        "stock_qty": 111,
+                                        "on_sale": false,
+                                        "sale_price": null,
+                                        "discount_price": null,
+                                        "length": null,
+                                        "breadth": null,
+                                        "height": null,
+                                        "is_default": true,
+                                        "created_at": "2022-09-07T12:13:33.132Z",
+                                        "updated_at": "2022-09-07T12:30:48.000Z",
+                                        "tax_amount": "7.62",
+                                        "price_including_tax": "160.0",
+                                        "catalogue_variant_properties": [
+                                            {
+                                                "id": "23",
+                                                "type": "catalogue_variant_property",
+                                                "attributes": {
+                                                    "id": 23,
+                                                    "catalogue_id": 102,
+                                                    "catalogue_variant_id": 20,
+                                                    "variant_id": 3,
+                                                    "variant_property_id": 8,
+                                                    "created_at": "2022-09-07T12:13:33.139Z",
+                                                    "updated_at": "2022-09-07T12:13:33.139Z",
+                                                    "variant_name": "Pack of ",
+                                                    "property_name": "2"
+                                                }
+                                            }
+                                        ],
+                                        "images": {
+                                            "data": [
+                                                {
+                                                    "id": "150",
+                                                    "type": "attachment",
+                                                    "attributes": {
+                                                        "attachable_type": "BxBlockCatalogue::CatalogueVariant",
+                                                        "attachable_id": 20,
+                                                        "position": null,
+                                                        "is_default": true,
+                                                        "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBaDRCIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--880d5f8965ef4aeda42b788b4b66d04a358cdf11/cropped_image.png",
+                                                        "url_link": null,
+                                                        "is_present?": false,
+                                                        "url_id": null,
+                                                        "url_type": null
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "actual_price_including_tax": "160.0",
+                                        "cart_quantity": null,
+                                        "is_notify_product": null
+                                    }
+                                },
+                                "product_name": "without sub product",
+                                "overall_order_status": "in_cart",
+                                "product_price": 160,
+                                "product_sale_price": null,
+                                "product_on_sale": false,
+                                "product_discount": null,
+                                "product_variant_price": "160.0",
+                                "product_variant_sale_price": null,
+                                "product_variant_on_sale": false,
+                                "product_variant_discount": null,
+                                "product_variant_is_deliverable": true,
+                                "is_item_cancelled": false,
+                                "is_review_present": false,
+                                "review": null,
+                                "delivery_address": null,
+                                "order_date": null,
+                                "order_number": "OD00000425",
+                                "is_deliverable": true,
+                                "product_images": null,
+                                "item_history": []
+                            }
+                        },
+                        {
+                            "id": "2003",
+                            "type": "order_item",
+                            "attributes": {
+                                "id": 2003,
+                                "order_id": 457,
+                                "quantity": null,
+                                "unit_price": "40.5",
+                                "total_price": "324.0",
+                                "old_unit_price": null,
+                                "status": "in_cart",
+                                "catalogue_id": 82,
+                                "catalogue_variant_id": null,
+                                "order_status_id": 9,
+                                "placed_at": null,
+                                "confirmed_at": null,
+                                "in_transit_at": null,
+                                "delivered_at": null,
+                                "cancelled_at": null,
+                                "refunded_at": null,
+                                "manage_placed_status": false,
+                                "manage_cancelled_status": false,
+                                "created_at": "2022-09-07T20:02:03.668Z",
+                                "updated_at": "2022-09-07T20:02:03.729Z",
+                                "subscription_quantity": 1,
+                                "subscription_package": "weekly",
+                                "subscription_period": "2",
+                                "subscription_discount": "12.0",
+                                "preferred_delivery_slot": "5pm to 9pm",
+                                "subscription_discounted_price": 39.6,
+                                "total_price_after_sub_discount": 316.8,
+                                "subscription_days_count": 8,
+                                "order_statuses": {
+                                    "order_number": "OD00000425",
+                                    "placed_at": null,
+                                    "confirmed_at": null,
+                                    "in_transit_at": null,
+                                    "delivered_at": null,
+                                    "cancelled_at": null,
+                                    "refunded_at": null
+                                },
+                                "delivery_addresses": [],
+                                "catalogue": {
+                                    "id": "82",
+                                    "type": "catalogue",
+                                    "attributes": {
+                                        "name": "Mushroom 200gms",
+                                        "description": "<ul>\r\n\t<li>Stylish Party Wear Earrings For Women And Girls. These Ear Rings Can Be Worn With All Kind Of Outfits</li>\r\n\t<li>5-Layer 18K Micro Gold Plated For High Durability</li>\r\n\t<li>Ideal Gifts For Girls And Women, Perfect Valentine Gifts For Girlfriend Wife</li>\r\n\t<li>Shining Diva Is A Well Known Brand Across Fashion Jewellery Sector</li>\r\n\t<li>Shining Diva Products Are Preferred By Many Stars And Celebrities</li>\r\n\t<li>Country of Origin: India</li>\r\n</ul>\r\n",
+                                        "manufacture_date": null,
+                                        "block_qty": -1,
+                                        "price": 45,
+                                        "on_sale": false,
+                                        "sale_price": null,
+                                        "discount": null,
+                                        "recommended": false,
+                                        "sku": "COD0000082",
+                                        "length": null,
+                                        "breadth": null,
+                                        "tax_amount": "2.14",
+                                        "price_including_tax": "45.0",
+                                        "height": null,
+                                        "weight": "200",
+                                        "weight_unit": "gm",
+                                        "brand": {
+                                            "id": 1,
+                                            "name": "Dummy",
+                                            "created_at": "2022-05-27T08:15:47.600Z",
+                                            "updated_at": "2022-05-27T08:15:47.600Z"
+                                        },
+                                        "tags": [
+                                            {
+                                                "id": 1,
+                                                "name": "Dummy",
+                                                "created_at": "2022-05-27T08:15:47.516Z",
+                                                "updated_at": "2022-05-27T08:15:47.516Z"
+                                            }
+                                        ],
+                                        "reviews": [],
+                                        "current_availibility": "in_stock",
+                                        "default_variant": null,
+                                        "stock_qty": 89,
+                                        "actual_price_including_tax": 45,
+                                        "cart_quantity": null,
+                                        "subscription_quantity": null,
+                                        "subscription_package": null,
+                                        "subscription_period": null,
+                                        "subscription_days_count": null,
+                                        "preferred_delivery_slot": null,
+                                        "wishlisted": false,
+                                        "product_notified": false,
+                                        "cart_items": null,
+                                        "average_rating": 0,
+                                        "images": {
+                                            "data": [
+                                                {
+                                                    "id": "100",
+                                                    "type": "attachment",
+                                                    "attributes": {
+                                                        "attachable_type": "BxBlockCatalogue::Catalogue",
+                                                        "attachable_id": 82,
+                                                        "position": null,
+                                                        "is_default": true,
+                                                        "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBYVk9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--28a791e5542abf48cc1453dbf82e87acbce9857b/cropped_image.png",
+                                                        "url_link": null,
+                                                        "is_present?": false,
+                                                        "url_id": null,
+                                                        "url_type": null
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "product_attributes": null,
+                                        "availability": null,
+                                        "deep_link": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai//share/share/dl?catalogue_id=82",
+                                        "catalogue_variants": [],
+                                        "variants_in_cart": [],
+                                        "can_review": false,
+                                        "similar_products": [],
+                                        "category": [
+                                            {
+                                                "data": {
+                                                    "id": "4",
+                                                    "type": "category",
+                                                    "attributes": {
+                                                        "id": 4,
+                                                        "name": "Fresh Vegetables",
+                                                        "created_at": "2022-05-27T08:15:49.611Z",
+                                                        "updated_at": "2022-07-04T12:44:41.561Z",
+                                                        "product_image": {
+                                                            "id": 59,
+                                                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBRQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--59b8887a3337af944e6d7fba4195fdb27df67b55/cropped_image.png"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "catalogue_subscriptions": [
+                                            {
+                                                "id": "92",
+                                                "type": "catalogue_subscription",
+                                                "attributes": {
+                                                    "id": 92,
+                                                    "catalogue_id": 82,
+                                                    "subscription_package": "weekly",
+                                                    "subscription_period": "2 month",
+                                                    "discount": "12.0",
+                                                    "morning_slot": "[\"\"]",
+                                                    "evening_slot": "[\"\", \"5pm to 9pm\"]",
+                                                    "subscription_number": null
+                                                }
+                                            },
+                                            {
+                                                "id": "82",
+                                                "type": "catalogue_subscription",
+                                                "attributes": {
+                                                    "id": 82,
+                                                    "catalogue_id": 82,
+                                                    "subscription_package": "monthly",
+                                                    "subscription_period": "3 month",
+                                                    "discount": "15.0",
+                                                    "morning_slot": "[\"\", \"9am to 11am\", \"6am to 9am\"]",
+                                                    "evening_slot": "[\"\", \"1pm to 5pm\", \"5pm to 9pm\", \"8pm to 11pm\"]",
+                                                    "subscription_number": null
+                                                }
+                                            }
+                                        ],
+                                        "is_subscription_available": true,
+                                        "available_subscription": {
+                                            "weekly": [
+                                                "2"
+                                            ],
+                                            "monthly": [
+                                                "3"
+                                            ]
+                                        },
+                                        "available_slots": {
+                                            "morning_slots": [
+                                                ""
+                                            ],
+                                            "evening_slots": [
+                                                "",
+                                                "5pm to 9pm"
+                                            ]
+                                        },
+                                        "is_notify_product": null
+                                    }
+                                },
+                                "catalogue_variant": null,
+                                "product_name": "Mushroom 200gms",
+                                "overall_order_status": "in_cart",
+                                "product_price": 45,
+                                "product_sale_price": null,
+                                "product_on_sale": false,
+                                "product_discount": null,
+                                "product_variant_price": null,
+                                "product_variant_sale_price": null,
+                                "product_variant_on_sale": null,
+                                "product_variant_discount": null,
+                                "product_variant_is_deliverable": null,
+                                "is_item_cancelled": false,
+                                "is_review_present": false,
+                                "review": null,
+                                "delivery_address": null,
+                                "order_date": null,
+                                "order_number": "OD00000425",
+                                "is_deliverable": true,
+                                "product_images": null,
+                                "item_history": []
+                            }
+                        }
+                    ],
+                    "account": {
+                        "id": "8981",
+                        "type": "account",
+                        "attributes": {
+                            "activated": false,
+                            "full_name": "guest",
+                            "user_name": null,
+                            "email": "guest_16625808310@example.com",
+                            "full_phone_number": null,
+                            "phone_number": null,
+                            "type": null,
+                            "created_at": "2022-09-07T20:00:31.797Z",
+                            "updated_at": "2022-09-07T20:16:21.773Z",
+                            "device_id": null,
+                            "provider": null,
+                            "unique_auth_id": null,
+                            "guest": true,
+                            "uuid": "e7ed9e35-e1b7-4435-8184-adbe4adbcd64",
+                            "is_notification_enabled": true,
+                            "fcm_token": null,
+                            "country_code": null,
+                            "image_url": null,
+                            "is_social_login": false,
+                            "wishlist_quantity": 0
+                        }
+                    },
+                    "order_transaction": [],
+                    "coupon": {
+                        "id": "1",
+                        "type": "coupon_code",
+                        "attributes": {
+                            "id": 1,
+                            "title": "promotional code",
+                            "description": "discount when order first time",
+                            "code": "NEWUSER",
+                            "discount_type": "percentage",
+                            "discount": "10.0",
+                            "valid_from": "2022-08-29",
+                            "valid_to": "2022-10-31",
+                            "min_cart_value": "100.0",
+                            "max_cart_value": "100000.0",
+                            "created_at": "2022-07-29T04:23:58.978Z",
+                            "updated_at": "2022-08-29T14:06:54.788Z"
+                        }
+                    },
+                    "delivered_on": null,
+                    "delivery_address": null,
+                    "order_cancelled": false,
+                    "is_review_present": false,
+                    "review": null,
+                    "shipping_charges": {
+                        "shipping_charge": 50,
+                        "shipping_discount": 50,
+                        "shipping_net_amt": 0,
+                        "shipping_total": 0
+                    },
+                    "ship_rocket_status": null
+                }
+            }
+        }
+    }
+}

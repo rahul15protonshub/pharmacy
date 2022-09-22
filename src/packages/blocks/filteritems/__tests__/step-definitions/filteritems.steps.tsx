@@ -11,6 +11,10 @@ import MessageEnum, {
 import React from "react";
 import Filteritems from "../../src/Filteritems";
 import Filteroptions from "../../src/Filteroptions";
+import TopHeader from "../../../studio-store-ecommerce-components/src/TopHeader/TopHeader";
+import GreenButton from "../../../studio-store-ecommerce-components/src/GreenButton/GreenButton";
+import CustomErrorModal from "../../../studio-store-ecommerce-components/src/CustomErrorModal/CustomErrorModal";
+import ProductBox from "../../../catalogue/src/components/ProductBox";
 
 const screenProps = {
   navigation: {
@@ -78,6 +82,7 @@ defineFeature(feature, (test) => {
       instance.getProductList();
       instance.getCartHasProduct();
       instance.getCartList();
+        
       expect(filterItemsBlock).toBeTruthy();
 
     });
@@ -102,6 +107,32 @@ defineFeature(feature, (test) => {
       instance.getProductApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
+    then("filteritems products errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          errors: ["an error occured"],
+    
+        }
+      );
+      instance.getProductApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+
+      instance.setState({noProductFound:true})
+      filterItemsBlock.find(GreenButton).first().prop('onPress')()
+    });
+    then("filteritems will load product boxes without errors", () => {
+      instance.setState({productList:mockOrderItem.attributes.sub_categories})
+      expect(filterItemsBlock.find(ProductBox)).toBeTruthy()
+    });
+
 
     then("filteritems will filter data without errors", () => {
       const msgLoadDataAPI = new Message(
@@ -266,6 +297,7 @@ defineFeature(feature, (test) => {
       instance.putItemToCart(1,mockOrderItem,"")
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
+
     then("I can select the button with with out errors", () => {
       instance.setState({ showSortByModal: false });
       let buttonComponent = filterItemsBlock.findWhere(
@@ -302,11 +334,17 @@ defineFeature(feature, (test) => {
       buttonComponent.simulate("press");
       
     });
+    then("I can navigate notification with out errors", () => {
+      
+    });
 
     then("I can leave the screen with out errors", () => {
+      const customerror = filterItemsBlock.find(CustomErrorModal).first();
+      customerror.prop("hideErrorModal")()
+      filterItemsBlock.find(TopHeader).first().prop('onPressLeft')()
+      filterItemsBlock.find(TopHeader).first().simulate('onPress')
       instance.handleBackButtonClick();
       instance.componentWillUnmount();
-      
       expect(filterItemsBlock).toBeTruthy();
 
     });
@@ -438,6 +476,7 @@ defineFeature(feature, (test) => {
     });
 
     then("I can leave the screen with out errors", () => {
+      filterItemsBlock.find(TopHeader).first().prop('onPressLeft')()
       instance.componentWillUnmount();
       expect(filterItemsBlock).toBeTruthy();
 

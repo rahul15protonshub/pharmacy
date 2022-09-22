@@ -65,16 +65,17 @@ export default class Catalogue extends CatalogueController {
             hideErrorModal={() => this.setState({ customErrorModal: false })}
           />
           <TopHeader
-            onSearchPress={() => this.props.navigation.push("Search")}
-            onCartPress={() => this.props.navigation.push("Shoppingcart")}
-            onMenuPress={() => this.props.navigation.push("Profilebio")}
-            onLogoPress={() => this.props.navigation.push("Home")}
+            onSearchPress={() => this.props.navigation.navigate("Search")}
+            onCartPress={() => this.props.navigation.navigate("Shoppingcart")}
+            onMenuPress={() => this.props.navigation.navigate("Profilebio")}
+            onLogoPress={() => this.props.navigation.navigate("Home")}
             cartCount={this.state.cartLength}
             logoSrc={this.state.brandSettings?.commonLogoSrc}
           />
 
           {!this.state.noDataFound && (
             <ScrollView
+              testID="onscroll"
               data-testid="scrollviewscroll" 
               keyboardShouldPersistTaps="always"
               style={styles.innerContainer}
@@ -106,7 +107,7 @@ export default class Catalogue extends CatalogueController {
                             this.props.navigation.push("ProductDescription", { productData: item })
                           }
                           onAddToCartPress={() => this.addToCart(item)}
-                          onAddToWishlistPress={() => this.onHeartPress(item, "wishlist")}
+                          onAddToWishlistPress={() => this.onHeartPress(item, "newProducts")}
                           onQuantityDecrease={() => this.increaseOrDecreaseCartQuantity(item, -1)}
                           onQuantityIncrease={() => this.increaseOrDecreaseCartQuantity(item, 1)}
                           addToCartLoading={this.state.productsAddingToCart.includes(item.id)}

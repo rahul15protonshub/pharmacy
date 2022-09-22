@@ -154,7 +154,7 @@ export default class Filteritems extends FilteritemsController {
         <TopHeader
           headerTitle={this.state.screenName}
           headerRightIcons={[
-            {
+            { 
               src: NOTIFICATIONS_ICON,
               onPress: () => {
                 this.props.navigation.navigate("Notifications");

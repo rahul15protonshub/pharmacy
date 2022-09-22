@@ -27,6 +27,38 @@ const feature = loadFeature(
 const mockOrderItem = {
   id: "34",
   type: "order",
+  data:{attributes: {
+    id: 34,
+    order_number: "OD00000034",
+    amount: null,
+    account_id: 3,
+    coupon_code_id: 1,
+    applied_discount: 1,
+    delivery_address_id: null,
+    sub_total: "19.99",
+    total: "82.59",
+    order_items: [
+      {
+        id: "33",
+        type: "order_item",
+        attributes: {
+          id: 33,
+          order_id: 34,
+          quantity: 1,
+          unit_price: "19.99",
+          total_price: "19.99",
+          old_unit_price: null,
+          status: "in_cart",
+          catalogue_id: 24,
+          catalogue_variant_id: 24,
+          product_images: [
+            {
+              url: "",
+            },
+          ],
+        },
+      },
+    ],}},
   attributes: {
     id: 34,
     order_number: "OD00000034",
@@ -152,6 +184,23 @@ defineFeature(feature, (test) => {
       instance.getUserProfileApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
+    then("ordersummary will load user profile with errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          message: [{}],
+        }
+      );
+      instance.getUserProfileApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
 
     then("ordersummary failed to load user profile", () => {
       const msgLoadDataErrorRestAPI = new Message(
@@ -191,6 +240,7 @@ defineFeature(feature, (test) => {
         }
       );
       instance.getCartProductId = msgLoadDataAPI.messageId;
+      instance.getShippingChargeCalculation()
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
 
@@ -352,6 +402,7 @@ defineFeature(feature, (test) => {
     });
 
     then("I can leave the screen with out errors", () => {
+      instance.handleBackButtonClick()
       instance.componentWillUnmount();
       expect(ordersummaryBlock).toBeTruthy();
 
@@ -408,6 +459,7 @@ defineFeature(feature, (test) => {
         }
       );
       instance.releaseBlockQuantityApiCallId = msgLoadDataAPI.messageId;
+      instance.releaseBlockQuantitySuccessCallBack()
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
     then("ordersummary releaseShippingChargeCalculationApiCallID without error", () => {
@@ -442,6 +494,7 @@ defineFeature(feature, (test) => {
         }
       );
       instance.shippingChargeCalculationApiCallID = msgLoadDataAPI.messageId;
+      instance.getShippingChargeCalculationSuccessCallBack(mockOrderItem)
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
     //rahul
@@ -477,6 +530,7 @@ defineFeature(feature, (test) => {
         }
       );
       instance.checkZipcodeId = msgLoadDataAPI.messageId;
+      instance.onConfirmingOrder()
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
     then("ordersummary check availablity without error", () => {
@@ -494,6 +548,7 @@ defineFeature(feature, (test) => {
         }
       );
       instance.checkAvailabilityId = msgLoadDataAPI.messageId;
+      instance.checkZipcodeAvailability()
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
     then("ordersummary releaseblock without error", () => {

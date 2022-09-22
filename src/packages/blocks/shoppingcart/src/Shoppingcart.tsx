@@ -452,6 +452,7 @@ export default class Shoppingcart extends ShoppingcartController {
           contentContainerStyle={{ flex: 1 }}
         >
           <TouchableOpacity
+          testID="presscoupon"
             activeOpacity={1}
             onPress={() => {
               if (this.state.isCouponApplied && this.state.isValidCoupon) {
@@ -561,9 +562,7 @@ export default class Shoppingcart extends ShoppingcartController {
           this.setState({ showGuestModal: false });
         }}
       >
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={() => { }}
+        <View
           style={styles.modalContainer1}
         >
           <View style={styles.popup1}>
@@ -582,6 +581,7 @@ export default class Shoppingcart extends ShoppingcartController {
               </TouchableOpacity>
               <View style={styles.verticalLine1} />
               <TouchableOpacity
+              testID="handleguest"
                 style={{ flex: 1, alignItems: "center" }}
                 onPress={() => {
                   this.handleGuest();
@@ -591,7 +591,7 @@ export default class Shoppingcart extends ShoppingcartController {
               </TouchableOpacity>
             </View>
           </View>
-        </TouchableOpacity>
+        </View>
       </Modal>
       // Customizable Area End
     );
@@ -637,6 +637,7 @@ export default class Shoppingcart extends ShoppingcartController {
                 {this.state.showCouponCodeModal && this.renderCouponCodeModal()}
               </ScrollView>
               <TouchableOpacity
+              testID="preslogin"
                 style={styles.loginButton}
                 onPress={() =>
                   this.state.isGuestUser

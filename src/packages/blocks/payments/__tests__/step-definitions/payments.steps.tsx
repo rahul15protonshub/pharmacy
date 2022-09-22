@@ -14,6 +14,8 @@ import Hyperpay from "../../src/Hyperpay";
 import {FloatingTitleTextInputField} from "../../src/FloatingTitleTextInputField"
 import OrderConfirm from "../../src/OrderConfirm";
 import {StripePayments} from "../../src/Stripe.web";
+import StorageProvider from "../../../../framework/src/StorageProvider";
+
 const navigation = require("react-navigation");
 
 const screenProps = {
@@ -30,8 +32,11 @@ const floatingTitleTextInputFieldProps = {
   navigation: navigation,
   id: "Payments",
   isFieldActive: false,
+  value:"test",
+  title:'hello'
 
 }
+const checkout_detail={body:{id:123}}
 const feature = loadFeature("./__tests__/features/payments-scenario.feature");
 
 defineFeature(feature, (test) => {
@@ -65,11 +70,49 @@ defineFeature(feature, (test) => {
       floatingTitleTextInputFieldInst = floatingTitleTextInputField .instance() as FloatingTitleTextInputField;
       orderConfirmInst = orderConfirm.instance() as OrderConfirm;
       stripeInst = stripe.instance() as StripePayments;
+      floatingTitleTextInputFieldInst._returnAnimatedTitleStyles('cardNumber')
     });
     then("Hyperpay will load with out errors", () => {
       expect(hyperpayTrackingDetails).toBeTruthy();
       expect(orderConfirmInst).toBeTruthy();
       expect(stripeInst).toBeTruthy();
+    });
+    
+    then("Hyperpay will apiHyperpayStatusCallId without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      hyperpayInst.apiHyperpayStatusCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("Hyperpay will apiHyperpayStatusCallId with errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          errors:{status:404}
+        }
+      );
+      hyperpayInst.apiHyperpayStatusCallId = msgLoadDataAPI.messageId;
+      hyperpayInst.setState({checkout_detail:checkout_detail})
+      hyperpayInst.hyperPayNativeCall()
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
     then("I can enter text with out errors", () => {
       let textInputComponent = hyperpayTrackingDetails.findWhere(
@@ -89,6 +132,12 @@ defineFeature(feature, (test) => {
         (node) => node.prop("testID") === "textinputCardNumber"
       );
       textInputComponent.simulate("changeText", "textinputCardNumber");
+      // textInputComponent = hyperpayTrackingDetails.findWhere(
+      //   (node) => node.prop("testID") === "otherTextInput"
+      // );
+      // textInputComponent.simulate('focus')
+      // textInputComponent.simulate("changeText", "");
+      
 
       const sessionResponseMessage = new Message(
         getName(MessageEnum.SessionResponseMessage)
@@ -178,6 +227,9 @@ defineFeature(feature, (test) => {
       PayementWrapper = shallow(<Payments {...screenProps} />);
       expect(PayementWrapper).toBeTruthy();
       instance = PayementWrapper.instance() as Payments;
+   
+      instance.componentDidMount()
+     
 
       const getOrdersAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
@@ -263,6 +315,40 @@ defineFeature(feature, (test) => {
       );
       btnRazorPay.simulate("press");
       instance.setState({ razorPayModal: true, name: "Test", Order_Id: "1" });
+    });
+    then("payment will getIdApiCallId without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.getIdApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("payment will getIdApiCallId with errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          errors:{status:404}
+        }
+      );
+      instance.getIdApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
 
     then("Payment should success", () => {
