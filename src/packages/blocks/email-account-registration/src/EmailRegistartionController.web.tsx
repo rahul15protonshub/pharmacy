@@ -598,6 +598,10 @@ export default class EmailAccountRegistrationController extends BlockComponent<
   });
   signUpValidation2 = Yup.object().shape({
     FullName: Yup.string()
+    .matches(
+      /^([A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff\s]*)$/gi,
+          'Name can only contain letters only.'
+      )
       .min(3, "Name is Too Short")
       .required("Name is Required"),
     password: Yup.string()

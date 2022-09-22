@@ -11,7 +11,8 @@ import MessageEnum, {
 import React from "react";
 import {FilterProduct} from "../../src/FilterProduct.web";
 import Filteroptions from "../../src/Filteroptions.web";
-import FilteroptionsList from "../../src/FilteroptionsList.web";
+// import FilteroptionsList from "../../src/FilteroptionsList.web";
+import FilteroptionsListWithRouter, {FilteroptionsList} from "../../src/FilteroptionsList.web";
 import content from "../../../studio-store-ecommerce-components/src/content";
 import ProductListCard from "../../../studio-store-ecommerce-components/src/ProductCard/productListCard";
 
