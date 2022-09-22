@@ -27,45 +27,29 @@ const ProductBox: React.FC<ProductBoxProps> = ({
   wishlistLoading,
   isProductAddtoCart,
 }) => {
-  let productDefaultWeight = (
-    <>
-      {product.attributes.weight ?? ""} {product.attributes.weight_unit ?? ""}
-    </>
-  );
-  let productDefaultPrice = product.attributes.on_sale
-    ? product.attributes.price_including_tax
-    : product.attributes.actual_price_including_tax;
-  let productDefaultNonDiscountedPrice = product.attributes.on_sale
-    ? product.attributes.actual_price_including_tax
-    : null;
-  let productDefaultCartQuantity = product.attributes.cart_quantity;
-  let productDefaultStockQuantity = product.attributes.stock_qty;
-
-  if (product.attributes.default_variant) {
-    const defaultVariantDetails = product.attributes.catalogue_variants.find(
-      (v: any) => parseInt(v.id) === product.attributes.default_variant.id
-    );
-    if (defaultVariantDetails) {
-      productDefaultPrice = defaultVariantDetails.attributes.on_sale
-        ? defaultVariantDetails.attributes.price_including_tax
-        : defaultVariantDetails.attributes.actual_price_including_tax;
-      productDefaultNonDiscountedPrice = defaultVariantDetails.attributes
-        .on_sale
-        ? defaultVariantDetails.attributes.actual_price_including_tax
-        : null;
-      const weightDetails =
-        defaultVariantDetails.attributes.catalogue_variant_properties.find(
-          (p: any) =>
-            p.attributes.variant_name.trim().toLowerCase() === "weight"
-        );
-      if (weightDetails) {
-        productDefaultWeight = <>{weightDetails.attributes.property_name}</>;
-      }
-      productDefaultCartQuantity =
-        defaultVariantDetails.attributes.cart_quantity;
-      productDefaultStockQuantity = defaultVariantDetails.attributes.stock_qty;
+  let productDefaultWeight = <>{product.attributes.weight ?? ""} {product.attributes.weight_unit ?? ""}</>
+    let productDefaultPrice = product.attributes.on_sale ? product.attributes.price_including_tax : product.attributes.actual_price_including_tax
+    let productDefaultNonDiscountedPrice = product.attributes.on_sale ? product.attributes.actual_price_including_tax : null
+    let productDefaultCartQuantity = product.attributes.cart_quantity
+    let productDefaultStockQuantity = product.attributes.stock_qty
+    
+    if (product.attributes.default_variant) {
+        const defaultVariantDetails = product.attributes.catalogue_variants.find((v: any) => (
+            parseInt(v.id) === product.attributes.default_variant.id
+        ))
+        if (defaultVariantDetails) {
+            productDefaultPrice = defaultVariantDetails.attributes.on_sale ? defaultVariantDetails.attributes.price_including_tax : defaultVariantDetails.attributes.actual_price_including_tax
+            productDefaultNonDiscountedPrice = defaultVariantDetails.attributes.on_sale ? defaultVariantDetails.attributes.actual_price_including_tax : null
+            const weightDetails = defaultVariantDetails.attributes.catalogue_variant_properties.find((p: any) => (
+                p.attributes.variant_name.trim().toLowerCase() == "weight"||p.attributes.variant_name.trim().toLowerCase() =="size"||p.attributes.variant_name.trim().toLowerCase() =="colour"||p.attributes.variant_name.trim().toLowerCase() =="pack size"||p.attributes.variant_name.trim().toLowerCase() =="pcs"||p.attributes.variant_name.trim().toLowerCase() =="dummy"    
+            ))
+            if (weightDetails) {
+                productDefaultWeight = <>{weightDetails.attributes.property_name}</>
+            }
+            productDefaultCartQuantity = defaultVariantDetails.attributes.cart_quantity
+            productDefaultStockQuantity = defaultVariantDetails.attributes.stock_qty
+        }
     }
-  }
  
   return (
     <div className="product_card_single">
