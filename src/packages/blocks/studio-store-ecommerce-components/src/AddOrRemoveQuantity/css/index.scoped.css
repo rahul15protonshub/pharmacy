@@ -22,17 +22,17 @@
     text-align: center;
     /* padding: 4px 0 !important; */
 }
-.product-quantity-container .form-control{
+/* .product-quantity-container .form-control{
     text-indent: 10px !important;
-}
+} */
 .product-quantity-container .btn.plus {
     color: white;
     background-color: var(--color-cyan);
     border-color: var(--color-cyan) !important;
 }
 
-@media screen and (max-width:767.4px) {
+/* @media screen and (max-width:767.4px) {
     .product-quantity-container input.form-control{
         text-indent: 0px !important;
     }
-}
+} */
