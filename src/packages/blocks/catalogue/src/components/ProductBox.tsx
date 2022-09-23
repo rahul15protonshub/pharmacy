@@ -16,16 +16,21 @@ interface ProductBoxProps {
     onAddToWishlistPress: () => void;
     onQuantityIncrease: () => void;
     onQuantityDecrease: () => void;
+    disabled?: boolean;
+
 }
 
 interface QuantitySelectorProps {
-    product: any;
+    cartQuantity: number;
+    stockQuantity: number;
     loading: boolean;
+    disabled?: boolean;
     onQuantityIncrease: () => void;
     onQuantityDecrease: () => void;
+
 }
 
-const QuantitySelector: React.FC<QuantitySelectorProps> = ({ product, loading, onQuantityDecrease, onQuantityIncrease }) => {
+const QuantitySelector: React.FC<QuantitySelectorProps> = ({ cartQuantity, stockQuantity, loading, disabled, onQuantityDecrease, onQuantityIncrease }) => {
 
     return (
         <View style={componentStyles.quantitySelectorWrapper}>
@@ -37,15 +42,15 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({ product, loading, o
             </TouchableOpacity>
             {
                 loading ? <ActivityIndicator size="small" color={themeJson.attributes.primary_color} /> :
-                    <Text style={componentStyles.quantityText}>{product.attributes.cart_quantity}</Text>
+                    <Text style={componentStyles.quantityText}>{cartQuantity}</Text>
             }
             <TouchableOpacity testID='productQuantityincrease' style={[
                 componentStyles.quantityMinusPlus,
-                loading || product.attributes.cart_quantity === product.attributes.stock_qty ? { opacity: 0.5 } : {}
+                ((loading || disabled) || cartQuantity >= stockQuantity) ? {opacity: 0.5} : {}
             ]}
-                disabled={loading || product.attributes.cart_quantity === product.attributes.stock_qty}
+            disabled={(loading || disabled) || cartQuantity >= stockQuantity}
                 onPress={() => {
-                    if (product.attributes.cart_quantity < product.attributes.stock_qty) {
+                    if (cartQuantity < stockQuantity) {
                         onQuantityIncrease()
                     }
                 }}>
@@ -58,23 +63,33 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({ product, loading, o
 
 const ProductBox: React.FC<ProductBoxProps> = ({
     product, onAddToCartPress, onAddToWishlistPress, onProductPress, addToCartLoading,
-    onQuantityDecrease, onQuantityIncrease, addToWishlistLoading, currency
+    onQuantityDecrease, onQuantityIncrease, addToWishlistLoading, currency,disabled
+
 }) => {
     let productDefaultWeight = `${product.attributes.weight ?? ""} ${product.attributes.weight_unit ?? ""}`;
     let productDefaultPrice = product.attributes.on_sale ? product.attributes.price_including_tax : product.attributes.actual_price_including_tax
+    let productDefaultNonDiscountedPrice = product.attributes.on_sale ? product.attributes.actual_price_including_tax : null
+    let productDefaultCartQuantity = product.attributes.cart_quantity
+    let productDefaultStockQuantity = product.attributes.stock_qty
+    let productDefaultImage=product.attributes.images?.data[0].attributes.url
+
     if (product.attributes.default_variant) {
         const defaultVariantDetails = product.attributes.catalogue_variants.find((v: any) => (
             parseInt(v.id) === product.attributes.default_variant.id
         ))
         if (defaultVariantDetails) {
             productDefaultPrice = defaultVariantDetails.attributes.on_sale ? defaultVariantDetails.attributes.price_including_tax : defaultVariantDetails.attributes.actual_price_including_tax
+            productDefaultNonDiscountedPrice = defaultVariantDetails.attributes.on_sale ? defaultVariantDetails.attributes.actual_price_including_tax : null
             const weightDetails = defaultVariantDetails.attributes.catalogue_variant_properties.find((p: any) => (
-                p.attributes.variant_name.trim().toLowerCase() === "weight" || p.attributes.variant_name.trim().toLowerCase() === "size"
+                p.attributes.catalogue_id ==defaultVariantDetails.attributes.catalogue_id
             ))
             if (weightDetails) {
                 productDefaultWeight = weightDetails.attributes.property_name
             }
         }
+        productDefaultImage=defaultVariantDetails.attributes.images?.data[0].attributes.url
+        productDefaultCartQuantity = defaultVariantDetails.attributes.cart_quantity
+        productDefaultStockQuantity = defaultVariantDetails.attributes.stock_qty
     }
 
     return (
@@ -87,7 +102,7 @@ const ProductBox: React.FC<ProductBoxProps> = ({
                 }
             </TouchableOpacity>
             <TouchableOpacity testID='productDetails' style={componentStyles.productInfoWrapper} onPress={onProductPress}>
-                <FastImage source={{ uri: product.attributes.images?.data[0].attributes.url }}
+                <FastImage source={{ uri: productDefaultImage }}
                     style={componentStyles.productImage}
                 />
                 <Text style={componentStyles.productTitleText} numberOfLines={1}>{product.attributes.name}</Text>
@@ -111,9 +126,13 @@ const ProductBox: React.FC<ProductBoxProps> = ({
             </TouchableOpacity>
             {
                 product.attributes.cart_quantity ? (
-                    <QuantitySelector product={product} loading={addToCartLoading}
-                        onQuantityDecrease={onQuantityDecrease}
-                        onQuantityIncrease={onQuantityIncrease}
+                    <QuantitySelector cartQuantity={productDefaultCartQuantity}
+                    stockQuantity={productDefaultStockQuantity}
+                    loading={addToCartLoading}
+                    onQuantityDecrease={onQuantityDecrease}
+                    onQuantityIncrease={onQuantityIncrease}
+                    disabled={disabled}
+
                     />
                 ) : (
                     product.attributes.stock_qty ? <TouchableOpacity testID='productBottomAddtocart' style={componentStyles.addToCartButtonWrapper} onPress={onAddToCartPress}

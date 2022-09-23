@@ -813,19 +813,30 @@ export default class ProductDescriptionController extends BlockComponent<
         (cat: any) =>
           cat.id == this.props.navigation.state.params?.catalogue_variant_id
       );
-    const isFromCart = this.props.navigation.state.params?.catalogue_variant_id;
-    const productData = responseJson?.data.attributes;
-    let isProductAvailable = false;
-    if (responseJson?.data.attributes?.catalogue_variants?.length > 0) {
-      if (isFromCart) {
+      const isFromCart = this.props.navigation.state.params?.catalogue_variant_id;
+      const productData = responseJson?.data.attributes;
+      let isProductAvailable = false;
+      let isVariantProduct = productData.catalogue_variants.length > 0;
+  
+      let defaultSelectedAttributes: any = {}
+      if (isVariantProduct) {
+        if (isFromCart) {
+          isProductAvailable = true;
+        }
+        else if (productData.default_variant) {
+          const defaultVariantObject = productData.catalogue_variants.find((v: any)=> Number(v.id) == productData.default_variant.id);
+          if (defaultVariantObject) { 
+            defaultVariantObject.attributes.catalogue_variant_properties.forEach((cvp: any) => {
+              defaultSelectedAttributes[cvp.attributes.variant_name] = {
+                name: cvp.attributes.property_name,
+                variant_property_id: cvp.attributes.variant_property_id,
+              };
+            })
+          }
+        }
+      } else {
         isProductAvailable = true;
       }
-    } else {
-      isProductAvailable = true;
-    }
-    let isVariantProduct =
-      responseJson?.data?.attributes?.catalogue_variants.length > 0;
-
     this.setState(
       {
         isFetching: false,
@@ -868,12 +879,13 @@ export default class ProductDescriptionController extends BlockComponent<
           .subscription_quantity
           ? true
           : false,
+          selectedAttributes: defaultSelectedAttributes
       },
       () => {
-        // if (isFromCart) {
-        //   this.setDefaultVarient();
-        // }
-        this.setDefaultVarient();
+        if (isFromCart) {
+          this.setDefaultVarient();
+        }
+        // this.setDefaultVarient();
         this.setSubscriptionData();
         this.setSelectedProduct();
       }
@@ -991,7 +1003,7 @@ export default class ProductDescriptionController extends BlockComponent<
     const { catalogue_variants } = attributes;
     if (catalogue_variants?.length > 0) {
       catalogue_variants?.map((varient: any, index: any) => {
-        if (varient.attributes.is_default == true) {
+        if (varient.id == this.state?.catalogue_variant_id) {
           const { images } = varient?.attributes;
           let isVarientImage = images?.data?.length > 0;
           let selectedAttributes = {};

@@ -402,7 +402,7 @@ export default class Shoppingcart extends ShoppingcartController {
             {this.state.isValidCoupon &&
               <>
                 <View style={[styles.tax, { marginHorizontal: mobW * 0.05, marginTop: verticalScale(24) }]}>
-                  <Text style={styles.discountTxt}>Discount</Text>
+                  <Text style={styles.discountTxt}>Coupon Discount</Text>
                   <View style={styles.discountRightTxt}>
                     <TouchableOpacity onPress={() => this.removeCoupon()}>
                       <FastImage

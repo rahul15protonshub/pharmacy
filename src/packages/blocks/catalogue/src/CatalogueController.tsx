@@ -944,7 +944,7 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
 
   };
 
-  putItemToCart = async (cartId: any, product: any, type: string) => {
+  putItemToCart = async (cartId: any, product: any, type: string,catalogue_variant_id:any) => {
     const header = {
       "Content-Type": configJSON.productApiContentType,
       token: this.state.token,
@@ -953,10 +953,10 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
     if (type == "subscription") {
       httpBody = this.state.SubscriptionRequestBody;
     } else {
-      if (product.catalogue_id && this.state.catalogue_variant_id) {
+      if (product?.id && catalogue_variant_id) {
         httpBody = {
-          catalogue_id: product.catalogue_id,
-          catalogue_variant_id: parseInt(this.state.catalogue_variant_id),
+          catalogue_id: product.id,
+          catalogue_variant_id: parseInt(catalogue_variant_id),
           quantity: this.state.itemQuantity,
         };
         await StorageProvider.set(
@@ -1010,7 +1010,7 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
     return true;
   };
 
-  postCreateCart = async (product: any) => {
+  postCreateCart = async (product: any,catalogue_variant_id:any) => {
     const { productDetails } = this.state;
     const header = {
       "Content-Type": configJSON.productApiContentType,
@@ -1020,10 +1020,10 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
     if (product == "subscription") {
       httpBody = this.state.SubscriptionRequestBody;
     } else {
-      if (product?.catalogue_id) {
+      if (catalogue_variant_id) {
         httpBody = {
-          catalogue_id: product.catalogue_id,
-          catalogue_variant_id: parseInt(this.state.catalogue_variant_id),
+          catalogue_id: product.id,
+          catalogue_variant_id: parseInt(catalogue_variant_id),
           quantity: this.state.itemQuantity ?? 1,
         };
       } else {
@@ -1064,21 +1064,24 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
     return true;
   };
 
-  addToCart = (product: any) => {
+  addToCart = (product: any, variantId?: number) => {
     this.setState({
       productsAddingToCart: [...this.state.productsAddingToCart, product.id],
+      catalogue_variant_id: variantId,
     });
     if (this.state.cartId) {
-      this.putItemToCart(this.state.cartId, product, "")
+      this.putItemToCart(this.state.cartId, product, "",variantId)
     }
     else {
-      this.postCreateCart(product);
+      this.postCreateCart(product,variantId);
     }
   };
 
-  increaseOrDecreaseCartQuantity = async (product: any, increment: number) => {
+  increaseOrDecreaseCartQuantity = async (product: any, increment: number, variantId?: number) => {
     this.setState({
-      productsAddingToCart: [...this.state.productsAddingToCart, product.id]
+      productsAddingToCart: [...this.state.productsAddingToCart, product.id],
+      productDetails: product,
+      catalogue_variant_id: variantId,
     });
     const header = {
       "Content-Type": configJSON.productApiContentType,

@@ -106,10 +106,10 @@ export default class Catalogue extends CatalogueController {
                           onProductPress={() =>
                             this.props.navigation.push("ProductDescription", { productData: item })
                           }
-                          onAddToCartPress={() => this.addToCart(item)}
+                          onAddToCartPress={() => this.addToCart(item,item.attributes.default_variant?.id)}
                           onAddToWishlistPress={() => this.onHeartPress(item, "newProducts")}
-                          onQuantityDecrease={() => this.increaseOrDecreaseCartQuantity(item, -1)}
-                          onQuantityIncrease={() => this.increaseOrDecreaseCartQuantity(item, 1)}
+                          onQuantityDecrease={() => this.increaseOrDecreaseCartQuantity(item, -1,item.attributes.default_variant?.id)}
+                          onQuantityIncrease={() => this.increaseOrDecreaseCartQuantity(item, 1,item.attributes.default_variant?.id)}
                           addToCartLoading={this.state.productsAddingToCart.includes(item.id)}
                           addToWishlistLoading={this.state.productWishlisting === item.id}
                           currency={this.state.brandSettings?.ExtraFields.currency_type}
