@@ -102,9 +102,9 @@ export default class ForgotPasswordController extends BlockComponent<
             });
             if (responseJson?.meta) {
               // @ts-ignore
-              // window.notify([
-              //   { message: responseJson?.meta?.message, type: "success" },
-              // ]);
+              window.notify([
+                { message: responseJson?.meta?.message, type: "success" },
+              ]);
             }
           }
           if (responseJson && responseJson.errors) {
