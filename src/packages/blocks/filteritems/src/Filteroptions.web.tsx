@@ -33,9 +33,9 @@ export default class Filteroptions extends FilteroptionsController {
     return (
       // Customizable Area Start
       <div>
-        <div style={{ width: "92%", margin: "0 auto" }}>
+        <div style={{width:'92%',margin:'0 auto'}}>
           <div className="pageroute">
-            <Link style={{ textDecoration: "none" }} to="/home-page">
+            <Link style={{ textDecoration:'none' }} to="/home-page">
               <span
                 className="cart-pg-home w3-hover-opacity"
                 style={{ cursor: "pointer" }}
@@ -46,50 +46,36 @@ export default class Filteroptions extends FilteroptionsController {
             {" > "}
             <span className="currpage">{content.shop}</span>
           </div>
-          <div
-            onClick={this.ytmbFilter}
-            className={this.state.YtMbFilter ? "overlay" : ""}
-          >
-            <div
-              id="mySidenav"
-              className="sidenav"
-              style={this.state.YtMbFilter ? {} : { width: "0%" }}
-            >
-              <div
-                className={
-                  this.state.YtMbFilter ? "ytMbfilteropen" : "yt-cm-lt-col "
-                }
-              >
-                <FilteroptionsList
-                  mbOpenState={this.state.YtMbFilter}
-                  cancel={this.ytmbFilter}
-                />
-              </div>
+          <div onClick={this.ytmbFilter} className={this.state.YtMbFilter ? "overlay":""}>
+          <div id="mySidenav" className="sidenav" style={{display: this.state.YtMbFilter ? "block" : "none"}}>
+                  <FilteroptionsList
+                    mbOpenState={this.state.YtMbFilter}
+                    cancel={this.ytmbFilter}
+                  />
+                 
             </div>
           </div>
-
-          <div className="filterpage1">
-            <Row className="yt-cm-row">
-              <Col lg={3} className="desktopFilter">
-                <FilteroptionsList
-                  mbOpenState={this.state.YtMbFilter}
-                  cancel={this.ytmbFilter}
-                />
-                {/* <div
-                    className="w3-overlay w3-show"
-                    style={{ zIndex: -1, backgroundColor: "transparent" }}
-                    onClick={() => this.ytmbFilter()}
-                  /> */}
-              </Col>
-              <Col xs={12} sm={12} lg={9} className="1yt-cm-rt-col">
-                <div className="d-flex flex-column justify-content-between h-100">
-                  <div id="SingelnewProducts">
-                    <FilterProduct openFilter={this.ytmbFilter} />
+           
+            <div className="filterpage1">
+              <Row className="yt-cm-row">
+                <Col
+                  lg={3}
+                  className="desktopFilter"
+                >
+                  <FilteroptionsList
+                    mbOpenState={this.state.YtMbFilter}
+                    cancel={this.ytmbFilter}
+                  />
+                </Col>
+                <Col xs={12} xl={9} className="1yt-cm-rt-col">
+                  <div className="d-flex flex-column justify-content-between h-100">
+                    <div id="SingelnewProducts">
+                      <FilterProduct openFilter={this.ytmbFilter} />
+                    </div>
                   </div>
-                </div>
-              </Col>
-            </Row>
-          </div>
+                </Col>
+              </Row>
+            </div>
         </div>
       </div>
       // Customizable Area End
