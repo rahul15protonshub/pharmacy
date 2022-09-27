@@ -463,7 +463,7 @@ class ProfileBlock extends ProfileWebController {
                           <>
                             <div className="order-data-scroll">
                               {map(
-                                this.state.orders,
+                                this.state.orders.reverse(),
                                 (ordr: any, index: number) => {
                                   return (
                                     <SingleOrder

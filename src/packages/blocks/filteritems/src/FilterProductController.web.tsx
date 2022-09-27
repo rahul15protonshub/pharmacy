@@ -62,19 +62,7 @@ interface S {
   // Customizable Area Start
   productDetails?:any;
   // presentFetchUrl: string;
-  isLoaderWithoutFilters?: boolean;
   totalPage: number;
-  isProductAddtoCart:boolean;
-  productsAddingToCart: number[];
-  productDescriptionLoader: boolean;
-  deleteProduct: boolean;
-  itemQuantity: any;
-  SubscriptionRequestBody?: any;
-  availableAttributes?: any;
-  currentImage: any;
-  subscriptionqty?: any;
-  isSubscribeClicked?: boolean;
-  cartDetails: any;
   // Customizable Area End
 }
 
@@ -99,9 +87,6 @@ export default class FilteritemsController extends BlockComponent<
   postCreateCartApiCallId: string = "";
   // Customizable Area Start
   increaseOrDecreaseCartQuantityApiCallId: string = "";
-  getProductDetailsApiCallId: string = "";
-  getCartHasProductAPICallID: string = "";
-  putItemToCartApiCallId: string = "";
   // Customizable Area End
   constructor(props: Props) {
     super(props);
@@ -186,18 +171,8 @@ export default class FilteritemsController extends BlockComponent<
       prevUrl: "",
       Url: "",
       qParams: new URLSearchParams(window.location.search),
-      loading: false,
-      totalPage: 0,
+      totalPage: 1,
       // Customizable Area Start
-      isProductAddtoCart:false,
-      productsAddingToCart:[],
-      productDescriptionLoader: false,
-      deleteProduct:false,
-      itemQuantity:1,
-      currentImage: "",
-      subscriptionqty: 1,
-      isSubscribeClicked:false,
-      cartDetails: null,
       // presentFetchUrl: ""
       // Customizable Area End
     };
@@ -207,7 +182,7 @@ export default class FilteritemsController extends BlockComponent<
   }
 
   removeFilter = (data, type, itemId) => {
-    console.log('object :>> ', data, type, itemId);
+    const urlSearch = new URLSearchParams(window.location.search);
     if (type == "category") {
       Object.keys(JSON.parse(localStorage.getItem("subCategory") || "{}"))
         .length != 0 &&
@@ -217,12 +192,34 @@ export default class FilteritemsController extends BlockComponent<
       const removeFav = this.state.filterData.category.filter((item) => {
         return item.attributes.name !== data.name;
       });
+      let filterSubCategoryArray = [];
+      let filterCategoryArray = [];
+      removeFav.map((item) => {
+        filterCategoryArray?.push(item?.attributes?.id);
+        item?.attributes?.sub_categories?.map((sub) => {
+          if (sub?.checked) {
+            filterSubCategoryArray.push(sub?.id);
+          }
+        });
+      });
+      urlSearch.delete("q[category_id][]");
+      urlSearch.delete("q[sub_category_id][]");
+      !!filterCategoryArray.join(",")?.length &&
+        urlSearch.append("q[category_id][]", filterCategoryArray.join(","));
+      !!filterSubCategoryArray.join(",")?.length &&
+        urlSearch.append(
+          "q[sub_category_id][]",
+          filterSubCategoryArray.join(",")
+        );
       this.setState(
         {
           filterData: { ...this.state.filterData, category: removeFav },
         },
         () => {
           // this.getProductList()
+          this.props?.history?.replace(
+            `/Filteroptions?${decodeURIComponent(urlSearch.toString())}`
+          );
         }
       );
       localStorage.removeItem("category");
@@ -238,15 +235,21 @@ export default class FilteritemsController extends BlockComponent<
     }
 
     if (type == "brand") {
-      const removeFav = this.state.filterData.brand.filter((item) => {
+      const removeBrand = this.state.filterData.brand.filter((item) => {
         return item.attributes.name !== data.name;
       });
       this.setState(
         {
-          filterData: { ...this.state.filterData, brand: removeFav },
+          filterData: { ...this.state.filterData, brand: removeBrand },
         },
         () => {
-          // this.getProductList()
+          urlSearch.delete("q[brand_id][]");
+          if (this.state.filterData.brand?.length > 0) {
+            urlSearch.append("q[brand_id][]", this.state.filterData.brand.map(b => b.id).join(","));
+          }
+          this.props?.history?.replace(
+            `/Filteroptions?${decodeURIComponent(urlSearch.toString())}`
+          );
         }
       );
 
@@ -269,7 +272,7 @@ export default class FilteritemsController extends BlockComponent<
           filterData: { ...this.state.filterData, tag: removeFav },
         },
         () => {
-          // this.getProductList()
+          this.getProductList()
         }
       );
 
@@ -286,10 +289,56 @@ export default class FilteritemsController extends BlockComponent<
 
   async componentDidMount() {
     // Object.keys(JSON.parse(localStorage.getItem("subCategory") || '{}')).length == 0 &&
+    this.getIsCartCreated();
     this.getProductList();
-    this.getIsCartCreated()
-    // urlSearch.get(("q[name]") && this.getProductList();
+    window.addEventListener("scroll", this.handleScroll, true);
+    let prevUrl = window.location.search;
+    this.setState({ prevUrl }, () => {
+      this.unListen = this.props.history?.listen((location, action) => {
+        this.state.prevUrl !== location.search &&
+          this.clearAllFilters(location);
+
+        let lastFour = location.search.substring(location.search.length - 4);
+        this.setState({ prevUrl: location.search });
+        if (lastFour === "desc" || lastFour === "true") {
+          this.setState({ page: 1 });
+        }
+      });
+    });
   }
+
+  async componentWillUnmount() {
+    super.componentWillUnmount();
+    window.removeEventListener("scroll", this.handleScroll);
+    this.unListen();
+  }
+
+  clearAllFilters = (location) => {
+    if (
+      location.search === "?&page=1&per_page=16&sort[order_by]=sold&sort[direction]=desc" ||
+      location.search === "?&page=1&per_page=16&sort[order_by]=created_at&sort[direction]=desc&[newArrivals]=true"
+    ) {
+      window.location = `/Filteroptions${location.search}`;
+      localStorage.removeItem("searchQuery");
+      localStorage.removeItem("category");
+      localStorage.removeItem("subCategory");
+      this.setState({
+        searchQuery: "",
+        filterProducList: [],
+        page: 1,
+      });
+    }
+  };
+
+  handleScroll = () => {
+    const position = document.documentElement.scrollHeight - document.documentElement.scrollTop
+    const cHeight = document.documentElement.clientHeight
+    if (position <= cHeight + 100) {
+      if (!this.state.loading && this.state.totalPage > this.state.page) {
+        this.setState({ page: this.state.page + 1 }, this.getProductList);
+      }
+    }
+  };
 
   componentWillReceiveProps(nextProps: any) {
     const fs = this.state.filterProducList;
@@ -307,14 +356,6 @@ export default class FilteritemsController extends BlockComponent<
     if (this.props.location.search != nextProps.location.search) {
       this.getProductList();
     }
-    // if (!isEmpty(localStorage.getItem("searchQuery")) || !isEmpty(localStorage.getItem("newest"))) {
-    //   setTimeout(() => {
-    //     this.getProductList();
-    //   }, 300)
-    // }
-    // if (Object.keys(JSON.parse(localStorage.getItem("subCategory") || '{}')).length != 0) {
-    //   this.getProductList();
-    // }
   }
 
   async receive(from: string, message: Message) {
@@ -323,6 +364,7 @@ export default class FilteritemsController extends BlockComponent<
       searchQuery: localStorage.getItem("searchQuery"),
       newest: localStorage.getItem("newest"),
     });
+
     if (getName(MessageEnum.FilterCheckedMessage) === message.id) {
       const FilterData = message.getData(
         getName(MessageEnum.FilterCheckedMessageData)
@@ -368,108 +410,37 @@ export default class FilteritemsController extends BlockComponent<
                 filterProducList: [],
               });
             }
-            productData && productData.length == 16
-              ? this.setState({ loadMoreShow: true })
-              : this.setState({ loadMoreShow: false });
-
-            if (responseJson) {
-              this.setState({ loading: false });
-            }
-            productData &&
+            if (productData) {
               this.setState({
                 loading: false,
-                filterProducList: [...productData],
-                totalPage: responseJson.meta.pagination.total_pages,
+                filterProducList: this.state.page === 1 ? productData : [...this.state?.filterProducList, ...productData],
+                totalPage: responseJson.meta.pagination.total_pages
               });
-            // productData && this.setState({ loading: false, filterProducList: [...this.state?.filterProducList, ...productData] });
+            }
           }
 
-          // Sahib preet---------------------start
-             //update cart quantity
-
-             if (apiRequestCallId === this.putUpdateCartQuantityApiCallId) {
-              this.setState({
-                itemQuantity:
-                  responseJson.data.attributes.order_items[0].attributes
-                    .quantity,
-                productDescriptionLoader: false,
-              });
-              this.getProductDetails();
-              //@ts-ignore
-              window.notify([
-                { message: "Cart updated successfully ", type: "success" },
-              ]);
-            }
-
-             //increase or decrease cart quantity
-
-             if (
-              apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId
-            ) {
-              if(responseJson.data){
-              this.state.filterProducList?.forEach((product: any) => {
-                const orderItem = responseJson.data.attributes.order_items.find(
-                  (item: any) =>
-                    parseInt(product.id) === item.attributes.catalogue_id
-                );
-                product.attributes.cart_quantity = orderItem
-                  ? orderItem.attributes.quantity
-                  : null;
-              });
-              this.setState({
-                productDescriptionLoader: false,
-                productsAddingToCart: [],
-                filterProducList: this.state.filterProducList
-                  ? [...this.state.filterProducList]
-                  : [],
-              });
-              if (this.state.deleteProduct) {
-                const cart_length = parseInt(
-                  localStorage.getItem("cart_length") ?? "0"
-                );
-                localStorage.setItem(
-                  "cart_length",
-                  (cart_length - 1).toString()
-                );
-                this.getIsCartCreated();
-                this.getProductDetails();
-                this.getProductList();
-                this.setState({
-                  deleteProduct: false,
-                });
-              }
-
-              //this.getFilteredProducts();
-              this.getProductDetails()
-
-              //@ts-ignore
-              window.notify([
-                { message: "Quantity changed successfully", type: "success" },
-              ]);
-            }else{
-              this.setState({
-                isProductAddtoCart:false
-              })
-            }
-            }
-          // Sahib preet---------------------end
-          
           //create wishlist
           if (apiRequestCallId === this.postWishlistApiCallId) {
-            // this.setState({ filterProducList: [] });
-            // window.notify([{ message: responseJson.message, type: "success" }]);
-            // @ts-ignore
-            const wishlist_length = parseInt(
-              localStorage.getItem("wishlist_len")
-            );
-            // @ts-ignore
-            localStorage.setItem("wishlist_len", wishlist_length + 1);
+            if(responseJson.message !==  "The item has been added to the wishlist"){
+              window.notify([{ message: responseJson.message, type: "error" }]);
+            }
+
+            this.state.filterProducList.forEach(item => {
+              if (item.wishlistLoading) {
+                item.wishlistLoading = false;
+              }
+            })
+
+            this.setState({filterProducList: [...this.state.filterProducList]});
+            const wishlist_count = responseJson?.data?.wishlist?.data?.attributes?.wishlist_count || 0;
+            
+            localStorage.setItem("wishlist_len", wishlist_count);
             var wishlistupdateMessage = new Message(
               getName(MessageEnum.UpdateWishlist)
             );
             wishlistupdateMessage.addData(
               getName(MessageEnum.UpdateWishlistLen),
-              wishlist_length + 1
+              wishlist_count
             );
             runEngine.sendMessage(
               wishlistupdateMessage.id,
@@ -483,21 +454,22 @@ export default class FilteritemsController extends BlockComponent<
 
           //delete wishlist
           if (apiRequestCallId === this.delWishlistApiCallId) {
-            // this.setState({ filterProducList: [] });
-            // window.notify([{ message: responseJson.message, type: "success" }]);
-            // this.getProductList();
-            // @ts-ignore
-            const wishlist_length = parseInt(
-              localStorage.getItem("wishlist_len")
-            );
-            // @ts-ignore
-            localStorage.setItem("wishlist_len", wishlist_length - 1);
+            this.state.filterProducList.forEach(item => {
+              if (item.wishlistLoading) {
+                item.wishlistLoading = false;
+              }
+            })
+            this.setState({filterProducList: [...this.state.filterProducList]});
+            
+            const wishlist_count = responseJson?.data?.wishlist?.data?.attributes?.wishlist_count || 0;
+            
+            localStorage.setItem("wishlist_len", wishlist_count);
             var wishlistupdateMessage = new Message(
               getName(MessageEnum.UpdateWishlist)
             );
             wishlistupdateMessage.addData(
               getName(MessageEnum.UpdateWishlistLen),
-              wishlist_length - 1
+              wishlist_count
             );
             runEngine.sendMessage(
               wishlistupdateMessage.id,
@@ -510,125 +482,90 @@ export default class FilteritemsController extends BlockComponent<
 
           //product details
           if (apiRequestCallId === this.getProductDetailsApiCallId) {
-            let dat: any;
-            let { cart_items, catalogue_variants } =
-              responseJson.data.attributes;
-            if (
-              cart_items &&
-              catalogue_variants &&
-              catalogue_variants.length > 0
-            ) {
-              catalogue_variants.map((ele: any, ind: number) => {
-                // @ts-ignore
-                if (Object.keys(cart_items).includes(ele.id)) {
-                  ele.attributes.catalogue_variant_properties &&
-                    ele.attributes.catalogue_variant_properties.map(
-                      (itema: any, ids: number) => {
-                        dat = {
-                          ...dat,
-                          [itema.attributes.variant_name]: [
-                            itema.attributes.property_name,
-                          ],
-                        };
-                      }
-                    );
-                }
-              });
-              this.setState({
-                available_sizes: dat,
-              });
-            }
             this.setState({
-              availableAttributes:
-                responseJson?.data.attributes?.product_attributes,
-              productDetails: responseJson?.data,
-              productDescriptionLoader: false,
-              itemQuantity: responseJson?.data.attributes?.cart_quantity || 1,
-              currentImage: this.setCurrentImage(
-                responseJson?.data.attributes?.images?.data
-              ),
+              productDetails: responseJson.data,
+              itemQuantity: 1,
             });
-            if (
-              responseJson?.data.attributes?.is_subscription_available &&
-              responseJson?.data.attributes?.subscription_quantity
-            ) {
-              this.setState({
-                subscriptionqty:
-                  responseJson?.data.attributes?.subscription_quantity,
-              });
-            }
-            if (localStorage.getItem("catalogue_variant_id")) {
-              this.setState({
-                catalogue_variant_id: localStorage.getItem(
-                  "catalogue_variant_id"
-                ),
-              });
-              localStorage.removeItem("catalogue_variant_id");
-            }
-            this.getCartHasProduct();
             this.toSetDefaultVariant();
           }
 
-            //getCartHasAProducts
-            if (apiRequestCallId === this.getCartHasProductAPICallID) {
-              if (responseJson.data) {
-                this.setState({
-                  cartProduct: responseJson.data,
-                });
-              }
-            }
-
           // add items to the cart
           if (apiRequestCallId === this.putItemToCartApiCallId) {
-            this.setState({
-              isProductAddtoCart:false
-            })
             if (!responseJson.errors) {
               this.state.filterProducList?.forEach((product: any) => {
-                const orderItem = responseJson.data.attributes.order_items.find(
-                  (item: any) =>
+                product.addToCartLoading = false;
+                if (product.attributes.default_variant) {
+                  const orderItem = responseJson.data.attributes.order_items.find((item: any) => (
+                    parseInt(product.id) === item.attributes.catalogue_id && product.attributes.default_variant.id === item.attributes.catalogue_variant_id
+                  ));
+                  const defaultVariantDetails = product.attributes.catalogue_variants.find((v: any) => (
+                      parseInt(v.id) === product.attributes.default_variant.id
+                  ))
+
+                  if (!defaultVariantDetails.attributes.cart_quantity) {
+                    defaultVariantDetails.attributes.cart_quantity = orderItem ? orderItem.attributes.quantity ?? 1 : null;
+                  }
+                }
+                else {
+                  const orderItem = responseJson.data.attributes.order_items.find((item: any) => (
                     parseInt(product.id) === item.attributes.catalogue_id
-                );
-                product.attributes.cart_quantity = orderItem
-                  ? orderItem.attributes.quantity ?? 1
-                  : null;
-              });
+                  ));
+                  if (!product.attributes.cart_quantity) {
+                    product.attributes.cart_quantity = orderItem ? orderItem.attributes.quantity ?? 1 : null;
+                  }
+                }
+              })
+
               this.setState({
-                isSubscribeClicked: false,
-                cartDetails: [responseJson.data],
                 cartId: responseJson.data.id,
-                productsAddingToCart: [],
-                filterProducList: this.state.filterProducList
-                  ? [...this.state.filterProducList]
-                  : [],
-              });
-              // @ts-ignore
-              window.notify([
-                { message: "Item added in cart successfully", type: "success" },
-              ]);
-              this.setState({ filterProducList: [] });
-              // @ts-ignore
+                filterProducList: [...this.state.filterProducList],
+              })
 
-              const cart_length = parseInt(localStorage.getItem("cart_length"));
-
-              // @ts-ignore
-              localStorage.setItem("cart_length", cart_length + 1);
-              window.location.pathname.endsWith("/Filteroptions")
-                ? ""
-                : this.state.catalogue_id && this.getProductList();
+              localStorage.setItem("cart_length", responseJson.data.attributes.order_items.length);
             }
-            this.getProductList();
-            this.getIsCartCreated();
-            this.getProductDetails();
-
             if (responseJson?.errors) {
+              this.state.filterProducList?.forEach((product: any) => {
+                product.addToCartLoading = false;
+              })
               this.setState({
-                isProductAddtoCart:false
+                filterProducList: [...this.state.filterProducList],
               })
               window.notify([
                 { message: responseJson.errors[0].order, type: "error" },
               ]);
             }
+          }
+
+          if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
+
+            if (!responseJson.errors) {
+              this.state.filterProducList?.forEach((product: any) => {
+                product.addToCartLoading = false;
+                if (product.attributes.default_variant) {
+                  const orderItem = responseJson.data.attributes.order_items.find((item: any) => (
+                    parseInt(product.id) === item.attributes.catalogue_id && product.attributes.default_variant.id === item.attributes.catalogue_variant_id
+                  ));
+                  const defaultVariantDetails = product.attributes.catalogue_variants.find((v: any) => (
+                      parseInt(v.id) === product.attributes.default_variant.id
+                  ))
+                  defaultVariantDetails.attributes.cart_quantity = orderItem ? orderItem.attributes.quantity : null;
+                  
+                }
+                else {
+                  const orderItem = responseJson.data.attributes.order_items.find((item: any) => (
+                    parseInt(product.id) === item.attributes.catalogue_id
+                  ));
+                  product.attributes.cart_quantity = orderItem ? orderItem.attributes.quantity : null;
+                }
+              })
+              
+              this.setState({
+                filterProducList: this.state.filterProducList ? [...this.state.filterProducList] : [],
+              });
+          
+              localStorage.setItem("cart_length", responseJson.data.attributes.order_items.length);
+            }
+
           }
 
           // add to cart
@@ -636,56 +573,74 @@ export default class FilteritemsController extends BlockComponent<
           if (apiRequestCallId === this.GetIsCartCreatedApiCallId) {
             responseJson?.data &&
               responseJson?.data?.length > 0 &&
-              (this.setState({
+              this.setState({
                 cartId: responseJson?.data[0]?.id,
-                cartDetails: responseJson?.data,
-              }),
-              localStorage.setItem(
-                "cart_length",
-                responseJson?.data[0]?.attributes?.order_items?.length
-              ))
+              });
           }
 
           /// creating cart
-          if (apiRequestCallId === this.postCreateCartApiCallId) { 
+          if (apiRequestCallId === this.postCreateCartApiCallId) {
             if (responseJson?.data) {
-              this.setState({
-                isProductAddtoCart:false
+              product.addToCartLoading = false;
+              this.state.filterProducList?.forEach((product: any) => {
+
+                if (product.attributes.default_variant) {
+                  const orderItem = responseJson.data.attributes.order_items.find((item: any) => (
+                    parseInt(product.id) === item.attributes.catalogue_id && product.attributes.default_variant.id === item.attributes.catalogue_variant_id
+                  ));
+                  const defaultVariantDetails = product.attributes.catalogue_variants.find((v: any) => (
+                      parseInt(v.id) === product.attributes.default_variant.id
+                  ))
+                  defaultVariantDetails.attributes.cart_quantity = orderItem ? orderItem.attributes.quantity : null;
+                }
+                else {
+                  const orderItem = responseJson.data.attributes.order_items.find((item: any) => parseInt(product.id) === item.attributes.catalogue_id);
+                  if (!product.attributes.cart_quantity) {
+                    product.attributes.cart_quantity = orderItem ? orderItem.attributes.quantity ?? 1 : null;
+                  }
+                }
               })
-              //@ts-ignore
-              window.notify([
-                { message: "Item added in cart successfully", type: "success" },
-              ]);
-              // this.setState({ filterProducList: [] });
-              this.getIsCartCreated();
-              this.getProductDetails();
-              // @ts-ignore
-              const cart_length = parseInt(localStorage.getItem("cart_length"));
-              // @ts-ignore
-              this.getProductList();
-              localStorage.setItem("cart_length", cart_length + 1);
+              
+              localStorage.setItem("cart_length", responseJson.data.attributes.order_items.length);
+
               this.setState({
-                isSubscribeClicked: false,
-                productDescriptionLoader: false,
-                productsAddingToCart: [],
-              });
+                cartId: responseJson.data.id,
+                filterProducList: [...this.state.filterProducList],
+              })
             }
             if (responseJson?.errors) {
+              this.state.filterProducList?.forEach((product: any) => {
+                product.addToCartLoading = false;
+              })
+              this.setState({
+                filterProducList: [...this.state.filterProducList],
+              })
               window.notify([
                 { message: responseJson.errors[0].order, type: "error" },
               ]);
             }
           }
-        }
-        if (responseJson?.errors) {
-          var errorReponse = message.getData(
-            getName(MessageEnum.RestAPIResponceErrorMessage)
-          );
 
-          const errors = responseJson?.errors;
-          this.parseApiCatchErrorResponse(errorReponse);
-          errors;
+          if (responseJson?.errors) {
+            var errorReponse = message.getData(
+              getName(MessageEnum.RestAPIResponceErrorMessage)
+            );
+  
+            const errors = responseJson?.errors;
+            this.parseApiCatchErrorResponse(errorReponse);
+            errors;
+          }
+
+          if (responseJson?.message) {
+            if (responseJson?.message === "No product found") {
+              this.setState({
+                loading: false,
+                filterProducList: []
+              })
+            }
+          }
         }
+        
       } else {
         this.setState({
           invalidTokenMessageRecieved: true,
@@ -707,6 +662,7 @@ export default class FilteritemsController extends BlockComponent<
         ...temp.attributes,
         wishlisted: !temp.attributes.wishlisted,
       },
+      wishlistLoading: true
     };
     filterProducList[index] = temp;
     this.setState(
@@ -766,6 +722,7 @@ export default class FilteritemsController extends BlockComponent<
         ...temp.attributes,
         wishlisted: !temp.attributes.wishlisted,
       },
+      wishlistLoading: true
     };
     filterProducList[index] = temp;
     this.setState(
@@ -805,83 +762,144 @@ export default class FilteritemsController extends BlockComponent<
   };
 
   // add items into the cart
-
-  putItemToCart = (cartId: any, type: string): boolean => {
-    const product = this.state.productToBeAdded;
+  putItemToCart = (product: any): boolean => {
+    
     const header = {
       "Content-Type": configJSON.productApiContentType,
       token: localStorage.getItem("token"),
     };
-    let httpBody: any;
-    if (type == "subscription") {
-      httpBody = this.state.SubscriptionRequestBody;
-    } else {
-      if (product.catalogue_id && this.state.catalogue_variant_id) {
-        httpBody = {
-          catalogue_id: product.catalogue_id,
-          catalogue_variant_id: parseInt(this.state.catalogue_variant_id),
-          quantity: this.state.itemQuantity,
-        };
-        localStorage.setItem(
-          "catalogue_variant_id",
-          this.state.catalogue_variant_id
-        );
-      } else if (
-        !this.state.isProductAvailable == false &&
-        this.state.productDetails?.attributes?.cart_quantity == null
-      ) {
-        httpBody = {
-          catalogue_id: this.state.productDetails.id,
-          quantity: this.state.itemQuantity,
-        };
-      } else {
-        httpBody = {
-          catalogue_id: product?.attributes?.hasOwnProperty(
-            "is_subscription_available"
-          )
-            ? product.id
-            : product?.attributes?.catalogue_id,
-          quantity: this.state.itemQuantity,
-        };
-      }
-    }
+
+    const httpBody = {
+      catalogue_id: product?.attributes?.catalogue_id ?? product.id,
+      catalogue_variant_id: product?.attributes?.default_variant?.id,
+      quantity: 1,
+    };
+
     const requestMessage = new Message(
       getName(MessageEnum.RestAPIRequestMessage)
     );
+
     this.putItemToCartApiCallId = requestMessage.messageId;
-    if (this.state.isSubscriptionUpdate && type == "subscription") {
-      requestMessage.addData(
-        getName(MessageEnum.RestAPIResponceEndPointMessage),
-        configJSON.endPointApiPutUpdateCartQuantity +
-          `${cartId}/update_item_quantity`
-      );
-    } else {
-      requestMessage.addData(
-        getName(MessageEnum.RestAPIResponceEndPointMessage),
-        configJSON.endPointApiPutUpdateCartQuantity + `${cartId}/add_item`
-      );
-    }
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIResponceEndPointMessage),
+      configJSON.addToCartApiEndPoint + `${this.state.cartId}/add_item`
+    );
+
     requestMessage.addData(
       getName(MessageEnum.RestAPIRequestHeaderMessage),
       JSON.stringify(header)
     );
+
     requestMessage.addData(
       getName(MessageEnum.RestAPIRequestBodyMessage),
       JSON.stringify(httpBody)
     );
+
     requestMessage.addData(
       getName(MessageEnum.RestAPIRequestMethodMessage),
       configJSON.putAPiMethod
     );
-
     runEngine.sendMessage(requestMessage.id, requestMessage);
+    return true;
+  };
 
+  increaseOrDecreaseCartQuantity = (product: any, increment: number, variantId?: number) => {
+
+    product.addToCartLoading = true;
+    
+    this.setState({
+      productToBeAdded: product,
+      filterProducList: this.state?.filterProducList ? [...this.state.filterProducList] : [],
+    }, () => {
+      const header = {
+        "Content-Type": configJSON.productApiContentType,
+        token: localStorage.getItem("token"),
+      };
+
+      let httpBody: any;
+      let endPointFullPath: string;
+      let method: string;
+
+      if (variantId) {
+
+        const defaultVariantDetails = product.attributes.catalogue_variants.find((v: any) => (
+          parseInt(v.id) === variantId
+        ))
+
+        if (defaultVariantDetails.attributes.cart_quantity + increment > 0) {
+          httpBody = {
+            quantity: defaultVariantDetails.attributes.cart_quantity + increment,
+            catalogue_id: product.id,
+            catalogue_variant_id: variantId,
+          };
+          endPointFullPath = configJSON.addToCartApiEndPoint +
+            `${this.state.cartId}/update_item_quantity`
+          method = configJSON.putAPiMethod;
+        }
+        else {
+          httpBody = {
+            catalogue_id: product.id,
+            catalogue_variant_id: variantId,
+          }
+          endPointFullPath = configJSON.addToCartApiEndPoint +
+            `${this.state.cartId}/delete_item`
+          method = configJSON.DeleteMethodType;
+        }
+
+      } else if (product.attributes.cart_quantity + increment > 0) {
+        httpBody = {
+          quantity: product.attributes.cart_quantity + increment,
+          catalogue_id: product.id,
+          catalogue_variant_id: variantId,
+        };
+        endPointFullPath = configJSON.addToCartApiEndPoint +
+          `${this.state.cartId}/update_item_quantity`
+        method = configJSON.putAPiMethod;
+      }
+      else {
+        httpBody = {
+          catalogue_id: product.id,
+          catalogue_variant_id: variantId,
+        }
+        endPointFullPath = configJSON.addToCartApiEndPoint +
+          `${this.state.cartId}/delete_item`
+        method = configJSON.DeleteMethodType;
+      }
+
+      const requestMessage = new Message(
+        getName(MessageEnum.RestAPIRequestMessage)
+      );
+
+      this.increaseOrDecreaseCartQuantityApiCallId = requestMessage.messageId;
+
+      requestMessage.addData(
+        getName(MessageEnum.RestAPIResponceEndPointMessage),
+        endPointFullPath
+      );
+
+      requestMessage.addData(
+        getName(MessageEnum.RestAPIRequestHeaderMessage),
+        JSON.stringify(header)
+      );
+
+      requestMessage.addData(
+        getName(MessageEnum.RestAPIRequestBodyMessage),
+        JSON.stringify(httpBody)
+      );
+
+      requestMessage.addData(
+        getName(MessageEnum.RestAPIRequestMethodMessage),
+        method
+      );
+
+      runEngine.sendMessage(requestMessage.id, requestMessage);
+
+    });
     return true;
   };
 
   // add to cart
   //is cart created || checking
-  
   getIsCartCreated = (): boolean => {
     const headers = {
       "Content-Type": configJSON.productApiContentType,
@@ -896,7 +914,7 @@ export default class FilteritemsController extends BlockComponent<
 
     requestMessage.addData(
       getName(MessageEnum.RestAPIResponceEndPointMessage),
-      configJSON.endPointApiGetIsCartCreated
+      configJSON.getCartApiEndPoint
     );
 
     requestMessage.addData(
@@ -914,30 +932,18 @@ export default class FilteritemsController extends BlockComponent<
   };
 
   //post create cart
+
   postCreateCart = (product: any): boolean => {
-    this.setState({ productDescriptionLoader: true });
     const header = {
-      "Content-Type": configJSON.dashboarContentType,
+      "Content-Type": configJSON.productApiContentType,
       token: localStorage.getItem("token"),
     };
-    let httpBody: any;
-    if (product == "subscription") {
-      httpBody = this.state.SubscriptionRequestBody;
-    } else {
-      if (product?.attributes?.catalogue_id) {
-        httpBody = {
-          catalogue_id: product?.attributes?.catalogue_id,
-          catalogue_variant_id: parseInt(this.state.catalogue_variant_id),
-          quantity: this.state.itemQuantity,
-        };
-      } else {
-        httpBody = {
-          catalogue_id: product.id,
-          // "catalogue_variant_id": product.id,
-          quantity: this.state.itemQuantity,
-        };
-      }
-    }
+
+    const httpBody = {
+      catalogue_id: product?.attributes?.catalogue_id ?? product.id,
+      catalogue_variant_id: product?.attributes?.default_variant?.id,
+      quantity: 1,
+    };
 
     const requestMessage = new Message(
       getName(MessageEnum.RestAPIRequestMessage)
@@ -946,7 +952,7 @@ export default class FilteritemsController extends BlockComponent<
     this.postCreateCartApiCallId = requestMessage.messageId;
     requestMessage.addData(
       getName(MessageEnum.RestAPIResponceEndPointMessage),
-      configJSON.endPointApiGetIsCartCreated
+      configJSON.getCartApiEndPoint
     );
 
     requestMessage.addData(
@@ -963,62 +969,55 @@ export default class FilteritemsController extends BlockComponent<
       getName(MessageEnum.RestAPIRequestMethodMessage),
       configJSON.apiMethodTypePost
     );
-
     runEngine.sendMessage(requestMessage.id, requestMessage);
-
     return true;
   };
 
   //  cart function
   addToCart = (product: any) => {
+
+    product.addToCartLoading = true;
+
     this.setState({
       productToBeAdded: product,
+      filterProducList: [...this.state.filterProducList],
+    }, () => {
+      this.state.cartId ? this.putItemToCart(product) : this.postCreateCart(product);
     });
-    setTimeout(() => {
-      this.setState({
-        productToBeAdded: product,
-      });
-
-      this.state.cartId != ""
-        ? this.putItemToCart(this.state.cartId,"")
-        : this.postCreateCart(product);
-    }, 500);
   };
 
   // get Product Details
   getProductDetails = (): boolean => {
     let catalogue_id_from_url = window.location.pathname.split("/").pop();
-    if (catalogue_id_from_url != "home-page") {
     this.setState({
       catalogue_id: catalogue_id_from_url,
-      productDescriptionLoader: true,
-    },()=>{
-        const headers = {
-          "Content-Type": configJSON.productApiContentType,
-          token: localStorage.getItem("token"),
-        };
-  
-        const requestMessage = new Message(
-          getName(MessageEnum.RestAPIRequestMessage)
-        );
-  
-        this.getProductDetailsApiCallId = requestMessage.messageId;
-  
-        requestMessage.addData(
-          getName(MessageEnum.RestAPIResponceEndPointMessage),
-          configJSON.endPointApiGetProductDetails + `${this.state.catalogue_id}`
-        );
-        requestMessage.addData(
-          getName(MessageEnum.RestAPIRequestHeaderMessage),
-          JSON.stringify(headers)
-        );
-        requestMessage.addData(
-          getName(MessageEnum.RestAPIRequestMethodMessage),
-          configJSON.apiMethodTypeGet
-        );
-        runEngine.sendMessage(requestMessage.id, requestMessage);
     });
-  }
+    setTimeout(() => {
+      const headers = {
+        "Content-Type": configJSON.productApiContentType,
+        token: localStorage.getItem("token"),
+      };
+
+      const requestMessage = new Message(
+        getName(MessageEnum.RestAPIRequestMessage)
+      );
+
+      this.getProductDetailsApiCallId = requestMessage.messageId;
+
+      requestMessage.addData(
+        getName(MessageEnum.RestAPIResponceEndPointMessage),
+        configJSON.endPointApiGetProductDetails + `${this.state.catalogue_id}`
+      );
+      requestMessage.addData(
+        getName(MessageEnum.RestAPIRequestHeaderMessage),
+        JSON.stringify(headers)
+      );
+      requestMessage.addData(
+        getName(MessageEnum.RestAPIRequestMethodMessage),
+        configJSON.apiMethodTypeGet
+      );
+      runEngine.sendMessage(requestMessage.id, requestMessage);
+    }, 500);
     return true;
   };
 
@@ -1030,17 +1029,17 @@ export default class FilteritemsController extends BlockComponent<
       product.attributes.stock_qty > 0
         ? product.attributes.default_variant.stock_qty > 0
           ? product.attributes.catalogue_variants.filter(
-              (variant: any, index: any) => {
-                return (
-                  variant.id == parseInt(product.attributes.default_variant.id)
-                );
-              }
-            )[0]
+            (variant: any, index: any) => {
+              return (
+                variant.id == parseInt(product.attributes.default_variant.id)
+              );
+            }
+          )[0]
           : product.attributes.catalogue_variants.filter(
-              (variant: any, index: any) => {
-                return variant.attributes.stock_qty > 0;
-              }
-            )[0]
+            (variant: any, index: any) => {
+              return variant.attributes.stock_qty > 0;
+            }
+          )[0]
         : product.attributes.catalogue_variants[0];
 
     const productAvailable =
@@ -1060,24 +1059,24 @@ export default class FilteritemsController extends BlockComponent<
 
     this.state.productDetails.attributes.stock_qty > 0
       ? this.setState({
-          default_variant: productAvailable,
-          currentImage:
-            this.state.default_variant &&
-            this.state.default_variant.attributes.images.data[0].attributes.url,
-          active_color:
-            this.state.default_variant &&
-            this.state.default_variant.attributes.product_variant_properties[1]
-              .property_name,
-          active_size:
-            this.state.default_variant &&
-            this.state.default_variant.attributes.product_variant_properties[0]
-              .property_name,
-        })
+        default_variant: productAvailable,
+        currentImage:
+          this.state.default_variant &&
+          this.state.default_variant.attributes.images.data[0].attributes.url,
+        active_color:
+          this.state.default_variant &&
+          this.state.default_variant.attributes.product_variant_properties[1]
+            .property_name,
+        active_size:
+          this.state.default_variant &&
+          this.state.default_variant.attributes.product_variant_properties[0]
+            .property_name,
+      })
       : this.setState({
-          default_variant: this.state.productDetails,
-          currentImage: this.state.productDetails.attributes.images.data[0].url,
-          catalogue_variant_id: this.state.productDetails.attributes.id,
-        });
+        default_variant: this.state.productDetails,
+        currentImage: this.state.productDetails.attributes.images.data[0].url,
+        catalogue_variant_id: this.state.productDetails.attributes.id,
+      });
     const pushed_sizes: any = [];
     const colorFilter =
       this.state.productDetails.attributes.catalogue_variants.filter(
@@ -1098,11 +1097,10 @@ export default class FilteritemsController extends BlockComponent<
     });
   };
 
-  getProductList = (token: any) => {
+  getProductList = () => {
     this.setState({
       loading: true,
-    });
-    setTimeout(() => {
+    }, () => {
       const header = {
         "Content-Type": configJSON.productApiContentType,
         token: localStorage.getItem("token"),
@@ -1113,13 +1111,7 @@ export default class FilteritemsController extends BlockComponent<
       let urlSearch = new URLSearchParams(window.location.search);
       let url = configJSON.sortingFilteringAPiEndPoint;
 
-      const newest = this.state.newest && this.state.newest;
-
-      if (this.state.isLoaderWithoutFilters) {
-        url += `?&page=${this.state.page}&per_page=${this.state.per_page}`;
-      } else {
-        url += `?&page=${this.state.page}&per_page=${this.state.per_page}`;
-      }
+      url += `?&page=${this.state.page}&per_page=${this.state.per_page}`;
 
       if (
         !localStorage.getItem("searchQuery") &&
@@ -1153,15 +1145,15 @@ export default class FilteritemsController extends BlockComponent<
         urlSearch.delete("[newArrivals]");
         localStorage.getItem("newest") == "By Newest"
           ? this.setState({
-              value: localStorage.getItem("newest"),
-              order_by: "created_at",
-              sort_by: "desc",
-            })
+            value: localStorage.getItem("newest"),
+            order_by: "created_at",
+            sort_by: "desc",
+          })
           : this.setState({
-              value: localStorage.getItem("newest"),
-              order_by: "recommended",
-              sort_by: "desc",
-            });
+            value: localStorage.getItem("newest"),
+            order_by: "recommended",
+            sort_by: "desc",
+          });
       }
 
       if (cat_id != null) {
@@ -1242,7 +1234,6 @@ export default class FilteritemsController extends BlockComponent<
             : "?sort[order_by]=" + order_by + "&sort[direction]=" + sort_by;
       }
 
-    
       this.getProductCategoryApiCallId = requestMessage.messageId;
       requestMessage.addData(
         getName(MessageEnum.RestAPIResponceEndPointMessage),
@@ -1257,8 +1248,8 @@ export default class FilteritemsController extends BlockComponent<
         configJSON.apiMethodTypeGet
       );
       runEngine.sendMessage(requestMessage.id, requestMessage);
-    }, 1000);
-  };
+    })
+  }
 
   // remove search
   removeSearchQuery = () => {
@@ -1266,106 +1257,32 @@ export default class FilteritemsController extends BlockComponent<
     this.setState({
       searchQuery: "",
       filterProducList: [],
-    });
-    setTimeout(() => {
+    }, () => {
       this.getProductList();
-    }, 300);
-  };
-
-  loadMore = () => {
-    this.setState(
-      (prev) => {
-        return { page: prev.page + 1, per_page: this.state.per_page };
-      },
-      () => this.getProductList()
-    );
-  };
-  nextPage = () => {
-    this.setState(
-      (prev) => {
-        return { page: prev.page + 1, per_page: this.state.per_page };
-      },
-      () => this.getProductList()
-    );
-  };
-  previousPage = () => {
-    this.setState(
-      (prev) => {
-        return { page: prev.page - 1, per_page: this.state.per_page };
-      },
-      () => this.getProductList()
-    );
-  };
-  getCurrentPage = (page) => {
-    this.setState(
-      (prev) => {
-        return { page: page, per_page: this.state.per_page };
-      },
-      () => this.getProductList()
-    );
+    });
   };
 
   addSortBy = (order) => {
-    let urlSearch = new URLSearchParams(window.location.search);
-    if (this.state.page > 1) {
-      this.setState({
-        page: 1,
-        isLoaderWithoutFilters: true,
-      });
-    }
-    urlSearch.delete("sort[order_by]");
-    urlSearch.delete("sort[direction]");
-    localStorage.removeItem("newest");
-    if (order == "0") {
-      this.setState({ order_by: "", sort_by: "", filterProducList: [] });
-    }
-    if (order == "1") {
-      //low to high
-      this.setState({
-        order_by: "price_including_tax",
-        sort_by: "asc",
-        filterProducList: [],
-      });
-    }
-    if (order == "2") {
-      //high to low
-      this.setState({
-        order_by: "price_including_tax",
-        sort_by: "desc",
-        filterProducList: [],
-      });
-    }
-    if (order == "3") {
-      this.setState({
-        order_by: "sold",
-        sort_by: "desc",
-        filterProducList: [],
-      });
-    }
-    if (order == "4") {
-      this.setState({
-        order_by: "created_at",
-        sort_by: "desc",
-        filterProducList: [],
-      });
-    }
-    if (order == "5") {
-      this.setState({
-        order_by: "recommended",
-        sort_by: "desc",
-        filterProducList: [],
-      });
-    }
-
-    setTimeout(() => {
-      urlSearch.append("sort[order_by]", this.state.order_by);
-      urlSearch.append("sort[direction]", this.state.sort_by);
-      this.props?.history?.push(
+    this.setState({
+      page: 1,
+      order_by: this.state.sortMenu[order].order_by,
+      sort_by: this.state.sortMenu[order].direction,
+    }, () => {
+      const urlSearch = new URLSearchParams(window.location.search);
+      urlSearch.delete("sort[order_by]");
+      urlSearch.delete("sort[direction]");
+      localStorage.removeItem("newest");
+      if (this.state.order_by) {
+        urlSearch.append("sort[order_by]", this.state.order_by);
+      }
+      if (this.state.sort_by) {
+        urlSearch.append("sort[direction]", this.state.sort_by);
+      }
+      console.log(`/Filteroptions?${decodeURIComponent(urlSearch.toString())}`)
+      this.props?.history?.replace(
         `/Filteroptions?${decodeURIComponent(urlSearch.toString())}`
       );
-
-      // this.getProductList()
-    }, 300);
+    })
   };
 
   // Customizable Area Start

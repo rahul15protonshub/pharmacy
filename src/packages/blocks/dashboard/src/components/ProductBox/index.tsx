@@ -28,6 +28,8 @@ const ProductBox: React.FC<ProductBoxProps> = ({
   isProductAddtoCart,
 }) => {
   let productDefaultWeight = <>{product.attributes.weight ?? ""} {product.attributes.weight_unit ?? ""}</>
+  let defaultImage=product.attributes.images?.data[0].attributes.url
+
     let productDefaultPrice = product.attributes.on_sale ? product.attributes.price_including_tax : product.attributes.actual_price_including_tax
     let productDefaultNonDiscountedPrice = product.attributes.on_sale ? product.attributes.actual_price_including_tax : null
     let productDefaultCartQuantity = product.attributes.cart_quantity
@@ -45,6 +47,7 @@ const ProductBox: React.FC<ProductBoxProps> = ({
             ))
             if (weightDetails) {
                 productDefaultWeight = <>{weightDetails.attributes.property_name}</>
+                defaultImage=defaultVariantDetails.attributes.images.data[0].attributes.url
             }
             productDefaultCartQuantity = defaultVariantDetails.attributes.cart_quantity
             productDefaultStockQuantity = defaultVariantDetails.attributes.stock_qty
@@ -58,13 +61,9 @@ const ProductBox: React.FC<ProductBoxProps> = ({
           <div className="card_image">
             <img
               className="card_img"
-              src={
-                product.attributes.images?.data[0].attributes.url ||
-                "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
-              }
+              src={defaultImage}
               alt="Card image cap"
             />
-
             <button
               className="product_wishlist_button"
               onClick={(e) => {
