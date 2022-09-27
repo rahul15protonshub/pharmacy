@@ -403,7 +403,7 @@ button.loginbutton.header-log-btn.w3-ripple.ml-2.btn.btn-secondary:hover {
 
 .yt-main-header .header-search-field-wrap {
   position: relative;
-  /* left: 25px; */
+  right: 25px;
 }
 
 .yt-main-header .yt-recent-search-wrap {

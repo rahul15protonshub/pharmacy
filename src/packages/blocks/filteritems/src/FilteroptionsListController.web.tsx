@@ -17,6 +17,8 @@ export interface Props {
   navigation: any;
   id: string;
   // Customizable Area Start
+  mbOpenState: boolean
+  cancel: any
   // Customizable Area End
 }
 
@@ -29,7 +31,7 @@ interface S {
   brandSearch: string;
   tagsList: any;
   categoryList: any;
-  colorList: any;
+  colorList: any[];
   colorSearch: any;
   priceList: any;
   filterObj: any;
@@ -42,11 +44,11 @@ interface S {
   isExcludeChecked?: boolean;
   maxPrice?: number;
   minPrice?: number;
-  givenMaxValue?: number;
-  givenMinValue?: number;
-  isGivenRangeSlected?: boolean;
   materaiList: any;
   kgList: any;
+  activeTab: string,
+  mobileOrTablet: boolean,
+  windowSize: number
   // Customizable Area End
 }
 
@@ -104,8 +106,11 @@ export default class FilterOptionListController extends BlockComponent<
       sizesList: [],
       value: { min: 0, max: 0 },
       minPrice: 0,
+      maxPrice: 9999,
       kgList: [],
       materaiList: [],
+      activeTab: "1",
+      mobileOrTablet: false
     };
     // Customizable Area End
     runEngine.attachBuildingBlock(this as IBlock, this.subScribedMessages);
@@ -113,21 +118,23 @@ export default class FilterOptionListController extends BlockComponent<
   async componentDidMount() {
     window.scrollTo(0, 0);
     super.componentDidMount();
-    this.getToken();
-    // if (this.isPlatformWeb() === false) {
-    //   this.props.navigation.addListener("willFocus", () => {
-    //     this.getToken();
-    //   });
-    // }
-    this.getCategoryList(localStorage.getItem("token"));
-    this.getBrandList(localStorage.getItem("token"));
-    this.getTagList(localStorage.getItem("token"));
-    this.getPriceRangeList(localStorage.getItem("token"));
-    this.getListRequest(localStorage.getItem("token"));
+    this.init();
+
+    let urlSearch = new URLSearchParams(window.location.search);
+    let subIdsArray = urlSearch.get("q[sub_category_id][]")?.split(",");
+    let catIdsArray = urlSearch.get("q[category_id][]")?.split(",");
     setTimeout(() => {
-      // !localStorage.getItem("searchQuery") && !localStorage.getItem("category") && this.forBannertoggleCheckBox()
-    }, 3000);
-    // let urlSearch = new URLSearchParams(window.location.search);
+      if (subIdsArray?.length > 0) {
+        subIdsArray.map((sub) => {
+          this.toggleCheckBox(String(sub), "sub_category");
+        });
+      }
+      if (catIdsArray?.length > 0) {
+        catIdsArray.map((cat) => {
+          this.toggleCheckBox(String(cat), "category", true);
+        });
+      }
+    }, 1200);
   }
 
   /////// recieve props ////////
@@ -138,10 +145,22 @@ export default class FilterOptionListController extends BlockComponent<
     });
 
     let urlSearch = new URLSearchParams(window.location.search);
-    // (urlSearch.get("q[category_id][]")
-    //   // urlSearch.get("[sub_category]") == 'true'
-    //   || urlSearch.get("[newArrivals]") == 'true') && this.subCategoryChecked()
     urlSearch.get("isFromHeader") && this.forBannertoggleCheckBox();
+  }
+
+  init = () => {
+    let urlSearch = new URLSearchParams(window.location.search);
+    let isDiscountSelected = urlSearch.get("discounted_items");
+    this.getToken();
+    this.getCategoryList(localStorage.getItem("token"));
+    this.getBrandList(localStorage.getItem("token"));
+    this.getTagList(localStorage.getItem("token"));
+    this.getListRequest(localStorage.getItem("token"));
+    if (isDiscountSelected) {
+      this.setState({
+        isDiscountChecked: true
+      })
+    }
   }
 
   forBannertoggleCheckBox = (id: any, type: any) => {
@@ -166,7 +185,7 @@ export default class FilterOptionListController extends BlockComponent<
     if (urlSearch.get("[newArrivals]")) {
       urlSearch.delete("[newArrivals]");
 
-      this.props?.history?.push(
+      this.props?.history?.replace(
         `/Filteroptions?${decodeURIComponent(urlSearch.toString())}`
       );
     }
@@ -225,6 +244,7 @@ export default class FilterOptionListController extends BlockComponent<
         min: min_price,
         max: max_price,
       };
+      
       this.setState({
         value: dat,
       });
@@ -242,7 +262,7 @@ export default class FilterOptionListController extends BlockComponent<
     }
   };
 
-  toggleCheckBox = (id: any, type: any) => {
+  toggleCheckBox = (id: any, type: any, passive?: Boolean) => {
     const requestCheckMessage = new Message(
       getName(MessageEnum.FilterCheckedMessage)
     );
@@ -250,35 +270,23 @@ export default class FilterOptionListController extends BlockComponent<
     let shop = urlSearch.get("[sub_category]");
     let newArrivals = urlSearch.get("[newArrivals]");
 
-    if (type == "brand" && this.state.brandList?.length > 0) {
-      let oldbrands = [...this.state.brandList];
+    if (type === "brand" && this.state.brandList?.length > 0) {
 
-      if (shop != null || newArrivals != null) {
-        oldbrands &&
-          oldbrands?.forEach((item, idx) => {
-            if (item.checked == true) {
-              item.checked = !item.checked;
-            }
-          });
+      const brand = this.state.brandList.find(b => b.id === id)
+      if (brand) {
+        brand.checked = !brand.checked;
       }
 
-      oldbrands.forEach((item, idx) => {
-        if (id == item.id) {
-          item.checked = !item.checked;
-        }
-      });
-      const selectedBrands = oldbrands.filter((brand) => {
-        return brand.checked;
-      });
+      const selectedBrands = this.state.brandList.filter((brand) => brand.checked);
 
-      const filderBrandId = selectedBrands?.map((cat) => cat.attributes.id);
       urlSearch.delete("q[brand_id][]");
-      filderBrandId.length > 0 &&
-        urlSearch.append("q[brand_id][]", filderBrandId.join(","));
+      if (selectedBrands.length > 0) {
+        urlSearch.append("q[brand_id][]", selectedBrands.map((brand) => brand.id).join(","));
+      }
 
       this.setState(
         {
-          brandList: oldbrands,
+          brandList: [...this.state.brandList],
           filterObj: { ...this.state.filterObj, brand: selectedBrands },
         },
         () => {
@@ -291,35 +299,24 @@ export default class FilterOptionListController extends BlockComponent<
         }
       );
     }
-    if (type == "tag" && this.state.tagsList?.length > 0) {
-      let oldtags = [...this.state.tagsList];
-      if (shop != null || newArrivals != null) {
-        oldtags &&
-          oldtags?.forEach((item, idx) => {
-            if (item.checked == true) {
-              item.checked = !item.checked;
-            }
-          });
+    if (type === "tag" && this.state.tagsList?.length > 0) {
+
+      const tag = this.state.tagsList.find(t => t.id === id)
+      if (tag) {
+        tag.checked = !tag.checked;
       }
 
-      oldtags.forEach((item, idx) => {
-        if (id === item.id) {
-          item.checked = !item.checked;
-        }
-      });
-      const selectedtag = oldtags.filter((tag) => {
-        return tag.checked;
-      });
+      const selectedTags = this.state.tagsList.filter((tag) => tag.checked);
 
-      const filderTagId = selectedtag?.map((cat) => cat.attributes.id);
       urlSearch.delete("q[tag_id][]");
-      filderTagId.length > 0 &&
-        urlSearch.append("q[tag_id][]", filderTagId.join(","));
+      if (selectedTags.length > 0) {
+        urlSearch.append("q[tag_id][]", selectedTags.map((tag) => tag.id).join(","));
+      }
 
       this.setState(
         {
-          tagsList: oldtags,
-          filterObj: { ...this.state.filterObj, tag: selectedtag },
+          tagsList: [...this.state.tagsList],
+          filterObj: { ...this.state.filterObj, tag: selectedTags },
         },
         () => {
           requestCheckMessage.addData(
@@ -331,12 +328,12 @@ export default class FilterOptionListController extends BlockComponent<
         }
       );
     }
-    if (type == "category" && this.state.categoryList?.length > 0) {
+    if (type === "category" && this.state.categoryList?.length > 0) {
       var oldcategory = this.state.categoryList && [...this.state.categoryList];
       let sub_cat = "";
 
       //for shop
-      if (shop != null || newArrivals != null) {
+      if (shop != null && !passive) {
         oldcategory &&
           oldcategory?.forEach((item, idx) => {
             if (item.checked == true) {
@@ -358,6 +355,7 @@ export default class FilterOptionListController extends BlockComponent<
       }
 
       oldcategory &&
+        !passive &&
         oldcategory?.forEach((item, idx) => {
           if (id == item.id) {
             if (item.checked == true) {
@@ -397,7 +395,7 @@ export default class FilterOptionListController extends BlockComponent<
         });
 
       //to remove search category from url
-      if (urlSearch.get("q[sub_category_id][]") != null) {
+      if (urlSearch.get("q[sub_category_id][]") != null && !passive) {
         const sub_cate = urlSearch.get("q[sub_category_id][]").split(",");
         const filderSubCategoryIdArray = [];
         const filderSubCategoryId = selectedSubCategory
@@ -420,8 +418,9 @@ export default class FilterOptionListController extends BlockComponent<
       const filderCategoryId = selectedCategory?.map(
         (cat) => cat.attributes.id
       );
-      urlSearch.delete("q[category_id][]");
+      !passive && urlSearch.delete("q[category_id][]");
       filderCategoryId?.length > 0 &&
+        !passive &&
         urlSearch.append("q[category_id][]", filderCategoryId.join(","));
 
       this.setState(
@@ -443,13 +442,16 @@ export default class FilterOptionListController extends BlockComponent<
         }
       );
     }
-    if (type == "sub_category") {
+    if (type === "sub_category") {
       let oldcategory = this.state.categoryList && [...this.state.categoryList];
       oldcategory &&
         oldcategory?.forEach((item, idx) => {
           item?.attributes.sub_categories?.forEach((sub, idx) => {
+            if (sub?.checked === undefined) {
+              sub.checked = false;
+            }
             if (sub.id == id) {
-              sub.checked = !sub.checked;
+              sub.checked = !sub?.checked;
             }
           });
         });
@@ -493,7 +495,7 @@ export default class FilterOptionListController extends BlockComponent<
         }
       );
     }
-    if (type == "color" && this.state.colorList?.length > 0) {
+    if (type === "color" && this.state.colorList?.length > 0) {
       let oldColor = [...this.state.colorList];
 
       if (shop != null || newArrivals != null) {
@@ -536,7 +538,7 @@ export default class FilterOptionListController extends BlockComponent<
         }
       );
     }
-    if (type == "size" && this.state.sizesList?.length > 0) {
+    if (type === "size" && this.state.sizesList?.length > 0) {
       let oldSizes = [...this.state.sizesList];
       if (shop != null || newArrivals != null) {
         oldSizes &&
@@ -579,7 +581,7 @@ export default class FilterOptionListController extends BlockComponent<
         }
       );
     }
-    if (type == "kg" && this.state.kgList?.length > 0) {
+    if (type === "kg" && this.state.kgList?.length > 0) {
       let oldkg = [...this.state.kgList];
       if (shop != null || newArrivals != null) {
         oldkg &&
@@ -622,7 +624,7 @@ export default class FilterOptionListController extends BlockComponent<
         }
       );
     }
-    if (type == "material" && this.state.materaiList?.length > 0) {
+    if (type === "material" && this.state.materaiList?.length > 0) {
       let oldMaterials = [...this.state.materaiList];
       if (shop != null || newArrivals != null) {
         oldMaterials &&
@@ -667,7 +669,7 @@ export default class FilterOptionListController extends BlockComponent<
         }
       );
     }
-    if (type == "price") {
+    if (type === "price") {
       let priceRang = this.state.value;
 
       const minPrice = priceRang?.min;
@@ -696,7 +698,7 @@ export default class FilterOptionListController extends BlockComponent<
         urlSearch.delete("q[price][to]");
       }
     }
-    if (type == "discount") {
+    if (type === "discount") {
       const oldDiscount = this.state.isDiscountChecked;
       const includeDiscount = id;
       urlSearch.delete("discounted_items");
@@ -719,7 +721,7 @@ export default class FilterOptionListController extends BlockComponent<
         }
       );
     }
-    if (type == "outOfStock") {
+    if (type === "outOfStock") {
       const oldSTock = this.state.isExcludeChecked;
       this.setState(
         {
@@ -735,7 +737,7 @@ export default class FilterOptionListController extends BlockComponent<
       );
     }
     // console.log("urlSearch", urlSearch, "NewArr", newArrivals, "subCate", shop);
-    this.props?.history?.push(
+    this.props?.history?.replace(
       `/Filteroptions?${decodeURIComponent(urlSearch.toString())}`
     );
   };
@@ -743,11 +745,6 @@ export default class FilterOptionListController extends BlockComponent<
   // choosing category from home page
   categoryChecked = () => {
     let urlSearch = new URLSearchParams(window.location.search);
-    // setTimeout(() => {
-    //   localStorage.getItem("category") &&
-    //     this.state.categoryChecked != "" &&
-    //     this.toggleCheckBox(urlSearch.get("q[category_id][]"), "category");
-    // }, 2500);
     if (localStorage.getItem("category") && this.state.categoryChecked !== "") {
       this.toggleCheckBox(urlSearch.get("q[category_id][]"), "category");
     }
@@ -758,11 +755,6 @@ export default class FilterOptionListController extends BlockComponent<
     let urlSearch = new URLSearchParams(window.location.search);
     const subCategoryObject = JSON.parse(localStorage.getItem("subCategory"));
     subCategoryObject && this.categoryChecked();
-    // this.toggleCheckBox(urlSearch.get("q[category_id][]"), "category")
-    // this.toggleCheckBox("", "brand")
-    // this.toggleCheckBox("", "tag")
-    // this.toggleCheckBox("", "color")
-    // this.toggleCheckBox("", "size")
   };
 
   getToken = () => {
@@ -847,67 +839,14 @@ export default class FilterOptionListController extends BlockComponent<
         filterObj: { ...this.state.filterObj, tag: selectedtag },
       });
     }
-    // else if (type == "size") {
-    //   let oldSizes = [...this.state.sizesList];
-    //   oldSizes.forEach((item: any, index: number) => {
-    //     if (id == item.variant_property_id) {
-    //       item.checked = !item.checked;
-    //     }
-    //   });
-    //   const selectedSize = oldSizes.filter((size) => {
-    //     return size.checked;
-    //   });
-    //   this.setState({ sizesList: oldSizes, filterObj: { ...this.state.filterObj, size: selectedSize } });
-    // }
-    // else if (type == "kg") {
-    //   let oldKgs = [...this.state.kgList];
-    //   oldKgs.forEach((item: any, index: number) => {
-    //     if (id == item.variant_property_id) {
-    //       item.checked = !item.checked;
-    //     }
-    //   });
-    //   const selectedKg = oldKgs.filter((kg) => {
-    //     return kg.checked;
-    //   });
-    //   this.setState({ kgList: oldKgs, filterObj: { ...this.state.filterObj, kg: selectedKg } });
-    // }
-    // else if (type == "material") {
-    //   let oldMaterials = [...this.state.materaiList];
-    //   oldMaterials.forEach((item: any, index: number) => {
-    //     if (id == item.variant_property_id) {
-    //       item.checked = !item.checked;
-    //     }
-    //   });
-    //   const selectedmaterial = oldMaterials.filter((material) => {
-    //     return material.checked;
-    //   });
-    //   this.setState({ materaiList: oldMaterials, filterObj: { ...this.state.filterObj, material: selectedmaterial } });
-    // }
   };
 
   async receive(from: string, message: Message) {
     // Customizable Area Start
-    // localStorage.getItem("subCategory") && this.subCategoryChecked()
 
     this.setState({
       subCategorySearch: JSON.parse(localStorage.getItem("subCategory")),
     });
-    // if (getName(MessageEnum.SessionResponseMessage) === message.id) {
-    //   let token = message.getData(getName(MessageEnum.SessionResponseToken));
-    //   if(token){
-    //     this.setState({ token: token },()=>{
-    //       this.getBrandList(token);
-    //   this.getTagList(token);
-    //   this.getCategoryList(token);
-    //   // this.getColorList(token);
-    //   this.getPriceList(token);
-    //   // this.getSizeList(token);
-    //   this.getPriceRangeList(token);
-    //   this.getListRequest(token);
-    //     });
-    //   }
-
-    // }
 
     if (getName(MessageEnum.removeFilter) === message.id) {
       var responseJson = message.getData(getName(MessageEnum.removeFilterData));
@@ -922,7 +861,7 @@ export default class FilterOptionListController extends BlockComponent<
           getName(MessageEnum.RestAPIResponceMessage) === message.id &&
           this.getProductApiCallId != null &&
           this.getProductApiCallId ===
-            message.getData(getName(MessageEnum.RestAPIResponceDataMessage))
+          message.getData(getName(MessageEnum.RestAPIResponceDataMessage))
         ) {
           var responseJson = message.getData(
             getName(MessageEnum.RestAPIResponceSuccessMessage)
@@ -932,42 +871,72 @@ export default class FilterOptionListController extends BlockComponent<
             responseJson.data &&
             responseJson.data.available_variants
           ) {
+            var urlSearch = new URLSearchParams(window.location.search),
+              colorSelected = urlSearch.get("q[color][]")?.split(',') || [],
+              sizeSelected = urlSearch.get("q[size][]")?.split(',') || [],
+              kgSelected = urlSearch.get("q[kg][]")?.split(',') || [],
+              materialSelected = urlSearch.get("q[material][]")?.split(',') || [],
+              kgList: any = [],
+              colorList: any = [],
+              sizesList: any = [],
+              materialList: any = [];
             if (
               Array.isArray(responseJson.data.available_variants?.Kg) &&
               responseJson.data.available_variants?.Kg.length > 0
             ) {
-              // console.log("kg");
-              this.setState({
-                kgList: responseJson.data.available_variants?.Kg,
-              });
+              kgList = responseJson.data.available_variants.Kg.map(
+                (item) => (
+                  {
+                    ...item,
+                    checked: kgSelected.includes(item?.variant_property_id?.toString())
+                  }
+                ))
             }
             if (
               Array.isArray(responseJson.data.available_variants?.Color) &&
               responseJson.data.available_variants?.Color?.length > 0
             ) {
               // console.log("colors");
-              this.setState({
-                colorList: responseJson.data.available_variants?.Color,
-              });
+              colorList = responseJson.data.available_variants?.Color.map(
+                (item) => (
+                  {
+                    ...item,
+                    checked: colorSelected.includes(item?.variant_property_id?.toString())
+                  }
+                ))
             }
             if (
               Array.isArray(responseJson.data.available_variants?.Size) &&
               responseJson.data.available_variants?.Size?.length > 0
             ) {
               // console.log("sizeData")
-              this.setState({
-                sizesList: responseJson.data.available_variants?.Size,
-              });
+              sizesList = responseJson.data.available_variants?.Size.map(
+                (item) => (
+                  {
+                    ...item,
+                    checked: sizeSelected.includes(item?.variant_property_id?.toString())
+                  }
+                ))
             }
             if (
               Array.isArray(responseJson.data.available_variants?.Material) &&
               responseJson.data.available_variants?.Material.length > 0
             ) {
               // console.log("material")
-              this.setState({
-                materaiList: responseJson.data.available_variants?.Material,
-              });
+              materialList = responseJson.data.available_variants?.Material.map(
+                (item) => (
+                  {
+                    ...item,
+                    checked: materialSelected.includes(item?.variant_property_id?.toString())
+                  }
+                ))
             }
+            this.setState({
+              kgList,
+              colorList,
+              sizesList,
+              materaiList: materialList
+            });
           }
         }
 
@@ -975,15 +944,41 @@ export default class FilterOptionListController extends BlockComponent<
           getName(MessageEnum.RestAPIResponceMessage) === message.id &&
           this.getBrandProductApiCallId != null &&
           this.getBrandProductApiCallId ===
-            message.getData(getName(MessageEnum.RestAPIResponceDataMessage))
+          message.getData(getName(MessageEnum.RestAPIResponceDataMessage))
         ) {
           var responseJson = message.getData(
             getName(MessageEnum.RestAPIResponceSuccessMessage)
           );
           let brands = responseJson?.data?.brand.data;
           // setMaxProductValue(res.data.data?.max_product_value || 100000);
+          var urlSearch = new URLSearchParams(window.location.search);
+          let brandSelected = urlSearch.get("q[brand_id][]")?.split(',') || [],
+            minPriceSelected = urlSearch.get("q[price][from]"),
+            maxPriceSelected = urlSearch.get("q[price][to]");
           if (Array.isArray(brands) && brands.length > 0) {
+            brands = brands.map(
+              (brand) => (
+                {
+                  ...brand,
+                  checked: brandSelected.includes(brand.id.toString())
+                }
+              )
+            )
             this.setState({ brandList: brands });
+          }
+          if (responseJson && responseJson.data) {
+            let maxRangeValue = responseJson.data?.maximum_price;
+            let minRangeValue = responseJson.data?.minimum_price;
+            let finalRangeValues = {
+              // min: minRangeValue,
+              min: minPriceSelected || minRangeValue,
+              max: maxPriceSelected || maxRangeValue,
+            };
+            this.setState({
+              value: finalRangeValues,
+              maxPrice: responseJson.data?.maximum_price,
+              minPrice: responseJson.data?.minimum_price,
+            });
           }
         }
 
@@ -991,13 +986,23 @@ export default class FilterOptionListController extends BlockComponent<
           getName(MessageEnum.RestAPIResponceMessage) === message.id &&
           this.getTagProductApiCallId != null &&
           this.getTagProductApiCallId ===
-            message.getData(getName(MessageEnum.RestAPIResponceDataMessage))
+          message.getData(getName(MessageEnum.RestAPIResponceDataMessage))
         ) {
           var responseJson = message.getData(
             getName(MessageEnum.RestAPIResponceSuccessMessage)
           );
           let tags = responseJson?.data;
           if (Array.isArray(tags) && tags.length > 0) {
+            var urlSearch = new URLSearchParams(window.location.search);
+            let tagSelected = urlSearch.get("q[tag_id][]")?.split(',') || [];
+            tags = tags.map(
+              (tag) => (
+                {
+                  ...tag,
+                  checked: tagSelected.includes(tag.id.toString())
+                }
+              )
+            )
             this.setState({ tagsList: tags });
           }
         }
@@ -1006,17 +1011,24 @@ export default class FilterOptionListController extends BlockComponent<
           getName(MessageEnum.RestAPIResponceMessage) === message.id &&
           this.getProductCategoryApiCallId != null &&
           this.getProductCategoryApiCallId ===
-            message.getData(getName(MessageEnum.RestAPIResponceDataMessage))
+          message.getData(getName(MessageEnum.RestAPIResponceDataMessage))
         ) {
           var responseJson = message.getData(
             getName(MessageEnum.RestAPIResponceSuccessMessage)
           );
           let category = responseJson?.data;
           if (Array.isArray(category) && category.length > 0) {
+            var urlSearch = new URLSearchParams(window.location.search);
+            let categorySelected = urlSearch.get("q[category_id][]")?.split(',') || [];
+            category = category.map(
+              (cat) => (
+                {
+                  ...cat,
+                  checked: categorySelected.includes(cat.id.toString())
+                }
+              )
+            )
             this.setState({ categoryList: category });
-            this.categoryChecked();
-            //localStorage.getItem("subCategory") && this.subCategoryChecked()
-            // this.forBannertoggleCheckBox()
           }
         }
 
@@ -1024,14 +1036,14 @@ export default class FilterOptionListController extends BlockComponent<
           getName(MessageEnum.RestAPIResponceMessage) === message.id &&
           this.getProductColorApiCallId != null &&
           this.getProductColorApiCallId ===
-            message.getData(getName(MessageEnum.RestAPIResponceDataMessage))
+          message.getData(getName(MessageEnum.RestAPIResponceDataMessage))
         ) {
           var responseJson = message.getData(
             getName(MessageEnum.RestAPIResponceSuccessMessage)
           );
-          let color = responseJson?.data;
-          if (Array.isArray(color) && color.length > 0) {
-            this.setState({ colorList: color });
+          let colors = responseJson?.data;
+          if (Array.isArray(colors) && colors.length > 0) {
+            this.setState({ colorList: colors });
           }
         }
 
@@ -1039,7 +1051,7 @@ export default class FilterOptionListController extends BlockComponent<
           getName(MessageEnum.RestAPIResponceMessage) === message.id &&
           this.getProductPriceApiCallId != null &&
           this.getProductPriceApiCallId ===
-            message.getData(getName(MessageEnum.RestAPIResponceDataMessage))
+          message.getData(getName(MessageEnum.RestAPIResponceDataMessage))
         ) {
           var responseJson = message.getData(
             getName(MessageEnum.RestAPIResponceSuccessMessage)
@@ -1053,7 +1065,7 @@ export default class FilterOptionListController extends BlockComponent<
           getName(MessageEnum.RestAPIResponceMessage) === message.id &&
           this.getProductSizeApiCallId != null &&
           this.getProductSizeApiCallId ===
-            message.getData(getName(MessageEnum.RestAPIResponceDataMessage))
+          message.getData(getName(MessageEnum.RestAPIResponceDataMessage))
         ) {
           var responseJson = message.getData(
             getName(MessageEnum.RestAPIResponceSuccessMessage)
@@ -1067,7 +1079,7 @@ export default class FilterOptionListController extends BlockComponent<
           getName(MessageEnum.RestAPIResponceMessage) === message.id &&
           this.getPiceListAPICallId != null &&
           this.getPiceListAPICallId ===
-            message.getData(getName(MessageEnum.RestAPIResponceDataMessage))
+          message.getData(getName(MessageEnum.RestAPIResponceDataMessage))
         ) {
           var responseJson = message.getData(
             getName(MessageEnum.RestAPIResponceSuccessMessage)
@@ -1083,6 +1095,7 @@ export default class FilterOptionListController extends BlockComponent<
             this.setState({
               value: finalRangeValues,
               maxPrice: responseJson.data?.maximum_price,
+              minPrice: responseJson.data?.minimum_price,
             });
           }
         }
@@ -1306,7 +1319,7 @@ export default class FilterOptionListController extends BlockComponent<
 
   resizeWindow = () => {
     this.setState({ windowSize: window.innerWidth });
-    if (window.innerWidth > 1280) {
+    if (window.innerWidth > 1200) {
       // this.props.cancel();
       this.setState({ mobileOrTablet: false });
     } else {

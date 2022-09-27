@@ -32,6 +32,7 @@ const ProductBox: React.FC<ProductBoxProps> = ({
       {product.attributes.weight ?? ""} {product.attributes.weight_unit ?? ""}
     </>
   );
+  let defaultImage=product.attributes.images?.data[0].attributes.url
   let productDefaultPrice = product.attributes.on_sale
     ? product.attributes.price_including_tax
     : product.attributes.actual_price_including_tax;
@@ -56,10 +57,11 @@ const ProductBox: React.FC<ProductBoxProps> = ({
       const weightDetails =
         defaultVariantDetails.attributes.catalogue_variant_properties.find(
           (p: any) =>
-            p.attributes.variant_name.trim().toLowerCase() === "weight"
+          p.attributes.variant_name.trim().toLowerCase() == "weight"||p.attributes.variant_name.trim().toLowerCase() =="size"||p.attributes.variant_name.trim().toLowerCase() =="colour"||p.attributes.variant_name.trim().toLowerCase() =="pack size"||p.attributes.variant_name.trim().toLowerCase() =="pcs"||p.attributes.variant_name.trim().toLowerCase() =="dummy"    
         );
       if (weightDetails) {
         productDefaultWeight = <>{weightDetails.attributes.property_name}</>;
+        defaultImage=defaultVariantDetails.attributes.images.data[0].attributes.url
       }
       productDefaultCartQuantity =
         defaultVariantDetails.attributes.cart_quantity;
@@ -74,13 +76,9 @@ const ProductBox: React.FC<ProductBoxProps> = ({
           <div className="card_image">
             <img
               className="card_img"
-              src={
-                product.attributes.images?.data[0].attributes.url ||
-                "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
-              }
+              src={defaultImage}
               alt="Card image cap"
             />
-
             <button
               className="product_wishlist_button"
               onClick={(e) => {
