@@ -333,6 +333,9 @@ export default class EmailAccountLoginController extends BlockComponent<
   }
 
   routeToAll(route: string) {
+    this.setState({
+      isOpenPopUp:false
+    })
     this.props?.history?.push(route);
   }
 

@@ -190,6 +190,7 @@ class EmailAccountLoginBlock extends EmailAccountLoginController {
               color="link yt-login-forget-pass"
               onClick={() => {
                 this.routeToAll("forgotpassword");
+                
               }}
             >
               {content.forgotPassword}
