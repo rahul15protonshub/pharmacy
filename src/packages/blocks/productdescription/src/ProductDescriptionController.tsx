@@ -627,32 +627,8 @@ export default class ProductDescriptionController extends BlockComponent<
           });
         } else if (apiRequestCallId === this.getCartProductId) {
           this.setState({ cartProduct: null });
-        } else if (apiRequestCallId === this.addToCartApiCallId) {
-          this.setState({
-            isShowError: false,
-            showAlertModal: true,
-            isFetching: false,
-            message: responseJson?.message,
-            productsAddingToCart: [],
-          });
         }
-        else if (apiRequestCallId === this.putItemToCartApiCallId) {
-          this.setState({
-            productsAddingToCart: [],
-            isFetching: false,
-            isShowError: true,
-            showAlertModal: true,
-            message: responseJson?.message,
-          });
-        } else if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
-          this.setState({
-            productsAddingToCart: [],
-            isFetching: false,
-            isShowError: true,
-            showAlertModal: true,
-            message: responseJson?.message,
-          });
-        } else if (apiRequestCallId === this.updateQtyApiCallId) {
+       else if (apiRequestCallId === this.updateQtyApiCallId) {
           this.setState({
             isShowError: false,
             showAlertModal: true,
@@ -749,33 +725,8 @@ export default class ProductDescriptionController extends BlockComponent<
             message: errorReponse,
             cart: null,
           });
-        } else if (apiRequestCallId === this.addToCartApiCallId) {
-          this.setState({
-            isFetching: false,
-            isShowError: true,
-            showAlertModal: true,
-            message: errorReponse,
-            productsAddingToCart: [],
-          });
         }
         // Customizable Area Start
-        else if (apiRequestCallId === this.putItemToCartApiCallId) {
-          this.setState({
-            productsAddingToCart: [],
-            isFetching: false,
-            isShowError: true,
-            showAlertModal: true,
-            message: errorReponse,
-          });
-        } else if (apiRequestCallId === this.increaseOrDecreaseCartQuantityApiCallId) {
-          this.setState({
-            productsAddingToCart: [],
-            isFetching: false,
-            isShowError: true,
-            showAlertModal: true,
-            message: responseJson?.message,
-          });
-        }
         // Customizable Area End
       }
     }
@@ -1122,21 +1073,6 @@ export default class ProductDescriptionController extends BlockComponent<
         this.state.cart_id +
         "/update_item_quantity",
       body: httpBody,
-    });
-  };
-
-  viewAll() {
-    const msg: Message = new Message(
-      getName(MessageEnum.NavigationRaiseMessage)
-    );
-    msg.addData(getName(MessageEnum.NavigationPropsMessage), this.props);
-    this.send(msg);
-  }
-
-  similarProducts = (item: any) => {
-    this.props.navigation.push("ProductDescription", {
-      productData: item,
-      isFromSP: false,
     });
   };
 
@@ -1619,8 +1555,8 @@ export default class ProductDescriptionController extends BlockComponent<
             () => {
               this.setAvailbleAttributesForSelected();
               this.setState({
-                quantity: this.state.selectedProduct.attributes.cart_quantity
-                  ? this.state.selectedProduct.attributes.cart_quantity
+                quantity: this.state.selectedProduct?.attributes?.cart_quantity
+                  ? this.state.selectedProduct?.attributes?.cart_quantity
                   : 1,
               });
             }

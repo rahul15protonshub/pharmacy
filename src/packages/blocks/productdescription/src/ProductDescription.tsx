@@ -154,7 +154,7 @@ export default class ProductDescription extends ProductDescriptionController {
     // Customizable Area End
   };
 
-  renderSelectorTools = () => {
+  renderSelectorTools =   () => {
     // Customizable Area Start
     const product_attributes =
       this.state.productData?.attributes?.product_attributes;
@@ -414,7 +414,7 @@ export default class ProductDescription extends ProductDescriptionController {
       }
     });
     if (productImage === "") {
-      productImage = productData?.attributes?.images.data[0]?.attributes?.url;
+      productImage = productData?.attributes?.images?.data[0]?.attributes?.url;
     }
     return (
       <>
@@ -543,7 +543,9 @@ export default class ProductDescription extends ProductDescriptionController {
             <View style={[styles.insidePriceBox2]}>
               {stock_qty !== 0 ? (
                 <View style={[styles.tools, {}]}>
-                  <TouchableOpacity activeOpacity={1} style={styles.minusview}
+                  <TouchableOpacity
+                  testID="updatecartvaluepress"
+                  activeOpacity={1} style={styles.minusview}
                     onPress={() => this.onUpdateCartValue(false)}
                   >
                     <Text style={styles.minus}>-</Text>
@@ -551,7 +553,9 @@ export default class ProductDescription extends ProductDescriptionController {
                   <View style={styles.countview}>
                     <Text style={styles.count}>{this.state.quantity}</Text>
                   </View>
-                  <TouchableOpacity activeOpacity={1} style={styles.plusview}
+                  <TouchableOpacity 
+                  testID="updatecartvaluepress1"
+                  activeOpacity={1} style={styles.plusview}
                     onPress={() => this.onUpdateCartValue(true)}
                   >
                     <Text style={styles.plus}>+</Text>
@@ -898,7 +902,7 @@ export default class ProductDescription extends ProductDescriptionController {
             <View
               style={styles.BUYbuttonCustom}
             >
-              <Text style={styles.BUYcustomTxtStyle}>Close</Text>
+              <Text style={[styles.BUYcustomTxtStyle,{textAlignVertical:'center'}]}>Close</Text>
             </View>
           </TouchableOpacity>
         </SafeAreaView>

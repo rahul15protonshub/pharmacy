@@ -87,7 +87,7 @@ export default StyleSheet.create({
     width: "70%",
     fontSize: scale(14),
     marginVertical: 4,
-    color: "#999A9C",
+    marginLeft:scale(6),
     fontFamily: FONTS.GTWalsheimProRegular,
   },
   infoText: {

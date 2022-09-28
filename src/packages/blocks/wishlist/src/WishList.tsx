@@ -72,22 +72,38 @@ export default class WishList extends WishListController {
 
   renderListItem = (item: any) => {
     const data = item.item.data.attributes?.id?.data?.attributes;
+    const product =item.item.data.attributes?.id?.data
+    
+    let productDefaultWeight1 = `${product.attributes.weight ?? ""} ${product.attributes.weight_unit ?? ""}`;
+    let productDefaultPrice = product.attributes.on_sale ? product.attributes.price_including_tax : product.attributes.actual_price_including_tax
+    let productDefaultNonDiscountedPrice = product.attributes.on_sale ? product.attributes.actual_price_including_tax : null
+    let productDefaultCartQuantity = product.attributes.cart_quantity
+    let productDefaultStockQuantity = product.attributes.stock_qty
+    let productDefaultImage=product.attributes.images?.data[0].attributes.url
+
+    if (product.attributes.default_variant) {
+      const defaultVariantDetails = product.attributes.catalogue_variants.find((v: any) => (
+          parseInt(v.id) === product.attributes.default_variant.id
+      ))
+
+    if (defaultVariantDetails) {
+          productDefaultPrice = defaultVariantDetails.attributes.on_sale ? defaultVariantDetails.attributes.sale_price : defaultVariantDetails.attributes.price
+          productDefaultNonDiscountedPrice = defaultVariantDetails.attributes.on_sale ? defaultVariantDetails.attributes.price : null
+          const weightDetails = defaultVariantDetails?.attributes?.variant_property?.data.find((p: any) => (
+              p.attributes.catalogue_id ==defaultVariantDetails.attributes.catalogue_id
+          ))
+          if (weightDetails) {
+            productDefaultWeight1 = weightDetails.attributes.property_name
+          }
+      }
+      productDefaultImage=defaultVariantDetails.attributes.images?.data[0].attributes.url
+      // productDefaultCartQuantity = defaultVariantDetails.attributes.cart_quantity
+      productDefaultStockQuantity = defaultVariantDetails.attributes.stock_qty
+  }
     const id = item.item.data?.attributes?.id?.data?.id;
     if (!id) {
       return;
     }
-    let productImage = "";
-    if (data?.images?.data && data?.images?.data.length > 0) {
-      data?.images.data.map((variant: any) => {
-        if (variant.attributes.is_default) {
-          productImage = variant.attributes.url;
-        }
-      });
-      if (productImage === "") {
-        productImage = data?.images?.data[0].attributes.url;
-      }
-    }
-    let productDefaultWeight = `${data.weight ?? ""} ${data.weight_unit ?? ""}`;
      const isInCart = data?.cart_quantity > 0 ? true : false;
     return (
       // Customizable Area Start
@@ -111,27 +127,27 @@ export default class WishList extends WishListController {
           )}
         </TouchableOpacity>
         <View style={styles.titleContainer}>
-          <Image source={{ uri: productImage }} style={styles.BottalImage} />
+          <Image source={{ uri: productDefaultImage }} style={styles.BottalImage} />
           <Text numberOfLines={1} style={styles.titleNameStyle}>
             {data.name}
           </Text>
           {data?.on_sale ? (
             <View style={styles.discountRow}>
               <Text style={styles.price}>
-                {themeJson.attributes.currency_type} {data?.price_including_tax}
+                {themeJson.attributes.currency_type} {productDefaultPrice}
               </Text>
               <Text style={styles.discountPrice}>
                 {" "}
                 {themeJson.attributes.currency_type}{" "}
-                {data?.actual_price_including_tax}
+                {productDefaultNonDiscountedPrice}
               </Text>
             </View>
           ) : (
             <Text style={[styles.price, {}]}>
-              {themeJson.attributes.currency_type} {data.price_including_tax}
+              {themeJson.attributes.currency_type} {productDefaultPrice}
             </Text>
           )}
-           <Text style={styles.weight}>{productDefaultWeight}</Text>
+           <Text style={styles.weight}>{productDefaultWeight1}</Text>
         </View>
        {data.stock_qty? <TouchableOpacity onPress={() => this.onAddtocartPress(item.item.data)} style={styles.addtocartitem}>
           <View >

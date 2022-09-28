@@ -59,7 +59,7 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
   constructor(props: Props) {
     super(props);
     Prescriptionuploads.instance = this;
-    let createdata = [{ selectedItems: [], forselect: this.props.productData, browsefile: [], is_selecatable: false, selected_values: '' }]
+    let createdata = [{ selectedItems: [], forselect: this.props.productData, browsefile: [], is_selecatable: false, selected_values: '',name:'' }]
     this.state = {
       mainarrLength: this.props.productData.length,
       showbrowsecount: 1,
@@ -122,10 +122,11 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
       return false
     }
     var empIds = this.state.selectedItems
+    console.log('empIds',empIds)
     var searchData = this.props.productData.filter(function (itm: any) {
       return empIds.indexOf(itm.id) == -1;
     });
-    let createdata = { selectedItems: [], forselect: searchData, browsefile: [], is_selecatable: false, selected_values: '' }
+    let createdata = { selectedItems: [], forselect: searchData, browsefile: [], is_selecatable: false, selected_values: '',name:'' }
     let olddata = this.state.dataArr
     let lastiindex = olddata.length - 1
     olddata[lastiindex].is_selecatable = true
@@ -148,12 +149,12 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
         DocumentPicker.types.pptx,
       ],
     }).then((response) => {
-
      RNFS.readFile( response[0].uri, 'base64')
         .then((data:any) => {
           let tempbrowsefile = this.state.dataArr
           let finaldata = 'data:' + response[0].type + ';base64,' + data
           tempbrowsefile[index].browsefile = [finaldata]
+          tempbrowsefile[index].name = response[0].name
           this.setState({ dataArr: tempbrowsefile })
           if (tempbrowsefile[index].selectedItems.length > 0 && this.props.productData?.length > this.state.selectedItems.length) {
             this.setState({ showanother: true })
@@ -179,14 +180,48 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
   deletebrowsefile = async (index: any) => {
     let tempbrowsefile = this.state.dataArr
     tempbrowsefile[index].browsefile = []
+    tempbrowsefile[index].name = ''
     this.setState({ dataArr: tempbrowsefile, showanother: false, allfileupload: false })
   }
   deleteview = async (index: any) => {
+    let allselecteditem=this.state.selectedItems
     let tempbrowsefile = this.state.dataArr
-      tempbrowsefile.splice(index, 1);
-      let newindex=tempbrowsefile.length-1
+    console.log('tempbrowe',tempbrowsefile)
+    let selecteddata=tempbrowsefile[index].selectedItems
+    let forselect=tempbrowsefile[index].forselect
+    let newindex= tempbrowsefile.length-1
+    let showanother=true
+    if(selecteddata.length>0){
+      for(let i=0;i<selecteddata.length;i++){
+        var selected_index_find = allselecteditem.findIndex((x:any)=>x == selecteddata[i])
+        if(selected_index_find!=-1){
+          allselecteditem.splice(selected_index_find, 1);
+        }
+        var index_find = forselect.findIndex((x:any)=>x.id == selecteddata[i])
+        if(index_find!=-1){
+        
+         if(newindex!=0){
+          tempbrowsefile[newindex].forselect.push(forselect[index_find])
+          tempbrowsefile[newindex].is_selecatable = false
+          console.log('tempbrowe2',tempbrowsefile)
+         } 
+        }
+      }
+    }else{
       tempbrowsefile[newindex].is_selecatable = false
-    this.setState({ dataArr: tempbrowsefile,  allfileupload: false,showanother: true })
+    }
+    if(tempbrowsefile[newindex].selectedItems.length==0){
+      showanother=false
+    }
+    if(newindex==1){
+      tempbrowsefile[0].is_selecatable = false
+      showanother=true
+     }else{
+      tempbrowsefile[newindex].is_selecatable = false
+     }
+     tempbrowsefile.splice(index, 1);
+    console.log('tempbrowe2',tempbrowsefile)
+    this.setState({ dataArr: tempbrowsefile,  allfileupload: false,showanother: showanother })
   }
 
   render() {
@@ -246,7 +281,7 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
                                   style={styles.browseimg}
                                 />
                                 <View>
-                                <Text style={styles.labelText12}>{'Prescription' + (index + 1)}</Text>
+                                <Text numberOfLines={1} style={styles.labelText12}>{item.name}</Text>
                                 <View style={{marginTop:verticalScale(6), backgroundColor:COLOR_CONST.newtheme,borderRadius:scale(5),width:windowWidth*55/100,height:verticalScale(5)}}></View>
                                 <Text style={[styles.labelText22,{}]}>Completed</Text>
                                 </View>

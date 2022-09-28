@@ -173,8 +173,8 @@ export default StyleSheet.create({
     lineHeight: scale(18),
     color: COLOR_CONST.newtheme,
     fontFamily: FONTS.GTWalsheimProMedium,
-    marginTop: verticalScale(8),
-    marginBottom: verticalScale(9),
+    marginTop: verticalScale(5),
+    marginBottom: verticalScale(5),
     height: scale(18),
     alignSelf: 'center',
   },
@@ -192,9 +192,9 @@ export default StyleSheet.create({
     color: COLOR_CONST.lightgraycolor,
     fontFamily: FONTS.GTWalsheimProMedium,
     textDecorationLine: 'line-through',
-    marginTop: verticalScale(8),
+    marginTop: verticalScale(5),
     marginLeft: scale(2),
-    marginBottom: verticalScale(9),
+    marginBottom: verticalScale(5),
     height: scale(18),
   },
 
@@ -380,7 +380,7 @@ export default StyleSheet.create({
   },
 
   touchableOpacityStyle: {
-    backgroundColor: COLOR_CONST.white,
+    
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
@@ -492,8 +492,8 @@ export default StyleSheet.create({
   },
   addtocartitem: {
     alignItems: 'center',
-    paddingVertical: verticalScale(12),
-    marginTop: verticalScale(14),
+    paddingVertical: verticalScale(11),
+    marginTop: verticalScale(8),
     borderTopColor: themeJson.attributes.light_grey,
     borderTopWidth: scale(1),
   },
@@ -507,7 +507,7 @@ export default StyleSheet.create({
   weight: {
     fontFamily: FONTS.GTWalsheimProRegular,
     fontSize: scale(13),
-    lineHeight: scale(24),
+    lineHeight: scale(22),
     color: themeJson.attributes.dark_grey,
     alignSelf:'center'
 },

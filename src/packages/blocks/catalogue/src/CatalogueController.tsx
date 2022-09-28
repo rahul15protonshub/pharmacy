@@ -601,9 +601,12 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
           // @ts-ignore
           await StorageProvider.set("cart_length", responseJson.data.attributes.order_items.length.toString());
           //@ts-ignore
-        } else if (apiRequestCallId === this.putItemToCartApiCallId) {
+        } else if (apiRequestCallId === this.putItemToCartApiCallId) {  
+          console.log('data1',responseJson)
+          console.log('data2',this.state.catalogueFilteredProducts)
           this.state.catalogueFilteredProducts?.forEach((product: any) => {
             const orderItem = responseJson.data.attributes.order_items.find((item: any) => parseInt(product.id) === item.attributes.catalogue_id);
+            console.log('data3',orderItem)
             if (!product.attributes.cart_quantity) {
               product.attributes.cart_quantity = orderItem ? orderItem.attributes.quantity ?? 1 : null;
             }
@@ -617,9 +620,11 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
           // @ts-ignore
           // @ts-ignore
           await StorageProvider.set("cart_length", responseJson.data.attributes.order_items.length.toString());
- } else if (apiRequestCallId === this.postCreateCartApiCallId) {
+        } else if (apiRequestCallId === this.postCreateCartApiCallId) {
+          console.log('data',responseJson)
           this.state.catalogueFilteredProducts?.forEach((product: any) => {
             const orderItem = responseJson.data.attributes.order_items.find((item: any) => parseInt(product.id) === item.attributes.catalogue_id);
+            
             if (!product.attributes.cart_quantity) {
               product.attributes.cart_quantity = orderItem ? orderItem.attributes.quantity ?? 1 : null;
             }

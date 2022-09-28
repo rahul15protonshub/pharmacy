@@ -3,7 +3,9 @@ Feature: ProductDescription
     Scenario: User navigates to ProductDescription
         Given I am a User loading ProductDescription
         When I navigate to the ProductDescription
+        Then ProductDescription will load  ProductBox  with out errors
         Then ProductDescription will load with out errors
+        Then ProductDescription will load Prescriptionuploads with out errors
         And Load product description data without errors
         And Failed to Load product description data
         And Call notify product api without errors
@@ -11,6 +13,7 @@ Feature: ProductDescription
         And Get buy product without errors
         And Failed to get buy product
         And Update Qty without errors
+        And Update Qty with success
         And Failed to update qty
         And Add to cart without errors
         And Failed to add to cart
@@ -22,6 +25,12 @@ Feature: ProductDescription
         And Failed to get product id
         And Get product description id without errors
         And Failed to get product description id
+        Then Get product getCartId without errors
+        Then Get product getCartId with errors
+        Then productdescription will load putItemToCartApiCallId without errors
+        Then productdescription will load putItemToCartApiCallId with errors
+        Then productdesc will load increaseOrDecreaseCartQuantityApiCallId without errors
+        Then productdesc will load increaseOrDecreaseCartQuantityApiCallId with errors
         And Render guest modal
         And Render view all components
         And I can enter text with out errors

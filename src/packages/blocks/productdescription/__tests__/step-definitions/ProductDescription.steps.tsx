@@ -1,3 +1,4 @@
+/// <reference types="@types/jest" />
 import { defineFeature, loadFeature } from "jest-cucumber";
 import { shallow, ShallowWrapper } from "enzyme";
 
@@ -11,8 +12,9 @@ import MessageEnum, {
 import React from "react";
 import ProductDescription from "../../src/ProductDescription";
 import ReviewList from "../../src/ReviewList";
-
+import Prescriptionuploads from '../../../../components/src/precriptionuploads'
 import { mockProductData } from "../../__mocks__/mockProductData";
+import  ProductBox from "../../../../blocks/catalogue/src/components/ProductBox"
 
 const screenProps = {
   navigation: {
@@ -22,8 +24,11 @@ const screenProps = {
     push: jest.fn(),
     state: {
       params: {
-        productData: {},
+        productData: {product:{id:23}},
+        isFromSP:true,
+        catalogue_variant_id:12
       },
+      isFromDeepLink:true
     },
   },
   id: "ProductDescription",
@@ -100,6 +105,7 @@ const product_details ={data:
     height: null,
     weight: '1.0',
     brand: [],
+    order_items:[{attributes:{catalogue_id:"96",}}],
     tags: [],
     reviews: [],
     current_availibility: 'in_stock',
@@ -110,7 +116,7 @@ const product_details ={data:
     product_notified: false,
     cart_items: {},
     average_rating: 0,
-    images: [],
+    images: {data:[{attributes:{uri:'test'}}]},
     product_attributes: [],
     availability: [],
     deep_link: '',
@@ -118,7 +124,7 @@ const product_details ={data:
     variants_in_cart: [],
     can_review: false,
     similar_products: [],
-    category: []
+    category: [],
   }
 }
 }
@@ -140,16 +146,40 @@ defineFeature(feature, (test) => {
 
     when("I navigate to the ProductDescription", () => {
       instance = exampleBlockA.instance() as ProductDescription;
+      instance.componentDidMount()
+      instance.getToken()
+      instance.getProductDescriptionRequest('12345')
+      instance.setState({appState:'background'})
+      instance._handleAppStateChange('active')
       instance.setState({
-        productData:product_details
+        productData:product_details.data,catalogue_id:''
       })
+      instance.setState({selectedProduct:product_details.data})
       instance.renderReviewList()
+      instance.notifyProduct()
+    });
+
+    then("ProductDescription will load  ProductBox  with out errors", () => {
+      //  instance.setState({
+      //   productData:product_details.data,catalogue_id:''
+      // })
+      // exampleBlockA.find(ProductBox).first().prop('onQuantityIncrease')()     
+
     });
 
     then("ProductDescription will load with out errors", () => {
       expect(exampleBlockA).toBeTruthy();
 
     });
+
+    then("ProductDescription will load Prescriptionuploads with out errors", () => {
+      instance.setState({prescriptionModal:true})
+      // exampleBlockA.find(Prescriptionuploads).first().prop('hideErrorModal')()
+      exampleBlockA.find(Prescriptionuploads).first().prop('uploadprescription')(product_details)
+      instance.setState({isFetching:true})
+      
+    });
+    
 
     then("Load product description data without errors", () => {
       const msgLoadDataAPI = new Message(
@@ -205,6 +235,7 @@ defineFeature(feature, (test) => {
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
           data: [{}],
+          message:'success'
         }
       );
       instance.getNotifyProductApiCallId = msgLoadDataAPI.messageId;
@@ -225,7 +256,12 @@ defineFeature(feature, (test) => {
           errors: [{}],
         }
       );
-
+      msgLoadPrivacyErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
+        }
+      );
       msgLoadPrivacyErrorRestAPI.addData(
         getName(MessageEnum.RestAPIResponceDataMessage),
         msgLoadPrivacyErrorRestAPI.messageId
@@ -287,9 +323,29 @@ defineFeature(feature, (test) => {
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
           data: [{}],
+          message:'success'
         }
       );
       instance.updateQtyApiCallId = msgLoadDataAPI.messageId;
+      instance.setState({isFromSubscription:true})
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("Update Qty with success", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          success: true,
+        }
+      );
+      instance.updateQtyApiCallId = msgLoadDataAPI.messageId;
+      instance.setState({isFromSubscription:true})
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
 
@@ -328,6 +384,7 @@ defineFeature(feature, (test) => {
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
           data: [{}],
+          message:'success'
         }
       );
       instance.addToCartApiCallId = msgLoadDataAPI.messageId;
@@ -348,7 +405,12 @@ defineFeature(feature, (test) => {
           errors: [{}],
         }
       );
-
+      msgLoadPrivacyErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
+        }
+      );
       msgLoadPrivacyErrorRestAPI.addData(
         getName(MessageEnum.RestAPIResponceDataMessage),
         msgLoadPrivacyErrorRestAPI.messageId
@@ -369,9 +431,12 @@ defineFeature(feature, (test) => {
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
           data: [{}],
+          message:'success'
         }
       );
       instance.addToWishlistApiCallId = msgLoadDataAPI.messageId;
+      instance.LikeFlag='description'
+      instance.updateMyWhishList()
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
 
@@ -389,7 +454,12 @@ defineFeature(feature, (test) => {
           errors: [{}],
         }
       );
-
+      msgLoadPrivacyErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
+        }
+      );
       msgLoadPrivacyErrorRestAPI.addData(
         getName(MessageEnum.RestAPIResponceDataMessage),
         msgLoadPrivacyErrorRestAPI.messageId
@@ -410,6 +480,7 @@ defineFeature(feature, (test) => {
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
           data: [{}],
+          message:'success'
         }
       );
       instance.removeFromWishlistApiCallId = msgLoadDataAPI.messageId;
@@ -430,7 +501,12 @@ defineFeature(feature, (test) => {
           errors: [{}],
         }
       );
-
+      msgLoadPrivacyErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
+        }
+      );
       msgLoadPrivacyErrorRestAPI.addData(
         getName(MessageEnum.RestAPIResponceDataMessage),
         msgLoadPrivacyErrorRestAPI.messageId
@@ -451,7 +527,10 @@ defineFeature(feature, (test) => {
       msgLoadDataAPI.addData(
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
-          data: [{}],
+          data: {
+            order_id:'2345'
+          },
+          message:'success'
         }
       );
       instance.getCartProductId = msgLoadDataAPI.messageId;
@@ -472,7 +551,12 @@ defineFeature(feature, (test) => {
           errors: [{}],
         }
       );
-
+      msgLoadPrivacyErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
+        }
+      );
       msgLoadPrivacyErrorRestAPI.addData(
         getName(MessageEnum.RestAPIResponceDataMessage),
         msgLoadPrivacyErrorRestAPI.messageId
@@ -492,10 +576,50 @@ defineFeature(feature, (test) => {
       msgLoadDataAPI.addData(
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
-          data: [{}],
+          data: [{attributes:{
+            name: 'ABC 38',
+            description: '',
+            manufacture_date: null,
+            block_qty: 0,
+            price: 37.7,
+            on_sale: false,
+            sale_price: null,
+            discount: null,
+            recommended: true,
+            sku: 'COD0000063',
+            length: null,
+            breadth: null,
+            height: null,
+            weight: '1.0',
+            brand: [],
+            order_items:[{attributes:{catalogue_id:"96",}}],
+            tags: [],
+            reviews: [],
+            current_availibility: 'in_stock',
+            default_variant: [],
+            stock_qty: 76,
+            cart_quantity: [{test:''}],
+            wishlisted: false,
+            product_notified: false,
+            cart_items: {},
+            average_rating: 0,
+            images: {data:[{attributes:{uri:'test'}}]},
+            product_attributes: [],
+            availability: [],
+            deep_link: '',
+            catalogue_variants: [{
+              id:12,
+              attributes:{stock_qty:50}
+            }],
+            variants_in_cart: [],
+            can_review: false,
+            similar_products: [],
+            category: [],
+          }}],
         }
       );
       instance.getCartProductDescriptionId = msgLoadDataAPI.messageId;
+      instance.getCartProductDescriptionSuccessCallBack(product_details)
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
 
@@ -513,7 +637,12 @@ defineFeature(feature, (test) => {
           errors: [{}],
         }
       );
-
+      msgLoadPrivacyErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
+        }
+      );
       msgLoadPrivacyErrorRestAPI.addData(
         getName(MessageEnum.RestAPIResponceDataMessage),
         msgLoadPrivacyErrorRestAPI.messageId
@@ -522,7 +651,149 @@ defineFeature(feature, (test) => {
         msgLoadPrivacyErrorRestAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadPrivacyErrorRestAPI);
     });
+    then("Get product getCartId without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+        }
+      );
+      instance.getCartId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
 
+    then("Get product getCartId with errors", () => {
+      const msgLoadPrivacyErrorRestAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadPrivacyErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadPrivacyErrorRestAPI
+      );
+      msgLoadPrivacyErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          errors: [{}],
+        }
+      );
+      msgLoadPrivacyErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
+        }
+      );
+      msgLoadPrivacyErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadPrivacyErrorRestAPI.messageId
+      );
+      instance.getCartId =
+        msgLoadPrivacyErrorRestAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadPrivacyErrorRestAPI);
+    });
+    then("productdescription will load putItemToCartApiCallId without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+          message:'success'
+        }
+      );
+      instance.putItemToCartApiCallId = msgLoadDataAPI.messageId;
+      instance.setState({similarproductList:product_details})
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+
+    then("productdescription will load putItemToCartApiCallId with errors", () => {
+      const msgLoadPrivacyErrorRestAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadPrivacyErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadPrivacyErrorRestAPI
+      );
+      msgLoadPrivacyErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          errors: [{}],
+        }
+      );
+      msgLoadPrivacyErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
+        }
+      );
+
+      msgLoadPrivacyErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadPrivacyErrorRestAPI.messageId
+      );
+      instance.putItemToCartApiCallId =
+        msgLoadPrivacyErrorRestAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadPrivacyErrorRestAPI);
+    });
+    then("productdesc will load increaseOrDecreaseCartQuantityApiCallId without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+          message:'success'
+        }
+      );
+      instance.increaseOrDecreaseCartQuantityApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+
+    then("productdesc will load increaseOrDecreaseCartQuantityApiCallId with errors", () => {
+      const msgLoadPrivacyErrorRestAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadPrivacyErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadPrivacyErrorRestAPI
+      );
+      msgLoadPrivacyErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          errors: [{}],
+        }
+      );
+      msgLoadPrivacyErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
+        }
+      );
+      msgLoadPrivacyErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadPrivacyErrorRestAPI.messageId
+      );
+      instance.increaseOrDecreaseCartQuantityApiCallId =
+        msgLoadPrivacyErrorRestAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadPrivacyErrorRestAPI);
+    });
+    
     then("Render guest modal", () => {
       instance = exampleBlockA.instance() as ProductDescription;
       instance.setState({
@@ -537,6 +808,16 @@ defineFeature(feature, (test) => {
         (node) => node.prop("testID") === "buttonGuestSignIn"
       );
       buttonComponent.simulate("press");
+      buttonComponent = exampleBlockA.findWhere(
+        (node) => node.prop("testID") === "updatecartvaluepress"
+      );
+      buttonComponent.simulate("press");
+      buttonComponent = exampleBlockA.findWhere(
+        (node) => node.prop("testID") === "updatecartvaluepress1"
+      );
+      buttonComponent.simulate("press");
+
+      
 
     });
 
@@ -674,6 +955,7 @@ defineFeature(feature, (test) => {
     });
 
     then("I can leave the screen with out errors", () => {
+      instance.handleBackButtonClick
       instance.componentWillUnmount();
       expect(exampleBlockA).toBeTruthy();
 

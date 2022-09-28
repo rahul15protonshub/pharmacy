@@ -88,7 +88,7 @@ const ProductBox: React.FC<ProductBoxProps> = ({
             }
         }
         productDefaultImage=defaultVariantDetails.attributes.images?.data[0].attributes.url
-        productDefaultCartQuantity = defaultVariantDetails.attributes.cart_quantity
+        // productDefaultCartQuantity = defaultVariantDetails.attributes.cart_quantity
         productDefaultStockQuantity = defaultVariantDetails.attributes.stock_qty
     }
 
