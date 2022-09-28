@@ -933,7 +933,7 @@ class AppHeaderScreen extends HeaderController {
                             //@ts-ignore
                             this.props?.history?.push({
                               pathname: localStorage.getItem("token")
-                                ? "/home-page"
+                                ? localStorage.getItem("guestuser")?"/login":"/home-page"
                                 : "/",
                             });
                           }

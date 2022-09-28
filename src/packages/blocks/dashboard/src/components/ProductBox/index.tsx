@@ -29,7 +29,6 @@ const ProductBox: React.FC<ProductBoxProps> = ({
 }) => {
   let productDefaultWeight = <>{product.attributes.weight ?? ""} {product.attributes.weight_unit ?? ""}</>
   let defaultImage=product.attributes.images?.data[0].attributes.url
-
     let productDefaultPrice = product.attributes.on_sale ? product.attributes.price_including_tax : product.attributes.actual_price_including_tax
     let productDefaultNonDiscountedPrice = product.attributes.on_sale ? product.attributes.actual_price_including_tax : null
     let productDefaultCartQuantity = product.attributes.cart_quantity
@@ -64,6 +63,7 @@ const ProductBox: React.FC<ProductBoxProps> = ({
               src={defaultImage}
               alt="Card image cap"
             />
+
             <button
               className="product_wishlist_button"
               onClick={(e) => {
