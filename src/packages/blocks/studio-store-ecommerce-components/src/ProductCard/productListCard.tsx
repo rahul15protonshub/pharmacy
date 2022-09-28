@@ -89,8 +89,8 @@ const ProductCard: any = withRouter((props: any) => {
             onProductDeleteFromWishlist={() => props.deleteWishlist(product.id)}
 
             addToCartLoading={product.addToCartLoading}
-            onProductDecreaseCartQuantity={() => props.increaseOrDecreaseCartQuantity(product, -1, product.attributes.default_variant?.id)}
-            onProductIncreaseCartQuantity={() => props.increaseOrDecreaseCartQuantity(product, 1, product.attributes.default_variant?.id)}
+            onProductDecreaseCartQuantity={props.onProductDecreaseCartQuantity}
+            onProductIncreaseCartQuantity={props.onProductIncreaseCartQuantity}
             onProductAddToCart={() => props.addToCart(product)} isProductAddtoCart={false}          />
         </Col>
       );

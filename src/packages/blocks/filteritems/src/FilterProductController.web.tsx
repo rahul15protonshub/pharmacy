@@ -1471,7 +1471,6 @@ export default class FilteritemsController extends BlockComponent<
 
   // Customizable Area Start
   increaseOrDecreaseCartQuantity(product: any, increment: number) {
-    console.log('product :>> ', product);
     this.setState({
       productsAddingToCart: [...this.state.productsAddingToCart, product.id],
     });
