@@ -391,6 +391,7 @@ export const PrescriptionModal = (props: any) => {
   const [uploading, setUploading] = useState<any>([]);
   const [selectedProduct, setSelectedProduct] = useState<any>([]);
   const [preFiles, setPreFiles] = useState<any>([]);
+  const [btndisable, setBtndisable] = useState<any>(false);
   const [dropDown, setDropdown] = useState([
     {
       id: 0,
@@ -543,13 +544,15 @@ export const PrescriptionModal = (props: any) => {
     }
   }
 
-  const handleDeleteUploadFile = (id: any) => {
+  const handleDeleteUploadFile = (id: any) => {   
     setPrescriptionFile(
       prescriptionFile.filter((elm: any, index: any) => index !== id)
     );
     setUploading(uploading.filter((el: any) => el.id !== id));
     setProgress(progress.filter((item: any, index: any) => index != id));
+    setPreFiles(preFiles.filter((item: any, index: any) => index != id));
   };
+
   const handleUploadAnotherPre = () => {
     setSelectedProduct([]);
     let remainProduct = dropDown[dropDown.length - 1].options.filter(
@@ -563,6 +566,7 @@ export const PrescriptionModal = (props: any) => {
     };
     setDropdown((dropDown) => [...dropDown, obj]);
   };
+
   const handleOnSelect = (e: any, index: number) => {
     let proArr: any = [];
     e.map((elm: any) => {
@@ -579,8 +583,10 @@ export const PrescriptionModal = (props: any) => {
     setDropdown(newArr);
   };
   const removeUploadFile = (id: any) => {
+    setSelectedProduct(dropDown[0].selected)
     let updateArray = dropDown.filter((elm: any, index: any) => index != id);
     setDropdown(updateArray);
+    setPreFiles(preFiles.filter((item: any, index: any) => index != id));
   };
   return (
     <div className={` modal-wrap`}>
@@ -648,6 +654,7 @@ export const PrescriptionModal = (props: any) => {
                                   color: "#3FC1CB",
                                   cursor: "pointer",
                                 }}
+                                className={dropDown.length > index + 1 ? "d-none" : ""}
                                 onClick={() => handleDeleteUploadFile(index)}
                               >
                                 x
@@ -735,7 +742,7 @@ export const PrescriptionModal = (props: any) => {
                     dropDown[dropDown.length - 1].options.length !=
                     selectedProduct.length
                       ? true
-                      : false || progress[progress.length-1] != 100
+                      : false || progress.length!=dropDown.length 
                       ? true
                       : false
                   }
