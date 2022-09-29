@@ -36,8 +36,191 @@ defineFeature(feature, (test) => {
 
         when('I navigate to the Signup', () => {
              instance = signupBlockWrapper.instance() as Signup
+             instance.getHelpCenterData()
  
         });
+        
+        then("Signup will load sendOtpApiCallId without errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{}],
+              }
+            );
+            instance.sendOtpApiCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("Signup will load sendOtpApiCallId with errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                errors: [{}],
+              }
+            );
+            msgLoadDataAPI.addData(
+                getName(MessageEnum.RestAPIResponceErrorMessage),
+                {
+                  errors: [{}],
+                }
+              );
+            instance.sendOtpApiCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+                    
+        then("Signup will load apiSocialLoginCallId without errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{}],
+              }
+            );
+            instance.apiSocialLoginCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("Signup will load apiSocialLoginCallId with errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                errors: [{}],
+              }
+            );
+            msgLoadDataAPI.addData(
+                getName(MessageEnum.RestAPIResponceErrorMessage),
+                {
+                  errors: [{}],
+                }
+              );
+            instance.apiSocialLoginCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("Signup will load apiGuestLoginCallId without errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{}],
+              }
+            );
+            instance.apiGuestLoginCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("Signup will load apiGuestLoginCallId with errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                errors: [{}],
+              }
+            );
+            msgLoadDataAPI.addData(
+                getName(MessageEnum.RestAPIResponceErrorMessage),
+                {
+                  errors: [{}],
+                }
+              );
+            instance.apiGuestLoginCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("Signup will load getHelpCenterApiCallId without errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                data: [{}],
+              }
+            );
+            instance.getHelpCenterApiCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+          then("Signup will load getHelpCenterApiCallId with errors", () => {
+            const msgLoadDataAPI = new Message(
+              getName(MessageEnum.RestAPIResponceMessage)
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceDataMessage),
+              msgLoadDataAPI.messageId
+            );
+            msgLoadDataAPI.addData(
+              getName(MessageEnum.RestAPIResponceSuccessMessage),
+              {
+                errors: [{}],
+              }
+            );
+            msgLoadDataAPI.addData(
+                getName(MessageEnum.RestAPIResponceErrorMessage),
+                {
+                  errors: [{}],
+                }
+              );
+            instance.getHelpCenterApiCallId = msgLoadDataAPI.messageId;
+            runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          });
+
+        then('Signup will load  inputs without errors', () => {
+          let txtfullname=  signupBlockWrapper.findWhere((node)=>node.prop('testID')===('txtfullname'))
+          txtfullname.simulate('focus','email')
+          txtfullname.simulate('changeText', 'hello');
+          txtfullname.simulate('blur')
+          txtfullname.simulate('onSubmitEditing',{ target: { value: 'test' } });
+          instance.setState({email: false, password: true, fullName: true})
+          instance.resetErrors()
+
+          let txtpassword=  signupBlockWrapper.findWhere((node)=>node.prop('testID')===('txtpassword'))
+          txtpassword.simulate('focus','email')
+          txtpassword.simulate('changeText', 'hello');
+          txtpassword.simulate('blur')
+          txtpassword.simulate('onSubmitEditing',{ target: { value: 'test' } });
+          
+
+        });
+
+          
 
         then('Signup will load with out errors', () => {
             expect(signupBlockWrapper).toBeTruthy()

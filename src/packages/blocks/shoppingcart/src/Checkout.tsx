@@ -79,6 +79,7 @@ export default class Checkout extends CheckoutController {
             <View style={styles.selectAddressRow}>
               <Text style={styles.billingAddress}>Billing Address</Text>
               <TouchableOpacity
+              testID="pressBillingAdd"
                 onPress={() =>
                   this.props.navigation.navigate("SavedAddress", {
                     onSetAddress: (addressData: any) =>
@@ -96,6 +97,7 @@ export default class Checkout extends CheckoutController {
               <View>
                 <Text style={styles.inputText}>Name</Text>
                 <TextInput
+                testID="txtname"
                   style={styles.textInput}
                   value={this.state.textInputData.name}
                   {...this.textInputNameProps}
@@ -109,6 +111,7 @@ export default class Checkout extends CheckoutController {
                   Flat / House / Apartment No.
                 </Text>
                 <TextInput
+                testID="txtflat"
                   style={styles.textInput}
                   value={this.state.textInputData.flat_no}
                   {...this.textInputFlatProps}
@@ -123,6 +126,7 @@ export default class Checkout extends CheckoutController {
                 />
                 <Text style={styles.inputText}>Address Line 1</Text>
                 <TextInput
+                testID="txtaddress1"
                   style={styles.textInput}
                   value={this.state.textInputData.address}
                   {...this.textInputAddressLine1Props}
@@ -151,6 +155,7 @@ export default class Checkout extends CheckoutController {
                 />
                 <Text style={styles.inputText}>City</Text>
                 <TextInput
+                testID="txtcity"
                   style={styles.textInput}
                   value={this.state.textInputData.city}
                   {...this.textInputCityProps}
@@ -180,6 +185,7 @@ export default class Checkout extends CheckoutController {
                 </Picker>
                 <Text style={styles.inputText}>Country</Text>
                 <TextInput
+               testID="txtcountry"
                   style={styles.textInput}
                   value={this.state.textInputData.country}
                   {...this.textInputCountryProps}
@@ -208,6 +214,7 @@ export default class Checkout extends CheckoutController {
                 />
                 <Text style={styles.inputText}>Phone Number</Text>
                 <TextInput
+                testID="txtphonenumber"
                   style={styles.textInput}
                   value={this.state.textInputData.phone_number}
                   keyboardType={"number-pad"}
@@ -220,6 +227,7 @@ export default class Checkout extends CheckoutController {
               </View>
             </KeyboardAwareScrollView>
             <TouchableOpacity
+              testID="pressEnablesameBilling"
               onPress={() => this.enableMyBillingAddressSame()}
               style={styles.checkBoxContainer}
             >
@@ -236,6 +244,7 @@ export default class Checkout extends CheckoutController {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+             testID="pressSaveaddress"
               onPress={() =>
                 this.setState({ saveAddress: !this.state.saveAddress })
               }
@@ -258,6 +267,7 @@ export default class Checkout extends CheckoutController {
                   <View>
                     <Text style={styles.inputText}>Name</Text>
                     <TextInput
+                    testID="txtshpname"
                       style={styles.textInput}
                       value={this.state.shippingtextInputData.name}
                       {...this.shippingtextInputNameProps}
@@ -271,6 +281,7 @@ export default class Checkout extends CheckoutController {
                       Flat / House / Apartment No.
                     </Text>
                     <TextInput
+                    testID="txtshpflat"
                       style={styles.textInput}
                       value={this.state.shippingtextInputData.flat_no}
                       {...this.shippingtextInputFlatProps}
@@ -299,6 +310,7 @@ export default class Checkout extends CheckoutController {
                     />
                     <Text style={styles.inputText}>Address Line 2</Text>
                     <TextInput
+                    testID="txtaddress2"
                       style={styles.textInput}
                       value={this.state.shippingtextInputData.address_line_2}
                       {...this.shippingtextInputAddressLine2Props}
@@ -327,6 +339,7 @@ export default class Checkout extends CheckoutController {
                     />
                     <Text style={styles.inputText}>State</Text>
                     <Picker
+                    testID="changestate"
                       style={styles.textInput}
                       selectedValue={
                         this.state.shippingtextInputData.address_state_id
@@ -384,6 +397,7 @@ export default class Checkout extends CheckoutController {
                   </View>
                 </KeyboardAwareScrollView>
                 <TouchableOpacity
+                testID="pressShipingadd"
                   onPress={() =>
                     this.setState({
                       shippingsaveAddress: !this.state.shippingsaveAddress,

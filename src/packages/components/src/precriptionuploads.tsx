@@ -27,10 +27,10 @@ import {
 } from "../../blocks/studio-store-ecommerce-theme/src/AppAssets/appassets";
 import MultiSelect from 'react-native-multiple-select';
 import DocumentPicker from 'react-native-document-picker';
-import RNFetchBlob from "rn-fetch-blob";
+//@ts-ignore
+import RNFS from 'react-native-fs';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const fs = RNFetchBlob.fs;
 interface Props {
   // Customizable Area Start
   navigation: any;
@@ -149,9 +149,8 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
       ],
     }).then((response) => {
 
-      RNFetchBlob.fs
-        .readFile(response[0].uri, 'base64')
-        .then((data) => {
+     RNFS.readFile( response[0].uri, 'base64')
+        .then((data:any) => {
           let tempbrowsefile = this.state.dataArr
           let finaldata = 'data:' + response[0].type + ';base64,' + data
           tempbrowsefile[index].browsefile = [finaldata]
@@ -169,7 +168,7 @@ class Prescriptionuploads extends BlockComponent<Props, S, SS> {
           this.setState({ allfileupload: checkbrowse })
 
         })
-        .catch((err) => { });
+        .catch((err:any) => { });
 
     }).catch((error) => {
 

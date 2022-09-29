@@ -338,8 +338,8 @@ export default class HyperpayController extends BlockComponent<Props, S, SS> {
         this.handleTrasaction();
       } else if (resp.staatus === "failure" || resp.error) {
       }
-    } catch (error) {
-      alert(error);
+    } catch (error:any) {
+      this.showAlert(error, "");
     }
   }
   handleTrasaction = async () => {

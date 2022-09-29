@@ -52,6 +52,10 @@ defineFeature(feature, (test) => {
             buttonComponent.simulate('press');
             expect(instance.state.txtSavedValue).toEqual("hello@aol.com");
         });
+        then('I can select the touchablefeedback with out errors', () => {
+            let buttonComponent = exampleBlockA.findWhere((node) => node.prop('testID') === 'touchfeedback');
+            buttonComponent.simulate('press');
+        });
 
         then('I can leave the screen with out errors', () => {
             instance.componentWillUnmount()

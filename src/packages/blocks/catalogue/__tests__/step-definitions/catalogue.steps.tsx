@@ -1,5 +1,6 @@
+/// <reference types="@types/jest" />
 import { defineFeature, loadFeature } from "jest-cucumber";
-import { shallow, ShallowWrapper } from "enzyme";
+import { shallow, ShallowWrapper,mount } from "enzyme";
 
 import * as helpers from "../../../../framework/src/Helpers";
 import { runEngine } from "../../../../framework/src/RunEngine";
@@ -10,6 +11,14 @@ import MessageEnum, {
 } from "../../../../framework/src/Messages/MessageEnum";
 import React from "react";
 import Catalogue from "../../src/Catalogue";
+import ProductBox from "../../src/components/ProductBox";
+import TopHeader from "../../src/components/TopHeader";
+import CustomErrorModal from "../../../../blocks/studio-store-ecommerce-components/src/CustomErrorModal/CustomErrorModal";
+import OurProductsButton from "../../src/components/OurProductsButton";
+import SortSelector from "../../src/components/SortSelector";
+import { ScrollView} from "react-native";
+
+const catalogueFilteredProducts = require("./product.json")
 
 const screenProps = {
   navigation: {
@@ -26,6 +35,7 @@ defineFeature(feature, (test) => {
     jest.spyOn(helpers, "getOS").mockImplementation(() => "web");
   });
 
+  
   test("User navigates to Catalogue", ({ given, when, then }) => {
     let catalogueBlock: ShallowWrapper;
     let instance: Catalogue;
@@ -38,16 +48,48 @@ defineFeature(feature, (test) => {
 
     when("I navigate to the Catalogue", () => {
       instance = catalogueBlock.instance() as Catalogue;
+      instance.componentDidMount()
+      instance.getToken()
+      instance.onRegister('353456')
+      instance.onNotification('454354543')
     });
 
     then("Catalogue will load with out errors", () => {
       expect(catalogueBlock).toBeTruthy();
     });
+    then(`Catalogue load TopHeader without errors`, () => {
+      const topHeader = catalogueBlock.find(TopHeader).first();
+      topHeader.prop("onCartPress")()
+      topHeader.prop("onSearchPress")()
+      topHeader.prop("onMenuPress")()
+      topHeader.prop("onLogoPress")()
+      expect(topHeader).toBeTruthy();
+
+      const customerror = catalogueBlock.find(CustomErrorModal).first();
+      customerror.prop("hideErrorModal")()
+      expect(customerror).toBeTruthy();
+     
+  });
+
 
     then("Catalogue will pre-load data without errors", async () => {
       instance = catalogueBlock.instance() as Catalogue;
       instance.componentDidMount();
       instance.getToken();
+      instance.setState({
+        brandSettings:null,
+        bannerImages:[],
+        categoriesArray:[],
+        catalogueFilteredProducts,
+        catalogueFilteredProductsTotalPages: 2,
+        catalogueFilteredProductsActivePage: 1,
+        catalogueFilterSortBy: "created_at",
+        catalogueFilterSortOrder: "desc",
+        noDataFound: false,
+        cartLength: 3,
+
+    })
+
       expect(catalogueBlock).toBeTruthy();
     });
 
@@ -68,6 +110,9 @@ defineFeature(feature, (test) => {
       instance.getProductApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
+    then(`Catalogue load SortSelector without errors`, () => {
+      catalogueBlock.find(SortSelector).first().prop("onChange")?.("created_at", "desc")
+  });
 
     then("Catalogue load recommended data without errors", () => {
       const msgLoadDataAPI = new Message(
@@ -120,6 +165,7 @@ defineFeature(feature, (test) => {
         }
       );
       instance.getCategoriesApiCallId = msgLoadDataAPI.messageId;
+      catalogueBlock.find(OurProductsButton).first().invoke("onButtonPress")()
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
 
@@ -160,6 +206,8 @@ defineFeature(feature, (test) => {
     });
 
     then("Catalogue add to wishlist without errors", () => {
+      instance.onHeartPress(catalogueFilteredProducts[2], "newProducts")
+      instance.setState({productWishlisting: catalogueFilteredProducts[2].id})
       const msgLoadDataAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
       );
@@ -335,6 +383,9 @@ defineFeature(feature, (test) => {
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
     then("Catalogue add more item to cart without errors", () => {
+      instance.increaseOrDecreaseCartQuantity(catalogueFilteredProducts[0], 1)
+      instance.increaseOrDecreaseCartQuantity(catalogueFilteredProducts[0], -1)
+
       const msgLoadDataAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
       );
@@ -395,18 +446,40 @@ defineFeature(feature, (test) => {
         (node) => node.prop("data-testid") === "opencategories"
       );
       formComponent.simulate("press");
-      
+      instance.setState({catalogueFilterLoading:true})
       formComponent = catalogueBlock.findWhere(
-        (node) => node.prop("data-testid") === "scrollviewscroll"
+        (node) => node.prop("testID") === "onscroll"
       );
       formComponent.simulate("press");
+      
       
 
     });
     then("I can select the detail button", () => {
 
-
     });
+
+    then("Catalogue load ProductBox without errors", () => {
+      const component = mount(<ProductBox
+        addToCartLoading={false}
+        onAddToCartPress={jest.fn()}
+        product={catalogueFilteredProducts[0]}
+        onProductPress={jest.fn()}
+        addToWishlistLoading={false}
+        onAddToWishlistPress={jest.fn()}
+        onQuantityDecrease={jest.fn()}
+        onQuantityIncrease={jest.fn()}
+        currency="INR"
+      />);
+      component.prop("onProductPress")();
+      component.prop("onAddToCartPress")();
+      component.prop("onQuantityDecrease")();
+      component.prop("onQuantityIncrease")();
+      component.prop("onAddToWishlistPress")();
+      
+      expect(component).toBeTruthy();
+    });
+
 
     then("I can leave the screen with out errors", () => {
       instance.componentWillUnmount();

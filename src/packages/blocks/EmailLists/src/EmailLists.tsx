@@ -79,6 +79,7 @@ export default class EmailLists extends EmailListsController {
     return (
       <ScrollView keyboardShouldPersistTaps="always" style={styles.container}>
         <TouchableWithoutFeedback
+        testID="touchfeedback"
           onPress={() => {
             this.hideKeyboard();
           }}

@@ -98,6 +98,7 @@ export default class Signup extends SignupController {
                   ]}
                 />
                 <TextInput
+                testID="txtfullname"
                   style={[
                     styles.input,
                     {
@@ -205,6 +206,7 @@ export default class Signup extends SignupController {
                   ]}
                 />
                 <TextInput
+                testID="txtpassword"
                   style={[
                     styles.input1,
                     {

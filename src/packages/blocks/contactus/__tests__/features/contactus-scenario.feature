@@ -6,6 +6,7 @@ Feature: contactus
         Then contactus will load with out errors
         Then contactus save without errors
         Then contactus get profile without errors
+        Then Contactus load TopHeader without errors
         And I can leave the screen with out errors
 
     Scenario: Empty fields

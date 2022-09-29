@@ -43,13 +43,7 @@ export default class EditProfile extends EditProfileController {
         onPress={() => this.onPressCameraUploadImage()}
         style={styles.cameraButton}
       >
-        <Image
-          source={
-            this.state.profileImage
-              ? { uri: this.state.profileImage }
-              : this.state.isFetching
-              ? ""
-              : cameraIcon
+        <Image   source={ this.state.profileImage  ? { uri: this.state.profileImage }  : this.state.isFetching  ? { uri: "his.state.profileImage" }  : cameraIcon
           }
           style={
             this.state.profileImage ? styles.profileIcon : styles.cameraIcon

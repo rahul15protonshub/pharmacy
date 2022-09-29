@@ -103,6 +103,78 @@ defineFeature(feature, (test) => {
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
 
+
+    then("notifications will load notification list with errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          errors: [{}],
+        }
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
+        }
+      );
+      instance.getNotificationListApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+
+    then("notifications will read notification with errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          errors: [{}],
+        }
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
+        }
+      );
+      instance.readNotificationApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+
+    then("notifications will delete notification with errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          errors: [{}],
+        }
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
+        }
+      );
+      instance.deleteNotificationApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
     then("Set different states to render different views", () => {
       instance = notificationsBlock.instance() as Notifications;
       instance.setState({ noProductFound: true });
@@ -119,6 +191,7 @@ defineFeature(feature, (test) => {
     });
 
     then("I can leave the screen with out errors", () => {
+      instance.handleBackButtonClick
       instance.componentWillUnmount();
       expect(notificationsBlock).toBeTruthy();
 

@@ -1,0 +1,337 @@
+{
+    "data": [
+        {
+            "id": "34",
+            "type": "address_states",
+            "attributes": {
+                "id": 34,
+                "name": "ANDAMAN AND NICOBAR ISLANDS",
+                "gst_code": "35"
+            }
+        },
+        {
+            "id": "27",
+            "type": "address_states",
+            "attributes": {
+                "id": 27,
+                "name": "ANDHRA PRADESH",
+                "gst_code": "28"
+            }
+        },
+        {
+            "id": "36",
+            "type": "address_states",
+            "attributes": {
+                "id": 36,
+                "name": "ANDHRA PRADESH",
+                "gst_code": "37"
+            }
+        },
+        {
+            "id": "12",
+            "type": "address_states",
+            "attributes": {
+                "id": 12,
+                "name": "ARUNACHAL PRADESH",
+                "gst_code": "12"
+            }
+        },
+        {
+            "id": "18",
+            "type": "address_states",
+            "attributes": {
+                "id": 18,
+                "name": "ASSAM",
+                "gst_code": "18"
+            }
+        },
+        {
+            "id": "10",
+            "type": "address_states",
+            "attributes": {
+                "id": 10,
+                "name": "BIHAR",
+                "gst_code": "10"
+            }
+        },
+        {
+            "id": "4",
+            "type": "address_states",
+            "attributes": {
+                "id": 4,
+                "name": "CHANDIGARH",
+                "gst_code": "4"
+            }
+        },
+        {
+            "id": "22",
+            "type": "address_states",
+            "attributes": {
+                "id": 22,
+                "name": "CHATTISGARH",
+                "gst_code": "22"
+            }
+        },
+        {
+            "id": "25",
+            "type": "address_states",
+            "attributes": {
+                "id": 25,
+                "name": "DADRA AND NAGAR HAVELI AND DAMAN AND DIU",
+                "gst_code": "26"
+            }
+        },
+        {
+            "id": "7",
+            "type": "address_states",
+            "attributes": {
+                "id": 7,
+                "name": "DELHI",
+                "gst_code": "7"
+            }
+        },
+        {
+            "id": "29",
+            "type": "address_states",
+            "attributes": {
+                "id": 29,
+                "name": "GOA",
+                "gst_code": "30"
+            }
+        },
+        {
+            "id": "24",
+            "type": "address_states",
+            "attributes": {
+                "id": 24,
+                "name": "GUJARAT",
+                "gst_code": "24"
+            }
+        },
+        {
+            "id": "6",
+            "type": "address_states",
+            "attributes": {
+                "id": 6,
+                "name": "HARYANA",
+                "gst_code": "6"
+            }
+        },
+        {
+            "id": "2",
+            "type": "address_states",
+            "attributes": {
+                "id": 2,
+                "name": "HIMACHAL PRADESH",
+                "gst_code": "2"
+            }
+        },
+        {
+            "id": "1",
+            "type": "address_states",
+            "attributes": {
+                "id": 1,
+                "name": "JAMMU AND KASHMIR",
+                "gst_code": "1"
+            }
+        },
+        {
+            "id": "20",
+            "type": "address_states",
+            "attributes": {
+                "id": 20,
+                "name": "JHARKHAND",
+                "gst_code": "20"
+            }
+        },
+        {
+            "id": "28",
+            "type": "address_states",
+            "attributes": {
+                "id": 28,
+                "name": "KARNATAKA",
+                "gst_code": "29"
+            }
+        },
+        {
+            "id": "31",
+            "type": "address_states",
+            "attributes": {
+                "id": 31,
+                "name": "KERALA",
+                "gst_code": "32"
+            }
+        },
+        {
+            "id": "37",
+            "type": "address_states",
+            "attributes": {
+                "id": 37,
+                "name": "LADAKH",
+                "gst_code": "38"
+            }
+        },
+        {
+            "id": "30",
+            "type": "address_states",
+            "attributes": {
+                "id": 30,
+                "name": "LAKSHADWEEP",
+                "gst_code": "31"
+            }
+        },
+        {
+            "id": "23",
+            "type": "address_states",
+            "attributes": {
+                "id": 23,
+                "name": "MADHYA PRADESH",
+                "gst_code": "23"
+            }
+        },
+        {
+            "id": "26",
+            "type": "address_states",
+            "attributes": {
+                "id": 26,
+                "name": "MAHARASHTRA",
+                "gst_code": "27"
+            }
+        },
+        {
+            "id": "14",
+            "type": "address_states",
+            "attributes": {
+                "id": 14,
+                "name": "MANIPUR",
+                "gst_code": "14"
+            }
+        },
+        {
+            "id": "17",
+            "type": "address_states",
+            "attributes": {
+                "id": 17,
+                "name": "MEGHALAYA",
+                "gst_code": "17"
+            }
+        },
+        {
+            "id": "15",
+            "type": "address_states",
+            "attributes": {
+                "id": 15,
+                "name": "MIZORAM",
+                "gst_code": "15"
+            }
+        },
+        {
+            "id": "13",
+            "type": "address_states",
+            "attributes": {
+                "id": 13,
+                "name": "NAGALAND",
+                "gst_code": "13"
+            }
+        },
+        {
+            "id": "21",
+            "type": "address_states",
+            "attributes": {
+                "id": 21,
+                "name": "ODISHA",
+                "gst_code": "21"
+            }
+        },
+        {
+            "id": "33",
+            "type": "address_states",
+            "attributes": {
+                "id": 33,
+                "name": "PUDUCHERRY",
+                "gst_code": "34"
+            }
+        },
+        {
+            "id": "3",
+            "type": "address_states",
+            "attributes": {
+                "id": 3,
+                "name": "PUNJAB",
+                "gst_code": "3"
+            }
+        },
+        {
+            "id": "8",
+            "type": "address_states",
+            "attributes": {
+                "id": 8,
+                "name": "RAJASTHAN",
+                "gst_code": "8"
+            }
+        },
+        {
+            "id": "11",
+            "type": "address_states",
+            "attributes": {
+                "id": 11,
+                "name": "SIKKIM",
+                "gst_code": "11"
+            }
+        },
+        {
+            "id": "32",
+            "type": "address_states",
+            "attributes": {
+                "id": 32,
+                "name": "TAMIL NADU",
+                "gst_code": "33"
+            }
+        },
+        {
+            "id": "35",
+            "type": "address_states",
+            "attributes": {
+                "id": 35,
+                "name": "TELANGANA",
+                "gst_code": "36"
+            }
+        },
+        {
+            "id": "16",
+            "type": "address_states",
+            "attributes": {
+                "id": 16,
+                "name": "TRIPURA",
+                "gst_code": "16"
+            }
+        },
+        {
+            "id": "5",
+            "type": "address_states",
+            "attributes": {
+                "id": 5,
+                "name": "UTTARAKHAND",
+                "gst_code": "5"
+            }
+        },
+        {
+            "id": "9",
+            "type": "address_states",
+            "attributes": {
+                "id": 9,
+                "name": "UTTAR PRADESH",
+                "gst_code": "9"
+            }
+        },
+        {
+            "id": "19",
+            "type": "address_states",
+            "attributes": {
+                "id": 19,
+                "name": "WEST BENGAL",
+                "gst_code": "19"
+            }
+        }
+    ]
+}

@@ -8,6 +8,7 @@ Feature: ordersummary
         And ordersummary will load cart list without errors
         And ordersummary failed to load cart list
         And ordersummary will load user profile without errors
+         And ordersummary will load user profile with errors
         And ordersummary failed to load user profile
         And ordersummary will load cart product id without errors
         And ordersummary failed to load cart product id

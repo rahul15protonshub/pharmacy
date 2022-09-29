@@ -5,6 +5,8 @@ Feature: filteritems
         When I navigate to the filteritems
         Then filteritems will load with out errors
         And filteritems will load products without errors
+        And filteritems products errors
+        And filteritems will load product boxes without errors
         And filteritems will filter data without errors
         And filteritems will add in wishlist without errors
         And filteritems will add to wishlist without errors
@@ -15,6 +17,7 @@ Feature: filteritems
         And filteritems will increament without errors
         And filteritems will update without errors
         And I can select the button with with out errors
+        And I can navigate notification with out errors
         And I can leave the screen with out errors
 
     Scenario: User navigates to filteroptions

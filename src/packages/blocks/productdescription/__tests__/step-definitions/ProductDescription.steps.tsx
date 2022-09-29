@@ -35,6 +35,48 @@ const feature = loadFeature(
   "./__tests__/features/ProductDescription-scenario.feature"
 );
 
+const product_details ={data:
+{ id :   "96",
+  type  :   "catalogue",
+  attributes:{
+    name: 'ABC 38',
+    description: '',
+    manufacture_date: null,
+    block_qty: 0,
+    price: 37.7,
+    on_sale: false,
+    sale_price: null,
+    discount: null,
+    recommended: true,
+    sku: 'COD0000063',
+    length: null,
+    breadth: null,
+    height: null,
+    weight: '1.0',
+    brand: [],
+    tags: [],
+    reviews: [],
+    current_availibility: 'in_stock',
+    default_variant: [],
+    stock_qty: 76,
+    cart_quantity: [{test:''}],
+    wishlisted: false,
+    product_notified: false,
+    cart_items: {},
+    average_rating: 0,
+    images: [],
+    product_attributes: [],
+    availability: [],
+    deep_link: '',
+    catalogue_variants: [],
+    variants_in_cart: [],
+    can_review: false,
+    similar_products: [],
+    category: []
+  }
+}
+}
+
 defineFeature(feature, (test) => {
   beforeEach(() => {
     jest.resetModules();
@@ -52,6 +94,10 @@ defineFeature(feature, (test) => {
 
     when("I navigate to the ProductDescription", () => {
       instance = exampleBlockA.instance() as ProductDescription;
+      instance.setState({
+        productData:product_details
+      })
+      instance.renderReviewList()
     });
 
     then("ProductDescription will load with out errors", () => {
