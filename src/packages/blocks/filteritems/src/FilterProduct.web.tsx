@@ -29,6 +29,7 @@ class FilterProduct extends FilterProductController {
   constructor(props: Props) {
     super(props);
     // Customizable Area Start
+    this.rootRef = React.createRef();
     // Customizable Area End
   }
 
@@ -125,9 +126,9 @@ class FilterProduct extends FilterProductController {
                             </span>
                           )}
                         {this.state.filterData.category?.map(
-                          (data, index) =>
+                          (data) =>
                             data.checked && (
-                              <span className="yt-flt-tag" key={index}>
+                              <span className="yt-flt-tag" key={data.id}>
                                 {data.attributes.name}
                                 <RiCloseLine
                                   className="yt-close-icn"
@@ -145,9 +146,9 @@ class FilterProduct extends FilterProductController {
                         )}
 
                         {this.state.filterData.brand?.map(
-                          (data, index) =>
+                          (data) =>
                             data.checked && (
-                              <span className="yt-flt-tag" key={index}>
+                              <span className="yt-flt-tag" key={data.id}>
                                 {data.attributes.name}
                                 <RiCloseLine
                                   className="yt-close-icn"
@@ -176,7 +177,7 @@ class FilterProduct extends FilterProductController {
                               localStorage.removeItem("subCategory");
                               this.setState({
                                 searchQuery: "",
-                                filterProducList: [],
+                                // filterProducList: [],
                               });
                             }}
                             style={{ cursor: "default" }}
@@ -244,7 +245,7 @@ class FilterProduct extends FilterProductController {
                       style={{ marginLeft: "24px" }}
                       className="yt-filter-selected d-flex align-items-center flex-wrap"
                     >
-                      {this.state.searchQuery && this.state.searchQuery != "" && (
+                      {this.state.searchQuery && this.state.searchQuery != "" && 
                         <span className="yt-flt-tag">
                           {
                             this.state.searchQuery
@@ -258,11 +259,11 @@ class FilterProduct extends FilterProductController {
                             onClick={() => this.removeSearchQuery()}
                           />
                         </span>
-                      )}
+                      }
                       {this.state.filterData.category?.map(
-                        (data, index) =>
+                        (data) =>
                           data.checked && (
-                            <span className="yt-flt-tag" key={index}>
+                            <span className="yt-flt-tag" key={data.id}>
                               {data.attributes.name}
                               <RiCloseLine
                                 className="yt-close-icn"
@@ -280,9 +281,9 @@ class FilterProduct extends FilterProductController {
                       )}
 
                       {this.state.filterData.brand?.map(
-                        (data, index) =>
+                        (data) =>
                           data.checked && (
-                            <span className="yt-flt-tag" key={index}>
+                            <span className="yt-flt-tag" key={data.id}>
                               {data.attributes.name}
                               <RiCloseLine
                                 className="yt-close-icn"
@@ -326,6 +327,7 @@ class FilterProduct extends FilterProductController {
           </Row>
         </div>
         {this.state.filterProducList.length != 0 ? (
+          <>
           <ProductListCard
             collection={this.state.filterProducList}
             addToCart={product => this.addToCart(product, product.attributes.default_variant?.id)}
@@ -339,11 +341,13 @@ class FilterProduct extends FilterProductController {
             onProductDecreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, -1, product.attributes.default_variant?.id)}
             onProductIncreaseCartQuantity={product => this.increaseOrDecreaseCartQuantity(product, 1, product.attributes.default_variant?.id)}
           />
+          <div ref={this.rootRef} />
+          </>
         ) : (
           !this.state.loading && <PageLoadingBlock />
         )}
 
-        <div className="loadMoreBtn">
+        {/* <div className="loadMoreBtn">
           {!this.state.loading && this.state.filterProducList.length != 0 && (
             <div className="productPagination">
               <div
@@ -371,7 +375,7 @@ class FilterProduct extends FilterProductController {
               </div>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     );
     // Customizable Area End

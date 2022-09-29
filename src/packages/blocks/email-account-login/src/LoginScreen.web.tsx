@@ -22,16 +22,16 @@ class LoginScreen extends EmailAccountLoginController {
       });
       this.toggle(this.props?.location?.state?.activeTab);
     }
-    const tokenn = localStorage.getItem("token");
-    if (tokenn) {
-      this.setState({
-        isOpenPopUp: false,
-      });
-    } else {
-      this.setState({
-        isOpenPopUp: true,
-      });
-    }
+    // const tokenn = localStorage.getItem("token");
+    // if (tokenn) {
+    //   this.setState({
+    //     isOpenPopUp: false,
+    //   });
+    // } else {
+    //   this.setState({
+    //     isOpenPopUp: true,
+    //   });
+    // }
     // Customizable Area Start
     if (localStorage.getItem("appThemData") == null) {
       setInterval(() => {

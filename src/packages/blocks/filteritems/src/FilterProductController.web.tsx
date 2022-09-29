@@ -187,7 +187,7 @@ export default class FilteritemsController extends BlockComponent<
       Url: "",
       qParams: new URLSearchParams(window.location.search),
       loading: false,
-      totalPage: 0,
+      totalPage: 1,
       // Customizable Area Start
       isProductAddtoCart:false,
       productsAddingToCart:[],
@@ -207,6 +207,7 @@ export default class FilteritemsController extends BlockComponent<
   }
 
   removeFilter = (data, type, itemId) => {
+    const urlSearch = new URLSearchParams(window.location.search);
     console.log('object :>> ', data, type, itemId);
     if (type == "category") {
       Object.keys(JSON.parse(localStorage.getItem("subCategory") || "{}"))
@@ -217,12 +218,34 @@ export default class FilteritemsController extends BlockComponent<
       const removeFav = this.state.filterData.category.filter((item) => {
         return item.attributes.name !== data.name;
       });
+      let filterSubCategoryArray = [];
+      let filterCategoryArray = [];
+      removeFav.map((item) => {
+        filterCategoryArray?.push(item?.attributes?.id);
+        item?.attributes?.sub_categories?.map((sub) => {
+          if (sub?.checked) {
+            filterSubCategoryArray.push(sub?.id);
+          }
+        });
+      });
+      urlSearch.delete("q[category_id][]");
+      urlSearch.delete("q[sub_category_id][]");
+      !!filterCategoryArray.join(",")?.length &&
+        urlSearch.append("q[category_id][]", filterCategoryArray.join(","));
+      !!filterSubCategoryArray.join(",")?.length &&
+        urlSearch.append(
+          "q[sub_category_id][]",
+          filterSubCategoryArray.join(",")
+        );
       this.setState(
         {
           filterData: { ...this.state.filterData, category: removeFav },
         },
         () => {
           // this.getProductList()
+          this.props?.history?.replace(
+            `/Filteroptions?${decodeURIComponent(urlSearch.toString())}`
+          );
         }
       );
       localStorage.removeItem("category");
@@ -238,7 +261,7 @@ export default class FilteritemsController extends BlockComponent<
     }
 
     if (type == "brand") {
-      const removeFav = this.state.filterData.brand.filter((item) => {
+      const removeBrand = this.state.filterData.brand.filter((item) => {
         return item.attributes.name !== data.name;
       });
       this.setState(
@@ -247,6 +270,13 @@ export default class FilteritemsController extends BlockComponent<
         },
         () => {
           // this.getProductList()
+          urlSearch.delete("q[brand_id][]");
+          if (this.state.filterData.brand?.length > 0) {
+            urlSearch.append("q[brand_id][]", this.state.filterData.brand.map(b => b.id).join(","));
+          }
+          this.props?.history?.replace(
+            `/Filteroptions?${decodeURIComponent(urlSearch.toString())}`
+          );
         }
       );
 
@@ -269,7 +299,7 @@ export default class FilteritemsController extends BlockComponent<
           filterData: { ...this.state.filterData, tag: removeFav },
         },
         () => {
-          // this.getProductList()
+          this.getProductList()
         }
       );
 
@@ -286,10 +316,59 @@ export default class FilteritemsController extends BlockComponent<
 
   async componentDidMount() {
     // Object.keys(JSON.parse(localStorage.getItem("subCategory") || '{}')).length == 0 &&
-    this.getProductList();
-    this.getIsCartCreated()
+    // this.getProductList();
+    // this.getIsCartCreated()
     // urlSearch.get(("q[name]") && this.getProductList();
+    this.getIsCartCreated();
+    this.getProductList();
+    window.addEventListener("scroll", this.handleScroll, true);
+    let prevUrl = window.location.search;
+    this.setState({ prevUrl }, () => {
+      this.unListen = this.props.history?.listen((location, action) => {
+        this.state.prevUrl !== location.search &&
+          this.clearAllFilters(location);
+
+        let lastFour = location.search.substring(location.search.length - 4);
+        this.setState({ prevUrl: location.search });
+        if (lastFour === "desc" || lastFour === "true") {
+          this.setState({ page: 1 });
+        }
+      });
+    });
   }
+
+  async componentWillUnmount() {
+    super.componentWillUnmount();
+    window.removeEventListener("scroll", this.handleScroll);
+    this.unListen();
+  }
+
+  clearAllFilters = (location) => {
+    if (
+      location.search === "?&page=1&per_page=16&sort[order_by]=sold&sort[direction]=desc" ||
+      location.search === "?&page=1&per_page=16&sort[order_by]=created_at&sort[direction]=desc&[newArrivals]=true"
+    ) {
+      window.location = `/Filteroptions${location.search}`;
+      localStorage.removeItem("searchQuery");
+      localStorage.removeItem("category");
+      localStorage.removeItem("subCategory");
+      this.setState({
+        searchQuery: "",
+        filterProducList: [],
+        page: 1,
+      });
+    }
+  };
+
+  handleScroll = () => {
+    const position = document.documentElement.scrollHeight - document.documentElement.scrollTop
+    const cHeight = document.documentElement.clientHeight
+    if (position <= cHeight + 100) {
+      if (!this.state.loading && this.state.totalPage > this.state.page) {
+        this.setState({ page: this.state.page + 1 }, this.getProductList);
+      }
+    }
+  };
 
   componentWillReceiveProps(nextProps: any) {
     const fs = this.state.filterProducList;
@@ -1306,71 +1385,92 @@ export default class FilteritemsController extends BlockComponent<
   };
 
   addSortBy = (order) => {
-    let urlSearch = new URLSearchParams(window.location.search);
-    if (this.state.page > 1) {
-      this.setState({
-        page: 1,
-        isLoaderWithoutFilters: true,
-      });
-    }
-    urlSearch.delete("sort[order_by]");
-    urlSearch.delete("sort[direction]");
-    localStorage.removeItem("newest");
-    if (order == "0") {
-      this.setState({ order_by: "", sort_by: "", filterProducList: [] });
-    }
-    if (order == "1") {
-      //low to high
-      this.setState({
-        order_by: "price_including_tax",
-        sort_by: "asc",
-        filterProducList: [],
-      });
-    }
-    if (order == "2") {
-      //high to low
-      this.setState({
-        order_by: "price_including_tax",
-        sort_by: "desc",
-        filterProducList: [],
-      });
-    }
-    if (order == "3") {
-      this.setState({
-        order_by: "sold",
-        sort_by: "desc",
-        filterProducList: [],
-      });
-    }
-    if (order == "4") {
-      this.setState({
-        order_by: "created_at",
-        sort_by: "desc",
-        filterProducList: [],
-      });
-    }
-    if (order == "5") {
-      this.setState({
-        order_by: "recommended",
-        sort_by: "desc",
-        filterProducList: [],
-      });
-    }
-
-    setTimeout(() => {
-      urlSearch.append("sort[order_by]", this.state.order_by);
-      urlSearch.append("sort[direction]", this.state.sort_by);
-      this.props?.history?.push(
+    this.setState({
+      page: 1,
+      order_by: this.state.sortMenu[order].order_by,
+      sort_by: this.state.sortMenu[order].direction,
+    }, () => {
+      const urlSearch = new URLSearchParams(window.location.search);
+      urlSearch.delete("sort[order_by]");
+      urlSearch.delete("sort[direction]");
+      localStorage.removeItem("newest");
+      if (this.state.order_by) {
+        urlSearch.append("sort[order_by]", this.state.order_by);
+      }
+      if (this.state.sort_by) {
+        urlSearch.append("sort[direction]", this.state.sort_by);
+      }
+      console.log(`/Filteroptions?${decodeURIComponent(urlSearch.toString())}`)
+      this.props?.history?.replace(
         `/Filteroptions?${decodeURIComponent(urlSearch.toString())}`
       );
-
-      // this.getProductList()
-    }, 300);
+    })
   };
+  // addSortBy = (order) => {
+  //   let urlSearch = new URLSearchParams(window.location.search);
+  //   if (this.state.page > 1) {
+  //     this.setState({
+  //       page: 1,
+  //       isLoaderWithoutFilters: true,
+  //     });
+  //   }
+  //   urlSearch.delete("sort[order_by]");
+  //   urlSearch.delete("sort[direction]");
+  //   localStorage.removeItem("newest");
+  //   if (order == "0") {
+  //     this.setState({ order_by: "", sort_by: "", filterProducList: [] });
+  //   }
+  //   if (order == "1") {
+  //     //low to high
+  //     this.setState({
+  //       order_by: "price_including_tax",
+  //       sort_by: "asc",
+  //       filterProducList: [],
+  //     });
+  //   }
+  //   if (order == "2") {
+  //     //high to low
+  //     this.setState({
+  //       order_by: "price_including_tax",
+  //       sort_by: "desc",
+  //       filterProducList: [],
+  //     });
+  //   }
+  //   if (order == "3") {
+  //     this.setState({
+  //       order_by: "sold",
+  //       sort_by: "desc",
+  //       filterProducList: [],
+  //     });
+  //   }
+  //   if (order == "4") {
+  //     this.setState({
+  //       order_by: "created_at",
+  //       sort_by: "desc",
+  //       filterProducList: [],
+  //     });
+  //   }
+  //   if (order == "5") {
+  //     this.setState({
+  //       order_by: "recommended",
+  //       sort_by: "desc",
+  //       filterProducList: [],
+  //     });
+  //   }
+
+  //   setTimeout(() => {
+  //     urlSearch.append("sort[order_by]", this.state.order_by);
+  //     urlSearch.append("sort[direction]", this.state.sort_by);
+  //     this.props?.history?.push(
+  //       `/Filteroptions?${decodeURIComponent(urlSearch.toString())}`
+  //     );
+
+  //     // this.getProductList()
+  //   }, 300);
+  // };
 
   // Customizable Area Start
   increaseOrDecreaseCartQuantity(product: any, increment: number) {
-    console.log('product :>> ', product);
     this.setState({
       productsAddingToCart: [...this.state.productsAddingToCart, product.id],
     });

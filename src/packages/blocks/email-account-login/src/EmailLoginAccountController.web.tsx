@@ -176,6 +176,7 @@ export default class EmailAccountLoginController extends BlockComponent<
               "user",
               JSON.stringify(responseJson.data)
             );
+            localStorage.removeItem("guestuser")
             await localStorage.setItem("token", responseJson.meta.token);
             await localStorage.setItem("profileImage", user.photoURL);
             await localStorage.setItem("userData", JSON.stringify(dat));
@@ -211,6 +212,7 @@ export default class EmailAccountLoginController extends BlockComponent<
             JSON.stringify(responseJson.data)
           );
           localStorage.setItem("token", responseJson.meta.token);
+          localStorage.setItem("guestuser","guest")
           //@ts-ignore
           // window.notify([
           //   { type: "success", message: "Welcome to Our Store !" },
@@ -224,6 +226,8 @@ export default class EmailAccountLoginController extends BlockComponent<
           const { data, meta } = responseJson;
           if (meta && meta.token) {
             localStorage.setItem("token", meta.token);
+            localStorage.removeItem("guestuser")
+
           }
           if (data) {
             localStorage.setItem("user", JSON.stringify(data));
@@ -295,6 +299,8 @@ export default class EmailAccountLoginController extends BlockComponent<
           this.setState({ showSpinner: false });
           const { data } = responseJson;
           const name = data?.attributes?.full_name;
+          localStorage.setItem("guestuser","guest")
+
           localStorage.setItem("token", responseJson.meta.token);
           localStorage.setItem("userFullName", name);
           this.props?.history?.push({
@@ -333,6 +339,9 @@ export default class EmailAccountLoginController extends BlockComponent<
   }
 
   routeToAll(route: string) {
+    this.setState({
+      isOpenPopUp:false
+    })
     this.props?.history?.push(route);
   }
 

@@ -42,10 +42,13 @@ const CartAmount: any = withRouter((props: any) => {
   // Customizable Area Start
   const wholeCart = props.wholeCart;
 
-  const [couponCode, setCouponCode] = useState(
-    wholeCart?.coupon?.attributes?.code
-  );
+  const [couponCode, setCouponCode] = useState("")
   const [accordianOpen, setAccordianOpen] = useState("");
+  
+  setTimeout(() => {
+    setCouponCode(wholeCart?.coupon?.attributes?.code)
+  }, 500);
+
   function getProducts() {
     var items: any = [];
     wholeCart &&

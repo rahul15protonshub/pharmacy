@@ -1350,7 +1350,7 @@ defineFeature(feature, (test) => {
     let instance: FilteroptionsList;
 
     given("I am a User loading filteroptionslist", () => {
-      filterOptionListBlock = shallow(<FilteroptionsList {...screenProps} />);
+      filterOptionListBlock = shallow(<FilteroptionsList mbOpenState={false} cancel={undefined} {...screenProps} />);
       expect(filterOptionListBlock).toBeTruthy();
       instance = filterOptionListBlock.instance() as FilteroptionsList;
     });

@@ -188,9 +188,9 @@ export default class ForgotPasswordController extends BlockComponent<
               this.startTimer
             );
             // @ts-ignore
-            // window.notify([
-            //   { message: "OTP has been sent to you", type: "success" },
-            // ]);
+            window.notify([
+              { message: "OTP has been sent to you", type: "success" },
+            ]);
           }
           if (
             responseJson &&
@@ -227,23 +227,20 @@ export default class ForgotPasswordController extends BlockComponent<
               otpToken: responseJson.meta?.token,
             });
             // @ts-ignore
-            // window.notify([
-            //   { message: responseJson?.meta?.message, type: "success" },
-            // ]);
+            window.notify([
+              { message: responseJson?.meta?.message, type: "success" },
+            ]);
           }
           if (
             responseJson &&
             responseJson.errors &&
             responseJson.errors.length > 0
           ) {
-            this.setState({ showSpinner: false });
-            //@ts-ignore
+            // @ts-ignore
             window.notify([
-              {
-                type: "danger",
-                message: responseJson.errors[0] || "something went wrong!",
-              },
+              { message: responseJson.errors[0].pin || "something went wrong!",type:"danger"},
             ]);
+            this.setState({ showSpinner: false });
           }
         }
       }
@@ -252,8 +249,8 @@ export default class ForgotPasswordController extends BlockComponent<
   }
 
   isValidEmail(email: string) {
-    // const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const re = /^(?:\d{10}|\w+@\w+\.\w{2,3})$/;
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // const re = /^(?:\d{10}|\w+@\w+\.\w{2,3})$/;
     return re.test(String(email).toLowerCase());
   }
 
@@ -263,6 +260,7 @@ export default class ForgotPasswordController extends BlockComponent<
   }
 
   SendOtpBtn = (e: any) => {
+    localStorage.setItem("guestuser","guest")
     e.preventDefault();
     let res;
     const { emailError, otp, email } = this.state;

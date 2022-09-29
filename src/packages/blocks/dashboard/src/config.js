@@ -33,8 +33,8 @@ exports.endPointApiGetFeaturedProduct = "catalogue/catalogues?recommended=true";
 
 exports.endPointApiGetIsCartCreated = "cart/carts";
 exports.endPointApiGetProductDetails = "catalogue/catalogues/";
-//exports.endPointApiPostCreateCart = "cart/carts";
-//exports.endPointApiPutItemsToCart = "cart/carts/";
+exports.endPointApiPostCreateCart = "cart/carts";
+exports.endPointApiPutItemsToCart = "cart/carts/";
 exports.SuccessfullyItemAdded = "Added To Cart";
 exports.endPointApiIsItemInCart =
   "cart/user/carts/has_product?catalogue_variant_id=";
