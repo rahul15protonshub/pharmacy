@@ -236,7 +236,7 @@ export default class ForgotPasswordController extends BlockComponent<
             responseJson.errors &&
             responseJson.errors.length > 0
           ) {
-              // @ts-ignore
+            // @ts-ignore
             window.notify([
               { message: responseJson.errors[0].pin || "something went wrong!",type:"danger"},
             ]);
@@ -260,6 +260,7 @@ export default class ForgotPasswordController extends BlockComponent<
   }
 
   SendOtpBtn = (e: any) => {
+    localStorage.setItem("guestuser","guest")
     e.preventDefault();
     let res;
     const { emailError, otp, email } = this.state;

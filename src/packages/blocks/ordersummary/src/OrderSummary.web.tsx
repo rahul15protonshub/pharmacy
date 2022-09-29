@@ -41,15 +41,13 @@ import Radio from "../../studio-store-ecommerce-components/src/UI/Radio";
 const CartAmount: any = withRouter((props: any) => {
   // Customizable Area Start
   const wholeCart = props.wholeCart;
-  let code=wholeCart?.coupon?.attributes?.code
-  const [couponCode, setCouponCode] = useState("");
+
+  const [couponCode, setCouponCode] = useState("")
   const [accordianOpen, setAccordianOpen] = useState("");
-//   useEffect(()=>{
-// console.log('object :>> ');
-//   },[])
-setTimeout(() => {
-  setCouponCode(wholeCart?.coupon?.attributes?.code)
-}, 500);
+  
+  setTimeout(() => {
+    setCouponCode(wholeCart?.coupon?.attributes?.code)
+  }, 500);
 
   function getProducts() {
     var items: any = [];
@@ -533,7 +531,3 @@ export default class OrderSummary extends OrderSummaryWebController {
     );
   }
 }
-function useEffect(arg0: () => void, arg1: any[]) {
-  throw new Error("Function not implemented.");
-}
-
