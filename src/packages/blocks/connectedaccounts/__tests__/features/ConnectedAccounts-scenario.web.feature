@@ -4,8 +4,6 @@ Feature: ConnectedAccounts
         Given I am a User loading ConnectedAccounts
         When I navigate to the ConnectedAccounts
         Then ConnectedAccounts will load with out errors
-        And I can connect a social account
-        And I can deactivate a social account
         And I can leave the screen with out errors
 
     Scenario: User navigates to ConnectedAccounts and press backbutton

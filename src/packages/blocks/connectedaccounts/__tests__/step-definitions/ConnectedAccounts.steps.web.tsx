@@ -15,7 +15,7 @@ const screenProps = {
     id: "ConnectedAccounts"
   }
 
-const feature = loadFeature('./__tests__/features/ConnectedAccounts-scenario.feature');
+const feature = loadFeature('./__tests__/features/ConnectedAccounts-scenario.web.feature');
 
 defineFeature(feature, (test) => {
 

@@ -104,6 +104,7 @@ export default class ConnectedAccounts extends ConnectedAccountsController {
     return (
       // Customizable Area Start
       <TouchableOpacity
+      testID="pressfacebook"
         onPress={() => this.onPressLoginWithFacebook()}
         style={styles.connectedListBottomCell}
       >
@@ -185,7 +186,7 @@ export default class ConnectedAccounts extends ConnectedAccountsController {
     return (
       // Customizable Area Start
       <View style={styles.connectedAccountContainer}>
-        {this.state.socialAccountList.map((socialItem: any, index: any) => {
+        {this.state.socialAccountList?.map((socialItem: any, index: any) => {
           return <View>{this.renderSocialViews(socialItem)}</View>;
         })}
         {!this.state.isFetching &&

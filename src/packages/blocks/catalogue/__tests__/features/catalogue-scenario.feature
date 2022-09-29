@@ -25,6 +25,7 @@ Feature: Catalogue
         Then Catalogue add cart without errors
         Then Catalogue add more item to cart without errors
         Then Catalogue get brandsetting without errors
+        Then Catalogue get brandsetting with message
         Then Catalogue update item to cart without errors
         Then I can add item to wishlist
         Then I can navigate to subcategories

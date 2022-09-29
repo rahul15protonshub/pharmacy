@@ -841,14 +841,14 @@ export default class CatalogueController extends BlockComponent<Props, S, SS> {
     }
   };
 
-  getListRequest = async (token: any) => {
-    this.setState({ isFetching: true });
-    this.getProductApiCallId = await this.apiCall({
-      contentType: configJSON.productApiContentType,
-      method: configJSON.apiMethodTypeGet,
-      endPoint: configJSON.productAPiEndPoint,
-    });
-  };
+  // getListRequest = async (token: any) => {
+  //   this.setState({ isFetching: true });
+  //   this.getProductApiCallId = await this.apiCall({
+  //     contentType: configJSON.productApiContentType,
+  //     method: configJSON.apiMethodTypeGet,
+  //     endPoint: configJSON.productAPiEndPoint,
+  //   });
+  // };
 
   getRecommendedListRequest = async (token: any) => {
     this.getRecommendedApiCallId = await this.apiCall({

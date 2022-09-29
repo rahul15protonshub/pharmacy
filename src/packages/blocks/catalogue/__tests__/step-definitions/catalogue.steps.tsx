@@ -16,13 +16,20 @@ import TopHeader from "../../src/components/TopHeader";
 import CustomErrorModal from "../../../../blocks/studio-store-ecommerce-components/src/CustomErrorModal/CustomErrorModal";
 import OurProductsButton from "../../src/components/OurProductsButton";
 import SortSelector from "../../src/components/SortSelector";
-import { ScrollView} from "react-native";
+import { FlatList, ScrollView,Linking, } from "react-native";
+import StorageProvider from "../../../../framework/src/StorageProvider";
+
+import Carousel from "../../src/components/Carousel";
+const bannerImages = require("./bannerImages.json")
 
 const catalogueFilteredProducts = require("./product.json")
 
 const screenProps = {
   navigation: {
     navigate: jest.fn(),
+    addListener:(param:string,callback:any)=>{
+      callback()
+    },
   },
   id: "Catalogue",
 };
@@ -33,6 +40,19 @@ defineFeature(feature, (test) => {
   beforeEach(() => {
     jest.doMock("react-native", () => ({ Platform: { OS: "web" } }));
     jest.spyOn(helpers, "getOS").mockImplementation(() => "web");
+    jest.spyOn(console, "error").mockImplementation(() => {});
+    //@ts-ignore
+    StorageProvider = {
+      get: jest.fn(),
+      set: jest.fn(),
+    }
+    // jest.mock('react-native/Libraries/Linking/Linking', () => ({
+    //   openURL: jest.fn().mockResolvedValue(null),
+    //   addEventListener: jest.fn(),
+    //   removeEventListener: jest.fn(),
+    //   getInitialURL:() => new Promise((resolve, reject) => {resolve('')})
+    // }));
+    
   });
 
   
@@ -46,12 +66,19 @@ defineFeature(feature, (test) => {
       instance = catalogueBlock.instance() as Catalogue;
     });
 
-    when("I navigate to the Catalogue", () => {
+    when("I navigate to the Catalogue", async() => {
       instance = catalogueBlock.instance() as Catalogue;
-      instance.componentDidMount()
+     await instance.componentDidMount()
+      instance.setupNotification()
       instance.getToken()
+      instance.setDeepLink()
       instance.onRegister('353456')
       instance.onNotification('454354543')
+      let noti={title:'hello'}
+      instance.onNotification(noti)
+      instance.setState({catalogueFilterCategoryIds:catalogueFilteredProducts,catalogueFilterSubCategoryIds:catalogueFilteredProducts})
+      
+     
     });
 
     then("Catalogue will load with out errors", () => {
@@ -68,10 +95,7 @@ defineFeature(feature, (test) => {
       const customerror = catalogueBlock.find(CustomErrorModal).first();
       customerror.prop("hideErrorModal")()
       expect(customerror).toBeTruthy();
-     
-  });
-
-
+     });
     then("Catalogue will pre-load data without errors", async () => {
       instance = catalogueBlock.instance() as Catalogue;
       instance.componentDidMount();
@@ -104,11 +128,15 @@ defineFeature(feature, (test) => {
       msgLoadDataAPI.addData(
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
-          data: [{}],
+          data: catalogueFilteredProducts,
         }
       );
       instance.getProductApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+      const flatList = catalogueBlock.find(FlatList).first();
+      flatList.prop("renderItem")({item: catalogueFilteredProducts[0], index: 0, separators: {highlight: jest.fn(), unhighlight: jest.fn(), updateProps: jest.fn()}});
+
+
     });
     then(`Catalogue load SortSelector without errors`, () => {
       catalogueBlock.find(SortSelector).first().prop("onChange")?.("created_at", "desc")
@@ -142,11 +170,16 @@ defineFeature(feature, (test) => {
       msgLoadDataAPI.addData(
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
-          data: [{}],
+          data: bannerImages,
         }
       );
       instance.getBannerImagesAPICallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+      instance.onPressBanner(bannerImages[0])
+          instance.onPressBanner(bannerImages[1])
+        const component = shallow(<Carousel bannerImages={bannerImages} index={0} onPressBanner={jest.fn()} />)
+        expect(component).toBeTruthy();
+
     });
 
 
@@ -165,8 +198,8 @@ defineFeature(feature, (test) => {
         }
       );
       instance.getCategoriesApiCallId = msgLoadDataAPI.messageId;
-      catalogueBlock.find(OurProductsButton).first().invoke("onButtonPress")()
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+      catalogueBlock.find(OurProductsButton).first().invoke("onButtonPress")()
     });
 
     then("Catalogue load cart product data without errors", () => {
@@ -223,6 +256,9 @@ defineFeature(feature, (test) => {
       );
       instance.addToWishlistApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+      instance.updateWhiseList(catalogueFilteredProducts, "93", "newProducts")
+      instance.updateWhiseList(catalogueFilteredProducts, "93", "xyz")
+
     });
 
     then("Catalogue remove from wishlist without errors", () => {
@@ -241,9 +277,15 @@ defineFeature(feature, (test) => {
       );
       instance.removeFromWishlistApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+      instance.removeFromWishlist((catalogueFilteredProducts))
     });
 
     then("Catalogue add to cart without errors", () => {
+      instance.setState({catalogue_variant_id: 16})
+        instance.addToCart(catalogueFilteredProducts[0])
+        instance.setState({cartId: "123"})
+        instance.addToCart(catalogueFilteredProducts[0])
+
       const msgLoadDataAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
       );
@@ -330,6 +372,9 @@ defineFeature(feature, (test) => {
       );
       instance.addToWishNewlistApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+      instance.updateWhiseList(catalogueFilteredProducts, "93", "newProducts")
+      instance.updateWhiseList(catalogueFilteredProducts, "93", "xyz")
+
     });
     then("Catalogue update to whishlist without errors", () => {
       const msgLoadDataAPI = new Message(
@@ -359,11 +404,27 @@ defineFeature(feature, (test) => {
       msgLoadDataAPI.addData(
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
-          data: [{}],
+          data: catalogueFilteredProducts,
         }
       );
       instance.getFilteredProductsApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+
+      const sv = catalogueBlock.find(ScrollView).first()
+      instance.setState({
+        catalogueFilterLoading: false,
+        catalogueFilteredProductsActivePage: 1,
+        catalogueFilteredProductsTotalPages: 2
+      })
+      instance.handleScroll({
+        layoutMeasurement: {height: 2000, width: 0},
+        contentOffset: {y: 1000, x: 0},
+        contentSize: {height: 1000, width: 0},
+        contentInset: {top: 0, left: 0, bottom: 0, right: 0},
+        zoomScale: 1
+      })
+      expect(sv).toBeTruthy()
+
     });
     then("Catalogue add cart without errors", () => {
       const msgLoadDataAPI = new Message(
@@ -414,6 +475,26 @@ defineFeature(feature, (test) => {
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
           data: [{}],
+          message:'success',
+          brand_setting:'done'
+        }
+      );
+      instance.getBrandSettingsCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("Catalogue get brandsetting with message", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          message:'success',
+          brand_setting:'done'
         }
       );
       instance.getBrandSettingsCallId = msgLoadDataAPI.messageId;
@@ -435,6 +516,8 @@ defineFeature(feature, (test) => {
       );
       instance.putItemToCartApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+      instance.postCreateCart('subscription',2)
+      instance.postCreateCart('subscri',2)
     });
 
     then("I can add item to wishlist", () => {
@@ -450,7 +533,7 @@ defineFeature(feature, (test) => {
       formComponent = catalogueBlock.findWhere(
         (node) => node.prop("testID") === "onscroll"
       );
-      formComponent.simulate("press");
+      formComponent.simulate("onscroll");
       
       
 
@@ -460,6 +543,7 @@ defineFeature(feature, (test) => {
     });
 
     then("Catalogue load ProductBox without errors", () => {
+      instance.setState({catalogueFilteredProducts:catalogueFilteredProducts,})
       const component = mount(<ProductBox
         addToCartLoading={false}
         onAddToCartPress={jest.fn()}
@@ -478,10 +562,15 @@ defineFeature(feature, (test) => {
       component.prop("onAddToWishlistPress")();
       
       expect(component).toBeTruthy();
+      instance.addToWishlist(2,'pro')
+      instance.setState({isSubscriptionUpdate:true})
+      instance.putItemToCart(1,catalogueFilteredProducts[0],'subscription',2)
+      instance.putItemToCart(1,catalogueFilteredProducts[0],'subscrip',2)
     });
 
 
     then("I can leave the screen with out errors", () => {
+      instance.handleBackButtonClick()
       instance.componentWillUnmount();
       expect(catalogueBlock).toBeTruthy();
     });
