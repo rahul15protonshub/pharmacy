@@ -7,9 +7,12 @@ Feature: ordermanagement
         Then ordermangement will load order list without errors
         Then ordermanagement will load with out errors
         And ordermangement failed to load order list
+        And ordermanagement will create cart
+        And ordermanagement will failed create cart
+        And ordermanagement will load cart
+        And ordermanagement will failed load cart
         And ordermanagement will render empty address view
         And ordermanagement will render order cell
-        And I click on star
         And I can leave the screen with out errors
 
     Scenario: User cancel an order
@@ -26,5 +29,4 @@ Feature: ordermanagement
         And I click on submit review
         And I click on cancel review
         And Rest Api will return success response
-        And Rest Api will return hascart response
         And ordermangement failed to submit order review

@@ -16,7 +16,7 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import TopHeader from "../../../blocks/studio-store-ecommerce-components/src/TopHeader/TopHeader";
 import COLOR_CONST from "../../studio-store-ecommerce-theme/src/AppFonts";
-import Scale from "../../../framework/src/utils/Scale";
+import Scale, { verticalScale } from "../../../framework/src/utils/Scale";
 import {
   RADIO_SELECTED,
   RADIO_UNSELECTED,
@@ -142,22 +142,7 @@ export default class Ordersummary extends OrdersummaryController {
                             } ${item.attributes.subscription_period > 1 ? "Months" : "Month"})`}
                           </Text>
                 </View>
-                // <View style={styles.changeRow}>
-                //   <Text style={styles.periodText}>
-                //     {item.attributes.preferred_delivery_slot
-                //       ? `${this.getSlotString(
-                //         item.attributes.preferred_delivery_slot
-                //       )} | `
-                //       : ""}
-                //     <Text style={styles.packageText}>
-                //       {item.attributes.subscription_package
-                //         .charAt(0)
-                //         .toUpperCase() +
-                //         item.attributes.subscription_package.slice(1)}{" "}
-                //       for {item.attributes.subscription_period} Month
-                //     </Text>
-                //   </Text>
-                // </View>
+               
               )}
               {isProductVarient && (
                 <View style={styles.changeRow}>
@@ -228,13 +213,15 @@ export default class Ordersummary extends OrdersummaryController {
             })}
           </View>
           <View style={styles.bottomDetails}>
-            <View style={styles.tax}>
-              <Text style={styles.productName}>Taxes</Text>
-              <Text style={styles.price}>
-                {themeJson.attributes.currency_type}{" "}
-                {this.state.cartData.attributes.total_tax}
-              </Text>
-            </View>
+          <View style={styles.devider} />
+          <View style={styles.applyCouponRow}>
+                <Text style={styles.couponText}>Sub Total (Inclusive Tax) </Text>
+                <Text style={styles.subText}>
+                  {themeJson.attributes.currency_type}{" "}
+                  {this.state.cartData.attributes.sub_total}
+                </Text>
+           </View>
+           <View style={[styles.devider,{marginBottom:verticalScale(10)}]} />
             {
                 this.state.cartData.attributes.sub_discounted_total_price ? (
                   <View style={styles.delivery}>
@@ -248,7 +235,7 @@ export default class Ordersummary extends OrdersummaryController {
               }
             <View style={styles.delivery}>
               <Text style={styles.productName}>Delivery Charges</Text>
-              <Text style={styles.price}>
+              <Text style={styles.price}>{'+ '}
                 {themeJson.attributes.currency_type}{" "}
                 {this.state.cartData.attributes.shipping_total}
               </Text>
@@ -271,16 +258,8 @@ export default class Ordersummary extends OrdersummaryController {
             {this.state.isValidCoupon && (
               <Text style={styles.couponText}>{this.state.codeValue}</Text>
             )}
-            {!this.state.isCouponApplied && (
-              <TouchableOpacity style={styles.applyCouponRow}>
-                <Text style={styles.couponText}>Sub Total</Text>
-                <Text style={styles.subText}>
-                  {themeJson.attributes.currency_type}{" "}
-                  {this.state.cartData.attributes.sub_total}
-                </Text>
-              </TouchableOpacity>
-            )}
           </View>
+          <View style={[styles.devider,{marginTop:verticalScale(5)}]} />
           <View style={styles.bottomDetails}>
             <View style={styles.total}>
               <Text style={styles.couponText}>Total Amount</Text>

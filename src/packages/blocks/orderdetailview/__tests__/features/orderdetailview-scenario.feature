@@ -25,10 +25,12 @@ Feature: orderdetailview
         And Render view with different states with out errors
         And I can leave the screen with out errors
 
-      Scenario: User navigates to subscriptionorderlist
-        Given I am a User loading subscriptionorderlist
-        When I navigate to the subscriptionorderlist
-        Then subscriptionorderlist will load with out errors
-        Then Load subscription data without errors
-        Then Extend deleviry without errors
-        And I can leave the screen with out errors   
+    Scenario: User navigates to subscription order list
+        Given I am a User loading subscription order list
+        When I navigate to the subscription order list
+        Then subscription order list will load with out errors
+        And Load subscription orders without errors
+        And Extend subscription delivery
+        And Failed to Load subscription orders
+        And Failed extend subscription delivery
+        And I can leave the screen with out errors

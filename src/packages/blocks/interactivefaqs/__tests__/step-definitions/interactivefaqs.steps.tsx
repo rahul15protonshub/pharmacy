@@ -8,13 +8,31 @@ export const configJSON = require("../../config.json");
 import MessageEnum, {getName} from "../../../../framework/src/Messages/MessageEnum"; 
 import React from "react";
 import Interactivefaqs from "../../src/Interactivefaqs"
+import { FlatList } from "react-native";
+import CustomErrorModal from "../../../../blocks/studio-store-ecommerce-components/src/CustomErrorModal/CustomErrorModal";
 const navigation = require("react-navigation")
 
 const screenProps = {
-    navigation: navigation,
+    navigation: {
+        navigate:jest.fn(),
+        addListener:(param:string,callback:any)=>{
+        callback()
+        }
+    },
     id: "Interactivefaqs"
   }
 
+  const faqdata=  {
+    "faqs": [
+        {
+            "id": 10,
+            "title": "FAQ 4",
+            "content": "<html><head>This is a head</head><body>Hello. I am a body</body></html>",
+            "created_at": "2020-10-13T09:37:02.001Z",
+            "updated_at": "2020-10-13T09:37:02.001Z"
+        }
+    ]
+}
 const feature = loadFeature('./__tests__/features/interactivefaqs-scenario.feature');
 
 defineFeature(feature, (test) => {
@@ -69,11 +87,30 @@ defineFeature(feature, (test) => {
             });
             instance.getFAQDataApiCallId = getFaqAPIFail.messageId;
             runEngine.sendMessage("Unit Test", getFaqAPIFail)
+            
+
+            const flatList = interactiveFaqsWrapper.find(FlatList).first();
+            flatList.prop("renderItem")({item: faqdata.faqs[0], index: 0, separators: {highlight: jest.fn(), unhighlight: jest.fn(), updateProps: jest.fn()}});
+           
+            const getFaqAPIerr = new Message(getName(MessageEnum.RestAPIResponceMessage))
+            getFaqAPIerr.addData(getName(MessageEnum.RestAPIResponceDataMessage), getFaqAPIerr.messageId);
+            getFaqAPIerr.addData(getName(MessageEnum.RestAPIResponceErrorMessage), 
+            {
+                errors:'error'
+            });
+            instance.getFAQDataApiCallId = getFaqAPIerr.messageId;
+            runEngine.sendMessage("Unit Test", getFaqAPIerr);
+
+            
 
         });
 
         when('I navigate to the interactivefaqs', () => {
              instance = interactiveFaqsWrapper.instance() as Interactivefaqs
+
+             const customerror = interactiveFaqsWrapper.find(CustomErrorModal).first();
+             customerror.prop("hideErrorModal")()
+             expect(customerror).toBeTruthy();
 
         });
 
@@ -82,6 +119,7 @@ defineFeature(feature, (test) => {
         });
 
         then('I can leave the screen with out errors', () => {
+            instance.handleBackButtonClick
             instance.componentWillUnmount()
             expect(interactiveFaqsWrapper).toBeTruthy()
         });

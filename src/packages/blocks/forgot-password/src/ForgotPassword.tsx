@@ -229,6 +229,7 @@ export default class ForgotPassword extends ForgotPasswordController {
                 )}
                 {!this.state.isOTPSent ? (
                   <TouchableOpacity
+                  testID="presssubmit"
                     style={[
                       styles.submitButton,
                       {

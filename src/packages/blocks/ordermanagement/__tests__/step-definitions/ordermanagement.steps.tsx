@@ -1,3 +1,5 @@
+/// <reference types="@types/jest" />
+
 import { shallow, ShallowWrapper } from "enzyme";
 import { defineFeature, loadFeature } from "jest-cucumber";
 import React from "react";
@@ -8,66 +10,31 @@ import MessageEnum, {
 } from "../../../../framework/src/Messages/MessageEnum";
 import { runEngine } from "../../../../framework/src/RunEngine";
 import Ordermanagement from "../../src/Ordermanagement";
-import CustomErrorModal from "../../../studio-store-ecommerce-components/src/CustomErrorModal/CustomErrorModal";
 import TopHeader from "../../../studio-store-ecommerce-components/src/TopHeader/TopHeader";
+import CustomErrorModal from "../../../../blocks/studio-store-ecommerce-components/src/CustomErrorModal/CustomErrorModal";
 
 const screenProps = {
   navigation: {
-    replace: jest.fn(),
     navigate: jest.fn(),
     addListener: jest.fn(),
+    replace: jest.fn(),
+    goBack: jest.fn(),
     state: {
       params: {
-        isFromPlaced: true,
-        mainOrderData: {},
-      },
+        isFromPlaced: true
+      }
     }
   },
   id: "Ordermanagement",
 };
+
+const orders = require("./orders.json");
 
 jest.useFakeTimers();
 
 const feature = loadFeature(
   "./__tests__/features/ordermanagement-scenario.feature"
 );
-
-const mockOrderItem = {
-  id: "34",
-  type: "order",
-  attributes: {
-    id: 34,
-    order_number: "OD00000034",
-    amount: null,
-    account_id: 3,
-    coupon_code_id: 1,
-    delivery_address_id: null,
-    sub_total: "19.99",
-    total: "82.59",
-    order_items: [
-      {
-        id: "33",
-        type: "order_item",
-        attributes: {
-          id: 33,
-          order_id: 34,
-          quantity: 1,
-          unit_price: "19.99",
-          total_price: "19.99",
-          old_unit_price: null,
-          status: "in_cart",
-          catalogue_id: 24,
-          catalogue_variant_id: 24,
-          product_images: [
-            {
-              url: "",
-            },
-          ],
-        },
-      },
-    ],
-  },
-};
 
 defineFeature(feature, (test) => {
   beforeEach(() => {
@@ -88,19 +55,21 @@ defineFeature(feature, (test) => {
 
     when("I navigate to the ordermanagement", () => {
       instance = OrderWrapper.instance() as Ordermanagement;
+      const topHeader = OrderWrapper.find(TopHeader).first();
+      topHeader.prop("onPressLeft")()
+      expect(topHeader).toBeTruthy();
+
+      const customerror = OrderWrapper.find(CustomErrorModal).first();
+      customerror.prop("hideErrorModal")()
+      expect(customerror).toBeTruthy();
     });
 
     then("ordermangement will mount and preload data", () => {
       instance = OrderWrapper.instance() as Ordermanagement;
       instance.componentDidMount();
       instance.getMyOrderListData();
-      instance.renderSubmitReviewModal;
-     
-    
+      instance.apiCall({ contentType: "", method: "", endPoint: "", body: {} })
     });
-
-  
-    
 
     then("ordermangement will load order list without errors", () => {
       const getOrdersAPI = new Message(
@@ -113,7 +82,7 @@ defineFeature(feature, (test) => {
       getOrdersAPI.addData(getName(MessageEnum.RestAPIResponceSuccessMessage), {
         data: {
           order: {
-            data: [mockOrderItem],
+            data: orders.data.order.data[0].attributes.order_items,
           },
         },
       });
@@ -122,7 +91,7 @@ defineFeature(feature, (test) => {
     });
 
     then("ordermanagement will load with out errors", () => {
-      instance.setState({myOrderList:mockOrderItem})
+      
       expect(OrderWrapper).toBeTruthy();
 
     });
@@ -150,6 +119,82 @@ defineFeature(feature, (test) => {
       runEngine.sendMessage("Unit Test", msgLoadDataErrorRestAPI);
     });
 
+    then('ordermanagement will create cart', () => {
+      const cartApi = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      cartApi.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        cartApi.messageId
+      );
+      cartApi.addData(getName(MessageEnum.RestAPIResponceSuccessMessage), {
+        data: { },
+      });
+      instance.cartHasProductAPICallID = cartApi.messageId;
+      runEngine.sendMessage("Unit Test", cartApi);
+    });
+
+    then('ordermanagement will failed create cart', () => {
+      const msgLoadDataErrorRestAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataErrorRestAPI
+      );
+      msgLoadDataErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          errors: [{}],
+        }
+      );
+
+      msgLoadDataErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataErrorRestAPI.messageId
+      );
+      instance.cartHasProductAPICallID = msgLoadDataErrorRestAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataErrorRestAPI);
+    });
+
+    then('ordermanagement will load cart', () => {
+      const cartApi = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      cartApi.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        cartApi.messageId
+      );
+      cartApi.addData(getName(MessageEnum.RestAPIResponceSuccessMessage), {
+        data: {},
+      });
+      instance.cartHasProductAPICallID = cartApi.messageId;
+      runEngine.sendMessage("Unit Test", cartApi);
+    });
+
+    then('ordermanagement will failed load cart', () => {
+      const msgLoadDataErrorRestAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataErrorRestAPI
+      );
+      msgLoadDataErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          errors: [{}],
+        }
+      );
+
+      msgLoadDataErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataErrorRestAPI.messageId
+      );
+      instance.cartHasProductAPICallID = msgLoadDataErrorRestAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataErrorRestAPI);
+    });
+
     then("ordermanagement will render empty address view", () => {
       instance = OrderWrapper.instance() as Ordermanagement;
       instance.setState({ noProductFound: true });
@@ -159,23 +204,18 @@ defineFeature(feature, (test) => {
 
     then("ordermanagement will render order cell", () => {
       instance = OrderWrapper.instance() as Ordermanagement;
+      instance.setState({myOrderList: orders.data.order.data[0].attributes.order_items});
+      instance.renderMyOrderList()
+      instance.renderMyOrderCell(orders.data.order.data[0])
       expect(OrderWrapper).toBeTruthy();
 
     });
-    
-    then("I click on star", () => {
-      instance = OrderWrapper.instance() as Ordermanagement;
-      instance.setState({showSubmitReviewModal:true,ratingList:mockOrderItem.attributes.order_items,onEndReachedCalledDuringMomentum:true})
-      let btnCancelOrder = OrderWrapper.findWhere(
-        (node) => node.prop("testID") === "pressStar"
-      );
-      btnCancelOrder.simulate("press");
-      expect(OrderWrapper).toBeTruthy();
 
-    });
     then("I can leave the screen with out errors", () => {
-      OrderWrapper.find(CustomErrorModal).first().prop('hideErrorModal')();
-      OrderWrapper.find(TopHeader).first().prop('onPressLeft')()
+      instance.handleBackButtonClick()
+      screenProps.navigation.state.params.isFromPlaced = false
+      OrderWrapper.setProps({...screenProps});
+      instance.handleBackButtonClick()
       instance.componentWillUnmount();
       expect(OrderWrapper).toBeTruthy();
 
@@ -208,7 +248,20 @@ defineFeature(feature, (test) => {
         (node) => node.prop("testID") === "btnCancelOrder"
       );
       btnCancelOrder.simulate("press");
-      // expect(instance.cancelOrderDataRequest()).toBe(true);
+
+      const cancelApi = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      cancelApi.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        cancelApi.messageId
+      );
+      cancelApi.addData(getName(MessageEnum.RestAPIResponceSuccessMessage), {
+        data: {},
+      });
+      instance.cancelOrderAPICallID = cancelApi.messageId;
+      runEngine.sendMessage("Unit Test", cancelApi);
+
       expect(OrderWrapper).toBeTruthy();
 
     });
@@ -276,8 +329,7 @@ defineFeature(feature, (test) => {
       let ratingInput = OrderWrapper.findWhere(
         (node) => node.prop("testID") === "ratingInput"
       );
-      ratingInput.simulate("focus");
-      ratingInput.simulate("changetext", "test rate");
+      ratingInput.simulate("change", "test rate");
 
     });
 
@@ -314,23 +366,6 @@ defineFeature(feature, (test) => {
         }
       );
       instance.submitOrderReviewAPICallID = submitReviewSucessRestAPI.messageId;
-      runEngine.sendMessage("Unit Test", submitReviewSucessRestAPI);
-    });
-    then("Rest Api will return hascart response", () => {
-      const submitReviewSucessRestAPI = new Message(
-        getName(MessageEnum.RestAPIResponceMessage)
-      );
-      submitReviewSucessRestAPI.addData(
-        getName(MessageEnum.RestAPIResponceDataMessage),
-        submitReviewSucessRestAPI.messageId
-      );
-      submitReviewSucessRestAPI.addData(
-        getName(MessageEnum.RestAPIResponceSuccessMessage),
-        {
-          data: [{}],
-        }
-      );
-      instance.cartHasProductAPICallID = submitReviewSucessRestAPI.messageId;
       runEngine.sendMessage("Unit Test", submitReviewSucessRestAPI);
     });
 

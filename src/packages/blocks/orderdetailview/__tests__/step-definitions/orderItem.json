@@ -1,0 +1,487 @@
+{
+    "data": {
+        "tracking_detail": {
+            "data": [
+                {
+                    "id": "126",
+                    "type": "tracking",
+                    "attributes": {
+                        "id": 126,
+                        "status": "placed",
+                        "tracking_number": "TR00000126",
+                        "date": "2022-09-12T19:54:03.708Z",
+                        "orders_details": null,
+                        "order_date": "Tue, 13th September 2022",
+                        "order_datetime": "Tue, 13th September 2022 - 01:24 AM",
+                        "order_items_details": null,
+                        "message": "Your order has been Placed"
+                    }
+                }
+            ]
+        },
+        "order_item_detail": {
+            "data": {
+                "id": "2043",
+                "type": "order_item",
+                "attributes": {
+                    "id": 2043,
+                    "order_id": 463,
+                    "quantity": 1,
+                    "unit_price": "120.0",
+                    "total_price": "120.0",
+                    "old_unit_price": null,
+                    "status": "placed",
+                    "catalogue_id": 85,
+                    "catalogue_variant_id": 2,
+                    "order_status_id": 1,
+                    "placed_at": null,
+                    "confirmed_at": null,
+                    "in_transit_at": null,
+                    "delivered_at": null,
+                    "cancelled_at": null,
+                    "refunded_at": null,
+                    "manage_placed_status": false,
+                    "manage_cancelled_status": false,
+                    "created_at": "2022-09-12T19:53:11.682Z",
+                    "updated_at": "2022-09-12T19:54:03.719Z",
+                    "subscription_quantity": null,
+                    "subscription_package": null,
+                    "subscription_period": null,
+                    "subscription_discount": null,
+                    "preferred_delivery_slot": null,
+                    "subscription_discounted_price": null,
+                    "total_price_after_sub_discount": null,
+                    "subscription_days_count": null,
+                    "order_statuses": null,
+                    "delivery_addresses": [
+                        {
+                            "id": 202,
+                            "account_id": 411,
+                            "address": "Est quo atque rerum",
+                            "name": "Willow Austin",
+                            "flat_no": "Est ut amet fugit ",
+                            "zip_code": "760001",
+                            "phone_number": "9234343433",
+                            "deleted_at": null,
+                            "latitude": null,
+                            "longitude": null,
+                            "residential": true,
+                            "city": "Ab dolorem est et ne",
+                            "state_code": null,
+                            "country_code": null,
+                            "state": "LADAKH",
+                            "address_line_2": "Asperiores dignissim",
+                            "address_type": "home",
+                            "address_for": "billing_and_shipping",
+                            "is_default": false,
+                            "landmark": null,
+                            "created_at": "2022-09-12T19:53:59.398Z",
+                            "updated_at": "2022-09-12T19:53:59.398Z",
+                            "country": "india",
+                            "address_state_id": 37
+                        }
+                    ],
+                    "catalogue": {
+                        "id": "85",
+                        "type": "catalogue",
+                        "attributes": {
+                            "name": "Organic Yelakki Banana - Box of 6 (400 grams)",
+                            "description": "<p data-mce-fragment=\"1\">Petite and bite-sized, these naturally grown bananas are more aromatic and sweeter than the classic Robusta bananas that are more commonly available. These palm-sized bananas are called Yelakki in Bangalore and Elaichi in Mumbai.</p>\r\n\r\n<p data-mce-fragment=\"1\">Yelakki Bananas are around 3- 4 inches long and have thinner skin and better shelf life than the larger Robusta Bananas.</p>\r\n\r\n<ul data-mce-fragment=\"1\">\r\n\t<li data-mce-fragment=\"1\">Organic</li>\r\n\t<li data-mce-fragment=\"1\">Locally and Sustainably Grown</li>\r\n\t<li data-mce-fragment=\"1\">Farm to Table</li>\r\n\t<li data-mce-fragment=\"1\">Chemical Free</li>\r\n\t<li data-mce-fragment=\"1\">Naturally Ripened</li>\r\n</ul>\r\n\r\n<p data-mce-fragment=\"1\"><strong data-mce-fragment=\"1\">How to Use:</strong>&nbsp;Eat the fruit as-is or add them in smoothies, pancakes, or bake banana bread.</p>\r\n\r\n<p data-mce-fragment=\"1\"><strong data-mce-fragment=\"1\">How to Store:&nbsp;</strong>Best consumed within 2-3 days. To store longer, keep it in a cool and dry place.</p>\r\n\r\n<p data-mce-fragment=\"1\"><strong data-mce-fragment=\"1\">Available Size:&nbsp;</strong>Box of 6 pcs (400 grams)</p>\r\n",
+                            "manufacture_date": "2022-07-01T16:00:00.000Z",
+                            "block_qty": 0,
+                            "price": 260,
+                            "on_sale": false,
+                            "sale_price": null,
+                            "discount": null,
+                            "recommended": true,
+                            "sku": "COD0000085",
+                            "length": null,
+                            "breadth": null,
+                            "tax_amount": "0.0",
+                            "price_including_tax": "260.0",
+                            "height": null,
+                            "weight": "1.0",
+                            "weight_unit": "kg",
+                            "brand": {
+                                "id": 1,
+                                "name": "Dummy",
+                                "created_at": "2022-05-27T08:15:47.600Z",
+                                "updated_at": "2022-05-27T08:15:47.600Z"
+                            },
+                            "tags": [
+                                {
+                                    "id": 2,
+                                    "name": "Organic ",
+                                    "created_at": "2022-07-08T10:19:29.638Z",
+                                    "updated_at": "2022-07-08T10:19:29.638Z"
+                                }
+                            ],
+                            "reviews": [],
+                            "current_availibility": "in_stock",
+                            "default_variant": {
+                                "id": 7,
+                                "catalogue_id": 85,
+                                "price": "260.0",
+                                "stock_qty": 152,
+                                "on_sale": false,
+                                "sale_price": null,
+                                "discount_price": null,
+                                "length": null,
+                                "breadth": null,
+                                "height": null,
+                                "created_at": "2022-07-18T08:20:47.399Z",
+                                "updated_at": "2022-08-25T04:54:52.000Z",
+                                "block_qty": null,
+                                "is_default": true,
+                                "sold": null,
+                                "current_availability": "in_stock",
+                                "remaining_stock": null,
+                                "variant_property_id": null,
+                                "tax_amount": "0.0",
+                                "price_including_tax": "260.0",
+                                "tax_id": 1
+                            },
+                            "stock_qty": 301,
+                            "actual_price_including_tax": 260,
+                            "cart_quantity": null,
+                            "subscription_quantity": null,
+                            "subscription_package": null,
+                            "subscription_period": null,
+                            "subscription_days_count": null,
+                            "preferred_delivery_slot": null,
+                            "wishlisted": false,
+                            "product_notified": false,
+                            "cart_items": null,
+                            "average_rating": 0,
+                            "images": {
+                                "data": [
+                                    {
+                                        "id": "103",
+                                        "type": "attachment",
+                                        "attributes": {
+                                            "attachable_type": "BxBlockCatalogue::Catalogue",
+                                            "attachable_id": 85,
+                                            "position": null,
+                                            "is_default": true,
+                                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBYXM9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--e8cbc5d0d09735b10ab7b884c805d3659fd448ca/cropped_image.png",
+                                            "url_link": null,
+                                            "is_present?": false,
+                                            "url_id": null,
+                                            "url_type": null
+                                        }
+                                    }
+                                ]
+                            },
+                            "product_attributes": {
+                                "Pack of ": [],
+                                "Weight ": [
+                                    {
+                                        "name": "250 gm",
+                                        "variant_property_id": 15
+                                    },
+                                    {
+                                        "name": "500 gm ",
+                                        "variant_property_id": 16
+                                    }
+                                ],
+                                "Pcs": []
+                            },
+                            "availability": [
+                                {
+                                    "variant_attributes": []
+                                },
+                                {
+                                    "variant_attributes": [
+                                        {
+                                            "variant_id": 4,
+                                            "variant_name": "Weight ",
+                                            "variant_property_name": "250 gm",
+                                            "variant_property_id": 15
+                                        },
+                                        {
+                                            "variant_id": 4,
+                                            "variant_name": "Weight ",
+                                            "variant_property_name": "500 gm ",
+                                            "variant_property_id": 16
+                                        }
+                                    ]
+                                },
+                                {
+                                    "variant_attributes": []
+                                }
+                            ],
+                            "deep_link": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai//share/share/dl?catalogue_id=85",
+                            "catalogue_variants": [
+                                {
+                                    "id": "2",
+                                    "type": "catalogue_variant",
+                                    "attributes": {
+                                        "id": 2,
+                                        "catalogue_id": 85,
+                                        "price": "130.0",
+                                        "stock_qty": 149,
+                                        "on_sale": true,
+                                        "sale_price": "120.0",
+                                        "discount_price": "7.69",
+                                        "length": null,
+                                        "breadth": null,
+                                        "height": null,
+                                        "is_default": false,
+                                        "created_at": "2022-07-11T07:56:46.029Z",
+                                        "updated_at": "2022-09-12T19:54:04.112Z",
+                                        "tax_amount": "0.0",
+                                        "price_including_tax": "120.0",
+                                        "catalogue_variant_properties": [
+                                            {
+                                                "id": "3",
+                                                "type": "catalogue_variant_property",
+                                                "attributes": {
+                                                    "id": 3,
+                                                    "catalogue_id": 85,
+                                                    "catalogue_variant_id": 2,
+                                                    "variant_id": 4,
+                                                    "variant_property_id": 15,
+                                                    "created_at": "2022-07-11T07:56:46.032Z",
+                                                    "updated_at": "2022-07-18T08:20:47.381Z",
+                                                    "variant_name": "Weight ",
+                                                    "property_name": "250 gm"
+                                                }
+                                            }
+                                        ],
+                                        "images": {
+                                            "data": [
+                                                {
+                                                    "id": "107",
+                                                    "type": "attachment",
+                                                    "attributes": {
+                                                        "attachable_type": "BxBlockCatalogue::CatalogueVariant",
+                                                        "attachable_id": 2,
+                                                        "position": null,
+                                                        "is_default": true,
+                                                        "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBYkU9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--ca0546504ee14971cc29b6113e425bc537a536f6/cropped_image.png",
+                                                        "url_link": null,
+                                                        "is_present?": false,
+                                                        "url_id": null,
+                                                        "url_type": null
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "actual_price_including_tax": "130.0",
+                                        "cart_quantity": null,
+                                        "is_notify_product": null
+                                    }
+                                },
+                                {
+                                    "id": "7",
+                                    "type": "catalogue_variant",
+                                    "attributes": {
+                                        "id": 7,
+                                        "catalogue_id": 85,
+                                        "price": "260.0",
+                                        "stock_qty": 152,
+                                        "on_sale": false,
+                                        "sale_price": null,
+                                        "discount_price": null,
+                                        "length": null,
+                                        "breadth": null,
+                                        "height": null,
+                                        "is_default": true,
+                                        "created_at": "2022-07-18T08:20:47.399Z",
+                                        "updated_at": "2022-08-25T04:54:52.000Z",
+                                        "tax_amount": "0.0",
+                                        "price_including_tax": "260.0",
+                                        "catalogue_variant_properties": [
+                                            {
+                                                "id": "9",
+                                                "type": "catalogue_variant_property",
+                                                "attributes": {
+                                                    "id": 9,
+                                                    "catalogue_id": 85,
+                                                    "catalogue_variant_id": 7,
+                                                    "variant_id": 4,
+                                                    "variant_property_id": 16,
+                                                    "created_at": "2022-07-18T08:20:47.414Z",
+                                                    "updated_at": "2022-07-18T08:20:47.414Z",
+                                                    "variant_name": "Weight ",
+                                                    "property_name": "500 gm "
+                                                }
+                                            }
+                                        ],
+                                        "images": {
+                                            "data": [
+                                                {
+                                                    "id": "122",
+                                                    "type": "attachment",
+                                                    "attributes": {
+                                                        "attachable_type": "BxBlockCatalogue::CatalogueVariant",
+                                                        "attachable_id": 7,
+                                                        "position": null,
+                                                        "is_default": true,
+                                                        "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBZE09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--30faae69fd627c11cc2ff056e6e4830329313f58/cropped_image.png",
+                                                        "url_link": null,
+                                                        "is_present?": false,
+                                                        "url_id": null,
+                                                        "url_type": null
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "actual_price_including_tax": "260.0",
+                                        "cart_quantity": null,
+                                        "is_notify_product": null
+                                    }
+                                }
+                            ],
+                            "variants_in_cart": [],
+                            "can_review": false,
+                            "similar_products": {
+                                "data": []
+                            },
+                            "category": [
+                                {
+                                    "data": {
+                                        "id": "5",
+                                        "type": "category",
+                                        "attributes": {
+                                            "id": 5,
+                                            "name": "Fresh Fruits",
+                                            "created_at": "2022-07-04T12:47:16.004Z",
+                                            "updated_at": "2022-08-09T10:41:14.520Z",
+                                            "product_image": {
+                                                "id": 60,
+                                                "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBRUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--95db367c657ecfbcdf46090e6c1137985482b49b/cropped_image.png"
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "catalogue_subscriptions": [],
+                            "is_subscription_available": false,
+                            "available_subscription": {},
+                            "available_slots": {
+                                "morning_slots": null,
+                                "evening_slots": null
+                            },
+                            "is_notify_product": null
+                        }
+                    },
+                    "catalogue_variant": {
+                        "id": "2",
+                        "type": "catalogue_variant",
+                        "attributes": {
+                            "id": 2,
+                            "catalogue_id": 85,
+                            "price": "130.0",
+                            "stock_qty": 149,
+                            "on_sale": true,
+                            "sale_price": "120.0",
+                            "discount_price": "7.69",
+                            "length": null,
+                            "breadth": null,
+                            "height": null,
+                            "is_default": false,
+                            "created_at": "2022-07-11T07:56:46.029Z",
+                            "updated_at": "2022-09-12T19:54:04.112Z",
+                            "tax_amount": "0.0",
+                            "price_including_tax": "120.0",
+                            "catalogue_variant_properties": [
+                                {
+                                    "id": "3",
+                                    "type": "catalogue_variant_property",
+                                    "attributes": {
+                                        "id": 3,
+                                        "catalogue_id": 85,
+                                        "catalogue_variant_id": 2,
+                                        "variant_id": 4,
+                                        "variant_property_id": 15,
+                                        "created_at": "2022-07-11T07:56:46.032Z",
+                                        "updated_at": "2022-07-18T08:20:47.381Z",
+                                        "variant_name": "Weight ",
+                                        "property_name": "250 gm"
+                                    }
+                                }
+                            ],
+                            "images": {
+                                "data": [
+                                    {
+                                        "id": "107",
+                                        "type": "attachment",
+                                        "attributes": {
+                                            "attachable_type": "BxBlockCatalogue::CatalogueVariant",
+                                            "attachable_id": 2,
+                                            "position": null,
+                                            "is_default": true,
+                                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBYkU9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--ca0546504ee14971cc29b6113e425bc537a536f6/cropped_image.png",
+                                            "url_link": null,
+                                            "is_present?": false,
+                                            "url_id": null,
+                                            "url_type": null
+                                        }
+                                    }
+                                ]
+                            },
+                            "actual_price_including_tax": "130.0",
+                            "cart_quantity": null,
+                            "is_notify_product": null
+                        }
+                    },
+                    "product_name": "Organic Yelakki Banana - Box of 6 (400 grams)",
+                    "overall_order_status": "placed",
+                    "product_price": 260,
+                    "product_sale_price": null,
+                    "product_on_sale": false,
+                    "product_discount": null,
+                    "product_variant_price": "130.0",
+                    "product_variant_sale_price": "120.0",
+                    "product_variant_on_sale": true,
+                    "product_variant_discount": "7.69",
+                    "product_variant_is_deliverable": true,
+                    "is_item_cancelled": false,
+                    "is_review_present": false,
+                    "review": null,
+                    "delivery_address": {
+                        "id": 202,
+                        "account_id": 411,
+                        "address": "Est quo atque rerum",
+                        "name": "Willow Austin",
+                        "flat_no": "Est ut amet fugit ",
+                        "zip_code": "760001",
+                        "phone_number": "9234343433",
+                        "deleted_at": null,
+                        "latitude": null,
+                        "longitude": null,
+                        "residential": true,
+                        "city": "Ab dolorem est et ne",
+                        "state_code": null,
+                        "country_code": null,
+                        "state": "LADAKH",
+                        "address_line_2": "Asperiores dignissim",
+                        "address_type": "home",
+                        "address_for": "billing_and_shipping",
+                        "is_default": false,
+                        "landmark": null,
+                        "created_at": "2022-09-12T19:53:59.398Z",
+                        "updated_at": "2022-09-12T19:53:59.398Z",
+                        "country": "india",
+                        "address_state_id": 37
+                    },
+                    "order_date": "Tue, 12th September 2022",
+                    "order_number": "OD00000425",
+                    "is_deliverable": true,
+                    "product_images": null,
+                    "item_history": [
+                        {
+                            "status": "Placed",
+                            "order_date": "Tue, 13th September '22",
+                            "order_datetime": "Tue, 13th September '2022 - 01:24 AM",
+                            "msg": "Your order has been Placed",
+                            "tracking_number": "TR00000126"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "success": true
+}

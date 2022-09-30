@@ -345,13 +345,7 @@ export default class Shoppingcart extends ShoppingcartController {
             <View style={styles.devider} />
 
             <View>
-              {/* <View style={styles.tax}>
-                <Text style={styles.product_name}>Taxes</Text>
-                <Text style={styles.price}>{'+ '}
-                  {themeJson.attributes.currency_type}{" "}
-                  {this.state.cartData.attributes.total_tax || 0.0}
-                </Text>
-              </View> */}
+             
                 {
                 this.state.cartData.attributes.sub_discounted_total_price ? (
                   <View style={styles.tax}>

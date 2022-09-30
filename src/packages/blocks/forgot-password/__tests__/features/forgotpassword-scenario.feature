@@ -20,6 +20,7 @@ Feature: forgotpassword
         When I navigate to the newpassword
         Then newpassword will load with out errors
         Then newpassword will get validation without errors
+        Then newpassword will get validation with errors
         Then newpassword will resetPasswordApiCallIdwithout errors
         Then newpassword will resetPasswordApiCallId with errors
         Then newpassword will changetext with out errors

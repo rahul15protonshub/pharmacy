@@ -194,7 +194,7 @@ const Footer = createBottomTabNavigator(
 );
 
 const MainNavigator = createStackNavigator({
-  Footer: { screen: Footer, navigationOptions: { header: null, title: 'Home' } },
+  Catalogue: { screen: Catalogue, navigationOptions: { header: null, gestureEnabled: false } },
   Filteritems: { screen: Filteritems, navigationOptions: { header: null, } },
   Filteroptions: {
     screen: Filteroptions,
@@ -307,7 +307,7 @@ const MainNavigator = createStackNavigator({
     screen: Checkout,
     navigationOptions: { header: null }
   },
-  MainNavigator: { screen: Footer, navigationOptions: { header: null, gestureEnabled: false } },
+  MainNavigator: { screen: Catalogue, navigationOptions: { header: null, gestureEnabled: false } },
 
 });
 

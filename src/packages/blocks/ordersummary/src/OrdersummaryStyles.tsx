@@ -344,7 +344,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginTop: verticalScale(25),
+    marginTop: verticalScale(7),
   },
 
   total: {
@@ -495,7 +495,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: verticalScale(5),
+    marginTop: verticalScale(19),
   },
 
   applyCouponText: {
@@ -610,11 +610,12 @@ export default StyleSheet.create({
 
   labelSticker: {
     height: scale(22.2),
-    borderTopLeftRadius: scale(50),
-    borderBottomLeftRadius: scale(50),
+    borderTopRightRadius: scale(50),
+    borderBottomRightRadius: scale(50),
     backgroundColor: COLOR_CONST.pastelRed,
-    alignSelf: "flex-end",
+    alignSelf: "flex-start",
     justifyContent: "center",
+    marginLeft:scale(8),
   },
 
   stickerText: {
@@ -759,6 +760,12 @@ export default StyleSheet.create({
     fontFamily: FONTS.GTWalsheimProRegular,
     marginLeft: scale(7),
     lineHeight: scale(14),
+  },
+  devider: {
+    height: 0.6,
+    backgroundColor: COLOR_CONST.newlightcolor,
+    marginHorizontal: scale(18),
+    marginTop: verticalScale(20)
   },
   // Customizable Area End
 });

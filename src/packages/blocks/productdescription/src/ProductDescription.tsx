@@ -795,7 +795,8 @@ export default class ProductDescription extends ProductDescriptionController {
             onPress={() => this.onPressSubscriptionButton()}
             disabled={isAlreadySubscribed}
           >
-            <Text style={styles.AddcustomTxtStyle}>{isAlreadySubscribed ? "Subscribed" : "Subscribe"}</Text>
+            <Text style={[styles.AddcustomTxtStyle,{ textAlign:'center',
+    width: scale(320),}]}>{isAlreadySubscribed ? "Subscribed" : "Subscribe"}</Text>
           </TouchableOpacity>
         )}
         <TouchableOpacity

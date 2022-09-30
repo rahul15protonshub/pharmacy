@@ -10,10 +10,14 @@ import React from "react";
 import ForgotPassword from "../../src/ForgotPassword"
 import NewPassword from "../../src/NewPassword"
 
-const navigation = require("react-navigation")
-
 const screenProps = {
-    navigation: navigation,
+    navigation: {
+      navigate:jest.fn(),
+      replace: jest.fn(),
+      addListener:(param:string,callback:any)=>{
+        callback()
+      }
+    },
     id: "ForgotPassword"
   }
 
@@ -37,7 +41,7 @@ defineFeature(feature, (test) => {
 
         when('I navigate to the forgotpassword', () => {
              instance = forgotPassword.instance() as ForgotPassword
-             instance.setState({ showTimer: true, isOTPSent:true,emailInput:'test',otpInput:'gg' });
+             instance.setState({ showTimer: true, isOTPSent:true,emailInput:'test@gmail.com',otpInput:'gg' });
         });
 
         then('forgotpassword will load with out errors', () => {
@@ -173,7 +177,7 @@ defineFeature(feature, (test) => {
             instance.apiGuestLoginCallId = msgLoadDataAPI.messageId;
             runEngine.sendMessage("Unit Test", msgLoadDataAPI);
           });
-          then("forgotpassword will verifyOtpApiCallId without errors", () => {
+          then("forgotpassword will verifyOtpApiCallId without errors", async() => {
             const msgLoadDataAPI = new Message(
               getName(MessageEnum.RestAPIResponceMessage)
             );
@@ -185,17 +189,25 @@ defineFeature(feature, (test) => {
               getName(MessageEnum.RestAPIResponceSuccessMessage),
               {
                 data: [{}],
+                meta: {
+                  token: "token"
+              }
+  
               }
             );
             instance.verifyOtpApiCallId = msgLoadDataAPI.messageId;
             runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+            await instance.verifyOTPSuccessCallBack({data:{test:''}})
           });
           
           
         then("I can change text without error", () => {
+          let touchableComponent = forgotPassword.findWhere((node) => node.prop('testID') === 'presssubmit');
+          touchableComponent.simulate('press');
+          
+          instance.setState({isOTPSent:true})
             let textInputComponent = forgotPassword.findWhere((node) => node.prop('testID') === 'otpimage');
-            textInputComponent.simulate('onFocus', '123456789');
-
+            textInputComponent.simulate('focus', '123456789');
             let textInputContactname = forgotPassword.findWhere((node) => node.prop('testID') === 'txtforgotnum');
           textInputContactname.simulate('focus')
           textInputContactname.simulate('changeText', 'testtt');
@@ -252,6 +264,24 @@ defineFeature(feature, (test) => {
           instance.validationAPICallId = msgLoadDataAPI.messageId;
           runEngine.sendMessage("Unit Test", msgLoadDataAPI);
         });
+        then("newpassword will get validation with errors", () => {
+          const msgLoadDataAPI = new Message(
+            getName(MessageEnum.RestAPIResponceMessage)
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceDataMessage),
+            msgLoadDataAPI.messageId
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceErrorMessage),
+            {
+              errors: [{}],
+            }
+          );
+          instance.validationAPICallId = msgLoadDataAPI.messageId;
+          runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+        });
+        
         then("newpassword will resetPasswordApiCallIdwithout errors", () => {
           const msgLoadDataAPI = new Message(
             getName(MessageEnum.RestAPIResponceMessage)

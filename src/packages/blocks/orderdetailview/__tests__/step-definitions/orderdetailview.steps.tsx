@@ -11,16 +11,35 @@ import MessageEnum, {
 import React from "react";
 import Orderdetailview from "../../src/Orderdetailview";
 import SubscriptionOrderList from "../../src/SubscriptionOrderList";
-import CustomErrorModal from "../../../studio-store-ecommerce-components/src/CustomErrorModal/CustomErrorModal";
-import TopHeader from "../../../studio-store-ecommerce-components/src/TopHeader/TopHeader";
+import { FlatList, ScrollView,Linking, } from "react-native";
 const orders = require("./orders.json");
-const subscriptioniitem = require("./subscriptionitem.json");
+const subscriptionItem = require("./subscriptionItem.json");
+
 jest.useFakeTimers();
+jest.spyOn(global,'setTimeout');
 
 const screenProps = {
   navigation: {
     navigate: jest.fn(),
-    addListener: jest.fn(),
+    addListener: (param:string,callback:any)=>{
+      callback()
+    },
+    state: {
+      params: {
+        orderData: orders.data.order.data[0].attributes.order_items[5],
+        mainOrderData: {data:{}},
+      },
+    },
+  },
+  id: "Orderdetailview",
+};
+
+const screenPropsSubscriptionOrderList = {
+  navigation: {
+    navigate: jest.fn(),
+    addListener: (param:string,callback:any)=>{
+      callback()
+    },
     state: {
       params: {
         orderData: orders.data.order.data[0].attributes.order_items[5],
@@ -28,10 +47,8 @@ const screenProps = {
       },
     },
   },
-
-  id: "Orderdetailview",
+  id: "SubscriptionOrderList",
 };
-
 
 const feature = loadFeature(
   "./__tests__/features/orderdetailview-scenario.feature"
@@ -43,6 +60,9 @@ defineFeature(feature, (test) => {
     jest.doMock("react-native", () => ({ Platform: { OS: "web" } }));
     jest.spyOn(helpers, "getOS").mockImplementation(() => "web");
   });
+  afterEach(()=>{
+    jest.runAllTimers()
+  })
 
   test("User navigates to orderdetailview", ({ given, when, then }) => {
     let orderdetailviewBlock: ShallowWrapper;
@@ -54,11 +74,12 @@ defineFeature(feature, (test) => {
 
     when("I navigate to the orderdetailview", async () => {
       instance = orderdetailviewBlock.instance() as Orderdetailview;
+      instance.setState({ orderDetails:orders.data.order.data[0],trackingDetails:orders });
       await instance.componentDidMount();
       await instance.getTrackIdDetails();
       instance.renderOrderShippingAddressView()
-      instance.setState({ orderDetails: {} });
       instance.renderCompleteOrderStatusView()
+      await instance.getLogisticTrackIdDetails()
     });
 
     then("orderdetailview will load with out errors", () => {
@@ -85,6 +106,25 @@ defineFeature(feature, (test) => {
       instance.getLogisiticTrackIdDetailsCallID = msgLoadDataAPI.messageId;
       instance.onCancelDelivery("");
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+
+      const msgLoadDataAPIerr = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPIerr.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPIerr.messageId
+      );
+      msgLoadDataAPIerr.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: 
+          'error',
+        }
+      );
+      instance.getLogisiticTrackIdDetailsCallID = msgLoadDataAPIerr.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPIerr);
+      
+      
     });
 
     then("Load track id details without errors", () => {
@@ -258,6 +298,8 @@ defineFeature(feature, (test) => {
       );
       instance.getTrackIdDetailsCallID = msgLoadDataErrorRestAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataErrorRestAPI);
+      instance.getTrackIdDetailsFailureCallBack('error')
+      instance.getTrackIdDetailsFailureCallBack('')
     });
 
     then("Failed to Create cart", () => {
@@ -281,6 +323,8 @@ defineFeature(feature, (test) => {
       );
       instance.createCartAPICallID = msgLoadDataErrorRestAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataErrorRestAPI);
+      instance.createCartFailureCallBack('error')
+      instance.createCartFailureCallBack('')
     });
 
     then("Failed to Submit order review", () => {
@@ -442,36 +486,36 @@ defineFeature(feature, (test) => {
     });
 
     then("I can leave the screen with out errors", () => {
+      instance.handleBackButtonClick
       instance.componentWillUnmount();
       expect(orderdetailviewBlock).toBeTruthy();
 
     });
   });
-  //subscription test
-  test("User navigates to subscriptionorderlist", ({ given, when, then }) => {
-    let SubscriptionOrderListblock: ShallowWrapper;
-    let instance: SubscriptionOrderList;
 
-    given("I am a User loading subscriptionorderlist", () => {
-      SubscriptionOrderListblock = shallow(<SubscriptionOrderList {...screenProps} />);
+  test('User navigates to subscription order list', ({
+    given,
+    when,
+    then,
+    and
+  }) => {
+
+    let subscriptionOrderList: ShallowWrapper
+    let instance: SubscriptionOrderList
+
+    given('I am a User loading subscription order list', () => {
+      subscriptionOrderList = shallow(<SubscriptionOrderList {...screenPropsSubscriptionOrderList} />);
     });
 
-    when("I navigate to the subscriptionorderlist", async () => {
-      instance = SubscriptionOrderListblock.instance() as SubscriptionOrderList;
-      await instance.componentDidMount();
-      instance.setState({subscriptionOrders:subscriptioniitem.data})
-      instance.renderSubscriptionList()
-      SubscriptionOrderListblock.find(CustomErrorModal).first().prop('hideErrorModal')()
-      SubscriptionOrderListblock.find(TopHeader).first().prop('onPressLeft')
-      
+    when('I navigate to the subscription order list', () => {
+      instance = subscriptionOrderList.instance() as SubscriptionOrderList
     });
 
-    then("subscriptionorderlist will load with out errors", () => {
-      expect(SubscriptionOrderListblock).toBeTruthy();
-
+    then('subscription order list will load with out errors', () => {
+      instance.renderSubscriptionCell(subscriptionItem.data[0], 0)
     });
 
-    then("Load subscription data without errors", () => {
+    and('Load subscription orders without errors', () => {
       const msgLoadDataAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
       );
@@ -482,17 +526,17 @@ defineFeature(feature, (test) => {
       msgLoadDataAPI.addData(
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
-          data: {
-            tracking: {},
-          },
+          data: [{}],
         }
       );
       instance.getSubscrptionOrdersAPICallID = msgLoadDataAPI.messageId;
-      instance.onCancelDelivery("");
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+
+
     });
 
-    then("Extend deleviry without errors", () => {
+    and('Extend subscription delivery', () => {
+      instance.extendDeliveryOrderSuccess()
       const msgLoadDataAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
       );
@@ -508,12 +552,53 @@ defineFeature(feature, (test) => {
       );
       instance.extendDeliveryAPICallID = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+
+
     });
 
-    then("I can leave the screen with out errors", () => {
-      instance.componentWillUnmount();
-      expect(SubscriptionOrderListblock).toBeTruthy();
+    and('Failed to Load subscription orders', () => {
+      
+      const msgLoadDataAPIerr = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPIerr.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPIerr.messageId
+      );
+      msgLoadDataAPIerr.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          errors: [{}],
+        }
+      );
+      instance.getSubscrptionOrdersAPICallID = msgLoadDataAPIerr.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPIerr);
+    });
 
+    and('Failed extend subscription delivery', () => {
+      
+      instance.extendDeliveryOrderFailure("error")
+      const msgLoadDataAPIerr = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPIerr.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPIerr.messageId
+      );
+      msgLoadDataAPIerr.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          errors: [{}],
+        }
+      );
+      instance.extendDeliveryAPICallID = msgLoadDataAPIerr.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPIerr);
+    });
+
+    and('I can leave the screen with out errors', () => {
+      instance.handleBackButtonClick
+      instance.componentWillUnmount();
+      expect(subscriptionOrderList).toBeTruthy();
     });
   });
 });

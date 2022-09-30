@@ -433,6 +433,7 @@ const styles = StyleSheet.create({
     color: COLOR_CONST.black,
     fontSize: scale(14),
     lineHeight: scale(21),
+    width:scale(200),
   },
   labelText11: {
     fontFamily: FONTS.GTWalsheimProRegular,

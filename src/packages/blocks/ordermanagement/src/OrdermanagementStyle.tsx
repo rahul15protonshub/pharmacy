@@ -454,13 +454,13 @@ export default StyleSheet.create({
 
   labelSticker: {
     height: scale(22.2),
-    borderTopLeftRadius: scale(50),
-    borderBottomLeftRadius: scale(50),
+    borderTopRightRadius: scale(50),
+    borderBottomRightRadius: scale(50),
     backgroundColor: COLOR_CONST.pastelRed,
     top: scale(5),
-    right: 0,
+    marginLeft:scale(8),
     justifyContent: "center",
-    alignSelf: "flex-end",
+    alignSelf: "flex-start",
   },
 
   stickerText: {

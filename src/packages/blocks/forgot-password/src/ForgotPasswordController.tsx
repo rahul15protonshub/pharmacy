@@ -359,7 +359,7 @@ export default class ForgotPasswordController extends BlockComponent<
         showTimer: false,
         sendLink: false,
         isFetching: false,
-        token: res.meta.token,
+        token: res?.meta?.token,
         isShowError: false,
         message:
           "Your OTP is verified. Please proceed and reset your password.",
@@ -368,7 +368,7 @@ export default class ForgotPasswordController extends BlockComponent<
       () => {
         setTimeout(() => {
           this.props.navigation.navigate("NewPassword", {
-            token: res.meta.token,
+            token: res?.meta?.token,
             isPhoneLogin: isPhoneLogin,
           });
         }, 2000);

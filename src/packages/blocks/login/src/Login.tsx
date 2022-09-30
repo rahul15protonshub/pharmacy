@@ -104,6 +104,7 @@ export default class Login extends LoginController {
                   ]}
                 />
                 <TextInput
+                testID="txtemail"
                   style={[
                     styles.input,
                     {
@@ -159,6 +160,7 @@ export default class Login extends LoginController {
                   ]}
                 />
                 <TextInput
+                testID="txtpassword"
                   style={[
                     styles.input1,
                     {

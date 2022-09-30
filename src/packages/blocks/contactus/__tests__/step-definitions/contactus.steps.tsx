@@ -11,10 +11,13 @@ import React from "react";
 import Contactus from "../../src/Contactus";
 import TopHeader from "../../../studio-store-ecommerce-components/src/TopHeader/TopHeader";
 
-const navigation = require("react-navigation");
-
 const screenProps = {
-  navigation: navigation,
+  navigation:{
+    navigate: jest.fn(),
+    addListener:(param:string,callback:any)=>{
+      callback()
+    },
+  },
   id: "Contactus",
 };
 

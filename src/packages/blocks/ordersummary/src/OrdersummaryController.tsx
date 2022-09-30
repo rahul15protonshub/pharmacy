@@ -255,8 +255,8 @@ export default class OrdersummaryController extends BlockComponent<
             orderSuccess: true,
             orderData: {
               order: {
-                placed_at: responseJson.data.placed_at,
-                total: responseJson.data.total,
+                placed_at: responseJson?.data?.data?.attributes?.placed_at,
+                total: responseJson?.data?.data?.attributes?.total,
               },
             },
           });
