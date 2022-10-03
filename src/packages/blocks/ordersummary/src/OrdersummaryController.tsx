@@ -640,22 +640,7 @@ export default class OrdersummaryController extends BlockComponent<
     this.setState({ profileData: res, isFetching: false });
   };
 
-  onSetAddress = (isFromShipping: boolean, addressData: any) => {
-    if (isFromShipping) {
-      this.setState({ shippingAddressData: addressData });
-    } else {
-      this.setState({ billingAddressData: addressData });
-    }
-  };
-
-  onAddAddress = (isFromShipping: boolean) => {
-    this.props.navigation.navigate("SavedAddress", {
-      isFromCheckout: true,
-      onSetAddress: (addressData: any) =>
-        this.onSetAddress(isFromShipping, addressData),
-    });
-  };
-
+ 
   saveAddress = async () => {
     let addressData = this.props.navigation.state.params.checkoutData;
     if (addressData.address && addressData.address.id) {

@@ -15,18 +15,23 @@ import ReviewList from "../../src/ReviewList";
 import Prescriptionuploads from '../../../../components/src/precriptionuploads'
 import { mockProductData } from "../../__mocks__/mockProductData";
 import  ProductBox from "../../../../blocks/catalogue/src/components/ProductBox"
-
+import StorageProvider from "../../../../framework/src/StorageProvider";
+import TopHeader from "../../../studio-store-ecommerce-components/src/TopHeader/TopHeader";
 const screenProps = {
   navigation: {
     navigate: jest.fn(),
-    addListener: jest.fn(),
+    getParam:jest.fn(),
+    addListener: (params:string,callback:any)=>{
+      callback()
+    },
     replace: jest.fn(),
     push: jest.fn(),
     state: {
       params: {
         productData: {product:{id:23}},
         isFromSP:true,
-        catalogue_variant_id:12
+        catalogue_variant_id:12,
+        isFromDeepLink:'https://tst',
       },
       isFromDeepLink:true
     },
@@ -128,12 +133,21 @@ const product_details ={data:
   }
 }
 }
-
+jest.useFakeTimers()
+jest.spyOn(global, 'setTimeout');
 defineFeature(feature, (test) => {
   beforeEach(() => {
     jest.resetModules();
     jest.doMock("react-native", () => ({ Platform: { OS: "web" } }));
     jest.spyOn(helpers, "getOS").mockImplementation(() => "web");
+     //@ts-ignore
+     StorageProvider = {
+      get: jest.fn(),
+      set: jest.fn(),
+    }
+  });
+  afterEach(()=>{
+    jest.runAllTimers()
   });
 
   test("User navigates to ProductDescription", ({ given, when, then }) => {
@@ -144,12 +158,12 @@ defineFeature(feature, (test) => {
       exampleBlockA = shallow(<ProductDescription {...screenProps} />);
     });
 
-    when("I navigate to the ProductDescription", () => {
+    when("I navigate to the ProductDescription", async() => {
       instance = exampleBlockA.instance() as ProductDescription;
       instance.componentDidMount()
       instance.getToken()
-      instance.getProductDescriptionRequest('12345')
-      instance.setState({appState:'background'})
+     await instance.getProductDescriptionRequest('12345')
+      instance.setState({appState:'background',showProductDescriptionModal:true})
       instance._handleAppStateChange('active')
       instance.setState({
         productData:product_details.data,catalogue_id:''
@@ -157,6 +171,11 @@ defineFeature(feature, (test) => {
       instance.setState({selectedProduct:product_details.data})
       instance.renderReviewList()
       instance.notifyProduct()
+      const topHeader = exampleBlockA.find(TopHeader).first();
+      topHeader.prop("onPressLeft")()
+      topHeader.prop("headerRightIcons")
+      expect(topHeader).toBeTruthy();
+      await instance.onShare()
     });
 
     then("ProductDescription will load  ProductBox  with out errors", () => {
@@ -197,6 +216,7 @@ defineFeature(feature, (test) => {
       );
       instance.getProductDescriptionApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+      instance.getProductDescriptionSuccessCallBack(mockProductData)
     });
 
     then("Failed to Load product description data", () => {
@@ -270,7 +290,8 @@ defineFeature(feature, (test) => {
       runEngine.sendMessage("Unit Test", msgLoadPrivacyErrorRestAPI);
     });
 
-    then("Get buy product without errors", () => {
+    then("Get buy product without errors", async() => {
+      await instance.onPressBuyNow()
       const msgLoadDataAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
       );
@@ -372,7 +393,7 @@ defineFeature(feature, (test) => {
       runEngine.sendMessage("Unit Test", msgLoadPrivacyErrorRestAPI);
     });
 
-    then("Add to cart without errors", () => {
+    then("Add to cart without errors", async() => {
       const msgLoadDataAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
       );
@@ -389,6 +410,11 @@ defineFeature(feature, (test) => {
       );
       instance.addToCartApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+      instance.setState({updateCart:true})
+      await instance.addToCart()
+      await instance.addToCartPress(product_details.data)
+      
+
     });
 
     then("Failed to add to cart", () => {
@@ -419,7 +445,10 @@ defineFeature(feature, (test) => {
       runEngine.sendMessage("Unit Test", msgLoadPrivacyErrorRestAPI);
     });
 
-    then("Add to wishlist without errors", () => {
+    then("Add to wishlist without errors", async() => {
+      const dataa={attributes:{wishlisted:true}}
+      instance.onHeartPress(dataa,'description')
+      instance.onHeartPress(dataa,'similarProducts')
       const msgLoadDataAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
       );
@@ -436,8 +465,12 @@ defineFeature(feature, (test) => {
       );
       instance.addToWishlistApiCallId = msgLoadDataAPI.messageId;
       instance.LikeFlag='description'
+      
       instance.updateMyWhishList()
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+      instance.LikeFlag='similarProducts'
+      instance.updateMyWhishList()
+      await instance.addToWishlist(12)
     });
 
     then("Failed to add to wishlist", () => {
@@ -485,6 +518,7 @@ defineFeature(feature, (test) => {
       );
       instance.removeFromWishlistApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+      instance.removeFromWishlist(12)
     });
 
     then("Failed to remove from wishlist", () => {
@@ -746,7 +780,7 @@ defineFeature(feature, (test) => {
         msgLoadPrivacyErrorRestAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadPrivacyErrorRestAPI);
     });
-    then("productdesc will load increaseOrDecreaseCartQuantityApiCallId without errors", () => {
+    then("productdesc will load increaseOrDecreaseCartQuantityApiCallId without errors", async() => {
       const msgLoadDataAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
       );
@@ -763,9 +797,10 @@ defineFeature(feature, (test) => {
       );
       instance.increaseOrDecreaseCartQuantityApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+      await instance.updateQty(true)
     });
 
-    then("productdesc will load increaseOrDecreaseCartQuantityApiCallId with errors", () => {
+    then("productdesc will load increaseOrDecreaseCartQuantityApiCallId with errors", async() => {
       const msgLoadPrivacyErrorRestAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
       );
@@ -792,6 +827,7 @@ defineFeature(feature, (test) => {
       instance.increaseOrDecreaseCartQuantityApiCallId =
         msgLoadPrivacyErrorRestAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadPrivacyErrorRestAPI);
+      await instance.updateQty(false)
     });
     
     then("Render guest modal", () => {
@@ -816,9 +852,11 @@ defineFeature(feature, (test) => {
         (node) => node.prop("testID") === "updatecartvaluepress1"
       );
       buttonComponent.simulate("press");
-
+      buttonComponent = exampleBlockA.findWhere(
+        (node) => node.prop("testID") === "prescriptionmodal"
+      );
+      buttonComponent.simulate("press");
       
-
     });
 
     then("Render view all components", () => {
@@ -877,6 +915,7 @@ defineFeature(feature, (test) => {
     });
 
     then("I can leave the screen with out errors", () => {
+      instance.handleBackButtonClick
       instance.componentWillUnmount();
       expect(exampleBlockA).toBeTruthy();
 

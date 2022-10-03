@@ -9,6 +9,7 @@ Feature: ordersummary
         And ordersummary failed to load cart list
         And ordersummary will load user profile without errors
          And ordersummary will load user profile with errors
+         And ordersummary will load user profile with errors res
         And ordersummary failed to load user profile
         And ordersummary will load cart product id without errors
         And ordersummary failed to load cart product id
@@ -27,7 +28,10 @@ Feature: ordersummary
         And ordersummary releaseShippingChargeCalculationApiCallID without error
         And ordersummary shippingChargeCalculationApiCallID without error
         And ordersummary save address without error
+        And ordersummary save address with error
         And ordersummary check zipcode without error
         And ordersummary check availablity without error
+        And ordersummary check availablity with error
         And ordersummary releaseblock without error
+        And ordersummary releaseblock with error
         And ordersummary confirmStripePaymentID without error

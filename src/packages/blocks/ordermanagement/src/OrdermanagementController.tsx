@@ -344,30 +344,6 @@ export default class OrdermanagementController extends BlockComponent<
     // Customizable Area End
   };
 
-  createCartFailureCallBack = (error: any) => {
-    if (error) {
-      setTimeout(() => {
-        this.setState({
-          message: this.parseApiErrorResponse(error),
-          isShowError: true,
-          showAlertModal: true,
-          isFetching: false,
-        });
-      }, 0);
-    } else {
-      setTimeout(() => {
-        this.setState({
-          message: "Network Error!",
-          isShowError: true,
-          showAlertModal: true,
-          isFetching: false,
-        });
-      }, 0);
-    }
-    // Customizable Area Start
-    // Customizable Area End
-  };
-
   cartHasProductSuccessCallBack = (res: any) => {
     this.setState({ cartHasProduct: res.has_cart_product });
     // Customizable Area Start

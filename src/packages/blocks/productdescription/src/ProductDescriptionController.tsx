@@ -736,13 +736,13 @@ export default class ProductDescriptionController extends BlockComponent<
 
   getProductDescriptionRequest = async (token: any) => {
     let arr = this.props.navigation.getParam("productData");
-    if (this.props.navigation.state.params.isFromSP) {
-      arr.id = arr.product.id;
+    if (this.props.navigation.state.params.isFromSP && arr) {
+      arr.id = arr?.product?.id;
     }
     this.getProductDescriptionApiCallId = await this.apiCall({
       contentType: configJSON.productApiContentType,
       method: configJSON.apiMethodTypeGet,
-      endPoint: configJSON.productDescriptionAPiEndPoint + "/" + arr.id,
+      endPoint: configJSON.productDescriptionAPiEndPoint + "/" + arr?.id,
     });
   };
 
@@ -760,14 +760,14 @@ export default class ProductDescriptionController extends BlockComponent<
       );
     }
     const selectedProduct =
-      responseJson?.data.attributes.catalogue_variants.find(
+      responseJson?.data?.attributes?.catalogue_variants?.find(
         (cat: any) =>
           cat.id == this.props.navigation.state.params?.catalogue_variant_id
       );
       const isFromCart = this.props.navigation.state.params?.catalogue_variant_id;
-      const productData = responseJson?.data.attributes;
+      const productData = responseJson?.data?.attributes;
       let isProductAvailable = false;
-      let isVariantProduct = productData.catalogue_variants.length > 0;
+      let isVariantProduct = productData?.catalogue_variants?.length > 0;
   
       let defaultSelectedAttributes: any = {}
       if (isVariantProduct) {
@@ -775,12 +775,12 @@ export default class ProductDescriptionController extends BlockComponent<
           isProductAvailable = true;
         }
         else if (productData.default_variant) {
-          const defaultVariantObject = productData.catalogue_variants.find((v: any)=> Number(v.id) == productData.default_variant.id);
+          const defaultVariantObject = productData?.catalogue_variants?.find((v: any)=> Number(v.id) == productData.default_variant.id);
           if (defaultVariantObject) { 
-            defaultVariantObject.attributes.catalogue_variant_properties.forEach((cvp: any) => {
+            defaultVariantObject?.attributes?.catalogue_variant_properties?.forEach((cvp: any) => {
               defaultSelectedAttributes[cvp.attributes.variant_name] = {
-                name: cvp.attributes.property_name,
-                variant_property_id: cvp.attributes.variant_property_id,
+                name: cvp?.attributes?.property_name,
+                variant_property_id: cvp?.attributes?.variant_property_id,
               };
             })
           }
@@ -794,40 +794,38 @@ export default class ProductDescriptionController extends BlockComponent<
         productData: responseJson?.data,
         similarproductList: responseJson?.data?.attributes?.similar_products?.data,
         selectedProduct: selectedProduct || null,
-        catalogue_id: responseJson?.data.id,
-        showNotifyButton: responseJson?.data.attributes.product_notified,
+        catalogue_id: responseJson?.data?.id,
+        showNotifyButton: responseJson?.data?.attributes?.product_notified,
         isProductAvailable: isProductAvailable,
         quantity:
-          selectedProduct && selectedProduct.attributes.cart_quantity
-            ? selectedProduct.attributes.cart_quantity
+          selectedProduct && selectedProduct?.attributes?.cart_quantity
+            ? selectedProduct?.attributes?.cart_quantity
             : isVariantProduct
               ? 1
-              : productData.cart_quantity
-                ? productData.cart_quantity
+              : productData?.cart_quantity
+                ? productData?.cart_quantity
                 : 1,
         updateCart: selectedProduct
-          ? responseJson?.data.attributes.variants_in_cart.includes(
-            selectedProduct.attributes.id
+          ? responseJson?.data?.attributes?.variants_in_cart.includes(
+            selectedProduct?.attributes?.id
           )
             ? true
             : false
-          : productData.cart_quantity
+          : productData?.cart_quantity
             ? true
             : false,
-        availableAttributes: responseJson?.data.attributes?.product_attributes,
+        availableAttributes: responseJson?.data?.attributes?.product_attributes,
         catalogue_variant_id:
           this.props.navigation.state.params?.catalogue_variant_id ||
           catalogueVariantId,
         isVariantProduct:
-          responseJson?.data.attributes.catalogue_variants.length > 0,
+          responseJson?.data?.attributes?.catalogue_variants?.length > 0,
         isSubscriptionAvailable:
-          responseJson?.data.attributes.is_subscription_available,
-        subscriptionQuantity: responseJson?.data.attributes
-          .subscription_quantity
-          ? responseJson?.data.attributes.subscription_quantity
+          responseJson?.data?.attributes?.is_subscription_available,
+        subscriptionQuantity: responseJson?.data?.attributes?.subscription_quantity
+          ? responseJson?.data?.attributes?.subscription_quantity
           : 1,
-        subscriptionCartHasProduct: responseJson?.data.attributes
-          .subscription_quantity
+        subscriptionCartHasProduct: responseJson?.data?.attributes?.subscription_quantity
           ? true
           : false,
           selectedAttributes: defaultSelectedAttributes

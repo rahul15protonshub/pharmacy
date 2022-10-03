@@ -10,11 +10,18 @@ import React from "react";
 import Profilebio from "../../src/Profilebio"
 import EditProfile from "../../src/EditProfile"
 import ChangePassword from "../../src/ChangePassword"
-
+import StorageProvider from "../../../../framework/src/StorageProvider";
+import TopHeader from "../../../../blocks/studio-store-ecommerce-components/src/TopHeader/TopHeader";
+import CustomErrorModal from "../../../../blocks/studio-store-ecommerce-components/src/CustomErrorModal/CustomErrorModal";
 const navigation = require("react-navigation")
 
 const screenProps = {
-    navigation: navigation,
+    navigation: {
+      navigate:jest.fn(),
+      addListener:(params:string,callback:any)=>{
+        callback()
+      }
+    },
     id: "Profilebio"
   }
 
@@ -61,7 +68,8 @@ const screenProps = {
     }
 
 const feature = loadFeature('./__tests__/features/profilebio-scenario.feature');
-
+jest.useFakeTimers()
+jest.spyOn(global, 'setTimeout');
 defineFeature(feature, (test) => {
 
 
@@ -69,7 +77,15 @@ defineFeature(feature, (test) => {
         jest.resetModules()
         jest.doMock('react-native', () => ({ Platform: { OS: 'web' }}))
         jest.spyOn(helpers, 'getOS').mockImplementation(() => 'web');
+        //@ts-ignore
+    StorageProvider = {
+      get: jest.fn(),
+      set: jest.fn(),
+    }
     });
+    afterEach(()=>{
+      jest.runAllTimers()
+    })
 
     test('User navigates to profilebio', ({ given, when, then }) => {
         let profilebioWrapper:ShallowWrapper;
@@ -90,17 +106,29 @@ defineFeature(feature, (test) => {
              instance.getUserProfile()
 
              let textInputComponent = changePasswordWrapper.findWhere((node) => node.prop('testID') === 'txtPasswordInput');
+             textInputComponent.simulate('focus')
              textInputComponent.simulate('changeText', 'pAssword!23');
+             textInputComponent.simulate('blur')
 
              textInputComponent = changePasswordWrapper.findWhere((node) => node.prop('testID') === 'txtNewPassword');
+             textInputComponent.simulate('focus')
              textInputComponent.simulate('changeText', 'pAssword!23');
+             textInputComponent.simulate('blur')
 
              textInputComponent = changePasswordWrapper.findWhere((node) => node.prop('testID') === 'txtConfirmNewPassword');
+             textInputComponent.simulate('focus')
              textInputComponent.simulate('changeText', 'pAssword!23');
+             textInputComponent.simulate('blur')
 
         });
         
         then("Changepassword changePasswordApiCallId api without errors", () => {
+          const topHeader = changePasswordWrapper.find(TopHeader).first();
+          topHeader.prop("onPressLeft")
+          expect(topHeader).toBeTruthy();
+          const customerror = changePasswordWrapper.find(CustomErrorModal).first();
+          customerror.prop("hideErrorModal")()
+          expect(customerror).toBeTruthy();
           const msgLoadDataAPI = new Message(
             getName(MessageEnum.RestAPIResponceMessage)
           );
@@ -112,6 +140,7 @@ defineFeature(feature, (test) => {
             getName(MessageEnum.RestAPIResponceSuccessMessage),
             {
               data: [{}],
+              message:'success'
             }
           );
           instanceChangePassword.changePasswordApiCallId = msgLoadDataAPI.messageId;
@@ -131,8 +160,16 @@ defineFeature(feature, (test) => {
               errors:[{}]
             }
           );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceErrorMessage),
+            {
+              errors:[{}]
+            }
+          );
           instanceChangePassword.changePasswordApiCallId = msgLoadDataAPI.messageId;
           runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          instanceChangePassword.profileDataFailureCallBack('error')
+          instanceChangePassword.profileDataFailureCallBack('')
         });
 
         then("Profile bio get userprofile api without errors", () => {
@@ -296,6 +333,7 @@ defineFeature(feature, (test) => {
 
 
         then('I can leave the screen with out errors', () => {
+          instance.handleBackButtonClick
             instance.componentWillUnmount()
             instanceChangePassword.componentWillUnmount()
             expect(profilebioWrapper).toBeTruthy()

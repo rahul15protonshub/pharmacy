@@ -896,6 +896,7 @@ export default class ProductDescription extends ProductDescriptionController {
             style={{ flex: 1 }}
           />
           <TouchableOpacity
+          testID="prescriptionmodal"
             onPress={() =>
               this.setState({ showProductDescriptionModal: false })
             }

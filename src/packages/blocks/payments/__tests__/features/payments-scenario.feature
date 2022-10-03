@@ -12,6 +12,10 @@ Feature: payments
         When I click on pay with razor pay
         Then payment will getIdApiCallId without errors
         Then payment will getIdApiCallId with errors
+        Then payment will getUserProfileApiCallId without errors
+        Then payment will getUserProfileApiCallId with errors
+        Then payment will getsavePurchaseCallId without errors
+        Then payment will getsavePurchaseCallId with errors
         Then Payment should success
 
     Scenario: User navigates to Hyperpay

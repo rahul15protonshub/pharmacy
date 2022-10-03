@@ -16,7 +16,9 @@ import CustomErrorModal from "../../../../blocks/studio-store-ecommerce-componen
 const screenProps = {
   navigation: {
     navigate: jest.fn(),
-    addListener: jest.fn(),
+    addListener: (params:any,callback:any)=>{
+      callback()
+    },
     replace: jest.fn(),
     goBack: jest.fn(),
     state: {
@@ -31,7 +33,7 @@ const screenProps = {
 const orders = require("./orders.json");
 
 jest.useFakeTimers();
-
+jest.spyOn(global, 'setTimeout');
 const feature = loadFeature(
   "./__tests__/features/ordermanagement-scenario.feature"
 );
@@ -42,7 +44,9 @@ defineFeature(feature, (test) => {
     jest.doMock("react-native", () => ({ Platform: { OS: "web" } }));
     jest.spyOn(helpers, "getOS").mockImplementation(() => "web");
   });
-
+  afterEach(()=>{
+    jest.runAllTimers()
+  });
   test("User navigates to ordermanagement", ({ given, when, then }) => {
     let OrderWrapper: ShallowWrapper;
     let instance: Ordermanagement;
@@ -242,12 +246,13 @@ defineFeature(feature, (test) => {
       expect(OrderWrapper).toBeTruthy();
 
     });
-    then("I click on yes", () => {
+    then("I click on yes", async() => {
       instance = OrderWrapper.instance() as Ordermanagement;
       let btnCancelOrder = OrderWrapper.findWhere(
         (node) => node.prop("testID") === "btnCancelOrder"
       );
       btnCancelOrder.simulate("press");
+     
 
       const cancelApi = new Message(
         getName(MessageEnum.RestAPIResponceMessage)

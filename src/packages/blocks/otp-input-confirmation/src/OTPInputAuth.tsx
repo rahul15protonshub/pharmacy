@@ -174,6 +174,7 @@ export default class OTPInputAuth extends OTPInputAuthController {
                       ]}
                     />
                     <TextInput
+                    testID="txtotp"
                       style={[
                         styles.input,
                         {
@@ -230,6 +231,7 @@ export default class OTPInputAuth extends OTPInputAuthController {
                   this.renderCounter()}
                 {this.state.showResendLink && (
                   <TouchableOpacity
+                  testID="sendlink"
                     onPress={() => {
                       this.setState(
                         { isOTPSent: false, showResendLink: false },

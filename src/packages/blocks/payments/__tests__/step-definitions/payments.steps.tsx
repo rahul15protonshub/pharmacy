@@ -44,6 +44,11 @@ defineFeature(feature, (test) => {
     jest.resetModules();
     jest.doMock("react-native", () => ({ Platform: { OS: "web" } }));
     jest.spyOn(helpers, "getOS").mockImplementation(() => "web");
+     //@ts-ignore
+     StorageProvider = {
+      get: jest.fn(),
+      set: jest.fn(),
+    }
   });
   test("User navigates to Hyperpay", ({ given, when, then }) => {
     let hyperpayTrackingDetails: ShallowWrapper;
@@ -279,6 +284,8 @@ defineFeature(feature, (test) => {
 
     when("I navigate to the payments", () => {
       instance = PayementWrapper.instance() as Payments;
+      instance.componentDidMount()
+      instance.getToken()
     });
 
     then("payments will load with out errors", () => {
@@ -349,6 +356,70 @@ defineFeature(feature, (test) => {
       );
       instance.getIdApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("payment will getUserProfileApiCallId without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+          message:'success'
+        }
+      );
+      instance.getUserProfileApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("payment will getUserProfileApiCallId with errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          errors: [{}],
+         
+        }
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
+         
+        }
+      );
+      instance.getUserProfileApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("payment will getsavePurchaseCallId without errors", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: [{}],
+          message:'success'
+        }
+      );
+      instance.getsavePurchaseCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("payment will getsavePurchaseCallId with errors", () => {
+      
     });
 
     then("Payment should success", () => {

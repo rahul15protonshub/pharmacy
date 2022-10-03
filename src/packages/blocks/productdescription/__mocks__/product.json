@@ -1,0 +1,289 @@
+{
+    "data": {
+        "id": "86",
+        "type": "catalogue",
+        "attributes": {
+            "name": "La Casa Organic Red Cherries Karonda 250 Gm",
+            "description": "<p>Delicious in taste and use for decoration over cakes, icecreams, muffins and cream rolls etc. Made of red cherry and contains whole cherry pieces to add colors to your food and make it look delicious. Storage instructions - keep in a cool and dry place away from sunlight. Shelf life - 12 months. Used as attractive topping decoration for sundaes, ice creams, pastries, chocolates and perfect to add delicious fruity flavor to sweet dishes.</p>\r\n",
+            "manufacture_date": null,
+            "block_qty": 2,
+            "price": 700,
+            "on_sale": true,
+            "sale_price": "500.0",
+            "discount": "28.57",
+            "recommended": false,
+            "sku": "COD0000086",
+            "length": null,
+            "breadth": null,
+            "tax_amount": "0.0",
+            "price_including_tax": "500.0",
+            "height": null,
+            "weight": "1.0",
+            "weight_unit": "kg",
+            "brand": {
+                "id": 1,
+                "name": "Dummy",
+                "created_at": "2022-05-27T08:15:47.600Z",
+                "updated_at": "2022-05-27T08:15:47.600Z"
+            },
+            "tags": [
+                {
+                    "id": 2,
+                    "name": "Organic ",
+                    "created_at": "2022-07-08T10:19:29.638Z",
+                    "updated_at": "2022-07-08T10:19:29.638Z"
+                }
+            ],
+            "reviews": [],
+            "current_availibility": "in_stock",
+            "default_variant": {
+                "id": 4,
+                "catalogue_id": 86,
+                "price": "700.0",
+                "stock_qty": 23,
+                "on_sale": true,
+                "sale_price": "500.0",
+                "discount_price": "28.57",
+                "length": null,
+                "breadth": null,
+                "height": null,
+                "created_at": "2022-07-14T04:42:18.788Z",
+                "updated_at": "2022-08-30T11:36:14.385Z",
+                "block_qty": 2,
+                "is_default": true,
+                "sold": null,
+                "current_availability": "in_stock",
+                "remaining_stock": null,
+                "variant_property_id": null,
+                "tax_amount": "0.0",
+                "price_including_tax": "500.0",
+                "tax_id": 1
+            },
+            "stock_qty": 173,
+            "actual_price_including_tax": 700,
+            "cart_quantity": 3,
+            "subscription_quantity": null,
+            "subscription_package": null,
+            "subscription_period": null,
+            "subscription_days_count": null,
+            "preferred_delivery_slot": null,
+            "wishlisted": false,
+            "product_notified": false,
+            "cart_items": {
+                "6": 3
+            },
+            "average_rating": 0,
+            "images": {
+                "data": [
+                    {
+                        "id": "104",
+                        "type": "attachment",
+                        "attributes": {
+                            "attachable_type": "BxBlockCatalogue::Catalogue",
+                            "attachable_id": 86,
+                            "position": null,
+                            "is_default": true,
+                            "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBYXc9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--57ecae81197ca1b59673bfbc19f98cf8ef0d7a24/cropped_image.png",
+                            "url_link": null,
+                            "is_present?": false,
+                            "url_id": null,
+                            "url_type": null
+                        }
+                    }
+                ]
+            },
+            "product_attributes": {
+                "Pack of ": [],
+                "Weight ": [
+                    {
+                        "name": "500 gm ",
+                        "variant_property_id": 16
+                    },
+                    {
+                        "name": "750 gm",
+                        "variant_property_id": 17
+                    }
+                ],
+                "Pcs": []
+            },
+            "availability": [
+                {
+                    "variant_attributes": []
+                },
+                {
+                    "variant_attributes": [
+                        {
+                            "variant_id": 4,
+                            "variant_name": "Weight ",
+                            "variant_property_name": "500 gm ",
+                            "variant_property_id": 16
+                        },
+                        {
+                            "variant_id": 4,
+                            "variant_name": "Weight ",
+                            "variant_property_name": "750 gm",
+                            "variant_property_id": 17
+                        }
+                    ]
+                },
+                {
+                    "variant_attributes": []
+                }
+            ],
+            "deep_link": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai//share/share/dl?catalogue_id=86",
+            "catalogue_variants": [
+                {
+                    "id": "4",
+                    "type": "catalogue_variant",
+                    "attributes": {
+                        "id": 4,
+                        "catalogue_id": 86,
+                        "price": "700.0",
+                        "stock_qty": 23,
+                        "on_sale": true,
+                        "sale_price": "500.0",
+                        "discount_price": "28.57",
+                        "length": null,
+                        "breadth": null,
+                        "height": null,
+                        "is_default": true,
+                        "created_at": "2022-07-14T04:42:18.788Z",
+                        "updated_at": "2022-08-30T11:36:14.385Z",
+                        "tax_amount": "0.0",
+                        "price_including_tax": "500.0",
+                        "catalogue_variant_properties": [
+                            {
+                                "id": "6",
+                                "type": "catalogue_variant_property",
+                                "attributes": {
+                                    "id": 6,
+                                    "catalogue_id": 86,
+                                    "catalogue_variant_id": 4,
+                                    "variant_id": 4,
+                                    "variant_property_id": 16,
+                                    "created_at": "2022-07-15T04:47:39.582Z",
+                                    "updated_at": "2022-07-15T06:43:26.653Z",
+                                    "variant_name": "Weight ",
+                                    "property_name": "500 gm "
+                                }
+                            }
+                        ],
+                        "images": {
+                            "data": [
+                                {
+                                    "id": "110",
+                                    "type": "attachment",
+                                    "attributes": {
+                                        "attachable_type": "BxBlockCatalogue::CatalogueVariant",
+                                        "attachable_id": 4,
+                                        "position": null,
+                                        "is_default": true,
+                                        "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBZ0lCIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--10d008e43fa9060a312b9361baa0552daca07e8c/cropped_image.jpeg",
+                                        "url_link": null,
+                                        "is_present?": false,
+                                        "url_id": null,
+                                        "url_type": null
+                                    }
+                                }
+                            ]
+                        },
+                        "actual_price_including_tax": "700.0",
+                        "cart_quantity": null,
+                        "is_notify_product": false
+                    }
+                },
+                {
+                    "id": "6",
+                    "type": "catalogue_variant",
+                    "attributes": {
+                        "id": 6,
+                        "catalogue_id": 86,
+                        "price": "850.0",
+                        "stock_qty": 150,
+                        "on_sale": true,
+                        "sale_price": "650.0",
+                        "discount_price": "23.53",
+                        "length": null,
+                        "breadth": null,
+                        "height": null,
+                        "is_default": false,
+                        "created_at": "2022-07-18T04:54:27.242Z",
+                        "updated_at": "2022-08-09T07:34:18.000Z",
+                        "tax_amount": "0.0",
+                        "price_including_tax": "650.0",
+                        "catalogue_variant_properties": [
+                            {
+                                "id": "8",
+                                "type": "catalogue_variant_property",
+                                "attributes": {
+                                    "id": 8,
+                                    "catalogue_id": 86,
+                                    "catalogue_variant_id": 6,
+                                    "variant_id": 4,
+                                    "variant_property_id": 17,
+                                    "created_at": "2022-07-18T04:54:27.245Z",
+                                    "updated_at": "2022-07-18T04:54:27.245Z",
+                                    "variant_name": "Weight ",
+                                    "property_name": "750 gm"
+                                }
+                            }
+                        ],
+                        "images": {
+                            "data": [
+                                {
+                                    "id": "121",
+                                    "type": "attachment",
+                                    "attributes": {
+                                        "attachable_type": "BxBlockCatalogue::CatalogueVariant",
+                                        "attachable_id": 6,
+                                        "position": null,
+                                        "is_default": true,
+                                        "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBZ01CIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--0890c1d56333b45b29692987a8204f3230ff8750/cropped_image.jpeg",
+                                        "url_link": null,
+                                        "is_present?": false,
+                                        "url_id": null,
+                                        "url_type": null
+                                    }
+                                }
+                            ]
+                        },
+                        "actual_price_including_tax": "850.0",
+                        "cart_quantity": 3,
+                        "is_notify_product": false
+                    }
+                }
+            ],
+            "variants_in_cart": [],
+            "can_review": false,
+            "similar_products": {
+                "data": []
+            },
+            "category": [
+                {
+                    "data": {
+                        "id": "5",
+                        "type": "category",
+                        "attributes": {
+                            "id": 5,
+                            "name": "Fresh Fruits",
+                            "created_at": "2022-07-04T12:47:16.004Z",
+                            "updated_at": "2022-08-09T10:41:14.520Z",
+                            "product_image": {
+                                "id": 60,
+                                "url": "https://grocerysku-232512-ruby.b232512.dev.centralindia.az.svc.builder.ai/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBRUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--95db367c657ecfbcdf46090e6c1137985482b49b/cropped_image.png"
+                            }
+                        }
+                    }
+                }
+            ],
+            "catalogue_subscriptions": [],
+            "is_subscription_available": false,
+            "available_subscription": {},
+            "available_slots": {
+                "morning_slots": null,
+                "evening_slots": null
+            },
+            "is_notify_product": false
+        }
+    }
+}

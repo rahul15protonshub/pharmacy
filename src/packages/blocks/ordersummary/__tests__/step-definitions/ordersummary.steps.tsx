@@ -10,12 +10,18 @@ import MessageEnum, {
 } from "../../../../framework/src/Messages/MessageEnum";
 import React from "react";
 import Ordersummary from "../../src/Ordersummary";
-
+import {Alert,FlatList} from 'react-native';
 const screenProps = {
   navigation: {
     navigate: jest.fn(),
-    addListener: jest.fn(),
+    addListener: (params:string,callback:any)=>{
+      callback()
+    },
     replace: jest.fn(),
+    state:{
+      params:{checkoutData:{address:{id:1}}},
+      buyNowCartID:23
+    }
   },
   id: "Ordersummary",
 };
@@ -93,14 +99,18 @@ const mockOrderItem = {
     ],
   },
 };
-
+jest.useFakeTimers();
+jest.spyOn(global, 'setTimeout');
 defineFeature(feature, (test) => {
   beforeEach(() => {
     jest.resetModules();
     jest.doMock("react-native", () => ({ Platform: { OS: "web" } }));
     jest.spyOn(helpers, "getOS").mockImplementation(() => "web");
+    jest.spyOn(Alert, 'alert');
   });
-
+  afterEach(()=>{
+    jest.runAllTimers()
+  });
   test("User navigates to ordersummary", ({ given, when, then }) => {
     let ordersummaryBlock: ShallowWrapper;
     let instance: Ordersummary;
@@ -111,6 +121,9 @@ defineFeature(feature, (test) => {
 
     when("I navigate to the ordersummary", () => {
       instance = ordersummaryBlock.instance() as Ordersummary;
+      const flatList = ordersummaryBlock.find(FlatList).first();
+      flatList.prop("renderItem")({item: mockOrderItem, index: 0, separators: {highlight: jest.fn(), unhighlight: jest.fn(), updateProps: jest.fn()}});
+
     });
 
     then("ordersummary will load with out errors", () => {
@@ -138,6 +151,7 @@ defineFeature(feature, (test) => {
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
           data: [mockOrderItem],
+          message:'success'
         }
       );
       instance.getCartListApiCallId = msgLoadDataAPI.messageId;
@@ -158,7 +172,12 @@ defineFeature(feature, (test) => {
           errors: [{}],
         }
       );
-
+      msgLoadDataErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
+        }
+      );
       msgLoadDataErrorRestAPI.addData(
         getName(MessageEnum.RestAPIResponceDataMessage),
         msgLoadDataErrorRestAPI.messageId
@@ -201,7 +220,23 @@ defineFeature(feature, (test) => {
       instance.getUserProfileApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
-
+    then("ordersummary will load user profile with errors res", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
+        }
+      );
+      instance.getUserProfileApiCallId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
     then("ordersummary failed to load user profile", () => {
       const msgLoadDataErrorRestAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
@@ -237,6 +272,7 @@ defineFeature(feature, (test) => {
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
           data: [{}],
+          message:'success'
         }
       );
       instance.getCartProductId = msgLoadDataAPI.messageId;
@@ -256,6 +292,14 @@ defineFeature(feature, (test) => {
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
           errors: [{}],
+
+        }
+      );
+      msgLoadDataErrorRestAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
+
         }
       );
 
@@ -267,7 +311,7 @@ defineFeature(feature, (test) => {
       runEngine.sendMessage("Unit Test", msgLoadDataErrorRestAPI);
     });
 
-    then("ordersummary will load place order without errors", () => {
+    then("ordersummary will load place order without errors", async() => {
       const msgLoadDataAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
       );
@@ -279,10 +323,12 @@ defineFeature(feature, (test) => {
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
           data: [{}],
+          message:'success'
         }
       );
       instance.placeOrderId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+      await instance.placeOrder()
     });
 
     then("ordersummary failed to place order", () => {
@@ -308,7 +354,7 @@ defineFeature(feature, (test) => {
       runEngine.sendMessage("Unit Test", msgLoadDataErrorRestAPI);
     });
 
-    then("ordersummary will create stripe payment id without errors", () => {
+    then("ordersummary will create stripe payment id without errors", async() => {
       const msgLoadDataAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
       );
@@ -320,10 +366,13 @@ defineFeature(feature, (test) => {
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
           data: [{}],
+          message:'success'
         }
       );
       instance.createStripePaymentId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+     await instance.saveAddress()
+     await instance.requestPayment()
     });
 
     then("ordersummary failed to create stripe payment id", () => {
@@ -420,12 +469,13 @@ defineFeature(feature, (test) => {
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
           data: [{}],
+          message:'success'
         }
       );
       instance.createOrderId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
-    then("ordersummary verifyRazorPayId without error", () => {
+    then("ordersummary verifyRazorPayId without error", async() => {
       const msgLoadDataAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
       );
@@ -439,10 +489,12 @@ defineFeature(feature, (test) => {
           data: [{
             order:{placeat:'',placed_at:''}
           }],
+          message:'success'
         }
       );
       instance.verifyRazorPayId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+      await instance.getRazorpayOrderId()
     });
     then("ordersummary releaseBlockQuantityApiCallId without error", () => {
       const msgLoadDataAPI = new Message(
@@ -456,6 +508,7 @@ defineFeature(feature, (test) => {
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
           data: [{}],
+          message:'success'
         }
       );
       instance.releaseBlockQuantityApiCallId = msgLoadDataAPI.messageId;
@@ -477,9 +530,30 @@ defineFeature(feature, (test) => {
         }
       );
       instance.releaseShippingChargeCalculationApiCallID = msgLoadDataAPI.messageId;
+
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+      instance.releaseShippingChargeCalculationSuccessCallBack
     });
     then("ordersummary shippingChargeCalculationApiCallID without error", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          data: mockOrderItem,
+        }
+      );
+      instance.shippingChargeCalculationApiCallID = msgLoadDataAPI.messageId;
+      instance.getShippingChargeCalculationSuccessCallBack(mockOrderItem)
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+  
+    then("ordersummary save address without error", () => {
       const msgLoadDataAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
       );
@@ -493,12 +567,11 @@ defineFeature(feature, (test) => {
           data: [{}],
         }
       );
-      instance.shippingChargeCalculationApiCallID = msgLoadDataAPI.messageId;
-      instance.getShippingChargeCalculationSuccessCallBack(mockOrderItem)
+      instance.saveAddressId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+      instance.checkProductAvailability()
     });
-    //rahul
-    then("ordersummary save address without error", () => {
+    then("ordersummary save address with error", () => {
       const msgLoadDataAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
       );
@@ -509,7 +582,13 @@ defineFeature(feature, (test) => {
       msgLoadDataAPI.addData(
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
-          data: [{}],
+          errors: [{}],
+        }
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
         }
       );
       instance.saveAddressId = msgLoadDataAPI.messageId;
@@ -551,6 +630,29 @@ defineFeature(feature, (test) => {
       instance.checkZipcodeAvailability()
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
+    then("ordersummary check availablity with error", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          errors: [{}],
+        }
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
+        }
+      );
+      instance.checkAvailabilityId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
     then("ordersummary releaseblock without error", () => {
       const msgLoadDataAPI = new Message(
         getName(MessageEnum.RestAPIResponceMessage)
@@ -563,6 +665,29 @@ defineFeature(feature, (test) => {
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
           data: [{}],
+        }
+      );
+      instance.releaseBlockId = msgLoadDataAPI.messageId;
+      runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+    });
+    then("ordersummary releaseblock with error", () => {
+      const msgLoadDataAPI = new Message(
+        getName(MessageEnum.RestAPIResponceMessage)
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceDataMessage),
+        msgLoadDataAPI.messageId
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage),
+        {
+          errors: [{}],
+        }
+      );
+      msgLoadDataAPI.addData(
+        getName(MessageEnum.RestAPIResponceErrorMessage),
+        {
+          errors: [{}],
         }
       );
       instance.releaseBlockId = msgLoadDataAPI.messageId;

@@ -59,24 +59,18 @@ export default class Ordersummary extends OrdersummaryController {
     );
   };
 
-  getSlotString = (slot: any) => {
-    if (slot.includes("AM") || slot.includes("am")) {
-      return "Morning";
-    }
-    return "Evening";
-  };
-
+ 
   renderMyOrderCell = (item: any, _: number) => {
     let isProductVarient = item.attributes.catalogue_variant !== null;
     let isFromSubscription = item.attributes.subscription_package !== null;
     let productImage = "";
     if (
       isProductVarient &&
-      item.attributes.catalogue_variant.attributes &&
-      item.attributes.catalogue_variant.attributes.images &&
-      item.attributes.catalogue_variant.attributes.images.data
+      item?.attributes?.catalogue_variant?.attributes &&
+      item?.attributes?.catalogue_variant?.attributes?.images &&
+      item?.attributes?.catalogue_variant?.attributes?.images?.data
     ) {
-      item.attributes.catalogue_variant.attributes.images.data.map(
+      item?.attributes?.catalogue_variant?.attributes?.images?.data.map(
         (variant: any) => {
           if (variant.attributes.is_default) {
             productImage = variant.attributes.url;
@@ -85,23 +79,22 @@ export default class Ordersummary extends OrdersummaryController {
       );
       if (productImage === "") {
         productImage =
-          item.attributes.catalogue_variant.attributes.images.data[0].attributes
-            .url;
+          item?.attributes?.catalogue_variant?.attributes?.images?.data[0]?.attributes?.url;
       }
     } else {
-      item.attributes.catalogue.attributes.images?.data.map((variant: any) => {
-        if (variant.attributes.is_default) {
+      item?.attributes?.catalogue?.attributes?.images?.data.map((variant: any) => {
+        if (variant?.attributes?.is_default) {
           productImage = variant.attributes.url;
         }
       });
       if (productImage === "") {
         productImage =
-          item.attributes.catalogue.attributes.images?.data[0].attributes.url;
+          item?.attributes?.catalogue?.attributes?.images?.data[0]?.attributes?.url;
       }
     }
-    let itemQuantity = item.attributes.quantity
-      ? item.attributes.quantity
-      : item.attributes.subscription_quantity;
+    let itemQuantity = item?.attributes?.quantity
+      ? item?.attributes?.quantity
+      : item?.attributes?.subscription_quantity;
 
     return (
       // Customizable Area Start
@@ -124,16 +117,16 @@ export default class Ordersummary extends OrdersummaryController {
             />
             <View style={styles.middleInfo}>
               <Text numberOfLines={1} style={styles.prodName}>
-                {item.attributes.catalogue.attributes.name}
+                {item?.attributes?.catalogue?.attributes?.name}
               </Text>
               {isFromSubscription && (
                 <View>
                 <Text style={[styles.periodText1]}>
                           {
-                            ["9am to 12pm", "6am to 9am"].includes(item.attributes.preferred_delivery_slot)
-                            ? `Morning (${item.attributes.preferred_delivery_slot
+                            ["9am to 12pm", "6am to 9am"].includes(item?.attributes?.preferred_delivery_slot)
+                            ? `Morning (${item?.attributes?.preferred_delivery_slot
                               .replace(' to ', ' - ').replace(/am/g, 'AM').replace(/pm/g, 'PM')})`
-                            : `Evening (${item.attributes.preferred_delivery_slot.replace(' to ', ' - ')
+                            : `Evening (${item?.attributes?.preferred_delivery_slot?.replace(' to ', ' - ')
                             .replace(' to ', ' - ').replace(/am/g, 'AM').replace(/pm/g, 'PM')})`
                           }
                           </Text>
@@ -148,8 +141,7 @@ export default class Ordersummary extends OrdersummaryController {
                 <View style={styles.changeRow}>
                   <Text style={styles.periodText}>
                     {this.getVarientString(
-                      item.attributes.catalogue_variant.attributes
-                        .catalogue_variant_properties
+                      item?.attributes?.catalogue_variant?.attributes?.catalogue_variant_properties
                     )}
                   </Text>
                 </View>

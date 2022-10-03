@@ -41,6 +41,15 @@ defineFeature(feature, (test) => {
              expect(otpInputAuth).toBeTruthy()
         });
 
+        then('OTPInputAuth will load buttons without errors', () => {
+          instance.setState({showResendLink:true,isOTPSent:true})
+          let formComponent = otpInputAuth.findWhere(
+            (node) => node.prop("testID") === "sendlink"
+          );
+          formComponent.simulate("press");
+         
+        });
+       
         then('OTPInputAuth will load with out errors', () => {
             expect(otpInputAuth).toBeTruthy()
         });
