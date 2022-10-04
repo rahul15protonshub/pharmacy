@@ -6,7 +6,7 @@ import { shallow, ShallowWrapper } from 'enzyme'
 import * as helpers from '../../../../framework/src/Helpers'
 import {runEngine} from '../../../../framework/src/RunEngine'
 import {Message} from "../../../../framework/src/Message"
-
+import { FlatList, ScrollView,Linking, } from "react-native";
 import MessageEnum, {getName} from "../../../../framework/src/Messages/MessageEnum"; 
 import React from "react";
 import Shoppingcart from "../../src/Shoppingcart"
@@ -17,7 +17,7 @@ import TopHeader from '../../../studio-store-ecommerce-components/src/TopHeader/
 import CustomErrorModal from '../../../studio-store-ecommerce-components/src/CustomErrorModal/CustomErrorModal'
 import GreenButton from '../../../studio-store-ecommerce-components/src/GreenButton/GreenButton'
 import Prescriptionuploads from '../../../../components/src/precriptionuploads'
-
+import StorageProvider from "../../../../framework/src/StorageProvider";
 const cart = require('../../__mocks__/mockCart.json');
 const wishlistResponse = require('../../__mocks__/wishlistResponse.json');
 const applyCouponResponse = require('../../__mocks__/applyCouponResponse.json');
@@ -36,12 +36,14 @@ const navigation = {
   toggleDrawer: jest.fn(),
   getParam: jest.fn(),
   setParams: jest.fn(),
-  addListener: jest.fn(),
   push: jest.fn(),
   replace: jest.fn(),
   pop: jest.fn(),
   popToTop: jest.fn(),
-  isFocused: jest.fn()
+  isFocused: jest.fn(),
+  addListener:(param:string,callback:any)=>{
+    callback()
+  }
 }
 // mock everything in react-native-fs
 jest.mock('react-native-fs', () => {
@@ -96,7 +98,7 @@ const screenProps = {
   }
 
   const uploadproduct=[{selectedItems:'item',browsefile:'uri'}]
-
+const textInputData={phone_number:'1223456787',name:'Test',flat_no:"43",address:'23333',city:'city',address_state_id:2,country:"country",zip_code:"zip_code"}
 const feature = loadFeature('./__tests__/features/shoppingcart-scenario.feature');
 
 const mockApiCallWithSuccessResponse = (instance: any, apiCallId: string, data?: any, message?: string) => {
@@ -115,11 +117,27 @@ const mockApiCallWithSuccessResponse = (instance: any, apiCallId: string, data?:
         token: "token",
         message: "success"
       },
-      message
+      
     }
   );
   instance[apiCallId] = msgLoadDataAPI.messageId;
   runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+  const msgLoadDataAPI1 = new Message(
+    getName(MessageEnum.RestAPIResponceMessage)
+  );
+  msgLoadDataAPI1.addData(
+    getName(MessageEnum.RestAPIResponceDataMessage),
+    msgLoadDataAPI1.messageId
+  );
+  msgLoadDataAPI1.addData(
+    getName(MessageEnum.RestAPIResponceSuccessMessage),
+    {
+     
+      message:'success'
+    }
+  );
+  instance[apiCallId] = msgLoadDataAPI1.messageId;
+  runEngine.sendMessage("Unit Test", msgLoadDataAPI1);
 }
 
 const mockApiCallWithErroneousSuccessResponse = (instance: any, apiCallId: string) => {
@@ -138,6 +156,21 @@ const mockApiCallWithErroneousSuccessResponse = (instance: any, apiCallId: strin
   );
   instance[apiCallId] = msgLoadDataAPI.messageId;
   runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+  const msgLoadDataAPI1 = new Message(
+    getName(MessageEnum.RestAPIResponceMessage)
+  );
+  msgLoadDataAPI1.addData(
+    getName(MessageEnum.RestAPIResponceDataMessage),
+    msgLoadDataAPI1.messageId
+  );
+  msgLoadDataAPI1.addData(
+    getName(MessageEnum.RestAPIResponceErrorMessage),
+    {
+      errors: ["an error occured"],
+    }
+  );
+  instance[apiCallId] = msgLoadDataAPI1.messageId;
+  runEngine.sendMessage("Unit Test", msgLoadDataAPI1);
 }
 
 const mockApiCallWithErrorResponse = (instance?: any, apiCallId?: string) => {
@@ -166,6 +199,11 @@ defineFeature(feature, (test) => {
         jest.resetModules()
         jest.doMock('react-native', () => ({ Platform: { OS: 'web' }}))
         jest.spyOn(helpers, 'getOS').mockImplementation(() => 'web');
+         //@ts-ignore
+    StorageProvider = {
+      get: jest.fn(),
+      set: jest.fn(),
+    }
     });
 
     test('User navigates to shoppingcart', ({ given, when, then }) => {
@@ -182,7 +220,7 @@ defineFeature(feature, (test) => {
              instance.setState({prescriptionModal:true})
              shoppingcartWrapper.find(Prescriptionuploads).first().prop('hideErrorModal')()
             
-             instance.setState({emptyCart:false,showCouponCodeModal:true})
+             instance.setState({showCouponCodeModal:true})
              instance.renderEmptyDataView()
         });
 
@@ -193,11 +231,15 @@ defineFeature(feature, (test) => {
             handleguest.simulate('press')
             let presscoupon=shoppingcartWrapper.findWhere((node)=>node.prop('testID')==="presscoupon");
             presscoupon.simulate('press')
+            instance.setState({emptyCart:true,})
+            presscoupon=shoppingcartWrapper.findWhere((node)=>node.prop('testID')==="opencatalogue");
+            presscoupon.simulate('press')
+            
             
         });
         
 
-        then('shoppingcart will load with out errors', () => {
+        then('shoppingcart will load with out errors', async() => {
             instance = shoppingcartWrapper.instance() as Shoppingcart
             instance.componentDidMount()
             instance.getToken()
@@ -207,9 +249,25 @@ defineFeature(feature, (test) => {
 
             mockApiCallWithErrorResponse()
             mockApiCallWithSuccessResponse(instance, "getCartListApiCallId", cart.data)
+            mockApiCallWithSuccessResponse(instance, "getCartProductId", cart.data)
             mockApiCallWithErroneousSuccessResponse(instance, "getWishlistApiCallId")
+            mockApiCallWithErroneousSuccessResponse(instance, "getCartProductId")
+            mockApiCallWithSuccessResponse(instance, "addPrescriptionApiCallId", cart.data)
+            mockApiCallWithErroneousSuccessResponse(instance, "addPrescriptionApiCallId")
+            mockApiCallWithSuccessResponse(instance, "getWishlistApiCallId", cart.data)
+            mockApiCallWithErroneousSuccessResponse(instance, "getCartListApiCallId")
+            
+            expect(shoppingcartWrapper).toBeTruthy()
+            const tempdata={attributes:{subscription_package:2,subscription_period:2,preferred_delivery_slot:'9',subscription_discount:'10%',
+            catalogue_variant:{attributes:{images:{data:[{attributes:{url:'testt'}}]}}},
+            is_default:false,
+            quantity:5,
+          }}
+            await instance.onUpdateCartValue(tempdata,1,2,1)
+             await instance.removeCartItem(tempdata,1,2,1)
+             await instance.addToWishlist(tempdata,1,2)
+             instance.renderMyOrderCell(tempdata,1)
              
-             expect(shoppingcartWrapper).toBeTruthy()
 
         });
 
@@ -257,6 +315,7 @@ defineFeature(feature, (test) => {
 
         when('I navigate to the checkout', () => {
              instance = checkouttWrapper.instance() as Checkout
+             instance.setState({textInputData:textInputData,shippingtextInputData:textInputData})
         });
         then('checkout will load headers with out errors', () => {
           checkouttWrapper.find(TopHeader).first().prop('onPressLeft')()
@@ -382,6 +441,9 @@ defineFeature(feature, (test) => {
         when('I navigate to the editaddress', () => {
              instance = editAddressWrapper.instance() as EditAddress
              instance.getStateList()
+             instance.setState({textInputData:textInputData})
+             instance.saveAddress()
+             instance.editAddress(1)
         });
 
         then('editAddress will load headers with out errors', () => {
@@ -458,6 +520,12 @@ defineFeature(feature, (test) => {
               errors: [{}],
             }
           );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceErrorMessage),
+            {
+              errors: [{}],
+            }
+          );
           instance.getStateListApiCallId = msgLoadDataAPI.messageId;
           runEngine.sendMessage("Unit Test", msgLoadDataAPI);
         });
@@ -493,9 +561,71 @@ defineFeature(feature, (test) => {
               errors: [{}],
             }
           );
+        
           instance.addAddressApiCallId = msgLoadDataAPI.messageId;
           runEngine.sendMessage("Unit Test", msgLoadDataAPI);
         });
+        then("editaddress will load addAddressApiCallId with errorss", () => {
+          const msgLoadDataAPI = new Message(
+            getName(MessageEnum.RestAPIResponceMessage)
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceDataMessage),
+            msgLoadDataAPI.messageId
+          );
+         
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceErrorMessage),
+            {
+              errors: [{}],
+            }
+          );
+          instance.addAddressApiCallId = msgLoadDataAPI.messageId;
+          runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+        });
+        then("editaddress will load editAddressApiCallId without errors", () => {
+          const msgLoadDataAPI = new Message(
+            getName(MessageEnum.RestAPIResponceMessage)
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceDataMessage),
+            msgLoadDataAPI.messageId
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceSuccessMessage),
+            {
+              data: [{}],
+            }
+          );
+          
+          instance.editAddressApiCallId = msgLoadDataAPI.messageId;
+          runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+        });
+        then("editaddress will load editAddressApiCallId with errors", () => {
+          const msgLoadDataAPI = new Message(
+            getName(MessageEnum.RestAPIResponceMessage)
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceDataMessage),
+            msgLoadDataAPI.messageId
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceSuccessMessage),
+            {
+              errors: [{}],
+            }
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceErrorMessage),
+            {
+              errors: [{}],
+            }
+          );
+          instance.editAddressApiCallId = msgLoadDataAPI.messageId;
+          runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+        });
+
+        
 
         then('I can leave the screen with out errors', () => {
             instance.componentWillUnmount()
@@ -516,6 +646,39 @@ defineFeature(feature, (test) => {
            instance.componentDidMount()
            instance.getToken()
            instance.getListRequest('345667')
+           const  textInputData= [{
+            name: "item.name",
+            flat_no: "item.flat_no",
+            address: "item.address",
+            zip_code: "item.zip_code",
+            phone_number: "item.phone_number",
+            city: "item.city",
+            state: "item.state",
+            country: "item.country",
+            
+          }]
+           instance.setState({isFetching:false,addressList:textInputData})
+           const flatList = savedAddressWrapper.find(FlatList).first();
+           flatList.prop("renderItem")({item: textInputData, index: 0, separators: {highlight: jest.fn(), unhighlight: jest.fn(), updateProps: jest.fn()}});
+          //  let  formComponent = savedAddressWrapper.findWhere((node) => node.prop("testID") === "productdetail");
+          //      formComponent.simulate("press");
+          //      formComponent = savedAddressWrapper.findWhere((node) => node.prop("testID") === "editaddress");
+          //      formComponent.simulate("press");
+          //      formComponent = savedAddressWrapper.findWhere((node) => node.prop("testID") === "deleteaddress");
+          //      formComponent.simulate("press");
+          //      formComponent = savedAddressWrapper.findWhere((node) => node.prop("testID") === "updateaddress");
+          //      formComponent.simulate("press");
+      });
+
+      then("saveaddress will deletemodal without errors", () => {
+           instance.setState({showDeleteModal:true})
+           let  formComponent = savedAddressWrapper.findWhere((node) => node.prop("testID") === "modalpresss");
+                formComponent.simulate("press");
+                formComponent = savedAddressWrapper.findWhere((node) => node.prop("testID") === "modalclosepresss");
+                formComponent.simulate("press");
+                formComponent = savedAddressWrapper.findWhere((node) => node.prop("testID") === "modalseleteadd");
+                formComponent.simulate("press");
+                
       });
       
       then("saveaddress will load deleteAddressApiCallId without errors", () => {
@@ -556,6 +719,74 @@ defineFeature(feature, (test) => {
           }
         );
         instance.deleteAddressApiCallId = msgLoadDataAPI.messageId;
+        runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+      });
+      then("saveaddress will load getAddressListApiCallId without errors", () => {
+        const msgLoadDataAPI = new Message(
+          getName(MessageEnum.RestAPIResponceMessage)
+        );
+        msgLoadDataAPI.addData(
+          getName(MessageEnum.RestAPIResponceDataMessage),
+          msgLoadDataAPI.messageId
+        );
+        msgLoadDataAPI.addData(
+          getName(MessageEnum.RestAPIResponceSuccessMessage),
+          {
+            data: [{}],
+          }
+        );
+        instance.getAddressListApiCallId = msgLoadDataAPI.messageId;
+        instance.defaultAddressApiCallId = msgLoadDataAPI.messageId;
+        runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+        instance.getListRequest('123334')
+      });
+      then("saveaddress will load getAddressListApiCallId with errors", () => {
+        const msgLoadDataAPI = new Message(
+          getName(MessageEnum.RestAPIResponceMessage)
+        );
+        msgLoadDataAPI.addData(
+          getName(MessageEnum.RestAPIResponceDataMessage),
+          msgLoadDataAPI.messageId
+        );
+        msgLoadDataAPI.addData(
+          getName(MessageEnum.RestAPIResponceSuccessMessage),
+          {
+            errors: [{}],
+          }
+        );
+        instance.getAddressListApiCallId = msgLoadDataAPI.messageId;
+        instance.defaultAddressApiCallId = msgLoadDataAPI.messageId;
+        runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+        const  textInputData= {
+          name: "item.name",
+          flat_no: "item.flat_no",
+          address: "item.address",
+          zip_code: "item.zip_code",
+          phone_number: "item.phone_number",
+          city: "item.city",
+          state: "item.state",
+          country: "item.country",
+          is_default: true,
+        }
+        instance.updateAddressData(textInputData,true)
+      });
+      then("saveaddress will load getAddressListApiCallId with errorss", () => {
+        const msgLoadDataAPI = new Message(
+          getName(MessageEnum.RestAPIResponceMessage)
+        );
+        msgLoadDataAPI.addData(
+          getName(MessageEnum.RestAPIResponceDataMessage),
+          msgLoadDataAPI.messageId
+        );
+    
+        msgLoadDataAPI.addData(
+          getName(MessageEnum.RestAPIResponceErrorMessage),
+          {
+            errors: [{}],
+          }
+        );
+        instance.getAddressListApiCallId = msgLoadDataAPI.messageId;
+        instance.defaultAddressApiCallId = msgLoadDataAPI.messageId;
         runEngine.sendMessage("Unit Test", msgLoadDataAPI);
       });
       

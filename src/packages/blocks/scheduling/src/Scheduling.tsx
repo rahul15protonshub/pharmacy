@@ -67,6 +67,7 @@ export default class Scheduling extends SchedulingController {
               <Text style={styles.selectQuantityText}>Select Quantity</Text>
               <View style={styles.tools1}>
                 <TouchableOpacity style={styles.minusview}
+                testID='changequantity'
                   onPress={() => this.props.onChangeSubscriptionQuantity(false)}
                 >
                   <Text style={styles.minus}>-</Text>
@@ -77,6 +78,7 @@ export default class Scheduling extends SchedulingController {
                 </Text>
                 </View>
                 <TouchableOpacity style={styles.plusview}
+                 testID='changequantitydes'
                   onPress={() => this.props.onChangeSubscriptionQuantity(true)}
                 >
                   <Text style={styles.plus}>+</Text>

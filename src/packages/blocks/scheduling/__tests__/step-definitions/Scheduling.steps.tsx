@@ -64,9 +64,16 @@ defineFeature(feature, (test) => {
 
         when('I navigate to the Scheduling', () => {
             schedulingInstance = schedulingWrapper.instance() as Scheduling
+            schedulingInstance.renderSubscriptionModal()
         });
 
         then('Scheduling will load with out errors', () => {
+            
+            let formComponent = schedulingWrapper.findWhere((node) => node.prop("testID") === "changequantity");
+              formComponent.simulate("press");
+
+              formComponent = schedulingWrapper.findWhere((node) => node.prop("testID") === "changequantitydes");
+              formComponent.simulate("press");
             expect(schedulingWrapper).toBeTruthy()
         });
 

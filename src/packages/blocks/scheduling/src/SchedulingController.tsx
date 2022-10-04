@@ -88,50 +88,50 @@ export default class SchedulingController extends BlockComponent<Props, S, SS> {
     // Customizable Area End
   }
 
-  async receive(from: string, message: Message) {
-    if (getName(MessageEnum.RestAPIResponceMessage) === message.id) {
-      const apiRequestCallId = message.getData(
-        getName(MessageEnum.RestAPIResponceDataMessage)
-      );
+  // async receive(from: string, message: Message) {
+  //   if (getName(MessageEnum.RestAPIResponceMessage) === message.id) {
+  //     const apiRequestCallId = message.getData(
+  //       getName(MessageEnum.RestAPIResponceDataMessage)
+  //     );
 
-      var responseJson = message.getData(
-        getName(MessageEnum.RestAPIResponceSuccessMessage)
-      );
+  //     var responseJson = message.getData(
+  //       getName(MessageEnum.RestAPIResponceSuccessMessage)
+  //     );
 
-      var errorReponse = message.getData(
-        getName(MessageEnum.RestAPIResponceErrorMessage)
-      );
+  //     var errorReponse = message.getData(
+  //       getName(MessageEnum.RestAPIResponceErrorMessage)
+  //     );
 
-      let resultSesseion = OnManageNavigation(
-        responseJson,
-        errorReponse,
-        this.props.navigation
-      );
-      if (resultSesseion) {
-        this.setState({ isFetching: false });
-        ChangeStackNow(this.props.navigation);
-      }
+  //     let resultSesseion = OnManageNavigation(
+  //       responseJson,
+  //       errorReponse,
+  //       this.props.navigation
+  //     );
+  //     if (resultSesseion) {
+  //       this.setState({ isFetching: false });
+  //       ChangeStackNow(this.props.navigation);
+  //     }
 
-      if (responseJson && responseJson?.data) {
-        // Customizable Area Start
-        // Customizable Area End
-      }
-      if (responseJson && responseJson.errors) {
-        // Customizable Area Start
-        // Customizable Area End
-      }
-      if (responseJson?.message) {
-        // Customizable Area Start
-        // Customizable Area End
-      }
-      if (errorReponse) {
-        // Customizable Area Start
-        // Customizable Area End
-      }
-    }
-    // Customizable Area Start
-    // Customizable Area End
-  }
+  //     if (responseJson && responseJson?.data) {
+  //       // Customizable Area Start
+  //       // Customizable Area End
+  //     }
+  //     if (responseJson && responseJson.errors) {
+  //       // Customizable Area Start
+  //       // Customizable Area End
+  //     }
+  //     if (responseJson?.message) {
+  //       // Customizable Area Start
+  //       // Customizable Area End
+  //     }
+  //     if (errorReponse) {
+  //       // Customizable Area Start
+  //       // Customizable Area End
+  //     }
+  //   }
+  //   // Customizable Area Start
+  //   // Customizable Area End
+  // }
   // Customizable Area Start
   // Customizable Area End
 }

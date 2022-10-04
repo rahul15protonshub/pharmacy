@@ -334,18 +334,18 @@ export default class SearchController extends BlockComponent<Props, S, SS> {
   };
 
   onPressSearchData = (item: any) => {
-    if (item.attributes.type === "Catalogue") {
-      let name = item.attributes.name;
-      const url = `&q[name]=${name}&q[id][]=${item.attributes.id}`;
+    if (item?.attributes?.type === "Catalogue") {
+      let name = item?.attributes?.name;
+      const url = `&q[name]=${name}&q[id][]=${item?.attributes?.id}`;
       this.saveSearch(url);
       this.props.navigation.navigate("ProductDescription", {
         productData: item,
       });
     } else {
       let url = "";
-      let name = item.attributes.name;
-      if (item.attributes.type === "SubCategory") {
-        url = `&q[name]=${name}&q[sub_category_id][]=${item.attributes.id}`;
+      let name = item?.attributes?.name;
+      if (item?.attributes?.type === "SubCategory") {
+        url = `&q[name]=${name}&q[sub_category_id][]=${item?.attributes?.id}`;
         this.props.navigation.navigate("Filteritems", {
           categoryData: item,
           subCategoryData: item,
@@ -355,11 +355,11 @@ export default class SearchController extends BlockComponent<Props, S, SS> {
           isFromSubcategory: true,
         });
       } else {
-        url = `&q[name]=${name}&q[category_id][]=${item.attributes.id}`;
+        url = `&q[name]=${name}&q[category_id][]=${item?.attributes?.id}`;
         this.props.navigation.navigate("Filteritems", {
           categoryData: item,
           isFromExplore: true,
-          screenName: item.attributes.name,
+          screenName: item?.attributes?.name,
           isFromSearch: true,
           isFromSubcategory: false,
         });

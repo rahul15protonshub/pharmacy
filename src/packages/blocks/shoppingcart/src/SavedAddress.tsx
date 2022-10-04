@@ -68,6 +68,7 @@ export default class SavedAddress extends SavedAddressController {
       // Customizable Area Start
       <View key={index} style={styles.cellContainer}>
         <TouchableOpacity
+        testID="productdetail"
           style={styles.upperContainer}
           onPress={() => this.onPressProduct(item)}
         >
@@ -75,20 +76,21 @@ export default class SavedAddress extends SavedAddressController {
             <Image source={LOCATION_PIN} style={styles.locationIcon} />
           </View>
           <View>
-            <Text style={styles.addressName}>{item.attributes.name}</Text>
+            <Text style={styles.addressName}>{item?.attributes?.name}</Text>
             <Text style={styles.addressText}>
-              {item.attributes.flat_no} {item.attributes.address},
-              {item.attributes.city} {item.attributes.zip_code}
+              {item?.attributes?.flat_no} {item?.attributes?.address},
+              {item?.attributes?.city} {item?.attributes?.zip_code}
             </Text>
           </View>
         </TouchableOpacity>
         <View style={styles.horizontalLine} />
         <View style={styles.bottomView}>
           <TouchableOpacity
+           testID="editaddress"
             onPress={() =>
               this.props.navigation.navigate("EditAddress", {
                 isFromEdit: true,
-                addressData: item.attributes,
+                addressData: item?.attributes,
               })
             }
           >
@@ -96,6 +98,7 @@ export default class SavedAddress extends SavedAddressController {
           </TouchableOpacity>
           <View style={styles.verticalLine} />
           <TouchableOpacity
+            testID="deleteaddress"
             onPress={() =>
               this.setState({
                 selectedAddressData: item,
@@ -107,6 +110,7 @@ export default class SavedAddress extends SavedAddressController {
           </TouchableOpacity>
         </View>
         <TouchableOpacity
+          testID="updateaddress"
           onPress={() =>
             this.setState({
               selectedAddressData: item,
@@ -116,7 +120,7 @@ export default class SavedAddress extends SavedAddressController {
           style={styles.tickStatus}
         >
           <Image
-            source={!item.attributes.is_default ? BLANK_ADDRESS : TICK_ADDRESS}
+            source={!item?.attributes?.is_default ? BLANK_ADDRESS : TICK_ADDRESS}
             style={styles.tickAddress}
           />
         </TouchableOpacity>
@@ -136,6 +140,7 @@ export default class SavedAddress extends SavedAddressController {
           ListFooterComponent={() => {
             return (
               <TouchableOpacity
+              testID="editaddresspress"
                 onPress={() =>
                   this.props.navigation.navigate("EditAddress", {
                     isFromEdit: false,
@@ -162,7 +167,7 @@ export default class SavedAddress extends SavedAddressController {
           this.setState({ showDeleteModal: false });
         }}
       >
-        <TouchableOpacity activeOpacity={1} style={styles.modalContainer}>
+        <TouchableOpacity testID="modalpresss" activeOpacity={1} style={styles.modalContainer}>
           <View style={styles.popup}>
             <Text style={styles.deleteAddress}>Delete Address</Text>
             <Text style={styles.areYouSure}>
@@ -170,15 +175,17 @@ export default class SavedAddress extends SavedAddressController {
             </Text>
             <View style={styles.bottomPopupView}>
               <TouchableOpacity
+              testID="modalclosepresss"
                 onPress={() => this.setState({ showDeleteModal: false })}
               >
                 <Text style={styles.cancelText}>Cancel</Text>
               </TouchableOpacity>
               <View style={styles.verticalLine} />
               <TouchableOpacity
+                testID="modalseleteadd"
                 onPress={() =>
                   this.setState({ showDeleteModal: false }, () =>
-                    this.deleteAddress(this.state.selectedAddressData.id)
+                    this.deleteAddress(this.state.selectedAddressData?.id)
                   )
                 }
               >

@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   Text,
   Image,
@@ -150,6 +149,7 @@ export default class Signup extends SignupController {
                   ]}
                 />
                 <TextInput
+                 testID="txtemail"
                   style={[
                     styles.input,
                     {
@@ -245,6 +245,7 @@ export default class Signup extends SignupController {
               </View>
 
               <TouchableOpacity
+               testID="touchsignup"
                 style={[
                   styles.signupButton,
                   {
@@ -293,6 +294,7 @@ export default class Signup extends SignupController {
             <View style={styles.socialButtonContainer}>
               {themeJson.attributes.isFacebookLogin && (
                 <TouchableOpacity
+                testID="touchfb"
                   onPress={() => this.onPressLoginWithFacebook()}
                   style={styles.socialButton}
                 >
@@ -336,6 +338,7 @@ export default class Signup extends SignupController {
             </Text>
             <Text style={styles.termsAndConditionText}>
               <Text
+              testID="termcond"
                 onPress={() =>
                   this.state?.termsPolicy?.attributes &&
                   this.props.navigation.navigate("HelpCenterData", {
@@ -356,18 +359,19 @@ export default class Signup extends SignupController {
               </Text>
               {" & "}
               <Text
+              testID="termpolicy"
                 onPress={() =>
-                  this.state.privacyPolicy.attributes &&
+                  this.state.privacyPolicy?.attributes &&
                   this.props.navigation.navigate("HelpCenterData", {
-                    Title: this.state.privacyPolicy.attributes
-                      ? this.state.privacyPolicy.attributes.help_center_type
+                    Title: this.state.privacyPolicy?.attributes
+                      ? this.state.privacyPolicy?.attributes?.help_center_type
                       : "",
                     heading:
-                      this.state.privacyPolicy.attributes &&
-                      this.state.privacyPolicy.attributes.title,
+                      this.state.privacyPolicy?.attributes &&
+                      this.state.privacyPolicy?.attributes?.title,
                     description:
-                      this.state.privacyPolicy.attributes &&
-                      this.state.privacyPolicy.attributes.description,
+                      this.state.privacyPolicy?.attributes &&
+                      this.state.privacyPolicy?.attributes?.description,
                     isFromHelpCenter: false,
                   })
                 }
@@ -376,7 +380,7 @@ export default class Signup extends SignupController {
               </Text>
             </Text>
             {
-              <TouchableOpacity onPress={() => this.onGuestLogin()}>
+              <TouchableOpacity testID="pressguest" onPress={() => this.onGuestLogin()}>
                 <Text style={styles.skipText}>Skip & Continue as Guest</Text>
               </TouchableOpacity>
             }

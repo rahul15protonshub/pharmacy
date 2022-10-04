@@ -33,12 +33,19 @@ Feature: shoppingcart
         Then editaddress will load stateslist with errors
         Then editaddress will load addAddressApiCallId without errors
         Then editaddress will load addAddressApiCallId with errors 
+        Then editaddress will load addAddressApiCallId with errorss
+        Then editaddress will load editAddressApiCallId without errors
+        Then editaddress will load editAddressApiCallId with errors
         And I can leave the screen with out errors
 
     Scenario: User navigates to saved address
         Given I am a User loading saved address
         When I navigate to the saved address
+        Then saveaddress will deletemodal without errors
         Then saveaddress will load deleteAddressApiCallId without errors
         Then saveaddress will load deleteAddressApiCallId with errors
+        Then saveaddress will load getAddressListApiCallId without errors
+        Then saveaddress will load getAddressListApiCallId with errors
+        Then saveaddress will load getAddressListApiCallId with errorss
         Then saved address will without errors
         Then I can leave the screen with out errors

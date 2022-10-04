@@ -338,6 +338,7 @@ export default class Profilebio extends ProfilebioController {
         }}
       >
         <TouchableOpacity
+        testID="modalguest"
           activeOpacity={1}
           onPress={() => { }}
           style={styles.modalContainer}
@@ -351,6 +352,7 @@ export default class Profilebio extends ProfilebioController {
             </Text>
             <View style={styles.bottomPopupView}>
               <TouchableOpacity
+              testID="modalguestclose"
                 style={{ flex: 1, alignItems: "center" }}
                 onPress={() => this.setState({ showGuestModal: false })}
               >
@@ -358,6 +360,7 @@ export default class Profilebio extends ProfilebioController {
               </TouchableOpacity>
               <View style={styles.verticalLine} />
               <TouchableOpacity
+               testID="modalguestlogin"
                 style={{ flex: 1, alignItems: "center" }}
                 onPress={() =>
                   this.setState({ showGuestModal: false }, () =>
@@ -387,6 +390,7 @@ export default class Profilebio extends ProfilebioController {
         }}
       >
         <TouchableOpacity
+        testID="modalpress"
           activeOpacity={1}
           onPress={() => { }}
           style={styles.modalContainer}
@@ -398,6 +402,7 @@ export default class Profilebio extends ProfilebioController {
             >{`Are you sure you want to logout from ${themeJson.attributes.heading} App?`}</Text>
             <View style={styles.bottomPopupView}>
               <TouchableOpacity
+              testID="modalclosepress"
                 style={{ flex: 1, alignItems: "center" }}
                 onPress={() => this.setState({ showLogoutModal: false })}
               >
@@ -405,6 +410,7 @@ export default class Profilebio extends ProfilebioController {
               </TouchableOpacity>
               <View style={styles.verticalLine} />
               <TouchableOpacity
+               testID="modallogoutpress"
                 style={{ flex: 1, alignItems: "center" }}
                 onPress={() => this.onPressLogout()}
               >

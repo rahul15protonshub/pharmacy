@@ -17,6 +17,8 @@ const navigation = require("react-navigation")
 
 const screenProps = {
     navigation: {
+      replace:jest.fn(),
+      goBack:jest.fn(),
       navigate:jest.fn(),
       addListener:(params:string,callback:any)=>{
         callback()
@@ -120,6 +122,7 @@ defineFeature(feature, (test) => {
              textInputComponent.simulate('changeText', 'pAssword!23');
              textInputComponent.simulate('blur')
 
+
         });
         
         then("Changepassword changePasswordApiCallId api without errors", () => {
@@ -129,6 +132,14 @@ defineFeature(feature, (test) => {
           const customerror = changePasswordWrapper.find(CustomErrorModal).first();
           customerror.prop("hideErrorModal")()
           expect(customerror).toBeTruthy();
+
+          const topHeaderbio = profilebioWrapper.find(TopHeader).first();
+          topHeaderbio.prop("onPressLeft")
+          expect(topHeaderbio).toBeTruthy();
+          const bio = profilebioWrapper.find(CustomErrorModal).first();
+          bio.prop("hideErrorModal")()
+          expect(bio).toBeTruthy();
+
           const msgLoadDataAPI = new Message(
             getName(MessageEnum.RestAPIResponceMessage)
           );
@@ -145,6 +156,7 @@ defineFeature(feature, (test) => {
           );
           instanceChangePassword.changePasswordApiCallId = msgLoadDataAPI.messageId;
           runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+          instanceChangePassword.changePassword()
         });
         then("Changepassword changePasswordApiCallId api with errors", () => {
           const msgLoadDataAPI = new Message(
@@ -328,10 +340,30 @@ defineFeature(feature, (test) => {
         });
         
         then('profilebio will load with out errors', () => {
+          instance.setState({isFetching:false,showLogoutModal:true})
+          let buttonComponent = profilebioWrapper.findWhere((node) => node.prop('testID') === 'modalpress');
+          buttonComponent.simulate('press')
+
+          buttonComponent = profilebioWrapper.findWhere((node) => node.prop('testID') === 'modalclosepress');
+          buttonComponent.simulate('press')
+          buttonComponent = profilebioWrapper.findWhere((node) => node.prop('testID') === 'modallogoutpress');
+          buttonComponent.simulate('press')
+                  
             expect(profilebioWrapper).toBeTruthy()
         });
+        then('profilebio will load guest without errors', () => {
+          instance.setState({isFetching:false,showLogoutModal:false,showGuestModal:true})
+          let buttonComponent = profilebioWrapper.findWhere((node) => node.prop('testID') === 'modalguest');
+          buttonComponent.simulate('press')
 
+          buttonComponent = profilebioWrapper.findWhere((node) => node.prop('testID') === 'modalguestclose');
+          buttonComponent.simulate('press')
 
+          buttonComponent = profilebioWrapper.findWhere((node) => node.prop('testID') === 'modalguestlogin');
+          buttonComponent.simulate('press')
+         
+          expect(profilebioWrapper).toBeTruthy()
+        });
         then('I can leave the screen with out errors', () => {
           instance.handleBackButtonClick
             instance.componentWillUnmount()
@@ -405,6 +437,47 @@ defineFeature(feature, (test) => {
             runEngine.sendMessage("Unit Test", msgLoadDataAPI);
           });
             
+        then("Edit profile get updateProfileApiCallId api without errors", () => {
+          const msgLoadDataAPI = new Message(
+            getName(MessageEnum.RestAPIResponceMessage)
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceDataMessage),
+            msgLoadDataAPI.messageId
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceSuccessMessage),
+            {
+              data: [{}],
+            }
+          );
+          instanceEditProfile.updateProfileApiCallId = msgLoadDataAPI.messageId;
+          runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+        });
+        then("Edit profile get updateProfileApiCallId api with errors", () => {
+          const msgLoadDataAPI = new Message(
+            getName(MessageEnum.RestAPIResponceMessage)
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceDataMessage),
+            msgLoadDataAPI.messageId
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceSuccessMessage),
+            {
+              errors:[{}]
+            }
+          );
+          msgLoadDataAPI.addData(
+            getName(MessageEnum.RestAPIResponceErrorMessage),
+            {
+              errors:[{}]
+            }
+          );
+          
+          instanceEditProfile.updateProfileApiCallId = msgLoadDataAPI.messageId;
+          runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+        });
         then('editprofile will load with out errors', () => {
             // expect(profilebioWrapper).toBeTruthy()
         });

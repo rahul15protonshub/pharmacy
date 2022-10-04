@@ -61,6 +61,7 @@ export default class Shoppingcart extends ShoppingcartController {
           <Text style={styles.youhave}>{staticString.emptyCartSubText}</Text>
         </View>
         <TouchableOpacity
+        testID="opencatalogue"
           onPress={() => this.props.navigation.navigate("Catalogue")}
         >
           <View
@@ -125,7 +126,7 @@ export default class Shoppingcart extends ShoppingcartController {
       ? item.attributes.quantity
       : item.attributes.subscription_quantity;
 
-    let prescription = item.attributes.catalogue.attributes.prescription;
+    let prescription = item?.attributes?.catalogue?.attributes?.prescription;
     return (
       <View style={{}
       } key={item.id}>
@@ -153,7 +154,7 @@ export default class Shoppingcart extends ShoppingcartController {
             />
 
             <View style={styles.productleftContainer}>
-              <Text style={styles.productleftText}>{item.attributes.catalogue.attributes.name}</Text>
+              <Text style={styles.productleftText}>{item?.attributes?.catalogue?.attributes?.name}</Text>
 
 
               {/* <View style={styles.productleftContainer1}> */}
@@ -161,8 +162,7 @@ export default class Shoppingcart extends ShoppingcartController {
               {
                 isProductVarient && (
                   <FlatList
-                    data={item.attributes.catalogue_variant.attributes
-                      .catalogue_variant_properties}
+                    data={item?.attributes?.catalogue_variant?.attributes?.catalogue_variant_properties}
                     numColumns={2}
                     extraData={this.state}
                     renderItem={({ item, index }) => this.renderVariaentRow(item, index)}
@@ -300,7 +300,6 @@ export default class Shoppingcart extends ShoppingcartController {
 
 
             {this.state.cartList.map((item: any) => {
-              console.log('myitem',item)
               return (
                 <View style={styles.tax}>
                   <View>
@@ -377,7 +376,9 @@ export default class Shoppingcart extends ShoppingcartController {
                 {...this.codeTextInputProps}
                 editable={(!this.state.isValidCoupon) ? true : false}
               />
-              <TouchableOpacity disabled={this.state.isValidCoupon} style={styles.input_cupan_btn} onPress={() => {
+              <TouchableOpacity
+              testID="applycoupon"
+              disabled={this.state.isValidCoupon} style={styles.input_cupan_btn} onPress={() => {
                 this.applyCoupon();
               }}>
                 <Text style={styles.cupon_btn_txt}>
