@@ -1,3 +1,4 @@
+/// <reference types="@types/jest" />
 import { defineFeature, loadFeature} from "jest-cucumber"
 import { shallow, ShallowWrapper } from 'enzyme'
 
@@ -9,13 +10,14 @@ import MessageEnum, {getName} from "../../../../framework/src/Messages/MessageEn
 import React from "react";
 import Signup from "../../src/Signup"
 const navigation = require("react-navigation")
-
+import StorageProvider from "../../../../framework/src/StorageProvider";
 const screenProps = {
     navigation: navigation,
     id: "Signup",
     fromCart: false
   }
-
+jest.useFakeTimers()
+jest.spyOn(global,"setTimeout");
 const feature = loadFeature('./__tests__/features/Signup-scenario.feature');
 
 defineFeature(feature, (test) => {
@@ -24,8 +26,15 @@ defineFeature(feature, (test) => {
         jest.resetModules()
         jest.doMock('react-native', () => ({ Platform: { OS: 'web' }}))
         jest.spyOn(helpers, 'getOS').mockImplementation(() => 'web');
+         //@ts-ignore
+    StorageProvider = {
+      get: jest.fn(),
+      set: jest.fn(),
+    }
     });
-
+afterEach(()=>{
+  jest.runAllTimers();
+})
     test('User navigates to Signup', ({ given, when, then }) => {
         let signupBlockWrapper:ShallowWrapper;
         let instance:Signup; 
@@ -34,13 +43,16 @@ defineFeature(feature, (test) => {
             signupBlockWrapper = shallow(<Signup {...screenProps}/>)
         });
 
-        when('I navigate to the Signup', () => {
+        when('I navigate to the Signup', async() => {
              instance = signupBlockWrapper.instance() as Signup
-             instance.getHelpCenterData()
+            await instance.getHelpCenterData()
              const customerror = signupBlockWrapper.find(CustomErrorModal).first();
              customerror.prop("hideErrorModal")()
              expect(customerror).toBeTruthy();
- 
+            await instance.onPressGoogleSignIn()
+            instance.setState({emailInput:'1236547896'})
+            instance.initUser('233544')
+            instance.onPressGoogleSignIn()
         });
         
         then("Signup will load sendOtpApiCallId without errors", () => {
@@ -107,11 +119,14 @@ defineFeature(feature, (test) => {
             msgLoadDataAPI.addData(
               getName(MessageEnum.RestAPIResponceSuccessMessage),
               {
-                data: [{}],
+                data: [{id:1}],
               }
             );
             instance.apiSocialLoginCallId = msgLoadDataAPI.messageId;
             runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+            const temp={data:{id:1}}
+            instance.onSocialLogin(temp)
+            
           });
           then("Signup will load apiSocialLoginCallId with errors", () => {
             const msgLoadDataAPI = new Message(
@@ -175,6 +190,8 @@ defineFeature(feature, (test) => {
               );
             instance.apiGuestLoginCallId = msgLoadDataAPI.messageId;
             runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+            instance.onGuestLoginFailureCallBack('error')
+            instance.onGuestLoginFailureCallBack('')
           });
           then("Signup will load getHelpCenterApiCallId without errors", () => {
             const msgLoadDataAPI = new Message(
@@ -215,6 +232,8 @@ defineFeature(feature, (test) => {
               );
             instance.getHelpCenterApiCallId = msgLoadDataAPI.messageId;
             runEngine.sendMessage("Unit Test", msgLoadDataAPI);
+            instance.getHelpCenterDataFailureCallBack('error')
+            instance.getHelpCenterDataFailureCallBack('')
           });
 
         then('Signup will load  inputs without errors', () => {

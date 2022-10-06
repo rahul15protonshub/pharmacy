@@ -339,12 +339,6 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
     },
   };
 
-  onCloseAlertModal = () => {
-    this.setState({ showAlertModal: false }, () => {
-      this.resetErrors();
-    });
-  };
-
   onPressSignUp = async () => {
     let phoneNo = "";
     if (
@@ -608,9 +602,9 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
 
   onPressLoginWithFacebook = () => {
     if (Platform.OS === "android") {
-      LoginManager.setLoginBehavior("web_only");
+      LoginManager?.setLoginBehavior("web_only");
     }
-    LoginManager.logInWithPermissions(["public_profile", "email"]).then(
+    LoginManager?.logInWithPermissions(["public_profile", "email"]).then(
       (result) => {
         if (result.isCancelled) {
         } else {
@@ -650,9 +644,9 @@ export default class SignupController extends BlockComponent<Props, S, SS> {
   };
 
   onPressLoginWithApple = async () => {
-    const appleAuthRequestResponse = await appleAuth.performRequest({
-      requestedOperation: appleAuth.Operation.LOGIN,
-      requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+    const appleAuthRequestResponse = await appleAuth?.performRequest({
+      requestedOperation: appleAuth?.Operation?.LOGIN,
+      requestedScopes: [appleAuth?.Scope?.EMAIL, appleAuth?.Scope?.FULL_NAME],
     });
 
     let data = {

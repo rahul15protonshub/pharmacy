@@ -233,7 +233,7 @@ export default class Signup extends SignupController {
                   returnKeyType={"done"}
                   {...this.txtInputPasswordProps}
                 />
-                <TouchableOpacity
+                <View
                   style={styles.eye}
                   {...this.btnPasswordShowHideProps}
                 >
@@ -241,7 +241,7 @@ export default class Signup extends SignupController {
                     style={styles.imgPasswordShowhide}
                     {...this.imgEnablePasswordFieldProps}
                   />
-                </TouchableOpacity>
+                </View>
               </View>
 
               <TouchableOpacity

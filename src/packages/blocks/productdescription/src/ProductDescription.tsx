@@ -141,6 +141,7 @@ export default class ProductDescription extends ProductDescriptionController {
     return (
       <View style={styles.listSelector}>
         <FlatList
+        testID="attribute_flat"
           horizontal
           keyExtractor={(index: any, item: any) => index.toString()}
           extraData={this.state}
@@ -269,6 +270,7 @@ export default class ProductDescription extends ProductDescriptionController {
     return (
       <View style={styles.reviewListContainer}>
         <FlatList
+        testID="review_flat"
           data={this.state.productData?.attributes.reviews.slice(
             0,
             sliceLength
@@ -628,6 +630,7 @@ export default class ProductDescription extends ProductDescriptionController {
           {productData?.attributes?.similar_products?.data?.length > 0 && (
             <View style={styles.productGrid}>
               <FlatList
+               testID="similar_flat"
                 columnWrapperStyle={{ justifyContent: 'space-between' }}
                 numColumns={2}
                 data={this.state.similarproductList}

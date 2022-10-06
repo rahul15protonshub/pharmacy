@@ -82,7 +82,7 @@ export default class WishList extends WishListController {
     let productDefaultImage=product.attributes.images?.data[0].attributes.url
 
     if (product.attributes.default_variant) {
-      const defaultVariantDetails = product.attributes.catalogue_variants.find((v: any) => (
+      const defaultVariantDetails = product?.attributes?.catalogue_variants?.find((v: any) => (
           parseInt(v.id) === product.attributes.default_variant.id
       ))
 
@@ -218,6 +218,7 @@ export default class WishList extends WishListController {
             }
           >
             <FlatList
+            testID="renderproductlist"
               numColumns={2}
               extraData={this.state}
               data={this.state.productList}

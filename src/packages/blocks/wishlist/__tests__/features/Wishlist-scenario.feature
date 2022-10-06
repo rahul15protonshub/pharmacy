@@ -3,6 +3,7 @@ Feature: Wishlist
     Scenario: User navigates to Wishlist
         Given I am a User loading Wishlist
         When I navigate to the Wishlist
+        Then wishlist render nodata without error
         Then wishlist getWishlistApiCallId without error
         Then wishlist removeFromWishlistApiCallId without error
         Then wishlist addToCartApiCallId without error

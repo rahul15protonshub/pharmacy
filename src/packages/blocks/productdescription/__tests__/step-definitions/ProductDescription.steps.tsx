@@ -17,6 +17,7 @@ import { mockProductData } from "../../__mocks__/mockProductData";
 import  ProductBox from "../../../../blocks/catalogue/src/components/ProductBox"
 import StorageProvider from "../../../../framework/src/StorageProvider";
 import TopHeader from "../../../studio-store-ecommerce-components/src/TopHeader/TopHeader";
+const prodata = require("./productdata.json")
 const screenProps = {
   navigation: {
     navigate: jest.fn(),
@@ -166,7 +167,7 @@ defineFeature(feature, (test) => {
       instance.setState({appState:'background',showProductDescriptionModal:true})
       instance._handleAppStateChange('active')
       instance.setState({
-        productData:product_details.data,catalogue_id:''
+        productData:prodata,catalogue_id:'',similarproductList:prodata
       })
       instance.setState({selectedProduct:product_details.data})
       instance.renderReviewList()
@@ -216,7 +217,7 @@ defineFeature(feature, (test) => {
       );
       instance.getProductDescriptionApiCallId = msgLoadDataAPI.messageId;
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
-      instance.getProductDescriptionSuccessCallBack(mockProductData)
+      instance.getProductDescriptionSuccessCallBack(prodata)
     });
 
     then("Failed to Load product description data", () => {
@@ -653,7 +654,7 @@ defineFeature(feature, (test) => {
         }
       );
       instance.getCartProductDescriptionId = msgLoadDataAPI.messageId;
-      instance.getCartProductDescriptionSuccessCallBack(product_details)
+      instance.getCartProductDescriptionSuccessCallBack({data:prodata})
       runEngine.sendMessage("Unit Test", msgLoadDataAPI);
     });
 
@@ -791,7 +792,7 @@ defineFeature(feature, (test) => {
       msgLoadDataAPI.addData(
         getName(MessageEnum.RestAPIResponceSuccessMessage),
         {
-          data: [{}],
+          data: prodata,
           message:'success'
         }
       );
@@ -862,7 +863,7 @@ defineFeature(feature, (test) => {
     then("Render view all components", () => {
       instance = exampleBlockA.instance() as ProductDescription;
       instance.setState({
-        productData: mockProductData,
+        productData: prodata,
       });
 
     });
